@@ -1,0 +1,189 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 24 Dec, 2016, 5:00:20 PM
+    Author     : Saikat
+*/
+body {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+/*Scroll up*/
+.scrollup {
+  width: 40px;
+  height: 40px;
+  position: fixed;
+  padding: 6px 12px !important;
+  bottom: 50px;
+  right: 5px;
+  display: none;
+  /*text-indent: -9999px;*/
+}
+.framework-info {
+  font-size: 11px;
+}
+/*Scroll up end*/
+.validation-error {
+  color: #b20000;
+  font-size: 12px;
+}
+.ci-form label {
+  font-weight: normal;
+}
+/*.navbar-brand{
+    padding: 1px 15px!important;
+}*/
+.star {
+  color: red;
+}
+.thumbnail {
+  margin-bottom: 20px;
+  padding: 0px;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+}
+.item.list-group-item {
+  float: none;
+  width: 100%;
+  background-color: #fff;
+  margin-bottom: 10px;
+}
+.item.list-group-item:nth-of-type(odd):hover,
+.item.list-group-item:hover {
+  background: #428bca;
+}
+.item.list-group-item .list-group-image {
+  margin-right: 10px;
+}
+.item.list-group-item .thumbnail {
+  margin-bottom: 0px;
+}
+.item.list-group-item .caption {
+  padding: 9px 9px 0px 9px;
+}
+.item.list-group-item:nth-of-type(odd) {
+  background: #eeeeee;
+}
+.item.list-group-item:before,
+.item.list-group-item:after {
+  display: table;
+  content: " ";
+}
+.item.list-group-item img {
+  float: left;
+}
+.item.list-group-item:after {
+  clear: both;
+}
+.list-group-item-text {
+  margin: 0 0 11px;
+}
+select.form-control.dob-inline {
+  display: inline !important;
+  width: auto;
+}
+.text-bold {
+  font-weight: bold;
+}
+.text-upper {
+  text-transform: uppercase;
+}
+.row.cart-item {
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #f5f5f5;
+}
+/* Custom Buttons */
+.btn {
+  border-radius: 0px;
+  cursor: pointer;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+/*Form Controls*/
+.form-control {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  -webkit-transition: none;
+  transition: none;
+  border-radius: 0px;
+  height: 40px;
+}
+/*Profile*/
+.dp {
+  border: 10px solid #eee;
+  transition: all 0.2s ease-in-out;
+  height: 100px;
+  width: 100px;
+}
+.dp:hover {
+  border: 2px solid #eee;
+  transform: rotate(360deg);
+  -ms-transform: rotate(360deg);
+  -webkit-transform: rotate(360deg);
+  /*-webkit-font-smoothing:antialiased;*/
+}
+.user_intro {
+  font-size: 11px;
+}
+.text-greyed-out {
+  opacity: 0.5;
+}
+/*Panel, Panel Group Style*/
+.panel-group .panel {
+  border-radius: 0;
+  box-shadow: none;
+  border-color: #EEEEEE;
+}
+.panel-heading {
+  padding: 0;
+  border-radius: 0;
+}
+.panel-default > .panel-heading,
+panel-footer {
+  color: #212121;
+  background-color: #FAFAFA;
+  border-color: #EEEEEE;
+}
+.panel-title {
+  font-size: 14px;
+  padding: 15px;
+}
+.panel-title > a {
+  display: block;
+  text-decoration: none;
+}
+.more-less {
+  float: right;
+  color: #212121;
+}
+.panel-default > .panel-heading + .panel-collapse > .panel-body {
+  border-top-color: #EEEEEE;
+}
+/* Help Info */
+.info-help {
+  border: 1px solid #666;
+  background-color: #f2f2f2;
+  border-radius: 0px;
+  padding: 10px;
+  font-size: 11px;
+}
+.tnc-content {
+  font-size: 11px;
+}
+.tnc-content h1,
+.tnc-content h2 {
+  font-size: 18px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  background-color: #f5f5f5;
+}

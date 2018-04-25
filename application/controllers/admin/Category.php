@@ -1,0 +1,213 @@
+<?php
+
+if (!defined('BASEPATH'))
+    exit('No direct script access allowed');
+
+class Category extends CI_Controller {
+
+    var $data;
+    var $id;
+    var $sess_user_id;
+
+    function __construct() {
+        parent::__construct();
+
+        //Check if any user logged in else redirect to login
+        $is_logged_in = $this->common_lib->is_logged_in();
+        if ($is_logged_in == FALSE) {
+            redirect('admin/user/login');
+        }
+
+        //Has logged in user permission to access this page or method?        
+        $this->common_lib->check_user_role_permission(array(
+            'default-super-admin-access',
+            'default-admin-access'
+        ));
+
+        // Get logged  in user id
+        $this->sess_user_id = $this->common_lib->get_sess_user('id');
+
+        //Render header, footer, navbar, sidebar etc common elements of templates
+        $this->common_lib->init_template_elements('admin');
+
+        //add required js files for this controller
+        $app_js_src = array(
+            'assets/dist/js/category.js',
+        );
+        $this->data['app_js'] = $this->common_lib->add_javascript($app_js_src);
+        
+        
+        $this->load->model('category_model');
+        $this->id = $this->uri->segment(4);
+        $this->data['alert_message'] = NULL;
+        $this->data['alert_message_css'] = NULL;
+        $this->data['category_dropdown'] = $this->category_model->get_category_dropdown();
+
+        //View Page Config
+        $this->data['page_heading'] = "Product Category";
+        $this->data['datatable']['dt_id']= array('heading'=>'Data Table','cols'=>array());
+		
+		// load Breadcrumbs
+		$this->load->library('breadcrumbs');
+		// add breadcrumbs. push() - Append crumb to stack
+		$this->breadcrumbs->push('Dashboard', '/admin');
+		$this->breadcrumbs->push('Product Category', '/admin/category');		
+		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
+    }
+
+    function index() {
+		$this->breadcrumbs->push('View','/');				
+		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
+		
+        $this->data['alert_message'] = $this->session->flashdata('flash_message');
+        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
+
+        $this->data['maincontent'] = $this->load->view('admin/category/index', $this->data, true);
+        $this->load->view('admin/_layouts/layout_authenticated', $this->data);
+    }
+
+    function render_datatable() {
+        //Total rows - Refer to model method definition
+        $result_array = $this->category_model->get_rows();
+        $total_rows = $result_array['num_rows'];
+
+        // Total filtered rows - check without limit query. Refer to model method definition
+        $result_array = $this->category_model->get_rows(NULL, NULL, NULL, TRUE, FALSE);
+        $total_filtered = $result_array['num_rows'];
+
+        // Data Rows - Refer to model method definition
+        $result_array = $this->category_model->get_rows(NULL, NULL, NULL, TRUE);
+        $data_rows = $result_array['data_rows'];
+        $data = array();
+        $no = $_REQUEST['start'];
+        foreach ($data_rows as $result) {
+            $no++;
+            $row = array();
+            $row[] = $result['category_name'];
+            $row[] = $result['category_status'];
+            //add html for action
+            $action_html = '';
+            $action_html.= anchor(site_url('admin/category/edit/' . $result['id']), 'Edit', array(
+                'class' => 'btn btn-sm btn-outline-dark',
+                'data-toggle' => 'tooltip',
+                'data-original-title' => 'Edit',
+                'title' => 'Edit',
+            ));
+            $action_html.='&nbsp;';
+            $action_html.= anchor(site_url('admin/category/delete/' . $result['id']), 'Delete', array(
+                'class' => 'btn btn-sm btn-outline-danger btn-delete',
+				'data-confirmation'=>true,
+				'data-confirmation-message'=>'Are you sure, you want to delete this?',				
+                'data-toggle' => 'tooltip',
+                'data-original-title' => 'Delete',
+                'title' => 'Delete',
+            ));
+
+            $row[] = $action_html;
+            $data[] = $row;
+        }
+
+        /* jQuery Data Table JSON format */
+        $output = array(
+            'draw' => isset($_REQUEST['draw']) ? $_REQUEST['draw'] : '',
+            'recordsTotal' => $total_rows,
+            'recordsFiltered' => $total_filtered,
+            'data' => $data,
+        );
+        //output to json format
+        echo json_encode($output);
+    }
+
+    function validate_category_form_data($db_operation = NULL) {
+        if ($db_operation == 'add') {
+            $this->form_validation->set_rules('category_name', 'category name', 'required');
+        } elseif ($db_operation == 'edit') {
+            $this->form_validation->set_rules('category_name', 'category name', 'required|callback_is_category_name_exists');
+        }
+        $this->form_validation->set_error_delimiters('<p class="validation-error">', '</p>');
+        if ($this->form_validation->run() == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function is_category_name_exists($str) {
+        //echo $str; die();
+        $result = $this->category_model->check_category_name($str);
+        if ($result == false) {
+            $this->form_validation->set_message('is_category_name_exists', $str . ' is already exists !');
+            return false;
+        }
+        return true;
+    }
+
+    function add() {
+		$this->breadcrumbs->push('Add','/');				
+		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
+		
+        $this->data['alert_message'] = $this->session->flashdata('flash_message');
+        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
+        if ($this->input->post('form_action') == 'insert') {
+            if ($this->validate_category_form_data('add') == true) {
+                $parent_cat_id = ($this->input->post('category_parent') == '') ? NULL : $this->input->post('category_parent');
+                $postdata = array(
+                    'category_name' => $this->input->post('category_name'),
+                    'category_parent' => $parent_cat_id,
+                );
+                $insert_id = $this->category_model->insert($postdata);
+                if ($insert_id) {
+                    $this->session->set_flashdata('flash_message', '<i class="icon fa fa-check" aria-hidden="true"></i>Added successfully.');
+                    $this->session->set_flashdata('flash_message_css', 'alert-success');
+                    redirect(current_url());
+                }
+            }
+        }
+        $this->data['maincontent'] = $this->load->view('admin/category/add', $this->data, true);
+        $this->load->view('admin/_layouts/layout_authenticated', $this->data);
+    }
+
+    function edit() {
+		$this->breadcrumbs->push('Edit','/');				
+		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
+		
+        $this->data['alert_message'] = $this->session->flashdata('flash_message');
+        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
+        if ($this->input->post('form_action') == 'update') {
+            if ($this->validate_category_form_data('edit') == true) {
+                $parent_cat_id = ($this->input->post('category_parent') == '') ? NULL : $this->input->post('category_parent');
+                $postdata = array(
+                    'category_name' => $this->input->post('category_name'),
+                    'category_parent' => $parent_cat_id,
+                    'category_status' => $this->input->post('category_status'),
+                );
+                $where_array = array('id' => $this->input->post('id'));
+                $res = $this->category_model->update($postdata, $where_array);
+
+                if ($res) {
+                    $this->session->set_flashdata('flash_message', '<i class="icon fa fa-check" aria-hidden="true"></i>Updated successfully.');
+                    $this->session->set_flashdata('flash_message_css', 'alert-success');
+                    redirect(current_url());
+                }
+            }
+        }
+        $result_array = $this->category_model->get_rows($this->uri->segment(4));
+        $this->data['rows'] = $result_array['data_rows'];
+
+        $this->data['maincontent'] = $this->load->view('admin/category/edit', $this->data, true);
+        $this->load->view('admin/_layouts/layout_authenticated', $this->data);
+    }
+
+    function delete() {
+        $where_array = array('id' => $this->id);
+        $res = $this->category_model->delete($where_array);
+        if ($res) {
+            $this->session->set_flashdata('flash_message', '<i class="icon fa fa-check" aria-hidden="true"></i> Deleted successfully.');
+            $this->session->set_flashdata('flash_message_css', 'alert-success');
+            redirect('admin/category');
+        }
+    }
+
+}
+
+?>

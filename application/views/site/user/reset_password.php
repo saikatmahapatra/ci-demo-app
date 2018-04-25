@@ -1,0 +1,98 @@
+<div class="row">
+    <div class="col-md-12">
+        <h1 class="page-header">Create New Password</h1>               
+    </div>
+</div><!--/.row-->
+
+<div class="row">
+    <div class="col-md-4">
+        <?php
+        // Show server side messages
+        if (isset($alert_message)) {
+            $html_alert_ui = '';
+            $html_alert_ui.='<div class="alert-container">';
+            $html_alert_ui.='<div class="auto-closable-alert alert ' . $alert_message_css . ' alert-dismissable">';
+            $html_alert_ui.='<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
+            $html_alert_ui.=$alert_message;
+            $html_alert_ui.='</div>';
+            $html_alert_ui.='</div>';
+            echo $html_alert_ui;
+        }
+        ?>              
+    </div>
+</div><!--/.row-->
+
+<div class="row">
+    <div class="col-md-4">
+        <?php echo form_open(current_url(), array('method' => 'post', 'class' => 'ci-form','name' => '', 'id' => '')); ?>         
+        <?php echo form_hidden('form_action', 'reset_password'); ?>
+        <?php echo form_hidden('password_reset_key', $password_reset_key); ?>
+        
+        <div class="form-group">                    
+			<label for="user_email" class="">Email<span class="star">*</span></label>
+            <?php
+            echo form_input(array(
+                'name' => 'user_email',
+                'value' => set_value('user_email'),
+                'id' => 'name',
+                'class' => 'form-control',
+                'placeholder' => 'Please enter your registered email',
+                'maxlength' => '255',
+                'autofocus' => '',
+            ));
+            ?>         
+            <?php echo form_error('user_email'); ?>
+        </div>
+
+
+        <div class="form-group">            
+			<label for="user_new_password" class="">New Password <span class="star">*</span></label>
+            <?php
+            echo form_password(array(
+                'name' => 'user_new_password',
+                'value' => set_value('user_new_password'),
+                'id' => 'user_new_password',
+                'placeholder' => 'Please enter a new password',
+                'class' => 'form-control',
+                'maxlength' => '16',
+            ));
+            ?>        
+            <?php echo form_error('user_new_password'); ?>
+        </div>
+
+        <div class="form-group">            
+			<label for="confirm_user_new_password" class="">Re-enter New Password<span class="star">*</span></label>
+            <?php
+            echo form_password(array(
+                'name' => 'confirm_user_new_password',
+                'value' => set_value('confirm_user_new_password'),
+                'id' => 'confirm_user_new_password',
+                'placeholder' => 'Please confirm the new password',
+                'class' => 'form-control',
+                'maxlength' => '16',
+            ));
+            ?>        
+            <?php echo form_error('confirm_user_new_password'); ?>
+        </div>
+
+        <div class=" form-group">
+            <?php
+            echo form_submit(array(
+                'name' => 'submit',
+                'value' => 'Submit',
+                'class' => 'btn btn-primary',
+            ));
+            ?>
+        </div>
+        <?php echo form_close(); ?>
+    </div>
+    
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+		<a href="<?php echo site_url('user/login');?>" class="">Login</a>
+        <span>or</span>
+		<a href="<?php echo site_url('user/forgot_password');?>" class="">Resend Link</a>
+    </div>
+</div>
