@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-12">
-        <h1 class="page-header">Login</h1>               
+        <h1>Login</h1>               
     </div>
 </div><!--/.row-->
 
@@ -23,7 +23,7 @@
 </div><!--/.row-->
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-12 col-sm-12 col-md-4">
         <?php echo form_open(current_url(), array('method' => 'post', 'class' => 'ci-form', 'name' => 'form', 'id' => 'form')); ?> 
         <?php echo form_hidden('form_action', 'login'); ?>
         <div class="form-group">
@@ -35,6 +35,7 @@
                 'id' => 'user_email',
                 'class' => 'form-control',
                 'maxlength' => '255',
+                'placeholder' => 'Enter email address',
             ));
             ?> 
             <?php echo form_error('user_email'); ?>
@@ -48,6 +49,7 @@
                 'id' => 'user_password',
                 'class' => 'form-control',
                 'maxlength' => '16',
+                'placeholder' => 'Enter password',
             ));
             ?> 
             <?php echo form_error('user_password'); ?>
@@ -68,19 +70,11 @@
             ?>            
 
         </div>
-
         <?php echo form_close(); ?>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-md-12">
-		<a href="<?php echo site_url('user/forgot_password');?>" class="">Forgot your password?</a>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-md-12">
-		<a href="<?php echo site_url('user/create_account');?>" class="">Create an account</a>
+		
+		<div class="text-center">
+			<a class="d-block" href="<?php echo site_url('user/forgot_password');?>" class="">Forgot your password?</a>
+			<a class="d-block" href="<?php echo site_url('user/create_account');?>" class="">Create an account</a>
+		</div>
     </div>
 </div>
