@@ -30,7 +30,7 @@ class Home extends CI_Controller {
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
 
         $this->data['maincontent'] = $this->load->view('site/home/index', $this->data, true);
-        $this->load->view('site/_layouts/layout_default', $this->data);
+        $this->load->view('site/_layouts/layout_jumbotron', $this->data);
     }
 
 }

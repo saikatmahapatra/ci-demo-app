@@ -9,7 +9,7 @@ and open the template in the editor.
 */
 body {
   padding-top: 5rem;
-  padding-bottom: 5rem;
+  padding-bottom: 3rem;
 }
 /*Scroll up*/
 .scrollup {
@@ -30,12 +30,6 @@ body {
   color: #b20000;
   font-size: 12px;
 }
-.ci-form label {
-  font-weight: normal;
-}
-/*.navbar-brand{
-    padding: 1px 15px!important;
-}*/
 .star {
   color: red;
 }
@@ -96,22 +90,6 @@ select.form-control.dob-inline {
   margin-bottom: 20px;
   padding-bottom: 10px;
   border-bottom: 1px solid #f5f5f5;
-}
-/* Custom Buttons */
-.btn {
-  border-radius: 0px;
-  cursor: pointer;
-  padding-left: 30px;
-  padding-right: 30px;
-}
-/*Form Controls*/
-.form-control {
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  -webkit-transition: none;
-  transition: none;
-  border-radius: 0px;
-  height: 40px;
 }
 /*Profile*/
 .dp {
@@ -179,11 +157,11 @@ panel-footer {
 .tnc-content h2 {
   font-size: 18px;
 }
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 60px;
-  line-height: 60px;
-  background-color: #f5f5f5;
-}
+/*.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    background-color: @light-gray;
+}*/
