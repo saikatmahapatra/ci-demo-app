@@ -35,7 +35,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">                                
-						<label for="user_firstname" class="">First Name <span class="star">*</span></label>
+						<label for="user_firstname" class="">First Name <span class="required">*</span></label>
                         <?php
                         echo form_input(array(
                             'name' => 'user_firstname',
@@ -50,7 +50,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">  
-						<label for="user_lastname" class="">Last Name <span class="star">*</span></label>
+						<label for="user_lastname" class="">Last Name <span class="required">*</span></label>
                         <?php
                         echo form_input(array(
                             'name' => 'user_lastname',
@@ -87,7 +87,7 @@
             </div><!--/.row-->
             <div class="row">
                 <div class="col-md-12">
-                    <label class="">Gender <span class="star">*</span></label>
+                    <label class="">Gender <span class="required">*</span></label>
                     <div class="radio">  
                         <label class="label-normal">
                             <?php
@@ -125,7 +125,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-						<label for="user_mobile_phone1" class="">Mobile #1 <span class="star">*</span></label>
+						<label for="user_mobile_phone1" class="">Mobile #1 <span class="required">*</span></label>
                         <?php
                         echo form_input(array(
                             'name' => 'user_mobile_phone1',
@@ -160,7 +160,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="form-group">
-					<a href="<?php echo site_url('user/profile');?>" class="btn btn-dark">Back</a>
+					<a href="<?php echo site_url('user/profile');?>" class="btn btn-secondary">Back</a>
 					<?php echo form_submit(array('name' => 'submit','value' => 'Update','class' => 'btn btn-primary',));?> 
 					</div>
 				</div>

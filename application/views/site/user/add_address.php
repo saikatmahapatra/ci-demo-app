@@ -1,11 +1,11 @@
 <div class="row">
-    <div class="col-md-12">
-        <h1 class="page-header">Add New Address</h1>               
+    <div class="col-12">
+        <h1>Add New Address</h1>               
     </div>
 </div><!--/.row-->
 
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-12">
         <?php
         // Show server side messages
         if (isset($alert_message)) {
@@ -221,7 +221,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="form-group"> 
-						<a href="<?php echo site_url('user/profile');?>" class="btn btn-dark">Back</a>
+						<a href="<?php echo site_url('user/profile');?>" class="btn btn-secondary">Back</a>
 						<?php
 						echo form_submit(array(
 						'name' => 'submit',

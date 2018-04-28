@@ -32,8 +32,8 @@
 				<?php echo form_open(current_url(), array('method' => 'post', 'class' => 'ci-form','name' => 'order', 'id' => 'cartForm')); ?>
 				<?php echo form_hidden('form_action', 'order'); ?>			
 				<div class="text-center">
-					<a href="<?php echo site_url('product');?>" class="btn btn-lg btn-dark">Invoice</a>
-					<a href="<?php echo site_url('product');?>" class="btn btn-lg btn-dark">Continue Shopping</a>
+					<a href="<?php echo site_url('product');?>" class="btn btn-lg btn-secondary">Invoice</a>
+					<a href="<?php echo site_url('product');?>" class="btn btn-lg btn-secondary">Continue Shopping</a>
 				</div>
 				<?php echo form_close(); ?>
 			</div>

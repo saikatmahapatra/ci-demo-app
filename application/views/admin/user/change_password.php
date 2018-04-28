@@ -24,7 +24,7 @@
         <?php echo form_hidden('form_action', 'change_password'); ?>
 
         <div class="form-group">                    
-			<label for="user_current_password" class="">Old Password <span class="star">*</span></label>
+			<label for="user_current_password" class="">Old Password <span class="required">*</span></label>
             <?php
             echo form_password(array(
                 'name' => 'user_current_password',
@@ -39,7 +39,7 @@
         </div>
 
         <div class="form-group">                   
-			<label for="user_new_password" class="">New Password <span class="star">*</span></label>
+			<label for="user_new_password" class="">New Password <span class="required">*</span></label>
             <?php
             echo form_password(array(
                 'name' => 'user_new_password',
@@ -54,7 +54,7 @@
         </div>
 
         <div class="form-group">                    
-			<label for="confirm_user_new_password" class="">Repeat New Password <span class="star">*</span></label>
+			<label for="confirm_user_new_password" class="">Repeat New Password <span class="required">*</span></label>
             <?php
             echo form_password(array(
                 'name' => 'confirm_user_new_password',

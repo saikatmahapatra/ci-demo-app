@@ -1,11 +1,11 @@
 <div class="row">
-    <div class="col-md-12">
-        <h1 class="page-header">My Cart</h1>               
+    <div class="col-12">
+        <h1>My Cart</h1>               
     </div>
 </div>
 
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-12">
         <?php
         // Show server side messages
         if (isset($alert_message)) {
@@ -24,11 +24,11 @@
 
 <div class="row">
 	<div class="col-md-8">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title">My Cart (<?php echo $total_items; ?>)</h3>
+		<div class="card">
+			<div class="card-header">
+				<h5 class="card-title">My Cart (<?php echo $total_items; ?>)</h5>
 			</div>
-			<div class="panel-body">
+			<div class="card-body">
 				<?php echo form_open(current_url(), array('method' => 'post', 'class' => 'ci-form','name' => 'cartForm', 'id' => 'cartForm')); ?>
 				<?php echo form_hidden('form_action', 'update_cart'); ?>
 				<?php
@@ -75,12 +75,12 @@
 					<?php } ?>
 					
 				<div class="form-group text-right">
-					<a href="<?php echo site_url('product');?>" class="btn btn-lg btn-dark">Continue Shopping</a>
+					<a href="<?php echo site_url('product');?>" class="btn btn-secondary">Continue Shopping</a>
 					<?php
 					if (sizeof($cartrows) > 0) {
 						?>
-						<button type="submit" class="btn btn-lg btn-dark">Update Cart</button>
-						<a href="<?php echo site_url('order/init_payment');?>" class="btn btn-lg btn-primary">Place Order</a>
+						<button type="submit" class="btn btn-secondary">Update Cart</button>
+						<a href="<?php echo site_url('order/init_payment');?>" class="btn btn-primary">Place Order</a>
 						<?php						
 					}
 					?>
@@ -91,11 +91,11 @@
 		</div>
 	</div>
 	<div class="col-md-4">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title">Price Details</h3>
+		<div class="card">
+			<div class="card-header">
+				<h3 class="card-title">Price Details</h3>
 			</div>
-			<div class="panel-body">
+			<div class="card-body">
 				<div class="row">
 					<div class="col-md-6">Price(<?php echo isset($total_items) ? $total_items.' items' : ''; ?>)</div>
 					<div class="col-md-6 text-right"><span class="currency" id="INR">&#8377;</span><?php echo isset($cart_total)?number_format($cart_total,2):'';?></div>
@@ -105,7 +105,7 @@
 					<div class="col-md-6 text-right text-success">FREE</div>
 				</div>
 			</div>
-			<div class="panel-footer">
+			<div class="card-footer">
 				<div class="row">
 					<div class="col-md-6 h4">Amount Payble</div>
 					<div class="col-md-6 h4 text-right"><span class="currency" id="INR">&#8377;</span><?php echo isset($cart_total) ? number_format($cart_total,2) :'';?></div>

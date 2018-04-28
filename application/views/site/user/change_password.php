@@ -1,11 +1,11 @@
 <div class="row">
-    <div class="col-md-12">
-        <h1 class="page-header">Change Password</h1>               
+    <div class="col-12">
+        <h1>Change Password</h1>               
     </div>
 </div><!--/.row-->
 
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-12">
         <?php
         // Show server side messages
         if (isset($alert_message)) {
@@ -27,7 +27,7 @@
         <?php echo form_open(current_url(), array('method' => 'post', 'class' => 'ci-form','name' => 'change_password','id' => 'change_password')); ?> 
         <?php echo form_hidden('form_action', 'change_password'); ?>
         <div class="form-group">                   
-			<label for="user_current_password" class="">Old Password<span class="star">*</span></label>
+			<label for="user_current_password" class="">Old Password<span class="required">*</span></label>
             <?php
             echo form_password(array(
                 'name' => 'user_current_password',
@@ -41,7 +41,7 @@
         </div>
 
         <div class="form-group">
-			<label for="user_new_password" class="">New Password <span class="star">*</span></label>
+			<label for="user_new_password" class="">New Password <span class="required">*</span></label>
             <?php
             echo form_password(array(
                 'name' => 'user_new_password',
@@ -55,7 +55,7 @@
         </div>
 
         <div class="form-group">                    
-			<label for="confirm_user_new_password" class="">Confirm New Password<span class="star">*</span></label>
+			<label for="confirm_user_new_password" class="">Confirm New Password<span class="required">*</span></label>
             <?php
             echo form_password(array(
                 'name' => 'confirm_user_new_password',
@@ -73,7 +73,7 @@
             echo form_submit(array(
                 'name' => 'submit',
                 'value' => 'Submit',
-                'class' => 'btn btn-primary btn-block'));
+                'class' => 'btn btn-primary'));
             ?>
         </div>        
         <?php echo form_close(); ?>

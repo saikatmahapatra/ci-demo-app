@@ -24,7 +24,7 @@
         ?>
         <?php echo form_hidden('form_action', 'update_profile'); ?>
         <div class="form-group">                    
-			<label for="user_firstname" class="">First Name <span class="star">*</span></label>
+			<label for="user_firstname" class="">First Name <span class="required">*</span></label>
             <?php
             echo form_input(array(
                 'name' => 'user_firstname',
@@ -38,7 +38,7 @@
         </div>
 
         <div class="form-group">                    
-			<label for="" class="">Last Name<span class="star">*</span></label>
+			<label for="" class="">Last Name<span class="required">*</span></label>
             <?php
             echo form_input(array(
                 'name' => 'user_lastname',

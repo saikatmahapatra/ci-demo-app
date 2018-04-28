@@ -104,7 +104,7 @@ $row = $row[0];
                         <div class="col-md-4">Date of Registration</div>
                         <div class="col-md-8"><?php echo isset($row['user_registration_date']) ? date('d-m-Y h:i:s a', strtotime($row['user_registration_date'])) : ''; ?></div>                        
                     </div><!--/.row-->
-					<a class="btn btn-dark  pull-right" href="<?php echo site_url('user/edit_profile');?>">Edit</a>
+					<a class="btn btn-secondary  pull-right" href="<?php echo site_url('user/edit_profile');?>">Edit</a>
                 </div>
                 </div>
             </div>
@@ -139,15 +139,15 @@ $row = $row[0];
 									<?php echo isset($addr['zip']) ? ' - <span class="text-bold">'.$addr['zip'].'</span>' : '';?>
 								</div>
 								<div>								
-								<a href="<?php echo site_url('user/edit_address/'.$addr["id"]);?>" class="btn btn-dark">Edit</a>
-								<a href="<?php echo site_url('user/delete_address/'.$addr["id"]);?>" class="btn btn-dark">Delete</a>
+								<a href="<?php echo site_url('user/edit_address/'.$addr["id"]);?>" class="btn btn-secondary">Edit</a>
+								<a href="<?php echo site_url('user/delete_address/'.$addr["id"]);?>" class="btn btn-secondary">Delete</a>
 								</div>
 							</div>
                         </div><!--/.row-->
                         <?php
                         }
                     }?>
-					<a class="btn btn-dark  pull-right" href="<?php echo site_url('user/add_address');?>">Add New</a>
+					<a class="btn btn-secondary  pull-right" href="<?php echo site_url('user/add_address');?>">Add New</a>
                 </div>
                 </div>
             </div>
@@ -163,8 +163,8 @@ $row = $row[0];
                 </div>
                 <div id="collapse3" class="panel-collapse collapse">
                 <div class="card-body">
-						<a class="btn btn-dark  pull-right" href="<?php echo site_url('user/edit_profile');?>">Edit</a>
-						<a class="btn btn-dark  pull-right" href="<?php echo site_url('user/edit_profile');?>">Add New</a>
+						<a class="btn btn-secondary  pull-right" href="<?php echo site_url('user/edit_profile');?>">Edit</a>
+						<a class="btn btn-secondary  pull-right" href="<?php echo site_url('user/edit_profile');?>">Add New</a>
                 </div>
                 </div>
             </div>

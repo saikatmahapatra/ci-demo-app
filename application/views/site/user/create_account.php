@@ -29,7 +29,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">                            
-					<label for="user_firstname" class="">First Name <span class="star">*</span></label>
+					<label for="user_firstname" class="">First Name <span class="required">*</span></label>
                     <?php
                     echo form_input(array(
                         'name' => 'user_firstname',
@@ -44,7 +44,7 @@
             </div>            
             <div class="col-md-6">
                 <div class="form-group">                            
-					<label for="user_lastname" class="">Last Name <span class="star">*</span></label>
+					<label for="user_lastname" class="">Last Name <span class="required">*</span></label>
                     <?php
                     echo form_input(array(
                         'name' => 'user_lastname',
@@ -61,7 +61,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-					<label for="user_email" class="">Email Address <span class="star">*</span></label>
+					<label for="user_email" class="">Email Address <span class="required">*</span></label>
                     <?php
                     echo form_input(array(
                         'name' => 'user_email',
@@ -76,7 +76,7 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group">                           
-					<label for="user_mobile_phone1" class="">Mobile Number <span class="star">*</span></label>
+					<label for="user_mobile_phone1" class="">Mobile Number <span class="required">*</span></label>
                     <?php
                     echo form_input(array(
                         'name' => 'user_mobile_phone1',
@@ -93,7 +93,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">                   
-					<label for="user_password" class="">Password <span class="star">*</span></label>
+					<label for="user_password" class="">Password <span class="required">*</span></label>
                     <?php
                     echo form_password(array(
                         'name' => 'user_password',
@@ -108,7 +108,7 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-					<label for="user_password_confirm" class="">Confirm Password <span class="star">*</span></label>
+					<label for="user_password_confirm" class="">Confirm Password <span class="required">*</span></label>
                     <?php
                     echo form_password(array(
                         'name' => 'user_password_confirm',
@@ -126,7 +126,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">                            
-					<label for="user_dob" class="">Date of Birth <span class="star">*</span></label>
+					<label for="user_dob" class="">Date of Birth <span class="required">*</span></label>
                     <div class="">
                         <?php echo form_dropdown('dob_day', $day_arr, set_value('dob_day'), array('class' => 'form-control dob-inline',));?>
                         <?php echo form_dropdown('dob_month', $month_arr, set_value('dob_month'), array('class' => 'form-control dob-inline',));?>
@@ -141,7 +141,7 @@
 
         <div class="row">
             <div class="col-md-6">                
-				<label for="user_gender" class="">Gender <span class="star">*</span></label>
+				<label for="user_gender" class="">Gender <span class="required">*</span></label>
                 <div class="radio">  
                     <label class="label-normal">
                         <?php
@@ -178,7 +178,7 @@
 
         <div class="row">
             <div class="col-md-12">               
-				<label for="terms" class="">Uses Agreement Terms & Conditions <span class="star">*</span></label>
+				<label for="terms" class="">Uses Agreement Terms & Conditions <span class="required">*</span></label>
                 <div class="checkbox"> 
                     <label class="label-normal">
                         <?php
@@ -189,7 +189,7 @@
                         ));
                         ?>
                         <span>By clicking Create an account, you agree to our Terms and that you have read our Data Policy, including our Cookie Use</span>
-                        <span class="star">*</span>
+                        <span class="required">*</span>
                     </label>
                     <?php echo form_error('terms'); ?>
                 </div>

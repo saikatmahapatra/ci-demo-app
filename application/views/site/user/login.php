@@ -1,11 +1,11 @@
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-12">
         <h1>Login</h1>               
     </div>
 </div><!--/.row-->
 
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-12">
         <?php
         // Show server side messages
         if (isset($alert_message)) {
@@ -27,7 +27,7 @@
         <?php echo form_open(current_url(), array('method' => 'post', 'class' => 'ci-form', 'name' => 'form', 'id' => 'form')); ?> 
         <?php echo form_hidden('form_action', 'login'); ?>
         <div class="form-group">
-            <label for="user_email" class="">Email <span class="star">*</span></label>
+            <label for="user_email" class="">Email <span class="required">*</span></label>
             <?php
             echo form_input(array(
                 'name' => 'user_email',
@@ -41,7 +41,7 @@
             <?php echo form_error('user_email'); ?>
         </div>
         <div class="form-group">            
-			<label for="user_password" class="">Password <span class="star">*</span></label>
+			<label for="user_password" class="">Password <span class="required">*</span></label>
             <?php
             echo form_password(array(
                 'name' => 'user_password',
@@ -72,7 +72,7 @@
         </div>
         <?php echo form_close(); ?>
 		
-		<div class="text-center">
+		<div class="text-left">
 			<a class="d-block" href="<?php echo site_url('user/forgot_password');?>" class="">Forgot your password?</a>
 			<a class="d-block" href="<?php echo site_url('user/create_account');?>" class="">Create an account</a>
 		</div>

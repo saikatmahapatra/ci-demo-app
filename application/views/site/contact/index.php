@@ -34,7 +34,7 @@
     <?php echo form_hidden('form_action', 'send'); ?>
     
         <div class="form-group">                    
-			<label for="name">Name <span class="star">*</span></label>
+			<label for="name">Name <span class="required">*</span></label>
             <?php
             echo form_input(array(
                 'name' => 'name',
@@ -51,7 +51,7 @@
         </div>
 
         <div class="form-group">                    
-			<label for="email" class="">Email <span class="star">*</span></label>			
+			<label for="email" class="">Email <span class="required">*</span></label>			
             <?php
             echo form_input(array(
                 'name' => 'email',
@@ -83,7 +83,7 @@
             <?php echo form_error('phone_number'); ?>
         </div>
         <div class="form-group"> 
-			<label for="message" class="">Message <span class="star">*</span></label>
+			<label for="message" class="">Message <span class="required">*</span></label>
             <?php
             echo form_textarea(array(
                 'name' => 'message',

@@ -1,11 +1,11 @@
 <div class="row">
-    <div class="col-md-12">
-        <h1 class="page-header">Forgot your login password?</h1>               
+    <div class="col-12">
+        <h1>Forgot your login password?</h1>               
     </div>
 </div><!--/.row-->
 
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-12">
         <?php
         // Show server side messages
         if (isset($alert_message)) {
@@ -32,7 +32,7 @@
         ?> 
         <?php echo form_hidden('form_action', 'reset_password'); ?>
         <div class="form-group">                    
-			<label for="user_email" class="">Email <span class="star">*</span></label>
+			<label for="user_email" class="">Registered Email <span class="required">*</span></label>
             <?php
             echo form_input(array(
                 'name' => 'user_email',
@@ -41,12 +41,13 @@
                 'maxlength' => '255',
                 'class' => 'form-control',
                 'autofocus' => '',
-                'placeholder' => 'Please enter your registered email'
+                'placeholder' => 'Email address',
+                'data-hint' => 'Password reset link will be sent to this email id.'
             ));
             ?> 
             <?php echo form_error('user_email'); ?>
         </div>
-        <p class="text-muted">Password reset link will be sent to this registered email.</p>
+        
         <div class=" form-group">
             <?php
             echo form_submit(array(
@@ -56,9 +57,9 @@
             ));
             ?>
         </div>
-        <div class=" form-group">            
-			<a href="<?php echo site_url('user/login');?>" class="">Back to login</a>
-        </div>
         <?php echo form_close(); ?>
+        <div class="text-left">
+            <a href="<?php echo site_url('user/login');?>" class="d-block">Back to login</a>
+        </div>
     </div>
 </div>

@@ -1,6 +1,6 @@
 <div class="row">
-    <div class="col-md-12">
-        <h1 class="page-header">Create New Password</h1>               
+    <div class="col-12">
+        <h1>Create New Password</h1>               
     </div>
 </div><!--/.row-->
 
@@ -29,7 +29,7 @@
         <?php echo form_hidden('password_reset_key', $password_reset_key); ?>
         
         <div class="form-group">                    
-			<label for="user_email" class="">Email<span class="star">*</span></label>
+			<label for="user_email" class="">Email<span class="required">*</span></label>
             <?php
             echo form_input(array(
                 'name' => 'user_email',
@@ -46,7 +46,7 @@
 
 
         <div class="form-group">            
-			<label for="user_new_password" class="">New Password <span class="star">*</span></label>
+			<label for="user_new_password" class="">New Password <span class="required">*</span></label>
             <?php
             echo form_password(array(
                 'name' => 'user_new_password',
@@ -61,7 +61,7 @@
         </div>
 
         <div class="form-group">            
-			<label for="confirm_user_new_password" class="">Re-enter New Password<span class="star">*</span></label>
+			<label for="confirm_user_new_password" class="">Re-enter New Password<span class="required">*</span></label>
             <?php
             echo form_password(array(
                 'name' => 'confirm_user_new_password',
@@ -85,14 +85,9 @@
             ?>
         </div>
         <?php echo form_close(); ?>
-    </div>
-    
-</div>
-
-<div class="row">
-    <div class="col-md-12">
-		<a href="<?php echo site_url('user/login');?>" class="">Login</a>
-        <span>or</span>
-		<a href="<?php echo site_url('user/forgot_password');?>" class="">Resend Link</a>
-    </div>
+        <div class="text-left">
+            <a href="<?php echo site_url('user/login');?>" class="d-block">Back to login</a>
+            <a href="<?php echo site_url('user/forgot_password');?>" class="d-block">Resend password reset link</a>
+        </div>        
+    </div>    
 </div>

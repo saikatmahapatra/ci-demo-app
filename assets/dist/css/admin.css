@@ -19,10 +19,10 @@ body {
 }
 /*Scroll up end*/
 .validation-error {
-  font-size: 12px;
+  font-size: 13px;
   color: #b20000;
 }
-.star {
+.required {
   color: #b20000;
 }
 /*.footer {

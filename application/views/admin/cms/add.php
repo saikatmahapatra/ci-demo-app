@@ -25,14 +25,14 @@
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">									
-									<label for="pagecontent_type" class="">Content Type <span class="star">*</span></label>
+									<label for="pagecontent_type" class="">Content Type <span class="required">*</span></label>
 									<?php echo form_dropdown('pagecontent_type', $arr_content_type, set_value('pagecontent_type'), array('class' => 'form-control',));?>
 									<?php echo form_error('pagecontent_type'); ?>
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">									
-									<label for="pagecontent_title" class="">Content Title <span class="star">*</span></label>
+									<label for="pagecontent_title" class="">Content Title <span class="required">*</span></label>
 									<?php echo form_input(array('name' => 'pagecontent_title', 'value' => set_value('pagecontent_title'), 'id' => 'pagecontent_title', 'class' => 'form-control', 'placeholder' => '', 'title' => '','minlength' => '','maxlength' => '', ));?>
 									<?php echo form_error('pagecontent_title'); ?>
 								</div>
@@ -41,7 +41,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">									
-									<label for="pagecontent_text" class="">Content(HTML) <span class="star">*</span></label>
+									<label for="pagecontent_text" class="">Content(HTML) <span class="required">*</span></label>
 									<?php echo form_textarea(array('name' => 'pagecontent_text','value' => set_value('pagecontent_text'),'class' => 'form-control textarea','id' => 'pagecontent_text','rows' => '4','cols' => '50','placeholder' => '','title' => '','minlength' => '','maxlength' => '', 'style'=>'width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;' )); ?>
 									<?php echo form_error('pagecontent_text'); ?>
 								</div>
