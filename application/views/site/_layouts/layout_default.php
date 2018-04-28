@@ -30,13 +30,14 @@
             </div>
         </nav>
 		
-		<main role="main" class="container-fluid">
+		<main role="main" class="container">
             <?php echo $maincontent; ?>            			
         </main> <!-- /container -->
 		
-		<hr>
-		<footer class="container">
-		  <div class="container-fluid">
+		
+		<footer class="footer">
+		  <div class="container">
+			<hr>
 			<span class="text-muted text-center"><?php echo $el_footer; ?></span>
 		  </div>
 		</footer>

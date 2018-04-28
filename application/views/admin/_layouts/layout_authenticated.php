@@ -34,7 +34,7 @@
         </div>
     </nav>
 
-    <main role="main" class="container-fluid">
+    <main role="main" class="container">
         <?php echo $maincontent; ?>
     </main>
 	

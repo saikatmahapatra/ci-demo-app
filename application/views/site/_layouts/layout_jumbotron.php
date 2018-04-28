@@ -42,13 +42,13 @@
 		  </div>
 
 		  <div class="container">
-			<?php echo $maincontent; ?>
-			<hr>
+			<?php echo $maincontent; ?>			
 		  </div> <!-- /container -->
 		</main>
 		
 		<footer class="footer">
-		  <div class="container-fluid">
+		  <div class="container">
+			<hr>
 			<span class="text-muted text-center"><?php echo $el_footer; ?></span>
 		  </div>
 		</footer>

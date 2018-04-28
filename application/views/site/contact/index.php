@@ -23,6 +23,7 @@
 </div><!--/.row-->
 
 <div class="row">
+	<div class="col-5">
     <?php
     echo form_open_multipart(current_url(), array(
         'method' => 'post', 'class' => 'ci-form',
@@ -31,7 +32,7 @@
     ));
     ?>
     <?php echo form_hidden('form_action', 'send'); ?>
-    <div class="col-md-4">              
+    
         <div class="form-group">                    
 			<label for="name">Name <span class="star">*</span></label>
             <?php
@@ -124,10 +125,11 @@
             echo form_submit(array(
                 'name' => 'submit',
                 'value' => 'Submit',
-                'class' => 'btn btn-primary btn-block',
+                'class' => 'btn btn-primary',
             ));
             ?>            
         </div>
-    </div>    
-<?php echo form_close(); ?>
+    
+	<?php echo form_close(); ?>
+	</div>
 </div>
