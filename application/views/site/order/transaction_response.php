@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-12">
-        <h1 class="page-header">Your Order</h1>               
+        <h1 class="page-header">Transaction Status</h1>               
     </div>
 </div>
 
@@ -24,19 +24,20 @@
 
 <div class="row">
 	<div class="col-md-12">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title">Order # <?php echo $order_no;?></h3>
+		<div class="card">
+			<div class="card-header">
+                Order # <?php echo $order_no;?>
 			</div>
-			<div class="panel-body">
+			<div class="card-body">
+                <p class="text-center">Thank you for shopping with us. We have received your order. You will get order status email notifications soon.<p>
 				<?php echo form_open(current_url(), array('method' => 'post', 'class' => 'ci-form','name' => 'order', 'id' => 'cartForm')); ?>
 				<?php echo form_hidden('form_action', 'order'); ?>			
 				<div class="text-center">
-					<a href="<?php echo site_url('product');?>" class="btn btn-lg btn-secondary">Invoice</a>
-					<a href="<?php echo site_url('product');?>" class="btn btn-lg btn-secondary">Continue Shopping</a>
+					<a href="<?php echo site_url('order/download_invoice');?>" class="btn btn-primary">Download Invoice</a>
+					<a href="<?php echo site_url('product');?>" class="btn btn-primary">Continue Shopping</a>
 				</div>
 				<?php echo form_close(); ?>
-			</div>
+			</div>            
 		</div>
 	</div>	
 </div>

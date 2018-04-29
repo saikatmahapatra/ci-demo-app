@@ -1,5 +1,10 @@
 <div class="row">
     <div class="col-md-12">
+        <h1 class="page-header">Products</h1>               
+    </div>
+</div><!--/.row-->
+<div class="row">
+    <div class="col-md-12">
         <?php
         // Show server side messages
         if (isset($alert_message)) {

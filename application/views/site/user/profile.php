@@ -3,8 +3,8 @@
    //print_r($address);
    ?>
 <div class="row">
-   <div class="col-12">
-      <h1>Profile</h1>
+   <div class="col-md-12">
+      <h1 class="page-header">Profile</h1>
    </div>
 </div>
 <div class="row">

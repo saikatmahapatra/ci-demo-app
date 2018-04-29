@@ -1,6 +1,6 @@
 <div class="row">
-    <div class="col-12">
-        <h1>Forgot your login password?</h1>               
+    <div class="col-md-12">
+        <h1 class="page-header">Forgot your login password?</h1>               
     </div>
 </div><!--/.row-->
 

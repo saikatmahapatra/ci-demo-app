@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-12">
-        <h1 class="page-header">Examples & Documentation</h1>               
+        <h1 class="page-header">Examples Documentation</h1>               
     </div>
 </div><!--/.row-->
 

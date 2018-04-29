@@ -1,5 +1,7 @@
 <div class="row">
-	<h1>Welcome to <?php echo $this->config->item('app_html_title'); ?></h1>               
+  <div class="col-md-12">
+	<h1 class="page-header">Welcome to <?php echo $this->config->item('app_html_title'); ?></h1>               
+  </div>
 </div>
 
 <div class="row">
@@ -39,6 +41,73 @@
   </div>
 </div>
 
-
-
-
+<div class="row">
+    <div class="col-12 col-sm-6 col-md-3">
+        <div class="card text-center">
+            <div class="card-header bg-dark text-white">
+                Header
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
+                    type and scrambled it to make a type specimen book.</p>
+                <a href="#" class="btn btn-primary">Action</a>
+            </div>
+            <div class="card-footer text-muted">
+                21 min ago
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-sm-6 col-md-3">
+        <div class="card text-center">
+            <div class="card-header bg-warning text-white">
+                Header
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
+                    type and scrambled it to make a type specimen book.</p>
+                <a href="#" class="btn btn-primary">Action</a>
+            </div>
+            <div class="card-footer text-muted">
+                21 min ago
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-sm-6 col-md-3">
+        <div class="card text-center">
+            <div class="card-header bg-primary text-white">
+                Header
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
+                    type and scrambled it to make a type specimen book.</p>
+                <a href="#" class="btn btn-primary">Action</a>
+            </div>
+            <div class="card-footer text-muted">
+                21 min ago
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-sm-6 col-md-3">
+        <div class="card text-center">
+            <div class="card-header bg-danger text-white">
+                Header
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
+                    type and scrambled it to make a type specimen book.</p>
+                <a href="#" class="btn btn-primary">Action</a>
+            </div>
+            <div class="card-footer text-muted">
+                21 min ago
+            </div>
+        </div>
+    </div>
+</div>

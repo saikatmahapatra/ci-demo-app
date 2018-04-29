@@ -1,6 +1,6 @@
 <div class="row">
-    <div class="col-12">
-        <h1>Add New Address</h1>               
+    <div class="col-md-12">
+        <h1 class="page-header">Add New Address</h1>               
     </div>
 </div><!--/.row-->
 
