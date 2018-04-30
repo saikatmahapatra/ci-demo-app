@@ -34,7 +34,7 @@
         ?>
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true"
-			aria-expanded="false"><?php echo isset($this->session->userdata['sess_user']['id']) ? $this->session->userdata['sess_user']['user_email'] : 'Guest'; ?></a>    
+			aria-expanded="false">My Account <?php //echo isset($this->session->userdata['sess_user']['id']) ? $this->session->userdata['sess_user']['user_firstname'] : 'Guest'; ?></a>    
             <div class="dropdown-menu" aria-labelledby="dropdown02">
                 <a class="dropdown-item" href="<?php echo site_url('user/profile');?>">Profile</a>
                 <a class="dropdown-item" href="<?php echo site_url('user/change_password');?>">Change Password</a>

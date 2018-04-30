@@ -29,7 +29,7 @@
             'method' => 'post',			
 			'class'=>'ci-form',
             'name' => '',
-            'id' => '',
+            'id' => 'ci-form-helper',
         ));
         ?>
         <?php echo form_hidden('form_action', 'add'); ?>
@@ -198,7 +198,7 @@
             echo form_submit(array(
                 'name' => 'submit',
                 'value' => 'Submit',
-                'id' => '',
+                'id' => 'btn_submit',
                 'class' => 'btn btn-primary',
             ));
             ?> 
