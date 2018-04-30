@@ -279,17 +279,17 @@ function panelGroupToggle() {
 function renderFieldHelp(e) {
     $('.form-control').on('focusin', function (e) {
         var elm = $(this);
-        var helpText = elm.attr('data-hint');
+        var helpText = elm.attr('help-text');		
         if (typeof helpText != 'undefined' && helpText.length > 0) {
-            var html = '<div class="info-help">';
-            html += elm.attr('data-hint');
-            html += '</div>';
+            var html = '<div class="p-3 mt-1 mb-2 bg-info text-white"><small>';
+            html += elm.attr('help-text');
+            html += '</small></div>';
             elm.after(html);
         }
     });
     $('.form-control').on('focusout', function (e) {
         var elm = $(this);
-        var helpText = elm.attr('data-hint');;
+        var helpText = elm.attr('help-text');;
         if (typeof helpText != 'undefined' && helpText.length > 0) {
             elm.next().remove();
         }

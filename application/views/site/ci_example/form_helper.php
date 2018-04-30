@@ -44,7 +44,8 @@
                 'placeholder' => 'Email address',
                 'minlength' => '',
                 'maxlength' => '',
-				'data-hint' => ''
+				'aria-describedby'=>'emailHelpBlock',
+				'help-text' => 'We will not share your email to any thirrd party websites.'
             ));
             ?>
             <?php echo form_error('user_email'); ?>
@@ -60,7 +61,8 @@
                 'placeholder' => 'Password',
                 'minlength' => '6',
                 'maxlength' => '16',
-				'data-hint' => 'A strong password should contains the followings <ul><li>Atleast one upper case.</li><li>Atleast one lower case.</li><li>Atleast one digit.</li><li>Some special characters.</li></ul>'
+				'help-text' => 'A strong password should contains the followings <ul><li>Atleast one upper case.</li><li>Atleast one lower case.</li><li>Atleast one digit.</li><li>Some special characters.</li></ul>',
+				'aria-describedby'=>'passwordHelpBlock'
             ));
             ?> 
             <?php echo form_error('user_password'); ?>
