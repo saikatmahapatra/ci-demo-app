@@ -277,19 +277,18 @@ function panelGroupToggle() {
  * Field Help
  */
 function renderFieldHelp(e) {
-    $('.form-control').on('focusin', function (e) {
+    $('.field-help').on('focusin', function (e) {
         var elm = $(this);
-        var helpText = elm.attr('help-text');		
+        var helpText = elm.attr('data-help-text');
+        var helpTextCssClass = elm.attr('data-help-text-class') ? elm.attr('data-help-text-class') : 'p-3 mt-1 mb-2 bg-light';
         if (typeof helpText != 'undefined' && helpText.length > 0) {
-            var html = '<div class="p-3 mt-1 mb-2 bg-info text-white"><small>';
-            html += elm.attr('help-text');
-            html += '</small></div>';
+            var html = '<div class="'+helpTextCssClass+'"><small>'+helpText+'</small></div>';            
             elm.after(html);
         }
     });
-    $('.form-control').on('focusout', function (e) {
+    $('.field-help').on('focusout', function (e) {
         var elm = $(this);
-        var helpText = elm.attr('help-text');;
+        var helpText = elm.attr('data-help-text');;
         if (typeof helpText != 'undefined' && helpText.length > 0) {
             elm.next().remove();
         }
@@ -299,7 +298,7 @@ function renderFieldHelp(e) {
 /**
  * Allow Numeric Only
  */
-function numericOnly(event) {    
+function numericOnly(event) {
     event.target.value = event.target.value.replace(/[^0-9\.]/g, '');
     if ((event.which != 46 || event.target.value.indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
         event.preventDefault();

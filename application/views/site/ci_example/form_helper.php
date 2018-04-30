@@ -40,12 +40,13 @@
                 'name' => 'user_email',
                 'value' => set_value('user_email'),
                 'id' => 'user_email',
-                'class' => 'form-control',
+                'class' => 'form-control field-help',
                 'placeholder' => 'Email address',
                 'minlength' => '',
                 'maxlength' => '',
 				'aria-describedby'=>'emailHelpBlock',
-				'help-text' => 'We will not share your email to any thirrd party websites.'
+				'data-help-text' => 'We will not share your email to any thirrd party websites.',
+				'data-help-text-class' => 'p-3 mt-1 mb-2 bg-info text-white'
             ));
             ?>
             <?php echo form_error('user_email'); ?>
@@ -57,11 +58,11 @@
                 'name' => 'user_password',
                 'value' => set_value('user_password'),
                 'id' => 'user_password',
-                'class' => 'form-control',
+                'class' => 'form-control field-help',
                 'placeholder' => 'Password',
                 'minlength' => '6',
                 'maxlength' => '16',
-				'help-text' => 'A strong password should contains the followings <ul><li>Atleast one upper case.</li><li>Atleast one lower case.</li><li>Atleast one digit.</li><li>Some special characters.</li></ul>',
+				'data-help-text' => 'A strong password should contains the followings <ul><li>Atleast one upper case.</li><li>Atleast one lower case.</li><li>Atleast one digit.</li><li>Some special characters.</li></ul>',
 				'aria-describedby'=>'passwordHelpBlock'
             ));
             ?> 
@@ -114,7 +115,10 @@
 			<label for="functional_domain" class="">Job Domain <span class="required">*</span></label>
             <?php
             echo form_multiselect('functional_domain', $domain_arr, set_value('functional_domain'), array(
-                'class' => 'form-control',
+                'class' => 'form-control field-help',
+                'aria-describedby'=>'jobDomainHelpBlock',
+				'data-help-text' => 'Press control key to select multiple job domains',
+				'data-help-text-class' => 'p-3 mt-1 mb-2 bg-warning text-white'
             ));
             ?> 
             <?php echo form_error('functional_domain'); ?>
@@ -126,7 +130,10 @@
             echo form_upload(array(
                 'name' => 'userfile',
                 'id' => 'userfile',
-                'class' => '',
+                'class' => 'field-help',
+                'aria-describedby'=>'uploaderHelpBlock',
+				'data-help-text' => 'Please read the file upload instructions given below: <ul><li>doc, docx, pdf, jpg, png formats are supported.</li><li>File size should not exceed 2 MB</li></ul>',
+				'data-help-text-class' => 'p-3 mt-1 mb-2 bg-warning text-white'
             ));
             ?>                                
             <?php echo form_error('userfile'); ?>
