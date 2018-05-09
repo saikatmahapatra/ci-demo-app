@@ -92,11 +92,11 @@ select.form-control.dob-inline {
 .text-upper {
   text-transform: uppercase;
 }
-.row.cart-item {
-  margin-bottom: 20px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #f5f5f5;
-}
+/*.row.cart-item{
+	margin-bottom:20px;
+	padding-bottom:10px;
+	border-bottom: 1px solid #f5f5f5;
+}*/
 /*Profile*/
 .dp {
   border: 10px solid #eee;

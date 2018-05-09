@@ -18,7 +18,7 @@
     </head>
 
     <body data-controller="<?php echo $this->router->class; ?>" data-method="<?php echo $this->router->method; ?>">
-        <nav class="navbar navbar-expand-md navbar-dark bg-indigo bg-primary fixed-top">
+        <nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
             <a class="navbar-brand" href="<?php echo site_url(); ?>"><?php echo $this->config->item('app_html_title'); ?></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault"
                 aria-expanded="false" aria-label="Toggle navigation">
@@ -30,7 +30,7 @@
             </div>
         </nav>
 		
-		<main role="main" class="container">
+		<main role="main" class="container-fluid">
             <?php echo $maincontent; ?>            			
         </main> <!-- /container -->
 		
