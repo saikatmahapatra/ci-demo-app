@@ -143,7 +143,12 @@ class Order extends CI_Controller {
             }
         }
         $result_array = $this->order_model->get_rows($this->id);
+        $order_details_result_array = $this->order_model->get_order_details($this->id); // order product details
+		//print_r($order_details_result_array);
+		//die();
+		 
         $this->data['rows'] = $result_array['data_rows'];
+        $this->data['odetails'] = $order_details_result_array['data_rows'];
         $this->data['maincontent'] = $this->load->view('admin/order/edit', $this->data, true);
         $this->load->view('admin/_layouts/layout_authenticated', $this->data);
     }

@@ -131,4 +131,18 @@ class order_model extends CI_Model {
         $result = $query->result_array();
         return array('num_rows' => $num_rows, 'data_rows' => $result);
     }
+	
+	function get_order_details($order_id) {
+        $this->db->select('t1.id, t1.order_id, t1.product_id, t1.order_detail_price, t1.order_detail_quantity, t1.order_detail_discount_coupon, t1.order_detail_discount_amt, t1.order_detail_delivery_amt, t1.order_detail_total_amt, t2.product_name, t2.product_price, t2.product_color,t2.product_size, t2.product_sku');
+        $this->db->join('products as t2', 't2.id=t1.product_id', 'left');
+        $this->db->where(array('t1.order_id' => $order_id));
+        $query = $this->db->get('order_details as t1');
+		//echo $this->db->last_query(); die();
+        $num_rows = $query->num_rows();
+        $result = $query->result_array();
+        return array('num_rows' => $num_rows, 'data_rows' => $result);
+        return $result;
+    }
+	
+	
 }
