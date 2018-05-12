@@ -89,8 +89,8 @@ $row = $rows[0];
 							<?php echo isset($row['order_shipping_zip']) ? $row['order_shipping_zip'] : '';?>
 						</div>
 						<div>
-							<?php echo isset($row['order_shipping_phone1']) ? $row['order_shipping_phone1'].' / ' : '';?>
-							<?php echo isset($row['order_shipping_phone2']) ? $row['order_shipping_phone2'] : '';?>
+							<?php echo isset($row['order_shipping_phone1']) ? $row['order_shipping_phone1'] : '';?>
+							<?php echo isset($row['order_shipping_phone2']) ? ' / '.$row['order_shipping_phone2'] : '';?>
 						</div>						
 					</div>
 					<div class="col-md-6 text-right">
@@ -114,16 +114,23 @@ $row = $rows[0];
 							  <th scope="col">In Stock</th>
 							  <th scope="col">Qty</th>
 							  <th scope="col">Price</th>
-							  <th scope="col">Disscount</th>
-							  <th scope="col">Coupon</th>
+							  <!--<th scope="col">Disscount</th>
+							  <th scope="col">Coupon</th>-->
 							  <th scope="col">Delivery</th>
 							  <th scope="col">Total</th>
 							  <th scope="col">Status</th>
 							</tr>
 						  </thead>
 						  <tbody>
-							<form>						
-							
+							<?php
+							echo form_open(current_url(), array(
+								'method' => 'post',			
+								'class'=>'ci-form',
+								'name' => '',
+								'id' => 'order-update-form',
+							));
+							?>
+							<?php echo form_hidden('form_action', 'update'); ?>
 							<?php
 								if (isset($odetails) && sizeof($odetails) > 0) {
 									$i = 1;
@@ -140,6 +147,7 @@ $row = $rows[0];
 													<div class="mt-0"><?php echo isset($drow['product_name']) ? $drow['product_name'] : '';?></div>
 													<div><?php echo isset($drow['product_size']) ? $drow['product_size'] : '';?></div>
 													<div><?php echo isset($drow['product_color']) ? $drow['product_color'] : '';?></div>
+													<div><?php echo isset($drow['order_details_unit_price']) ? $drow['order_details_unit_price'] : '';?></div>
 													</div><!--/.media-body-->
 											</div><!--/.media-->
 										  
@@ -147,58 +155,45 @@ $row = $rows[0];
 										  <td>N/A</td>
 										  <td><?php echo isset($drow['order_detail_quantity']) ? $drow['order_detail_quantity'] : '';?></td>
 										  <td><?php echo isset($drow['order_detail_price']) ? $drow['order_detail_price'] : '';?></td>
-										  <td><?php echo isset($drow['order_detail_discount_amt']) ? $drow['order_detail_discount_amt'] : '';?></td>
-										  <td><?php echo isset($drow['order_detail_discount_coupon']) ? $drow['order_detail_discount_coupon'] : '';?></td>
+										  <!--<td><?php echo isset($drow['order_detail_discount_amt']) ? $drow['order_detail_discount_amt'] : '';?></td>
+										  <td><?php echo isset($drow['order_detail_discount_coupon']) ? $drow['order_detail_discount_coupon'] : '';?></td>-->
 										  <td><?php echo isset($drow['order_detail_delivery_amt']) ? $drow['order_detail_delivery_amt'] : '';?></td>
 										  <td><?php echo isset($drow['order_detail_total_amt']) ? $drow['order_detail_total_amt'] : '';?></td>
 										  
-										  <td>
-											<span class="status d-none"> Dispatched <a href="#">Edit</a></span>
-											<select name="order_item_status" class="form-controsl d-nonae">
-												<option value="1">Shipped</option>
-											</select>
+										  <td>											
+											<?php
+											echo form_dropdown('order_detail_status['.$drow['id'].']', $arr_order_item_status, $drow['order_detail_status'], array(
+												'class' => 'form-control-sm',
+											));
+											?>
 										  </td>
-										</tr><!--/.order-item-->
-										
+										</tr><!--/.order-item-->										
 										<?php
 										$i++;										
 									}
 								}
 							?>
 							
-							<tr class="order-item d-none">
-							  <th scope="row">1</th>
-							  <td>
-								<div class="media">
-									<div class="mr-3 media-left media-top">
-									<img class="mr-3" data-src="holder.js/64x64" alt="64x64" style="width: 64px; height: 64px;" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2264%22%20height%3D%2264%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_16345c2a7ae%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A10pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_16345c2a7ae%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2213.5546875%22%20y%3D%2236.5%22%3E64x64%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true">
-									</div>
-									<div class="media-body">											
-										<div class="mt-0">Louis Phhilippe Shirt</div>
-										<div>M/Slim Fit</div>										
-									</div><!--/.media-body-->
-								</div><!--/.media-->
-							  
-							  </td>
-							  <td>12</td>
-							  <td>2</td>
-							  <td>10.00</td>
-							  <td>2.00</td>
-							  <td>18.00</td>							  
-							  <td>UPTO2</td>
-							  <td>20.00</td>
-							  <td>
-								<span class="status d-none"> Dispatched <a href="#">Edit</a></span>
-								<select name="order_item_status" class="form-controsl d-nonae">
-									<option value="1">Shipped</option>
-								</select>
+							<tr class="order-item mt-3">							  
+							  <td colspan="8">
+								<div class="pull-right mt-4">
+								<a href="" class="btn btn-secondary">Back to Orders</a>
+								<?php
+								echo form_submit(array(
+									'name' => 'submit',
+									'value' => 'Update Order',
+									'id' => 'btn_submit',
+									'class' => 'btn btn-primary',
+								));
+								?> 
+								</div>
 							  </td>
 							</tr><!--/.order-item-->
 							
 							
 							
 						  </tbody>
-						  </form>
+						  <?php echo form_close(); ?>
 						</table>				
 					</div>
 				</div>

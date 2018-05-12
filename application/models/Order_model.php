@@ -41,7 +41,16 @@ class order_model extends CI_Model {
         //echo $this->db->last_query(); die();
         return $result;
     }
-
+	
+	function update_batch($data, $where_col = NULL, $table = NULL) {
+		if($table == NULL){
+			$result = $this->db->update_batch('order_details', $data, $where_col);			
+		}else{
+			$result = $this->db->update_batch($table, $data, $where_col);			
+		}
+        return $result;
+    }
+	
     function delete($where_array = NULL, $table = NULL) {
         $this->db->where($where_array);
         if ($table == NULL) {
@@ -133,7 +142,7 @@ class order_model extends CI_Model {
     }
 	
 	function get_order_details($order_id) {
-        $this->db->select('t1.id, t1.order_id, t1.product_id, t1.order_detail_price, t1.order_detail_quantity, t1.order_detail_discount_coupon, t1.order_detail_discount_amt, t1.order_detail_delivery_amt, t1.order_detail_total_amt, t2.product_name, t2.product_price, t2.product_color,t2.product_size, t2.product_sku');
+        $this->db->select('t1.id, t1.order_id, t1.product_id, t1.order_detail_price, t1.order_detail_quantity, t1.order_detail_status, t1.order_detail_discount_coupon, t1.order_detail_discount_amt, t1.order_detail_delivery_amt, t1.order_detail_total_amt, t2.product_name, t2.product_price, t2.product_color,t2.product_size, t2.product_sku');
         $this->db->join('products as t2', 't2.id=t1.product_id', 'left');
         $this->db->where(array('t1.order_id' => $order_id));
         $query = $this->db->get('order_details as t1');

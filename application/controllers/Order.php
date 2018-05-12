@@ -51,7 +51,7 @@ class Order extends CI_Controller {
                 'price' => $item['price'],
                 'name' => $item['name'],
                 'line_total' => $item['subtotal'],
-                'category_name' => $product_options['category_name'],
+                'category_name' => $product_options['category_name']
             );
         }
 		$result['cartrows'] = $cartrows;
@@ -62,7 +62,7 @@ class Order extends CI_Controller {
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
         
-        $cart_data = $this->get_cart_data();
+        $cart_data = $this->get_cart_data();		
 		$this->data['cartrows'] = $cart_data['cartrows'];
         $this->data['cart_total'] = $cart_data['cart_total']; // Returns:	Total amount
         $this->data['total_items'] = $cart_data['total_items']; //Returns:	Total amount of items in the cart
@@ -106,6 +106,7 @@ class Order extends CI_Controller {
                     'product_image' => 'prod.png'
                 )
             );
+			//print_r($data); die();
             $result = $this->cart->insert($data);
         } else {
             $data = array(
@@ -199,10 +200,43 @@ class Order extends CI_Controller {
 
     function place_order() {        
 		$cart_data = $this->get_cart_data();
-		$cartrows = $cart_data['cartrows'];
-		//print_r($cartrows);die();
+		//echo '<pre>';print_r($cart_data);die();
+		/*
+		Array
+		(
+			[cartrows] => Array
+				(
+					[0] => Array
+						(
+							[rowid] => ae9501535ac7c5595d4dc625d283838d
+							[id] => 4
+							[qty] => 2
+							[price] => 90
+							[name] => Moto G5 Back Cover
+							[line_total] => 180
+							[category_name] => Accessories
+						)
+
+					[1] => Array
+						(
+							[rowid] => b4c547233243f2317d8ad8343d699f5c
+							[id] => 5
+							[qty] => 2
+							[price] => 1500
+							[name] => Men's Nike Running Shoe
+							[line_total] => 3000
+							[category_name] => Shoes
+						)
+
+				)
+
+			[cart_total] => 3180
+			[total_items] => 4
+		)
+		*/
+		$cartrows = $cart_data['cartrows'];		
         $cart_total = $cart_data['cart_total']; // Returns:	Total amount
-        $total_items = $cart_data['total_items']; //Returns:	Total amount of items in the cart
+        $total_items = $cart_data['total_items']; //Returns:	Total number of added items of a cart
 		$shipping_address_id = $this->input->post('shipping_address');
 		$shipping_address = $this->get_user_shipping_address($shipping_address_id, $this->sess_user_id, 'S');
         $order_number = $this->generate_order_number();
@@ -232,16 +266,17 @@ class Order extends CI_Controller {
 		
 		if ($insert_id_order_id) {
 			$order_details_post_data = array();
-			foreach($cartrows as $key => $cart){				
+			foreach($cartrows as $key => $cart_row){				
 				$order_details_post_data[$key] = array(
 					'order_id' => $insert_id_order_id,
-					'product_id' => $cart['id'],
-					'order_detail_price' => $cart['price'],
-					'order_detail_quantity' => $cart['qty'],
-					//'order_detail_discount_coupon' => $cart['coupon'],
-					//'order_detail_discount_amt' => $cart['coupon'],
-					//'order_detail_delivery_amt' => $cart['delivery'],
-					'order_detail_total_amt' => $cart['price']
+					'product_id' => $cart_row['id'],
+					//'order_detail_unit_price' => $cart_row['price'],
+					'order_detail_price' => $cart_row['price'],
+					'order_detail_quantity' => $cart_row['qty'],
+					//'order_detail_discount_coupon' => $cart_row['coupon'],
+					//'order_detail_discount_amt' => $cart_row['coupon'],
+					//'order_detail_delivery_amt' => $cart_row['delivery'],
+					'order_detail_total_amt' => $cart_row['line_total'] // this col aded for future implementation on calculation on gst, discount, delivey charges
 				);
 
 				

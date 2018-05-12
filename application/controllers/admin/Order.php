@@ -126,21 +126,41 @@ class Order extends CI_Controller {
 		
 		$this->breadcrumbs->push('Edit', '/');		
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
+		$this->data['arr_order_item_status'] = array(
+		'processing'=>'Processing',
+		'dispatched'=>'Dispatched',
+		'out_for_del'=>'Out for Delivery',
+		'delivered'=>'Delivered',
+		'return_init'=>'Return Initiated',
+		'return_approved'=>'Return Approved',
+		'refund_init'=>'Refund Initiated',
+		'refund_done'=>'Refunded Amount',
+		'cancelled'=>'Cancelled',
+		'rejected'=>'Rejected',
+		'dismissed'=>'Dismissed'
+		);		
 		
 		
         if ($this->input->post('form_action') == 'update') {
-            if ($this->validate_form_data('edit') == true) {
-                $postdata = array(                    
-                );
-                $where_array = array('id' => $this->input->post('id'));
-                $res = $this->order_model->update($postdata, $where_array);
-
-                if ($res) {
-                    $this->session->set_flashdata('flash_message', '<i class="icon fa fa-check" aria-hidden="true"></i>Updated successfully.');
-                    $this->session->set_flashdata('flash_message_css', 'alert-success');
-                    redirect('admin/product');
-                }
-            }
+            //if ($this->validate_form_data('edit') == true) {
+				//print_r($_POST);die();
+                $postdata = array();				
+				if(isset($_POST['order_detail_status'])){
+					$i = 0;
+					foreach($_POST['order_detail_status'] as $key => $val){					
+						$postdata[$i]['id'] = $key;
+						$postdata[$i]['order_detail_status'] = $val;					
+						$i++;					
+					}
+					//print_r($postdata);die();										
+					$res = $this->order_model->update_batch($postdata, 'id', NULL);
+					if ($res) {
+						$this->session->set_flashdata('flash_message', '<i class="icon fa fa-check" aria-hidden="true"></i>Order updated successfully.');
+						$this->session->set_flashdata('flash_message_css', 'alert-success');
+						redirect('admin/order/edit/'.$this->id);
+					}
+				}
+            //}
         }
         $result_array = $this->order_model->get_rows($this->id);
         $order_details_result_array = $this->order_model->get_order_details($this->id); // order product details
