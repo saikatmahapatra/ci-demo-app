@@ -284,7 +284,7 @@ class User_model extends CI_Model {
             $this->db->where(array('t1.address_type' => $address_type));
         }    
         $query = $this->db->get('user_addresses as t1');
-        echo $this->db->last_query();
+        //echo $this->db->last_query();
         $result = $query->result_array();        
         return $result;
     }

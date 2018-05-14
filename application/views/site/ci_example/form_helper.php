@@ -23,68 +23,65 @@
 </div><!--/.row-->
 
 <div class="row">
-    <div class="col-md-6">        
-        <?php
-        echo form_open(current_url(), array(
-            'method' => 'post',			
-			'class'=>'ci-form',
-            'name' => '',
-            'id' => 'ci-form-helper',
-        ));
-        ?>
-        <?php echo form_hidden('form_action', 'add'); ?>
-        <div class="form-group">
-			<label for="user_email" class="">Email <span class="required">*</span></label>			
-            <?php
-            echo form_input(array(
-                'name' => 'user_email',
-                'value' => set_value('user_email'),
-                'id' => 'user_email',
-                'class' => 'form-control field-help',
-                'placeholder' => 'Email address',
-                'minlength' => '',
-                'maxlength' => '',
-				'aria-describedby'=>'emailHelpBlock',
-				'data-help-text' => 'We will not share your email to any thirrd party websites.',
-				'data-help-text-class' => 'p-3 mt-1 mb-2 bg-info text-white'
-            ));
-            ?>
-            <?php echo form_error('user_email'); ?>
-        </div>            
-        <div class="form-group">             
-			<label for="user_password" class="">Password <span class="required">*</span></label>
-			<?php
-            echo form_password(array(
-                'name' => 'user_password',
-                'value' => set_value('user_password'),
-                'id' => 'user_password',
-                'class' => 'form-control field-help',
-                'placeholder' => 'Password',
-                'minlength' => '6',
-                'maxlength' => '16',
-				'data-help-text' => 'A strong password should contains the followings <ul><li>Atleast one upper case.</li><li>Atleast one lower case.</li><li>Atleast one digit.</li><li>Some special characters.</li></ul>',
-				'aria-describedby'=>'passwordHelpBlock'
-            ));
-            ?> 
-            <?php echo form_error('user_password'); ?>
-        </div>
-        <div class="form-group">            
-			<label for="user_password_confirm" class="">Confirm Password <span class="required">*</span></label>
-            <?php
-            echo form_password(array(
-                'name' => 'user_password_confirm',
-                'value' => set_value('user_password_confirm'),
-                'id' => 'user_password_confirm',
-                'class' => 'form-control',
-                'placeholder' => 'Confirm Password',
-                'minlength' => '6',
-                'maxlength' => '16',
-            ));
-            ?> 
-            <?php echo form_error('user_password_confirm'); ?>
-        </div>
-
-        <div class="form-group">            
+	<div class="col-md-8">
+		<?php echo form_open(current_url(), array( 'method' => 'post','class'=>'ci-form','name' => '','id' => 'ci-form-helper',)); ?>
+		<?php echo form_hidden('form_action', 'add'); ?>		  
+			<div class="form-group">
+				<label for="user_email" class="">Email <span class="required">*</span></label>			
+				<?php
+				echo form_input(array(
+					'name' => 'user_email',
+					'value' => set_value('user_email'),
+					'id' => 'user_email',
+					'class' => 'form-control field-help',
+					'placeholder' => 'Email address',
+					'minlength' => '',
+					'maxlength' => '',
+					'aria-describedby'=>'emailHelpBlock',
+					'data-help-text' => 'We will not share your email to any thirrd party websites.',
+					'data-help-text-class' => 'p-3 mt-1 mb-2 bg-info text-white'
+				));
+				?>
+				<?php echo form_error('user_email'); ?>
+			</div>
+			
+			<div class="form-row">
+				<div class="form-group col-md-6">
+				  <label for="user_password" class="">Password <span class="required">*</span></label>
+					<?php
+					echo form_password(array(
+						'name' => 'user_password',
+						'value' => set_value('user_password'),
+						'id' => 'user_password',
+						'class' => 'form-control field-help',
+						'placeholder' => 'Password',
+						'minlength' => '6',
+						'maxlength' => '16',
+						'data-help-text' => 'A strong password should contains the followings <ul><li>Atleast one upper case.</li><li>Atleast one lower case.</li><li>Atleast one digit.</li><li>Some special characters.</li></ul>',
+						'aria-describedby'=>'passwordHelpBlock'
+					));
+					?> 
+					<?php echo form_error('user_password'); ?>
+				</div>
+				<div class="form-group col-md-6">
+				  <label for="user_password_confirm" class="">Confirm Password <span class="required">*</span></label>
+					<?php
+					echo form_password(array(
+						'name' => 'user_password_confirm',
+						'value' => set_value('user_password_confirm'),
+						'id' => 'user_password_confirm',
+						'class' => 'form-control',
+						'placeholder' => 'Confirm Password',
+						'minlength' => '6',
+						'maxlength' => '16',
+					));
+					?> 
+					<?php echo form_error('user_password_confirm'); ?>
+				</div>
+		  </div>
+		  
+		  
+		  <div class="form-group">
 			<label for="address" class="">Address <span class="required">*</span></label>
             <?php
             echo form_textarea(array(
@@ -92,130 +89,119 @@
                 'value' => set_value('address'),
                 'id' => 'address',
                 'class' => 'form-control',
-                'rows' => '4',
-                'cols' => '50',
+                'rows' => '1',
+                'cols' => '4',
                 'placeholder' => 'Address',
                 'minlength' => '10',
                 'maxlength' => '200',
             ));
             ?>
             <?php echo form_error('address'); ?>
-        </div>
-        <div class="form-group">            
-			<label for="job_role" class="">Job Role <span class="required">*</span></label>
-            <?php
-            echo form_dropdown('job_role', $job_role_arr, set_value('job_role'), array(
-                'class' => 'form-control',
-            ));
-            ?> 
-            <?php echo form_error('job_role'); ?>
-        </div>
-
-        <div class="form-group">                    
-			<label for="functional_domain" class="">Job Domain <span class="required">*</span></label>
-            <?php
-            echo form_multiselect('functional_domain', $domain_arr, set_value('functional_domain'), array(
-                'class' => 'form-control field-help',
-                'aria-describedby'=>'jobDomainHelpBlock',
-				'data-help-text' => 'Press control key to select multiple job domains',
-				'data-help-text-class' => 'p-3 mt-1 mb-2 bg-warning text-white'
-            ));
-            ?> 
-            <?php echo form_error('functional_domain'); ?>
-        </div>
-
-        <div class="form-group">
-			<label for="functional_domain" class="">Resume <span class="required">*</span></label>
-            <?php
-            echo form_upload(array(
-                'name' => 'userfile',
-                'id' => 'userfile',
-                'class' => 'field-help',
-                'aria-describedby'=>'uploaderHelpBlock',
-				'data-help-text' => 'Please read the file upload instructions given below: <ul><li>doc, docx, pdf, jpg, png formats are supported.</li><li>File size should not exceed 2 MB</li></ul>',
-				'data-help-text-class' => 'p-3 mt-1 mb-2 bg-warning text-white'
-            ));
-            ?>                                
-            <?php echo form_error('userfile'); ?>
-        </div>
-              
-
-        <div class="form-group"> 
-			<label for="gender">Gender <span class="required">*</span></label>
-            <div>
-				<label class="">
-					<?php
-					$radio_is_checked = $this->input->post('gender') === 'M';
-					echo form_radio(array(
-						'name' => 'gender',
-						'value' => 'M',
-						'id' => 'm',
-						'checked' => $radio_is_checked,
-						'class' => '',
-							), set_radio('gender', 'M')
-					);
-					?>
-					<span>Male</span>
-				</label>                    
-				<label class="">
-					<?php
-					$radio_is_checked = $this->input->post('gender') === 'F';
-					echo form_radio(array(
-						'name' => 'gender',
-						'value' => 'F',
-						'id' => 'f',
-						'checked' => $radio_is_checked,
-						'class' => ''
-							), set_radio('gender', 'F')
-					);
-					?>
-					<span>Female</span>
-				</label>
+		  </div>
+		  
+		  <div class="form-row">
+			<div class="form-group col-md-6">
+			  <label for="job_role" class="">Job Role <span class="required">*</span></label>
+				<?php
+				echo form_dropdown('job_role', $job_role_arr, set_value('job_role'), array(
+					'class' => 'form-control',
+				));
+				?> 
+				<?php echo form_error('job_role'); ?>
 			</div>
-            <?php echo form_error('gender'); ?>
-        </div>
-
-
-
-        <div class="checkbox">
-			
-            <label class="">
-                <?php
-                $cb_is_checked = $this->input->post('terms') === 'accept';
-                echo form_checkbox('terms', 'accept', $cb_is_checked, array(
-                    'id' => 'trems',
-                    'class' => ''
-                ));
-                ?>
-                <span>I've read & accepting the <a href="#" data-toggle="modal" data-target="#tncModal">Terms of Uses Agreement</a></span>
-                <span class="required">*</span>
-            </label>
-            <?php echo form_error('terms'); ?>
-        </div>
-
-
-        <div class="form-group">
-            <?php
-            /*echo form_reset(array(
-                'name' => 'reset',
-                'value' => 'Reset',
-                'id' => '',
-                'class' => 'btn btn-secondary',
-            ));*/
-            ?>
-            <?php
-            echo form_submit(array(
-                'name' => 'submit',
-                'value' => 'Submit',
-                'id' => 'btn_submit',
-                'class' => 'btn btn-primary',
-            ));
-            ?> 
-        </div>
-        <?php echo form_close(); ?>
-    </div>
+			<div class="form-group col-md-6">
+			  <label for="functional_domain" class="">Job Domain <span class="required">*</span></label>
+				<?php
+				echo form_multiselect('functional_domain', $domain_arr, set_value('functional_domain'), array(
+					'class' => 'form-control field-help',
+					'aria-describedby'=>'jobDomainHelpBlock',
+					'data-help-text' => 'Press control key to select multiple job domains',
+					'data-help-text-class' => 'p-3 mt-1 mb-2 bg-warning text-white'
+				));
+				?> 
+				<?php echo form_error('functional_domain'); ?>
+			</div>
+		  </div>
+		  
+		  <div class="form-group">
+			  <label for="functional_domain" class="">Resume <span class="required">*</span></label>
+				<?php
+				echo form_upload(array(
+					'name' => 'userfile',
+					'id' => 'userfile',
+					'class' => 'field-help',
+					'aria-describedby'=>'uploaderHelpBlock',
+					'data-help-text' => 'Please read the file upload instructions given below: <ul><li>doc, docx, pdf, jpg, png formats are supported.</li><li>File size should not exceed 2 MB</li></ul>',
+					'data-help-text-class' => 'p-3 mt-1 mb-2 bg-warning text-white'
+				));
+				?>                                
+				<?php echo form_error('userfile'); ?>
+			</div>
+		  
+		  
+		  <div class="form-group">
+			<label for="gender">Gender <span class="required">*</span></label>
+			<div class="form-radio">
+				<?php
+				$radio_is_checked = $this->input->post('gender') === 'M';
+				echo form_radio(array(
+					'name' => 'gender',
+					'value' => 'M',
+					'id' => 'm',
+					'checked' => $radio_is_checked,
+					'class' => '',
+						), set_radio('gender', 'M')
+				);
+				?>
+				<label class="form-radio-label" for="m">Male</span></label>
+				
+				<?php
+				$radio_is_checked = $this->input->post('gender') === 'F';
+				echo form_radio(array(
+					'name' => 'gender',
+					'value' => 'F',
+					'id' => 'f',
+					'checked' => $radio_is_checked,
+					'class' => ''
+						), set_radio('gender', 'F')
+				);
+				?>
+				<label class="form-radio-label" for="f">Female</span></label>
+				
+				<?php
+				$radio_is_checked = $this->input->post('gender') === 'T';
+				echo form_radio(array(
+					'name' => 'gender',
+					'value' => 'T',
+					'id' => 't',
+					'checked' => $radio_is_checked,
+					'class' => ''
+						), set_radio('gender', 'T')
+				);
+				?>
+				<label class="form-radio-label" for="t">Trans-gender</span></label>
+			</div>
+			<?php echo form_error('gender'); ?>
+		  </div>
+		  
+		  
+		  <div class="form-group">
+			<div class="form-check">
+				<?php
+					$cb_is_checked = $this->input->post('terms') === 'accept';
+					echo form_checkbox('terms', 'accept', $cb_is_checked, array('id' => 'trems','class' => 'form-check-input'));
+				?>				
+				<label class="form-check-label" for="trems">
+				<span class="required">*</span>I've read & accepting the <a href="#" data-toggle="modal" data-target="#tncModal">Terms of Uses Agreement</a>
+				</label>
+				<?php echo form_error('terms'); ?>
+			</div>
+		  </div>
+		  
+		  <?php echo form_submit(array('name' => 'submit', 'value' => 'Submit', 'id' => 'btn_submit', 'class' => 'btn btn-primary')); ?> 
+		<?php echo form_close(); ?>
+	</div>
 </div>
-
 
 
 <!-- Modal -->

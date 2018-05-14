@@ -49,28 +49,22 @@
             ));
             ?> 
             <?php echo form_error('user_password'); ?>
-        </div>            
-        <!--<div class="checkbox">
-            <label>
-                <input type="checkbox" name="remember" id="remember"> Remember login
-            </label>
-            <p class="help-block">(if this is a private computer)</p>
-        </div>-->
-        <div class="form-group">
-            <?php
-            echo form_submit(array(
-                'name' => 'submit',
-                'value' => 'Log In',
-                'class' => 'btn btn-primary',
-            ));
-            ?>            
-
         </div>
-        <?php echo form_close(); ?>
-		
-		<div class="text-left">
+        
+		<?php
+		echo form_submit(array(
+			'name' => 'submit',
+			'value' => 'Log In',
+			'class' => 'btn btn-primary',
+		));
+		?>
+		<div class="text-centre">
 			<a class="d-block" href="<?php echo site_url('user/forgot_password');?>" class="">Forgot your password?</a>
 			<a class="d-block" href="<?php echo site_url('user/create_account');?>" class="">Create an account</a>
 		</div>
+			
+		<?php echo form_close(); ?>
+		
+		
     </div>
 </div>
