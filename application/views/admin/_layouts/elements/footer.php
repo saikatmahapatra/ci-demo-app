@@ -1,8 +1,9 @@
-<footer class="main-footer">
-    <div class="pull-right hidden-xs">
-        <b>Version</b> <?php echo $this->config->item('app_admin_ui_version');?>
+<div class="container small">
+    <hr>
+    <div class="text-muted text-center">
+        <?php echo $this->config->item('app_admin_copy_right');?>
     </div>
-<!--    <strong>Copyright &copy; 2014-2016 <a href="#">App Name</a>.</strong> All rights
-    reserved.-->
-    <?php echo $this->config->item('app_admin_copy_right');?>
-</footer>
+    <div class="small text-muted text-center">
+        Version <?php echo $this->config->item('app_admin_ui_version');?>
+    </div>
+</div>

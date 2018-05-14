@@ -5,6 +5,12 @@ body {
     padding-top: 5rem;
     padding-bottom: 1rem;
 }
+h1{
+    font-size: 18px;
+}
+h2{
+    font-size: 16px;
+}
 
 /*Scroll up*/
 .scrollup {
@@ -24,7 +30,7 @@ body {
 /*Scroll up end*/
 .validation-error{
     font-size: 13px;
-    color: @dark-red;
+    color: @red;
 }
 
 .required{
@@ -39,3 +45,57 @@ body {
     line-height: 60px;
     background-color: @light-gray;
 }*/
+.bg-brand {
+    background: linear-gradient(to bottom, @brand-light, @brand-dark);
+    background: -moz-linear-gradient(top, @brand-light, @brand-dark);
+    background: -ms-linear-gradient(top, @brand-light, @brand-dark);
+    background: -o-linear-gradient(top, @brand-light, @brand-dark);
+    background: -webkit-linear-gradient(top, @brand-light, @brand-dark);
+    background: -webkit-gradient(linear, left top, left bottom, from(@brand-light), to(@brand-dark));
+}
+
+
+.btn-brand{
+	background-color: @brand-light;
+    border-color: @brand-light;
+	&:hover{
+		background-color: @brand-dark;
+		border-color: @brand-dark;
+	}
+	&:active{
+		background-color: @brand-dark;
+		border-color: @brand-dark;
+	}
+}
+
+/*Profile*/
+.dp
+{
+    border:10px solid #eee;
+    transition: all 0.2s ease-in-out;
+	height: 100px;
+	width: 100px;
+}
+.dp:hover
+{
+    border:2px solid #eee;
+    transform:rotate(360deg);
+    -ms-transform:rotate(360deg);  
+    -webkit-transform:rotate(360deg);  
+    /*-webkit-font-smoothing:antialiased;*/
+}
+.user_intro{
+	font-size: 11px;
+}
+.text-greyed-out{
+	opacity:0.5;
+}
+
+
+.heading-container{
+    .breadcrumb {
+        margin-top: 0px;
+        padding: 0px;
+        background: @white;
+    }
+}

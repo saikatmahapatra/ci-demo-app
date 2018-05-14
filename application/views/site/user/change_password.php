@@ -5,7 +5,7 @@
 </div><!--/.row-->
 
 <div class="row">
-    <div class="col-12">
+    <div class="col-md-4">
         <?php
         // Show server side messages
         if (isset($alert_message)) {
@@ -18,12 +18,7 @@
             $html_alert_ui.='</div>';
             echo $html_alert_ui;
         }
-        ?>              
-    </div>
-</div><!--/.row-->
-
-<div class="row">
-    <div class="col-md-4">        
+        ?>        
         <?php echo form_open(current_url(), array('method' => 'post', 'class' => 'ci-form','name' => 'change_password','id' => 'change_password')); ?> 
         <?php echo form_hidden('form_action', 'change_password'); ?>
         <div class="form-group">                   

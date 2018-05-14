@@ -27,11 +27,9 @@
         <?php echo $maincontent; ?>
     </main>
 	
-	<!--<footer class="footer">
-      <div class="container">
-        <span class="text-muted">Place sticky footer content here.</span>
-      </div>
-    </footer>-->
+	<footer class="footer">
+    <?php echo $el_footer; ?>
+    </footer>
     
 	<button class="btn btn-primary scrollup" data-toggle="tooltip" data-placement="left" data-original-title="Scroll to top"><i aria-hidden="true" class="fa fa-arrow-up"></i></button>
 

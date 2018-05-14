@@ -88,14 +88,14 @@ class Category extends CI_Controller {
             //add html for action
             $action_html = '';
             $action_html.= anchor(site_url('admin/category/edit/' . $result['id']), 'Edit', array(
-                'class' => 'btn btn-sm btn-outline-dark',
+                'class' => 'btn btn-sm btn-dark',
                 'data-toggle' => 'tooltip',
                 'data-original-title' => 'Edit',
                 'title' => 'Edit',
             ));
             $action_html.='&nbsp;';
             $action_html.= anchor(site_url('admin/category/delete/' . $result['id']), 'Delete', array(
-                'class' => 'btn btn-sm btn-outline-danger btn-delete',
+                'class' => 'btn btn-sm btn-danger btn-delete',
 				'data-confirmation'=>true,
 				'data-confirmation-message'=>'Are you sure, you want to delete this?',				
                 'data-toggle' => 'tooltip',

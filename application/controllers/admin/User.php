@@ -101,10 +101,10 @@ class User extends CI_Controller {
 
 
             $acc_status_text = ($result['user_account_active'] == 'Y') ? 'Deactivate' : 'Activate';
-            $acc_status_class = ($result['user_account_active'] == 'Y') ? 'btn-outline-warning' : 'btn-info';
+            $acc_status_class = ($result['user_account_active'] == 'Y') ? 'btn-warning' : 'btn-info';
             $acc_status_set = ($result['user_account_active'] == 'Y') ? 'N' : 'Y';
             $action_html.= anchor(site_url('admin/user/profile/' . $result['id']), 'Profile', array(
-                'class' => 'btn btn-sm btn-outline-dark',
+                'class' => 'btn btn-sm btn-dark',
                 'data-toggle' => 'tooltip',
                 'data-original-title' => 'Profile',
                 'title' => 'Profile',
@@ -122,7 +122,7 @@ class User extends CI_Controller {
 			}
             /* $action_html.='&nbsp;';
               $action_html.= anchor(site_url('admin/user/delete/' . $result['id']), 'Delete', array(
-              'class' => 'btn btn-sm btn-outline-danger btn-delete',
+              'class' => 'btn btn-sm btn-danger btn-delete',
 			  'data-confirmation'=>true,
 			  'data-confirmation-message'=>'Are you sure, you want to delete this?',
               'data-toggle' => 'tooltip',
@@ -360,12 +360,16 @@ class User extends CI_Controller {
     }
 
     function is_email_valid($user_email) {		
-        $result = $this->user_model->check_is_email_registered($user_email);
-        if ($result == false) {
-            $this->form_validation->set_message('is_email_valid', $user_email . ' is not registered.');
-            return false;
+        if($user_email){
+            $result = $this->user_model->check_is_email_registered($user_email);
+            if ($result == false) {
+                $this->form_validation->set_message('is_email_valid', $user_email . ' is not a registered email address.');
+                return false;
+            }
+            
+        }else{
+            return true;
         }
-        return true;
     }
 
     function change_password() {
@@ -399,7 +403,7 @@ class User extends CI_Controller {
     }
 
     function validate_changepassword_form() {
-        $this->form_validation->set_rules('user_current_password', 'current password', 'required|callback_check_current_password');
+        $this->form_validation->set_rules('user_current_password', 'current password', 'required|callback_check_current_password');        
         $this->form_validation->set_rules('user_new_password', 'new password', 'required|trim|min_length[6]');
         $this->form_validation->set_rules('confirm_user_new_password', 'confirm password', 'required|matches[user_new_password]');
         $this->form_validation->set_error_delimiters('<p class="validation-error">', '</p>');
@@ -411,12 +415,17 @@ class User extends CI_Controller {
     }
 
     function check_current_password($password) {
-        $result = $this->user_model->check_user_password_valid(md5($password), $this->sess_user_id);
-        if ($result == false) {
-            $this->form_validation->set_message('check_current_password', 'current password is invalid');
-            return false;
+        if($password){
+            $result = $this->user_model->check_user_password_valid(md5($password), $this->sess_user_id);
+            if ($result == false) {
+                $this->form_validation->set_message('check_current_password', 'The {field} field is invalid');
+                return false;
+            }else{
+                return true;
+            }
+        }else{
+            return true;
         }
-        return true;
     }
 
     function logout() {
@@ -474,28 +483,31 @@ class User extends CI_Controller {
         ########### Validate User Auth End #############
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
-        $this->data['row'] = $this->user_model->get_user_details($this->sess_user_id);
+        $rows = $this->user_model->get_rows($this->sess_user_id);
+        $this->data['row'] = $rows['data_rows'];
 
         if ($this->input->post('form_action') == 'update_profile') {
             if ($this->validate_edit_profile_form() == true) {
                 $postdata = array(
                     'user_firstname' => $this->input->post('user_firstname'),
                     'user_lastname' => $this->input->post('user_lastname'),
-                    'user_phone1' => $this->input->post('user_phone'),
-                    'user_zipcode' => $this->input->post('user_zipcode'),
-                    'user_gender' => $this->input->post('user_gender')
+                    'user_intro' => $this->input->post('user_intro'),
+                    'user_gender' => $this->input->post('user_gender'),                   
+                    //'user_dob' => $dob,
+                    'user_mobile_phone1' => $this->input->post('user_mobile_phone1'),
+                    'user_mobile_phone2' => $this->input->post('user_mobile_phone2')                    
                 );
                 $where = array('id' => $this->sess_user_id);
                 $res = $this->user_model->update($postdata, $where);
                 if ($res) {
-                    $this->session->set_flashdata('flash_message', '<strong>Success! </strong>Information updated successfully');
+                    $this->session->set_flashdata('flash_message', 'Basic info has been updated successfully');
                     $this->session->set_flashdata('flash_message_css', 'alert-success');
                     redirect(current_url());
                 }
             }
         }
 
-        $this->data['maincontent'] = $this->load->view('admin/user/profile', $this->data, true);
+        $this->data['maincontent'] = $this->load->view('admin/user/edit_profile', $this->data, true);
         $this->load->view('admin/_layouts/layout_authenticated', $this->data);
     }
 
@@ -538,6 +550,136 @@ class User extends CI_Controller {
             );
         }
         echo json_encode($response);
+    }
+
+
+
+    function add_address() {
+        $is_logged_in = $this->common_lib->is_logged_in();
+        if ($is_logged_in == FALSE) {
+            redirect('admin/user/login');
+        }
+        $this->data['alert_message'] = $this->session->flashdata('flash_message');
+        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');		
+        if ($this->input->post('form_action') == 'insert_address') {
+            if ($this->validate_user_address_form_data('add') == true) {
+                $postdata = array(
+					'user_id' => $this->sess_user_id,
+                    'address_type' => $this->input->post('address_type'),
+                    'name' => $this->input->post('name'),
+                    'phone1' => $this->input->post('phone1'),                    
+                    'zip' => $this->input->post('zip'),                    
+                    'locality' => $this->input->post('locality'),                    
+                    'address' => $this->input->post('address'),                    
+                    'city' => $this->input->post('city'),                    
+                    'state' => $this->input->post('state'),                    
+                    //'country' => $this->input->post('country'),                    
+                    'landmark' => $this->input->post('landmark'),                    
+                    'phone2' => $this->input->post('phone2'),                    
+                );                
+                $res = $this->user_model->insert($postdata,'user_addresses');
+                if ($res) {
+                    $this->session->set_flashdata('flash_message', 'Your address has been added successfully');
+                    $this->session->set_flashdata('flash_message_css', 'alert-success');
+                    redirect('admin/user/profile');
+                }
+            }
+        }
+
+        $this->data['maincontent'] = $this->load->view('admin/user/add_address', $this->data, true);
+        $this->load->view('admin/_layouts/layout_authenticated', $this->data);
+    }
+	
+	function edit_address() {
+        $is_logged_in = $this->common_lib->is_logged_in();
+        if ($is_logged_in == FALSE) {
+            redirect('admin/user/login');
+        }
+        $this->data['alert_message'] = $this->session->flashdata('flash_message');
+        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
+		$address_id = $this->uri->segment(4);        
+        $this->data['address'] = $this->user_model->get_user_address($address_id, $this->sess_user_id,NULL);
+        //print_r($this->data['address']);die();
+        if ($this->input->post('form_action') == 'update_address') {
+            if ($this->validate_user_address_form_data('edit') == true) {
+                $postdata = array(
+					//'user_id' => $this->sess_user_id,
+                    //'address_type' => $this->input->post('address_type'),
+                    'name' => $this->input->post('name'),
+                    'phone1' => $this->input->post('phone1'),                    
+                    'zip' => $this->input->post('zip'),                    
+                    'locality' => $this->input->post('locality'),                    
+                    'address' => $this->input->post('address'),                    
+                    'city' => $this->input->post('city'),                    
+                    'state' => $this->input->post('state'),                    
+                    //'country' => $this->input->post('country'),                    
+                    'landmark' => $this->input->post('landmark'),                    
+                    'phone2' => $this->input->post('phone2'),                    
+                );
+                $where = array('id'=>$address_id, 'user_id' => $this->sess_user_id);
+                $res = $this->user_model->update($postdata, $where,'user_addresses');
+                if ($res) {
+                    $this->session->set_flashdata('flash_message', 'Address has been updated successfully');
+                    $this->session->set_flashdata('flash_message_css', 'alert-success');
+                    redirect('admin/user/profile');
+                }
+            }
+        }
+
+        $this->data['maincontent'] = $this->load->view('admin/user/edit_address', $this->data, true);
+        $this->load->view('admin/_layouts/layout_authenticated', $this->data);
+    }
+	
+	function delete_address() {
+        $is_logged_in = $this->common_lib->is_logged_in();
+        if ($is_logged_in == FALSE) {
+            redirect('admin/user/login');
+        }
+        $this->data['alert_message'] = $this->session->flashdata('flash_message');
+        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
+		$address_id = $this->uri->segment(4);        
+        $this->data['address'] = $this->user_model->get_user_address($address_id, $this->sess_user_id,NULL);
+		$where = array('id'=>$address_id, 'user_id' => $this->sess_user_id);
+		$res = $this->user_model->delete($where,'user_addresses');
+		if ($res) {
+			$this->session->set_flashdata('flash_message', 'Your address has been deleted successfully.');
+			$this->session->set_flashdata('flash_message_css', 'alert-success');
+			redirect('admin/user/profile');
+		}else{
+			$this->session->set_flashdata('flash_message', 'We\'re unable to process your request.');
+			$this->session->set_flashdata('flash_message_css', 'alert-danger');
+			redirect('admin/user/profile');
+		}
+    }
+	
+	function get_address_types($char_address_type){
+		if(isset($char_address_type)){
+			return $this->data['address_type'][$char_address_type];
+		}else{
+			return '';
+		}		
+    }
+    
+    function validate_user_address_form_data($mode) {
+		if($mode == 'add'){
+			$this->form_validation->set_rules('address_type', 'address type selection', 'required');        
+		}
+        $this->form_validation->set_rules('name', ' ', 'required');        
+        $this->form_validation->set_rules('phone1', ' ', 'required|trim|min_length[10]|max_length[10]|numeric');        
+        $this->form_validation->set_rules('zip', ' ', 'required');        
+        $this->form_validation->set_rules('locality', ' ', 'required');        
+        $this->form_validation->set_rules('address', ' ', 'required|max_length[200]');               
+        $this->form_validation->set_rules('city', ' ', 'required');        
+        $this->form_validation->set_rules('state', ' ', 'required');        
+        //$this->form_validation->set_rules('country', ' ', 'required');        
+        $this->form_validation->set_rules('landmark', ' ', 'max_length[100]');        
+        $this->form_validation->set_rules('phone2', ' ', 'min_length[10]|max_length[10]|numeric');        
+        $this->form_validation->set_error_delimiters('<p class="validation-error">', '</p>');
+        if ($this->form_validation->run() == true) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

@@ -98,7 +98,7 @@ class Order extends CI_Controller {
             //add html for action
             $action_html = '';
             $action_html.= anchor(site_url('admin/order/edit/' . $result['id']), 'Edit', array(
-                'class' => 'btn btn-sm btn-outline-dark',
+                'class' => 'btn btn-sm btn-dark',
                 'data-toggle' => 'tooltip',
                 'data-original-title' => 'Edit',
                 'title' => 'Edit',

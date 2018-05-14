@@ -320,12 +320,16 @@ class User extends CI_Controller {
     }
 
     function is_email_valid($user_email) {
-        $result = $this->user_model->check_is_email_registered($user_email);
-        if ($result == false) {
-            $this->form_validation->set_message('is_email_valid', $user_email . ' is not registered.');
-            return false;
+        if($user_email){
+            $result = $this->user_model->check_is_email_registered($user_email);
+            if ($result == false) {
+                $this->form_validation->set_message('is_email_valid', $user_email . ' is not a registered email address.');
+                return false;
+            }
+            
+        }else{
+            return true;
         }
-        return true;
     }
 
     function change_password() {
@@ -362,12 +366,17 @@ class User extends CI_Controller {
     }
 
     function check_current_password($password) {
-        $result = $this->user_model->check_user_password_valid(md5($password), $this->sess_user_id);
-        if ($result == false) {
-            $this->form_validation->set_message('check_current_password', 'current password is invalid');
-            return false;
+        if($password){
+            $result = $this->user_model->check_user_password_valid(md5($password), $this->sess_user_id);
+            if ($result == false) {
+                $this->form_validation->set_message('check_current_password', 'The {field} field is invalid');
+                return false;
+            }else{
+                return true;
+            }
+        }else{
+            return true;
         }
-        return true;
     }
 
     function logout() {
@@ -503,7 +512,7 @@ class User extends CI_Controller {
         if ($this->input->post('form_action') == 'update_address') {
             if ($this->validate_user_address_form_data('edit') == true) {
                 $postdata = array(
-					'user_id' => $this->sess_user_id,
+					//'user_id' => $this->sess_user_id,
                     //'address_type' => $this->input->post('address_type'),
                     'name' => $this->input->post('name'),
                     'phone1' => $this->input->post('phone1'),                    

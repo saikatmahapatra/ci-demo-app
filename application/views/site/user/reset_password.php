@@ -4,9 +4,9 @@
     </div>
 </div><!--/.row-->
 
-<div class="row">
-    <div class="col-md-4">
-        <?php
+<div class="row justify-content-center">
+    <div class="col-12 col-sm-8 col-md-4">
+    <?php
         // Show server side messages
         if (isset($alert_message)) {
             $html_alert_ui = '';
@@ -18,12 +18,7 @@
             $html_alert_ui.='</div>';
             echo $html_alert_ui;
         }
-        ?>              
-    </div>
-</div><!--/.row-->
-
-<div class="row">
-    <div class="col-md-4">
+        ?>
         <?php echo form_open(current_url(), array('method' => 'post', 'class' => 'ci-form','name' => '', 'id' => '')); ?>         
         <?php echo form_hidden('form_action', 'reset_password'); ?>
         <?php echo form_hidden('password_reset_key', $password_reset_key); ?>

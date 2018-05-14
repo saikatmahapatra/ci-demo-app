@@ -36,11 +36,8 @@
 		
 		
 		<footer class="footer">
-		  <div class="container">
-			<hr>
-			<span class="text-muted text-center"><?php echo $el_footer; ?></span>
-		  </div>
-		</footer>
+            <?php echo $el_footer; ?>
+        </footer>
 
         <button class="btn btn-primary scrollup" data-toggle="tooltip" data-placement="left" data-original-title="Scroll to top"><i aria-hidden="true" class="fa fa-arrow-up"></i></button>
 	

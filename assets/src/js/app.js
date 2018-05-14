@@ -334,7 +334,7 @@ function askConfirmation(event) {
  * DOM Interaction (Ready/Load, Click, Hover, Change)
  * ------------------------------------------------------------------------------
  */
-var closeBootstrapAlertMsg = true; // true|false
+var closeBootstrapAlertMsg = false; // true|false
 
 // Start of document ready
 $(document).ready(initPage);

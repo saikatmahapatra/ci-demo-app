@@ -1,5 +1,13 @@
-<!--<h2 class="page-header"><?php echo isset($page_heading)? $page_heading:'Untitled Page'; ?></h2>-->
-<?php echo $breadcrumbs; ?>
+<div class="row heading-container">
+    <div class="col-md-5">
+        <h1 class="page-header"><?php echo isset($page_heading)? $page_heading:'Page Heading'; ?></h1>
+    </div>
+    <div class="col-md-7">
+        <?php echo $breadcrumbs; ?>
+    </div>
+</div><!--/.heading-container-->
+
+
 <div class="row">
     <div class="col-md-12">
         <?php
@@ -22,7 +30,7 @@
                 <!-- /.card-header -->
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="user-datatable" class="table">
+                        <table id="user-datatable" class="table table-sm">
                             <thead>
                                 <tr>
                                     <th>Name</th>

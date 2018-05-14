@@ -33,6 +33,6 @@ $config['app_meta_author'] = 'Saikat Mahapatra';
 
 
 $config['app_copy_right'] = 'Copyright '.date('Y').' &copy; CI App';
-$config['app_admin_copy_right'] = '<strong>Copyright &copy; '.date('Y').' <a href="#">CI App</a>.</strong> All rights reserved.';
+$config['app_admin_copy_right'] = 'Copyright &copy; '.date('Y').' <a href="#">CI App</a>. All rights reserved.';
 $config['app_ui_version'] = 'v1.0.1';
 $config['app_admin_ui_version'] = '2.3.6';
