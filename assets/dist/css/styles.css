@@ -1,18 +1,13 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : 24 Dec, 2016, 5:00:20 PM
-    Author     : Saikat
-*/
+/* Site Style*/
 body {
   padding-top: 5rem;
   padding-bottom: 3rem;
 }
 h1 {
   font-size: 2rem;
+}
+h2 {
+  font-size: 1.25rem;
 }
 h1.page-header {
   font-size: 1.5rem;
@@ -33,11 +28,11 @@ h1.page-header {
 }
 /*Scroll up end*/
 .validation-error {
-  color: red;
+  color: #ff0000;
   font-size: 13px;
 }
 .required {
-  color: red;
+  color: #ff0000;
 }
 .thumbnail {
   margin-bottom: 20px;
@@ -117,36 +112,9 @@ select.form-control.dob-inline {
 .text-greyed-out {
   opacity: 0.5;
 }
-/*Panel, Panel Group Style*/
-.panel-group .panel {
-  border-radius: 0;
-  box-shadow: none;
-  border-color: #EEEEEE;
-}
-.panel-heading {
-  padding: 0;
-  border-radius: 0;
-}
-.panel-default > .panel-heading,
-panel-footer {
-  color: #212121;
-  background-color: #FAFAFA;
-  border-color: #EEEEEE;
-}
-.panel-title {
-  font-size: 14px;
-  padding: 15px;
-}
-.panel-title > a {
-  display: block;
-  text-decoration: none;
-}
 .more-less {
   float: right;
   color: #212121;
-}
-.panel-default > .panel-heading + .panel-collapse > .panel-body {
-  border-top-color: #EEEEEE;
 }
 /* Help Info */
 .info-help {
@@ -163,19 +131,26 @@ panel-footer {
 .tnc-content h2 {
   font-size: 18px;
 }
-/*.footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 60px;
-    line-height: 60px;
-    background-color: @light-gray;
-}*/
-.bg-indigo {
+.bg-brand {
   background: linear-gradient(to bottom, #0256A0, #0D2B48);
   background: -moz-linear-gradient(top, #0256A0, #0D2B48);
   background: -ms-linear-gradient(top, #0256A0, #0D2B48);
   background: -o-linear-gradient(top, #0256A0, #0D2B48);
   background: -webkit-linear-gradient(top, #0256A0, #0D2B48);
   background: -webkit-gradient(linear, left top, left bottom, from(#0256A0), to(#0D2B48));
+}
+.btn-brand {
+  background-color: #0256A0;
+  border-color: #0256A0;
+}
+.btn-brand:hover {
+  background-color: #0D2B48;
+  border-color: #0D2B48;
+}
+.btn-brand:active {
+  background-color: #0D2B48;
+  border-color: #0D2B48;
+}
+.nav-item.active {
+  font-weight: 500;
 }

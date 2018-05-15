@@ -51,8 +51,19 @@
 	<?php if (isset($this->session->userdata['sess_user']['id'])) {  ?>
 	<li class="nav-item dropdown">
 		<a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true"
-			aria-expanded="false"><i aria-hidden="true" class="fa fa-user fa-fw"></i> <?php echo isset($this->session->userdata['sess_user']['user_firstname']) ? $this->session->userdata['sess_user']['user_firstname']:'Guest';?> </a>
+			aria-expanded="false"><i aria-hidden="true" class="fa fa-user-circle"></i> My Account </a>
 		<div class="dropdown-menu" aria-labelledby="dropdown03">
+			
+			<div class="dropdown-item welcome-user-container">
+			<!--<a class="dropdown-item" href="#">-->
+				<div class=""><?php echo isset($this->session->userdata['sess_user']['user_firstname']) ? $this->session->userdata['sess_user']['user_firstname'].' '.$this->session->userdata['sess_user']['user_lastname']:'Guest';?></div>
+				<div class="small d-none"><?php echo isset($this->session->userdata['sess_user']['user_role']) ? $this->session->userdata['sess_user']['user_role_name'] :'';?></div>
+				<div class="small"><?php echo isset($this->session->userdata['sess_user']['user_email']) ? $this->session->userdata['sess_user']['user_email'] :'';?></div>
+				<div class="small">Last Login: 03/04/2018 10.30am</div>
+			<!--</a>-->
+			</div><!--/.welcome-user-container-->
+			
+			<div class="dropdown-divider mt-3"></div>			
 			<a class="dropdown-item"  href="<?php echo site_url('admin/user/profile/'.$this->session->userdata['sess_user']['id']); ?>">Profile</a>
 			<a class="dropdown-item" href="<?php echo site_url('admin/user/change_password'); ?>">Change Password</a>
 			<a class="dropdown-item" href="<?php echo site_url('admin/user/logout'); ?>">Logout</a>			

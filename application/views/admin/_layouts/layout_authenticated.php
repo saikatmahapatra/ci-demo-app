@@ -22,7 +22,7 @@
 </head>
 
 <body data-layout="layout_authenticated" data-controller="<?php echo $this->router->class; ?>" data-method="<?php echo $this->router->method; ?>">
-	<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+	<nav class="navbar navbar-expand-md navbar-dark bg-brand fixed-top">
         <a class="navbar-brand" href="<?php echo site_url('admin/home'); ?>"><?php echo $this->config->item('app_logo_name_dashboard'); ?></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault"
             aria-expanded="false" aria-label="Toggle navigation">
@@ -34,7 +34,7 @@
         </div>
     </nav>
 
-    <main role="main" class="container-fluid">
+    <main role="main" class="container">
         <?php echo $maincontent; ?>
     </main>
 	

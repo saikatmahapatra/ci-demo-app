@@ -57,6 +57,7 @@ class Home extends CI_Controller {
 
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
+		$this->data['page_heading'] = 'Dashboard';
         $this->data['maincontent'] = $this->load->view('admin/home/index', $this->data, true);
         $this->load->view('admin/_layouts/layout_authenticated', $this->data);
     }
