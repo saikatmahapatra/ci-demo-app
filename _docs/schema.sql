@@ -1,0 +1,334 @@
+-- phpMyAdmin SQL Schema with Table definition and table alteration
+-- Author: Saikat Mahapatra
+
+
+
+-- CREATE DATABASE, TABLE SCHEMA
+CREATE DATABASE IF NOT EXISTS `ci_demo` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `ci_demo`;
+
+
+CREATE TABLE IF NOT EXISTS `ci_sessions` (
+  `id` varchar(40) NOT NULL,
+  `ip_address` varchar(45) NOT NULL,
+  `timestamp` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `data` blob NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE IF NOT EXISTS `activity_actions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `activity_action_name` varchar(128) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1; 
+  
+  
+CREATE TABLE IF NOT EXISTS `activity_object_types` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `activity_object_type_name` varchar(128) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE IF NOT EXISTS `activity_streams` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `activity_action_id` int(11) DEFAULT NULL,
+  `activity_object_type_id` int(11) DEFAULT NULL,
+  `activity_object_id` int(11) DEFAULT NULL,
+  `activity_stream_date` datetime DEFAULT CURRENT_TIMESTAMP,
+  `activity_stream_read` enum('Y','N') NOT NULL DEFAULT 'N',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE IF NOT EXISTS `categories` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `category_name` varchar(255) NOT NULL,
+  `category_parent` int(11) DEFAULT NULL,
+  `category_status` enum('Y','N') NOT NULL DEFAULT 'Y',
+  `category_archived` enum('N','Y') NOT NULL DEFAULT 'N',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE IF NOT EXISTS `cms` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `pagecontent_type` enum('page','post','review','comment') NOT NULL DEFAULT 'page' COMMENT 'page,post,review,comment',
+  `pagecontent_user_id` int(11) DEFAULT NULL,
+  `pagecontent_title` varchar(50) DEFAULT NULL,
+  `pagecontent_text` text,
+  `pagecontent_meta_keywords` text,
+  `pagecontent_meta_description` text,
+  `pagecontent_meta_author` text,
+  `pagecontent_status` enum('Y','N') NOT NULL DEFAULT 'Y',
+  `pagecontent_archived` enum('Y','N') NOT NULL DEFAULT 'N',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE IF NOT EXISTS `orders` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_user_id` varchar(11) DEFAULT NULL,
+  `order_no` varchar(50) DEFAULT NULL,
+  `order_payment_debit_credit` enum('C','D') NOT NULL DEFAULT 'C',
+  `order_tax_amt` double(8,2) DEFAULT NULL,
+  `order_coupon_code` varchar(30) DEFAULT NULL,
+  `order_discount_amt` double(8,2) DEFAULT NULL,
+  `order_total_amt` double(8,2) DEFAULT NULL,
+  `order_payment_method` enum('cod','debit_card','credit_card','net_banking') DEFAULT 'debit_card',
+  `order_payment_status` enum('pending','completed','cancelled') NOT NULL DEFAULT 'pending',
+  `order_payment_trans_id` varchar(100) DEFAULT NULL,
+  `order_shipping_name` varchar(30) DEFAULT NULL,
+  `order_shipping_phone1` varchar(10) DEFAULT NULL,
+  `order_shipping_locality` varchar(100) DEFAULT NULL,
+  `order_shipping_zip` varchar(10) DEFAULT NULL,
+  `order_shipping_address` varchar(254) DEFAULT NULL,
+  `order_shipping_city` varchar(50) DEFAULT NULL,
+  `order_shipping_state` varchar(50) DEFAULT NULL,
+  `order_shipping_country` varchar(50) DEFAULT NULL,
+  `order_shipping_landmark` varchar(100) DEFAULT NULL,
+  `order_shipping_phone2` varchar(10) DEFAULT NULL,
+  `order_type` enum('ecommerce','test') NOT NULL DEFAULT 'ecommerce',
+  `order_status` enum('processing','confirmed','cancelled','returned','cancelled_by_buyer','pending') DEFAULT 'pending',
+  `order_datetime` datetime DEFAULT CURRENT_TIMESTAMP,
+  `order_archived` enum('Y','N') NOT NULL DEFAULT 'N',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE IF NOT EXISTS `payments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(11) DEFAULT NULL,
+  `payment_no` varchar(50) DEFAULT NULL,
+  `payment_purpose` enum('order','donation','subscription', 'test') DEFAULT 'order',
+  `payment_date` datetime DEFAULT CURRENT_TIMESTAMP,
+  `payment_method` enum('paypal','credit_debit_card','internet_banking', 'digital_wallet') DEFAULT NULL,  
+  `payment_total_amount` DOUBLE(8,2) DEFAULT NULL,
+  `payment_pgtransaction_id` varchar(255) DEFAULT NULL,
+  `payment_pgpayment_status` varchar(255) NOT NULL,
+  `payment_status` enum('error','success','processing','cancelled') DEFAULT NULL,
+  `payment_archived` enum('Y','N') NOT NULL DEFAULT 'N',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE IF NOT EXISTS `order_details` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `order_detail_price` DOUBLE(8,2) NOT NULL,
+  `order_detail_quantity` int(5) NOT NULL,
+  `order_detail_discount_coupon` varchar(20) NULL,
+  `order_detail_discount_amt` DOUBLE(8,2) NOT NULL,
+  `order_detail_delivery_amt` DOUBLE(8,2) NOT NULL,
+  `order_detail_total_amt` DOUBLE(8,2) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE IF NOT EXISTS `permissions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `permission_name` varchar(254) NOT NULL,
+  `permission_description` text,
+  `permission_active` enum('Y','N') NOT NULL DEFAULT 'Y',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE IF NOT EXISTS `roles` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `role_name` varchar(50) NOT NULL,
+  `role_weight` int(3) NOT NULL,
+  `role_active` enum('Y','N') NOT NULL DEFAULT 'Y',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE IF NOT EXISTS `role_permission` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `role_id` int(11) NOT NULL,
+  `permission_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE IF NOT EXISTS `products` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `product_sku` varchar(20) DEFAULT NULL,
+  `category_id` int(11) DEFAULT NULL,
+  `product_name` varchar(200) DEFAULT NULL,
+  `product_description` text,
+  `product_length` varchar(10) DEFAULT NULL,
+  `product_width` varchar(10) DEFAULT NULL,
+  `product_height` varchar(10) DEFAULT NULL,
+  `product_weight` varchar(10) DEFAULT NULL,
+  `product_size` varchar(10) DEFAULT NULL,
+  `product_color` varchar(20) DEFAULT NULL,
+  `product_mrp` float(8,2) DEFAULT NULL,
+  `product_price` float(8,2) DEFAULT NULL,
+  `product_is_featured` enum('Y','N') DEFAULT 'N',
+  `product_status` enum('Y','N') DEFAULT 'Y',
+  `product_archived` enum('Y','N') NOT NULL DEFAULT 'N',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE IF NOT EXISTS `professions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `profession_name` varchar(50) NOT NULL,
+  `profession_status` enum('Y','N') NOT NULL DEFAULT 'Y',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `permission_name` (`permission_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE IF NOT EXISTS `uploads` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `album_id` int(11) DEFAULT NULL,
+  `upload_object_name` varchar(50) DEFAULT NULL,
+  `upload_object_id` int(11) DEFAULT NULL,
+  `upload_document_type_name` varchar(50) DEFAULT NULL,
+  `upload_file_name` varchar(254) DEFAULT NULL,
+  `upload_file_binary_obj` blob,
+  `upload_file_description` text,
+  `upload_mime_type` varchar(100) DEFAULT NULL,
+  `upload_by_user_id` int(11) DEFAULT NULL,
+  `upload_is_featured` enum('Y','N') NOT NULL DEFAULT 'N',
+  `upload_status` enum('Y','N') NOT NULL DEFAULT 'Y',
+  `upload_date` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_email` varchar(254) NOT NULL,
+  `user_password` char(128) NOT NULL,
+  `user_firstname` varchar(30) DEFAULT NULL,
+  `user_midname` varchar(15) DEFAULT NULL,
+  `user_lastname` varchar(50) DEFAULT NULL,
+  `user_gender` char(1) DEFAULT NULL,
+  `user_role` int(11) DEFAULT NULL,
+  `user_intro` text,
+  `user_dob` date DEFAULT NULL,
+  `user_image` longblob,
+  `user_mobile_phone1` varchar(15) DEFAULT NULL,
+  `user_mobile_phone2` varchar(15) DEFAULT NULL,
+  `user_registration_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `user_registration_ip` varchar(40) DEFAULT NULL,
+  `user_reset_password_key` char(128) DEFAULT NULL,
+  `user_activation_key` char(128) DEFAULT NULL,
+  `user_account_active` enum('Y','N') DEFAULT 'N',
+  `user_archived` enum('Y','N') NOT NULL DEFAULT 'N',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_email` (`user_email`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE IF NOT EXISTS `user_addresses` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `address_type` enum('S','B','W','C','P','H') DEFAULT 'W',
+  `shipping_address_type` enum('H','W') DEFAULT 'H',
+  `name` varchar(50) DEFAULT NULL,
+  `phone1` varchar(10) DEFAULT NULL,
+  `locality` varchar(100) DEFAULT NULL,
+  `address` varchar(200) DEFAULT NULL,
+  `city` varchar(50) DEFAULT NULL,
+  `state` varchar(50) DEFAULT NULL,
+  `zip` varchar(10) DEFAULT NULL,
+  `country` varchar(20) DEFAULT NULL,
+  `landmark` varchar(100) DEFAULT NULL,
+  `phone2` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE IF NOT EXISTS `security_questions` ( 
+  `id` INT(11) NOT NULL AUTO_INCREMENT , 
+  `security_question` VARCHAR(255) NULL , 
+  `security_question_status` ENUM('Y','N') NOT NULL DEFAULT 'Y' , 
+  `security_question_is_archived` ENUM('Y','N') NOT NULL DEFAULT 'N' , 
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE IF NOT EXISTS `user_security_questions` ( 
+  `id` INT(11) NOT NULL AUTO_INCREMENT , 
+  `security_question` VARCHAR(255) NULL , 
+  `security_question_status` ENUM('Y','N') NOT NULL DEFAULT 'Y' , 
+  `security_question_is_archived` ENUM('Y','N') NOT NULL DEFAULT 'N' , 
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
+
+
+
+
+
+-- phpMyAdmin SQL Schema with Table definition and table alteration
+-- INSERT BASIC DATA SCHEMA
+INSERT INTO `permissions` (`id`, `permission_name`, `permission_description`, `permission_active`) VALUES
+(1, 'default-super-admin-access', NULL, 'Y'),(2, 'default-admin-access', NULL, 'Y'),(3, 'default-user-access', NULL, 'Y');
+
+INSERT INTO `roles` (`id`, `role_name`, `role_weight`, `role_active`) VALUES
+(1, 'Super Admin', 100, 'Y'),(2, 'Admin', 90, 'Y'),(3, 'User', 80, 'Y');
+
+INSERT INTO `role_permission` (`id`, `role_id`, `permission_id`) VALUES
+(1, 1, 1),(2, 2, 2),(3, 3, 3);
+
+INSERT INTO `professions` (`id`, `profession_name`, `profession_status`) VALUES
+(1, 'Professor', 'Y'),(2, 'Teacher', 'Y'),(3, 'Student', 'Y'),(4, 'Anesthesiologist', 'Y'),(5, 'Audiologist', 'Y'),(6,'Chiropractor', 'Y'),(7, 'Dentist', 'Y'),(8, 'Engineer', 'Y'),(9, 'Accountant', 'Y'),(10, 'Chemist', 'Y');
+
+
+
+
+
+
+-- phpMyAdmin SQL Schema with Table definition and table alteration
+-- ALTER SCHEMA
+ALTER TABLE `activity_streams`  ADD FOREIGN KEY (user_id) REFERENCES users(id)
+	ON DELETE CASCADE
+	ON UPDATE CASCADE;
+	
+ALTER TABLE `activity_streams`  ADD FOREIGN KEY (activity_action_id) REFERENCES activity_actions(id)
+	ON DELETE CASCADE
+	ON UPDATE CASCADE;
+	
+ALTER TABLE `activity_streams`  ADD FOREIGN KEY (activity_object_type_id) REFERENCES activity_object_types(id)
+	ON DELETE CASCADE
+	ON UPDATE CASCADE;
+	
+ALTER TABLE `user_addresses` ADD FOREIGN KEY (user_id) REFERENCES users(id)
+	ON DELETE CASCADE
+	ON UPDATE CASCADE;
+	
+ALTER TABLE `role_permission`  ADD FOREIGN KEY (role_id) REFERENCES roles(id)
+	ON DELETE CASCADE
+	ON UPDATE CASCADE;
+
+ALTER TABLE `role_permission`  ADD FOREIGN KEY (permission_id) REFERENCES permissions(id)
+	ON DELETE CASCADE
+	ON UPDATE CASCADE;
+	
+ALTER TABLE `order_details` ADD FOREIGN KEY (order_id) REFERENCES orders(id)
+	ON DELETE CASCADE
+	ON UPDATE CASCADE;
+
+ALTER TABLE `order_details` CHANGE `order_detail_price` `order_detail_price` DOUBLE(8,2) NOT NULL;
+ALTER TABLE `order_details` CHANGE `order_detail_discount_amt` `order_detail_discount_amt` DOUBLE(8,2) NOT NULL;
+ALTER TABLE `order_details` CHANGE `order_detail_delivery_amt` `order_detail_delivery_amt` DOUBLE(8,2) NOT NULL;
+ALTER TABLE `order_details` CHANGE `order_detail_total_amt` `order_detail_total_amt` DOUBLE(8,2) NOT NULL;
+	
+-- ALTER TABLE `newsletter_subscriber_group`  ADD FOREIGN KEY (newsletter_subscriber_id) REFERENCES newsletter_subscribers(id)
+-- 	ON DELETE CASCADE
+-- 	ON UPDATE CASCADE;
+-- 	
+-- ALTER TABLE `newsletter_subscriber_group`  ADD FOREIGN KEY (newsletter_group_id) REFERENCES newsletter_groups(id)
+-- 	ON DELETE CASCADE
+--	ON UPDATE CASCADE;
+ALTER TABLE `order_details` ADD `order_detail_updated_on` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER `order_detail_status`;
+
