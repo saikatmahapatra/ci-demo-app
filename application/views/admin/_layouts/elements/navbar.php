@@ -1,27 +1,10 @@
 <ul class="navbar-nav">
-	<li class="nav-item">
+	<li class="nav-item <?php echo ($this->uri->segment(2)=='home') ? 'active':''?>">
 		<a class="nav-link" href="<?php echo site_url('admin/home'); ?>">Home
 			<span class="sr-only">(current)</span>
 		</a>
-	</li>
-	<!--<li class="nav-item">
-		<a class="nav-link" href="#">Link</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link disabled" href="#">Disabled</a>
-	</li>
-
-	<li class="nav-item dropdown">
-		<a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
-			aria-expanded="false">Dropdown</a>
-		<div class="dropdown-menu" aria-labelledby="dropdown01">
-			<a class="dropdown-item" href="#">Action</a>
-			<a class="dropdown-item" href="#">Another action</a>
-			<a class="dropdown-item" href="#">Something else here</a>
-		</div>
-	</li>-->
-	
-	<li class="nav-item dropdown">
+	</li>	
+	<li class="nav-item dropdown <?php echo ($this->uri->segment(2)=='cms') ? 'active':''?>">
 		<a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
 			aria-expanded="false">CMS</a>
 		<div class="dropdown-menu" aria-labelledby="dropdown01">
@@ -30,7 +13,7 @@
 		</div>
 	</li>
 
-	<li class="nav-item dropdown">
+	<li class="nav-item dropdown <?php echo ($this->uri->segment(2)=='product' || $this->uri->segment(2) == 'category') ? 'active':''?>">
 		<a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true"
 			aria-expanded="false">Products</a>
 		<div class="dropdown-menu" aria-labelledby="dropdown02">
@@ -41,15 +24,15 @@
 		</div>
 	</li>
 	
-	<li class="nav-item">
+	<li class="nav-item <?php echo ($this->uri->segment(3)=='manage') ? 'active':''?>">
 		<a class="nav-link"href="<?php echo site_url('admin/user/manage'); ?>">Customers</a>
 	</li>
-	<li class="nav-item">
+	<li class="nav-item <?php echo ($this->uri->segment(2)=='order') ? 'active':''?>">
 		<a class="nav-link" href="<?php echo site_url('admin/order'); ?>">Orders</a>
 	</li>
 	
 	<?php if (isset($this->session->userdata['sess_user']['id'])) {  ?>
-	<li class="nav-item dropdown">
+	<li class="nav-item dropdown <?php echo ($this->uri->segment(2)=='user' && $this->uri->segment(3)!='manage') ? 'active':''?>">
 		<a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true"
 			aria-expanded="false"><i aria-hidden="true" class="fa fa-user-circle"></i> My Account </a>
 		<div class="dropdown-menu" aria-labelledby="dropdown03">
