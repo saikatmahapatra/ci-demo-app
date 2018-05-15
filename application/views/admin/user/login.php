@@ -2,7 +2,7 @@
 	<div class="col-12 col-sm-8 col-md-4">				
 		<div class="card">
 			<div class="card-header bg-default">
-				<h4>Login</h4>
+				<h4><?php echo isset($page_heading)? $page_heading:'Page Heading'; ?></h4>
 			</div>
 			<div class="card-body">
 				<?php
@@ -20,7 +20,7 @@
 				?>
 				<?php echo form_open(current_url(), array('method' => 'post', 'class'=>'admin_login ci-from')) ?>
 				<?php echo form_hidden('form_action', 'login'); ?>
-				<fieldset>
+				
 					<div class="form-group">
 						<label for="user_email">Email Address or Username</label>
 						<?php echo form_input(array('name' => 'user_email', 'value' => set_value('user_email'),'id' => 'name','class' => 'form-control','placeholder' => 'Enter email or username','maxlength' => '100','autofocus' => true,));?>
@@ -31,13 +31,12 @@
 						<?php echo form_password(array('name' => 'user_password','value' => set_value('user_password'),'id' =>'user_password','placeholder' => 'Enter password','class' => 'form-control','maxlength' => '16'));?>
 						<?php echo form_error('user_password'); ?>
 					</div>
-					<div class="checkbox">
-						<label>
-							<input name="remember" type="checkbox" value="1"> Remember Password
-							</label>
-						</div>												
+					<div class="form-group">
+						<input id="remember" name="remember" type="checkbox" value="1">
+						<label class="form-check-label" for="remember">Remember Password</label>
+					</div>												
 						<?php echo form_submit(array('name' => 'submit','value' => 'Login','class' => 'btn btn-primary btn-lg btn-block'));?>														
-					</fieldset>
+					
 					<?php form_close(); ?>
 
 					<div class="text-center">

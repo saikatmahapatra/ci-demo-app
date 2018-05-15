@@ -26,9 +26,12 @@ class Order extends CI_Controller {
         $this->load->model('order_model');
         $this->cart->product_name_rules = '[:print:]'; // allow any characters in product name rule
         $this->data['alert_message'] = NULL;
-        $this->data['alert_message_css'] = NULL;
-        
+        $this->data['alert_message_css'] = NULL;        
 		$this->data['payment_method'] = array('cod'=>'Cash On Delivery','debit_card' => 'Debit Card', 'credit_card' => 'Credit Card', 'net_banking' => 'Net Banking');
+		
+		//View Page Config
+		$this->data['page_heading'] = $this->router->class.' : '.$this->router->method;
+		
     }
 
     function index(){
@@ -72,7 +75,7 @@ class Order extends CI_Controller {
 			$this->update_cart();
 		}
 		
-		
+		$this->data['page_heading'] = 'My Cart';
         $this->data['maincontent'] = $this->load->view('site/order/my_cart', $this->data, true);
         $this->load->view('site/_layouts/layout_default', $this->data);
     }
@@ -185,6 +188,7 @@ class Order extends CI_Controller {
 			}
 		}
 		
+		$this->data['page_heading'] = 'Checkout';		
 		$this->data['maincontent'] = $this->load->view('site/order/init_payment', $this->data, true);
         $this->load->view('site/_layouts/layout_default', $this->data);
 	}
@@ -300,7 +304,7 @@ class Order extends CI_Controller {
     function validate_order_payment_form_data() {
         $this->form_validation->set_rules('shipping_address', 'Shipping address selection', 'required');        
         $this->form_validation->set_rules('payment_method', 'payment method selection', 'required');        
-        $this->form_validation->set_error_delimiters('<p class="validation-error">', '</p>');
+        $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
         if ($this->form_validation->run() == true) {
             return true;
         } else {
@@ -315,6 +319,7 @@ class Order extends CI_Controller {
         //Update table with payment response
 		//$this->data = array();
 		$this->data['order_no'] = '8278783799829080';
+		$this->data['page_heading'] = 'Your Online Transaction Summary';
 		$this->data['maincontent'] = $this->load->view('site/order/transaction_response', $this->data, true);
         $this->load->view('site/_layouts/layout_default', $this->data);
     }

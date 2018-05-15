@@ -1,11 +1,14 @@
-<div class="row">
-    <div class="col-md-12">
-        <h1 class="page-header">Create New Password</h1>               
+<div class="row heading-container">
+    <div class="col-md-5">
+        <h1 class="page-header"><?php echo isset($page_heading)? $page_heading:'Page Heading'; ?></h1>
     </div>
-</div><!--/.row-->
+    <div class="col-md-7">
+        
+    </div>
+</div><!--/.heading-container-->
 
-<div class="row justify-content-center">
-    <div class="col-12 col-sm-8 col-md-4">
+<div class="row">
+    <div class="col-12 col-sm-8 col-md-5">
     <?php
         // Show server side messages
         if (isset($alert_message)) {

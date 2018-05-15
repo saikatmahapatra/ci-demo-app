@@ -23,6 +23,9 @@ class Home extends CI_Controller {
         
         $this->data['alert_message'] = NULL;
         $this->data['alert_message_css'] = NULL;
+		
+		//View Page Config
+		$this->data['page_heading'] = $this->router->class.' : '.$this->router->method;
     }
 
     function index() {

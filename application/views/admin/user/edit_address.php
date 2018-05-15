@@ -1,9 +1,12 @@
 <?php $row = $address[0]; ?>
-<div class="row">
-    <div class="col-md-12">
-        <h1 class="page-header">Update <?php echo isset($address_type[$row['address_type']])?$address_type[$row['address_type']]:'Address'; ?></h1>
+<div class="row heading-container">
+    <div class="col-md-5">
+        <h1 class="page-header"><?php echo isset($page_heading)? $page_heading:'Page Heading'; ?></h1>
     </div>
-</div><!--/.row-->
+    <div class="col-md-7">
+        <?php echo $breadcrumbs; ?>
+    </div>
+</div><!--/.heading-container-->
 
 
 <div class="row">	

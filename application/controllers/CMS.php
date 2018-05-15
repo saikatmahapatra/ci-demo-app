@@ -22,7 +22,10 @@ class CMS extends CI_Controller {
         $this->data['app_js'] = $this->common_lib->add_javascript($app_js_src);
         
         $this->data['alert_message'] = NULL;
-        $this->data['alert_message_css'] = NULL;        
+        $this->data['alert_message_css'] = NULL;
+		
+		//View Page Config
+		$this->data['page_heading'] = $this->router->class.' : '.$this->router->method;
     }
 
     function index() {

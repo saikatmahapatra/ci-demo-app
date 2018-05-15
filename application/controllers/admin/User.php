@@ -38,7 +38,7 @@ class User extends CI_Controller {
         $this->data['app_js'] = $this->common_lib->add_javascript($app_js_src);
 
         //View Page Config
-        $this->data['page_heading'] = "Users";
+        $this->data['page_heading'] = $this->router->class.' : '.$this->router->method;
         $this->data['datatable']['dt_id']= array('heading'=>'Data Table','cols'=>array());
 		
 		// load Breadcrumbs
@@ -70,6 +70,8 @@ class User extends CI_Controller {
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
+		
+		$this->data['page_heading'] = 'Manage Users';
         $this->data['maincontent'] = $this->load->view('admin/user/manage', $this->data, true);
         $this->load->view('admin/_layouts/layout_authenticated', $this->data);
     }
@@ -177,6 +179,7 @@ class User extends CI_Controller {
                 }
             }
         }
+		$this->data['page_heading'] = 'Login';
         $this->data['maincontent'] = $this->load->view('admin/user/login', $this->data, true);
         $this->load->view('admin/_layouts/layout_unauthenticated', $this->data);
     }
@@ -193,7 +196,7 @@ class User extends CI_Controller {
     function validate_login_form_data() {
         $this->form_validation->set_rules('user_email', 'email', 'trim|required|valid_email');
         $this->form_validation->set_rules('user_password', 'password', 'required');
-        $this->form_validation->set_error_delimiters('<p class="validation-error">', '</p>');
+        $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
         if ($this->form_validation->run() == true) {
             return true;
         } else {
@@ -280,13 +283,14 @@ class User extends CI_Controller {
                 }
             }
         }
+		$this->data['page_heading'] = 'Forgot Password?';
         $this->data['maincontent'] = $this->load->view('admin/user/forgot_password', $this->data, true);
         $this->load->view('admin/_layouts/layout_unauthenticated', $this->data);
     }
 
     function validate_forgot_password_form() {		
         $this->form_validation->set_rules('user_email', 'email address', 'trim|required|valid_email|callback_is_email_valid');
-        $this->form_validation->set_error_delimiters('<p class="validation-error">', '</p>');
+        $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
         if ($this->form_validation->run() == true) {
             return true;
         } else {
@@ -332,6 +336,7 @@ class User extends CI_Controller {
                 }
             }
         }
+		$this->data['page_heading'] = 'Reset Password : Create New Password';
         $this->data['maincontent'] = $this->load->view('admin/user/reset_password', $this->data, true);
         $this->load->view('admin/_layouts/layout_unauthenticated', $this->data);
     }
@@ -341,7 +346,7 @@ class User extends CI_Controller {
         $this->form_validation->set_rules('user_new_password', 'new password', 'required|trim|min_length[6]');
         $this->form_validation->set_rules('confirm_user_new_password', 'confirm password', 'required|matches[user_new_password]');
 
-        $this->form_validation->set_error_delimiters('<p class="validation-error">', '</p>');
+        $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
         if ($this->form_validation->run() == true) {
             return true;
         } else {
@@ -398,6 +403,7 @@ class User extends CI_Controller {
                 redirect(current_url());
             }
         }
+		$this->data['page_heading'] = 'Change Password';
         $this->data['maincontent'] = $this->load->view('admin/user/change_password', $this->data, true);
         $this->load->view('admin/_layouts/layout_authenticated', $this->data);
     }
@@ -406,7 +412,7 @@ class User extends CI_Controller {
         $this->form_validation->set_rules('user_current_password', 'current password', 'required|callback_check_current_password');        
         $this->form_validation->set_rules('user_new_password', 'new password', 'required|trim|min_length[6]');
         $this->form_validation->set_rules('confirm_user_new_password', 'confirm password', 'required|matches[user_new_password]');
-        $this->form_validation->set_error_delimiters('<p class="validation-error">', '</p>');
+        $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
         if ($this->form_validation->run() == true) {
             return true;
         } else {
@@ -464,7 +470,9 @@ class User extends CI_Controller {
 		//$this->sess_user_id;
         $rows = $this->user_model->get_rows($user_id);
         $this->data['row'] = $rows['data_rows'];
-		$this->data['address'] = $this->user_model->get_user_address(NULL,$user_id,NULL);		
+		$this->data['address'] = $this->user_model->get_user_address(NULL,$user_id,NULL);
+		
+		$this->data['page_heading'] = 'Profile';
         $this->data['maincontent'] = $this->load->view('admin/user/profile', $this->data, true);
         $this->load->view('admin/_layouts/layout_authenticated', $this->data);
     }
@@ -506,7 +514,8 @@ class User extends CI_Controller {
                 }
             }
         }
-
+	
+		$this->data['page_heading'] = 'Edit Profile';
         $this->data['maincontent'] = $this->load->view('admin/user/edit_profile', $this->data, true);
         $this->load->view('admin/_layouts/layout_authenticated', $this->data);
     }
@@ -515,7 +524,7 @@ class User extends CI_Controller {
         $this->form_validation->set_rules('user_firstname', 'first name', 'required');
         $this->form_validation->set_rules('user_lastname', 'last name', 'required');
         //$this->form_validation->set_rules('email', 'email', 'trim|required|valid_email|callback_is_email_exists');
-        $this->form_validation->set_error_delimiters('<p class="validation-error">', '</p>');
+        $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
         if ($this->form_validation->run() == true) {
             return true;
         } else {
@@ -585,7 +594,7 @@ class User extends CI_Controller {
                 }
             }
         }
-
+		$this->data['page_heading'] = 'Add Address';
         $this->data['maincontent'] = $this->load->view('admin/user/add_address', $this->data, true);
         $this->load->view('admin/_layouts/layout_authenticated', $this->data);
     }
@@ -625,7 +634,8 @@ class User extends CI_Controller {
                 }
             }
         }
-
+		
+		$this->data['page_heading'] = 'Edit Address';
         $this->data['maincontent'] = $this->load->view('admin/user/edit_address', $this->data, true);
         $this->load->view('admin/_layouts/layout_authenticated', $this->data);
     }
@@ -674,7 +684,7 @@ class User extends CI_Controller {
         //$this->form_validation->set_rules('country', ' ', 'required');        
         $this->form_validation->set_rules('landmark', ' ', 'max_length[100]');        
         $this->form_validation->set_rules('phone2', ' ', 'min_length[10]|max_length[10]|numeric');        
-        $this->form_validation->set_error_delimiters('<p class="validation-error">', '</p>');
+        $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
         if ($this->form_validation->run() == true) {
             return true;
         } else {

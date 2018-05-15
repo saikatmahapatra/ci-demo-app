@@ -43,7 +43,7 @@ class Order extends CI_Controller {
         $this->id = $this->uri->segment(4);
 
         //View Page Config
-        $this->data['page_heading'] = "Orders";
+        $this->data['page_heading'] = $this->router->class.' : '.$this->router->method;
         $this->data['datatable']['dt_id']= array('heading'=>'Data Table','cols'=>array());
 		// load Breadcrumbs
 		$this->load->library('breadcrumbs');
@@ -60,6 +60,7 @@ class Order extends CI_Controller {
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
+		$this->data['page_heading'] = 'Online Orders';
         $this->data['maincontent'] = $this->load->view('admin/order/index', $this->data, true);
         $this->load->view('admin/_layouts/layout_authenticated', $this->data);
     }
@@ -169,6 +170,8 @@ class Order extends CI_Controller {
 		 
         $this->data['rows'] = $result_array['data_rows'];
         $this->data['odetails'] = $order_details_result_array['data_rows'];
+		
+		$this->data['page_heading'] = 'Manage Order';
         $this->data['maincontent'] = $this->load->view('admin/order/edit', $this->data, true);
         $this->load->view('admin/_layouts/layout_authenticated', $this->data);
     }

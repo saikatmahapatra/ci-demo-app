@@ -44,7 +44,7 @@ class Category extends CI_Controller {
         $this->data['category_dropdown'] = $this->category_model->get_category_dropdown();
 
         //View Page Config
-        $this->data['page_heading'] = "Product Category";
+        $this->data['page_heading'] = $this->router->class.' : '.$this->router->method;
         $this->data['datatable']['dt_id']= array('heading'=>'Data Table','cols'=>array());
 		
 		// load Breadcrumbs
@@ -61,7 +61,7 @@ class Category extends CI_Controller {
 		
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
-
+		$this->data['page_heading'] = 'Product Category';
         $this->data['maincontent'] = $this->load->view('admin/category/index', $this->data, true);
         $this->load->view('admin/_layouts/layout_authenticated', $this->data);
     }
@@ -124,7 +124,7 @@ class Category extends CI_Controller {
         } elseif ($db_operation == 'edit') {
             $this->form_validation->set_rules('category_name', 'category name', 'required|callback_is_category_name_exists');
         }
-        $this->form_validation->set_error_delimiters('<p class="validation-error">', '</p>');
+        $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
         if ($this->form_validation->run() == true) {
             return true;
         } else {
@@ -163,6 +163,7 @@ class Category extends CI_Controller {
                 }
             }
         }
+		$this->data['page_heading'] = 'Add Product Category';
         $this->data['maincontent'] = $this->load->view('admin/category/add', $this->data, true);
         $this->load->view('admin/_layouts/layout_authenticated', $this->data);
     }
@@ -193,7 +194,7 @@ class Category extends CI_Controller {
         }
         $result_array = $this->category_model->get_rows($this->uri->segment(4));
         $this->data['rows'] = $result_array['data_rows'];
-
+		$this->data['page_heading'] = 'Edit Product Category';
         $this->data['maincontent'] = $this->load->view('admin/category/edit', $this->data, true);
         $this->load->view('admin/_layouts/layout_authenticated', $this->data);
     }

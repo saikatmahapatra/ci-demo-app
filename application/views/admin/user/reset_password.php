@@ -2,7 +2,7 @@
 	<div class="col-12 col-sm-8 col-md-4">			
 		<div class="card">
 			<div class="card-header bg-default">
-				<h4>Create New Password</h4>
+				<h4><?php echo isset($page_heading)? $page_heading:'Page Heading'; ?></h4>
 			</div>
 			<div class="card-body">
 				<?php
@@ -21,7 +21,7 @@
 				<?php echo form_open(current_url(), array('method' => 'post', 'class'=>'ci-form')) ?>
 				<?php echo form_hidden('form_action', 'reset_password'); ?>
 				<?php echo form_hidden('password_reset_key', $password_reset_key); ?>
-				<fieldset>
+				
 					<div class="form-group">
 						<?php
 							echo form_input(array(
@@ -62,16 +62,13 @@
 					?> 				
 					<?php echo form_error('user_new_password'); ?>        
 					</div>
-						<p>
-						<?php
-						echo form_submit(array(
-							'name' => 'submit',
-							'value' => 'Submit',
-							'class' => 'btn btn-primary btn-lg btn-block',
-						));
-						?>
-						</p>
-					</fieldset>
+					<?php
+					echo form_submit(array(
+						'name' => 'submit',
+						'value' => 'Submit',
+						'class' => 'btn btn-primary btn-lg btn-block',
+					));
+					?>	
 					<?php form_close(); ?>
 						
 					<div class="text-center">

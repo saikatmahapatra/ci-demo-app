@@ -123,13 +123,13 @@
                         <div class="col-sm-2"><?php echo isset($address_type[$addr['address_type']])?$address_type[$addr['address_type']]:'Address'; ?></div>
                         <div class="col-sm-8">
                             <div class="">
-                                <?php echo isset($addr['name'])?$addr['name'].'&nbsp;' :'';?>
-                                <?php echo isset($addr['phone1'])?$addr['phone1']:'';?>
+                                <?php echo isset($addr['name'])? $addr['name'].',&nbsp;' :'';?>
+                                <?php echo isset($addr['phone1'])? $addr['phone1'].', ':'';?>
                                 <?php echo isset($addr['address']) ? $addr['address'] : '';?>
-                                <?php echo isset($addr['locality'])? ', '.$addr['address'] : '';?>
+                                <?php echo isset($addr['locality'])? ', '.$addr['locality'] : '';?>
                                 <?php echo isset($addr['city']) ? ', '.$addr['city'].', ' : '';?>
                                 <?php echo isset($addr['state']) ? $addr['state'] : '';?>
-                                <?php echo isset($addr['zip']) ? ' - <span class="text-bold">'.$addr['zip'].'</span>' : '';?>                                
+                                <?php echo isset($addr['zip']) ? ' - '.$addr['zip'] : '';?>                                
                             </div>
                             <div>
                             </div>

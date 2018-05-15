@@ -21,6 +21,8 @@ class CI_Example extends CI_Controller {
         
         $this->data['alert_message'] = NULL;
         $this->data['alert_message_css'] = NULL;
+		//View Page Config
+		$this->data['page_heading'] = $this->router->class.' : '.$this->router->method;
         
     }
 
@@ -81,7 +83,7 @@ class CI_Example extends CI_Controller {
         $this->form_validation->set_rules('functional_domain', 'functional domain', 'required');        
         $this->form_validation->set_rules('userfile', 'resume upload', 'trim|required');
         $this->form_validation->set_rules('terms', 'terms & condition acceptance', 'trim|required');
-        $this->form_validation->set_error_delimiters('<p class="validation-error">', '</p>');
+        $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
         if ($this->form_validation->run() == true) {
             return true;
         } else {

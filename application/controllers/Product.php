@@ -26,6 +26,9 @@ class Product extends CI_Controller {
         $this->cart->product_name_rules = '[:print:]'; // allow any characters in product name rule
         $this->data['alert_message'] = NULL;
         $this->data['alert_message_css'] = NULL;
+		
+		//View Page Config
+		$this->data['page_heading'] = $this->router->class.' : '.$this->router->method;
     }
 
     function index() {
@@ -34,6 +37,7 @@ class Product extends CI_Controller {
         $products = $this->product_model->get_rows();
         $this->data['total_products'] = $products['num_rows'];
         $this->data['products'] = $products['data_rows'];
+		$this->data['page_heading'] = 'Products';
         $this->data['maincontent'] = $this->load->view('site/product/index', $this->data, true);
         $this->load->view('site/_layouts/layout_default', $this->data);
     }

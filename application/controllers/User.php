@@ -31,6 +31,9 @@ class User extends CI_Controller {
 		
 		/*Address Type*/
 		$this->data['address_type'] = array('S'=>'Shipping','B'=>'Billing','W'=>'Work','H'=>'Home','C'=>'Preseent','P'=>'Permanent');
+		
+		//View Page Config
+		$this->data['page_heading'] = $this->router->class.' : '.$this->router->method;
     }
 
     function index() {
@@ -38,7 +41,8 @@ class User extends CI_Controller {
     }
 
     function login() {
-        echo $this->session->userdata('sess_post_login_redirect_uri');
+        //echo $this->session->userdata('sess_post_login_redirect_uri');
+		$this->data['page_heading'] = "Please login to continue";
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
         if ($this->input->post('form_action') == 'login') {
@@ -79,7 +83,7 @@ class User extends CI_Controller {
     function validate_login_form_data() {
         $this->form_validation->set_rules('user_email', ' ', 'trim|required|valid_email');
         $this->form_validation->set_rules('user_password', ' ', 'required|min_length[5]|max_length[15]');
-        $this->form_validation->set_error_delimiters('<p class="validation-error">', '</p>');
+        $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
         if ($this->form_validation->run() == true) {
             return true;
         } else {
@@ -137,6 +141,7 @@ class User extends CI_Controller {
                 }
             }
         }
+		$this->data['page_heading'] = "Create your account";
         $this->data['maincontent'] = $this->load->view('site/user/create_account', $this->data, true);
         $this->load->view('site/_layouts/layout_default', $this->data);
     }
@@ -153,7 +158,7 @@ class User extends CI_Controller {
         $this->form_validation->set_rules('dob_month', 'birth month selection', 'required');
         $this->form_validation->set_rules('dob_year', 'birth year selection', 'required');
         $this->form_validation->set_rules('terms', 'terms & conditions acceptance', 'trim|required');
-        $this->form_validation->set_error_delimiters('<p class="validation-error">', '</p>');
+        $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
         if ($this->form_validation->run() == true) {
             return true;
         } else {
@@ -240,13 +245,14 @@ class User extends CI_Controller {
                 }
             }
         }
+		$this->data['page_heading'] = "Forgot login password?";
         $this->data['maincontent'] = $this->load->view('site/user/forgot_password', $this->data, true);
         $this->load->view('site/_layouts/layout_default', $this->data);
     }
 
     function validate_forgot_password_form() {
         $this->form_validation->set_rules('user_email', 'email address', 'trim|required|valid_email|callback_is_email_valid');
-        $this->form_validation->set_error_delimiters('<p class="validation-error">', '</p>');
+        $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
         if ($this->form_validation->run() == true) {
             return true;
         } else {
@@ -292,6 +298,7 @@ class User extends CI_Controller {
                 }
             }
         }
+		$this->data['page_heading'] = "Create new password";
         $this->data['maincontent'] = $this->load->view('site/user/reset_password', $this->data, true);
         $this->load->view('site/_layouts/layout_default', $this->data);
     }
@@ -301,7 +308,7 @@ class User extends CI_Controller {
         $this->form_validation->set_rules('user_new_password', 'new password', 'required|trim|min_length[6]');
         $this->form_validation->set_rules('confirm_user_new_password', 'confirm password', 'required|matches[user_new_password]');
 
-        $this->form_validation->set_error_delimiters('<p class="validation-error">', '</p>');
+        $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
         if ($this->form_validation->run() == true) {
             return true;
         } else {
@@ -349,6 +356,7 @@ class User extends CI_Controller {
                 redirect(current_url());
             }
         }
+		$this->data['page_heading'] = "Change Password";
         $this->data['maincontent'] = $this->load->view('site/user/change_password', $this->data, true);
         $this->load->view('site/_layouts/layout_default', $this->data);
     }
@@ -357,7 +365,7 @@ class User extends CI_Controller {
         $this->form_validation->set_rules('user_current_password', 'current password', 'required|callback_check_current_password');
         $this->form_validation->set_rules('user_new_password', 'new password', 'required|trim|min_length[6]');
         $this->form_validation->set_rules('confirm_user_new_password', 'confirm password', 'required|matches[user_new_password]');
-        $this->form_validation->set_error_delimiters('<p class="validation-error">', '</p>');
+        $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
         if ($this->form_validation->run() == true) {
             return true;
         } else {
@@ -401,6 +409,7 @@ class User extends CI_Controller {
         $rows = $this->user_model->get_rows($this->sess_user_id);		
         $this->data['row'] = $rows['data_rows'];
 		$this->data['address'] = $this->user_model->get_user_address(NULL,$this->sess_user_id,NULL);
+		$this->data['page_heading'] = "Profile";
         $this->data['maincontent'] = $this->load->view('site/user/profile', $this->data, true);
         $this->load->view('site/_layouts/layout_default', $this->data);
     }
@@ -435,7 +444,7 @@ class User extends CI_Controller {
                 }
             }
         }
-
+		$this->data['page_heading'] = "Edit Profile";
         $this->data['maincontent'] = $this->load->view('site/user/edit_profile', $this->data, true);
         $this->load->view('site/_layouts/layout_default', $this->data);
     }
@@ -455,7 +464,7 @@ class User extends CI_Controller {
         //$this->form_validation->set_rules('country', ' ', 'required');        
         $this->form_validation->set_rules('landmark', ' ', 'max_length[100]');        
         $this->form_validation->set_rules('phone2', ' ', 'min_length[10]|max_length[10]|numeric');        
-        $this->form_validation->set_error_delimiters('<p class="validation-error">', '</p>');
+        $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
         if ($this->form_validation->run() == true) {
             return true;
         } else {
@@ -494,7 +503,7 @@ class User extends CI_Controller {
                 }
             }
         }
-
+		$this->data['page_heading'] = "Add Address";
         $this->data['maincontent'] = $this->load->view('site/user/add_address', $this->data, true);
         $this->load->view('site/_layouts/layout_default', $this->data);
     }
@@ -534,7 +543,7 @@ class User extends CI_Controller {
                 }
             }
         }
-
+		$this->data['page_heading'] = "Edit Address";
         $this->data['maincontent'] = $this->load->view('site/user/edit_address', $this->data, true);
         $this->load->view('site/_layouts/layout_default', $this->data);
     }
@@ -579,7 +588,7 @@ class User extends CI_Controller {
         /* $this->form_validation->set_rules('dob_day', 'birth day selection', 'required');
           $this->form_validation->set_rules('dob_month', 'birth month selection', 'required');
           $this->form_validation->set_rules('dob_year', 'birth year selection', 'required'); */
-        $this->form_validation->set_error_delimiters('<p class="validation-error">', '</p>');
+        $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
         if ($this->form_validation->run() == true) {
             return true;
         } else {

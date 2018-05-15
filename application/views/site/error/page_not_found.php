@@ -1,5 +1,10 @@
-<div class="row">
-  <div class="col-md-12">
-	<h1 class="page-header">404 Not Found</h1>               
-  </div>
-</div>
+<div class="row heading-container">
+    <div class="col-md-5">
+        <h1 class="page-header"><?php echo isset($page_heading)? $page_heading:'Page Heading'; ?></h1>
+    </div>
+    <div class="col-md-7">
+        
+    </div>
+</div><!--/.heading-container-->
+
+<h1>404 Page Not Found</h1>

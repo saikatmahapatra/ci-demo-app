@@ -1,11 +1,14 @@
-<div class="row">
-    <div class="col-md-12">
-        <h1 class="page-header">Create Account</h1>               
+<div class="row heading-container">
+    <div class="col-md-5">
+        <h1 class="page-header"><?php echo isset($page_heading)? $page_heading:'Page Heading'; ?></h1>
     </div>
-</div><!--/.row-->
+    <div class="col-md-7">
+        
+    </div>
+</div><!--/.heading-container-->
 
 <div class="row">
-    <div class="col-md-9">
+    <div class="col-md-8">
         <?php
         // Show server side messages
         if (isset($alert_message)) {
@@ -21,41 +24,38 @@
         ?> 
         <?php echo form_open(current_url(), array('method' => 'post', 'class' => 'ci-form','name' => 'form','id' => 'form',));?>
         <?php echo form_hidden('form_action', 'create_account'); ?>        
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">                            
-					<label for="user_firstname" class="">First Name <span class="required">*</span></label>
-                    <?php
-                    echo form_input(array(
-                        'name' => 'user_firstname',
-                        'value' => set_value('user_firstname'),
-                        'id' => 'user_firstname',
-                        'class' => 'form-control',
-                        'maxlength' => '30',
-                    ));
-                    ?>
-                    <?php echo form_error('user_firstname'); ?>
-                </div>
-            </div>            
-            <div class="col-md-6">
-                <div class="form-group">                            
-					<label for="user_lastname" class="">Last Name <span class="required">*</span></label>
-                    <?php
-                    echo form_input(array(
-                        'name' => 'user_lastname',
-                        'value' => set_value('user_lastname'),
-                        'id' => 'user_lastname',
-                        'class' => 'form-control',
-                        'maxlength' => '50',
-                    ));
-                    ?>
-                    <?php echo form_error('user_lastname'); ?>
-                </div>
+        <div class="form-row">
+			<div class="form-group col-md-6">                            
+				<label for="user_firstname" class="">First Name <span class="required">*</span></label>
+				<?php
+				echo form_input(array(
+					'name' => 'user_firstname',
+					'value' => set_value('user_firstname'),
+					'id' => 'user_firstname',
+					'class' => 'form-control',
+					'maxlength' => '30',
+				));
+				?>
+				<?php echo form_error('user_firstname'); ?>
+			</div>
+            
+			<div class="form-group col-md-6">                            
+				<label for="user_lastname" class="">Last Name <span class="required">*</span></label>
+				<?php
+				echo form_input(array(
+					'name' => 'user_lastname',
+					'value' => set_value('user_lastname'),
+					'id' => 'user_lastname',
+					'class' => 'form-control',
+					'maxlength' => '50',
+				));
+				?>
+				<?php echo form_error('user_lastname'); ?>
+			</div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
+       
+            <div class="form-row">
+                <div class="form-group col-md-6">
 					<label for="user_email" class="">Email Address <span class="required">*</span></label>
                     <?php
                     echo form_input(array(
@@ -68,9 +68,7 @@
                     ?> 
                     <?php echo form_error('user_email'); ?>
                 </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">                           
+                <div class="form-group col-md-6">                           
 					<label for="user_mobile_phone1" class="">Mobile Number <span class="required">*</span></label>
                     <?php
                     echo form_input(array(
@@ -84,10 +82,9 @@
                     <?php echo form_error('user_mobile_phone1'); ?>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">                   
+			
+            <div class="form-row">
+                <div class="form-group col-md-6">                   
 					<label for="user_password" class="">Password <span class="required">*</span></label>
                     <?php
                     echo form_password(array(
@@ -100,9 +97,7 @@
                     ?> 
                     <?php echo form_error('user_password'); ?>
                 </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
+				<div class="form-group col-md-6">
 					<label for="user_password_confirm" class="">Confirm Password <span class="required">*</span></label>
                     <?php
                     echo form_password(array(
@@ -116,11 +111,10 @@
                     <?php echo form_error('user_password_confirm'); ?>
                 </div>
             </div>
-        </div>
 
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">                            
+       
+            <div class="form-row">
+                <div class="form-group col-md-6">                            
 					<label for="user_dob" class="">Date of Birth <span class="required">*</span></label>
                     <div class="">
                         <?php echo form_dropdown('dob_day', $day_arr, set_value('dob_day'), array('class' => 'form-control dob-inline',));?>
@@ -131,44 +125,51 @@
                     <?php echo form_error('dob_month'); ?>
                     <?php echo form_error('dob_year'); ?>
                 </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-6">                
-				<label for="user_gender" class="">Gender <span class="required">*</span></label>
-                <div class="radio">  
-                    <label class="label-normal">
-                        <?php
-                        $radio_is_checked = $this->input->post('user_gender') === 'M';
-                        echo form_radio(array(
-                            'name' => 'user_gender',
-                            'value' => 'M',
-                            'id' => 'm',
-                            'checked' => $radio_is_checked,
-                            'class' => '',
-                                ), set_radio('user_gender', 'M')
-                        );
-                        ?>
-                        <span>Male</span>
-                    </label>                    
-                    <label class="label-normal">
-                        <?php
-                        $radio_is_checked = $this->input->post('user_gender') === 'F';
-                        echo form_radio(array(
-                            'name' => 'user_gender',
-                            'value' => 'F',
-                            'id' => 'f',
-                            'checked' => $radio_is_checked,
-                            'class' => ''
-                                ), set_radio('user_gender', 'F')
-                        );
-                        ?>
-                        <span>Female</span>
-                    </label>                    
-                    <?php echo form_error('user_gender'); ?>
-                </div>
-            </div>
+            
+            <div class="form-group col-md-6">
+			<label for="gender">Gender <span class="required">*</span></label>
+			<div class="form-radio">
+				<?php
+				$radio_is_checked = $this->input->post('user_gender') === 'M';
+				echo form_radio(array(
+					'name' => 'user_gender',
+					'value' => 'M',
+					'id' => 'm',
+					'checked' => $radio_is_checked,
+					'class' => '',
+						), set_radio('user_gender', 'M')
+				);
+				?>
+				<label class="form-radio-label" for="m">Male</span></label>
+				
+				<?php
+				$radio_is_checked = $this->input->post('user_gender') === 'F';
+				echo form_radio(array(
+					'name' => 'user_gender',
+					'value' => 'F',
+					'id' => 'f',
+					'checked' => $radio_is_checked,
+					'class' => ''
+						), set_radio('user_gender', 'F')
+				);
+				?>
+				<label class="form-radio-label" for="f">Female</span></label>
+				
+				<?php
+				$radio_is_checked = $this->input->post('user_gender') === 'T';
+				echo form_radio(array(
+					'name' => 'user_gender',
+					'value' => 'T',
+					'id' => 't',
+					'checked' => $radio_is_checked,
+					'class' => ''
+						), set_radio('user_gender', 'T')
+				);
+				?>
+				<label class="form-radio-label" for="t">Trans-gender</span></label>
+			</div>
+			<?php echo form_error('user_gender'); ?>
+		  </div>
         </div>
 
         <div class="row">
@@ -203,14 +204,7 @@
                     ?>         
                 </div>	
             </div>
-        </div>
+        </div>		
         <?php echo form_close(); ?>
-    </div>
-    
-</div>
-
-<div class="row">
-    <div class="col-md-12">
-		<a href="<?php echo site_url('user/login');?>" class="">Already have an account? Login</a>
     </div>
 </div>

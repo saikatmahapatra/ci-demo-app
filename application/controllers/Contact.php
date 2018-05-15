@@ -28,7 +28,10 @@ class Contact extends CI_Controller {
         $this->to_email = 'mahapatra.saikat29@gmail.com';
         $this->bcc_email = '';
         $this->cc_email = '';
-        $this->load->library('email');        
+        $this->load->library('email'); 
+
+		//View Page Config
+		$this->data['page_heading'] = $this->router->class.' : '.$this->router->method;		
     }
 
     function validate_contact_form() {
@@ -37,7 +40,7 @@ class Contact extends CI_Controller {
         $this->form_validation->set_rules('phone_number', 'mobile number', 'trim|is_natural|numeric|max_length[10]');
         $this->form_validation->set_rules('message', 'message', 'required');
         $this->form_validation->set_rules('captcha', 'captcha verification', 'trim|required|callback_validate_captcha');
-        $this->form_validation->set_error_delimiters('<p class="validation-error">', '</p>');
+        $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
         if ($this->form_validation->run() == true) {
             return true;
         } else {
@@ -128,6 +131,8 @@ class Contact extends CI_Controller {
 
         $this->data['captcha_word'] = $cap['word'];
         $this->data['captcha_image'] = $cap['image'];
+		
+		$this->data['page_heading'] = 'Contact Us';
         $this->data['maincontent'] = $this->load->view('site/contact/index', $this->data, true);
         $this->load->view('site/_layouts/layout_default', $this->data);
     }

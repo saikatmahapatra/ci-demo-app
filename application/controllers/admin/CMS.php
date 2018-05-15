@@ -44,7 +44,7 @@ class Cms extends CI_Controller {
         $this->data['arr_content_type'] = $this->cms_model->get_pagecontent_type();
 
         //View Page Config
-        $this->data['page_heading'] = "CMS";
+        $this->data['page_heading'] = $this->router->class.' : '.$this->router->method;
         $this->data['datatable']['dt_id']= array('heading'=>'Data Table','cols'=>array());
 		
 		// load Breadcrumbs
@@ -65,6 +65,8 @@ class Cms extends CI_Controller {
 		
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
+		
+		$this->data['page_heading'] = 'Website CMS - Contents';
         $this->data['maincontent'] = $this->load->view('admin/cms/index', $this->data, true);
         $this->load->view('admin/_layouts/layout_authenticated', $this->data);
     }
@@ -150,6 +152,7 @@ class Cms extends CI_Controller {
                 }
             }
         }
+		$this->data['page_heading'] = 'Add Contents';
         $this->data['maincontent'] = $this->load->view('admin/cms/add', $this->data, true);
         $this->load->view('admin/_layouts/layout_authenticated', $this->data);
     }
@@ -185,7 +188,7 @@ class Cms extends CI_Controller {
         }
         $result_array = $this->cms_model->get_rows($this->uri->segment(4));
         $this->data['rows'] = $result_array['data_rows'];
-
+		$this->data['page_heading'] = 'Edit Contents';
         $this->data['maincontent'] = $this->load->view('admin/cms/edit', $this->data, true);
         $this->load->view('admin/_layouts/layout_authenticated', $this->data);
     }
@@ -208,7 +211,7 @@ class Cms extends CI_Controller {
         $this->form_validation->set_rules('pagecontent_title', ' ', 'required');
         $this->form_validation->set_rules('pagecontent_text', ' ', 'required');
 
-        $this->form_validation->set_error_delimiters('<p class="validation-error">', '</p>');
+        $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
         if ($this->form_validation->run() == true) {
             return true;
         } else {

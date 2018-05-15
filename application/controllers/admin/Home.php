@@ -40,7 +40,7 @@ class Home extends CI_Controller {
         $this->id = $this->uri->segment(4);
 
         //View Page Config
-        $this->data['page_heading'] = "Dashboard";
+        $this->data['page_heading'] = $this->router->class.' : '.$this->router->method;
         $this->data['datatable']['dt_id']= array('heading'=>'Data Table','cols'=>array());
 		
 		// load Breadcrumbs
