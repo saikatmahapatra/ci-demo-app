@@ -38,11 +38,11 @@
 		<div class="dropdown-menu" aria-labelledby="dropdown03">
 			
 			<div class="dropdown-item welcome-user-container">
-			<!--<a class="dropdown-item" href="#">-->
+			<!--<a class="dropdown-item" href="#">-->				
 				<div class=""><?php echo isset($this->session->userdata['sess_user']['user_firstname']) ? $this->session->userdata['sess_user']['user_firstname'].' '.$this->session->userdata['sess_user']['user_lastname']:'Guest';?></div>
-				<div class="small d-none"><?php echo isset($this->session->userdata['sess_user']['user_role']) ? $this->session->userdata['sess_user']['user_role_name'] :'';?></div>
 				<div class="small"><?php echo isset($this->session->userdata['sess_user']['user_email']) ? $this->session->userdata['sess_user']['user_email'] :'';?></div>
-				<div class="small">Last Login: 03/04/2018 10.30am</div>
+				<div class="small">Role: <?php echo isset($this->session->userdata['sess_user']['user_role_name']) ? $this->session->userdata['sess_user']['user_role_name'] :'';?></div>
+				<div class="small d-none">Last Login: 03/04/2018 10.30am</div>
 			<!--</a>-->
 			</div><!--/.welcome-user-container-->
 			

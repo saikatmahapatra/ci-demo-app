@@ -154,7 +154,8 @@ class User_model extends CI_Model {
         $loggedin_data = array();
         $auth_result = array('status' => $login_status, 'message' => $message, 'data' => $loggedin_data);
 
-        $this->db->select('t1.id,t1.user_email,t1.user_firstname,t1.user_lastname,t1.user_role,t1.user_image,t1.user_account_active,t1.user_archived');
+        $this->db->select('t1.id,t1.user_email,t1.user_firstname,t1.user_lastname,t1.user_role,t1.user_image,t1.user_account_active,t1.user_archived,t2.role_name,t2.role_weight');
+		$this->db->join('roles t2', 't1.user_role=t2.id');
         $this->db->where(array(
             't1.user_email' => $user_email,
             't1.user_password' => $user_password
@@ -180,6 +181,7 @@ class User_model extends CI_Model {
                 $loggedin_data = array(
                     'id' => $row['id'],
                     'user_role' => $row['user_role'],
+					'user_role_name' => $row['role_name'],
                     'user_firstname' => $row['user_firstname'],
                     'user_lastname' => $row['user_lastname'],
                     'user_email' => $row['user_email'],
