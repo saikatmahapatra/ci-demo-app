@@ -25,7 +25,10 @@
             ?>
             <div class="card ">
                 <div class="card-header">
-                    Data Table
+                    <span class="">Users</span>
+					<span class="float-right">
+						<a href="<?php echo base_url('admin/user/create_new_user');?>" class="btn btn-sm btn-success" title="Add"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add New</a>
+					</span>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
