@@ -32,7 +32,7 @@ var Cms = function(){
 		if(typeof CKEDITOR != 'undefined'){
 			// Replace the <textarea id="editor1"> with a CKEditor
 			// instance, using default configuration.
-			CKEDITOR.replace('pagecontent_text');
+			//CKEDITOR.replace('pagecontent_text');
 			//bootstrap WYSIHTML5 - text editor
 			//$(".textarea").wysihtml5();
 		}

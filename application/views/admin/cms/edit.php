@@ -43,7 +43,7 @@ $row = $rows[0];
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="pagecontent_title" class="">Content Title <span class="required">*</span></label>
-									<?php echo form_input(array('name' => 'pagecontent_title', 'value' => (isset($_POST['pagecontent_title']) ? set_value('pagecontent_title') : $row['pagecontent_title']), 'id' => 'pagecontent_title', 'class' => 'form-control', 'placeholder' => '', 'title' => '','minlength' => '','maxlength' => '', ));?>
+									<?php echo form_input(array('name' => 'pagecontent_title', 'value' => (isset($_POST['pagecontent_title']) ? set_value('pagecontent_title') : $row['pagecontent_title']), 'id' => 'pagecontent_title', 'class' => 'form-control', 'placeholder' => ''));?>
 									<?php echo form_error('pagecontent_title'); ?>
 								</div>
 							</div>
@@ -52,7 +52,7 @@ $row = $rows[0];
 							<div class="col-md-12">
 								<div class="form-group">
 									<label for="pagecontent_text" class="">Content(HTML) <span class="required">*</span></label>
-									<?php echo form_textarea(array('name' => 'pagecontent_text','value' => (isset($_POST['pagecontent_text']) ? set_value('pagecontent_text') : $row['pagecontent_text']),'class' => 'form-control textarea','id' => 'pagecontent_text','rows' => '4','cols' => '50','placeholder' => '','title' => '','minlength' => '','maxlength' => '', 'style'=>'width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;' )); ?>
+									<?php echo form_textarea(array('name' => 'pagecontent_text','value' => (isset($_POST['pagecontent_text']) ? set_value('pagecontent_text') : $row['pagecontent_text']),'class' => 'form-control textarea','id' => 'pagecontent_text','rows' => '2','cols' => '50','placeholder' => '')); ?>
 									<?php echo form_error('pagecontent_text'); ?>
 								</div>
 							</div>
@@ -61,21 +61,21 @@ $row = $rows[0];
 							<div class="col-md-4">
 								<div class="form-group">
 									<label for="pagecontent_meta_keywords" class="">Meta Keywords</label>
-									<?php echo form_input(array('name' => 'pagecontent_meta_keywords','value' => (isset($_POST['pagecontent_meta_keywords']) ? set_value('pagecontent_meta_keywords') : $row['pagecontent_meta_keywords']),'id' => 'pagecontent_meta_keywords','class' => 'form-control','rows' => '4','cols' => '50','placeholder' => '', 'title' => '','minlength' => '','maxlength' => '',)); ?>
+									<?php echo form_input(array('name' => 'pagecontent_meta_keywords','value' => (isset($_POST['pagecontent_meta_keywords']) ? set_value('pagecontent_meta_keywords') : $row['pagecontent_meta_keywords']),'id' => 'pagecontent_meta_keywords','class' => 'form-control', 'placeholder' => '')); ?>
 									<?php echo form_error('pagecontent_meta_keywords'); ?>
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
 									<label for="pagecontent_meta_description" class="">Meta Description</label>
-									<?php echo form_input(array('name' => 'pagecontent_meta_description','value' => (isset($_POST['pagecontent_meta_description']) ? set_value('pagecontent_meta_description') : $row['pagecontent_meta_description']),'id' => 'pagecontent_meta_description','class' => 'form-control','rows' => '4','cols' => '50','placeholder' => '','title' => '', 'minlength' => '10','maxlength' => '200',));?>
+									<?php echo form_input(array('name' => 'pagecontent_meta_description','value' => (isset($_POST['pagecontent_meta_description']) ? set_value('pagecontent_meta_description') : $row['pagecontent_meta_description']),'id' => 'pagecontent_meta_description','class' => 'form-control', 'placeholder' => ''));?>
 									<?php echo form_error('pagecontent_meta_description'); ?>
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
 									<label for="pagecontent_meta_author" class="">Meta Author</label>
-									<?php echo form_input(array('name' => 'pagecontent_meta_author','value' => (isset($_POST['pagecontent_meta_author']) ? set_value('pagecontent_meta_author') : $row['pagecontent_meta_author']),'class' => 'form-control','id' => 'pagecontent_meta_author','placeholder' => '','title' => '',));?>
+									<?php echo form_input(array('name' => 'pagecontent_meta_author','value' => (isset($_POST['pagecontent_meta_author']) ? set_value('pagecontent_meta_author') : $row['pagecontent_meta_author']),'class' => 'form-control','id' => 'pagecontent_meta_author','placeholder' => ''));?>
 									<?php echo form_error('pagecontent_meta_author'); ?>
 								</div>
 							</div>
