@@ -173,26 +173,43 @@
         </div>
 
         
-		<div class="form-group col-md-12">               
-			<label for="terms" class="">Uses Agreement Terms & Conditions <span class="required">*</span></label>
-			<div class="checkbox"> 
-				<label class="label-normal">
-					<?php
-					$cb_is_checked = $this->input->post('terms') === 'accept';
-					echo form_checkbox('terms', 'accept', $cb_is_checked, array(
-						'id' => 'trems',
-						'class' => ''
-					));
-					?>
-					<span>By clicking Create an account, you agree to our Terms and that you have read our Data Policy, including our Cookie Use</span>
-					<span class="required">*</span>
-				</label>
-				<?php echo form_error('terms'); ?>
+		<div class="form-group"> 
+			<div class="form-check">
+				<?php
+				$cb_is_checked = $this->input->post('terms') === 'accept';
+				echo form_checkbox('terms', 'accept', $cb_is_checked, array(
+					'id' => 'terms',
+					'class' => 'form-check-input'
+				));
+				?>
+				<label for="terms" class="form-label-checkbox">I have accepted uses agreement <a href="#" data-toggle="modal" data-target="#tncModal"> terms & conditions</a> <span class="required">*</span></label>				
 			</div>
+			<?php echo form_error('terms'); ?>
 		</div>
 
         <?php echo form_submit(array('name' => 'register','value' => 'Create an account','class' => 'btn btn-primary',));?>		
         <?php echo form_close(); ?>
 		<div class=""><a href="<?php echo site_url('user/login');?>" class="">Already have an account? Login</a></div>
     </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="tncModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="myModalLabel">Terms of Services</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body tnc-content">
+				some T&C content goes here
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary">Save changes</button>
+			</div>
+		</div>
+	</div>
 </div>

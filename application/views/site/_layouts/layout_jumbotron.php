@@ -21,8 +21,7 @@
         
 		<nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">            
 			<?php echo $el_navbar; ?>
-        </nav>
-		
+        </nav>		
 		
 		<main role="main">
 		  <!-- Main jumbotron for a primary marketing message or call to action -->
