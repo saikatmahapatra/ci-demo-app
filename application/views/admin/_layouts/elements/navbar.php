@@ -37,7 +37,7 @@ $segment3 = $this->uri->segment(3);
 			</div>
 		</li>
 		
-		<li class="nav-item <?php echo ($this->uri->segment(3)=='manage') ? 'active':''?>">
+		<li class="nav-item <?php echo ($segment3 == 'manage' || $segment3 == 'create_account') ? 'active':''?>">
 			<a class="nav-link"href="<?php echo site_url('admin/user/manage'); ?>">Customers</a>
 		</li>
 		<li class="nav-item <?php echo ($segment2=='order') ? 'active':''?>">
@@ -45,7 +45,7 @@ $segment3 = $this->uri->segment(3);
 		</li>
 		
 		<?php if (isset($this->session->userdata['sess_user']['id'])) {  ?>
-		<li class="nav-item dropdown <?php echo ($segment2=='user' && $segment3!='manage') ? 'active':''?>">
+		<li class="nav-item dropdown <?php echo ($segment2 == 'user' && ($segment3 != 'manage' || $segment3 != 'create_account')) ? 'active':''?>">
 			<a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true"
 				aria-expanded="false"><i aria-hidden="true" class="fa fa-user-circle"></i> My Account </a>
 			<div class="dropdown-menu" aria-labelledby="dropdown03">

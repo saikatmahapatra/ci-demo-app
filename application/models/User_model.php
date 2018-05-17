@@ -256,6 +256,20 @@ class User_model extends CI_Model {
         $result = $query->result_array();
         return $result;
     }
+	
+	function get_user_role_dropdown() {
+        $result = array();
+        $this->db->select('id,role_name,role_weight');
+        $query = $this->db->get('roles');
+        $result = array('' => 'Select Role');
+        if ($query->num_rows()) {
+            $res = $query->result();
+            foreach ($res as $r) {
+                $result[$r->id] = $r->role_name;
+            }
+        }
+        return $result;
+    }
 
     function get_user_role_permission($role_id) {
         $this->db->select('t1.id,t1.permission_id,t2.role_name,t2.role_weight,t3.permission_name,t3.permission_description');

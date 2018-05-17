@@ -81,8 +81,8 @@ class User extends CI_Controller {
     }
 
     function validate_login_form_data() {
-        $this->form_validation->set_rules('user_email', ' ', 'trim|required|valid_email');
-        $this->form_validation->set_rules('user_password', ' ', 'required|min_length[5]|max_length[15]');
+        $this->form_validation->set_rules('user_email', 'email or username', 'trim|required|valid_email');
+        $this->form_validation->set_rules('user_password', 'password', 'required|min_length[5]|max_length[15]');
         $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
         if ($this->form_validation->run() == true) {
             return true;
@@ -105,7 +105,7 @@ class User extends CI_Controller {
                     'user_gender' => $this->input->post('user_gender'),
                     'user_email' => $this->input->post('user_email'),
                     'user_dob' => $dob,
-                    'user_role' => '2', // as per role table 2 (user)
+                    'user_role' => '3', //as per role table 1=Super Admin, 2=Admin 3=User (user)
                     'user_mobile_phone1' => $this->input->post('user_mobile_phone1'),
                     'user_password' => md5($this->input->post('user_password')),
                     'user_registration_date' => date('Y-m-d H:i:s'),
@@ -449,7 +449,6 @@ class User extends CI_Controller {
         $this->load->view('site/_layouts/layout_default', $this->data);
     }
 	
-	
 	function validate_user_address_form_data($mode) {
 		if($mode == 'add'){
 			$this->form_validation->set_rules('address_type', 'address type selection', 'required');        
@@ -645,7 +644,12 @@ class User extends CI_Controller {
         }
         return $result;
     }
-
+	
+	function auth_error() {
+		$this->data['page_heading'] = 'Authorization Error';
+        $this->data['maincontent'] = $this->load->view('site/user/auth_error', $this->data, true);
+        $this->load->view('site/_layouts/layout_default', $this->data);
+    }
 }
 
 ?>

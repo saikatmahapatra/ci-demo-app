@@ -378,7 +378,7 @@ class Common_lib {
         //print_r($result);
         //die();
         if ($redirect == TRUE && $result['is_granted'] == FALSE) {
-            $uri = isset($redirect_uri) ? $redirect_uri : 'user/auth/error';
+            $uri = isset($redirect_uri) ? $redirect_uri : $this->router->directory.'/user/auth_error';
             redirect($uri);
         }
         //return $result;

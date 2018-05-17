@@ -30,8 +30,15 @@ class Error extends CI_Controller {
 
     function page_not_found() {
         $data = array();
-
+		$this->data['page_heading'] = "404 Not Found";
         $this->data['maincontent'] = $this->load->view('site/error/page_not_found', $this->data, true);
+        $this->load->view('site/_layouts/layout_default', $this->data);
+    }
+	
+	function auth() {
+		$data = array();
+		$this->data['page_heading'] = "Auth Error";
+        $this->data['maincontent'] = $this->load->view('site/error/auth_error', $this->data, true);
         $this->load->view('site/_layouts/layout_default', $this->data);
     }
 

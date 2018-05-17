@@ -50,6 +50,14 @@ class User extends CI_Controller {
 		
 		/*Address Type*/
 		$this->data['address_type'] = array('S'=>'Shipping','B'=>'Billing','W'=>'Work','H'=>'Home','C'=>'Preseent','P'=>'Permanent');
+		
+		/* DOB */
+        $this->data['day_arr'] = $this->calander_days();
+        $this->data['month_arr'] = $this->calander_months();
+        $this->data['year_arr'] = $this->calander_years();
+		
+		/*User Management*/
+		$this->data['arr_roles'] = $this->user_model->get_user_role_dropdown();
     }
 
     function index() {
@@ -97,16 +105,16 @@ class User extends CI_Controller {
             $row[] = $result['user_email'];
             $row[] = $result['user_mobile_phone1'];
             $row[] = $result['role_name'];
-            $row[] = ($result['user_account_active'] == 'Y') ? 'Active' : 'Inactive';
+            $row[] = ($result['user_account_active'] == 'Y') ? '<span class="badge badge-success">Active</span>' : '<span class="badge badge-danger">Inactive</span>';
             //add html for action
             $action_html = '';
 
 
             $acc_status_text = ($result['user_account_active'] == 'Y') ? 'Deactivate' : 'Activate';
-            $acc_status_class = ($result['user_account_active'] == 'Y') ? 'btn-warning' : 'btn-info';
+            $acc_status_class = ($result['user_account_active'] == 'Y') ? 'btn-danger' : 'btn-success';
             $acc_status_set = ($result['user_account_active'] == 'Y') ? 'N' : 'Y';
             $action_html.= anchor(site_url('admin/user/profile/' . $result['id']), 'Profile', array(
-                'class' => 'btn btn-sm btn-dark',
+                'class' => 'btn btn-sm btn-secondary',
                 'data-toggle' => 'tooltip',
                 'data-original-title' => 'Profile',
                 'title' => 'Profile',
@@ -114,7 +122,7 @@ class User extends CI_Controller {
 			$action_html.='&nbsp;';
 			if($result['role_weight'] <= 90){
 				$action_html.= anchor(site_url('admin/user/manage#'), $acc_status_text, array(
-					'class' => 'change_account_status btn btn-xs ' . $acc_status_class,
+					'class' => 'change_account_status btn btn-sm ' . $acc_status_class,
 					'data-toggle' => 'tooltip',
 					'data-original-title' => $acc_status_text,
 					'title' => $acc_status_text,
@@ -189,6 +197,7 @@ class User extends CI_Controller {
     }
 
     function auth_error() {
+		$this->data['page_heading'] = 'Authorization Error';
         $this->data['maincontent'] = $this->load->view('admin/user/auth_error', $this->data, true);
         $this->load->view('admin/_layouts/layout_unauthenticated', $this->data);
     }
@@ -196,6 +205,93 @@ class User extends CI_Controller {
     function validate_login_form_data() {
         $this->form_validation->set_rules('user_email', 'email', 'trim|required|valid_email');
         $this->form_validation->set_rules('user_password', 'password', 'required');
+        $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
+        if ($this->form_validation->run() == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+	
+	function create_account() {
+		########### Validate User Auth #############
+        $is_logged_in = $this->common_lib->is_logged_in();
+        if ($is_logged_in == FALSE) {
+            redirect('admin/user/login');
+        }
+        //Has logged in user permission to access this page or method?        
+        $this->common_lib->check_user_role_permission(array(
+            'default-super-admin-access',
+            'default-admin-access',
+        ));
+        ########### Validate User Auth End #############
+		
+        $this->data['alert_message'] = $this->session->flashdata('flash_message');
+        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
+        if ($this->input->post('form_action') == 'create_account') {
+            if ($this->validate_create_account_form_data() == true) {
+                $activation_token = md5(time('Y-m-d h:i:s'));
+                $dob = $this->input->post('dob_year') . '-' . $this->input->post('dob_month') . '-' . $this->input->post('dob_day');
+				$password = $this->generate_password();
+                $postdata = array(
+                    'user_firstname' => $this->input->post('user_firstname'),                    
+                    'user_lastname' => $this->input->post('user_lastname'),
+                    'user_gender' => $this->input->post('user_gender'),
+                    'user_email' => $this->input->post('user_email'),
+                    'user_dob' => $dob,
+                    'user_role' => $this->input->post('user_role'),
+                    'user_mobile_phone1' => $this->input->post('user_mobile_phone1'),
+                    'user_password' => md5($password),
+                    'user_registration_date' => date('Y-m-d H:i:s'),
+                    'user_activation_key' => $activation_token,
+                    'user_registration_ip' => $_SERVER['REMOTE_ADDR'],
+                    'user_account_active' => 'Y'
+                );
+                $insert_id = $this->user_model->insert($postdata);
+                if ($insert_id) {
+                    $html = '<div style="font-family:Verdana, Geneva, sans-serif; font-size:12px;">';
+                    $html.='<p>Hi ' . ucwords(strtolower($this->input->post('user_firstname'))) . ',</p>';
+                    $html.='<p>Your account has been created succesfully. Please note your login details mentioned below.</p><br>';
+                    #$html.='<br/> activate your account to login.<br><br>';
+                    #$html.='Activatation Link : <a href="'.base_url('users/activate_account/'.strtolower(base64_encode($insert_id)).'/'.$activation_token).'" target="_blank">'.base_url('users/activate_account/'.strtolower(base64_encode($insert_id)).'/'.$activation_token).'</a></p><br>';
+                    $html.='<p>URL: <a href="' . base_url() . '" target="_blank">' . base_url() . '</a><br>';
+                    $html.='Email: ' . $this->input->post('user_email') . '<br/>';
+                    $html.='Password: ' . $password . '</p>';                    
+					$html.='<p>Your can change password after login.</p>';
+                    $html.='</div>';
+                    echo $html;
+                    die();
+                    $config['mailtype'] = 'html';
+                    $this->email->initialize($config);
+                    $this->email->to($this->input->post('user_email'));
+                    $this->email->from($this->config->item('app_admin_email'), $this->config->item('app_admin_email_name'));
+                    $this->email->subject($this->config->item('app_email_subject_prefix') . 'Your Account Details');
+                    $this->email->message($html);
+                    $this->email->send();
+                    //echo $this->email->print_debugger();
+                    $this->session->set_flashdata('flash_message', '<i class="icon fa fa-check" aria-hidden="true"></i> User has been added succesfully.');
+                    $this->session->set_flashdata('flash_message_css', 'alert-success');
+                    redirect(current_url());
+                }
+            }
+        }
+		$this->data['page_heading'] = "Create Account";
+        $this->data['maincontent'] = $this->load->view('admin/user/create_account', $this->data, true);
+        $this->load->view('admin/_layouts/layout_authenticated', $this->data);
+    }
+
+    function validate_create_account_form_data() {
+        $this->form_validation->set_rules('user_firstname', 'first name', 'required');
+        $this->form_validation->set_rules('user_lastname', 'last name', 'required');
+        $this->form_validation->set_rules('user_gender', 'gender selection', 'required');
+        $this->form_validation->set_rules('user_email', 'email', 'trim|required|valid_email|callback_is_email_registered');
+        //$this->form_validation->set_rules('user_password', 'password', 'required|trim|min_length[6]');
+        $this->form_validation->set_rules('user_mobile_phone1', 'mobile number', 'required|trim|min_length[10]|max_length[10]|numeric');
+        //$this->form_validation->set_rules('user_password_confirm', 'confirm password', 'required|matches[user_password]');
+        $this->form_validation->set_rules('dob_day', 'birth day selection', 'required');
+        $this->form_validation->set_rules('dob_month', 'birth month selection', 'required');
+        $this->form_validation->set_rules('dob_year', 'birth year selection', 'required');
+        $this->form_validation->set_rules('user_role', 'role selection', 'required');
         $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
         if ($this->form_validation->run() == true) {
             return true;
@@ -561,8 +657,6 @@ class User extends CI_Controller {
         echo json_encode($response);
     }
 
-
-
     function add_address() {
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
@@ -690,6 +784,45 @@ class User extends CI_Controller {
         } else {
             return false;
         }
+    }
+	
+	function calander_days() {
+        $result = array();
+        $result[''] = 'Day';
+        for ($i = 0; $i < 31; $i++) {
+            $result[$i + 1] = sprintf('%02d', $i + 1);
+        }
+        return $result;
+    }
+
+    function calander_months() {
+        $result = array(
+            '' => 'Month',
+            '01' => 'Jan',
+            '02' => 'Feb',
+            '03' => 'Mar',
+            '04' => 'Apr',
+            '05' => 'May',
+            '06' => 'Jun',
+            '07' => 'Jul',
+            '08' => 'Aug',
+            '09' => 'Sep',
+            '10' => 'Oct',
+            '11' => 'Nov',
+            '12' => 'Dec',
+        );
+        return $result;
+    }
+
+    function calander_years() {
+        $result = array();
+        $result[''] = 'Year';
+        $current_year = date('Y');
+        $start_year = ($current_year - 105);
+        for ($i = $current_year; $i > $start_year; $i--) {
+            $result[$i] = $i;
+        }
+        return $result;
     }
 
 }

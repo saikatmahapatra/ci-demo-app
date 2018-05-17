@@ -31,7 +31,7 @@
 						<?php echo form_input(array('name' => 'user_email','value' => set_value('user_email'),'id' => 'name','class'=> 'form-control','placeholder' => 'Email','maxlength' => '100','autofocus' => true,));?>
 						<?php echo form_error('user_email'); ?>
 					</div>
-					<?php echo form_submit(array('name' => 'submit','value' => 'Submit','class' => 'btn btn-primary btn-lg btn-block',));?>				
+					<?php echo form_submit(array('name' => 'submit','value' => 'Submit','class' => 'btn btn-primary btn-block',));?>				
 					
 					
 					<?php form_close(); ?>

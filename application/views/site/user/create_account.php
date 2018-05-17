@@ -172,40 +172,27 @@
 		  </div>
         </div>
 
-        <div class="row">
-            <div class="col-md-12">               
-				<label for="terms" class="">Uses Agreement Terms & Conditions <span class="required">*</span></label>
-                <div class="checkbox"> 
-                    <label class="label-normal">
-                        <?php
-                        $cb_is_checked = $this->input->post('terms') === 'accept';
-                        echo form_checkbox('terms', 'accept', $cb_is_checked, array(
-                            'id' => 'trems',
-                            'class' => ''
-                        ));
-                        ?>
-                        <span>By clicking Create an account, you agree to our Terms and that you have read our Data Policy, including our Cookie Use</span>
-                        <span class="required">*</span>
-                    </label>
-                    <?php echo form_error('terms'); ?>
-                </div>
-            </div>
-        </div>
+        
+		<div class="form-group col-md-12">               
+			<label for="terms" class="">Uses Agreement Terms & Conditions <span class="required">*</span></label>
+			<div class="checkbox"> 
+				<label class="label-normal">
+					<?php
+					$cb_is_checked = $this->input->post('terms') === 'accept';
+					echo form_checkbox('terms', 'accept', $cb_is_checked, array(
+						'id' => 'trems',
+						'class' => ''
+					));
+					?>
+					<span>By clicking Create an account, you agree to our Terms and that you have read our Data Policy, including our Cookie Use</span>
+					<span class="required">*</span>
+				</label>
+				<?php echo form_error('terms'); ?>
+			</div>
+		</div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <?php
-                    echo form_submit(array(
-                        'name' => 'register',
-                        'value' => 'Create an account',
-                        'class' => 'btn btn-primary',
-                    ));
-                    ?>         
-                </div>	
-            </div>
-        </div>
-		<a href="<?php echo site_url('user/login');?>" class="">Already have an account? Login</a>
+        <?php echo form_submit(array('name' => 'register','value' => 'Create an account','class' => 'btn btn-primary',));?>		
         <?php echo form_close(); ?>
+		<div class=""><a href="<?php echo site_url('user/login');?>" class="">Already have an account? Login</a></div>
     </div>
 </div>

@@ -35,7 +35,7 @@
 						<input id="remember" name="remember" type="checkbox" value="1">
 						<label class="form-check-label" for="remember">Remember Password</label>
 					</div>												
-						<?php echo form_submit(array('name' => 'submit','value' => 'Login','class' => 'btn btn-primary btn-lg btn-block'));?>														
+						<?php echo form_submit(array('name' => 'submit','value' => 'Login','class' => 'btn btn-primary btn-block'));?>														
 					
 					<?php form_close(); ?>
 

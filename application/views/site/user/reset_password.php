@@ -8,7 +8,7 @@
 </div><!--/.heading-container-->
 
 <div class="row">
-    <div class="col-12 col-sm-8 col-md-5">
+    <div class="col-12 col-sm-8 col-md-4">
     <?php
         // Show server side messages
         if (isset($alert_message)) {
