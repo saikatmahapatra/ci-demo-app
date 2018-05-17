@@ -60,7 +60,7 @@
                 </div>
                 <!-- /.card-body -->
             </div>
-            <!-- /.panel -->
+            <!-- /.card -->
     </div>
     <!-- /.col-md-12 -->
 </div>

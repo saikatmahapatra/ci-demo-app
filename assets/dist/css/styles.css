@@ -154,3 +154,40 @@ select.form-control.dob-inline {
 .nav-item.active {
   font-weight: bold;
 }
+.bg-purple,
+.bg-blue,
+.bg-red,
+.bg-orange,
+.bg-green {
+  color: #fff;
+}
+.bg-purple {
+  background: #5133AB;
+}
+.bg-purple:hover {
+  background: #3e2784;
+}
+.bg-red {
+  background: #AC193D;
+}
+.bg-red:hover {
+  background: #7f132d;
+}
+.bg-green {
+  background: #00A600;
+}
+.bg-green:hover {
+  background: #007300;
+}
+.bg-blue {
+  background: #2672EC;
+}
+.bg-blue:hover {
+  background: #125acd;
+}
+.bg-orange {
+  background: #DC572E;
+}
+.bg-orange:hover {
+  background: #b8431f;
+}

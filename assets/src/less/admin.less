@@ -99,3 +99,48 @@ h2{
     display: inline !important;
     width: auto;
 }
+
+
+&.bg-purple, &.bg-blue, &.bg-red, &.bg-orange, &.bg-green {
+    color: @white;
+  }
+  
+  &.bg-purple {
+    background: @color_purple;
+
+		&:hover {
+			background: darken(@color_purple, 10%);
+		}		
+  }
+  
+  &.bg-red {
+    background: @color_red;
+
+		&:hover {
+			background: darken(@color_red, 10%);
+		}		
+  }
+  
+  &.bg-green {
+    background: @color_green;
+
+		&:hover {
+			background: darken(@color_green, 10%);
+		}		
+  }
+  
+  &.bg-blue {
+    background: @color_blue;
+
+		&:hover {
+			background: darken(@color_blue, 10%);
+		}	
+  }
+  
+  &.bg-orange {
+    background: @color_orange;
+
+		&:hover {
+			background: darken(@color_orange, 10%);
+		}	
+  }
