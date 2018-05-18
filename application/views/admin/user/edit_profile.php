@@ -65,12 +65,12 @@
 			<div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
-						<label for="user_intro" class="">Intro</label>
+						<label for="user_bio" class="">Intro</label>
 						<?php
 						echo form_textarea(array(
-							'name' => 'user_intro',
-							'value' => isset($row['user_intro']) ? $row['user_intro'] : set_value('user_intro'),
-							'id' => 'user_intro',
+							'name' => 'user_bio',
+							'value' => isset($row['user_bio']) ? $row['user_bio'] : set_value('user_bio'),
+							'id' => 'user_bio',
 							'class' => 'form-control',
 							'rows' => '2',
 							'cols' => '40',
@@ -79,7 +79,7 @@
 							'maxlength' => '100',
 						));
 						?>
-                        <?php echo form_error('user_intro'); ?>
+                        <?php echo form_error('user_bio'); ?>
                     </div>
                 </div>
             </div><!--/.row-->

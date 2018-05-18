@@ -57,19 +57,19 @@
             </div><!--/.form-row-->
 			
 			<div class="form-group">
-				<label for="user_intro" class="">Short Bio</label>
+				<label for="user_bio" class="">Short Bio</label>
 				<?php
 				echo form_input(array(
-					'name' => 'user_intro',
-					'value' => isset($row['user_intro']) ? $row['user_intro'] : set_value('user_intro'),
-					'id' => 'user_intro',
+					'name' => 'user_bio',
+					'value' => isset($row['user_bio']) ? $row['user_bio'] : set_value('user_bio'),
+					'id' => 'user_bio',
 					'class' => 'form-control',
 					'placeholder' => 'Some shot bio',
 					'title' => 'Short Bio',							
 					'maxlength' => '100',
 				));
 				?>
-				<?php echo form_error('user_intro'); ?>
+				<?php echo form_error('user_bio'); ?>
 			</div>
 			
             

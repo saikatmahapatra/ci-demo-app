@@ -34,6 +34,11 @@ class User extends CI_Controller {
 		
 		//View Page Config
 		$this->data['page_heading'] = $this->router->class.' : '.$this->router->method;
+		
+		/*Education*/
+		$this->data['arr_academic_qualification'] = $this->user_model->get_qualification_dropdown();
+		$this->data['arr_academic_inst'] = $this->user_model->get_institute_dropdown();
+		$this->data['arr_academic_specialization'] = $this->user_model->get_specialization_dropdown();
     }
 
     function index() {
@@ -409,6 +414,7 @@ class User extends CI_Controller {
         $rows = $this->user_model->get_rows($this->sess_user_id);		
         $this->data['row'] = $rows['data_rows'];
 		$this->data['address'] = $this->user_model->get_user_address(NULL,$this->sess_user_id,NULL);
+		$this->data['education'] = $this->user_model->get_user_education(NULL, $this->sess_user_id);
 		$this->data['page_heading'] = "Profile";
         $this->data['maincontent'] = $this->load->view('site/user/profile', $this->data, true);
         $this->load->view('site/_layouts/layout_default', $this->data);
@@ -429,7 +435,7 @@ class User extends CI_Controller {
                 $postdata = array(
                     'user_firstname' => $this->input->post('user_firstname'),
                     'user_lastname' => $this->input->post('user_lastname'),
-                    'user_intro' => $this->input->post('user_intro'),
+                    'user_bio' => $this->input->post('user_bio'),
                     'user_gender' => $this->input->post('user_gender'),                   
                     //'user_dob' => $dob,
                     'user_mobile_phone1' => $this->input->post('user_mobile_phone1'),
@@ -583,7 +589,7 @@ class User extends CI_Controller {
         $this->form_validation->set_rules('user_gender', 'gender selection', 'required');        
         $this->form_validation->set_rules('user_mobile_phone1', 'primary mobile', 'required|trim|min_length[10]|max_length[10]|numeric');
         $this->form_validation->set_rules('user_mobile_phone2', 'secondary mobile', 'trim|min_length[10]|max_length[10]|numeric');
-        $this->form_validation->set_rules('user_intro', 'short introduction', 'max_length[100]');
+        $this->form_validation->set_rules('user_bio', 'short introduction', 'max_length[100]');
         /* $this->form_validation->set_rules('dob_day', 'birth day selection', 'required');
           $this->form_validation->set_rules('dob_month', 'birth month selection', 'required');
           $this->form_validation->set_rules('dob_year', 'birth year selection', 'required'); */
@@ -650,6 +656,92 @@ class User extends CI_Controller {
         $this->data['maincontent'] = $this->load->view('site/user/auth_error', $this->data, true);
         $this->load->view('site/_layouts/layout_default', $this->data);
     }
+	
+	function add_education() {
+        $is_logged_in = $this->common_lib->is_logged_in();
+        if ($is_logged_in == FALSE) {
+            redirect('user/login');
+        }
+        $this->data['alert_message'] = $this->session->flashdata('flash_message');
+        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');		
+        if ($this->input->post('form_action') == 'add') {
+            if ($this->validate_user_education_form_data('add') == true) {
+                $postdata = array(
+					'user_id' => $this->sess_user_id,
+                    'academic_qualification' => $this->input->post('academic_qualification'),
+                    'academic_from_year' => $this->input->post('academic_from_year'),
+                    'academic_to_year' => $this->input->post('academic_to_year'),                    
+                    'academic_inst' => $this->input->post('academic_inst'),                    
+                    'academic_other_inst' => $this->input->post('academic_other_inst'),                    
+                    'academic_marks_percentage' => $this->input->post('academic_marks_percentage'),                    
+                    'academic_specialization' => $this->input->post('academic_specialization'),                    
+                    'academic_other_specialization' => $this->input->post('academic_other_specialization')                  
+                );                
+                $res = $this->user_model->insert($postdata,'user_academics');
+                if ($res) {
+                    $this->session->set_flashdata('flash_message', 'Your education has been added successfully');
+                    $this->session->set_flashdata('flash_message_css', 'alert-success');
+                    redirect('user/profile');
+                }
+            }
+        }
+		$this->data['page_heading'] = "Add Educational Qualification";
+        $this->data['maincontent'] = $this->load->view('site/user/add_education', $this->data, true);
+        $this->load->view('site/_layouts/layout_default', $this->data);
+    }
+	
+	function edit_education() {
+        $is_logged_in = $this->common_lib->is_logged_in();
+        if ($is_logged_in == FALSE) {
+            redirect('user/login');
+        }
+        $this->data['alert_message'] = $this->session->flashdata('flash_message');
+        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
+		$education_id = $this->uri->segment(3);        
+        $this->data['education'] = $this->user_model->get_user_education($education_id, $this->sess_user_id);
+
+        if ($this->input->post('form_action') == 'edit') {
+            if ($this->validate_user_education_form_data('edit') == true) {
+                $postdata = array(
+                    'academic_qualification' => $this->input->post('academic_qualification'),
+                    'academic_from_year' => $this->input->post('academic_from_year'),
+                    'academic_to_year' => $this->input->post('academic_to_year'),                    
+                    'academic_inst' => $this->input->post('academic_inst'),                    
+                    'academic_other_inst' => $this->input->post('academic_other_inst'),                    
+                    'academic_marks_percentage' => $this->input->post('academic_marks_percentage'),                    
+                    'academic_specialization' => $this->input->post('academic_specialization'),                    
+                    'academic_other_specialization' => $this->input->post('academic_other_specialization')                    
+                );
+                $where = array('id'=>$education_id, 'user_id' => $this->sess_user_id);
+                $res = $this->user_model->update($postdata, $where,'user_academics');
+                if ($res) {
+                    $this->session->set_flashdata('flash_message', 'Education has been updated successfully');
+                    $this->session->set_flashdata('flash_message_css', 'alert-success');
+                    redirect('user/profile');
+                }
+            }
+        }
+		$this->data['page_heading'] = "Edit Educational Qualification";
+        $this->data['maincontent'] = $this->load->view('site/user/edit_education', $this->data, true);
+        $this->load->view('site/_layouts/layout_default', $this->data);
+    }
+	
+	function validate_user_education_form_data($mode) {		
+        $this->form_validation->set_rules('academic_qualification', 'qualification', 'required'); 
+		$this->form_validation->set_rules('academic_from_year', 'from year', 'required|min_length[4]|max_length[4]|numeric');        
+        $this->form_validation->set_rules('academic_to_year', 'to year', 'required|min_length[4]|max_length[4]|numeric'); 
+        $this->form_validation->set_rules('academic_inst', 'academic inst', 'required');
+        $this->form_validation->set_rules('academic_specialization', 'specialization', 'required');
+        $this->form_validation->set_rules('academic_marks_percentage', 'marks in percentage', 'required');
+        $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
+        if ($this->form_validation->run() == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+	
+
 }
 
 ?>

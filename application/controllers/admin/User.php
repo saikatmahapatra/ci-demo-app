@@ -595,7 +595,7 @@ class User extends CI_Controller {
                 $postdata = array(
                     'user_firstname' => $this->input->post('user_firstname'),
                     'user_lastname' => $this->input->post('user_lastname'),
-                    'user_intro' => $this->input->post('user_intro'),
+                    'user_bio' => $this->input->post('user_bio'),
                     'user_gender' => $this->input->post('user_gender'),                   
                     //'user_dob' => $dob,
                     'user_mobile_phone1' => $this->input->post('user_mobile_phone1'),

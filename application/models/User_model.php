@@ -304,6 +304,68 @@ class User_model extends CI_Model {
         $result = $query->result_array();        
         return $result;
     }
+	
+	function get_qualification_dropdown() {
+        $result = array();
+        $this->db->select('id,qualification_name');
+        $this->db->where('qualification_status','Y');
+        $query = $this->db->get('academic_qualification');
+        $result = array('' => 'Select');
+        if ($query->num_rows()) {
+            $res = $query->result();
+            foreach ($res as $r) {
+                $result[$r->id] = $r->qualification_name;
+            }
+        }
+        return $result;
+    }
+	
+	function get_specialization_dropdown() {
+        $result = array();
+        $this->db->select('id,specialization_name');
+        $this->db->where('specialization_status','Y');
+        $query = $this->db->get('academic_specialization');
+        $result = array('' => 'Select');
+        if ($query->num_rows()) {
+            $res = $query->result();
+            foreach ($res as $r) {
+                $result[$r->id] = $r->specialization_name;
+            }
+        }
+        return $result;
+    }
+	
+	function get_institute_dropdown() {
+        $result = array();
+        $this->db->select('id,institute_name');
+        $this->db->where('institute_status','Y');
+        $query = $this->db->get('academic_institute');
+        $result = array('' => 'Select');
+        if ($query->num_rows()) {
+            $res = $query->result();
+            foreach ($res as $r) {
+                $result[$r->id] = $r->institute_name;
+            }
+        }
+        return $result;
+    }
+	
+	function get_user_education($id = NULL, $user_id) {
+        $this->db->select('t1.*,t2.qualification_name,t3.specialization_name,t4.institute_name');    
+        if(isset($id)){
+            $this->db->where(array('t1.id' => $id));
+        }  
+        if(isset($user_id)){
+            $this->db->where(array('t1.user_id' => $user_id));
+        }
+		$this->db->join('academic_qualification t2', 't1.academic_qualification=t2.id', 'left');
+		$this->db->join('academic_specialization t3', 't1.academic_specialization=t3.id', 'left');
+		$this->db->join('academic_institute t4', 't1.academic_inst=t4.id', 'left');		
+        $query = $this->db->get('user_academics as t1');
+        //echo $this->db->last_query();
+        $result = $query->result_array();        
+        return $result;
+    }
 
 }
 

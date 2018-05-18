@@ -1,6 +1,7 @@
 <?php
    $row = $row[0];
    //print_r($address);
+   print_r($education);
 ?>
 <div class="row heading-container">
     <div class="col-md-5">
@@ -52,7 +53,7 @@
         
     </div>            
     <div>
-        <?php echo (isset($row['user_intro']) && strlen($row['user_intro'])>0) ? $row['user_intro'] : '<span class="text-greyed-out">Describe who you are...</span>'; ?>
+        <?php echo (isset($row['user_bio']) && strlen($row['user_bio'])>0) ? $row['user_bio'] : '<span class="text-greyed-out">Describe who you are...</span>'; ?>
         <a href="<?php echo site_url('user/edit_profile');?>">Edit</a>
     </div>
     <hr style="m-8 auto">
@@ -68,7 +69,7 @@
 
 <div class="row mb-3">
     <div class="col-md-12">
-        <a class="btn btn-secondary btn-sm float-right" href="<?php echo site_url('user/edit_profile');?>"><i class="fa fa-edit" aria-hidden="true"></i> Edit</a>
+        <a class="btn btn-outline-info btn-sm float-right" href="<?php echo site_url('user/edit_profile');?>"><i class="fa fa-edit" aria-hidden="true"></i></a>
         <h6>Basic Info</h6>        
         <hr>        
         <div class="row">
@@ -104,8 +105,8 @@
         <!--/.row-->
 
         <div class="row">
-            <div class="col-sm-2">Profile Created On</div>
-            <div class="col-sm-4"><?php echo isset($row['user_registration_date']) ? date('d-m-Y h:i:s a', strtotime($row['user_registration_date'])) : ''; ?></div>
+            <div class="col-sm-2">Blood Group</div>
+            <div class="col-sm-4"></div>
         </div>
         <!--/.row-->
     </div>
@@ -114,8 +115,8 @@
 
 <div class="row mb-3">
     <div class="col-md-12">
-    <a class="btn btn-secondary btn-sm pull-right" href="<?php echo site_url('user/add_address');?>">Add New</a>
-        <h6>Address Details</h6><hr>
+    <a class="btn btn-outline-success btn-sm pull-right" href="<?php echo site_url('user/add_address');?>"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+        <h6>Communication Address</h6><hr>
             <?php if(isset($address)){
                 foreach($address as $key=>$addr){
                 ?>
@@ -135,8 +136,8 @@
                             </div>
                         </div>
                         <div class="col-sm-2">			
-                            <a href="<?php echo site_url('user/edit_address/'.$addr["id"]);?>" class="btn btn-secondary btn-sm">Edit</a>
-                            <a href="<?php echo site_url('user/delete_address/'.$addr["id"]);?>" class="btn btn-danger btn-sm">Delete</a>
+                            <a href="<?php echo site_url('user/edit_address/'.$addr["id"]);?>" class="btn btn-outline-secondary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                            <a href="<?php echo site_url('user/delete_address/'.$addr["id"]);?>" class="btn btn-outline-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></a>
                         </div>
                     </div>
                     <!--/.row-->
@@ -149,6 +150,40 @@
 
 <div class="row">
     <div class="col-md-12">
-        <h6>Other Info</h6><hr>        
+        <a class="btn btn-outline-success btn-sm pull-right" href="<?php echo site_url('user/add_education');?>"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+        <h6>Educational Qualification</h6><hr>
+			<table id="user-datatable" class="table table-sm">
+				<thead>
+					<tr class="small">
+						<th>Qualification</th>
+						<th>Specialization</th>
+						<th>Duration</th>
+						<th>Institute/University</th>
+						<th>Marks(%)</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+				<?php if(isset($education)){
+					foreach($education as $key=>$edu){
+					?>
+						<tr>
+							<td><?php echo isset($edu['qualification_name'])?$edu['qualification_name']:'';?></td>
+							<td><?php echo isset($edu['specialization_name'])?$edu['specialization_name']:$edu['academic_other_specialization'];?></td>
+							<td><?php echo isset($edu['academic_from_year'])?$edu['academic_from_year'].'-'.$edu['academic_to_year']:'';?></td>
+							<td><?php echo isset($edu['institute_name']) ? $edu['institute_name']: $edu['academic_other_inst'];?></td>
+							<td><?php echo isset($edu['academic_marks_percentage'])?$edu['academic_marks_percentage']:'';?></td>
+							<td>
+								<a href="<?php echo site_url('user/edit_education/'.$edu["id"]);?>" class="btn btn-outline-secondary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></a>
+								<a href="<?php echo site_url('user/delete_education/'.$edu["id"]);?>" class="btn btn-outline-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></a>
+							</td>
+							
+						</tr>
+					<?php
+					}
+				}?>
+				</tbody>				
+			</table>
+					
     </div>
 </div>

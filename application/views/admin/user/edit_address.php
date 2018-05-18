@@ -179,7 +179,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="form-group">
-						<a href="<?php echo site_url('user/profile');?>" class="btn btn-secondary">Back</a>
+						<a href="<?php echo site_url('admin/user/profile');?>" class="btn btn-secondary">Back</a>
 						<?php echo form_submit(array('name' => 'submit','value' => 'Save','class' => 'btn btn-primary'));?> 
 					</div>
 				</div>
