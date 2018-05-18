@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.7.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 15, 2018 at 07:06 AM
--- Server version: 10.1.28-MariaDB
--- PHP Version: 5.6.32
+-- Generation Time: May 18, 2018 at 02:17 PM
+-- Server version: 10.1.25-MariaDB
+-- PHP Version: 5.6.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -21,6 +21,976 @@ SET time_zone = "+00:00";
 --
 -- Database: `ci_demo`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `academic_institute`
+--
+
+CREATE TABLE `academic_institute` (
+  `id` int(11) NOT NULL,
+  `institute_name` varchar(255) NOT NULL,
+  `institute_status` enum('Y','N') NOT NULL DEFAULT 'Y'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `academic_institute`
+--
+
+INSERT INTO `academic_institute` (`id`, `institute_name`, `institute_status`) VALUES
+(1, 'Abhilashi University', 'Y'),
+(2, 'Acharya N.G. Ranga Agricultural University', 'Y'),
+(3, 'Acharya Nagarjuna University', 'Y'),
+(4, 'Adamas University', 'Y'),
+(5, 'Adesh University', 'Y'),
+(6, 'Adikavi Nannaya University', 'Y'),
+(7, 'Ahmedabad University', 'Y'),
+(8, 'AISECT University', 'Y'),
+(9, 'Ajeenkya D.Y. Patil University', 'Y'),
+(10, 'Akal University', 'Y'),
+(11, 'AKS University', 'Y'),
+(12, 'Alagappa University', 'Y'),
+(13, 'Al-Falah University', 'Y'),
+(14, 'Aliah University', 'Y'),
+(15, 'Aligarh Muslim University', 'Y'),
+(16, 'All India Institute of Medical Sciences Bhopal', 'Y'),
+(17, 'All India Institute of Medical Sciences Bhubaneswar', 'Y'),
+(18, 'All India Institute of Medical Sciences Delhi', 'Y'),
+(19, 'All India Institute of Medical Sciences Jodhpur', 'Y'),
+(20, 'All India Institute of Medical Sciences Patna', 'Y'),
+(21, 'All India Institute of Medical Sciences Raipur', 'Y'),
+(22, 'All India Institute of Medical Sciences Rishikesh', 'Y'),
+(23, 'Allahabad State University', 'Y'),
+(24, 'Alliance University', 'Y'),
+(25, 'Ambedkar University Delhi', 'Y'),
+(26, 'Amity University', 'Y'),
+(27, 'Amrita Vishwa Vidyapeetham', 'Y'),
+(28, 'Anand Agricultural University', 'Y'),
+(29, 'Anant National University', 'Y'),
+(30, 'Andhra University', 'Y'),
+(31, 'Anna University', 'Y'),
+(32, 'Annamalai University', 'Y'),
+(33, 'Ansal University', 'Y'),
+(34, 'AP Goyal Shimla University', 'Y'),
+(35, 'Apeejay Stya University', 'Y'),
+(36, 'Apex Professional University', 'Y'),
+(37, 'APJ Abdul Kalam Technological University', 'Y'),
+(38, 'Arka Jain University', 'Y'),
+(39, 'Arni University', 'Y'),
+(40, 'Arunachal University of Studies', 'Y'),
+(41, 'Arunodaya University', 'Y'),
+(42, 'Aryabhatta Knowledge University', 'Y'),
+(43, 'Ashoka University', 'Y'),
+(44, 'Assam Agricultural University', 'Y'),
+(45, 'Assam Don Bosco University', 'Y'),
+(46, 'Assam Down Town University', 'Y'),
+(47, 'Assam Rajiv Gandhi University of Cooperative Management', 'Y'),
+(48, 'Assam Science and Technology University', 'Y'),
+(49, 'Assam University', 'Y'),
+(50, 'Assam Women\'s University', 'Y'),
+(51, 'Atal Bihari Vajpayee Hindi Vishwavidyalaya', 'Y'),
+(52, 'AURO University', 'Y'),
+(53, 'Avantika University', 'Y'),
+(54, 'Avinashilingam University', 'Y'),
+(55, 'Awadhesh Pratap Singh University', 'Y'),
+(56, 'Ayush and Health Sciences University of Chhattisgarh', 'Y'),
+(57, 'Azim Premji University', 'Y'),
+(58, 'B.S. Abdur Rahman University', 'Y'),
+(59, 'Baba Farid University of Health Sciences', 'Y'),
+(60, 'Baba Ghulam Shah Badhshah University', 'Y'),
+(61, 'Baba Mastnath University', 'Y'),
+(62, 'Babasaheb Bhimrao Ambedkar Bihar University', 'Y'),
+(63, 'Babasaheb Bhimrao Ambedkar University', 'Y'),
+(64, 'Babu Banarasi Das University', 'Y'),
+(65, 'Baddi University of Emerging Sciences and Technologies', 'Y'),
+(66, 'BAHRA University', 'Y'),
+(67, 'Banaras Hindu University', 'Y'),
+(68, 'Banasthali Vidyapith', 'Y'),
+(69, 'Banda University of Agriculture and Technology', 'Y'),
+(70, 'Bangalore University', 'Y'),
+(71, 'Bankura University', 'Y'),
+(72, 'Bareilly International University', 'Y'),
+(73, 'Barkatullah University', 'Y'),
+(74, 'Bastar Vishwavidyalaya', 'Y'),
+(75, 'Bengaluru North University', 'Y'),
+(76, 'Bennett University', 'Y'),
+(77, 'Berhampur University', 'Y'),
+(78, 'Bhagat Phool Singh Mahila Vishwavidyalaya', 'Y'),
+(79, 'Bhagwant University', 'Y'),
+(80, 'Bhakta Kavi Narsinh Mehta University', 'Y'),
+(81, 'Bharath Institute of Higher Education and Research', 'Y'),
+(82, 'Bharathiar University', 'Y'),
+(83, 'Bharathidasan University', 'Y'),
+(84, 'Bharati Vidyapeeth University', 'Y'),
+(85, 'Bhartiya Skill Development University', 'Y'),
+(86, 'Bhatkhande Music Institute', 'Y'),
+(87, 'Bhupal Nobles University', 'Y'),
+(88, 'Bhupendra Narayan Mandal University', 'Y'),
+(89, 'Bidhan Chandra Krishi Vishwavidyalaya', 'Y'),
+(90, 'Bihar Agricultural University', 'Y'),
+(91, 'Biju Patnaik University of Technology', 'Y'),
+(92, 'Bilaspur Vishwavidyalaya', 'Y'),
+(93, 'Birla Institute of Technology', 'Y'),
+(94, 'Birla Institute of Technology and Science', 'Y'),
+(95, 'Birsa Agricultural University', 'Y'),
+(96, 'BLDE University', 'Y'),
+(97, 'BML Munjal University', 'Y'),
+(98, 'Bodoland University', 'Y'),
+(99, 'Brainware University', 'Y'),
+(100, 'Bundelkhand University', 'Y'),
+(101, 'C.U. Shah University', 'Y'),
+(102, 'Calorx Teachers University', 'Y'),
+(103, 'Career Point University', 'Y'),
+(104, 'Central Agricultural University', 'Y'),
+(105, 'Central Institute of Fisheries Education', 'Y'),
+(106, 'Central University of Gujarat', 'Y'),
+(107, 'Central University of Haryana', 'Y'),
+(108, 'Central University of Himachal Pradesh', 'Y'),
+(109, 'Central University of Jammu', 'Y'),
+(110, 'Central University of Jharkhand', 'Y'),
+(111, 'Central University of Karnataka', 'Y'),
+(112, 'Central University of Kashmir', 'Y'),
+(113, 'Central University of Kerala', 'Y'),
+(114, 'Central University of Orissa', 'Y'),
+(115, 'Central University of Punjab', 'Y'),
+(116, 'Central University of Rajasthan', 'Y'),
+(117, 'Central University of South Bihar', 'Y'),
+(118, 'Central University of Tamil Nadu', 'Y'),
+(119, 'Central University of Tibetan Studies', 'Y'),
+(120, 'Centurion University of Technology and Management', 'Y'),
+(121, 'CEPT University', 'Y'),
+(122, 'Chanakya National Law University', 'Y'),
+(123, 'Chandigarh University', 'Y'),
+(124, 'Chandra Shekhar Azad University of Agriculture and Technology', 'Y'),
+(125, 'Charotar University of Science and Technology', 'Y'),
+(126, 'Chaudhary Bansi Lal University', 'Y'),
+(127, 'Chaudhary Charan Singh Haryana Agricultural University', 'Y'),
+(128, 'Chaudhary Charan Singh University', 'Y'),
+(129, 'Chaudhary Devi Lal University', 'Y'),
+(130, 'Chaudhary Ranbir Singh University', 'Y'),
+(131, 'Chennai Mathematical Institute', 'Y'),
+(132, 'Chhatrapati Shahu Ji Maharaj University', 'Y'),
+(133, 'Chhattisgarh Kamdhenu Vishwavidyalaya', 'Y'),
+(134, 'Chhattisgarh Swami Vivekananda Technical University', 'Y'),
+(135, 'Children\'s University', 'Y'),
+(136, 'Chitkara University', 'Y'),
+(137, 'Chitkara University', 'Y'),
+(138, 'Christ University', 'Y'),
+(139, 'Cluster University of Jammu', 'Y'),
+(140, 'CMJ University', 'Y'),
+(141, 'CMR University', 'Y'),
+(142, 'Cochin University of Science and Technology', 'Y'),
+(143, 'Cooch Behar Panchanan Barma University', 'Y'),
+(144, 'Cotton University', 'Y'),
+(145, 'CSK Himachal Pradesh Krishi Vishvavidyalaya', 'Y'),
+(146, 'Dakshina Bharat Hindi Prachar Sabha', 'Y'),
+(147, 'Damodaram Sanjivayya National Law University', 'Y'),
+(148, 'Datta Meghe Institute of Medical Sciences', 'Y'),
+(149, 'DAV University', 'Y'),
+(150, 'Davangere University', 'Y'),
+(151, 'Dayalbagh Educational Institute', 'Y'),
+(152, 'Dayananda Sagar University', 'Y'),
+(153, 'Deccan College Post-Graduate and Research Institute', 'Y'),
+(154, 'Deen Dayal Upadhyay Gorakhpur University', 'Y'),
+(155, 'Deenbandhu Chhotu Ram University of Science and Technology', 'Y'),
+(156, 'Delhi Pharmaceutical Sciences and Research University', 'Y'),
+(157, 'Delhi Technological University', 'Y'),
+(158, 'Desh Bhagat University', 'Y'),
+(159, 'Dev Sanskriti Vishwavidyalaya', 'Y'),
+(160, 'Devi Ahilya Vishwavidyalaya', 'Y'),
+(161, 'Dharmsinh Desai University', 'Y'),
+(162, 'Dhirubhai Ambani Institute of Information and Communication Technology', 'Y'),
+(163, 'Diamond Harbour Women\'s University', 'Y'),
+(164, 'Dibrugarh University', 'Y'),
+(165, 'DIT University', 'Y'),
+(166, 'Doon University', 'Y'),
+(167, 'Dr K.N. Modi University', 'Y'),
+(168, 'Dr. A.P.J Abdul Kalam University', 'Y'),
+(169, 'Dr. A.P.J. Abdul Kalam Technical University', 'Y'),
+(170, 'Dr. B R Ambedkar National Institute of Technology Jalandhar', 'Y'),
+(171, 'Dr. B.R. Ambedkar University', 'Y'),
+(172, 'Dr. B.R. Ambedkar University of Social Sciences', 'Y'),
+(173, 'Dr. Babasaheb Ambedkar Marathwada University', 'Y'),
+(174, 'Dr. Babasaheb Ambedkar Technological University', 'Y'),
+(175, 'Dr. Balasaheb Sawant Konkan Krishi Vidyapeeth', 'Y'),
+(176, 'Dr. Bhimrao Ambedkar University', 'Y'),
+(177, 'Dr. C.V. Raman University', 'Y'),
+(178, 'Dr. D.Y. Patil Vidyapeeth', 'Y'),
+(179, 'Dr. Hari Singh Gour University', 'Y'),
+(180, 'Dr. M.G.R. Educational and Research Institute', 'Y'),
+(181, 'Dr. N.T.R. University of Health Sciences', 'Y'),
+(182, 'Dr. Panjabrao Deshmukh Krishi Vidyapeeth', 'Y'),
+(183, 'Dr. Rajendra Prasad Central Agriculture University', 'Y'),
+(184, 'Dr. Ram Manohar Lohia Avadh University', 'Y'),
+(185, 'Dr. Ram Manohar Lohiya National Law University', 'Y'),
+(186, 'Dr. Sarvepalli Radhakrishnan Rajasthan Ayurved University', 'Y'),
+(187, 'Dr. Shakuntala Misra Rehabilitation University', 'Y'),
+(188, 'Dr. Vishwanath Karad MIT World Peace University', 'Y'),
+(189, 'Dr. Y.S. Parmar University of Horticulture and Forestry', 'Y'),
+(190, 'Dr.Y.S.R. Horticultural University', 'Y'),
+(191, 'Dravidian University', 'Y'),
+(192, 'EIILM University', 'Y'),
+(193, 'Era University', 'Y'),
+(194, 'Eternal University', 'Y'),
+(195, 'Fakir Mohan University', 'Y'),
+(196, 'Flame University', 'Y'),
+(197, 'Forest Research Institute', 'Y'),
+(198, 'G H Raisoni University', 'Y'),
+(199, 'G.L.S. University', 'Y'),
+(200, 'Galgotias University', 'Y'),
+(201, 'Gandhi Institute of Technology and Management', 'Y'),
+(202, 'Gandhigram Rural University', 'Y'),
+(203, 'Gangadhar Meher University', 'Y'),
+(204, 'Ganpat University', 'Y'),
+(205, 'Garden City University', 'Y'),
+(206, 'Gauhati University', 'Y'),
+(207, 'Gautam Buddha University', 'Y'),
+(208, 'GD Goenka University', 'Y'),
+(209, 'Geetanjali University', 'Y'),
+(210, 'GLA University', 'Y'),
+(211, 'Glocal University', 'Y'),
+(212, 'GNA University', 'Y'),
+(213, 'Goa University', 'Y'),
+(214, 'Gokhale Institute of Politics and Economics', 'Y'),
+(215, 'Gondwana University', 'Y'),
+(216, 'Govind Ballabh Pant University of Agriculture and Technology', 'Y'),
+(217, 'Govind Guru Tribal University', 'Y'),
+(218, 'Graphic Era Hill University', 'Y'),
+(219, 'Graphic Era University', 'Y'),
+(220, 'GSFC University', 'Y'),
+(221, 'Gujarat Ayurved University', 'Y'),
+(222, 'Gujarat Forensic Sciences University', 'Y'),
+(223, 'Gujarat National Law University', 'Y'),
+(224, 'Gujarat Technological University', 'Y'),
+(225, 'Gujarat University', 'Y'),
+(226, 'Gujarat University of Transplantation Sciences', 'Y'),
+(227, 'Gujarat Vidyapith', 'Y'),
+(228, 'Gulbarga University', 'Y'),
+(229, 'Guru Angad Dev Veterinary and Animal Sciences University', 'Y'),
+(230, 'Guru Ghasidas Vishwavidyalaya', 'Y'),
+(231, 'Guru Gobind Singh Indraprastha University', 'Y'),
+(232, 'Guru Jambheshwar University of Science and Technology', 'Y'),
+(233, 'Guru Kashi University', 'Y'),
+(234, 'Guru Nanak Dev University', 'Y'),
+(235, 'Guru Ravidas Ayurved University', 'Y'),
+(236, 'Gurukul Kangri Vishwavidyalaya', 'Y'),
+(237, 'Harcourt Butler Technical University', 'Y'),
+(238, 'Haridev Joshi University of Journalism and Mass Communication', 'Y'),
+(239, 'Haryana Vishwakarma Skill University', 'Y'),
+(240, 'Hemchandracharya North Gujarat University', 'Y'),
+(241, 'Hemwati Nandan Bahuguna Garhwal University', 'Y'),
+(242, 'Hemwati Nandan Bahuguna Medical University', 'Y'),
+(243, 'Hidayatullah National Law University', 'Y'),
+(244, 'Himachal Pradesh Technical University', 'Y'),
+(245, 'Himachal Pradesh University', 'Y'),
+(246, 'Himalayan Garhwal University', 'Y'),
+(247, 'Himalayan University', 'Y'),
+(248, 'Himgiri ZEE University', 'Y'),
+(249, 'Hindustan Institute of Technology and Science', 'Y'),
+(250, 'Homi Bhabha National Institute', 'Y'),
+(251, 'ICFAI University, Dehradun', 'Y'),
+(252, 'ICFAI University, Himachal Pradesh', 'Y'),
+(253, 'ICFAI University, Jaipur', 'Y'),
+(254, 'ICFAI University, Jharkhand', 'Y'),
+(255, 'ICFAI University, Meghalaya', 'Y'),
+(256, 'ICFAI University, Mizoram', 'Y'),
+(257, 'ICFAI University, Nagaland', 'Y'),
+(258, 'ICFAI University, Raipur', 'Y'),
+(259, 'ICFAI University, Sikkim', 'Y'),
+(260, 'ICFAI University, Tripura', 'Y'),
+(261, 'IEC University', 'Y'),
+(262, 'IFHE Hyderabad', 'Y'),
+(263, 'IFTM University', 'Y'),
+(264, 'IIHMR University', 'Y'),
+(265, 'IIMT University', 'Y'),
+(266, 'IMS Unison University', 'Y'),
+(267, 'Indian Agricultural Research Institute', 'Y'),
+(268, 'Indian Institute of Engineering Science and Technology, Shibpur', 'Y'),
+(269, 'Indian Institute of Foreign Trade', 'Y'),
+(270, 'Indian Institute of Information Technology Allahabad', 'Y'),
+(271, 'Indian Institute of Information Technology and Management Gwalior', 'Y'),
+(272, 'Indian Institute of Information Technology, Design and Manufacturing', 'Y'),
+(273, 'Indian Institute of Information Technology, Guwahati', 'Y'),
+(274, 'Indian Institute of Information Technology, Kalyani', 'Y'),
+(275, 'Indian Institute of Information Technology, Kottayam', 'Y'),
+(276, 'Indian Institute of Information Technology, Lucknow', 'Y'),
+(277, 'Indian Institute of Information Technology, Manipur', 'Y'),
+(278, 'Indian Institute of Information Technology, Sri City', 'Y'),
+(279, 'Indian Institute of Information Technology, Una', 'Y'),
+(280, 'Indian Institute of Information Technology, Vadodara', 'Y'),
+(281, 'Indian Institute of Public Health', 'Y'),
+(282, 'Indian Institute of Science', 'Y'),
+(283, 'Indian Institute of Science Education and Research, Bhopal', 'Y'),
+(284, 'Indian Institute of Science Education and Research, Kolkata', 'Y'),
+(285, 'Indian Institute of Science Education and Research, Mohali', 'Y'),
+(286, 'Indian Institute of Science Education and Research, Pune', 'Y'),
+(287, 'Indian Institute of Science Education and Research, Thiruvananthapuram', 'Y'),
+(288, 'Indian Institute of Space Science and Technology', 'Y'),
+(289, 'Indian Institute of Teacher Education', 'Y'),
+(290, 'Indian Institute of Technology Bhubaneswar', 'Y'),
+(291, 'Indian Institute of Technology Bombay', 'Y'),
+(292, 'Indian Institute of Technology Delhi', 'Y'),
+(293, 'Indian Institute of Technology Gandhinagar', 'Y'),
+(294, 'Indian Institute of Technology Guwahati', 'Y'),
+(295, 'Indian Institute of Technology Hyderabad', 'Y'),
+(296, 'Indian Institute of Technology Indore', 'Y'),
+(297, 'Indian Institute of Technology Jodhpur', 'Y'),
+(298, 'Indian Institute of Technology Kanpur', 'Y'),
+(299, 'Indian Institute of Technology Kharagpur', 'Y'),
+(300, 'Indian Institute of Technology Madras', 'Y'),
+(301, 'Indian Institute of Technology Mandi', 'Y'),
+(302, 'Indian Institute of Technology Patna', 'Y'),
+(303, 'Indian Institute of Technology Roorkee', 'Y'),
+(304, 'Indian Institute of Technology Ropar', 'Y'),
+(305, 'Indian Institute of Technology, BHU', 'Y'),
+(306, 'Indian Maritime University', 'Y'),
+(307, 'Indian School of Mines', 'Y'),
+(308, 'Indian Statistical Institute', 'Y'),
+(309, 'Indian Veterinary Research Institute', 'Y'),
+(310, 'Indira Gandhi Delhi Technical University for Women', 'Y'),
+(311, 'Indira Gandhi Institute of Development Research', 'Y'),
+(312, 'Indira Gandhi Institute of Medical Sciences, Sheikhpura', 'Y'),
+(313, 'Indira Gandhi Krishi Vishwavidyalaya', 'Y'),
+(314, 'Indira Gandhi National Tribal University', 'Y'),
+(315, 'Indira Gandhi Technological and Medical Sciences University', 'Y'),
+(316, 'Indira Gandhi University, Meerpur', 'Y'),
+(317, 'Indira Kala Sangeet Vishwavidyalaya', 'Y'),
+(318, 'Indraprastha Institute of Information Technology', 'Y'),
+(319, 'Indrashil University', 'Y'),
+(320, 'Indus International University', 'Y'),
+(321, 'Indus University', 'Y'),
+(322, 'Institute of Advanced Research', 'Y'),
+(323, 'Institute of Advanced Studies in Education', 'Y'),
+(324, 'Institute of Chemical Technology', 'Y'),
+(325, 'Institute of Infrastructure, Technology, Research and Management', 'Y'),
+(326, 'Integral University', 'Y'),
+(327, 'International Institute for Population Sciences', 'Y'),
+(328, 'International Institute of Information Technology Bangalore', 'Y'),
+(329, 'International Institute of Information Technology, Bhubaneswar', 'Y'),
+(330, 'International Institute of Information Technology, Hyderabad', 'Y'),
+(331, 'International Institute of Information Technology, Naya Raipur', 'Y'),
+(332, 'Invertis University', 'Y'),
+(333, 'ISBM University', 'Y'),
+(334, 'Islamic University of Science and Technology', 'Y'),
+(335, 'ITM University Gwalior', 'Y'),
+(336, 'ITM University Raipur', 'Y'),
+(337, 'ITM Vocational University', 'Y'),
+(338, 'Jadavpur University', 'Y'),
+(339, 'Jagadguru Ramanandacharya Rajasthan Sanskrit University', 'Y'),
+(340, 'Jagadguru Rambhadracharya Handicapped University', 'Y'),
+(341, 'Jagadguru Sri Shivarathreeswara University', 'Y'),
+(342, 'Jagan Nath University', 'Y'),
+(343, 'Jagannath University', 'Y'),
+(344, 'Jagran Lakecity University', 'Y'),
+(345, 'Jai Narain Vyas University', 'Y'),
+(346, 'Jai Prakash Vishwavidyalaya', 'Y'),
+(347, 'Jain University', 'Y'),
+(348, 'Jain Vishva Bharati Institute', 'Y'),
+(349, 'Jaipur National University', 'Y'),
+(350, 'Jamia Hamdard', 'Y'),
+(351, 'Jamia Millia Islamia', 'Y'),
+(352, 'Jananayak Chandrashekhar University', 'Y'),
+(353, 'Janardan Rai Nagar Rajasthan Vidhyapeeth University', 'Y'),
+(354, 'Jawaharlal Institute of Postgraduate Medical Education and Research', 'Y'),
+(355, 'Jawaharlal Nehru Architecture and Fine Arts University', 'Y'),
+(356, 'Jawaharlal Nehru Centre for Advanced Scientific Research', 'Y'),
+(357, 'Jawaharlal Nehru Krishi Vishwavidyalaya', 'Y'),
+(358, 'Jawaharlal Nehru Technological University', 'Y'),
+(359, 'Jawaharlal Nehru Technological University, Anantapur', 'Y'),
+(360, 'Jawaharlal Nehru Technological University, Kakinada', 'Y'),
+(361, 'Jawaharlal Nehru University', 'Y'),
+(362, 'Jayoti Vidyapeeth Women\'s University', 'Y'),
+(363, 'Jaypee Institute of Information Technology', 'Y'),
+(364, 'Jaypee University Anoopshahr', 'Y'),
+(365, 'Jaypee University of Engineering and Technology', 'Y'),
+(366, 'Jaypee University of Information Technology', 'Y'),
+(367, 'JECRC University', 'Y'),
+(368, 'Jharkhand Rai University', 'Y'),
+(369, 'Jharkhand Raksha Shakti University', 'Y'),
+(370, 'JIS University', 'Y'),
+(371, 'Jiwaji University', 'Y'),
+(372, 'JK Lakshmipat University', 'Y'),
+(373, 'Jodhpur National University', 'Y'),
+(374, 'JS University', 'Y'),
+(375, 'JSS Science and Technology University', 'Y'),
+(376, 'Junagadh Agricultural University', 'Y'),
+(377, 'K L University', 'Y'),
+(378, 'K.K. University', 'Y'),
+(379, 'K.R. Mangalam University', 'Y'),
+(380, 'Kadi Sarva Vishwavidyalaya', 'Y'),
+(381, 'Kakatiya University', 'Y'),
+(382, 'Kalasalingam University', 'Y'),
+(383, 'Kalinga University', 'Y'),
+(384, 'Kamdhenu University', 'Y'),
+(385, 'Kameshwar Singh Darbhanga Sanskrit University', 'Y'),
+(386, 'Kannada University', 'Y'),
+(387, 'Kannur University', 'Y'),
+(388, 'Karnatak University', 'Y'),
+(389, 'Karnataka Janapada Vishwavidyalaya', 'Y'),
+(390, 'Karnataka Sanskrit University', 'Y'),
+(391, 'Karnataka State Law University', 'Y'),
+(392, 'Karnataka State Rural Development and Panchayat Raj University', 'Y'),
+(393, 'Karnataka State Women\'s University', 'Y'),
+(394, 'Karnataka Veterinary, Animal and Fisheries Sciences University', 'Y'),
+(395, 'Karnavati University', 'Y'),
+(396, 'Karpagam Academy of Higher Education', 'Y'),
+(397, 'Karunya University', 'Y'),
+(398, 'Kavi Kulguru Kalidas Sanskrit Vishwavidyalaya', 'Y'),
+(399, 'Kazi Nazrul University', 'Y'),
+(400, 'Kaziranga University', 'Y'),
+(401, 'Kerala Agricultural University', 'Y'),
+(402, 'Kerala Kalamandalam', 'Y'),
+(403, 'Kerala University of Fisheries and Ocean Studies', 'Y'),
+(404, 'Kerala University of Health Sciences', 'Y'),
+(405, 'Kerala Veterinary and Animal Sciences University', 'Y'),
+(406, 'Khallikote University', 'Y'),
+(407, 'Khalsa University', 'Y'),
+(408, 'Khwaja Moinuddin Chishti Urdu, Arabi-Farsi University', 'Y'),
+(409, 'KIIT University', 'Y'),
+(410, 'King George\'s Medical University', 'Y'),
+(411, 'KLE Technological University', 'Y'),
+(412, 'KLE University', 'Y'),
+(413, 'Kolhan University', 'Y'),
+(414, 'Krantiguru Shyamji Krishna Verma Kachchh University', 'Y'),
+(415, 'Krishna Institute of Medical Sciences', 'Y'),
+(416, 'Krishna University', 'Y'),
+(417, 'KSGH Music and Performing Arts University', 'Y'),
+(418, 'Kumar Bhaskar Varma Sanskrit and Ancient Studies University', 'Y'),
+(419, 'Kumaun University', 'Y'),
+(420, 'Kurukshetra University', 'Y'),
+(421, 'Kushabhau Thakre Patrakarita Avam Jansanchar University', 'Y'),
+(422, 'Kuvempu University', 'Y'),
+(423, 'Lakshmibai National Institute of Physical Education', 'Y'),
+(424, 'Lakulish Yoga University', 'Y'),
+(425, 'Lala Lajpat Rai University of Veterinary and Animal Sciences', 'Y'),
+(426, 'Lalit Narayan Mithila University', 'Y'),
+(427, 'Lingaya\'s University', 'Y'),
+(428, 'LNCT University', 'Y'),
+(429, 'Lovely Professional University', 'Y'),
+(430, 'M.J.P. Rohilkhand University', 'Y'),
+(431, 'M.S. Ramaiah University of Applied Sciences', 'Y'),
+(432, 'Madan Mohan Malaviya University of Technology', 'Y'),
+(433, 'Madhav University', 'Y'),
+(434, 'Madurai Kamaraj University', 'Y'),
+(435, 'Magadh University', 'Y'),
+(436, 'Mahapurusha Srimanta Sankaradeva Viswavidyalaya', 'Y'),
+(437, 'Maharaja Agrasen University', 'Y'),
+(438, 'Maharaja Bir Bikram University', 'Y'),
+(439, 'Maharaja Chhatrasal Bundelkhand University', 'Y'),
+(440, 'Maharaja Ganga Singh University', 'Y'),
+(441, 'Maharaja Krishnakumarsinhji Bhavnagar University', 'Y'),
+(442, 'Maharaja Ranjit Singh Punjab Technical University', 'Y'),
+(443, 'Maharaja Surajmal Brij University', 'Y'),
+(444, 'Maharana Pratap University of Agriculture and Technology', 'Y'),
+(445, 'Maharashtra Animal and Fishery Sciences University', 'Y'),
+(446, 'Maharashtra National Law University, Aurangabad', 'Y'),
+(447, 'Maharashtra National Law University, Mumbai', 'Y'),
+(448, 'Maharashtra National Law University, Nagpur', 'Y'),
+(449, 'Maharashtra University of Health Sciences', 'Y'),
+(450, 'Maharishi Arvind University, Jaipur', 'Y'),
+(451, 'Maharishi Dayanand University', 'Y'),
+(452, 'Maharishi Mahesh Yogi Vedic Vishwavidyalaya', 'Y'),
+(453, 'Maharishi Markandeshwar University, Mullana', 'Y'),
+(454, 'Maharishi Markandeshwar University, Sadopur', 'Y'),
+(455, 'Maharishi Markandeshwar University, Solan', 'Y'),
+(456, 'Maharishi University', 'Y'),
+(457, 'Maharishi University of Management and Technology', 'Y'),
+(458, 'Maharshi Dayanand Saraswati University', 'Y'),
+(459, 'Maharshi Panini Sanskrit Vishwavidyalaya', 'Y'),
+(460, 'Mahatma Gandhi Antarrashtriya Hindi Vishwavidyalaya', 'Y'),
+(461, 'Mahatma Gandhi Central University, Motihari', 'Y'),
+(462, 'Mahatma Gandhi Chitrakoot Gramoday Vishwavidyalaya', 'Y'),
+(463, 'Mahatma Gandhi Kashi Vidyapeeth', 'Y'),
+(464, 'Mahatma Gandhi University', 'Y'),
+(465, 'Mahatma Gandhi University of Medical Sciences and Technology', 'Y'),
+(466, 'Mahatma Gandhi University, Meghalaya', 'Y'),
+(467, 'Mahatma Gandhi University, Nalgonda', 'Y'),
+(468, 'Mahatma Jyoti Rao Phoole University', 'Y'),
+(469, 'Mahatma Phule Krishi Vidyapeeth', 'Y'),
+(470, 'Makhanlal Chaturvedi Rashtriya Patrakarita Vishwavidyalaya', 'Y'),
+(471, 'Malaviya National Institute of Technology, Jaipur', 'Y'),
+(472, 'Malwanchal University', 'Y'),
+(473, 'Manav Bharti University', 'Y'),
+(474, 'Manav Rachna International Institute of Research and Studies', 'Y'),
+(475, 'Manav Rachna University', 'Y'),
+(476, 'Mandsaur University', 'Y'),
+(477, 'Mangalayatan University', 'Y'),
+(478, 'Mangalore University', 'Y'),
+(479, 'Manipal University', 'Y'),
+(480, 'Manipur Technical University', 'Y'),
+(481, 'Manipur University', 'Y'),
+(482, 'Manipur University of Culture', 'Y'),
+(483, 'Manonmaniam Sundaranar University', 'Y'),
+(484, 'Martin Luther Christian University', 'Y'),
+(485, 'Marwadi University', 'Y'),
+(486, 'MATS University', 'Y'),
+(487, 'Maulana Abul Kalam Azad University of Technology', 'Y'),
+(488, 'Maulana Azad National Institute of Technology', 'Y'),
+(489, 'Maulana Azad National Urdu University', 'Y'),
+(490, 'Maulana Azad University, Jodhpur', 'Y'),
+(491, 'Maulana Mazharul Haque Arabic and Persian University', 'Y'),
+(492, 'Medi-Caps University', 'Y'),
+(493, 'Meenakshi Academy of Higher Education and Research', 'Y'),
+(494, 'Mewar University', 'Y'),
+(495, 'MGM Institute of Health Sciences', 'Y'),
+(496, 'MIT Art Design and Technology University', 'Y'),
+(497, 'Mizoram University', 'Y'),
+(498, 'Mody University of Science and Technology', 'Y'),
+(499, 'Mohammad Ali Jauhar University', 'Y'),
+(500, 'Mohanlal Sukhadia University', 'Y'),
+(501, 'Monad University', 'Y'),
+(502, 'Mother Teresa Women\'s University', 'Y'),
+(503, 'Motherhood University', 'Y'),
+(504, 'Motilal Nehru National Institute of Technology', 'Y'),
+(505, 'MVN University', 'Y'),
+(506, 'Nagaland University', 'Y'),
+(507, 'Nalanda University', 'Y'),
+(508, 'NALSAR University of Law', 'Y'),
+(509, 'Nanaji Deshmukh Veterinary Science University', 'Y'),
+(510, 'Narendra Dev University of Agriculture and Technology', 'Y'),
+(511, 'Narsee Monjee Institute of Management and Higher Studies', 'Y'),
+(512, 'National Dairy Research Institute', 'Y'),
+(513, 'National Institute of Design', 'Y'),
+(514, 'National Institute of Fashion Technology', 'Y'),
+(515, 'National Institute of Food Technology Entrepreneurship and Management', 'Y'),
+(516, 'National Institute of Mental Health and Neuro Sciences', 'Y'),
+(517, 'National Institute of Pharmaceutical Education and Research, Ahmedabad', 'Y'),
+(518, 'National Institute of Pharmaceutical Education and Research, Guwahati', 'Y'),
+(519, 'National Institute of Pharmaceutical Education and Research, Hajipur', 'Y'),
+(520, 'National Institute of Pharmaceutical Education and Research, Hyderabad', 'Y'),
+(521, 'National Institute of Pharmaceutical Education and Research, Kolkata', 'Y'),
+(522, 'National Institute of Pharmaceutical Education and Research, Mohali', 'Y'),
+(523, 'National Institute of Pharmaceutical Education and Research, Rae Bareli', 'Y'),
+(524, 'National Institute of Technology, Agartala', 'Y'),
+(525, 'National Institute of Technology, Arunachal Pradesh', 'Y'),
+(526, 'National Institute of Technology, Calicut', 'Y'),
+(527, 'National Institute of Technology, Delhi', 'Y'),
+(528, 'National Institute of Technology, Durgapur', 'Y'),
+(529, 'National Institute of Technology, Goa', 'Y'),
+(530, 'National Institute of Technology, Hamirpur', 'Y'),
+(531, 'National Institute of Technology, Jamshedpur', 'Y'),
+(532, 'National Institute of Technology, Karnataka', 'Y'),
+(533, 'National Institute of Technology, Kurukshetra', 'Y'),
+(534, 'National Institute of Technology, Manipur', 'Y'),
+(535, 'National Institute of Technology, Meghalaya', 'Y'),
+(536, 'National Institute of Technology, Mizoram', 'Y'),
+(537, 'National Institute of Technology, Nagaland', 'Y'),
+(538, 'National Institute of Technology, Patna', 'Y'),
+(539, 'National Institute of Technology, Puducherry', 'Y'),
+(540, 'National Institute of Technology, Raipur', 'Y'),
+(541, 'National Institute of Technology, Rourkela', 'Y'),
+(542, 'National Institute of Technology, Sikkim', 'Y'),
+(543, 'National Institute of Technology, Silchar', 'Y'),
+(544, 'National Institute of Technology, Srinagar', 'Y'),
+(545, 'National Institute of Technology, Tiruchirappalli', 'Y'),
+(546, 'National Institute of Technology, Uttarakhand', 'Y'),
+(547, 'National Institute of Technology, Warangal', 'Y'),
+(548, 'National Law Institute University', 'Y'),
+(549, 'National Law School of India University', 'Y'),
+(550, 'National Law University', 'Y'),
+(551, 'National Law University and Judicial Academy', 'Y'),
+(552, 'National Law University, Jodhpur', 'Y'),
+(553, 'National Law University, Orissa', 'Y'),
+(554, 'National University of Educational Planning and Administration', 'Y'),
+(555, 'National University of Study and Research in Law', 'Y'),
+(556, 'Nava Nalanda Mahavihara', 'Y'),
+(557, 'Navrachana University', 'Y'),
+(558, 'Navsari Agricultural University', 'Y'),
+(559, 'Nehru Gram Bharati Vishwavidyalaya', 'Y'),
+(560, 'NIILM University', 'Y'),
+(561, 'NIIT University', 'Y'),
+(562, 'Nilamber-Pitamber University', 'Y'),
+(563, 'NIMS University', 'Y'),
+(564, 'Nirma University of Science and Technology', 'Y'),
+(565, 'NITTE University', 'Y'),
+(566, 'Nizam\'s Institute of Medical Sciences', 'Y'),
+(567, 'Noida International University', 'Y'),
+(568, 'North East Frontier Technical University', 'Y'),
+(569, 'North Eastern Hill University', 'Y'),
+(570, 'North Eastern Regional Institute of Science and Technology', 'Y'),
+(571, 'North Maharashtra University', 'Y'),
+(572, 'North Orissa University', 'Y'),
+(573, 'O.P. Jindal Global University', 'Y'),
+(574, 'O.P. Jindal University', 'Y'),
+(575, 'OPJS University', 'Y'),
+(576, 'Oriental University', 'Y'),
+(577, 'Orissa University of Agriculture and Technology', 'Y'),
+(578, 'Osmania University', 'Y'),
+(579, 'P P Savani University', 'Y'),
+(580, 'P.K. University', 'Y'),
+(581, 'Pacific Medical University', 'Y'),
+(582, 'Pacific University, India', 'Y'),
+(583, 'Padmashree Dr. D.Y. Patil Vidyapith', 'Y'),
+(584, 'Palamuru University', 'Y'),
+(585, 'Pandit Deendayal Petroleum University', 'Y'),
+(586, 'Pandit Deendayal Upadhyaya Shekhawati University', 'Y'),
+(587, 'Pandit Ravishankar Shukla University', 'Y'),
+(588, 'Panjab University', 'Y'),
+(589, 'Parul University', 'Y'),
+(590, 'Patna University', 'Y'),
+(591, 'PDM University', 'Y'),
+(592, 'PDPM Indian Institute of Information Technology, Design and Manufacturing', 'Y'),
+(593, 'PEC University of Technology', 'Y'),
+(594, 'People\'s University', 'Y'),
+(595, 'Periyar Maniammai University', 'Y'),
+(596, 'Periyar University', 'Y'),
+(597, 'PES University', 'Y'),
+(598, 'Plastindia International University', 'Y'),
+(599, 'Pondicherry University', 'Y'),
+(600, 'Ponnaiyan Ramajayam Institute of Science and Technology', 'Y'),
+(601, 'Poornima University', 'Y'),
+(602, 'Post Graduate Institute of Medical Education and Research', 'Y'),
+(603, 'Potti Sreeramulu Telugu University', 'Y'),
+(604, 'Pragyan International University', 'Y'),
+(605, 'Pratap University', 'Y'),
+(606, 'Pravara Institute of Medical Sciences', 'Y'),
+(607, 'Presidency University', 'Y'),
+(608, 'Presidency University', 'Y'),
+(609, 'Professor Jayashankar Telangana State Agricultural University', 'Y'),
+(610, 'Pt. Bhagwat Dayal Sharma University of Health Sciences', 'Y'),
+(611, 'Punjab Agricultural University', 'Y'),
+(612, 'Punjab Technical University', 'Y'),
+(613, 'Punjabi University', 'Y'),
+(614, 'Quantum University', 'Y'),
+(615, 'Rabindra Bharati University', 'Y'),
+(616, 'Raffles University', 'Y'),
+(617, 'Rai Technology University', 'Y'),
+(618, 'Rai University', 'Y'),
+(619, 'Raiganj University', 'Y'),
+(620, 'Raj Rishi Bharthari Matsya University', 'Y'),
+(621, 'Raja Mansingh Tomar Music and Arts University', 'Y'),
+(622, 'Rajasthan Technical University Kota', 'Y'),
+(623, 'Rajasthan University of Health Sciences', 'Y'),
+(624, 'Rajasthan University of Veterinary and Animal Sciences', 'Y'),
+(625, 'Rajiv Gandhi Institute of Petroleum Technology', 'Y'),
+(626, 'Rajiv Gandhi National Aviation University', 'Y'),
+(627, 'Rajiv Gandhi National Institute of Youth Development', 'Y'),
+(628, 'Rajiv Gandhi National University of Law', 'Y'),
+(629, 'Rajiv Gandhi Proudyogiki Vishwavidyalaya', 'Y'),
+(630, 'Rajiv Gandhi University', 'Y'),
+(631, 'Rajiv Gandhi University of Health Sciences', 'Y'),
+(632, 'Rajiv Gandhi University of Knowledge Technologies', 'Y'),
+(633, 'Rajmata Vijayaraje Scindia Krishi Vishwavidyalaya', 'Y'),
+(634, 'Raksha Shakti University', 'Y'),
+(635, 'Rama Devi Women\'s University', 'Y'),
+(636, 'Rama University', 'Y'),
+(637, 'Ramakrishna Mission Vivekananda University', 'Y'),
+(638, 'Ranchi University', 'Y'),
+(639, 'Rani Channamma University, Belagavi', 'Y'),
+(640, 'Rani Durgavati Vishwavidyalaya', 'Y'),
+(641, 'Rani Lakshmi Bai Central Agricultural University', 'Y'),
+(642, 'Ras Bihari Bose Subharti University', 'Y'),
+(643, 'Rashtrasant Tukadoji Maharaj Nagpur University', 'Y'),
+(644, 'Rashtriya Sanskrit Sansthan University', 'Y'),
+(645, 'Rashtriya Sanskrit Vidyapeetha', 'Y'),
+(646, 'Ravenshaw University', 'Y'),
+(647, 'Rayalaseema University', 'Y'),
+(648, 'Rayat-Bahra University', 'Y'),
+(649, 'REVA University', 'Y'),
+(650, 'RIMT University', 'Y'),
+(651, 'RK University', 'Y'),
+(652, 'RKDF University', 'Y'),
+(653, 'Sai Nath University', 'Y'),
+(654, 'Sai Tirupati University', 'Y'),
+(655, 'Sam Higginbottom Institute of Agriculture, Technology and Sciences', 'Y'),
+(656, 'Sambalpur University', 'Y'),
+(657, 'Sampurnanand Sanskrit Vishvavidyalaya', 'Y'),
+(658, 'Sanchi University of Buddhist-Indic Studies', 'Y'),
+(659, 'Sandip University', 'Y'),
+(660, 'Sandip University, Sijoul', 'Y'),
+(661, 'Sangai International University', 'Y'),
+(662, 'Sangam University', 'Y'),
+(663, 'Sanjay Gandhi Post Graduate Institute of Medical Sciences', 'Y'),
+(664, 'Sanjay Ghodawat University', 'Y'),
+(665, 'Sankalchand Patel University', 'Y'),
+(666, 'Sanskriti University', 'Y'),
+(667, 'Sant Baba Bhag Singh University', 'Y'),
+(668, 'Sant Gadge Baba Amravati University', 'Y'),
+(669, 'Sant Longowal Institute of Engineering and Technology', 'Y'),
+(670, 'Santosh University', 'Y'),
+(671, 'Sardar Patel University', 'Y'),
+(672, 'Sardar Patel University of Police, Security and Criminal Justice', 'Y'),
+(673, 'Sardar Vallabhbhai National Institute of Technology, Surat', 'Y'),
+(674, 'Sardar Vallabhbhai Patel University of Agriculture and Technology', 'Y'),
+(675, 'Sardarkrushinagar Dantiwada Agricultural University', 'Y'),
+(676, 'Sarguja University', 'Y'),
+(677, 'Sarla Birla University', 'Y'),
+(678, 'Sarvepalli Radhakrishnan University', 'Y'),
+(679, 'SASTRA University', 'Y'),
+(680, 'Satavahana University', 'Y'),
+(681, 'Sathyabama University', 'Y'),
+(682, 'Saurashtra University', 'Y'),
+(683, 'Saveetha University', 'Y'),
+(684, 'Savitribai Phule Pune University', 'Y'),
+(685, 'School of Planning and Architecture, Bhopal', 'Y'),
+(686, 'School of Planning and Architecture, Delhi', 'Y'),
+(687, 'School of Planning and Architecture, Vijayawada', 'Y'),
+(688, 'Seacom Skills University', 'Y'),
+(689, 'Sharda University', 'Y'),
+(690, 'Sharnbasva University', 'Y'),
+(691, 'Sher-e-Kashmir University of Agricultural Sciences and Technology of Jammu', 'Y'),
+(692, 'Sher-e-Kashmir University of Agricultural Sciences and Technology of Kashmir', 'Y'),
+(693, 'Sher-i-Kashmir Institute of Medical Sciences', 'Y'),
+(694, 'Shiv Nadar University', 'Y'),
+(695, 'Shivaji University', 'Y'),
+(696, 'Shobhit University', 'Y'),
+(697, 'Shoolini University of Biotechnology and Management Sciences', 'Y'),
+(698, 'Shree Guru Gobind Singh Tricentenary University', 'Y'),
+(699, 'Shree Somnath Sanskrit University', 'Y'),
+(700, 'Shreemati Nathibai Damodar Thackersey Women\'s University', 'Y'),
+(701, 'Shri Govind Guru University', 'Y'),
+(702, 'Shri Guru Ram Rai Education Mission', 'Y'),
+(703, 'Shri Guru Ram Rai University', 'Y'),
+(704, 'Shri Jagannath Sanskrit Vishvavidyalaya', 'Y'),
+(705, 'Shri Jagdishprasad Jhabrmal Tibrewala University', 'Y'),
+(706, 'Shri Lal Bahadur Shastri Rashtriya Sanskrit Vidyapeetha', 'Y'),
+(707, 'Shri Mata Vaishno Devi University', 'Y'),
+(708, 'Shri Ramswaroop Memorial University', 'Y'),
+(709, 'Shri Vaishnav Vidyapeeth Vishwavidyalaya', 'Y'),
+(710, 'Shri Venkateshwara University', 'Y'),
+(711, 'Shridhar University', 'Y'),
+(712, 'Siddharth University', 'Y'),
+(713, 'Sidho Kanho Birsha University', 'Y'),
+(714, 'Sido Kanhu Murmu University', 'Y'),
+(715, 'Sikkim Manipal University', 'Y'),
+(716, 'Sikkim University', 'Y'),
+(717, 'Siksha O Anusandhan University', 'Y'),
+(718, 'Singhania University', 'Y'),
+(719, 'Sir Padampat Singhania University', 'Y'),
+(720, 'South Asian University', 'Y'),
+(721, 'Spicer Adventist University', 'Y'),
+(722, 'Sree Chitra Thirunal Institute of Medical Sciences and Technology', 'Y'),
+(723, 'Sree Sankaracharya University of Sanskrit', 'Y'),
+(724, 'Sri Balaji Vidyapeeth', 'Y'),
+(725, 'Sri Chandrasekharendra Saraswathi Viswa Mahavidyalaya', 'Y'),
+(726, 'Sri Dev Suman Uttarakhand University', 'Y'),
+(727, 'Sri Devaraj Urs Academy of Higher Education and Research', 'Y'),
+(728, 'Sri Guru Granth Sahib World University', 'Y'),
+(729, 'Sri Guru Ram Das University of Health Sciences', 'Y'),
+(730, 'Sri Konda Laxman Telangana State Horticultural University', 'Y'),
+(731, 'Sri Krishnadevaraya University', 'Y'),
+(732, 'Sri Padmavati Mahila Visvavidyalayam', 'Y'),
+(733, 'Sri Ramachandra University', 'Y'),
+(734, 'Sri Sai University', 'Y'),
+(735, 'Sri Sathya Sai Institute of Higher Learning', 'Y'),
+(736, 'Sri Satya Sai University of Technology and Medical Sciences', 'Y'),
+(737, 'Sri Siddhartha Academy of Higher Education', 'Y'),
+(738, 'Sri Sri University', 'Y'),
+(739, 'Sri Venkateswara Institute of Medical Sciences', 'Y'),
+(740, 'Sri Venkateswara University', 'Y'),
+(741, 'Sri Venkateswara Vedic University', 'Y'),
+(742, 'Sri Venkateswara Veterinary University', 'Y'),
+(743, 'Srimanta Sankaradeva University of Health Sciences', 'Y'),
+(744, 'Srinivas University', 'Y'),
+(745, 'SRM Institute of Science and Technology', 'Y'),
+(746, 'SRM University Haryana', 'Y'),
+(747, 'SRM University, Sikkim', 'Y'),
+(748, 'St. Joseph University', 'Y'),
+(749, 'St. Peter\'s University', 'Y'),
+(750, 'St. Xavier\'s University', 'Y'),
+(751, 'Starex University', 'Y'),
+(752, 'State University of Performing and Visual Arts', 'Y'),
+(753, 'Suamandeep Vidyapeeth', 'Y'),
+(754, 'Sunrise University', 'Y'),
+(755, 'Suresh Gyan Vihar University', 'Y'),
+(756, 'Swami Keshwanand Rajasthan Agricultural University', 'Y'),
+(757, 'Swami Rama Himalayan University', 'Y'),
+(758, 'Swami Ramanand Teerth Marathwada University', 'Y'),
+(759, 'Swami Vivekanand Subharti University', 'Y'),
+(760, 'Swami Vivekanand University', 'Y'),
+(761, 'Swami Vivekananda Yoga Anusandhana Samsthana', 'Y'),
+(762, 'Swarnim Gujarat Sports University', 'Y'),
+(763, 'Swarnim Startup and Innovation University', 'Y'),
+(764, 'Symbiosis International University', 'Y'),
+(765, 'Symbiosis University of Applied Sciences', 'Y'),
+(766, 'Tamil Nadu Agricultural University', 'Y'),
+(767, 'Tamil Nadu Dr Ambedkar Law University', 'Y'),
+(768, 'Tamil Nadu Dr. M.G.R.Medical University', 'Y'),
+(769, 'Tamil Nadu Fisheries University', 'Y'),
+(770, 'Tamil Nadu Music and Fine Arts University', 'Y'),
+(771, 'Tamil Nadu National Law School', 'Y'),
+(772, 'Tamil Nadu Physical Education and Sports University', 'Y'),
+(773, 'Tamil Nadu Teacher Education University', 'Y'),
+(774, 'Tamil Nadu Veterinary and Animal Sciences University', 'Y'),
+(775, 'Tamil University', 'Y'),
+(776, 'Tantia University', 'Y'),
+(777, 'Tata Institute of Fundamental Research', 'Y'),
+(778, 'Tata Institute of Social Sciences', 'Y'),
+(779, 'TeamLease Skills University', 'Y'),
+(780, 'Techno India University', 'Y'),
+(781, 'Teerthanker Mahaveer University', 'Y'),
+(782, 'Telangana University', 'Y'),
+(783, 'TERI University', 'Y'),
+(784, 'Tezpur University', 'Y'),
+(785, 'Thapar Institute of Engineering and Technology', 'Y'),
+(786, 'The English and Foreign Languages University', 'Y'),
+(787, 'The IIS University', 'Y'),
+(788, 'The Indian Law Institute', 'Y'),
+(789, 'The LNM Institute of Information Technology', 'Y'),
+(790, 'The Maharaja Sayajirao University of Baroda', 'Y'),
+(791, 'The National University of Advanced Legal Studies', 'Y'),
+(792, 'The Neotia University', 'Y'),
+(793, 'The Northcap University', 'Y'),
+(794, 'The Sanskrit College and University', 'Y'),
+(795, 'The West Bengal National University of Juridical Sciences', 'Y'),
+(796, 'Thiruvalluvar University', 'Y'),
+(797, 'Thunchath Ezhuthachan Malayalam University', 'Y'),
+(798, 'Tilak Maharashtra Vidyapeeth', 'Y'),
+(799, 'Tilka Manjhi Bhagalpur University', 'Y'),
+(800, 'TransDisciplinary University', 'Y'),
+(801, 'Tripura University', 'Y'),
+(802, 'Tumkur University', 'Y'),
+(803, 'U.P. Pandit Deen Dayal Upadhyaya Pashu Chikitsa Vigyan Vishwavidyalaya Evam Go-Anusandhan Sansthan', 'Y'),
+(804, 'UKA Tarsadia University', 'Y'),
+(805, 'University of Agricultural and Horticultural Sciences, Shivamogga', 'Y'),
+(806, 'University of Agricultural Sciences, Bangalore', 'Y'),
+(807, 'University of Agricultural Sciences, Dharwad', 'Y'),
+(808, 'University of Agricultural Sciences, Raichur', 'Y'),
+(809, 'University of Allahabad', 'Y'),
+(810, 'University of Burdwan', 'Y'),
+(811, 'University of Calcutta', 'Y'),
+(812, 'University of Calicut', 'Y'),
+(813, 'University of Delhi', 'Y'),
+(814, 'University of Engineering and Management, Kolkata', 'Y'),
+(815, 'University of Gour Banga', 'Y'),
+(816, 'University of Horticultural Sciences, Bagalkot', 'Y'),
+(817, 'University of Hyderabad', 'Y'),
+(818, 'University of Jammu', 'Y'),
+(819, 'University of Kalyani', 'Y'),
+(820, 'University of Kashmir', 'Y'),
+(821, 'University of Kerala', 'Y'),
+(822, 'University of Kota', 'Y'),
+(823, 'University of Lucknow', 'Y'),
+(824, 'University of Madras', 'Y'),
+(825, 'University of Mumbai', 'Y'),
+(826, 'University of Mysore', 'Y'),
+(827, 'University of North Bengal', 'Y'),
+(828, 'University of Patanjali', 'Y'),
+(829, 'University of Petroleum and Energy Studies', 'Y'),
+(830, 'University of Rajasthan', 'Y'),
+(831, 'University of Science and Technology, Meghalaya', 'Y'),
+(832, 'University of Solapur', 'Y'),
+(833, 'University of Technology', 'Y'),
+(834, 'University of Technology and Management', 'Y'),
+(835, 'Usha Martin University', 'Y'),
+(836, 'Utkal University', 'Y'),
+(837, 'Utkal University of Culture', 'Y'),
+(838, 'Uttar Banga Krishi Viswavidyalaya', 'Y'),
+(839, 'Uttar Pradesh University of Medical Sciences', 'Y'),
+(840, 'Uttarakhand Aawasiya Vishwavidyalaya', 'Y'),
+(841, 'Uttarakhand Ayurved University', 'Y'),
+(842, 'Uttarakhand Technical University', 'Y'),
+(843, 'Uttarakhand University of Horticulture and Forestry', 'Y'),
+(844, 'Uttaranchal Sanskrit University', 'Y'),
+(845, 'Uttaranchal University', 'Y'),
+(846, 'Vasantrao Naik Marathwada Krishi Vidyapeeth', 'Y'),
+(847, 'Veer Bahadur Singh Purvanchal University', 'Y'),
+(848, 'Veer Kunwar Singh University', 'Y'),
+(849, 'Veer Narmad South Gujarat University', 'Y'),
+(850, 'Veer Surendra Sai University of Technology', 'Y'),
+(851, 'Vel Tech Dr.RR and Dr.SR Technical University', 'Y'),
+(852, 'Vels University', 'Y'),
+(853, 'Vidyasagar University', 'Y'),
+(854, 'Vignan University', 'Y'),
+(855, 'Vijayanagara Sri Krishnadevaraya University', 'Y'),
+(856, 'Vikram University', 'Y'),
+(857, 'Vikrama Simhapuri University', 'Y'),
+(858, 'Vinayaka Missions Sikkim University', 'Y'),
+(859, 'Vinayaka Missions University', 'Y'),
+(860, 'Vinoba Bhave University', 'Y'),
+(861, 'Vishwakarma University', 'Y'),
+(862, 'Visva-Bharati University', 'Y'),
+(863, 'Visvesvaraya National Institute of Technology', 'Y'),
+(864, 'Visvesvaraya Technological University', 'Y'),
+(865, 'VIT Bhopal University', 'Y'),
+(866, 'VIT University', 'Y'),
+(867, 'Vivekananda Global University', 'Y'),
+(868, 'West Bengal State University', 'Y'),
+(869, 'West Bengal University of Animal and Fishery Sciences', 'Y'),
+(870, 'West Bengal University of Health Sciences', 'Y'),
+(871, 'West Bengal University of Teachers\' Training, Education Planning and Administration', 'Y'),
+(872, 'William Carey University, India', 'Y'),
+(873, 'William Carey University, Meghalaya', 'Y'),
+(874, 'Xavier University Bhubaneswar', 'Y'),
+(875, 'YBN University', 'Y'),
+(876, 'Yenepoya University', 'Y'),
+(877, 'YMCA University of Science and Technology', 'Y'),
+(878, 'Yogi Vemana University', 'Y');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `academic_qualification`
+--
+
+CREATE TABLE `academic_qualification` (
+  `id` int(11) NOT NULL,
+  `qualification_name` varchar(30) NOT NULL,
+  `qualification_status` enum('Y','N') NOT NULL DEFAULT 'Y'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `academic_qualification`
+--
+
+INSERT INTO `academic_qualification` (`id`, `qualification_name`, `qualification_status`) VALUES
+(1, 'Secondary/SE/10th', 'Y'),
+(2, 'Higher Secondary/HSE/12th', 'Y'),
+(3, 'Diploma', 'Y'),
+(4, 'Graduation', 'Y'),
+(5, 'Post Graduation', 'Y'),
+(6, 'PG Diploma', 'N'),
+(7, 'PHD Research', 'Y');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `academic_specialization`
+--
+
+CREATE TABLE `academic_specialization` (
+  `id` int(11) NOT NULL,
+  `specialization_name` varchar(100) NOT NULL,
+  `specialization_status` enum('Y','N') NOT NULL DEFAULT 'Y'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `academic_specialization`
+--
+
+INSERT INTO `academic_specialization` (`id`, `specialization_name`, `specialization_status`) VALUES
+(1, 'Aerospace Engineering', 'Y'),
+(2, 'Agriculture & Food Engineering', 'Y'),
+(3, 'Automobile Engineering', 'Y'),
+(4, 'Biotechnology Engineering', 'Y'),
+(5, 'Ceramic Engineering', 'Y'),
+(6, 'Chemical Engineering', 'Y'),
+(7, 'Civil Engineering', 'Y'),
+(8, 'Computer Science Engineering', 'Y'),
+(9, 'Electrical Engineering', 'Y'),
+(10, 'Electronics Engineering', 'Y'),
+(11, 'Engineering Physics', 'Y'),
+(12, 'Environmental Engineering', 'Y'),
+(13, 'Industrial and Production Engineering', 'Y'),
+(14, 'Industrial Engineering', 'Y'),
+(15, 'Information Technology Engineering', 'Y'),
+(16, 'Instrumentation Engineering', 'Y'),
+(17, 'Marine Engineering', 'Y'),
+(18, 'Mechanical Engineering', 'Y'),
+(19, 'Metallurgical Engineering', 'Y'),
+(21, 'Naval Architecture and Ocean Engineering', 'Y'),
+(22, 'Petroleum Engineering', 'Y'),
+(23, 'Textile Engineering', 'Y'),
+(24, 'Marketing', 'Y'),
+(25, 'Human Resources', 'Y'),
+(26, 'Information Systems', 'Y'),
+(27, 'Consulting', 'Y'),
+(28, 'Entrepreneurship', 'Y'),
+(29, 'Operations Management', 'Y'),
+(30, 'GIS - Geographical Information System', 'Y'),
+(31, 'GIS & Remote Sensing', 'Y'),
+(32, 'Mining Engineering', 'Y');
 
 -- --------------------------------------------------------
 
@@ -143,84 +1113,164 @@ CREATE TABLE `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+('0193qf93bg2j39qe4sd3n6d0taonedkv', '::1', 1526531682, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363533313638323b),
 ('057gun32as1ea0tuker7pf4jbfadls9m', '::1', 1526359312, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363335393038363b736573735f757365727c613a363a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
 ('0c3reqsh4f9vdj56bd23s6kkpi16h4rb', '::1', 1526317269, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363331373032393b736573735f757365727c613a363a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
+('0e13tbtqv7npmbfsbm0f7kssr894k3l0', '::1', 1526627887, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363632373838303b736573735f757365727c613a373a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f726f6c655f6e616d65223b733a31313a2253757065722041646d696e223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
+('0jdmhldm8nh4if4hilcdg74fii6o77su', '::1', 1526631007, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363633303732383b736573735f757365727c613a373a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f726f6c655f6e616d65223b733a31313a2253757065722041646d696e223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
+('0v7ijn3e7coci0ba4mtp4knf3mrm3vbl', '::1', 1526486928, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363438363632383b736573735f757365727c613a373a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f726f6c655f6e616d65223b733a31313a2253757065722041646d696e223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d636172745f636f6e74656e74737c613a333a7b733a31303a22636172745f746f74616c223b643a313530303b733a31313a22746f74616c5f6974656d73223b643a313b733a33323a226234633534373233333234336632333137643861643833343364363939663563223b613a373a7b733a323a226964223b733a313a2235223b733a333a22717479223b643a313b733a353a227072696365223b643a313530303b733a343a226e616d65223b733a32333a224d656e2773204e696b652052756e6e696e672053686f65223b733a373a226f7074696f6e73223b613a323a7b733a31333a2263617465676f72795f6e616d65223b733a353a2253686f6573223b733a31333a2270726f647563745f696d616765223b733a383a2270726f642e706e67223b7d733a353a22726f776964223b733a33323a226234633534373233333234336632333137643861643833343364363939663563223b733a383a22737562746f74616c223b643a313530303b7d7d666c6173685f6d6573736167657c733a33323a224974656d20686173206265656e20616464656420746f20796f75722063617274223b5f5f63695f766172737c613a323a7b733a31333a22666c6173685f6d657373616765223b733a333a226f6c64223b733a31373a22666c6173685f6d6573736167655f637373223b733a333a226f6c64223b7d666c6173685f6d6573736167655f6373737c733a31333a22616c6572742d73756363657373223b),
 ('14mndji24i35vhbd2hr1q33r620fj890', '::1', 1526353009, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363335323732323b736573735f757365727c613a363a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
+('1a4k5o6fumnq6g48u32u2jrdc3lbhmk1', '::1', 1526581029, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363538303935313b736573735f757365727c613a373a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f726f6c655f6e616d65223b733a31313a2253757065722041646d696e223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
 ('1bavvklijpd1a5b83s35qf17khqr68vn', '::1', 1526128521, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363132383233323b736573735f757365727c613a363a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
 ('1g9o752o8vavratr9i099cg08gqibcn5', '::1', 1526314624, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363331343337353b),
+('275q3evri7lisk6airhh8muhmuq9d6oc', '::1', 1526619914, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363631393731343b736573735f757365727c613a373a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f726f6c655f6e616d65223b733a31313a2253757065722041646d696e223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
 ('2hhrami50akb671usqa9pc19uadngd4i', '::1', 1526132153, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363133313835333b736573735f757365727c613a363a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
 ('2irpsa2lfqp1haiih696nrki96ibtohu', '::1', 1526127761, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363132373630353b736573735f757365727c613a363a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d666c6173685f6d6573736167657c733a39363a225468616e6b20796f7521205765206861766520726563656976656420796f7572206f726465722e20596f7572204f72646572204e756d62657220303531323230313831353236313237373631205061796d656e7420446f6e6520285465737429223b5f5f63695f766172737c613a323a7b733a31333a22666c6173685f6d657373616765223b733a333a226f6c64223b733a31373a22666c6173685f6d6573736167655f637373223b733a333a226f6c64223b7d666c6173685f6d6573736167655f6373737c733a31333a22616c6572742d73756363657373223b),
 ('2r31d985mhbj5cdnn39resa5dactsoq4', '::1', 1526296898, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363239363539383b736573735f757365727c613a363a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
 ('2v33djqcidt7drjc7n6jos2q4h4vuoau', '::1', 1526353254, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363335333032353b736573735f757365727c613a363a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
+('37fasi9em9qvc054q7o6tpatvntjds85', '::1', 1526617041, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363631363736313b736573735f757365727c613a373a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f726f6c655f6e616d65223b733a31313a2253757065722041646d696e223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
+('37i7hljbms753ao9kva19fgjc6s8drf0', '::1', 1526615607, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363631353630373b736573735f757365727c613a373a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f726f6c655f6e616d65223b733a31313a2253757065722041646d696e223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
+('39a3ue2onshgdfjig98destd1qcboipi', '::1', 1526531496, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363533313439363b),
+('3hmie5b33hjs8288071s3qg9d99pl62u', '::1', 1526644661, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363634343433333b736573735f757365727c613a373a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f726f6c655f6e616d65223b733a31313a2253757065722041646d696e223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
+('3mvn6lbsi6ls2oqhjrhusmomvrquofsg', '::1', 1526580331, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363538303231373b736573735f757365727c613a373a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f726f6c655f6e616d65223b733a31313a2253757065722041646d696e223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
+('3pfi7njon6ehf0vp359umtaq740qmv5n', '::1', 1526493931, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363439333633313b636172745f636f6e74656e74737c613a333a7b733a31303a22636172745f746f74616c223b643a363030303b733a31313a22746f74616c5f6974656d73223b643a343b733a33323a226234633534373233333234336632333137643861643833343364363939663563223b613a373a7b733a323a226964223b733a313a2235223b733a333a22717479223b643a343b733a353a227072696365223b643a313530303b733a343a226e616d65223b733a32333a224d656e2773204e696b652052756e6e696e672053686f65223b733a373a226f7074696f6e73223b613a323a7b733a31333a2263617465676f72795f6e616d65223b733a353a2253686f6573223b733a31333a2270726f647563745f696d616765223b733a383a2270726f642e706e67223b7d733a353a22726f776964223b733a33323a226234633534373233333234336632333137643861643833343364363939663563223b733a383a22737562746f74616c223b643a363030303b7d7d736573735f757365727c613a373a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f726f6c655f6e616d65223b733a31313a2253757065722041646d696e223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
 ('3tstr37skt8hrvambnrv8gu599of33l3', '::1', 1526126929, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363132363639353b736573735f757365727c613a363a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d636172745f636f6e74656e74737c613a343a7b733a31303a22636172745f746f74616c223b643a333138303b733a31313a22746f74616c5f6974656d73223b643a343b733a33323a226165393530313533356163376335353935643464633632356432383338333864223b613a373a7b733a323a226964223b733a313a2234223b733a333a22717479223b643a323b733a353a227072696365223b643a39303b733a343a226e616d65223b733a31383a224d6f746f204735204261636b20436f766572223b733a373a226f7074696f6e73223b613a323a7b733a31333a2263617465676f72795f6e616d65223b733a31313a224163636573736f72696573223b733a31333a2270726f647563745f696d616765223b733a383a2270726f642e706e67223b7d733a353a22726f776964223b733a33323a226165393530313533356163376335353935643464633632356432383338333864223b733a383a22737562746f74616c223b643a3138303b7d733a33323a226234633534373233333234336632333137643861643833343364363939663563223b613a373a7b733a323a226964223b733a313a2235223b733a333a22717479223b643a323b733a353a227072696365223b643a313530303b733a343a226e616d65223b733a32333a224d656e2773204e696b652052756e6e696e672053686f65223b733a373a226f7074696f6e73223b613a323a7b733a31333a2263617465676f72795f6e616d65223b733a353a2253686f6573223b733a31333a2270726f647563745f696d616765223b733a383a2270726f642e706e67223b7d733a353a22726f776964223b733a33323a226234633534373233333234336632333137643861643833343364363939663563223b733a383a22737562746f74616c223b643a333030303b7d7d),
+('46hkuvjv2gepfcm1lhjqab62kruhifns', '::1', 1526486368, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363438363132343b736573735f757365727c613a373a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f726f6c655f6e616d65223b733a31313a2253757065722041646d696e223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
+('4on1rghjh34ujdbbe1p50gtkl7attq9c', '::1', 1526531692, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363533313639323b),
+('4tn9q7snb6qf7rnfghg78vsghdqlvahm', '::1', 1526404369, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363430343130373b736573735f757365727c613a363a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
+('503jotsndpeqd3631a2ia9105grtns6m', '::1', 1526642109, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363634313835393b736573735f757365727c613a373a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f726f6c655f6e616d65223b733a31313a2253757065722041646d696e223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
+('51bvaumj477puki2vka8m6ri5klrmbl0', '::1', 1526616452, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363631363435323b736573735f757365727c613a373a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f726f6c655f6e616d65223b733a31313a2253757065722041646d696e223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
 ('56r4n6ohcr42ti28egt0mjftq2qgmujv', '::1', 1526313301, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363331333330313b736573735f757365727c613a363a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
+('57ctl7ug01cl26mq2v4vt07dvhtou0e8', '::1', 1526490874, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363439303538333b636172745f636f6e74656e74737c613a333a7b733a31303a22636172745f746f74616c223b643a363030303b733a31313a22746f74616c5f6974656d73223b643a343b733a33323a226234633534373233333234336632333137643861643833343364363939663563223b613a373a7b733a323a226964223b733a313a2235223b733a333a22717479223b643a343b733a353a227072696365223b643a313530303b733a343a226e616d65223b733a32333a224d656e2773204e696b652052756e6e696e672053686f65223b733a373a226f7074696f6e73223b613a323a7b733a31333a2263617465676f72795f6e616d65223b733a353a2253686f6573223b733a31333a2270726f647563745f696d616765223b733a383a2270726f642e706e67223b7d733a353a22726f776964223b733a33323a226234633534373233333234336632333137643861643833343364363939663563223b733a383a22737562746f74616c223b643a363030303b7d7d736573735f757365727c613a373a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f726f6c655f6e616d65223b733a31313a2253757065722041646d696e223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
 ('5j8ktlh8vl2l51ibu60mb4rrloof7qro', '::1', 1526130337, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363133303236373b736573735f757365727c613a363a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
 ('5kpaiqavpsgmt4dvnj305kj2ih4de1jg', '::1', 1526311688, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363331313637373b),
+('5n4kpbg2p3ks68opgm93grslhsufc0e5', '::1', 1526618424, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363631383334363b736573735f757365727c613a373a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f726f6c655f6e616d65223b733a31313a2253757065722041646d696e223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
 ('5pgffidgbor1vldd6rvbnp8ut473n05j', '::1', 1526311046, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363331303836383b),
+('5t8j57ge8qbpfv87fip1eecb3ool2a9u', '::1', 1526485915, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363438353638313b),
+('65pnii3a8bn1htkiemg16hn5dim2gcft', '::1', 1526637316, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363633373036323b736573735f757365727c613a373a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f726f6c655f6e616d65223b733a31313a2253757065722041646d696e223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
 ('66d0kd21dqrp29c7nr62egsm87nigsnb', '::1', 1526237692, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363233373639303b736573735f757365727c613a363a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
 ('6c77c5nhbb7ktflq00jaum95qjjta0g3', '::1', 1526313096, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363331323939393b),
+('6m04e9qo21epuqv1l6mpfuqsm5og42hp', '::1', 1526644970, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363634343932323b736573735f757365727c613a373a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f726f6c655f6e616d65223b733a31313a2253757065722041646d696e223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
+('6mao0l2lk5s6879ll9kakfe2uarsupvi', '::1', 1526641265, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363634313137393b736573735f757365727c613a373a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f726f6c655f6e616d65223b733a31313a2253757065722041646d696e223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
 ('6n78b86oqi6k7ln786nie333p4d71gk2', '::1', 1526356370, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363335363134323b636172745f636f6e74656e74737c613a333a7b733a31303a22636172745f746f74616c223b643a313530303b733a31313a22746f74616c5f6974656d73223b643a313b733a33323a226234633534373233333234336632333137643861643833343364363939663563223b613a373a7b733a323a226964223b733a313a2235223b733a333a22717479223b643a313b733a353a227072696365223b643a313530303b733a343a226e616d65223b733a32333a224d656e2773204e696b652052756e6e696e672053686f65223b733a373a226f7074696f6e73223b613a323a7b733a31333a2263617465676f72795f6e616d65223b733a353a2253686f6573223b733a31333a2270726f647563745f696d616765223b733a383a2270726f642e706e67223b7d733a353a22726f776964223b733a33323a226234633534373233333234336632333137643861643833343364363939663563223b733a383a22737562746f74616c223b643a313530303b7d7d736573735f757365727c613a363a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
+('6u9o3uvf0b7db4rc7rgr8i1abp6lk67d', '::1', 1526491608, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363439313337353b636172745f636f6e74656e74737c613a333a7b733a31303a22636172745f746f74616c223b643a363030303b733a31313a22746f74616c5f6974656d73223b643a343b733a33323a226234633534373233333234336632333137643861643833343364363939663563223b613a373a7b733a323a226964223b733a313a2235223b733a333a22717479223b643a343b733a353a227072696365223b643a313530303b733a343a226e616d65223b733a32333a224d656e2773204e696b652052756e6e696e672053686f65223b733a373a226f7074696f6e73223b613a323a7b733a31333a2263617465676f72795f6e616d65223b733a353a2253686f6573223b733a31333a2270726f647563745f696d616765223b733a383a2270726f642e706e67223b7d733a353a22726f776964223b733a33323a226234633534373233333234336632333137643861643833343364363939663563223b733a383a22737562746f74616c223b643a363030303b7d7d736573735f757365727c613a373a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f726f6c655f6e616d65223b733a31313a2253757065722041646d696e223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
+('6ujl5a03f669rf3f4cf0kesrvnk0b9jv', '::1', 1526614545, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363631343235303b736573735f757365727c613a373a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f726f6c655f6e616d65223b733a31313a2253757065722041646d696e223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
 ('710n10qervk3uoda0h8g8bfgg2vkoqg7', '::1', 1526352239, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363335323030393b),
+('7315or7fnosukteft6e13ust3cjm3pr4', '::1', 1526630444, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363633303136313b736573735f757365727c613a373a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f726f6c655f6e616d65223b733a31313a2253757065722041646d696e223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
+('79fta2t9eou0a6fv2r0ki4cupb25rpud', '::1', 1526531739, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363533313733393b),
 ('7cpcm38dpn6bb9q6mqehu1op2uos3eum', '::1', 1526314969, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363331343637363b),
 ('7ov5t4sltabm8p6hjit3gsmm142g4u9a', '::1', 1526126370, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363132363231393b736573735f757365727c613a363a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d636172745f636f6e74656e74737c613a343a7b733a31303a22636172745f746f74616c223b643a333138303b733a31313a22746f74616c5f6974656d73223b643a343b733a33323a226165393530313533356163376335353935643464633632356432383338333864223b613a373a7b733a323a226964223b733a313a2234223b733a333a22717479223b643a323b733a353a227072696365223b643a39303b733a343a226e616d65223b733a31383a224d6f746f204735204261636b20436f766572223b733a373a226f7074696f6e73223b613a323a7b733a31333a2263617465676f72795f6e616d65223b733a31313a224163636573736f72696573223b733a31333a2270726f647563745f696d616765223b733a383a2270726f642e706e67223b7d733a353a22726f776964223b733a33323a226165393530313533356163376335353935643464633632356432383338333864223b733a383a22737562746f74616c223b643a3138303b7d733a33323a226234633534373233333234336632333137643861643833343364363939663563223b613a373a7b733a323a226964223b733a313a2235223b733a333a22717479223b643a323b733a353a227072696365223b643a313530303b733a343a226e616d65223b733a32333a224d656e2773204e696b652052756e6e696e672053686f65223b733a373a226f7074696f6e73223b613a323a7b733a31333a2263617465676f72795f6e616d65223b733a353a2253686f6573223b733a31333a2270726f647563745f696d616765223b733a383a2270726f642e706e67223b7d733a353a22726f776964223b733a33323a226234633534373233333234336632333137643861643833343364363939663563223b733a383a22737562746f74616c223b643a333030303b7d7d666c6173685f6d6573736167657c733a33393a22596f75206361727420686173206265656e2075706461746564207375636365737366756c6c792e223b5f5f63695f766172737c613a323a7b733a31333a22666c6173685f6d657373616765223b733a333a226f6c64223b733a31373a22666c6173685f6d6573736167655f637373223b733a333a226f6c64223b7d666c6173685f6d6573736167655f6373737c733a31333a22616c6572742d73756363657373223b),
 ('7rk467mst7fd7u53nmooaukdufs5fvb0', '::1', 1526299386, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363239393230363b736573735f757365727c613a363a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
 ('81tsk6ud1227se5f0upvcsr6gndvef0e', '::1', 1526299116, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363239383837303b736573735f757365727c613a363a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
+('8bc2peklaehbi1r6b6oo1otjqejjhd03', '::1', 1526493581, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363439333238393b636172745f636f6e74656e74737c613a333a7b733a31303a22636172745f746f74616c223b643a363030303b733a31313a22746f74616c5f6974656d73223b643a343b733a33323a226234633534373233333234336632333137643861643833343364363939663563223b613a373a7b733a323a226964223b733a313a2235223b733a333a22717479223b643a343b733a353a227072696365223b643a313530303b733a343a226e616d65223b733a32333a224d656e2773204e696b652052756e6e696e672053686f65223b733a373a226f7074696f6e73223b613a323a7b733a31333a2263617465676f72795f6e616d65223b733a353a2253686f6573223b733a31333a2270726f647563745f696d616765223b733a383a2270726f642e706e67223b7d733a353a22726f776964223b733a33323a226234633534373233333234336632333137643861643833343364363939663563223b733a383a22737562746f74616c223b643a363030303b7d7d736573735f757365727c613a373a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f726f6c655f6e616d65223b733a31313a2253757065722041646d696e223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
+('8bt983u17nek73sglb1bpa851fgun1pk', '::1', 1526492298, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363439323036373b636172745f636f6e74656e74737c613a333a7b733a31303a22636172745f746f74616c223b643a363030303b733a31313a22746f74616c5f6974656d73223b643a343b733a33323a226234633534373233333234336632333137643861643833343364363939663563223b613a373a7b733a323a226964223b733a313a2235223b733a333a22717479223b643a343b733a353a227072696365223b643a313530303b733a343a226e616d65223b733a32333a224d656e2773204e696b652052756e6e696e672053686f65223b733a373a226f7074696f6e73223b613a323a7b733a31333a2263617465676f72795f6e616d65223b733a353a2253686f6573223b733a31333a2270726f647563745f696d616765223b733a383a2270726f642e706e67223b7d733a353a22726f776964223b733a33323a226234633534373233333234336632333137643861643833343364363939663563223b733a383a22737562746f74616c223b643a363030303b7d7d736573735f757365727c613a373a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f726f6c655f6e616d65223b733a31313a2253757065722041646d696e223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
 ('8n0noci46o3b885388lu1b1bmleac3rs', '::1', 1526353721, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363335333630393b736573735f757365727c613a363a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
 ('8nq5k4tn2m06piaqqdbe6kkern6r2jsr', '::1', 1526315005, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363331343939333b),
+('8tspgh7lqbg119qle7f8kp20s3dkart2', '::1', 1526487313, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363438373234303b636172745f636f6e74656e74737c613a333a7b733a31303a22636172745f746f74616c223b643a313530303b733a31313a22746f74616c5f6974656d73223b643a313b733a33323a226234633534373233333234336632333137643861643833343364363939663563223b613a373a7b733a323a226964223b733a313a2235223b733a333a22717479223b643a313b733a353a227072696365223b643a313530303b733a343a226e616d65223b733a32333a224d656e2773204e696b652052756e6e696e672053686f65223b733a373a226f7074696f6e73223b613a323a7b733a31333a2263617465676f72795f6e616d65223b733a353a2253686f6573223b733a31333a2270726f647563745f696d616765223b733a383a2270726f642e706e67223b7d733a353a22726f776964223b733a33323a226234633534373233333234336632333137643861643833343364363939663563223b733a383a22737562746f74616c223b643a313530303b7d7d736573735f757365727c613a373a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f726f6c655f6e616d65223b733a31313a2253757065722041646d696e223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
 ('8u23ihdnamia06548cj718sjt3qcgq6k', '::1', 1526314117, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363331343031323b),
 ('9569modr8mcsq4jb8fftd81e5jbq824s', '::1', 1526360424, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363336303339353b736573735f757365727c613a363a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
 ('95bnqduurhot71153fitbmtcb0rrlbl1', '::1', 1526292558, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363239323238313b),
+('9h2j1lp52r2oqvt9rocc794p171u3vd5', '::1', 1526484829, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363438343634393b),
+('9ra9jbm81aueaan3k6q03kl9s1rd23oc', '::1', 1526531688, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363533313638383b),
+('9toar604h0lfdv1r2ab10gg4kk5r687u', '::1', 1526644399, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363634343131333b736573735f757365727c613a373a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f726f6c655f6e616d65223b733a31313a2253757065722041646d696e223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
 ('9urpk3gq3ovq8ipcsi9h1op0tc3j1doe', '::1', 1526317465, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363331373433383b),
 ('a5dbqjdm0ls7eldbj0lrtuvaa95bk32u', '::1', 1526295472, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363239353236373b736573735f757365727c613a363a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
+('a67ja4kkdgtc2larnqtp8tcohbmofvil', '::1', 1526613523, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363631333232353b736573735f757365727c613a373a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f726f6c655f6e616d65223b733a31313a2253757065722041646d696e223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
+('akrro8rfkdc3rbsgsd5m9loi27j2lkcj', '::1', 1526404823, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363430343734393b666c6173685f6d6573736167657c733a33383a22596f752068617665206265656e206c6f67676564206f7574207375636365737366756c6c792e223b5f5f63695f766172737c613a323a7b733a31333a22666c6173685f6d657373616765223b733a333a226f6c64223b733a31373a22666c6173685f6d6573736167655f637373223b733a333a226f6c64223b7d666c6173685f6d6573736167655f6373737c733a31333a22616c6572742d73756363657373223b),
 ('am6te14lusomecupaui1nld3ob36amrs', '::1', 1526316506, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363331363330373b),
 ('b3guf5pamomhh4jbu6tj8vndooiuu9fa', '::1', 1526145953, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363134353837353b),
+('bcudjps85g1u57ub1a6ltg7hflie40po', '::1', 1526645656, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363634353337343b736573735f757365727c613a373a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f726f6c655f6e616d65223b733a31313a2253757065722041646d696e223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
+('beobind2405c023e6eqcpilav6h5eoee', '::1', 1526614228, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363631333933333b736573735f757365727c613a373a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f726f6c655f6e616d65223b733a31313a2253757065722041646d696e223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
+('bmf355h2o2nkeumituibj4fnin3nih4i', '::1', 1526614765, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363631343535313b736573735f757365727c613a373a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f726f6c655f6e616d65223b733a31313a2253757065722041646d696e223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
 ('bppcpt2caal674b062c0fv48e0471bto', '::1', 1526359647, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363335393434383b736573735f757365727c613a363a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
+('bsm2phprhlhl679lqll1cgcrtutei6bm', '::1', 1526531695, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363533313639353b),
 ('bsv8nmjbg4t4nmfo88vvo44gs0jf765j', '::1', 1526296245, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363239353934353b736573735f757365727c613a363a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
 ('c0r6bpmnd3v102t1pm51lfi8vdktkh95', '::1', 1526312885, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363331323638333b),
+('c146s1entludihk87d50133cttv041m7', '::1', 1526492657, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363439323430383b636172745f636f6e74656e74737c613a333a7b733a31303a22636172745f746f74616c223b643a363030303b733a31313a22746f74616c5f6974656d73223b643a343b733a33323a226234633534373233333234336632333137643861643833343364363939663563223b613a373a7b733a323a226964223b733a313a2235223b733a333a22717479223b643a343b733a353a227072696365223b643a313530303b733a343a226e616d65223b733a32333a224d656e2773204e696b652052756e6e696e672053686f65223b733a373a226f7074696f6e73223b613a323a7b733a31333a2263617465676f72795f6e616d65223b733a353a2253686f6573223b733a31333a2270726f647563745f696d616765223b733a383a2270726f642e706e67223b7d733a353a22726f776964223b733a33323a226234633534373233333234336632333137643861643833343364363939663563223b733a383a22737562746f74616c223b643a363030303b7d7d736573735f757365727c613a373a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f726f6c655f6e616d65223b733a31313a2253757065722041646d696e223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
+('c1dm4tp0929jrn8j130mh7kfvj2vvl8v', '::1', 1526490560, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363439303236353b636172745f636f6e74656e74737c613a333a7b733a31303a22636172745f746f74616c223b643a363030303b733a31313a22746f74616c5f6974656d73223b643a343b733a33323a226234633534373233333234336632333137643861643833343364363939663563223b613a373a7b733a323a226964223b733a313a2235223b733a333a22717479223b643a343b733a353a227072696365223b643a313530303b733a343a226e616d65223b733a32333a224d656e2773204e696b652052756e6e696e672053686f65223b733a373a226f7074696f6e73223b613a323a7b733a31333a2263617465676f72795f6e616d65223b733a353a2253686f6573223b733a31333a2270726f647563745f696d616765223b733a383a2270726f642e706e67223b7d733a353a22726f776964223b733a33323a226234633534373233333234336632333137643861643833343364363939663563223b733a383a22737562746f74616c223b643a363030303b7d7d666c6173685f6d6573736167657c733a39303a223c6920636c6173733d2269636f6e2066612066612d636865636b2220617269612d68696464656e3d2274727565223e3c2f693e20596f752068617665206265656e206c6f67676564206f7574207375636365737366756c6c792e223b5f5f63695f766172737c613a323a7b733a31333a22666c6173685f6d657373616765223b733a333a226f6c64223b733a31373a22666c6173685f6d6573736167655f637373223b733a333a226f6c64223b7d666c6173685f6d6573736167655f6373737c733a31333a22616c6572742d73756363657373223b),
+('c4j5l0jnrit9m717qaebv5pnlp45h43j', '::1', 1526613754, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363631333535393b736573735f757365727c613a373a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f726f6c655f6e616d65223b733a31313a2253757065722041646d696e223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
 ('c5ugledu97d44jobd055u84cr2pktr6d', '::1', 1526360391, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363336303039313b736573735f757365727c613a363a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
 ('c799trsj51a1kbd6csvh1cnlsvulnujg', '::1', 1526301305, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363330313230343b),
+('c7pjuqg4lksdqqmle2mid1vcucgpissc', '::1', 1526531720, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363533313732303b),
 ('cafkulma44acl80pkr3pbhc0v98h0q2s', '::1', 1526292638, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363239323633373b),
 ('ci4nog7goqenhpfpha7k3qblemuqso82', '::1', 1526129650, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363132393338393b736573735f757365727c613a363a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
 ('cl86pf7dmcstah2u9gk1phcr67t893e8', '::1', 1526132539, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363133323436343b),
 ('cp002vgo5f9qgbh7dhhgeone0cj6qvqd', '::1', 1526293799, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363239333631303b736573735f757365727c613a363a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
+('cv9d0hen88f96eql39n55jf8uu6mt6ip', '::1', 1526494164, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363439333933363b636172745f636f6e74656e74737c613a333a7b733a31303a22636172745f746f74616c223b643a363030303b733a31313a22746f74616c5f6974656d73223b643a343b733a33323a226234633534373233333234336632333137643861643833343364363939663563223b613a373a7b733a323a226964223b733a313a2235223b733a333a22717479223b643a343b733a353a227072696365223b643a313530303b733a343a226e616d65223b733a32333a224d656e2773204e696b652052756e6e696e672053686f65223b733a373a226f7074696f6e73223b613a323a7b733a31333a2263617465676f72795f6e616d65223b733a353a2253686f6573223b733a31333a2270726f647563745f696d616765223b733a383a2270726f642e706e67223b7d733a353a22726f776964223b733a33323a226234633534373233333234336632333137643861643833343364363939663563223b733a383a22737562746f74616c223b643a363030303b7d7d666c6173685f6d6573736167657c733a39303a223c6920636c6173733d2269636f6e2066612066612d636865636b2220617269612d68696464656e3d2274727565223e3c2f693e20596f752068617665206265656e206c6f67676564206f7574207375636365737366756c6c792e223b5f5f63695f766172737c613a323a7b733a31333a22666c6173685f6d657373616765223b733a333a226f6c64223b733a31373a22666c6173685f6d6573736167655f637373223b733a333a226f6c64223b7d666c6173685f6d6573736167655f6373737c733a31333a22616c6572742d73756363657373223b),
+('d25f8s8qljglchrd89tvrc6eq9gga8jr', '::1', 1526617481, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363631373438313b736573735f757365727c613a373a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f726f6c655f6e616d65223b733a31313a2253757065722041646d696e223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d);
+INSERT INTO `ci_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('d53v2fia2hms6e1s7nrdkpq2p2n94jco', '::1', 1526126996, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363132363939363b736573735f757365727c613a363a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d636172745f636f6e74656e74737c613a343a7b733a31303a22636172745f746f74616c223b643a333138303b733a31313a22746f74616c5f6974656d73223b643a343b733a33323a226165393530313533356163376335353935643464633632356432383338333864223b613a373a7b733a323a226964223b733a313a2234223b733a333a22717479223b643a323b733a353a227072696365223b643a39303b733a343a226e616d65223b733a31383a224d6f746f204735204261636b20436f766572223b733a373a226f7074696f6e73223b613a323a7b733a31333a2263617465676f72795f6e616d65223b733a31313a224163636573736f72696573223b733a31333a2270726f647563745f696d616765223b733a383a2270726f642e706e67223b7d733a353a22726f776964223b733a33323a226165393530313533356163376335353935643464633632356432383338333864223b733a383a22737562746f74616c223b643a3138303b7d733a33323a226234633534373233333234336632333137643861643833343364363939663563223b613a373a7b733a323a226964223b733a313a2235223b733a333a22717479223b643a323b733a353a227072696365223b643a313530303b733a343a226e616d65223b733a32333a224d656e2773204e696b652052756e6e696e672053686f65223b733a373a226f7074696f6e73223b613a323a7b733a31333a2263617465676f72795f6e616d65223b733a353a2253686f6573223b733a31333a2270726f647563745f696d616765223b733a383a2270726f642e706e67223b7d733a353a22726f776964223b733a33323a226234633534373233333234336632333137643861643833343364363939663563223b733a383a22737562746f74616c223b643a333030303b7d7d),
 ('da5qjicf24kt3ltgdnrb9vaknov09lr2', '::1', 1526357988, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363335373731363b636172745f636f6e74656e74737c613a333a7b733a31303a22636172745f746f74616c223b643a313530303b733a31313a22746f74616c5f6974656d73223b643a313b733a33323a226234633534373233333234336632333137643861643833343364363939663563223b613a373a7b733a323a226964223b733a313a2235223b733a333a22717479223b643a313b733a353a227072696365223b643a313530303b733a343a226e616d65223b733a32333a224d656e2773204e696b652052756e6e696e672053686f65223b733a373a226f7074696f6e73223b613a323a7b733a31333a2263617465676f72795f6e616d65223b733a353a2253686f6573223b733a31333a2270726f647563745f696d616765223b733a383a2270726f642e706e67223b7d733a353a22726f776964223b733a33323a226234633534373233333234336632333137643861643833343364363939663563223b733a383a22737562746f74616c223b643a313530303b7d7d736573735f757365727c613a363a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
 ('dc6hh6fl22odgvkg1mtop06it3fnaicj', '::1', 1526312217, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363331323030353b),
+('e1i8ohssds7psgdftevm012ta9qqej07', '::1', 1526531749, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363533313734393b),
+('ec6itqtpg08obg9qn435bauncgq240t4', '::1', 1526493250, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363439323937373b636172745f636f6e74656e74737c613a333a7b733a31303a22636172745f746f74616c223b643a363030303b733a31313a22746f74616c5f6974656d73223b643a343b733a33323a226234633534373233333234336632333137643861643833343364363939663563223b613a373a7b733a323a226964223b733a313a2235223b733a333a22717479223b643a343b733a353a227072696365223b643a313530303b733a343a226e616d65223b733a32333a224d656e2773204e696b652052756e6e696e672053686f65223b733a373a226f7074696f6e73223b613a323a7b733a31333a2263617465676f72795f6e616d65223b733a353a2253686f6573223b733a31333a2270726f647563745f696d616765223b733a383a2270726f642e706e67223b7d733a353a22726f776964223b733a33323a226234633534373233333234336632333137643861643833343364363939663563223b733a383a22737562746f74616c223b643a363030303b7d7d736573735f757365727c613a373a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f726f6c655f6e616d65223b733a31313a2253757065722041646d696e223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
 ('ehv2hlklk3gi049ls7rf2a5bre3tltqv', '::1', 1526299859, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363239393639343b736573735f757365727c613a363a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
+('embgl8uvs2b003kgh81ar7d7mrdv5log', '::1', 1526640469, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363634303237313b736573735f757365727c613a373a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f726f6c655f6e616d65223b733a31313a2253757065722041646d696e223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
+('eof7706q5hnagkg8vnmpdkr0t4h04qg5', '::1', 1526641815, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363634313531353b736573735f757365727c613a373a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f726f6c655f6e616d65223b733a31313a2253757065722041646d696e223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
+('fdo026m0oodgdbpggse7m9d6jgqdub6v', '::1', 1526404708, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363430343431373b736573735f757365727c613a373a7b733a323a226964223b733a313a2237223b733a393a22757365725f726f6c65223b733a313a2233223b733a31343a22757365725f726f6c655f6e616d65223b733a343a2255736572223b733a31343a22757365725f66697273746e616d65223b733a363a225341494b4154223b733a31333a22757365725f6c6173746e616d65223b733a31303a224d614861506154724120223b733a31303a22757365725f656d61696c223b733a31363a227361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
 ('ffktq6ecr92aj2aolbbcdd29ihic8ra9', '::1', 1526293123, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363239323934353b736573735f757365727c613a363a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
+('gaea6odf09k6skujoslvgjklar72s0m1', '::1', 1526485577, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363438353331323b),
 ('gi1h6q8ntk3klp914ri8qpkc1occei0q', '::1', 1526360067, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363335393738383b736573735f757365727c613a363a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
 ('h03ob1g8db4ttm37ugdc92v93257ab2f', '::1', 1526297804, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363239373636333b736573735f757365727c613a363a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
 ('hobscupaafcfpsk8741o27hhr1iea9rk', '::1', 1526355438, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363335353235343b),
+('i67d2v5hd7r6gcesrstp7ons4c6j6qq5', '::1', 1526619315, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363631393130333b736573735f757365727c613a373a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f726f6c655f6e616d65223b733a31313a2253757065722041646d696e223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
+('i823gehi6efmbnkbv4f450asg75uoq3h', '::1', 1526617275, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363631373036383b736573735f757365727c613a373a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f726f6c655f6e616d65223b733a31313a2253757065722041646d696e223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
 ('ic0g5sqsu9mv0jf3vgs5thaii0t1g4j6', '::1', 1526357204, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363335373032363b636172745f636f6e74656e74737c613a333a7b733a31303a22636172745f746f74616c223b643a313530303b733a31313a22746f74616c5f6974656d73223b643a313b733a33323a226234633534373233333234336632333137643861643833343364363939663563223b613a373a7b733a323a226964223b733a313a2235223b733a333a22717479223b643a313b733a353a227072696365223b643a313530303b733a343a226e616d65223b733a32333a224d656e2773204e696b652052756e6e696e672053686f65223b733a373a226f7074696f6e73223b613a323a7b733a31333a2263617465676f72795f6e616d65223b733a353a2253686f6573223b733a31333a2270726f647563745f696d616765223b733a383a2270726f642e706e67223b7d733a353a22726f776964223b733a33323a226234633534373233333234336632333137643861643833343364363939663563223b733a383a22737562746f74616c223b643a313530303b7d7d),
 ('ij6f136eh4v35b8d34v7kdqud7ckkk1n', '::1', 1526236638, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363233363631373b736573735f757365727c613a363a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
+('ilis2p9ndi7jkrgat3feljl2lerpknvi', '::1', 1526531725, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363533313732353b),
 ('j48eplfdos6bij9ss8pbhb6nukenotjf', '::1', 1526359040, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363335383734383b636172745f636f6e74656e74737c613a333a7b733a31303a22636172745f746f74616c223b643a313530303b733a31313a22746f74616c5f6974656d73223b643a313b733a33323a226234633534373233333234336632333137643861643833343364363939663563223b613a373a7b733a323a226964223b733a313a2235223b733a333a22717479223b643a313b733a353a227072696365223b643a313530303b733a343a226e616d65223b733a32333a224d656e2773204e696b652052756e6e696e672053686f65223b733a373a226f7074696f6e73223b613a323a7b733a31333a2263617465676f72795f6e616d65223b733a353a2253686f6573223b733a31333a2270726f647563745f696d616765223b733a383a2270726f642e706e67223b7d733a353a22726f776964223b733a33323a226234633534373233333234336632333137643861643833343364363939663563223b733a383a22737562746f74616c223b643a313530303b7d7d736573735f757365727c613a363a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
 ('j4k4qber95vjlhb6asoia7qrilbndpv6', '::1', 1526309924, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363330393830363b),
+('jlt05jvehv30pt4u36dp96oe5oavtcer', '::1', 1526627413, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363632373333343b736573735f757365727c613a373a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f726f6c655f6e616d65223b733a31313a2253757065722041646d696e223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
 ('jpvmekdnj1hc36fne12ks777caas02h2', '::1', 1526312557, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363331323334343b),
 ('jvn2om73cuach8pa6va4krjsuad8v1hk', '::1', 1526283511, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363238333431303b736573735f757365727c613a363a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
 ('kobsi9nin7g13oj3eu26tl49868iaa1c', '::1', 1526316935, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363331363633363b736573735f757365727c613a363a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
 ('l77qqr6am3alc87a2buagc55ofdrg1lp', '::1', 1526128178, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363132373931323b736573735f757365727c613a363a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
+('l9eokda7ulgkraskscr7s4jpcar8c9gt', '::1', 1526645749, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363634353732323b736573735f757365727c613a373a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f726f6c655f6e616d65223b733a31313a2253757065722041646d696e223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
 ('lhh6aohf3ojuos5lcfkfeuhqa2vnreal', '::1', 1526129372, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363132393038343b736573735f757365727c613a363a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
 ('lj5cmibod5ur9a92qqb053hej399ep4p', '127.0.0.1', 1526145812, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363134353831323b),
+('lpgn6s41gm82sar3rgvdfvplgh58hvc0', '::1', 1526616340, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363631363130313b736573735f757365727c613a373a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f726f6c655f6e616d65223b733a31313a2253757065722041646d696e223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
 ('lt8tvf8k6jfp737v9ibnk7cn58cl3a33', '::1', 1526354327, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363335343234373b736573735f757365727c613a363a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d666c6173685f6d6573736167657c733a34353a22596f757220626173696320696e666f20686173206265656e2075706461746564207375636365737366756c6c79223b5f5f63695f766172737c613a323a7b733a31333a22666c6173685f6d657373616765223b733a333a226f6c64223b733a31373a22666c6173685f6d6573736167655f637373223b733a333a226f6c64223b7d666c6173685f6d6573736167655f6373737c733a31333a22616c6572742d73756363657373223b),
 ('m3j5j64409ikb6pje9o5ejuv67f57js8', '::1', 1526292921, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363239323633383b736573735f757365727c613a363a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
 ('nici4hhva26v5raj4gp60ir2bpq4uk5i', '::1', 1526146383, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363134363338333b),
 ('o5pf92nkpd2t5s47vadnedemf0ttkacb', '::1', 1526297559, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363239373331333b736573735f757365727c613a363a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
 ('o7g17ivaeui7t7ghanfmr5tqv32a7f3t', '::1', 1526130044, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363132393831323b736573735f757365727c613a363a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
+('og3cco6qo4l54q8fei3co5m94nt2f0b5', '::1', 1526531709, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363533313730393b),
+('oggqk38tjkjg1v1mtevo5d36ik1q5s02', '::1', 1526631045, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363633313034323b736573735f757365727c613a373a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f726f6c655f6e616d65223b733a31313a2253757065722041646d696e223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
+('oiaocaioso4bgjb5ltiuou6vkepimmlu', '::1', 1526532036, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363533313832333b736573735f757365727c613a373a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f726f6c655f6e616d65223b733a31313a2253757065722041646d696e223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
 ('oq76fjgba4gaplbp5uld0sdle4m58q3r', '::1', 1526295869, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363239353633313b736573735f757365727c613a363a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
+('os5rcff3ufmjvjog9tdrb5l8q3akdhvv', '::1', 1526531385, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363533313039353b666c6173685f6d6573736167657c733a39303a223c6920636c6173733d2269636f6e2066612066612d636865636b2220617269612d68696464656e3d2274727565223e3c2f693e20596f752068617665206265656e206c6f67676564206f7574207375636365737366756c6c792e223b5f5f63695f766172737c613a323a7b733a31333a22666c6173685f6d657373616765223b733a333a226f6c64223b733a31373a22666c6173685f6d6573736167655f637373223b733a333a226f6c64223b7d666c6173685f6d6573736167655f6373737c733a31333a22616c6572742d73756363657373223b),
+('p0ffr5vbuac06p2punr41p8vs0tq4v8e', '::1', 1526531725, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363533313732353b),
 ('p1q4lilcvccvt5kqa5vkeiuq4de72qqi', '::1', 1526358061, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363335383035303b636172745f636f6e74656e74737c613a333a7b733a31303a22636172745f746f74616c223b643a313530303b733a31313a22746f74616c5f6974656d73223b643a313b733a33323a226234633534373233333234336632333137643861643833343364363939663563223b613a373a7b733a323a226964223b733a313a2235223b733a333a22717479223b643a313b733a353a227072696365223b643a313530303b733a343a226e616d65223b733a32333a224d656e2773204e696b652052756e6e696e672053686f65223b733a373a226f7074696f6e73223b613a323a7b733a31333a2263617465676f72795f6e616d65223b733a353a2253686f6573223b733a31333a2270726f647563745f696d616765223b733a383a2270726f642e706e67223b7d733a353a22726f776964223b733a33323a226234633534373233333234336632333137643861643833343364363939663563223b733a383a22737562746f74616c223b643a313530303b7d7d736573735f757365727c613a363a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
 ('p6m359ar28j154rlh1t3lmvbl2d70r1c', '::1', 1526298151, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363239383036353b736573735f757365727c613a363a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
 ('pnps3jp5tq6bcgvub3vvlecb23hu911n', '::1', 1526143994, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363134333732323b636172745f636f6e74656e74737c613a333a7b733a31303a22636172745f746f74616c223b643a3237303b733a31313a22746f74616c5f6974656d73223b643a333b733a33323a226165393530313533356163376335353935643464633632356432383338333864223b613a373a7b733a323a226964223b733a313a2234223b733a333a22717479223b643a333b733a353a227072696365223b643a39303b733a343a226e616d65223b733a31383a224d6f746f204735204261636b20436f766572223b733a373a226f7074696f6e73223b613a323a7b733a31333a2263617465676f72795f6e616d65223b733a31313a224163636573736f72696573223b733a31333a2270726f647563745f696d616765223b733a383a2270726f642e706e67223b7d733a353a22726f776964223b733a33323a226165393530313533356163376335353935643464633632356432383338333864223b733a383a22737562746f74616c223b643a3237303b7d7d),
 ('pvh5ee4spkk0f5u2vjsfusa9am5qrt9j', '::1', 1526355865, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363335353730343b636172745f636f6e74656e74737c613a333a7b733a31303a22636172745f746f74616c223b643a313530303b733a31313a22746f74616c5f6974656d73223b643a313b733a33323a226234633534373233333234336632333137643861643833343364363939663563223b613a373a7b733a323a226964223b733a313a2235223b733a333a22717479223b643a313b733a353a227072696365223b643a313530303b733a343a226e616d65223b733a32333a224d656e2773204e696b652052756e6e696e672053686f65223b733a373a226f7074696f6e73223b613a323a7b733a31333a2263617465676f72795f6e616d65223b733a353a2253686f6573223b733a31333a2270726f647563745f696d616765223b733a383a2270726f642e706e67223b7d733a353a22726f776964223b733a33323a226234633534373233333234336632333137643861643833343364363939663563223b733a383a22737562746f74616c223b643a313530303b7d7d736573735f757365727c613a363a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
 ('q7jmqlgng166237hqniiugr8rgrgr7rp', '::1', 1526292185, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363239313934343b666c6173685f6d6573736167657c733a33383a22596f752068617665206265656e206c6f67676564206f7574207375636365737366756c6c792e223b5f5f63695f766172737c613a323a7b733a31333a22666c6173685f6d657373616765223b733a333a226f6c64223b733a31373a22666c6173685f6d6573736167655f637373223b733a333a226f6c64223b7d666c6173685f6d6573736167655f6373737c733a31333a22616c6572742d73756363657373223b),
 ('q99immib9p37lt94d9clfcas5n5dr6mb', '::1', 1526300312, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363330303330333b666c6173685f6d6573736167657c733a39303a223c6920636c6173733d2269636f6e2066612066612d636865636b2220617269612d68696464656e3d2274727565223e3c2f693e20596f752068617665206265656e206c6f67676564206f7574207375636365737366756c6c792e223b5f5f63695f766172737c613a323a7b733a31333a22666c6173685f6d657373616765223b733a333a226f6c64223b733a31373a22666c6173685f6d6573736167655f637373223b733a333a226f6c64223b7d666c6173685f6d6573736167655f6373737c733a31333a22616c6572742d73756363657373223b),
+('qarojp86m5erqqqh643ie5hb5mmpg3el', '::1', 1526531690, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363533313638393b),
 ('qcesof4iphddcuenvri45lit1fne7m5u', '::1', 1526297044, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363239363930313b736573735f757365727c613a363a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
+('qj78s3lf8q97f9sdh7bhqgnu1jsfneln', '::1', 1526531533, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363533313437373b),
+('qolh4i39i7p36a8b9pl8algq57qgm2k1', '::1', 1526487098, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363438363933303b636172745f636f6e74656e74737c613a333a7b733a31303a22636172745f746f74616c223b643a313530303b733a31313a22746f74616c5f6974656d73223b643a313b733a33323a226234633534373233333234336632333137643861643833343364363939663563223b613a373a7b733a323a226964223b733a313a2235223b733a333a22717479223b643a313b733a353a227072696365223b643a313530303b733a343a226e616d65223b733a32333a224d656e2773204e696b652052756e6e696e672053686f65223b733a373a226f7074696f6e73223b613a323a7b733a31333a2263617465676f72795f6e616d65223b733a353a2253686f6573223b733a31333a2270726f647563745f696d616765223b733a383a2270726f642e706e67223b7d733a353a22726f776964223b733a33323a226234633534373233333234336632333137643861643833343364363939663563223b733a383a22737562746f74616c223b643a313530303b7d7d736573735f757365727c613a373a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f726f6c655f6e616d65223b733a31313a2253757065722041646d696e223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d666c6173685f6d6573736167657c733a34353a22596f757220626173696320696e666f20686173206265656e2075706461746564207375636365737366756c6c79223b5f5f63695f766172737c613a323a7b733a31333a22666c6173685f6d657373616765223b733a333a226f6c64223b733a31373a22666c6173685f6d6573736167655f637373223b733a333a226f6c64223b7d666c6173685f6d6573736167655f6373737c733a31333a22616c6572742d73756363657373223b),
 ('r7aujgia3s6bje5tgjdv733l18mh9hs2', '::1', 1526128968, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363132383736353b736573735f757365727c613a363a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
 ('sipj8a1g7v9u0fcj0pi4078a8rr452o2', '::1', 1526300183, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363330303030303b736573735f757365727c613a363a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
 ('soam53lpo2r57e975pja4i6sjr4epuui', '::1', 1526296496, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363239363239343b736573735f757365727c613a363a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
+('sq5ehc4irvumri3eotivutnc7q0n66ic', '::1', 1526531720, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363533313732303b),
+('sre4vbhnmtctdrui2auj2s465ntgj6ak', '::1', 1526531720, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363533313732303b),
+('st05m8vhog3bklt109l6lhnddsde2d1j', '::1', 1526531750, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363533313637373b736573735f757365727c613a373a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f726f6c655f6e616d65223b733a31313a2253757065722041646d696e223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
+('t07gfthei837ltiur8cqlhp9lljtva0u', '::1', 1526636810, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363633363639383b736573735f757365727c613a373a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f726f6c655f6e616d65223b733a31313a2253757065722041646d696e223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
 ('t7mnivpdvcq16evdkarv3sead83bu1lq', '::1', 1526290283, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363239303234333b666c6173685f6d6573736167657c733a33383a22596f752068617665206265656e206c6f67676564206f7574207375636365737366756c6c792e223b5f5f63695f766172737c613a323a7b733a31333a22666c6173685f6d657373616765223b733a333a226f6c64223b733a31373a22666c6173685f6d6573736167655f637373223b733a333a226f6c64223b7d666c6173685f6d6573736167655f6373737c733a31333a22616c6572742d73756363657373223b),
+('tpm04js55eq05pb0p648gsrf056538si', '::1', 1526531709, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363533313730393b),
+('tua100uip8jr46dr3ef72rkv3niql3t3', '::1', 1526642300, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363634323230363b736573735f757365727c613a373a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f726f6c655f6e616d65223b733a31313a2253757065722041646d696e223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
+('tvqh7nt15dqunaaq715bp6bvtvmqe21o', '::1', 1526491680, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363439313638303b636172745f636f6e74656e74737c613a333a7b733a31303a22636172745f746f74616c223b643a363030303b733a31313a22746f74616c5f6974656d73223b643a343b733a33323a226234633534373233333234336632333137643861643833343364363939663563223b613a373a7b733a323a226964223b733a313a2235223b733a333a22717479223b643a343b733a353a227072696365223b643a313530303b733a343a226e616d65223b733a32333a224d656e2773204e696b652052756e6e696e672053686f65223b733a373a226f7074696f6e73223b613a323a7b733a31333a2263617465676f72795f6e616d65223b733a353a2253686f6573223b733a31333a2270726f647563745f696d616765223b733a383a2270726f642e706e67223b7d733a353a22726f776964223b733a33323a226234633534373233333234336632333137643861643833343364363939663563223b733a383a22737562746f74616c223b643a363030303b7d7d736573735f757365727c613a373a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f726f6c655f6e616d65223b733a31313a2253757065722041646d696e223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
+('u11e97o8p3upaj0lspev2gatm6qbbeq8', '::1', 1526615193, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363631343936383b736573735f757365727c613a373a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f726f6c655f6e616d65223b733a31313a2253757065722041646d696e223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
+('u3kkt4miicnkvhkttjspg6fo7pcbu793', '::1', 1526636595, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363633363331323b),
 ('u9cbaasqf8p46epgnig53598uue9lhf1', '::1', 1526357623, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363335373338393b636172745f636f6e74656e74737c613a333a7b733a31303a22636172745f746f74616c223b643a313530303b733a31313a22746f74616c5f6974656d73223b643a313b733a33323a226234633534373233333234336632333137643861643833343364363939663563223b613a373a7b733a323a226964223b733a313a2235223b733a333a22717479223b643a313b733a353a227072696365223b643a313530303b733a343a226e616d65223b733a32333a224d656e2773204e696b652052756e6e696e672053686f65223b733a373a226f7074696f6e73223b613a323a7b733a31333a2263617465676f72795f6e616d65223b733a353a2253686f6573223b733a31333a2270726f647563745f696d616765223b733a383a2270726f642e706e67223b7d733a353a22726f776964223b733a33323a226234633534373233333234336632333137643861643833343364363939663563223b733a383a22737562746f74616c223b643a313530303b7d7d),
+('ue4rk6i4gm6u6b7mbpv264l873eio52a', '::1', 1526489897, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363438393833353b636172745f636f6e74656e74737c613a333a7b733a31303a22636172745f746f74616c223b643a313530303b733a31313a22746f74616c5f6974656d73223b643a313b733a33323a226234633534373233333234336632333137643861643833343364363939663563223b613a373a7b733a323a226964223b733a313a2235223b733a333a22717479223b643a313b733a353a227072696365223b643a313530303b733a343a226e616d65223b733a32333a224d656e2773204e696b652052756e6e696e672053686f65223b733a373a226f7074696f6e73223b613a323a7b733a31333a2263617465676f72795f6e616d65223b733a353a2253686f6573223b733a31333a2270726f647563745f696d616765223b733a383a2270726f642e706e67223b7d733a353a22726f776964223b733a33323a226234633534373233333234336632333137643861643833343364363939663563223b733a383a22737562746f74616c223b643a313530303b7d7d736573735f757365727c613a373a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f726f6c655f6e616d65223b733a31313a2253757065722041646d696e223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
 ('ujn6t263evnb4vnqc1c9nkk8mm8ofcds', '::1', 1526132406, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363133323135343b736573735f757365727c613a363a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
+('uoqeisik75ovub77f29h97ju8gshqq0n', '::1', 1526531749, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363533313734393b),
+('utbjnji4mmj5e8h1jukoqea7bv0959ac', '::1', 1526618016, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363631383031333b736573735f757365727c613a373a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f726f6c655f6e616d65223b733a31313a2253757065722041646d696e223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
+('v30ipibj1un4h1er8m97eclfhdrmk8um', '::1', 1526531739, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363533313733393b),
 ('v5eoc659rldns79inqkh1jpm7ndlr65a', '::1', 1526293575, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363239333330333b736573735f757365727c613a363a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
+('v6jiu3t1rkoo604frmq66std1f2drfkr', '::1', 1526637656, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363633373435313b736573735f757365727c613a373a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f726f6c655f6e616d65223b733a31313a2253757065722041646d696e223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d),
 ('vakvj2dbk9ri4ih4p6e33ifj7q26kku5', '::1', 1526213220, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363231333139303b736573735f757365727c613a363a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d666c6173685f6d6573736167657c733a34353a22596f757220626173696320696e666f20686173206265656e2075706461746564207375636365737366756c6c79223b5f5f63695f766172737c613a323a7b733a31333a22666c6173685f6d657373616765223b733a333a226f6c64223b733a31373a22666c6173685f6d6573736167655f637373223b733a333a226f6c64223b7d666c6173685f6d6573736167655f6373737c733a31333a22616c6572742d73756363657373223b),
 ('vibhh68sgmv6jddhcq6kv8f5p6hlpf3v', '::1', 1526131707, 0x5f5f63695f6c6173745f726567656e65726174657c693a313532363133313532333b736573735f757365727c613a363a7b733a323a226964223b733a313a2232223b733a393a22757365725f726f6c65223b733a313a2231223b733a31343a22757365725f66697273746e616d65223b733a363a225361696b6174223b733a31333a22757365725f6c6173746e616d65223b733a393a224d6168617061747261223b733a31303a22757365725f656d61696c223b733a32363a226d61686170617472612e7361696b617440676d61696c2e636f6d223b733a31303a22757365725f696d616765223b4e3b7d);
 
@@ -1821,13 +2871,13 @@ INSERT INTO `cms` (`id`, `pagecontent_type`, `pagecontent_user_id`, `pagecontent
 (1773, 'page', NULL, 'What We Do - 298', 'This is a sample description text 1464504056 Welcome', '', '', '', 'Y', 'N'),
 (1774, 'review', NULL, 'Uttaranchal - 259', 'This is a sample description text 1464504056 Welcome', '', '', '', 'Y', 'N'),
 (1776, 'review', NULL, 'Contact Us - 210', 'This is a sample description text 1464504057 Welcome', '', '', '', 'Y', 'N'),
-(1777, 'comment', NULL, 'Welcome Page - 432', 'This is a sample description text 1464504057 Welcome', '', '', '', 'Y', 'N'),
+(1777, 'comment', NULL, 'Welcome Page - 432', 'This is a sample description text 1464504057 <b>Welcome</b>', '', '', '', 'Y', 'N'),
 (1779, 'comment', NULL, 'Madhyapradesh - 281', 'This is a sample description text 1464504057 Welcome', '', '', '', 'Y', 'N');
 INSERT INTO `cms` (`id`, `pagecontent_type`, `pagecontent_user_id`, `pagecontent_title`, `pagecontent_text`, `pagecontent_meta_keywords`, `pagecontent_meta_description`, `pagecontent_meta_author`, `pagecontent_status`, `pagecontent_archived`) VALUES
 (1780, 'page', NULL, 'Who are We - 221', 'This is a sample description text 1464504057 Welcome', '', '', '', 'Y', 'N'),
 (1781, 'review', NULL, 'Madhyapradesh - 146', 'This is a sample description text 1464504057 Welcome', '', '', '', 'Y', 'N'),
 (1782, 'comment', NULL, 'What We Do - 221', 'This is a sample description text 1464504057 Welcome', '', '', '', 'Y', 'N'),
-(1784, 'page', NULL, 'Madhyapradesh - 359', '<p>This is a sample description text 1464504057 Welcome</p>\r\n', '', '', '', 'Y', 'N');
+(1784, 'post', NULL, 'Madhyapradesh - 359', '<p>This is a sample description text 1464504057 Welcome</p>\r\n', '', '', '', 'Y', 'N');
 
 -- --------------------------------------------------------
 
@@ -2119,7 +3169,7 @@ CREATE TABLE `users` (
   `user_lastname` varchar(50) DEFAULT NULL,
   `user_gender` char(1) DEFAULT NULL,
   `user_role` int(11) DEFAULT NULL,
-  `user_intro` text,
+  `user_bio` text,
   `user_dob` date DEFAULT NULL,
   `user_image` longblob,
   `user_mobile_phone1` varchar(15) DEFAULT NULL,
@@ -2136,9 +3186,35 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `user_email`, `user_password`, `user_firstname`, `user_midname`, `user_lastname`, `user_gender`, `user_role`, `user_intro`, `user_dob`, `user_image`, `user_mobile_phone1`, `user_mobile_phone2`, `user_registration_date`, `user_registration_ip`, `user_reset_password_key`, `user_activation_key`, `user_account_active`, `user_archived`) VALUES
-(2, 'mahapatra.saikat@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 'Saikat', NULL, 'Mahapatra', 'M', 1, 'Im an ui developer', '1987-12-29', NULL, '9474550761', '9831616696', '2015-09-03 16:52:46', '::1', 'a683048882d3786b7ad04fe846d10e77', 'd2193e17b9ec5d0c048b76c728fb8868', 'Y', 'N'),
+INSERT INTO `users` (`id`, `user_email`, `user_password`, `user_firstname`, `user_midname`, `user_lastname`, `user_gender`, `user_role`, `user_bio`, `user_dob`, `user_image`, `user_mobile_phone1`, `user_mobile_phone2`, `user_registration_date`, `user_registration_ip`, `user_reset_password_key`, `user_activation_key`, `user_account_active`, `user_archived`) VALUES
+(2, 'mahapatra.saikat@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 'Saikat', NULL, 'Mahapatra', 'M', 1, '', '1987-12-29', NULL, '9474550761', '', '2015-09-03 16:52:46', '::1', 'a683048882d3786b7ad04fe846d10e77', 'd2193e17b9ec5d0c048b76c728fb8868', 'Y', 'N'),
 (7, 'saikat@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 'SAIKAT', NULL, 'MaHaPaTrA ', 'M', 3, 'im a user', '2000-05-16', NULL, '9474550761', '8420111680', '2016-09-02 14:57:29', '::1', NULL, '453e50d706d57e6a76e82a339d3911ee', 'Y', 'N');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_academics`
+--
+
+CREATE TABLE `user_academics` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `academic_qualification` int(11) DEFAULT NULL,
+  `academic_from_year` year(4) DEFAULT NULL,
+  `academic_to_year` year(4) DEFAULT NULL,
+  `academic_inst` int(11) DEFAULT NULL,
+  `academic_other_inst` varchar(60) DEFAULT NULL,
+  `academic_marks_percentage` float(4,2) DEFAULT NULL,
+  `academic_specialization` int(11) DEFAULT NULL,
+  `academic_other_specialization` varchar(30) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user_academics`
+--
+
+INSERT INTO `user_academics` (`id`, `user_id`, `academic_qualification`, `academic_from_year`, `academic_to_year`, `academic_inst`, `academic_other_inst`, `academic_marks_percentage`, `academic_specialization`, `academic_other_specialization`) VALUES
+(1, 2, 2, 2003, 2007, 528, NULL, 66.30, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -2173,6 +3249,24 @@ INSERT INTO `user_addresses` (`id`, `user_id`, `address_type`, `shipping_address
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `academic_institute`
+--
+ALTER TABLE `academic_institute`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `academic_qualification`
+--
+ALTER TABLE `academic_qualification`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `academic_specialization`
+--
+ALTER TABLE `academic_specialization`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `activity_actions`
@@ -2287,6 +3381,12 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `user_email_2` (`user_email`);
 
 --
+-- Indexes for table `user_academics`
+--
+ALTER TABLE `user_academics`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `user_addresses`
 --
 ALTER TABLE `user_addresses`
@@ -2297,107 +3397,110 @@ ALTER TABLE `user_addresses`
 --
 
 --
+-- AUTO_INCREMENT for table `academic_institute`
+--
+ALTER TABLE `academic_institute`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=879;
+--
+-- AUTO_INCREMENT for table `academic_qualification`
+--
+ALTER TABLE `academic_qualification`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT for table `academic_specialization`
+--
+ALTER TABLE `academic_specialization`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+--
 -- AUTO_INCREMENT for table `activity_actions`
 --
 ALTER TABLE `activity_actions`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
 --
 -- AUTO_INCREMENT for table `activity_object_types`
 --
 ALTER TABLE `activity_object_types`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
 --
 -- AUTO_INCREMENT for table `activity_streams`
 --
 ALTER TABLE `activity_streams`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
 --
 -- AUTO_INCREMENT for table `cms`
 --
 ALTER TABLE `cms`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1785;
-
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
 --
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
 --
 -- AUTO_INCREMENT for table `professions`
 --
 ALTER TABLE `professions`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
 --
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT for table `role_permission`
 --
 ALTER TABLE `role_permission`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT for table `security_questions`
 --
 ALTER TABLE `security_questions`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-
 --
 -- AUTO_INCREMENT for table `uploads`
 --
 ALTER TABLE `uploads`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
+--
+-- AUTO_INCREMENT for table `user_academics`
+--
+ALTER TABLE `user_academics`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `user_addresses`
 --
 ALTER TABLE `user_addresses`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- Constraints for dumped tables
 --

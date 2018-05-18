@@ -332,3 +332,5 @@ ALTER TABLE `order_details` CHANGE `order_detail_total_amt` `order_detail_total_
 --	ON UPDATE CASCADE;
 ALTER TABLE `order_details` ADD `order_detail_updated_on` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER `order_detail_status`;
 
+ALTER TABLE `academic_institute` CHANGE `institute_name` `institute_name` VARCHAR(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL;
+ALTER TABLE `academic_specialization` CHANGE `specialization_name` `specialization_name` VARCHAR(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL;

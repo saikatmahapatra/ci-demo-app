@@ -90,7 +90,7 @@
 						'value' => set_value('academic_marks_percentage'),
 						'id' => 'academic_marks_percentage',
 						'class' => 'form-control',
-						'maxlength' => '4',
+						'maxlength' => '5',
 						'placeholder'=>'Marks'
 					));
 					?>

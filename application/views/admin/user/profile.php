@@ -66,6 +66,31 @@
 
 <br>
 
+<nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <a class="nav-item nav-link active" id="nav-basic-tab" data-toggle="tab" href="#nav-basic" role="tab" aria-controls="nav-basic" aria-selected="true">Home</a>
+	
+    <a class="nav-item nav-link" id="nav-address-tab" data-toggle="tab" href="#nav-address" role="tab" aria-controls="nav-address" aria-selected="false">Address</a>
+	
+    <a class="nav-item nav-link" id="nav-education-tab" data-toggle="tab" href="#nav-education" role="tab" aria-controls="nav-education" aria-selected="false">Education</a>
+	
+  </div>
+</nav>
+
+<div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane fade show active" id="nav-basic" role="tabpanel" aria-labelledby="nav-basic-tab">
+	
+  </div> <!--/#nav-basic-->
+  
+  <div class="tab-pane fade" id="nav-address" role="tabpanel" aria-labelledby="nav-address-tab">
+	
+  </div> <!--/#nav-address-->
+  <div class="tab-pane fade" id="nav-education" role="tabpanel" aria-labelledby="nav-education-tab">
+	
+  </div> <!--/#nav-education-->
+</div>
+
+
 <div class="row mb-3">
     <div class="col-md-12">
         <a class="btn btn-sm btn-outline-info float-right" href="<?php echo site_url('admin/user/edit_profile');?>"><i class="fa fa-edit" aria-hidden="true"></i></a>

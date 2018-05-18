@@ -34,11 +34,6 @@ class User extends CI_Controller {
 		
 		//View Page Config
 		$this->data['page_heading'] = $this->router->class.' : '.$this->router->method;
-		
-		/*Education*/
-		$this->data['arr_academic_qualification'] = $this->user_model->get_qualification_dropdown();
-		$this->data['arr_academic_inst'] = $this->user_model->get_institute_dropdown();
-		$this->data['arr_academic_specialization'] = $this->user_model->get_specialization_dropdown();
     }
 
     function index() {
@@ -544,7 +539,7 @@ class User extends CI_Controller {
                 if ($res) {
                     $this->session->set_flashdata('flash_message', 'Address has been updated successfully');
                     $this->session->set_flashdata('flash_message_css', 'alert-success');
-                    redirect('user/profile');
+                    redirect(current_url());
                 }
             }
         }
@@ -663,7 +658,10 @@ class User extends CI_Controller {
             redirect('user/login');
         }
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
-        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');		
+        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
+		$this->data['arr_academic_qualification'] = $this->user_model->get_qualification_dropdown();
+		$this->data['arr_academic_inst'] = $this->user_model->get_institute_dropdown();
+		$this->data['arr_academic_specialization'] = $this->user_model->get_specialization_dropdown();
         if ($this->input->post('form_action') == 'add') {
             if ($this->validate_user_education_form_data('add') == true) {
                 $postdata = array(
@@ -697,7 +695,10 @@ class User extends CI_Controller {
         }
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
-		$education_id = $this->uri->segment(3);        
+		$education_id = $this->uri->segment(3);
+		$this->data['arr_academic_qualification'] = $this->user_model->get_qualification_dropdown();
+		$this->data['arr_academic_inst'] = $this->user_model->get_institute_dropdown();
+		$this->data['arr_academic_specialization'] = $this->user_model->get_specialization_dropdown();
         $this->data['education'] = $this->user_model->get_user_education($education_id, $this->sess_user_id);
 
         if ($this->input->post('form_action') == 'edit') {
@@ -717,7 +718,7 @@ class User extends CI_Controller {
                 if ($res) {
                     $this->session->set_flashdata('flash_message', 'Education has been updated successfully');
                     $this->session->set_flashdata('flash_message_css', 'alert-success');
-                    redirect('user/profile');
+                    redirect(current_url());
                 }
             }
         }

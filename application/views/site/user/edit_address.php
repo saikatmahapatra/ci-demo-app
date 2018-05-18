@@ -29,7 +29,7 @@
 
 <div class="row">	
     <div class="col-md-8">        
-        <?php echo form_open(current_url(), array('method' => 'post', 'class' => 'ci-form','name' => 'profile', 'id' => 'profile'));?>
+        <?php echo form_open(current_url(), array('method' => 'post', 'class' => 'ci-form','name' => 'edit_address', 'id' => 'edit_address'));?>
         <?php echo form_hidden('form_action', 'update_address'); ?>
 			<div class="form-row">
 				<div class="form-group col-md-6">
@@ -166,7 +166,7 @@
 				</div>				
 			</div>
 			
-			<a href="<?php echo site_url('admin/user/profile');?>" class="btn btn-secondary">Back</a>
+			<a href="<?php echo site_url('user/profile');?>" class="btn btn-secondary">Back</a>
 			<?php echo form_submit(array('name' => 'submit','value' => 'Save','class' => 'btn btn-primary'));?>
         <?php echo form_close(); ?>
     </div>  

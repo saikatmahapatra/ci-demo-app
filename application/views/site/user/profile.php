@@ -1,7 +1,7 @@
 <?php
    $row = $row[0];
    //print_r($address);
-   print_r($education);
+   //print_r($education);
 ?>
 <div class="row heading-container">
     <div class="col-md-5">
@@ -49,16 +49,17 @@
     <div class="">
         <i class="fa fa-phone" aria-hidden="true"></i>
         <a class="mr-2" href="tel:<?php echo isset($row['user_mobile_phone1']) ? $row['user_mobile_phone1'] : ''; ?>"><?php echo isset($row['user_mobile_phone1']) ? $row['user_mobile_phone1'] : ''; ?></a>
-        <a href="tel:<?php echo isset($row['user_mobile_phone2']) ? $row['user_mobile_phone2'] : ''; ?>"><?php echo isset($row['user_mobile_phone2']) ? $row['user_mobile_phone2'] : ''; ?></a>
-        
-    </div>            
+        <a href="tel:<?php echo isset($row['user_mobile_phone2']) ? $row['user_mobile_phone2'] : ''; ?>"><?php echo isset($row['user_mobile_phone2']) ? $row['user_mobile_phone2'] : ''; ?></a>        
+    </div>
+	
     <div>
-        <?php echo (isset($row['user_bio']) && strlen($row['user_bio'])>0) ? $row['user_bio'] : '<span class="text-greyed-out">Describe who you are...</span>'; ?>
+        <?php echo (isset($row['user_bio']) && strlen($row['user_bio'])>0) ? $row['user_bio'] : '<span class="text-muted">Describe who you are...</span>'; ?>
         <a href="<?php echo site_url('user/edit_profile');?>">Edit</a>
     </div>
-    <hr style="m-8 auto">
+	<hr>
+    <!--<hr style="m-8 auto">
     <span class="label label-default">some text</span>
-    <span class="label label-default">some text</span>
+    <span class="label label-default">some text</span>-->
   </div>
 </div>
 </div>
@@ -67,123 +68,158 @@
 
 <br>
 
-<div class="row mb-3">
-    <div class="col-md-12">
-        <a class="btn btn-outline-info btn-sm float-right" href="<?php echo site_url('user/edit_profile');?>"><i class="fa fa-edit" aria-hidden="true"></i></a>
-        <h6>Basic Info</h6>        
-        <hr>        
+
+<nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <a class="nav-item nav-link active" id="nav-basic-tab" data-toggle="tab" href="#nav-basic" role="tab" aria-controls="nav-basic" aria-selected="true">Basic Information</a>
+	
+    <a class="nav-item nav-link" id="nav-address-tab" data-toggle="tab" href="#nav-address" role="tab" aria-controls="nav-address" aria-selected="false">Comminication Address</a>
+	
+    <a class="nav-item nav-link" id="nav-education-tab" data-toggle="tab" href="#nav-education" role="tab" aria-controls="nav-education" aria-selected="false">Education</a>
+	
+	<a class="nav-item nav-link" id="nav-exp-tab" data-toggle="tab" href="#nav-exp" role="tab" aria-controls="nav-exp" aria-selected="false">Work Experience</a>
+	
+  </div>
+</nav>
+
+<div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane fade show active" id="nav-basic" role="tabpanel" aria-labelledby="nav-basic-tab">
+	<div class="row mt-3">
+		<div class="col-md-12">
+        <a class="btn btn-info btn-sm" href="<?php echo site_url('user/edit_profile');?>"><i class="fa fa-edit" aria-hidden="true"></i> Edit</a>
+        <!--<h6>Basic Info</h6><hr>-->
         <div class="row">
-            <div class="col-sm-2">Name</div>
-            <div class="col-sm-4">
+            <div class="col-md-2">Name</div>
+            <div class="col-md-4">
             <?php
                 echo isset($row['user_firstname']) ? $row['user_firstname'] . '&nbsp;' : '';
                 echo isset($row['user_midname']) ? $row['user_midname'] . '&nbsp;' : '';
                 echo isset($row['user_lastname']) ? $row['user_lastname'] . '&nbsp;' : '';
                 ?>
             </div>
-            <div class="col-sm-2">Email</div>
-            <div class="col-sm-4">
+            <div class="col-md-2">Email</div>
+            <div class="col-md-4">
             <a href="mailto:<?php echo isset($row['user_email']) ? $row['user_email'] : ''; ?>"><?php echo isset($row['user_email']) ? $row['user_email'] : ''; ?></a>
             </div>
         </div>
         <!--/.row-->
         
         <div class="row">
-            <div class="col-sm-2">Phone # 1</div>
-            <div class="col-sm-4"><?php echo isset($row['user_mobile_phone1']) ? $row['user_mobile_phone1'] : ''; ?></div>
-            <div class="col-sm-2">Phone # 2</div>
+            <div class="col-md-2">Phone # 1</div>
+            <div class="col-md-4"><?php echo isset($row['user_mobile_phone1']) ? $row['user_mobile_phone1'] : ''; ?></div>
+            <div class="col-md-2">Phone # 2</div>
             <div class="col-md-4"><?php echo isset($row['user_mobile_phone2']) ? $row['user_mobile_phone2'] : ''; ?></div>
         </div>
         <!--/.row-->
         
         <div class="row">
-            <div class="col-sm-2">Date of Birth</div>
-            <div class="col-sm-4"><?php echo isset($row['user_dob']) ? date('d-m-Y', strtotime($row['user_dob'])) : ''; ?></div>
-            <div class="col-sm-2">Gender</div>
-            <div class="col-sm-4"><?php echo isset($row['user_gender']) ? (($row['user_gender'] == 'M') ? 'Male' : 'Female') : ''; ?></div>
+            <div class="col-md-2">Date of Birth</div>
+            <div class="col-md-4"><?php echo isset($row['user_dob']) ? date('d-m-Y', strtotime($row['user_dob'])) : ''; ?></div>
+            <div class="col-md-2">Gender</div>
+            <div class="col-md-4"><?php echo isset($row['user_gender']) ? (($row['user_gender'] == 'M') ? 'Male' : 'Female') : ''; ?></div>
         </div>
         <!--/.row-->
 
         <div class="row">
-            <div class="col-sm-2">Blood Group</div>
-            <div class="col-sm-4"></div>
+            <div class="col-md-2">Blood Group</div>
+            <div class="col-md-4"></div>
         </div>
         <!--/.row-->
-    </div>
-</div>
-
-
-<div class="row mb-3">
-    <div class="col-md-12">
-    <a class="btn btn-outline-success btn-sm pull-right" href="<?php echo site_url('user/add_address');?>"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
-        <h6>Communication Address</h6><hr>
-            <?php if(isset($address)){
-                foreach($address as $key=>$addr){
-                ?>
-                    <div class="row mb-3">
-                        <div class="col-sm-2"><?php echo isset($address_type[$addr['address_type']])?$address_type[$addr['address_type']]:'Address'; ?></div>
-                        <div class="col-sm-8">
-                            <div class="">
-                                <?php echo isset($addr['name'])? $addr['name'].',&nbsp;' :'';?>
-                                <?php echo isset($addr['phone1'])? $addr['phone1'].', ':'';?>
-                                <?php echo isset($addr['address']) ? $addr['address'] : '';?>
-                                <?php echo isset($addr['locality'])? ', '.$addr['locality'] : '';?>
-                                <?php echo isset($addr['city']) ? ', '.$addr['city'].', ' : '';?>
-                                <?php echo isset($addr['state']) ? $addr['state'] : '';?>
-                                <?php echo isset($addr['zip']) ? ' - '.$addr['zip'] : '';?>                                
-                            </div>
-                            <div>
-                            </div>
-                        </div>
-                        <div class="col-sm-2">			
-                            <a href="<?php echo site_url('user/edit_address/'.$addr["id"]);?>" class="btn btn-outline-secondary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></a>
-                            <a href="<?php echo site_url('user/delete_address/'.$addr["id"]);?>" class="btn btn-outline-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                        </div>
-                    </div>
-                    <!--/.row-->
-                <?php
-                }
-            }?>
-    </div>
-</div>
-
-
-<div class="row">
-    <div class="col-md-12">
-        <a class="btn btn-outline-success btn-sm pull-right" href="<?php echo site_url('user/add_education');?>"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
-        <h6>Educational Qualification</h6><hr>
-			<table id="user-datatable" class="table table-sm">
-				<thead>
-					<tr class="small">
-						<th>Qualification</th>
-						<th>Specialization</th>
-						<th>Duration</th>
-						<th>Institute/University</th>
-						<th>Marks(%)</th>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
-				<?php if(isset($education)){
-					foreach($education as $key=>$edu){
+		</div>
+	</div>
+  </div> <!--/#nav-basic-->
+  
+  <div class="tab-pane fade" id="nav-address" role="tabpanel" aria-labelledby="nav-address-tab">
+	<div class="row mt-3">
+		<div class="col-md-12">
+		<a class="btn btn-success btn-sm" href="<?php echo site_url('user/add_address');?>"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add New</a>
+			<!--<h6>Communication Address</h6><hr>-->
+				<?php if(isset($address)){
+					foreach($address as $key=>$addr){
 					?>
-						<tr>
-							<td><?php echo isset($edu['qualification_name'])?$edu['qualification_name']:'';?></td>
-							<td><?php echo isset($edu['specialization_name'])?$edu['specialization_name']:$edu['academic_other_specialization'];?></td>
-							<td><?php echo isset($edu['academic_from_year'])?$edu['academic_from_year'].'-'.$edu['academic_to_year']:'';?></td>
-							<td><?php echo isset($edu['institute_name']) ? $edu['institute_name']: $edu['academic_other_inst'];?></td>
-							<td><?php echo isset($edu['academic_marks_percentage'])?$edu['academic_marks_percentage']:'';?></td>
-							<td>
-								<a href="<?php echo site_url('user/edit_education/'.$edu["id"]);?>" class="btn btn-outline-secondary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></a>
-								<a href="<?php echo site_url('user/delete_education/'.$edu["id"]);?>" class="btn btn-outline-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></a>
-							</td>
-							
-						</tr>
+						<div class="row mb-3">
+							<div class="col-md-2"><?php echo isset($address_type[$addr['address_type']])?$address_type[$addr['address_type']]:'Address'; ?></div>
+							<div class="col-md-8">
+								<div class="">
+									<?php echo isset($addr['name'])? $addr['name'].',&nbsp;' :'';?>
+									<?php echo isset($addr['phone1'])? $addr['phone1'].', ':'';?>
+									<?php echo isset($addr['address']) ? $addr['address'] : '';?>
+									<?php echo isset($addr['locality'])? ', '.$addr['locality'] : '';?>
+									<?php echo isset($addr['city']) ? ', '.$addr['city'].', ' : '';?>
+									<?php echo isset($addr['state']) ? $addr['state'] : '';?>
+									<?php echo isset($addr['zip']) ? ' - '.$addr['zip'] : '';?>                                
+								</div>
+								<div>
+								</div>
+							</div>
+							<div class="col-md-2">			
+								<a href="<?php echo site_url('user/edit_address/'.$addr["id"]);?>" class="btn btn-outline-secondary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></a>
+								<a href="<?php echo site_url('user/delete_address/'.$addr["id"]);?>" class="btn btn-outline-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></a>
+							</div>
+						</div>
+						<!--/.row-->
 					<?php
 					}
 				}?>
-				</tbody>				
-			</table>
-					
-    </div>
-</div>
+		</div>
+	</div>
+  </div> <!--/#nav-address-->
+  
+  
+  <div class="tab-pane fade" id="nav-education" role="tabpanel" aria-labelledby="nav-education-tab">
+	<div class="row mt-3">
+		<div class="col-md-12">
+			<a class="btn btn-success btn-sm" href="<?php echo site_url('user/add_education');?>"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add New</a>
+			<!--<h6>Educational Qualification</h6><hr>-->
+				<table class="table table-sm mt-1">
+					<thead>
+						<tr class="small">
+							<th>Qualification</th>
+							<th>Specialization</th>
+							<th>Duration</th>
+							<th>Institute/University</th>
+							<th>Marks(%)</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+					<?php if(isset($education)){
+						foreach($education as $key=>$edu){
+						?>
+							<tr>
+								<td><?php echo isset($edu['qualification_name'])?$edu['qualification_name']:'';?></td>
+								<td><?php echo isset($edu['specialization_name'])?$edu['specialization_name']:$edu['academic_other_specialization'];?></td>
+								<td><?php echo isset($edu['academic_from_year'])?$edu['academic_from_year'].'-'.$edu['academic_to_year']:'';?></td>
+								<td><?php echo isset($edu['institute_name']) ? $edu['institute_name']: $edu['academic_other_inst'];?></td>
+								<td><?php echo isset($edu['academic_marks_percentage'])?$edu['academic_marks_percentage']:'';?></td>
+								<td>
+									<a href="<?php echo site_url('user/edit_education/'.$edu["id"]);?>" class="btn btn-outline-secondary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></a>
+									<a href="<?php echo site_url('user/delete_education/'.$edu["id"]);?>" class="btn btn-outline-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></a>
+								</td>
+								
+							</tr>
+						<?php
+						}
+					}?>
+					</tbody>				
+				</table>
+						
+		</div>
+	</div>
+  </div> <!--/#nav-education-->
+  
+  <div class="tab-pane fade" id="nav-exp" role="tabpanel" aria-labelledby="nav-exp-tab">
+	<div class="row mt-3">
+		<div class="col-md-12">
+		<a class="btn btn-success btn-sm" href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add New</a>
+		</div>
+	</div>
+  </div><!--/#nav-exp-->
+  
+</div><!--/.tab-content-->
+
+
+
+
+
+

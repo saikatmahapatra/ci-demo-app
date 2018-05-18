@@ -34,6 +34,7 @@
 					'id' => 'user_firstname',
 					'class' => 'form-control',
 					'maxlength' => '30',
+					'placeholder' => 'Enter first name'
 				));
 				?>
 				<?php echo form_error('user_firstname'); ?>
@@ -48,6 +49,7 @@
 					'id' => 'user_lastname',
 					'class' => 'form-control',
 					'maxlength' => '50',
+					'placeholder' => 'Enter last name'
 				));
 				?>
 				<?php echo form_error('user_lastname'); ?>
@@ -63,7 +65,8 @@
                         'value' => set_value('user_email'),
                         'id' => 'user_email',
                         'class' => 'form-control',
-                        'maxlength' => '254',
+                        'maxlength' => '255',
+						'placeholder' => 'Enter email address'
                     ));
                     ?> 
                     <?php echo form_error('user_email'); ?>
@@ -77,6 +80,7 @@
                         'id' => 'user_mobile_phone1',
                         'maxlength' => '10',
                         'class' => 'form-control',
+						'placeholder' => 'Enter 10 digit mobile number'
                     ));
                     ?>
                     <?php echo form_error('user_mobile_phone1'); ?>
@@ -93,6 +97,7 @@
                         'id' => 'user_password',
                         'class' => 'form-control',
                         'maxlength' => '15',
+						'placeholder' => 'Enter password'
                     ));
                     ?> 
                     <?php echo form_error('user_password'); ?>
@@ -106,6 +111,7 @@
                         'id' => 'user_password_confirm',
                         'class' => 'form-control',
                         'maxlength' => '15',
+						'placeholder' => 'Confirm the entered password'
                     ));
                     ?> 
                     <?php echo form_error('user_password_confirm'); ?>

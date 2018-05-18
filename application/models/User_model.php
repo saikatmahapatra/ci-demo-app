@@ -309,6 +309,7 @@ class User_model extends CI_Model {
         $result = array();
         $this->db->select('id,qualification_name');
         $this->db->where('qualification_status','Y');
+		$this->db->order_by('qualification_name');
         $query = $this->db->get('academic_qualification');
         $result = array('' => 'Select');
         if ($query->num_rows()) {
@@ -324,6 +325,7 @@ class User_model extends CI_Model {
         $result = array();
         $this->db->select('id,specialization_name');
         $this->db->where('specialization_status','Y');
+		$this->db->order_by('specialization_name');
         $query = $this->db->get('academic_specialization');
         $result = array('' => 'Select');
         if ($query->num_rows()) {
@@ -339,6 +341,7 @@ class User_model extends CI_Model {
         $result = array();
         $this->db->select('id,institute_name');
         $this->db->where('institute_status','Y');
+        $this->db->order_by('institute_name');
         $query = $this->db->get('academic_institute');
         $result = array('' => 'Select');
         if ($query->num_rows()) {
