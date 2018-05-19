@@ -28,10 +28,10 @@
 <div class="row">
     <div class="col-md-12">        
         <ul>
-            <li><a href="<?php echo base_url('ci_example/form_helper');?>" class="">Form Helper</a></li>
-            <li><a href="<?php echo base_url('ci_example/dom_pdf_gen_pdf');?>" class="">DOM PDF Generate</a></li>
-            <li><a href="<?php echo base_url('ci_example/date_helper');?>" class="">Date Helper</a></li>
-            <li><a href="<?php echo base_url('ci_example/directory_helper');?>" class="">Directory Helper</a></li>
+            <li><a href="<?php echo base_url($this->router->directory.'ci_example/form_helper');?>" class="">Form Helper</a></li>
+            <li><a href="<?php echo base_url($this->router->directory.'ci_example/dom_pdf_gen_pdf');?>" class="">DOM PDF Generate</a></li>
+            <li><a href="<?php echo base_url($this->router->directory.'ci_example/date_helper');?>" class="">Date Helper</a></li>
+            <li><a href="<?php echo base_url($this->router->directory.'ci_example/directory_helper');?>" class="">Directory Helper</a></li>
         </ul>   
     </div>
 

@@ -72,8 +72,8 @@
 					<?php form_close(); ?>
 						
 					<div class="text-center">
-						<a class="d-block small" href="<?php echo base_url('admin/user/login');?>">Back to login</a>
-						<a class="d-block small" href="<?php echo base_url('admin/user/forgot_password');?>" class="">Resend password reset link</a>
+						<a class="d-block small" href="<?php echo base_url($this->router->directory.'user/login');?>">Back to login</a>
+						<a class="d-block small" href="<?php echo base_url($this->router->directory.'user/forgot_password');?>" class="">Resend password reset link</a>
 					</div>
 
 				</div>

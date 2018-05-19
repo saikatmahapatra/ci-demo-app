@@ -38,8 +38,8 @@
 				<?php echo form_open(current_url(), array('method' => 'post', 'class' => 'ci-form','name' => 'order', 'id' => 'cartForm')); ?>
 				<?php echo form_hidden('form_action', 'order'); ?>			
 				<div class="text-center">
-					<a href="<?php echo base_url('order/download_invoice');?>" class="btn btn-primary">Download Invoice</a>
-					<a href="<?php echo base_url('product');?>" class="btn btn-primary">Continue Shopping</a>
+					<a href="<?php echo base_url($this->router->directory.'order/download_invoice');?>" class="btn btn-primary">Download Invoice</a>
+					<a href="<?php echo base_url($this->router->directory.'product');?>" class="btn btn-primary">Continue Shopping</a>
 				</div>
 				<?php echo form_close(); ?>
 			</div>            

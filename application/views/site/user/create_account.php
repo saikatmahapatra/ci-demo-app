@@ -195,7 +195,7 @@
 
         <?php echo form_submit(array('name' => 'register','value' => 'Create an account','class' => 'btn btn-primary',));?>		
         <?php echo form_close(); ?>
-		<div class=""><a href="<?php echo base_url('user/login');?>" class="">Already have an account? Login</a></div>
+		<div class=""><a href="<?php echo base_url($this->router->directory.'user/login');?>" class="">Already have an account? Login</a></div>
     </div>
 </div>
 

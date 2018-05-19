@@ -17,23 +17,23 @@ $segment3 = $this->uri->segment(3);
 			<span class="sr-only">(current)</span>
 		</li>
 		<li class="nav-item <?php echo ($segment1 == 'product') ? 'active':''?>">
-			<a class="nav-link" href="<?php echo base_url('product');?>">Shop Online</a>
+			<a class="nav-link" href="<?php echo base_url($this->router->directory.'product');?>">Shop Online</a>
 		</li>
 		<li class="nav-item <?php echo ($segment1 == 'order') ? 'active':''?>">
-			<a class="nav-link" href="<?php echo base_url('order/my_cart');?>">Cart</a>
+			<a class="nav-link" href="<?php echo base_url($this->router->directory.'order/my_cart');?>">Cart</a>
 		</li>
 		<li class="nav-item <?php echo ($segment1 == 'contact') ? 'active':''?>">
-			<a class="nav-link" href="<?php echo base_url('contact');?>">Contact Us</a>
+			<a class="nav-link" href="<?php echo base_url($this->router->directory.'contact');?>">Contact Us</a>
 		</li>
 
 		<li class="nav-item dropdown <?php echo ($segment1 == 'ci_example') ? 'active':''?>">
 			<a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true"
 				aria-expanded="false">Examples Modules</a>
 				<div class="dropdown-menu" aria-labelledby="dropdown02">                                
-					<a class="dropdown-item" href="<?php echo base_url('ci_example/form_helper');?>">Form Helper</a>
-					<a class="dropdown-item" href="<?php echo base_url('ci_example/date_helper');?>">Date Helper</a>
-					<a class="dropdown-item" href="<?php echo base_url('ci_example/directory_helper');?>">Directory Helper</a>               
-					<a class="dropdown-item" href="<?php echo base_url('ci_example/dom_pdf_gen_pdf');?>">Download as PDF/DOM PDF</a>
+					<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'ci_example/form_helper');?>">Form Helper</a>
+					<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'ci_example/date_helper');?>">Date Helper</a>
+					<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'ci_example/directory_helper');?>">Directory Helper</a>               
+					<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'ci_example/dom_pdf_gen_pdf');?>">Download as PDF/DOM PDF</a>
 				</div>
 		</li>
 
@@ -55,19 +55,19 @@ $segment3 = $this->uri->segment(3);
 				</div><!--/.welcome-user-container-->
 				
 				<div class="dropdown-divider mt-3"></div>			
-				<a class="dropdown-item"  href="<?php echo base_url('user/profile/'.$this->session->userdata['sess_user']['id']); ?>">Profile</a>
-				<a class="dropdown-item" href="<?php echo base_url('user/change_password'); ?>">Change Password</a>
-				<a class="dropdown-item" href="<?php echo base_url('user/logout'); ?>">Logout</a>			
+				<a class="dropdown-item"  href="<?php echo base_url($this->router->directory.'user/profile/'.$this->session->userdata['sess_user']['id']); ?>">Profile</a>
+				<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'user/change_password'); ?>">Change Password</a>
+				<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'user/logout'); ?>">Logout</a>			
 			</div>
 			</li>
 			<?php
 		} else {
 			?>
 			<li class="nav-item <?php echo ($segment2 == 'create_account') ? 'active':''?>">            
-				<a class="nav-link" href="<?php echo base_url('user/create_account');?>">Register</a>
+				<a class="nav-link" href="<?php echo base_url($this->router->directory.'user/create_account');?>">Register</a>
 			</li>
 			<li class="nav-item <?php echo ($segment2 == 'login') ? 'active':''?>">
-				<a class="nav-link" href="<?php echo base_url('user/login');?>">Login</a>
+				<a class="nav-link" href="<?php echo base_url($this->router->directory.'user/login');?>">Login</a>
 			</li>
 			<?php
 		}

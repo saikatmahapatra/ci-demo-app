@@ -100,7 +100,7 @@
 			
 			
 			
-			<a href="<?php echo base_url('user/profile');?>" class="btn btn-secondary">Back</a>
+			<a href="<?php echo base_url($this->router->directory.'user/profile');?>" class="btn btn-secondary">Back</a>
 			<?php
 			echo form_submit(array(
 			'name' => 'submit',

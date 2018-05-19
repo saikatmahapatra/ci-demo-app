@@ -26,7 +26,7 @@
                 <div class="card-header">
                     <span class="">Data Table</span>
 					<span class="float-right">
-						<a href="<?php echo base_url('admin/category/add');?>" class="btn btn-sm btn-success" title="Add"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add New</a>
+						<a href="<?php echo base_url($this->router->directory.'category/add');?>" class="btn btn-sm btn-success" title="Add"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add New</a>
 					</span>
                 </div>
                 <!-- /.card-header -->

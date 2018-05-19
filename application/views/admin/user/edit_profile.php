@@ -145,7 +145,7 @@
 				</div>                
             </div><!--/.form-row-->
 			
-			<a href="<?php echo base_url('admin/user/profile');?>" class="btn btn-secondary">Back</a>
+			<a href="<?php echo base_url($this->router->directory.'user/profile');?>" class="btn btn-secondary">Back</a>
 			<?php echo form_submit(array('name' => 'submit','value' => 'Update','class' => 'btn btn-primary',));?>
         <?php echo form_close(); ?>
     </div><!--/.col-md-6-->

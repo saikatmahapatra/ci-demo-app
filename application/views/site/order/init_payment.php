@@ -96,7 +96,7 @@
                      }
                      }else{
 						 ?>
-						 <a class="btn btn-primary pull-right" href="<?php echo base_url('user/add_address');?>">Add a Shipping Address</a>
+						 <a class="btn btn-primary pull-right" href="<?php echo base_url($this->router->directory.'user/add_address');?>">Add a Shipping Address</a>
 						 <?php
 					 }
 					?>

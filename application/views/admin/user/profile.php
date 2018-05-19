@@ -53,7 +53,7 @@
     </div>            
     <div>
         <?php echo (isset($row['user_bio']) && strlen($row['user_bio'])>0) ? $row['user_bio'] : '<span class="text-greyed-out">Describe who you are...</span>'; ?>
-        <a href="<?php echo base_url('admin/user/edit_profile');?>">Edit</a>
+        <a href="<?php echo base_url($this->router->directory.'user/edit_profile');?>">Edit</a>
     </div>
     <hr style="m-8 auto">
     <span class="label label-default">some text</span>
@@ -83,7 +83,7 @@
   <div class="tab-pane fade show active" id="nav-basic" role="tabpanel" aria-labelledby="nav-basic-tab">
 	<div class="row mt-3">
 		<div class="col-md-12">
-        <a class="btn btn-info btn-sm" href="<?php echo base_url('admin/user/edit_profile');?>"><i class="fa fa-edit" aria-hidden="true"></i> Edit</a>
+        <a class="btn btn-info btn-sm" href="<?php echo base_url($this->router->directory.'user/edit_profile');?>"><i class="fa fa-edit" aria-hidden="true"></i> Edit</a>
         <!--<h6>Basic Info</h6><hr>-->
         <div class="row">
             <div class="col-md-2">Name</div>
@@ -129,7 +129,7 @@
   <div class="tab-pane fade" id="nav-address" role="tabpanel" aria-labelledby="nav-address-tab">
 	<div class="row mt-3">
 		<div class="col-md-12">
-		<a class="btn btn-success btn-sm" href="<?php echo base_url('admin/user/add_address');?>"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add New</a>
+		<a class="btn btn-success btn-sm" href="<?php echo base_url($this->router->directory.'user/add_address');?>"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add New</a>
 			<!--<h6>Communication Address</h6><hr>-->
 				<?php if(isset($address)){
 					foreach($address as $key=>$addr){
@@ -150,8 +150,8 @@
 								</div>
 							</div>
 							<div class="col-md-2">			
-								<a href="<?php echo base_url('admin/user/edit_address/'.$addr["id"]);?>" class="btn btn-outline-secondary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></a>
-								<a href="<?php echo base_url('admin/user/delete_address/'.$addr["id"]);?>" class="btn btn-outline-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></a>
+								<a href="<?php echo base_url($this->router->directory.'user/edit_address/'.$addr["id"]);?>" class="btn btn-outline-secondary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></a>
+								<a href="<?php echo base_url($this->router->directory.'user/delete_address/'.$addr["id"]);?>" class="btn btn-outline-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></a>
 							</div>
 						</div>
 						<!--/.row-->
@@ -166,7 +166,7 @@
   <div class="tab-pane fade" id="nav-education" role="tabpanel" aria-labelledby="nav-education-tab">
 	<div class="row mt-3">
 		<div class="col-md-12">
-			<a class="btn btn-success btn-sm" href="<?php echo base_url('admin/user/add_education');?>"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add New</a>
+			<a class="btn btn-success btn-sm" href="<?php echo base_url($this->router->directory.'user/add_education');?>"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add New</a>
 			<!--<h6>Educational Qualification</h6><hr>-->
 				<table class="table table-sm mt-1">
 					<thead>
@@ -190,8 +190,8 @@
 								<td><?php echo isset($edu['institute_name']) ? $edu['institute_name']: $edu['academic_other_inst'];?></td>
 								<td><?php echo isset($edu['academic_marks_percentage'])?$edu['academic_marks_percentage']:'';?></td>
 								<td>
-									<a href="<?php echo base_url('admin/user/edit_education/'.$edu["id"]);?>" class="btn btn-outline-secondary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></a>
-									<a href="<?php echo base_url('admin/user/delete_education/'.$edu["id"]);?>" class="btn btn-outline-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></a>
+									<a href="<?php echo base_url($this->router->directory.'user/edit_education/'.$edu["id"]);?>" class="btn btn-outline-secondary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></a>
+									<a href="<?php echo base_url($this->router->directory.'user/delete_education/'.$edu["id"]);?>" class="btn btn-outline-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></a>
 								</td>
 								
 							</tr>
