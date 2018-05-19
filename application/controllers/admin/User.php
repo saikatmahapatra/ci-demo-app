@@ -618,9 +618,15 @@ class User extends CI_Controller {
     }
 
     function validate_edit_profile_form() {
-        $this->form_validation->set_rules('user_firstname', 'first name', 'required');
-        $this->form_validation->set_rules('user_lastname', 'last name', 'required');
-        //$this->form_validation->set_rules('email', 'email', 'trim|required|valid_email|callback_is_email_exists');
+        //$this->form_validation->set_rules('user_firstname', 'first name', 'required');
+        //$this->form_validation->set_rules('user_lastname', 'last name', 'required');
+        //$this->form_validation->set_rules('user_gender', 'gender selection', 'required');        
+        $this->form_validation->set_rules('user_mobile_phone1', 'primary mobile', 'required|trim|min_length[10]|max_length[10]|numeric');
+        $this->form_validation->set_rules('user_mobile_phone2', 'secondary mobile', 'trim|min_length[10]|max_length[10]|numeric');
+        $this->form_validation->set_rules('user_bio', 'about you', 'max_length[100]');
+        /* $this->form_validation->set_rules('dob_day', 'birth day selection', 'required');
+          $this->form_validation->set_rules('dob_month', 'birth month selection', 'required');
+          $this->form_validation->set_rules('dob_year', 'birth year selection', 'required'); */
         $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
         if ($this->form_validation->run() == true) {
             return true;

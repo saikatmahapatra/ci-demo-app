@@ -29,10 +29,10 @@
             'id' => 'profile',));
         ?>
         <?php echo form_hidden('form_action', 'update_profile'); ?>
-        
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">                                
+			
+			<?php /* ?>
+            <div class="form-row">                
+                    <div class="form-group col-md-6">                                
 						<label for="user_firstname" class="">First Name <span class="required">*</span></label>
                         <?php
                         echo form_input(array(
@@ -45,9 +45,8 @@
                         ?>
                         <?php echo form_error('user_firstname'); ?>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">  
+                
+                    <div class="form-group col-md-6">  
 						<label for="user_lastname" class="">Last Name <span class="required">*</span></label>
                         <?php
                         echo form_input(array(
@@ -59,32 +58,27 @@
                         ));
                         ?>
                         <?php echo form_error('user_lastname'); ?>
-                    </div>
-                </div>
+                    </div>                
             </div><!--/.row-->
-			<div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-						<label for="user_bio" class="">Intro</label>
-						<?php
-						echo form_textarea(array(
-							'name' => 'user_bio',
-							'value' => isset($row['user_bio']) ? $row['user_bio'] : set_value('user_bio'),
-							'id' => 'user_bio',
-							'class' => 'form-control',
-							'rows' => '2',
-							'cols' => '40',
-							'placeholder' => 'Describe who you are',
-							'title' => 'Short Introduction',							
-							'maxlength' => '100',
-						));
-						?>
-                        <?php echo form_error('user_bio'); ?>
-                    </div>
-                </div>
-            </div><!--/.row-->
-            <div class="row">
-                <div class="col-md-12">
+			<?php */ ?>
+			<div class="form-group">
+				<label for="user_bio" class="">About me</label>
+				<?php
+				echo form_input(array(
+					'name' => 'user_bio',
+					'value' => isset($row['user_bio']) ? $row['user_bio'] : set_value('user_bio'),
+					'id' => 'user_bio',
+					'class' => 'form-control',
+					'placeholder' => 'About me',
+					'title' => 'About me',							
+					'maxlength' => '100',
+				));
+				?>
+				<?php echo form_error('user_bio'); ?>
+			</div>
+                
+			<?php /*?>	
+            <div class="form-control">
                     <label class="">Gender <span class="required">*</span></label>
                     <div class="radio">  
                         <label class="label-normal">
@@ -118,51 +112,41 @@
                         <?php echo form_error('user_gender'); ?>
                     </div>
                 </div>
-            </div><!--/.row-->
+				<?php */ ?>
         
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-						<label for="user_mobile_phone1" class="">Mobile #1 <span class="required">*</span></label>
-                        <?php
-                        echo form_input(array(
-                            'name' => 'user_mobile_phone1',
-                            'value' => isset($row['user_mobile_phone1']) ? $row['user_mobile_phone1'] : set_value('user_mobile_phone1'),
-                            'id' => 'user_mobile_phone1',
-                            'class' => 'form-control',
-                            'maxlength' => '10',
-                            'minlength' => '10',
-                        ));
-                        ?>
-                        <?php echo form_error('user_mobile_phone1'); ?>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-						<label for="user_mobile_phone2" class="">Mobile #2</label>
-                        <?php
-                        echo form_input(array(
-                            'name' => 'user_mobile_phone2',
-                            'value' => isset($row['user_mobile_phone2']) ? $row['user_mobile_phone2'] : set_value('user_mobile_phone2'),
-                            'id' => 'user_mobile_phone2',
-                            'class' => 'form-control',
-                            'maxlength' => '10',
-                            'minlength' => '10',
-                        ));
-                        ?>
-                        <?php echo form_error('user_mobile_phone2'); ?>
-                    </div>
-                </div>
-            </div><!--/.row-->
-			
-			<div class="row">
-				<div class="col-md-12">
-					<div class="form-group">
-					<a href="<?php echo base_url('admin/user/profile');?>" class="btn btn-secondary">Back</a>
-					<?php echo form_submit(array('name' => 'submit','value' => 'Update','class' => 'btn btn-primary',));?> 
-					</div>
+            <div class="form-row">               
+				<div class="form-group col-md-6">
+					<label for="user_mobile_phone1" class="">Mobile #1 <span class="required">*</span></label>
+					<?php
+					echo form_input(array(
+						'name' => 'user_mobile_phone1',
+						'value' => isset($row['user_mobile_phone1']) ? $row['user_mobile_phone1'] : set_value('user_mobile_phone1'),
+						'id' => 'user_mobile_phone1',
+						'class' => 'form-control',
+						'maxlength' => '10',
+						'minlength' => '10',
+					));
+					?>
+					<?php echo form_error('user_mobile_phone1'); ?>
 				</div>
-			</div><!--/.row-->
+				<div class="form-group col-md-6">
+					<label for="user_mobile_phone2" class="">Mobile #2</label>
+					<?php
+					echo form_input(array(
+						'name' => 'user_mobile_phone2',
+						'value' => isset($row['user_mobile_phone2']) ? $row['user_mobile_phone2'] : set_value('user_mobile_phone2'),
+						'id' => 'user_mobile_phone2',
+						'class' => 'form-control',
+						'maxlength' => '10',
+						'minlength' => '10',
+					));
+					?>
+					<?php echo form_error('user_mobile_phone2'); ?>
+				</div>                
+            </div><!--/.form-row-->
+			
+			<a href="<?php echo base_url('admin/user/profile');?>" class="btn btn-secondary">Back</a>
+			<?php echo form_submit(array('name' => 'submit','value' => 'Update','class' => 'btn btn-primary',));?>
         <?php echo form_close(); ?>
     </div><!--/.col-md-6-->
 </div>

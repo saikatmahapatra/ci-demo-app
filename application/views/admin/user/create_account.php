@@ -34,6 +34,7 @@
 					'id' => 'user_firstname',
 					'class' => 'form-control',
 					'maxlength' => '30',
+					'placeholder' => 'Enter first name',
 				));
 				?>
 				<?php echo form_error('user_firstname'); ?>
@@ -48,6 +49,7 @@
 					'id' => 'user_lastname',
 					'class' => 'form-control',
 					'maxlength' => '50',
+					'placeholder' => 'Enter last name',
 				));
 				?>
 				<?php echo form_error('user_lastname'); ?>
@@ -63,7 +65,8 @@
 					'value' => set_value('user_email'),
 					'id' => 'user_email',
 					'class' => 'form-control',
-					'maxlength' => '254',
+					'maxlength' => '255',
+					'placeholder' => 'Enter organization\'s email address',
 				));
 				?> 
 				<?php echo form_error('user_email'); ?>
@@ -77,6 +80,7 @@
 					'id' => 'user_mobile_phone1',
 					'maxlength' => '10',
 					'class' => 'form-control',
+					'placeholder' => 'Enter 10 digit mobile number',
 				));
 				?>
 				<?php echo form_error('user_mobile_phone1'); ?>
@@ -147,7 +151,9 @@
 			  <label for="user_role" class="">Role <span class="required">*</span></label>
 				<?php
 				echo form_dropdown('user_role', $arr_roles, set_value('user_role'), array(
-					'class' => 'form-control',
+					'class' => 'form-control field-help',					
+					'data-help-text' => 'This will define user role. Role controlls user permission to do any thing like add, edit or delete something. If you are adding employee, choose role as <b>User</b>, If you are adding HR or CEO you can choose role as <b>administrator</b> or <b>super admin</b>',
+					'data-help-text-class' => 'p-3 mt-1 mb-2 bg-info text-white'
 				));
 				?> 
 				<?php echo form_error('user_role'); ?>
