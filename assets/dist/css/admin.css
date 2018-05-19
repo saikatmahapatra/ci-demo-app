@@ -29,7 +29,8 @@ h2 {
   color: #ff0000;
 }
 .required {
-  color: #b20000;
+  color: #ff0000;
+  font-weight: bold;
 }
 .bg-brand {
   background: linear-gradient(to bottom, #0256A0, #0D2B48);

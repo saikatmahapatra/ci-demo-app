@@ -80,7 +80,7 @@
                         </div>
 
                         <div class="form-group">                    
-                            <label for="confirm_user_new_password" class="">Repeat New Password <span class="required">*</span></label>
+                            <label for="confirm_user_new_password" class="">Confirm New Password <span class="required">*</span></label>
                             <?php
                             echo form_password(array(
                                 'name' => 'confirm_user_new_password',
@@ -94,14 +94,7 @@
                             <?php echo form_error('confirm_user_new_password'); ?>
                         </div>
 
-                        <div class="form-group">
-                            <?php
-                            echo form_submit(array(
-                                'name' => 'submit',
-                                'value' => 'Submit',
-                                'class' => 'btn btn-primary'));
-                            ?>
-                        </div>
+                        <?php echo form_submit(array('name' => 'submit','value' => 'Submit','class' => 'btn btn-primary'));?>
                         <?php echo form_close(); ?>
                     </div>
                 </div>

@@ -135,7 +135,7 @@ class Product extends CI_Controller {
         echo json_encode($output);
     }
 
-    function validate_form_data($db_operation = NULL) {
+    function validate_form_data($action = NULL) {
         //$this->form_validation->set_rules('category_name', 'category name', 'required|is_unique[categories.category_name]');
         $this->form_validation->set_rules('category_id', 'category', 'required');
         $this->form_validation->set_rules('product_name', 'product name', 'required');

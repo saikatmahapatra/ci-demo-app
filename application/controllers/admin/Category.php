@@ -119,10 +119,10 @@ class Category extends CI_Controller {
         echo json_encode($output);
     }
 
-    function validate_category_form_data($db_operation = NULL) {
-        if ($db_operation == 'add') {
+    function validate_category_form_data($action = NULL) {
+        if ($action == 'add') {
             $this->form_validation->set_rules('category_name', 'category name', 'required');
-        } elseif ($db_operation == 'edit') {
+        } elseif ($action == 'edit') {
             $this->form_validation->set_rules('category_name', 'category name', 'required|callback_is_category_name_exists');
         }
         $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
