@@ -30,9 +30,11 @@
 					<table id="product-datatable" class="table table-sm">
 						<thead>
 							<tr>
-								<th>Product Details</th>
-								<th>Price Details</th>
-								<th>Spec/Description</th>
+								<th>SKU</th>
+								<th>Product</th>
+								<th>Category</th>
+								<th>MRP</th>
+								<th>Price</th>
 								<th>Status</th>
 								<th>Action</th>
 							</tr>
@@ -40,9 +42,11 @@
 						<tbody></tbody>
 						<tfoot>
 							<tr>
-								<th>Product Details</th>
-								<th>Price Details</th>
-								<th>Spec/Description</th>
+								<th>SKU</th>
+								<th>Product</th>
+								<th>Category</th>
+								<th>MRP</th>
+								<th>Price</th>
 								<th>Status</th>
 								<th>Action</th>
 							</tr>

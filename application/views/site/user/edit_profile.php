@@ -11,18 +11,14 @@
 
 <div class="row"> 
     <?php
-    // Show server side messages
-    if (isset($alert_message)) {
-        $html_alert_ui = '';
-        $html_alert_ui.='<div class="alert-container">';
-        $html_alert_ui.='<div class="auto-closable-alert alert ' . $alert_message_css . ' alert-dismissable">';
-        $html_alert_ui.='<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
-        $html_alert_ui.=$alert_message;
-        $html_alert_ui.='</div>';
-        $html_alert_ui.='</div>';
-        echo $html_alert_ui;
-    }
-    ?> 
+		// Show server side flash messages
+		if (isset($alert_message)) {
+			$html_alert_ui = '';                
+			$html_alert_ui.='<div class="auto-closable-alert alert ' . $alert_message_css . ' alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'.$alert_message.'</div>';
+			echo $html_alert_ui;
+		}
+	?>
+
     <div class="col-md-8">
         <?php echo form_open(current_url(), array('method' => 'post', 'class' => 'ci-form','name' => 'profile','id' => 'profile',)); ?>
         <?php echo form_hidden('form_action', 'update_profile'); ?>

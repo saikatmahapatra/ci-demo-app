@@ -86,7 +86,7 @@ class Product extends CI_Controller {
         foreach ($data_rows as $result) {
             $no++;
             $row = array();
-            $html_product_details = '';
+            /*$html_product_details = '';
             $html_product_details.='<div>' . $result['product_name'] . ' (SKU: ' . $result['product_sku'] . ')' . '</div>';
             $html_product_details.=isset($result['product_color']) ? '<div>Color: ' . $result['product_color'] . '</div>' : '<div>Color: </div>';
             $html_product_details.=isset($result['product_size']) ? '<div>Size: ' . $result['product_size'] . '</div>' : '<div>Size: </div>';
@@ -94,14 +94,19 @@ class Product extends CI_Controller {
             $html_product_details.=isset($result['product_length']) ? '<div>Length: ' . $result['product_length'] . '</div>' : '<div>Length: </div>';
             $html_product_details.=isset($result['product_weight']) ? '<div>Weight: ' . $result['product_weight'] . '</div>' : '<div>Weight: </div>';
 
-            $row[] = $html_product_details;
+            $row[] = $html_product_details;*/
+            $row[] = $result['product_sku'];
+            $row[] = $result['product_name'];
 
-            $html_price_details = '';
+            /*$html_price_details = '';
             $html_price_details.=isset($result['product_mrp']) ? '<div>MRP: ' . $result['product_mrp'] . '</div>' : '<div>MRP: </div>';
             $html_price_details.=isset($result['product_price']) ? '<div>Price: ' . $result['product_price'] . '</div>' : '<div>Price: </div>';
-            $row[] = $html_price_details;
-            $row[] = word_limiter($result['product_description'], 6);
-            $row[] = (strtolower($result['product_status']) == 'y') ? 'Shown' : 'Hidden';
+            $row[] = $html_price_details;*/
+			$row[] = isset($result['category_name']) ? $result['category_name'] :'';
+			$row[] = isset($result['product_mrp']) ? $result['product_mrp'] :'';
+			$row[] = isset($result['product_price']) ? $result['product_price'] :'';
+            //$row[] = word_limiter($result['product_description'], 6);
+            $row[] = (strtolower($result['product_status']) == 'y') ? 'Active' : 'Inactive';
             //add html for action
             $action_html = '';
             $action_html.= anchor(base_url($this->router->directory.'product/edit/' . $result['id']), 'Edit', array(
