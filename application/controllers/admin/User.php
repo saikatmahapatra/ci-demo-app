@@ -113,7 +113,7 @@ class User extends CI_Controller {
             $acc_status_text = ($result['user_account_active'] == 'Y') ? 'Deactivate' : 'Activate';
             $acc_status_class = ($result['user_account_active'] == 'Y') ? 'btn-danger' : 'btn-success';
             $acc_status_set = ($result['user_account_active'] == 'Y') ? 'N' : 'Y';
-            $action_html.= anchor(site_url('admin/user/profile/' . $result['id']), 'Profile', array(
+            $action_html.= anchor(base_url('admin/user/profile/' . $result['id']), 'Profile', array(
                 'class' => 'btn btn-sm btn-secondary',
                 'data-toggle' => 'tooltip',
                 'data-original-title' => 'Profile',
@@ -121,7 +121,7 @@ class User extends CI_Controller {
             ));
 			$action_html.='&nbsp;';
 			if($result['role_weight'] <= 90){
-				$action_html.= anchor(site_url('admin/user/manage#'), $acc_status_text, array(
+				$action_html.= anchor(base_url('admin/user/manage#'), $acc_status_text, array(
 					'class' => 'change_account_status btn btn-sm ' . $acc_status_class,
 					'data-toggle' => 'tooltip',
 					'data-original-title' => $acc_status_text,
@@ -131,7 +131,7 @@ class User extends CI_Controller {
 				));
 			}
             /* $action_html.='&nbsp;';
-              $action_html.= anchor(site_url('admin/user/delete/' . $result['id']), 'Delete', array(
+              $action_html.= anchor(base_url('admin/user/delete/' . $result['id']), 'Delete', array(
               'class' => 'btn btn-sm btn-danger btn-delete',
 			  'data-confirmation'=>true,
 			  'data-confirmation-message'=>'Are you sure, you want to delete this?',
@@ -353,7 +353,7 @@ class User extends CI_Controller {
                     $html.='<div style="font:14px Arial,Helvetica,sans-serif;margin-bottom:5px;color:#222222;padding:0px 0 10px 0">';
                     $html.='<p>Please click on the password reset link to create a new login password.</p>';
                     $html.='<p><strong>Password Reset Link:</strong><br />';
-                    $html.= anchor(site_url('admin/user/reset_password/' . md5($password_reset_key)), NULL);
+                    $html.= anchor(base_url('admin/user/reset_password/' . md5($password_reset_key)), NULL);
                     $html.='</p>';
                     $html.='</div>';
                     $html.='</div>';
@@ -567,7 +567,7 @@ class User extends CI_Controller {
         $rows = $this->user_model->get_rows($user_id);
         $this->data['row'] = $rows['data_rows'];
 		$this->data['address'] = $this->user_model->get_user_address(NULL,$user_id,NULL);
-		
+		$this->data['education'] = $this->user_model->get_user_education(NULL, $user_id);
 		$this->data['page_heading'] = 'Profile';
         $this->data['maincontent'] = $this->load->view('admin/user/profile', $this->data, true);
         $this->load->view('admin/_layouts/layout_authenticated', $this->data);
@@ -593,10 +593,10 @@ class User extends CI_Controller {
         if ($this->input->post('form_action') == 'update_profile') {
             if ($this->validate_edit_profile_form() == true) {
                 $postdata = array(
-                    'user_firstname' => $this->input->post('user_firstname'),
-                    'user_lastname' => $this->input->post('user_lastname'),
+                    //'user_firstname' => $this->input->post('user_firstname'),
+                    //'user_lastname' => $this->input->post('user_lastname'),
                     'user_bio' => $this->input->post('user_bio'),
-                    'user_gender' => $this->input->post('user_gender'),                   
+                    //'user_gender' => $this->input->post('user_gender'),                   
                     //'user_dob' => $dob,
                     'user_mobile_phone1' => $this->input->post('user_mobile_phone1'),
                     'user_mobile_phone2' => $this->input->post('user_mobile_phone2')                    
@@ -823,6 +823,117 @@ class User extends CI_Controller {
             $result[$i] = $i;
         }
         return $result;
+    }
+	
+	function add_education() {
+        $is_logged_in = $this->common_lib->is_logged_in();
+        if ($is_logged_in == FALSE) {
+            redirect('admin/user/login');
+        }
+        $this->data['alert_message'] = $this->session->flashdata('flash_message');
+        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
+		$this->data['arr_academic_qualification'] = $this->user_model->get_qualification_dropdown();
+		$this->data['arr_academic_inst'] = $this->user_model->get_institute_dropdown();
+		$this->data['arr_academic_specialization'] = $this->user_model->get_specialization_dropdown();
+        if ($this->input->post('form_action') == 'add') {
+            if ($this->validate_user_education_form_data('add') == true) {
+                $postdata = array(
+					'user_id' => $this->sess_user_id,
+                    'academic_qualification' => $this->input->post('academic_qualification'),
+                    'academic_from_year' => $this->input->post('academic_from_year'),
+                    'academic_to_year' => $this->input->post('academic_to_year'),                    
+                    'academic_inst' => $this->input->post('academic_inst'),                    
+                    'academic_other_inst' => $this->input->post('academic_other_inst'),                    
+                    'academic_marks_percentage' => $this->input->post('academic_marks_percentage'),                    
+                    'academic_specialization' => $this->input->post('academic_specialization'),                    
+                    'academic_other_specialization' => $this->input->post('academic_other_specialization')                  
+                );                
+                $res = $this->user_model->insert($postdata,'user_academics');
+                if ($res) {
+                    $this->session->set_flashdata('flash_message', 'Your education has been added successfully');
+                    $this->session->set_flashdata('flash_message_css', 'alert-success');
+                    redirect('admin/user/profile');
+                }
+            }
+        }
+		$this->data['page_heading'] = "Add Educational Qualification";
+        $this->data['maincontent'] = $this->load->view('admin/user/add_education', $this->data, true);
+        $this->load->view('admin/_layouts/layout_authenticated', $this->data);
+    }
+	
+	function edit_education() {
+        $is_logged_in = $this->common_lib->is_logged_in();
+        if ($is_logged_in == FALSE) {
+            redirect('admin/user/login');
+        }
+        $this->data['alert_message'] = $this->session->flashdata('flash_message');
+        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
+		$education_id = $this->uri->segment(4);
+		$this->data['arr_academic_qualification'] = $this->user_model->get_qualification_dropdown();
+		$this->data['arr_academic_inst'] = $this->user_model->get_institute_dropdown();
+		$this->data['arr_academic_specialization'] = $this->user_model->get_specialization_dropdown();
+        $this->data['education'] = $this->user_model->get_user_education($education_id, $this->sess_user_id);
+
+        if ($this->input->post('form_action') == 'edit') {
+            if ($this->validate_user_education_form_data('edit') == true) {
+                $postdata = array(
+                    'academic_qualification' => $this->input->post('academic_qualification'),
+                    'academic_from_year' => $this->input->post('academic_from_year'),
+                    'academic_to_year' => $this->input->post('academic_to_year'),                    
+                    'academic_inst' => $this->input->post('academic_inst'),                    
+                    'academic_other_inst' => $this->input->post('academic_other_inst'),                    
+                    'academic_marks_percentage' => $this->input->post('academic_marks_percentage'),                    
+                    'academic_specialization' => $this->input->post('academic_specialization'),                    
+                    'academic_other_specialization' => $this->input->post('academic_other_specialization')                    
+                );
+                $where = array('id'=>$education_id, 'user_id' => $this->sess_user_id);
+                $res = $this->user_model->update($postdata, $where,'user_academics');
+                if ($res) {
+                    $this->session->set_flashdata('flash_message', 'Education has been updated successfully');
+                    $this->session->set_flashdata('flash_message_css', 'alert-success');
+                    redirect(current_url());
+                }
+            }
+        }
+		$this->data['page_heading'] = "Edit Educational Qualification";
+        $this->data['maincontent'] = $this->load->view('admin/user/edit_education', $this->data, true);
+        $this->load->view('admin/_layouts/layout_authenticated', $this->data);
+    }
+	
+	function delete_education() {
+        $is_logged_in = $this->common_lib->is_logged_in();
+        if ($is_logged_in == FALSE) {
+            redirect('user/login');
+        }
+        $this->data['alert_message'] = $this->session->flashdata('flash_message');
+        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
+		$id = $this->uri->segment(4);
+		$where = array('id'=>$id, 'user_id' => $this->sess_user_id);
+		$res = $this->user_model->delete($where,'user_academics');
+		if ($res) {
+			$this->session->set_flashdata('flash_message', 'Your education details has been deleted successfully.');
+			$this->session->set_flashdata('flash_message_css', 'alert-success');
+			redirect('user/profile');
+		}else{
+			$this->session->set_flashdata('flash_message', 'We\'re unable to process your request.');
+			$this->session->set_flashdata('flash_message_css', 'alert-danger');
+			redirect('user/profile');
+		}
+    }
+	
+	function validate_user_education_form_data($mode) {		
+        $this->form_validation->set_rules('academic_qualification', 'qualification', 'required'); 
+		$this->form_validation->set_rules('academic_from_year', 'from year', 'required|min_length[4]|max_length[4]|numeric');        
+        $this->form_validation->set_rules('academic_to_year', 'to year', 'required|min_length[4]|max_length[4]|numeric'); 
+        $this->form_validation->set_rules('academic_inst', 'academic inst', 'required');
+        $this->form_validation->set_rules('academic_specialization', 'specialization', 'required');
+        $this->form_validation->set_rules('academic_marks_percentage', 'marks in percentage', 'required');
+        $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
+        if ($this->form_validation->run() == true) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

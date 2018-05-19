@@ -5,7 +5,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<link rel="icon" href="<?php echo site_url('assets/dist/img/favicon.ico'); ?>">
+<link rel="icon" href="<?php echo base_url('assets/dist/img/favicon.ico'); ?>">
 
 <title><?php echo $el_html_tag_title; ?></title>
 <noscript>
@@ -14,7 +14,7 @@ However, it seems JavaScript is either disabled or not supported by your browser
 To use standard view, enable JavaScript by changing your browser options, then try again.
 </noscript>
 <script>
-    var SITE_URL = "<?php echo site_url(); ?>";
+    var SITE_URL = "<?php echo base_url(); ?>";
     var BASE_URL = "<?php echo base_url(); ?>";
     var ROUTER_DIRECTORY = "<?php echo $this->router->directory; ?>";
     var ROUTER_CLASS = "<?php echo $this->router->class; ?>";

@@ -84,8 +84,8 @@
         </div>
         <?php echo form_close(); ?>
         <div class="text-left">
-            <a href="<?php echo site_url('user/login');?>" class="d-block">Back to login</a>
-            <a href="<?php echo site_url('user/forgot_password');?>" class="d-block">Resend password reset link</a>
+            <a href="<?php echo base_url('user/login');?>" class="d-block">Back to login</a>
+            <a href="<?php echo base_url('user/forgot_password');?>" class="d-block">Resend password reset link</a>
         </div>        
     </div>    
 </div>

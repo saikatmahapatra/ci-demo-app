@@ -96,7 +96,7 @@
                      }
                      }else{
 						 ?>
-						 <a class="btn btn-primary pull-right" href="<?php echo site_url('user/add_address');?>">Add a Shipping Address</a>
+						 <a class="btn btn-primary pull-right" href="<?php echo base_url('user/add_address');?>">Add a Shipping Address</a>
 						 <?php
 					 }
 					?>

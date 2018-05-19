@@ -103,14 +103,14 @@ class Product extends CI_Controller {
             $row[] = (strtolower($result['product_status']) == 'y') ? 'Shown' : 'Hidden';
             //add html for action
             $action_html = '';
-            $action_html.= anchor(site_url('admin/product/edit/' . $result['id']), 'Edit', array(
+            $action_html.= anchor(base_url('admin/product/edit/' . $result['id']), 'Edit', array(
                 'class' => 'btn btn-sm btn-dark',
                 'data-toggle' => 'tooltip',
                 'data-original-title' => 'Edit',
                 'title' => 'Edit',
             ));
             $action_html.='&nbsp;';
-            $action_html.= anchor(site_url('admin/product/delete/' . $result['id']), 'Delete', array(
+            $action_html.= anchor(base_url('admin/product/delete/' . $result['id']), 'Delete', array(
                 'class' => 'btn btn-sm btn-danger btn-delete',
 				'data-confirmation'=>true,
 				'data-confirmation-message'=>'Are you sure, you want to delete this?',

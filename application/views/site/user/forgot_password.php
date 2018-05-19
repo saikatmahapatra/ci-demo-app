@@ -57,7 +57,7 @@
         </div>
         <?php echo form_close(); ?>
         <div class="text-left">
-            <a href="<?php echo site_url('user/login');?>" class="d-block">Back to login</a>
+            <a href="<?php echo base_url('user/login');?>" class="d-block">Back to login</a>
         </div>
     </div>
 </div>

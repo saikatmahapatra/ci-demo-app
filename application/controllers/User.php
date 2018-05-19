@@ -219,7 +219,7 @@ class User extends CI_Controller {
                     $html.='<div style="font:14px Arial,Helvetica,sans-serif;margin-bottom:5px;color:#222222;padding:0px 0 10px 0">';
                     $html.='<p>Please click on the password reset link to create a new login password.</p>';
                     $html.='<p><strong>Password Reset Link:</strong><br />';
-                    $html.= anchor(site_url('user/reset_password/' . md5($password_reset_key)), NULL);
+                    $html.= anchor(base_url('user/reset_password/' . md5($password_reset_key)), NULL);
                     $html.='</p>';
                     $html.='</div>';
                     $html.='</div>';
@@ -428,10 +428,10 @@ class User extends CI_Controller {
         if ($this->input->post('form_action') == 'update_profile') {
             if ($this->validate_edit_profile_form() == true) {
                 $postdata = array(
-                    'user_firstname' => $this->input->post('user_firstname'),
-                    'user_lastname' => $this->input->post('user_lastname'),
+                    //'user_firstname' => $this->input->post('user_firstname'),
+                    //'user_lastname' => $this->input->post('user_lastname'),
                     'user_bio' => $this->input->post('user_bio'),
-                    'user_gender' => $this->input->post('user_gender'),                   
+                    //'user_gender' => $this->input->post('user_gender'),                   
                     //'user_dob' => $dob,
                     'user_mobile_phone1' => $this->input->post('user_mobile_phone1'),
                     'user_mobile_phone2' => $this->input->post('user_mobile_phone2')                    
@@ -579,12 +579,12 @@ class User extends CI_Controller {
 	}
 
     function validate_edit_profile_form() {
-        $this->form_validation->set_rules('user_firstname', 'first name', 'required');
-        $this->form_validation->set_rules('user_lastname', 'last name', 'required');
-        $this->form_validation->set_rules('user_gender', 'gender selection', 'required');        
+        //$this->form_validation->set_rules('user_firstname', 'first name', 'required');
+        //$this->form_validation->set_rules('user_lastname', 'last name', 'required');
+        //$this->form_validation->set_rules('user_gender', 'gender selection', 'required');        
         $this->form_validation->set_rules('user_mobile_phone1', 'primary mobile', 'required|trim|min_length[10]|max_length[10]|numeric');
         $this->form_validation->set_rules('user_mobile_phone2', 'secondary mobile', 'trim|min_length[10]|max_length[10]|numeric');
-        $this->form_validation->set_rules('user_bio', 'short introduction', 'max_length[100]');
+        $this->form_validation->set_rules('user_bio', 'about you', 'max_length[100]');
         /* $this->form_validation->set_rules('dob_day', 'birth day selection', 'required');
           $this->form_validation->set_rules('dob_month', 'birth month selection', 'required');
           $this->form_validation->set_rules('dob_year', 'birth year selection', 'required'); */
@@ -725,6 +725,27 @@ class User extends CI_Controller {
 		$this->data['page_heading'] = "Edit Educational Qualification";
         $this->data['maincontent'] = $this->load->view('site/user/edit_education', $this->data, true);
         $this->load->view('site/_layouts/layout_default', $this->data);
+    }
+	
+	function delete_education() {
+        $is_logged_in = $this->common_lib->is_logged_in();
+        if ($is_logged_in == FALSE) {
+            redirect('user/login');
+        }
+        $this->data['alert_message'] = $this->session->flashdata('flash_message');
+        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
+		$id = $this->uri->segment(3);
+		$where = array('id'=>$id, 'user_id' => $this->sess_user_id);
+		$res = $this->user_model->delete($where,'user_academics');
+		if ($res) {
+			$this->session->set_flashdata('flash_message', 'Your education details has been deleted successfully.');
+			$this->session->set_flashdata('flash_message_css', 'alert-success');
+			redirect('user/profile');
+		}else{
+			$this->session->set_flashdata('flash_message', 'We\'re unable to process your request.');
+			$this->session->set_flashdata('flash_message_css', 'alert-danger');
+			redirect('user/profile');
+		}
     }
 	
 	function validate_user_education_form_data($mode) {		

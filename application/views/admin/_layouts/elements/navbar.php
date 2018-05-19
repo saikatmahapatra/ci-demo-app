@@ -13,7 +13,7 @@ $segment3 = $this->uri->segment(3);
 <div class="collapse navbar-collapse" id="navbarsExampleDefault">
 	<ul class="navbar-nav">
 		<li class="nav-item <?php echo ($segment2=='home') ? 'active':''?>">
-			<a class="nav-link" href="<?php echo site_url('admin/home'); ?>">Home
+			<a class="nav-link" href="<?php echo base_url('admin/home'); ?>">Home
 				<span class="sr-only">(current)</span>
 			</a>
 		</li>	
@@ -21,8 +21,8 @@ $segment3 = $this->uri->segment(3);
 			<a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
 				aria-expanded="false">CMS</a>
 			<div class="dropdown-menu" aria-labelledby="dropdown01">
-				<a class="dropdown-item" href="<?php echo site_url('admin/cms');?>">View All</a>
-				<a class="dropdown-item" href="<?php echo site_url('admin/cms/add');?>">Add</a>
+				<a class="dropdown-item" href="<?php echo base_url('admin/cms');?>">View All</a>
+				<a class="dropdown-item" href="<?php echo base_url('admin/cms/add');?>">Add</a>
 			</div>
 		</li>
 
@@ -30,18 +30,18 @@ $segment3 = $this->uri->segment(3);
 			<a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true"
 				aria-expanded="false">Products</a>
 			<div class="dropdown-menu" aria-labelledby="dropdown02">
-				<a class="dropdown-item" href="<?php echo site_url('admin/product');?>">View Products</a>
-				<a class="dropdown-item" href="<?php echo site_url('admin/product/add');?>">Add Product</a>
-				<a class="dropdown-item" href="<?php echo site_url('admin/category');?>">View Categories</a>
-				<a class="dropdown-item" href="<?php echo site_url('admin/category/add');?>">Add Category</a>
+				<a class="dropdown-item" href="<?php echo base_url('admin/product');?>">View Products</a>
+				<a class="dropdown-item" href="<?php echo base_url('admin/product/add');?>">Add Product</a>
+				<a class="dropdown-item" href="<?php echo base_url('admin/category');?>">View Categories</a>
+				<a class="dropdown-item" href="<?php echo base_url('admin/category/add');?>">Add Category</a>
 			</div>
 		</li>
 		
 		<li class="nav-item <?php echo ($segment3 == 'manage' || $segment3 == 'create_account') ? 'active':''?>">
-			<a class="nav-link"href="<?php echo site_url('admin/user/manage'); ?>">Customers</a>
+			<a class="nav-link"href="<?php echo base_url('admin/user/manage'); ?>">Customers</a>
 		</li>
 		<li class="nav-item <?php echo ($segment2=='order') ? 'active':''?>">
-			<a class="nav-link" href="<?php echo site_url('admin/order'); ?>">Orders</a>
+			<a class="nav-link" href="<?php echo base_url('admin/order'); ?>">Orders</a>
 		</li>
 		
 		<?php if (isset($this->session->userdata['sess_user']['id'])) {  ?>
@@ -60,9 +60,9 @@ $segment3 = $this->uri->segment(3);
 				</div><!--/.welcome-user-container-->
 				
 				<div class="dropdown-divider mt-3"></div>			
-				<a class="dropdown-item"  href="<?php echo site_url('admin/user/profile/'.$this->session->userdata['sess_user']['id']); ?>">Profile</a>
-				<a class="dropdown-item" href="<?php echo site_url('admin/user/change_password'); ?>">Change Password</a>
-				<a class="dropdown-item" href="<?php echo site_url('admin/user/logout'); ?>">Logout</a>			
+				<a class="dropdown-item"  href="<?php echo base_url('admin/user/profile/'.$this->session->userdata['sess_user']['id']); ?>">Profile</a>
+				<a class="dropdown-item" href="<?php echo base_url('admin/user/change_password'); ?>">Change Password</a>
+				<a class="dropdown-item" href="<?php echo base_url('admin/user/logout'); ?>">Logout</a>			
 			</div>
 		</li>
 		<?php } ?>

@@ -94,14 +94,14 @@ class Cms extends CI_Controller {
             $row[] = (strtolower($result['pagecontent_status']) == 'y') ? 'Published' : 'Unpublished';
             //add html for action
             $action_html = '';
-            $action_html.= anchor(site_url('admin/cms/edit/' . $result['id']), 'Edit', array(
+            $action_html.= anchor(base_url('admin/cms/edit/' . $result['id']), 'Edit', array(
                 'class' => 'btn btn-sm btn-dark',
                 'data-toggle' => 'tooltip',
                 'data-original-title' => 'Edit',
                 'title' => 'Edit',
             ));
             $action_html.='&nbsp;';
-            $action_html.= anchor(site_url('admin/cms/delete/' . $result['id']), 'Delete', array(
+            $action_html.= anchor(base_url('admin/cms/delete/' . $result['id']), 'Delete', array(
                 'class' => 'btn btn-sm btn-danger btn-delete',
 				'data-confirmation'=>true,
 				'data-confirmation-message'=>'Are you sure, you want to delete this?',

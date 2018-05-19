@@ -13,7 +13,7 @@
                 <div class="pull-left info">
                     <p><?php echo isset($this->session->userdata['sess_user']['id']) ? $this->session->userdata['sess_user']['user_firstname'] . ' ' . $this->session->userdata['sess_user']['user_lastname'] : 'Guest'; ?></p>
                     <!--<a href="#"><i class="fa fa-circle text-success"></i> Online</a>-->
-                    <a href="<?php echo site_url('admin/user/logout'); ?>"><i class="fa fa-lock"></i> Logout</a>                    
+                    <a href="<?php echo base_url('admin/user/logout'); ?>"><i class="fa fa-lock"></i> Logout</a>                    
                 </div>
             </div>
             <?php
@@ -41,8 +41,8 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="<?php echo site_url('admin/cms');?>"><i class="fa fa-circle-o"></i> View All /Edit</a></li>
-                    <li><a href="<?php echo site_url('admin/cms/add');?>"><i class="fa fa-circle-o"></i> Add</a></li>
+                    <li><a href="<?php echo base_url('admin/cms');?>"><i class="fa fa-circle-o"></i> View All /Edit</a></li>
+                    <li><a href="<?php echo base_url('admin/cms/add');?>"><i class="fa fa-circle-o"></i> Add</a></li>
                 </ul>
             </li>
             <li class="treeview">
@@ -53,8 +53,8 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="<?php echo site_url('admin/category');?>"><i class="fa fa-circle-o"></i> View All /Edit</a></li>
-                    <li><a href="<?php echo site_url('admin/category/add');?>"><i class="fa fa-circle-o"></i> Add</a></li>
+                    <li><a href="<?php echo base_url('admin/category');?>"><i class="fa fa-circle-o"></i> View All /Edit</a></li>
+                    <li><a href="<?php echo base_url('admin/category/add');?>"><i class="fa fa-circle-o"></i> Add</a></li>
                 </ul>
             </li>
             <li class="treeview">
@@ -65,8 +65,8 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="<?php echo site_url('admin/product');?>"><i class="fa fa-circle-o"></i> View All /Edit</a></li>
-                    <li><a href="<?php echo site_url('admin/product/add');?>"><i class="fa fa-circle-o"></i> Add</a></li>
+                    <li><a href="<?php echo base_url('admin/product');?>"><i class="fa fa-circle-o"></i> View All /Edit</a></li>
+                    <li><a href="<?php echo base_url('admin/product/add');?>"><i class="fa fa-circle-o"></i> Add</a></li>
                 </ul>
             </li>
             <li class="treeview">
@@ -77,7 +77,7 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="<?php echo site_url('admin/user/manage');?>"><i class="fa fa-circle-o"></i> View All/Manage</a></li>                    
+                    <li><a href="<?php echo base_url('admin/user/manage');?>"><i class="fa fa-circle-o"></i> View All/Manage</a></li>                    
                 </ul>
             </li>
             <li class="treeview">
@@ -88,7 +88,7 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="<?php echo site_url('admin/order');?>"><i class="fa fa-circle-o"></i> View All/Manage</a></li>                    
+                    <li><a href="<?php echo base_url('admin/order');?>"><i class="fa fa-circle-o"></i> View All/Manage</a></li>                    
                 </ul>
             </li>
         </ul>

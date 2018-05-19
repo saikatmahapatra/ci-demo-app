@@ -56,7 +56,7 @@
 											<div>Display product attribute 2</div>
 											<div>Display product attribute 3</div>
 											<div class="d-none"><?php echo '<span class="currency" id="INR">&#8377;</span> ' . number_format($row['price'], 2); ?></div>
-											<a href="<?php echo site_url('order/remove_cart/'.$row['rowid']);?>" class="">Remove</a>
+											<a href="<?php echo base_url('order/remove_cart/'.$row['rowid']);?>" class="">Remove</a>
 										</div><!--/.media-body-->
 									</div><!--/.media-->
 								</div>
@@ -86,12 +86,12 @@
 			</div><!--/.card-body-->
 			<div class="card-footer">
 				<div class="text-right">
-					<a href="<?php echo site_url('product');?>" class="btn btn-primary">Continue Shopping</a>
+					<a href="<?php echo base_url('product');?>" class="btn btn-primary">Continue Shopping</a>
 					<?php
 					if (sizeof($cartrows) > 0) {
 						?>
 						<button type="submit" class="btn btn-primary">Update Cart</button>
-						<a href="<?php echo site_url('order/init_payment');?>" class="btn btn-primary d-none">Place Order</a>
+						<a href="<?php echo base_url('order/init_payment');?>" class="btn btn-primary d-none">Place Order</a>
 						<?php						
 					}
 					?>
@@ -112,7 +112,7 @@
 				<?php
 					if (sizeof($cartrows) > 0) {
 						?>						
-						<a href="<?php echo site_url('order/init_payment');?>" class="btn btn-primary">Proceed to Checkout</a>
+						<a href="<?php echo base_url('order/init_payment');?>" class="btn btn-primary">Proceed to Checkout</a>
 						<?php						
 					}
 					?>

@@ -64,8 +64,8 @@
 		<?php echo form_close(); ?>
 		
 		<div class="text-centre">
-			<a class="d-block" href="<?php echo site_url('user/forgot_password');?>" class="">Forgot your password?</a>
-			<a class="d-block" href="<?php echo site_url('user/create_account');?>" class="">Create an account</a>
+			<a class="d-block" href="<?php echo base_url('user/forgot_password');?>" class="">Forgot your password?</a>
+			<a class="d-block" href="<?php echo base_url('user/create_account');?>" class="">Create an account</a>
 		</div>
 		
 		

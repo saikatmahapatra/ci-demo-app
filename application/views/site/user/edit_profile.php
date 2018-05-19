@@ -26,7 +26,9 @@
     <div class="col-md-8">
         <?php echo form_open(current_url(), array('method' => 'post', 'class' => 'ci-form','name' => 'profile','id' => 'profile',)); ?>
         <?php echo form_hidden('form_action', 'update_profile'); ?>
-        
+			<?php 
+			/*
+			?>
             <div class="form-row">                
 				<div class="form-group col-md-6">                                
 					<label for="user_firstname" class="">First Name <span class="required">*</span></label>
@@ -55,16 +57,17 @@
 					<?php echo form_error('user_lastname'); ?>
 				</div>               
             </div><!--/.form-row-->
+			<?php */ ?>
 			
 			<div class="form-group">
-				<label for="user_bio" class="">Short Bio</label>
+				<label for="user_bio" class="">About me</label>
 				<?php
 				echo form_input(array(
 					'name' => 'user_bio',
 					'value' => isset($row['user_bio']) ? $row['user_bio'] : set_value('user_bio'),
 					'id' => 'user_bio',
 					'class' => 'form-control',
-					'placeholder' => 'Some shot bio',
+					'placeholder' => 'About me',
 					'title' => 'Short Bio',							
 					'maxlength' => '100',
 				));
@@ -72,7 +75,7 @@
 				<?php echo form_error('user_bio'); ?>
 			</div>
 			
-            
+            <?php /* ?>
 			<div class="form-group">
 				<label class="">Gender <span class="required">*</span></label>
 				<div class="form-radio">
@@ -118,6 +121,8 @@
 					<?php echo form_error('user_gender'); ?>
 				</div>
 			</div>
+			
+			<?php */ ?>
         
             <div class="form-row">                
 				<div class="form-group col-md-6">
@@ -150,7 +155,7 @@
 				</div>                
             </div><!--/.row-->
 			
-			<a href="<?php echo site_url('user/profile');?>" class="btn btn-secondary">Back</a>
+			<a href="<?php echo base_url('user/profile');?>" class="btn btn-secondary">Back</a>
 			<?php echo form_submit(array('name' => 'submit','value' => 'Update','class' => 'btn btn-primary',));?> 
         <?php echo form_close(); ?>
 		

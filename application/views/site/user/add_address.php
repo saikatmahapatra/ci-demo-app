@@ -188,7 +188,7 @@
 				<?php echo form_error('address_type'); ?>
 			</div>
 			
-			<a href="<?php echo site_url('user/profile');?>" class="btn btn-secondary">Back</a>
+			<a href="<?php echo base_url('user/profile');?>" class="btn btn-secondary">Back</a>
 			<?php
 			echo form_submit(array(
 			'name' => 'submit',

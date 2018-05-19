@@ -40,7 +40,7 @@
 					<?php form_close(); ?>
 
 					<div class="text-center">
-						<a class="d-block small" href="<?php echo site_url('admin/user/forgot_password');?>">Forgot Password?</a>
+						<a class="d-block small" href="<?php echo base_url('admin/user/forgot_password');?>">Forgot Password?</a>
 					</div>
 				</div>
 			</div>

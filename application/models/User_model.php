@@ -363,7 +363,8 @@ class User_model extends CI_Model {
         }
 		$this->db->join('academic_qualification t2', 't1.academic_qualification=t2.id', 'left');
 		$this->db->join('academic_specialization t3', 't1.academic_specialization=t3.id', 'left');
-		$this->db->join('academic_institute t4', 't1.academic_inst=t4.id', 'left');		
+		$this->db->join('academic_institute t4', 't1.academic_inst=t4.id', 'left');	
+		$this->db->order_by('t1.academic_to_year','desc');
         $query = $this->db->get('user_academics as t1');
         //echo $this->db->last_query();
         $result = $query->result_array();        
