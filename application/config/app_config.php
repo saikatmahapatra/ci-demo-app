@@ -9,6 +9,12 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /*
+* Admin Controller, Site Controller and View Directory Config
+*/
+$config['site_view_dir'] = 'site/'; //application/views/site/
+$config['admin_view_dir'] = 'admin/'; //application/views/admin/
+
+/*
  * Email Config Application Team/Admin
  */
 $config['app_admin_email'] = 'mahapatra.saikat29@gmail.com';

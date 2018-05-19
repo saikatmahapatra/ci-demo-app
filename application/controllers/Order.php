@@ -30,6 +30,7 @@ class Order extends CI_Controller {
 		$this->data['payment_method'] = array('cod'=>'Cash On Delivery','debit_card' => 'Debit Card', 'credit_card' => 'Credit Card', 'net_banking' => 'Net Banking');
 		
 		//View Page Config
+		$this->data['view_dir'] = 'site/'; // inner view and layout directory name inside application/view
 		$this->data['page_heading'] = $this->router->class.' : '.$this->router->method;
 		
     }
@@ -76,8 +77,8 @@ class Order extends CI_Controller {
 		}
 		
 		$this->data['page_heading'] = 'My Cart';
-        $this->data['maincontent'] = $this->load->view('site/order/my_cart', $this->data, true);
-        $this->load->view('site/_layouts/layout_default', $this->data);
+        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'order/my_cart', $this->data, true);
+        $this->load->view($this->data['view_dir'].'_layouts/layout_default', $this->data);
     }
 
     function find_item($product_id) { //return rowid against a product id, if already added to the cart
@@ -189,8 +190,8 @@ class Order extends CI_Controller {
 		}
 		
 		$this->data['page_heading'] = 'Checkout';		
-		$this->data['maincontent'] = $this->load->view('site/order/init_payment', $this->data, true);
-        $this->load->view('site/_layouts/layout_default', $this->data);
+		$this->data['maincontent'] = $this->load->view($this->data['view_dir'].'order/init_payment', $this->data, true);
+        $this->load->view($this->data['view_dir'].'_layouts/layout_default', $this->data);
 	}
 
     function get_user_shipping_address($address_id = NULL, $user_id, $address_type_char){
@@ -320,8 +321,8 @@ class Order extends CI_Controller {
 		//$this->data = array();
 		$this->data['order_no'] = '8278783799829080';
 		$this->data['page_heading'] = 'Your Online Transaction Summary';
-		$this->data['maincontent'] = $this->load->view('site/order/transaction_response', $this->data, true);
-        $this->load->view('site/_layouts/layout_default', $this->data);
+		$this->data['maincontent'] = $this->load->view($this->data['view_dir'].'order/transaction_response', $this->data, true);
+        $this->load->view($this->data['view_dir'].'_layouts/layout_default', $this->data);
     }
 }
 

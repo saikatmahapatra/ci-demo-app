@@ -21,6 +21,7 @@ class Error extends CI_Controller {
         $this->data['app_js'] = $this->common_lib->add_javascript($app_js_src);
 		
 		//View Page Config
+		$this->data['view_dir'] = 'site/'; // inner view and layout directory name inside application/view
 		$this->data['page_heading'] = $this->router->class.' : '.$this->router->method;
     }
 
@@ -31,15 +32,15 @@ class Error extends CI_Controller {
     function page_not_found() {
         $data = array();
 		$this->data['page_heading'] = "404 Not Found";
-        $this->data['maincontent'] = $this->load->view('site/error/page_not_found', $this->data, true);
-        $this->load->view('site/_layouts/layout_default', $this->data);
+        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'error/page_not_found', $this->data, true);
+        $this->load->view($this->data['view_dir'].'_layouts/layout_default', $this->data);
     }
 	
 	function auth() {
 		$data = array();
 		$this->data['page_heading'] = "Auth Error";
-        $this->data['maincontent'] = $this->load->view('site/error/auth_error', $this->data, true);
-        $this->load->view('site/_layouts/layout_default', $this->data);
+        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'error/auth_error', $this->data, true);
+        $this->load->view($this->data['view_dir'].'_layouts/layout_default', $this->data);
     }
 
 }

@@ -25,6 +25,7 @@ class Home extends CI_Controller {
         $this->data['alert_message_css'] = NULL;
 		
 		//View Page Config
+		$this->data['view_dir'] = 'site/'; // inner view and layout directory name inside application/view
 		$this->data['page_heading'] = $this->router->class.' : '.$this->router->method;
     }
 
@@ -32,8 +33,8 @@ class Home extends CI_Controller {
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
 
-        $this->data['maincontent'] = $this->load->view('site/home/index', $this->data, true);
-        $this->load->view('site/_layouts/layout_jumbotron', $this->data);
+        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'home/index', $this->data, true);
+        $this->load->view($this->data['view_dir'].'_layouts/layout_jumbotron', $this->data);
     }
 
 }

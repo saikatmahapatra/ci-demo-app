@@ -28,6 +28,7 @@ class Product extends CI_Controller {
         $this->data['alert_message_css'] = NULL;
 		
 		//View Page Config
+		$this->data['view_dir'] = 'site/'; // inner view and layout directory name inside application/view
 		$this->data['page_heading'] = $this->router->class.' : '.$this->router->method;
     }
 
@@ -38,8 +39,8 @@ class Product extends CI_Controller {
         $this->data['total_products'] = $products['num_rows'];
         $this->data['products'] = $products['data_rows'];
 		$this->data['page_heading'] = 'Products';
-        $this->data['maincontent'] = $this->load->view('site/product/index', $this->data, true);
-        $this->load->view('site/_layouts/layout_default', $this->data);
+        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'product/index', $this->data, true);
+        $this->load->view($this->data['view_dir'].'_layouts/layout_default', $this->data);
     }
 
 }

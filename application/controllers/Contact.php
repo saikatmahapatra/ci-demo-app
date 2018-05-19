@@ -31,6 +31,7 @@ class Contact extends CI_Controller {
         $this->load->library('email'); 
 
 		//View Page Config
+		$this->data['view_dir'] = 'site/'; // inner view and layout directory name inside application/view
 		$this->data['page_heading'] = $this->router->class.' : '.$this->router->method;		
     }
 
@@ -133,8 +134,8 @@ class Contact extends CI_Controller {
         $this->data['captcha_image'] = $cap['image'];
 		
 		$this->data['page_heading'] = 'Contact Us';
-        $this->data['maincontent'] = $this->load->view('site/contact/index', $this->data, true);
-        $this->load->view('site/_layouts/layout_default', $this->data);
+        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'contact/index', $this->data, true);
+        $this->load->view($this->data['view_dir'].'_layouts/layout_default', $this->data);
     }
 
 }
