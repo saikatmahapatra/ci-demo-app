@@ -15,7 +15,7 @@ class Cms extends CI_Controller {
         //Check if any user logged in else redirect to login
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
-            redirect('admin/user/login');
+            redirect($this->router->directory.'user/login');
         }
 
         //Has logged in user permission to access this page or method?        
@@ -95,14 +95,14 @@ class Cms extends CI_Controller {
             $row[] = (strtolower($result['pagecontent_status']) == 'y') ? 'Published' : 'Unpublished';
             //add html for action
             $action_html = '';
-            $action_html.= anchor(base_url('admin/cms/edit/' . $result['id']), 'Edit', array(
+            $action_html.= anchor(base_url($this->router->directory.'cms/edit/' . $result['id']), 'Edit', array(
                 'class' => 'btn btn-sm btn-dark',
                 'data-toggle' => 'tooltip',
                 'data-original-title' => 'Edit',
                 'title' => 'Edit',
             ));
             $action_html.='&nbsp;';
-            $action_html.= anchor(base_url('admin/cms/delete/' . $result['id']), 'Delete', array(
+            $action_html.= anchor(base_url($this->router->directory.'cms/delete/' . $result['id']), 'Delete', array(
                 'class' => 'btn btn-sm btn-danger btn-delete',
 				'data-confirmation'=>true,
 				'data-confirmation-message'=>'Are you sure, you want to delete this?',
@@ -149,7 +149,7 @@ class Cms extends CI_Controller {
                 if ($insert_id) {
                     $this->session->set_flashdata('flash_message', '<i class="icon fa fa-check" aria-hidden="true"></i>Added successfully.');
                     $this->session->set_flashdata('flash_message_css', 'alert-success');
-                    redirect('admin/cms/add');
+                    redirect($this->router->directory.'cms/add');
                 }
             }
         }
@@ -203,7 +203,7 @@ class Cms extends CI_Controller {
         if ($res) {
             $this->session->set_flashdata('flash_message', '<strong>Deleted </strong> successfully.');
             $this->session->set_flashdata('flash_message_css', 'alert-success');
-            redirect('admin/cms');
+            redirect($this->router->directory.'cms');
         }
     }
 

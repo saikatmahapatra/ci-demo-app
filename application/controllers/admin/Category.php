@@ -15,7 +15,7 @@ class Category extends CI_Controller {
         //Check if any user logged in else redirect to login
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
-            redirect('admin/user/login');
+            redirect($this->router->directory.'user/login');
         }
 
         //Has logged in user permission to access this page or method?        
@@ -88,14 +88,14 @@ class Category extends CI_Controller {
             $row[] = $result['category_status'];
             //add html for action
             $action_html = '';
-            $action_html.= anchor(base_url('admin/category/edit/' . $result['id']), 'Edit', array(
+            $action_html.= anchor(base_url($this->router->directory.'category/edit/' . $result['id']), 'Edit', array(
                 'class' => 'btn btn-sm btn-dark',
                 'data-toggle' => 'tooltip',
                 'data-original-title' => 'Edit',
                 'title' => 'Edit',
             ));
             $action_html.='&nbsp;';
-            $action_html.= anchor(base_url('admin/category/delete/' . $result['id']), 'Delete', array(
+            $action_html.= anchor(base_url($this->router->directory.'category/delete/' . $result['id']), 'Delete', array(
                 'class' => 'btn btn-sm btn-danger btn-delete',
 				'data-confirmation'=>true,
 				'data-confirmation-message'=>'Are you sure, you want to delete this?',				
@@ -206,7 +206,7 @@ class Category extends CI_Controller {
         if ($res) {
             $this->session->set_flashdata('flash_message', '<i class="icon fa fa-check" aria-hidden="true"></i> Deleted successfully.');
             $this->session->set_flashdata('flash_message_css', 'alert-success');
-            redirect('admin/category');
+            redirect($this->router->directory.'category');
         }
     }
 

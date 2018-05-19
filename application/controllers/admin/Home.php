@@ -15,7 +15,7 @@ class Home extends CI_Controller {
         //Check if any user logged in else redirect to login
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
-            redirect('admin/user/login');
+            redirect($this->router->directory.'user/login');
         }
 
         //Has logged in user permission to access this page or method?        

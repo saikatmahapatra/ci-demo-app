@@ -16,7 +16,7 @@ class User extends CI_Controller {
 //        //Check if any user logged in else redirect to login
 //        $is_logged_in = $this->common_lib->is_logged_in();
 //        if ($is_logged_in == FALSE) {
-//            redirect('admin/user/login');
+//            redirect($this->router->directory.'user/login');
 //        }
 //
 //        //Has logged in user permission to access this page or method?        
@@ -68,7 +68,7 @@ class User extends CI_Controller {
     function manage() {        
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
-            redirect('admin/user/login');
+            redirect($this->router->directory.'user/login');
         }
         //Has logged in user permission to access this page or method?        
         $this->common_lib->check_user_role_permission(array(
@@ -114,7 +114,7 @@ class User extends CI_Controller {
             $acc_status_text = ($result['user_account_active'] == 'Y') ? 'Deactivate' : 'Activate';
             $acc_status_class = ($result['user_account_active'] == 'Y') ? 'btn-danger' : 'btn-success';
             $acc_status_set = ($result['user_account_active'] == 'Y') ? 'N' : 'Y';
-            $action_html.= anchor(base_url('admin/user/profile/' . $result['id']), 'Profile', array(
+            $action_html.= anchor(base_url($this->router->directory.'user/profile/' . $result['id']), 'Profile', array(
                 'class' => 'btn btn-sm btn-secondary',
                 'data-toggle' => 'tooltip',
                 'data-original-title' => 'Profile',
@@ -122,7 +122,7 @@ class User extends CI_Controller {
             ));
 			$action_html.='&nbsp;';
 			if($result['role_weight'] <= 90){
-				$action_html.= anchor(base_url('admin/user/manage#'), $acc_status_text, array(
+				$action_html.= anchor(base_url($this->router->directory.'user/manage#'), $acc_status_text, array(
 					'class' => 'change_account_status btn btn-sm ' . $acc_status_class,
 					'data-toggle' => 'tooltip',
 					'data-original-title' => $acc_status_text,
@@ -132,7 +132,7 @@ class User extends CI_Controller {
 				));
 			}
             /* $action_html.='&nbsp;';
-              $action_html.= anchor(base_url('admin/user/delete/' . $result['id']), 'Delete', array(
+              $action_html.= anchor(base_url($this->router->directory.'user/delete/' . $result['id']), 'Delete', array(
               'class' => 'btn btn-sm btn-danger btn-delete',
 			  'data-confirmation'=>true,
 			  'data-confirmation-message'=>'Are you sure, you want to delete this?',
@@ -160,7 +160,7 @@ class User extends CI_Controller {
         ########### Validate User Auth #############
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == TRUE) {
-            redirect('admin/home');
+            redirect($this->router->directory.'home');
         }
         ########### Validate User Auth End #############
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
@@ -183,7 +183,7 @@ class User extends CI_Controller {
                     }
                     if ($login_status == 'success') {
                         $this->session->set_userdata('sess_user', $login_data);
-                        redirect('admin/home');
+                        redirect($this->router->directory.'home');
                     }
                 }
             }
@@ -218,7 +218,7 @@ class User extends CI_Controller {
 		########### Validate User Auth #############
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
-            redirect('admin/user/login');
+            redirect($this->router->directory.'user/login');
         }
         //Has logged in user permission to access this page or method?        
         $this->common_lib->check_user_role_permission(array(
@@ -354,7 +354,7 @@ class User extends CI_Controller {
                     $html.='<div style="font:14px Arial,Helvetica,sans-serif;margin-bottom:5px;color:#222222;padding:0px 0 10px 0">';
                     $html.='<p>Please click on the password reset link to create a new login password.</p>';
                     $html.='<p><strong>Password Reset Link:</strong><br />';
-                    $html.= anchor(base_url('admin/user/reset_password/' . md5($password_reset_key)), NULL);
+                    $html.= anchor(base_url($this->router->directory.'user/reset_password/' . md5($password_reset_key)), NULL);
                     $html.='</p>';
                     $html.='</div>';
                     $html.='</div>';
@@ -479,7 +479,7 @@ class User extends CI_Controller {
         ########### Validate User Auth #############
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
-            redirect('admin/user/login');
+            redirect($this->router->directory.'user/login');
         }
         //Has logged in user permission to access this page or method?        
         $this->common_lib->check_user_role_permission(array(
@@ -536,9 +536,9 @@ class User extends CI_Controller {
             $this->session->unset_userdata('sess_user');
             $this->session->set_flashdata('flash_message', '<i class="icon fa fa-check" aria-hidden="true"></i> You have been logged out successfully.');
             $this->session->set_flashdata('flash_message_css', 'alert-success');
-            redirect('admin/user/login');
+            redirect($this->router->directory.'user/login');
         } else {
-            redirect('admin/home');
+            redirect($this->router->directory.'home');
         }
     }
 
@@ -546,7 +546,7 @@ class User extends CI_Controller {
         ########### Validate User Auth #############
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
-            redirect('admin/user/login');
+            redirect($this->router->directory.'user/login');
         }
         //Has logged in user permission to access this page or method?        
         $this->common_lib->check_user_role_permission(array(
@@ -578,7 +578,7 @@ class User extends CI_Controller {
         ########### Validate User Auth #############
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
-            redirect('admin/user/login');
+            redirect($this->router->directory.'user/login');
         }
         //Has logged in user permission to access this page or method?        
         $this->common_lib->check_user_role_permission(array(
@@ -667,7 +667,7 @@ class User extends CI_Controller {
     function add_address() {
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
-            redirect('admin/user/login');
+            redirect($this->router->directory.'user/login');
         }
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');		
@@ -691,7 +691,7 @@ class User extends CI_Controller {
                 if ($res) {
                     $this->session->set_flashdata('flash_message', 'Your address has been added successfully');
                     $this->session->set_flashdata('flash_message_css', 'alert-success');
-                    redirect('admin/user/profile');
+                    redirect($this->router->directory.'user/profile');
                 }
             }
         }
@@ -703,7 +703,7 @@ class User extends CI_Controller {
 	function edit_address() {
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
-            redirect('admin/user/login');
+            redirect($this->router->directory.'user/login');
         }
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
@@ -731,7 +731,7 @@ class User extends CI_Controller {
                 if ($res) {
                     $this->session->set_flashdata('flash_message', 'Address has been updated successfully');
                     $this->session->set_flashdata('flash_message_css', 'alert-success');
-                    redirect('admin/user/profile');
+                    redirect($this->router->directory.'user/profile');
                 }
             }
         }
@@ -744,7 +744,7 @@ class User extends CI_Controller {
 	function delete_address() {
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
-            redirect('admin/user/login');
+            redirect($this->router->directory.'user/login');
         }
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
@@ -755,11 +755,11 @@ class User extends CI_Controller {
 		if ($res) {
 			$this->session->set_flashdata('flash_message', 'Your address has been deleted successfully.');
 			$this->session->set_flashdata('flash_message_css', 'alert-success');
-			redirect('admin/user/profile');
+			redirect($this->router->directory.'user/profile');
 		}else{
 			$this->session->set_flashdata('flash_message', 'We\'re unable to process your request.');
 			$this->session->set_flashdata('flash_message_css', 'alert-danger');
-			redirect('admin/user/profile');
+			redirect($this->router->directory.'user/profile');
 		}
     }
 	
@@ -835,7 +835,7 @@ class User extends CI_Controller {
 	function add_education() {
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
-            redirect('admin/user/login');
+            redirect($this->router->directory.'user/login');
         }
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
@@ -859,7 +859,7 @@ class User extends CI_Controller {
                 if ($res) {
                     $this->session->set_flashdata('flash_message', 'Your education has been added successfully');
                     $this->session->set_flashdata('flash_message_css', 'alert-success');
-                    redirect('admin/user/profile');
+                    redirect($this->router->directory.'user/profile');
                 }
             }
         }
@@ -871,7 +871,7 @@ class User extends CI_Controller {
 	function edit_education() {
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
-            redirect('admin/user/login');
+            redirect($this->router->directory.'user/login');
         }
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
