@@ -45,6 +45,7 @@ class Product extends CI_Controller {
         $this->id = $this->uri->segment(4);
 
         //View Page Config
+		$this->data['view_dir'] = 'admin/'; // inner view and layout directory name inside application/view
         $this->data['page_heading'] = $this->router->class.' : '.$this->router->method;
         $this->data['datatable']['dt_id']= array('heading'=>'Data Table','cols'=>array());
 		
@@ -64,8 +65,8 @@ class Product extends CI_Controller {
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
 		
 		$this->data['page_heading'] = 'Products';
-        $this->data['maincontent'] = $this->load->view('admin/product/index', $this->data, true);
-        $this->load->view('admin/_layouts/layout_authenticated', $this->data);
+        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'product/index', $this->data, true);
+        $this->load->view($this->data['view_dir'].'_layouts/layout_authenticated', $this->data);
     }
 
     function render_datatable() {
@@ -181,8 +182,8 @@ class Product extends CI_Controller {
             }
         }
 		$this->data['page_heading'] = 'Add Product';
-        $this->data['maincontent'] = $this->load->view('admin/product/add', $this->data, true);
-        $this->load->view('admin/_layouts/layout_authenticated', $this->data);
+        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'product/add', $this->data, true);
+        $this->load->view($this->data['view_dir'].'_layouts/layout_authenticated', $this->data);
     }
 
     function edit() {
@@ -231,8 +232,8 @@ class Product extends CI_Controller {
             $this->upload_documents();
         }
 		$this->data['page_heading'] = 'Edit Product';
-        $this->data['maincontent'] = $this->load->view('admin/product/edit', $this->data, true);
-        $this->load->view('admin/_layouts/layout_authenticated', $this->data);
+        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'product/edit', $this->data, true);
+        $this->load->view($this->data['view_dir'].'_layouts/layout_authenticated', $this->data);
     }
 
     function delete() {

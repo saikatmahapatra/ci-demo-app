@@ -40,6 +40,7 @@ class Home extends CI_Controller {
         $this->id = $this->uri->segment(4);
 
         //View Page Config
+		$this->data['view_dir'] = 'admin/'; // inner view and layout directory name inside application/view
         $this->data['page_heading'] = $this->router->class.' : '.$this->router->method;
         $this->data['datatable']['dt_id']= array('heading'=>'Data Table','cols'=>array());
 		
@@ -58,8 +59,8 @@ class Home extends CI_Controller {
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
 		$this->data['page_heading'] = 'Dashboard';
-        $this->data['maincontent'] = $this->load->view('admin/home/index', $this->data, true);
-        $this->load->view('admin/_layouts/layout_authenticated', $this->data);
+        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'home/index', $this->data, true);
+        $this->load->view($this->data['view_dir'].'_layouts/layout_authenticated', $this->data);
     }
 
 }

@@ -38,6 +38,7 @@ class User extends CI_Controller {
         $this->data['app_js'] = $this->common_lib->add_javascript($app_js_src);
 
         //View Page Config
+		$this->data['view_dir'] = 'admin/'; // inner view and layout directory name inside application/view
         $this->data['page_heading'] = $this->router->class.' : '.$this->router->method;
         $this->data['datatable']['dt_id']= array('heading'=>'Data Table','cols'=>array());
 		
@@ -48,15 +49,15 @@ class User extends CI_Controller {
 		$this->breadcrumbs->push('User', '/admin/user/manage');		
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
 		
-		/*Address Type*/
+		// Address Types
 		$this->data['address_type'] = array('S'=>'Shipping','B'=>'Billing','W'=>'Work','H'=>'Home','C'=>'Preseent','P'=>'Permanent');
 		
-		/* DOB */
+		// DOB - DD MM YYYY drop down
         $this->data['day_arr'] = $this->calander_days();
         $this->data['month_arr'] = $this->calander_months();
         $this->data['year_arr'] = $this->calander_years();
 		
-		/*User Management*/
+		//User Roles drop down
 		$this->data['arr_roles'] = $this->user_model->get_user_role_dropdown();
     }
 
@@ -80,8 +81,8 @@ class User extends CI_Controller {
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
 		
 		$this->data['page_heading'] = 'Manage Users';
-        $this->data['maincontent'] = $this->load->view('admin/user/manage', $this->data, true);
-        $this->load->view('admin/_layouts/layout_authenticated', $this->data);
+        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'user/manage', $this->data, true);
+        $this->load->view($this->data['view_dir'].'_layouts/layout_authenticated', $this->data);
     }
 
     function render_datatable() {
@@ -188,8 +189,8 @@ class User extends CI_Controller {
             }
         }
 		$this->data['page_heading'] = 'Login';
-        $this->data['maincontent'] = $this->load->view('admin/user/login', $this->data, true);
-        $this->load->view('admin/_layouts/layout_unauthenticated', $this->data);
+        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'user/login', $this->data, true);
+        $this->load->view($this->data['view_dir'].'_layouts/layout_unauthenticated', $this->data);
     }
 
     function home() {
@@ -198,8 +199,8 @@ class User extends CI_Controller {
 
     function auth_error() {
 		$this->data['page_heading'] = 'Authorization Error';
-        $this->data['maincontent'] = $this->load->view('admin/user/auth_error', $this->data, true);
-        $this->load->view('admin/_layouts/layout_unauthenticated', $this->data);
+        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'user/auth_error', $this->data, true);
+        $this->load->view($this->data['view_dir'].'_layouts/layout_unauthenticated', $this->data);
     }
 
     function validate_login_form_data() {
@@ -276,8 +277,8 @@ class User extends CI_Controller {
             }
         }
 		$this->data['page_heading'] = "Create Account";
-        $this->data['maincontent'] = $this->load->view('admin/user/create_account', $this->data, true);
-        $this->load->view('admin/_layouts/layout_authenticated', $this->data);
+        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'user/create_account', $this->data, true);
+        $this->load->view($this->data['view_dir'].'_layouts/layout_authenticated', $this->data);
     }
 
     function validate_create_account_form_data() {
@@ -380,8 +381,8 @@ class User extends CI_Controller {
             }
         }
 		$this->data['page_heading'] = 'Forgot Password?';
-        $this->data['maincontent'] = $this->load->view('admin/user/forgot_password', $this->data, true);
-        $this->load->view('admin/_layouts/layout_unauthenticated', $this->data);
+        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'user/forgot_password', $this->data, true);
+        $this->load->view($this->data['view_dir'].'_layouts/layout_unauthenticated', $this->data);
     }
 
     function validate_forgot_password_form() {		
@@ -433,8 +434,8 @@ class User extends CI_Controller {
             }
         }
 		$this->data['page_heading'] = 'Reset Password : Create New Password';
-        $this->data['maincontent'] = $this->load->view('admin/user/reset_password', $this->data, true);
-        $this->load->view('admin/_layouts/layout_unauthenticated', $this->data);
+        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'user/reset_password', $this->data, true);
+        $this->load->view($this->data['view_dir'].'_layouts/layout_unauthenticated', $this->data);
     }
 
     function validate_reset_password_form() {
@@ -500,8 +501,8 @@ class User extends CI_Controller {
             }
         }
 		$this->data['page_heading'] = 'Change Password';
-        $this->data['maincontent'] = $this->load->view('admin/user/change_password', $this->data, true);
-        $this->load->view('admin/_layouts/layout_authenticated', $this->data);
+        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'user/change_password', $this->data, true);
+        $this->load->view($this->data['view_dir'].'_layouts/layout_authenticated', $this->data);
     }
 
     function validate_changepassword_form() {
@@ -569,8 +570,8 @@ class User extends CI_Controller {
 		$this->data['address'] = $this->user_model->get_user_address(NULL,$user_id,NULL);
 		$this->data['education'] = $this->user_model->get_user_education(NULL, $user_id);
 		$this->data['page_heading'] = 'Profile';
-        $this->data['maincontent'] = $this->load->view('admin/user/profile', $this->data, true);
-        $this->load->view('admin/_layouts/layout_authenticated', $this->data);
+        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'user/profile', $this->data, true);
+        $this->load->view($this->data['view_dir'].'_layouts/layout_authenticated', $this->data);
     }
 
     function edit_profile() {
@@ -612,8 +613,8 @@ class User extends CI_Controller {
         }
 	
 		$this->data['page_heading'] = 'Edit Profile';
-        $this->data['maincontent'] = $this->load->view('admin/user/edit_profile', $this->data, true);
-        $this->load->view('admin/_layouts/layout_authenticated', $this->data);
+        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'user/edit_profile', $this->data, true);
+        $this->load->view($this->data['view_dir'].'_layouts/layout_authenticated', $this->data);
     }
 
     function validate_edit_profile_form() {
@@ -689,8 +690,8 @@ class User extends CI_Controller {
             }
         }
 		$this->data['page_heading'] = 'Add Address';
-        $this->data['maincontent'] = $this->load->view('admin/user/add_address', $this->data, true);
-        $this->load->view('admin/_layouts/layout_authenticated', $this->data);
+        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'user/add_address', $this->data, true);
+        $this->load->view($this->data['view_dir'].'_layouts/layout_authenticated', $this->data);
     }
 	
 	function edit_address() {
@@ -730,8 +731,8 @@ class User extends CI_Controller {
         }
 		
 		$this->data['page_heading'] = 'Edit Address';
-        $this->data['maincontent'] = $this->load->view('admin/user/edit_address', $this->data, true);
-        $this->load->view('admin/_layouts/layout_authenticated', $this->data);
+        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'user/edit_address', $this->data, true);
+        $this->load->view($this->data['view_dir'].'_layouts/layout_authenticated', $this->data);
     }
 	
 	function delete_address() {
@@ -857,8 +858,8 @@ class User extends CI_Controller {
             }
         }
 		$this->data['page_heading'] = "Add Educational Qualification";
-        $this->data['maincontent'] = $this->load->view('admin/user/add_education', $this->data, true);
-        $this->load->view('admin/_layouts/layout_authenticated', $this->data);
+        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'user/add_education', $this->data, true);
+        $this->load->view($this->data['view_dir'].'_layouts/layout_authenticated', $this->data);
     }
 	
 	function edit_education() {
@@ -896,8 +897,8 @@ class User extends CI_Controller {
             }
         }
 		$this->data['page_heading'] = "Edit Educational Qualification";
-        $this->data['maincontent'] = $this->load->view('admin/user/edit_education', $this->data, true);
-        $this->load->view('admin/_layouts/layout_authenticated', $this->data);
+        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'user/edit_education', $this->data, true);
+        $this->load->view($this->data['view_dir'].'_layouts/layout_authenticated', $this->data);
     }
 	
 	function delete_education() {

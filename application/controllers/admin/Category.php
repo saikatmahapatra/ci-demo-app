@@ -44,6 +44,7 @@ class Category extends CI_Controller {
         $this->data['category_dropdown'] = $this->category_model->get_category_dropdown();
 
         //View Page Config
+		$this->data['view_dir'] = 'admin/'; // inner view and layout directory name inside application/view
         $this->data['page_heading'] = $this->router->class.' : '.$this->router->method;
         $this->data['datatable']['dt_id']= array('heading'=>'Data Table','cols'=>array());
 		
@@ -62,8 +63,8 @@ class Category extends CI_Controller {
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
 		$this->data['page_heading'] = 'Product Category';
-        $this->data['maincontent'] = $this->load->view('admin/category/index', $this->data, true);
-        $this->load->view('admin/_layouts/layout_authenticated', $this->data);
+        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'category/index', $this->data, true);
+        $this->load->view($this->data['view_dir'].'_layouts/layout_authenticated', $this->data);
     }
 
     function render_datatable() {
@@ -164,8 +165,8 @@ class Category extends CI_Controller {
             }
         }
 		$this->data['page_heading'] = 'Add Product Category';
-        $this->data['maincontent'] = $this->load->view('admin/category/add', $this->data, true);
-        $this->load->view('admin/_layouts/layout_authenticated', $this->data);
+        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'category/add', $this->data, true);
+        $this->load->view($this->data['view_dir'].'_layouts/layout_authenticated', $this->data);
     }
 
     function edit() {
@@ -195,8 +196,8 @@ class Category extends CI_Controller {
         $result_array = $this->category_model->get_rows($this->uri->segment(4));
         $this->data['rows'] = $result_array['data_rows'];
 		$this->data['page_heading'] = 'Edit Product Category';
-        $this->data['maincontent'] = $this->load->view('admin/category/edit', $this->data, true);
-        $this->load->view('admin/_layouts/layout_authenticated', $this->data);
+        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'category/edit', $this->data, true);
+        $this->load->view($this->data['view_dir'].'_layouts/layout_authenticated', $this->data);
     }
 
     function delete() {
