@@ -23,7 +23,7 @@
 
 <body data-layout="layout_authenticated" data-controller="<?php echo $this->router->class; ?>" data-method="<?php echo $this->router->method; ?>">
 	
-	<nav class="navbar navbar-expand-md navbar-dark bg-brand fixed-top">        
+	<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">        
 		<?php echo $el_navbar; ?>
     </nav>
 

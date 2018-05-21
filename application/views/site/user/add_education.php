@@ -93,10 +93,6 @@
 					<?php echo form_error('academic_marks_percentage'); ?>
 				</div>
 			</div>
-			
-			
-			
-			<a href="<?php echo base_url($this->router->directory.'user/profile');?>" class="btn btn-secondary">Back</a>
 			<?php
 			echo form_submit(array(
 			'name' => 'submit',
@@ -104,6 +100,7 @@
 			'class' => 'btn btn-primary',
 			));
 			?>
+			<a href="<?php echo base_url($this->router->directory.'user/profile');?>" class="btn btn-secondary">Back</a>
         <?php echo form_close(); ?>
     </div>  
 </div>
