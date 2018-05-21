@@ -155,7 +155,7 @@
 			</div>
 		</div>
 
-        <?php echo form_submit(array('name' => 'register','value' => 'Add','class' => 'btn btn-primary',)); ?>	
+        <?php echo form_button(array('name' => 'submit_btn','type' => 'submit','content' => '<i class="fa fa-fw fa-check-circle"></i> Submit','class' => 'btn btn-primary'));?>
         <?php echo form_close(); ?>
     </div>
 </div>

@@ -433,7 +433,7 @@ class User extends CI_Controller {
                 }
             }
         }
-		$this->data['page_heading'] = 'Reset Password : Create New Password';
+		$this->data['page_heading'] = 'Create New Password';
         $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'user/reset_password', $this->data, true);
         $this->load->view($this->data['view_dir'].'_layouts/layout_unauthenticated', $this->data);
     }

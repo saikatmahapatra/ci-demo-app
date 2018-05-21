@@ -30,12 +30,12 @@
 						<input id="remember" name="remember" type="checkbox" value="1">
 						<label class="form-check-label" for="remember">Remember Password</label>
 					</div>												
-						<?php echo form_submit(array('name' => 'submit','value' => 'Login','class' => 'btn btn-primary btn-block'));?>														
+					<?php echo form_button(array('name' => 'submit_btn','type' => 'submit','content' => '<i class="fa fa-fw fa-check-circle"></i> Login','class' => 'btn btn-primary btn-block'));?>
 					
 					<?php form_close(); ?>
 
-					<div class="text-center">
-						<a class="d-block small" href="<?php echo base_url($this->router->directory.'user/forgot_password');?>">Forgot Password?</a>
+					<div class="mt-3">
+						<a class="d-block" href="<?php echo base_url($this->router->directory.'user/forgot_password');?>">Forgot Password?</a>
 					</div>
 				</div>
 			</div>

@@ -179,20 +179,11 @@ $row = $rows[0];
 							<tr class="order-item mt-3">							  
 							  <td colspan="8">
 								<div class="pull-right mt-4">
-								<a href="" class="btn btn-secondary">Back to Orders</a>
-								<?php
-								echo form_submit(array(
-									'name' => 'submit',
-									'value' => 'Update Order',
-									'id' => 'btn_submit',
-									'class' => 'btn btn-primary',
-								));
-								?> 
+								<?php echo form_button(array('name' => 'submit_btn','type' => 'submit','content' => '<i class="fa fa-fw fa-check-circle"></i> Update','class' => 'btn btn-primary'));?> 
+								<a href="<?php echo base_url($this->router->directory.'order');?>" class="btn btn-secondary"><i class="fa fa-fw fa-times-circle"></i> Cancel</a>
 								</div>
 							  </td>
 							</tr><!--/.order-item-->
-							
-							
 							
 						  </tbody>
 						  <?php echo form_close(); ?>

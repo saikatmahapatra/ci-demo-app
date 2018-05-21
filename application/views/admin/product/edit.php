@@ -141,8 +141,8 @@ $row = $rows[0];
 					</div>
 				</div>
 				
-				<a href="<?php echo base_url($this->router->directory.'product');?>" class="btn btn-secondary">Back</a>
-				<?php echo form_submit(array('name' => 'submit','value' => 'Submit','class' => 'btn btn-primary'));?>
+				<?php echo form_button(array('name' => 'submit_btn','type' => 'submit','content' => '<i class="fa fa-fw fa-check-circle"></i> Submit','class' => 'btn btn-primary'));?>
+				<a href="<?php echo base_url($this->router->directory.'product');?>" class="btn btn-secondary"><i class="fa fa-fw fa-times-circle"></i> Cancel</a>
 				<?php echo form_close(); ?>
 			</div><!--/#nav-info-->
 			
@@ -174,7 +174,7 @@ $row = $rows[0];
 								<span class="font-weight-bold">pdf, doc, docx, png, jpg, jpeg</span> are allowed for docs. <span class="font-weight-bold">jpg, jpeg, png</span> are allowed for images. Maximum file size: <span class="font-weight-bold">2MB</span>
 							</div>
 						</div>
-						<?php echo form_submit(array('name' => 'submit','value' => 'Upload','class' => 'btn btn-primary'));?>
+						<?php echo form_button(array('name' => 'submit_btn','type' => 'submit','content' => '<i class="fa fa-fw fa-check-circle"></i> Upload','class' => 'btn btn-primary'));?>
 						<?php echo form_close(); ?>
 					</div>
 					
