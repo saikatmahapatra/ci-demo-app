@@ -6,53 +6,7 @@
         
     </div>
 </div><!--/.heading-container-->
-<style>
-	table.ci-cal{
-		border:5px solid #17a2b8;
-	}
-	.table.ci-cal td, 
-	.table.ci-cal th{
-		vertical-align: center !important;	
-	}
-	table.ci-cal td{
-		text-align:center;
-		border:1px solid #777777;
-		vertical-align: center !important;		
-	}
-	table.ci-cal td.day{
-		cursor:pointer;		
-	}
-	table.ci-cal th{
-		background:#FD5196;
-		font-size:20px;
-		color:#fff;
-		vertical-align: center !important;
-		text-align: center;
-	}
-	table.ci-cal .prevcell a,.nextcell a{
-		color: #fff !important;
-		text-decoration:none !important;
-	}	
-	table.ci-cal tr.wk_nm{
-		background:#E6C1EB;
-		color:#AB08BD;
-		font-size:17px;
-		font-weight:bold;
-	}	
-	table.ci-cal .highlight{
-		background:#FD5196;
-		color:#fff;
-	}
-	.selected-day{
-		background:#59b300;
-	}
-	
-</style>
-<script>
-$(".day").on("click",function(e){
-	console.log(e);
-});
-</script>
+
 <div class="row">
     <div class="col-md-4">
 		<?php echo $cal; ?>

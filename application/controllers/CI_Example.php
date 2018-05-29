@@ -136,13 +136,19 @@ class CI_Example extends CI_Controller {
     }
 	
 	function timesheet() {
+		//add required js files for this controller
+        $app_js_src = array(
+            'assets/dist/js/timesheet.js',
+        );
+        $this->data['app_js'] = $this->common_lib->add_javascript($app_js_src);
+		
 		$prefs = array (
                'start_day'    => 'monday',
                'month_type'   => 'short',
                'day_type'     => 'short',
 			   'show_next_prev'=>TRUE,
 			   'template'	  =>  '
-			   {table_open}<table class="ci-cal table-sm" border="0" cellpadding="" cellspacing="0">{/table_open}
+			   {table_open}<table class="ci-calendar table-sm" border="0" cellpadding="" cellspacing="0">{/table_open}
 
 				{heading_row_start}<tr>{/heading_row_start}
 
