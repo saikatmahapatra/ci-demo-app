@@ -25,6 +25,10 @@ $segment3 = $this->uri->segment(3);
 		<li class="nav-item <?php echo ($segment1 == 'contact') ? 'active':''?>">
 			<a class="nav-link" href="<?php echo base_url($this->router->directory.'contact');?>">Contact Us</a>
 		</li>
+		
+		<li class="nav-item <?php echo ($segment1 == 'timesheet') ? 'active':''?>">
+			<a class="nav-link" href="<?php echo base_url($this->router->directory.'timesheet');?>">Timesheet</a>
+		</li>
 
 		<li class="nav-item dropdown <?php echo ($segment1 == 'ci_example') ? 'active':''?>">
 			<a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true"
@@ -34,7 +38,7 @@ $segment3 = $this->uri->segment(3);
 					<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'ci_example/date_helper');?>">Date Helper</a>
 					<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'ci_example/directory_helper');?>">Directory Helper</a>               
 					<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'ci_example/dom_pdf_gen_pdf');?>">Download as PDF/DOM PDF</a>					
-					<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'ci_example/timesheet');?>">Timesheet</a>
+					<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'ci_example/calendar_lib');?>">Calendar Library</a>
 				</div>
 		</li>
 

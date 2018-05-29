@@ -135,7 +135,7 @@ class CI_Example extends CI_Controller {
         $this->load->view($this->data['view_dir'].'_layouts/layout_default', $this->data);
     }
 	
-	function timesheet() {
+	function calendar_lib() {
 		//add required js files for this controller
         $app_js_src = array(
             'assets/dist/js/timesheet.js',
@@ -191,8 +191,8 @@ class CI_Example extends CI_Controller {
 		
 		$data = array();
 		$this->data['cal'] = $this->calendar->generate($year,$month,$data);
-		$this->data['page_heading'] = 'Timesheet Entry';
-        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'ci_example/timesheet', $this->data, true);
+		$this->data['page_heading'] = 'Calendar';
+        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'ci_example/calendar_lib', $this->data, true);
         $this->load->view($this->data['view_dir'].'_layouts/layout_default', $this->data);
     }
 
