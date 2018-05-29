@@ -134,6 +134,58 @@ class CI_Example extends CI_Controller {
         $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'ci_example/directory_helper', $this->data, true);
         $this->load->view($this->data['view_dir'].'_layouts/layout_default', $this->data);
     }
+	
+	function timesheet() {
+		$prefs = array (
+               'start_day'    => 'monday',
+               'month_type'   => 'short',
+               'day_type'     => 'short',
+			   'show_next_prev'=>TRUE,
+			   'template'	  =>  '
+			   {table_open}<table class="ci-cal table-sm" border="0" cellpadding="" cellspacing="0">{/table_open}
+
+				{heading_row_start}<tr>{/heading_row_start}
+
+				{heading_previous_cell}<th class="prevcell"><a href="{previous_url}">&lt;&lt;</a></th>{/heading_previous_cell}
+				{heading_title_cell}<th colspan="{colspan}">{heading}</th>{/heading_title_cell}
+				{heading_next_cell}<th class="nextcell"><a href="{next_url}" >&gt;&gt;</a></th>{/heading_next_cell}
+
+				{heading_row_end}</tr>{/heading_row_end}
+
+				{week_row_start}<tr class="wk_nm">{/week_row_start}
+				{week_day_cell}<td>{week_day}</td>{/week_day_cell}
+				{week_row_end}</tr>{/week_row_end}
+
+				{cal_row_start}<tr>{/cal_row_start}
+				{cal_cell_start}<td class="day">{/cal_cell_start}
+
+				{cal_cell_content}<a href="{content}">{day}</a>{/cal_cell_content}
+				{cal_cell_content_today}<div class="highlight"><a href="{content}">{day}</a></div>{/cal_cell_content_today}
+
+				{cal_cell_no_content}{day}{/cal_cell_no_content}
+				{cal_cell_no_content_today}<div class="highlight">{day}</div>{/cal_cell_no_content_today}
+
+				{cal_cell_blank}&nbsp;{/cal_cell_blank}
+
+				{cal_cell_end}</td>{/cal_cell_end}
+				{cal_row_end}</tr>{/cal_row_end}
+
+				{table_close}</table>{/table_close}
+			   '
+             );
+		$this->load->library('calendar',$prefs);
+		
+		$year = $this->uri->segment(3) ? $this->uri->segment(3) : date('Y');
+		$month = $this->uri->segment(4) ? $this->uri->segment(4) : date('m');
+		$day = date('d');
+		
+		
+		
+		$data = array();
+		$this->data['cal'] = $this->calendar->generate($year,$month,$data);
+        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'ci_example/timesheet', $this->data, true);
+        $this->load->view($this->data['view_dir'].'_layouts/layout_default', $this->data);
+    }
 
 }
 

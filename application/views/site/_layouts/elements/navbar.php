@@ -33,7 +33,8 @@ $segment3 = $this->uri->segment(3);
 					<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'ci_example/form_helper');?>">Form Helper</a>
 					<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'ci_example/date_helper');?>">Date Helper</a>
 					<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'ci_example/directory_helper');?>">Directory Helper</a>               
-					<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'ci_example/dom_pdf_gen_pdf');?>">Download as PDF/DOM PDF</a>
+					<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'ci_example/dom_pdf_gen_pdf');?>">Download as PDF/DOM PDF</a>					
+					<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'ci_example/timesheet');?>">Timesheet</a>
 				</div>
 		</li>
 
