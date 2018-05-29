@@ -185,6 +185,8 @@ class CI_Example extends CI_Controller {
 		$month = $this->uri->segment(4) ? $this->uri->segment(4) : date('m');
 		$day = date('d');
 		
+		$this->data['entry_for'] = date('Y/m/d');
+		
 		
 		
 		$data = array();

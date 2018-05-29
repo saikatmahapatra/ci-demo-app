@@ -11,13 +11,19 @@
     <div class="col-md-4">		
 		<?php echo $cal; ?>
 		<div class="mt-3 small">
-			<div class="d-inline-block"><span class="i-today p-1 m-1 text-white">27</span>Today</div>
-			<div class="d-inline-block"><span class="i-selected p-1 m-1">27</span>Selected</div>
-			<div class="d-inline-block"><span class="i-leave p-1 m-1">27</span>Leave</div>
-			<div class="d-inline-block"><span class="i-holiday p-1 m-1">27</span>Holiday</div>
+			<div class="d-inline-block"><span class="i-today pr-2 pl-2 m-1 text-white"></span>Today</div>
+			<div class="d-inline-block"><span class="i-selected pr-2 pl-2 m-1"></span>Selected</div>
+			<div class="d-inline-block"><span class="i-leave pr-2 pl-2 m-1"></span>Leave</div>
+			<div class="d-inline-block"><span class="i-holiday pr-2 pl-2 m-1"></span>Holiday</div>
+		</div>
+		<div class="mt-3">
+			<div class="">Days worked: 10 days</div>
+			<div class="">Hours worked: 80 hrs</div>
+			<div class="">Average hours worked: 8 hrs/day</div>
 		</div>
 	</div>
 	<div class="col-md-6">
+		<h1 class="page-header">Entry for <?php echo $entry_for; ?></h1>
 		<?php
 		// Show server side flash messages
 		if (isset($alert_message)) {
