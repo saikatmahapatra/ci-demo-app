@@ -195,7 +195,6 @@ select.form-control.dob-inline {
 /*CI Calendar*/
 .ci-calendar {
   border: 5px solid #2672EC;
-  border-top: 0px;
 }
 .ci-calendar th {
   background: #2672EC;
@@ -229,4 +228,23 @@ select.form-control.dob-inline {
 .ci-calendar .selected {
   background: #b3cdf8;
 }
+.ci-calendar .holiday {
+  background: #f1a0b4;
+}
+.ci-calendar .leave {
+  background: #eb9d85;
+}
 /*end .ci-calendar*/
+/*Calendar Indicator*/
+.i-today {
+  background-color: #2672EC;
+}
+.i-selected {
+  background-color: #b3cdf8;
+}
+.i-leave {
+  background-color: #eb9d85;
+}
+.i-holiday {
+  background-color: #f1a0b4;
+}

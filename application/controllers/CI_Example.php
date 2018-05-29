@@ -148,7 +148,7 @@ class CI_Example extends CI_Controller {
                'day_type'     => 'short',
 			   'show_next_prev'=>TRUE,
 			   'template'	  =>  '
-			   {table_open}<table class="ci-calendar table-sm" border="0" cellpadding="" cellspacing="0">{/table_open}
+			   {table_open}<table class="ci-calendar table-sm" border="0" cellpadding="" cellspacing="">{/table_open}
 
 				{heading_row_start}<tr>{/heading_row_start}
 
@@ -189,6 +189,7 @@ class CI_Example extends CI_Controller {
 		
 		$data = array();
 		$this->data['cal'] = $this->calendar->generate($year,$month,$data);
+		$this->data['page_heading'] = 'Timesheet Entry';
         $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'ci_example/timesheet', $this->data, true);
         $this->load->view($this->data['view_dir'].'_layouts/layout_default', $this->data);
     }

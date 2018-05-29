@@ -8,10 +8,16 @@
 </div><!--/.heading-container-->
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4">		
 		<?php echo $cal; ?>
+		<div class="mt-3 small">
+			<div class="d-inline-block"><span class="i-today p-1 m-1 text-white">27</span>Today</div>
+			<div class="d-inline-block"><span class="i-selected p-1 m-1">27</span>Selected</div>
+			<div class="d-inline-block"><span class="i-leave p-1 m-1">27</span>Leave</div>
+			<div class="d-inline-block"><span class="i-holiday p-1 m-1">27</span>Holiday</div>
+		</div>
 	</div>
-	<div class="col-md-8 d-none">
+	<div class="col-md-6">
 		<?php
 		// Show server side flash messages
 		if (isset($alert_message)) {
