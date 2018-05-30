@@ -232,11 +232,12 @@ select.form-control.dob-inline{
   
   /*CI Calendar*/
 .ci-calendar{
-	border:5px solid @calendar-border;	
+	border:5px solid @calendar-border;
+	margin-top: 15px;
 	
 	th{
 		background:@color_blue;
-		font-size:20px;
+		font-size:1rem;
 		color:@white;
 		vertical-align: center !important;
 		text-align: center;
@@ -299,4 +300,25 @@ select.form-control.dob-inline{
 }
 .i-has-data{
 	background-color:@has-data;
+}
+
+/*nav tab*/
+.form-timesheet{
+	label{
+		font-weight:bold;
+	}
+}
+.ci-nav-tab{	
+	.nav-link{
+		border: 2px solid transparent;
+		border-top-left-radius: .25rem;
+		border-top-right-radius: .25rem;
+		&:hover{
+			border-color: transparent transparent;
+		}
+	}	
+	.nav-link.active{
+		border-color: transparent transparent @color_blue;
+		border-bottom: 2px solid @color_blue !important;
+	}	
 }
