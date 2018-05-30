@@ -129,6 +129,7 @@ class Timesheet extends CI_Controller {
     }
 	
 	function validate_form_data($action = NULL) {
+        $this->form_validation->set_rules('selected_date', 'at least one date', 'required');
         $this->form_validation->set_rules('project_id', 'project selection', 'required');
         $this->form_validation->set_rules('activity_id', 'activity selection', 'required');
         $this->form_validation->set_rules('timesheet_hours', 'hours spent', 'required');

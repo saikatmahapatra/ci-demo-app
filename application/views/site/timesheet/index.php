@@ -12,6 +12,7 @@
 
     <div class="col-md-4">		
 		<?php echo $cal; ?>
+		<?php echo form_error('selected_date'); ?>
 		<div class="mt-3 small">
 			<div class="d-inline-block"><span class="i-today pr-2 pl-2 m-1 text-white"></span>Today</div>
 			<div class="d-inline-block"><span class="i-selected pr-2 pl-2 m-1"></span>Selected</div>
@@ -41,6 +42,7 @@
 		?>
 		<?php echo form_open(current_url(), array( 'method' => 'post','class'=>'ci-form','name' => '','id' => 'ci-form-timesheet',)); ?>
 		<?php echo form_hidden('form_action', 'add'); ?>		  
+		<?php echo form_hidden('selected_date',set_value('selected_date')); ?>		  
 			
 		<div class="form-row">
 			<div class="form-group col-md-5">
