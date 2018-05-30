@@ -21,9 +21,9 @@
 			<div class="d-inline-block"><span class="i-holiday pr-2 pl-2 m-1"></span>Holiday</div>
 		</div>
 		<div class="mt-3">
-			<div class="">Days worked: 10 days</div>
-			<div class="">Hours worked: 80 hrs</div>
-			<div class="">Average hours worked: 8 hrs/day</div>
+			<div class="">Days worked: <span id="total_days">0.0</span> days</div>
+			<div class="">Hours worked: <span id="total_hrs">0.0</span> hrs</div>
+			<div class="">Average hours worked: <span id="average_worked_hrs">0.0</span> hrs/day</div>
 		</div>
 		
 		<a class="text-centre" href="#"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Download this month's timesheet</a>
@@ -54,16 +54,18 @@
 			<?php echo form_open(current_url(), array( 'method' => 'post','class'=>'ci-form form-timesheet','name' => '','id' => 'ci-form-timesheet',)); ?>
 			<?php echo form_hidden('form_action', 'add'); ?>		  
 			<?php echo form_hidden('selected_date',set_value('selected_date')); ?>		  
+			
+			<div class="form-group d-none">
+				<label for="selected_days" class="">Select Day(s) <span class="required">*</span>
+				<span class="text-muted font-weight-normal"> You can select multiple dates from the calendar</span></label>				
+				<div id="display_selected_date">You have not selected any day</div>
+				<?php echo form_error('selected_date'); ?>
+			</div>
 				
 			<div class="form-row">
 				<div class="form-group col-md-4">
 				  <label for="project_id" class="">Projects <span class="required">*</span></label>
 					<?php
-					$project_arr = array(
-						''=>'Select',
-						'1'=>'P001 - CRS - Fusion ACQ',
-						'2'=>'P002 - CRS - Fusion SVC',						
-					);
 					echo form_dropdown('project_id', $project_arr, set_value('project_id'), array(
 						'class' => 'form-control',
 					));
@@ -74,20 +76,6 @@
 				<div class="form-group col-md-4">
 				  <label for="activity_id" class="">Activity <span class="required">*</span></label>
 					<?php
-					$task_task_activity_type_array = array(
-						''=>'Select',
-						'1'=>'Coding & Development',
-						'2'=>'Testing',						
-						'3'=>'Planning',						
-						'4'=>'Meeting',						
-						'5'=>'Site Visit',						
-						'6'=>'Co-oridination',						
-						'7'=>'OOO-Out of Office',						
-						'8'=>'KT',						
-						'9'=>'Self Learning',						
-						'10'=>'Traning',						
-						'11'=>'Grooming',						
-					);
 					echo form_dropdown('activity_id', $task_task_activity_type_array, set_value('activity_id'), array(
 						'class' => 'form-control',
 					));
@@ -97,27 +85,7 @@
 					
 				<div class="form-group col-md-4">
 					<label for="timesheet_hours" class="">Hours <span class="required">*</span></label>		
-					<?php
-					$timesheet_hours = array('' => 'Select',
-											'0.5'=>'0.5 hrs',
-											'1.0'=>'1.0 hrs',
-											'1.5'=>'1.5 hrs',
-											'2.0'=>'2.0 hrs',
-											'2.5'=>'2.5 hrs',
-											'3.0'=>'3.0 hrs',
-											'3.5'=>'3.5 hrs',
-											'4.0'=>'4.0 hrs',
-											'4.5'=>'4.5 hrs',
-											'5.0'=>'5.0 hrs',
-											'5.5'=>'5.5 hrs',
-											'6.0'=>'6.0 hrs',
-											'6.5'=>'6.5 hrs',
-											'7.0'=>'7.0 hrs',
-											'7.5'=>'7.5 hrs',
-											'8.0'=>'8.0 hrs',
-											'8.5'=>'8.5 hrs',
-											'9.0'=>'9.0 hrs',
-											'9.5'=>'9.5 hrs');
+					<?php					
 					echo form_dropdown('timesheet_hours', $timesheet_hours, set_value('timesheet_hours'), array(
 						'class' => 'form-control',
 					));

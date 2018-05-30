@@ -40,6 +40,11 @@ class Timesheet extends CI_Controller {
 		$this->load->model('timesheet_model');
 		$this->id = $this->uri->segment(3);
 		
+		//Dropdown
+		$this->data['project_arr'] = $this->timesheet_model->get_project_dropdown();
+		$this->data['task_task_activity_type_array'] = $this->timesheet_model->get_activity_dropdown();
+		$this->data['timesheet_hours'] = $this->timesheet_model->get_timesheet_hours_dropdown();
+		
 		//View Page Config
 		$this->data['view_dir'] = 'site/'; // inner view and layout directory name inside application/view
 		$this->data['page_heading'] = $this->router->class.' : '.$this->router->method;
@@ -51,9 +56,9 @@ class Timesheet extends CI_Controller {
                'start_day'    => 'monday',
                'month_type'   => 'short',
                'day_type'     => 'short',
-			   'show_next_prev'=>TRUE,			   
+			   'show_next_prev'=>FALSE,			   
 			   'template'	  =>  '
-			   {table_open}<table class="ci-calendar table-sm" border="0" cellpadding="" cellspacing="">{/table_open}
+			   {table_open}<table class="table ci-calendar table-sm" border="0" cellpadding="" cellspacing="">{/table_open}
 
 				{heading_row_start}<tr>{/heading_row_start}
 
@@ -140,7 +145,7 @@ class Timesheet extends CI_Controller {
     }
 	
 	function validate_form_data($action = NULL) {
-        $this->form_validation->set_rules('selected_date', 'at least one date', 'required');
+        $this->form_validation->set_rules('selected_date', 'calendar date selection', 'required');
         $this->form_validation->set_rules('project_id', 'project selection', 'required');
         $this->form_validation->set_rules('activity_id', 'activity selection', 'required');
         $this->form_validation->set_rules('timesheet_hours', 'hours spent', 'required');
@@ -162,8 +167,7 @@ class Timesheet extends CI_Controller {
             'message_css' => '',
             'data' => array(),
         );		
-		if($this->input->post('via')=='ajax'){
-			
+		if($this->input->post('via')=='ajax'){			
 			$result_array = $this->timesheet_model->get_timesheet_stats($year,$month);			
 			if($result_array['num_rows']>0){
 				$response = array(
@@ -205,8 +209,8 @@ class Timesheet extends CI_Controller {
             $no++;
             $row = array();
             $row[] = date('d/m/Y',strtotime($result['timesheet_date']));
-            $row[] = $result['project_id'];
-            $row[] = $result['activity_id'];
+            $row[] = $result['project_name'];
+            $row[] = $result['task_activity_name'];
             $row[] = $result['timesheet_hours'];
             $row[] = $result['timesheet_review_status'];
             
@@ -221,7 +225,7 @@ class Timesheet extends CI_Controller {
             $action_html.='&nbsp;';
             $action_html.= anchor(base_url($this->router->directory.'timesheet/delete/' . $result['id']), 'Delete', array(
                 'class' => 'btn-delete',
-				'data-confirmation'=>true,
+				'data-confirmation'=>false,
 				'data-confirmation-message'=>'Are you sure, you want to delete this?',
                 'data-toggle' => 'tooltip',
                 'data-original-title' => 'Delete',

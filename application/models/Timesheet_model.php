@@ -56,8 +56,12 @@ class Timesheet_model extends CI_Model {
     function get_rows($id = NULL, $limit = NULL, $offset = NULL, $dataTable = FALSE, $checkPaging = TRUE) {
         $result = array();
         $this->db->select('
-		t1.*
-		');        
+		t1.*,
+		t2.project_name,
+		t3.task_activity_name
+		');
+		$this->db->join('projects as t2', 't2.id = t1.project_id', 'left');        
+		$this->db->join('task_activities as t3', 't3.id = t1.activity_id', 'left');        
         if ($id) {
             $this->db->where('t1.id', $id);
         }
@@ -147,8 +151,85 @@ class Timesheet_model extends CI_Model {
 		//echo $this->db->last_query(); //die();
         $num_rows = $query->num_rows();
         $result = $query->result_array();
-        return array('num_rows' => $num_rows, 'data_rows' => $result);
+		
+		
+		//Data Stat
+		$this->db->select('
+		count(DISTINCT(`timesheet_date`)) as total_days, 		
+		SUM(`timesheet_hours`) as total_hrs,
+		ROUND((SUM(`timesheet_hours`)/count(DISTINCT(`timesheet_date`))),2) as avg_hrs
+		');        
+        $this->db->where(
+			array(
+			'YEAR(`timesheet_date`)' => $year,
+			'MONTH(`timesheet_date`)' => $month,
+			)
+		);
+		
+        $query = $this->db->get('timesheet as t1');
+		//echo $this->db->last_query(); //die();        
+        $stat_data = $query->result_array();
+		
+		
+        return array('num_rows' => $num_rows, 'data_rows' => $result, 'stat_data'=>$stat_data[0]);
         return $result;
+	}
+	
+	function get_project_dropdown() {
+        $result = array();
+        $this->db->select('id,project_name');
+		$this->db->order_by('project_name');		
+        $this->db->where('project_status','Y');		
+        $query = $this->db->get('projects');
+        #echo $this->db->last_query();
+        $result = array('' => 'Select');
+        if ($query->num_rows()) {
+            $res = $query->result();
+            foreach ($res as $r) {
+                $result[$r->id] = $r->project_name;
+            }
+        }
+        return $result;
+    }
+	
+	function get_activity_dropdown() {
+        $result = array();
+        $this->db->select('id,task_activity_name');
+        $this->db->where('task_activity_status','Y');		
+        $this->db->order_by('task_activity_name');		
+        $query = $this->db->get('task_activities');
+        #echo $this->db->last_query();
+        $result = array('' => 'Select');
+        if ($query->num_rows()) {
+            $res = $query->result();
+            foreach ($res as $r) {
+                $result[$r->id] = $r->task_activity_name;
+            }
+        }
+        return $result;
+    }
+	
+	function get_timesheet_hours_dropdown(){
+		return $timesheet_hours = array('' => 'Select',
+											'0.5'=>'0.5 hrs',
+											'1.0'=>'1.0 hrs',
+											'1.5'=>'1.5 hrs',
+											'2.0'=>'2.0 hrs',
+											'2.5'=>'2.5 hrs',
+											'3.0'=>'3.0 hrs',
+											'3.5'=>'3.5 hrs',
+											'4.0'=>'4.0 hrs',
+											'4.5'=>'4.5 hrs',
+											'5.0'=>'5.0 hrs',
+											'5.5'=>'5.5 hrs',
+											'6.0'=>'6.0 hrs',
+											'6.5'=>'6.5 hrs',
+											'7.0'=>'7.0 hrs',
+											'7.5'=>'7.5 hrs',
+											'8.0'=>'8.0 hrs',
+											'8.5'=>'8.5 hrs',
+											'9.0'=>'9.0 hrs',
+											'9.5'=>'9.5 hrs');
 	}
 
 }

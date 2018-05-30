@@ -6,6 +6,7 @@ $(function(){
 	if(selected_date){
 		var selected_date_array = selected_date.split(',');
 		selectedDate = selected_date_array;
+		$('#display_selected_date').html(selectedDate.join());
 		//console.log(selected_date_array,selected_date_array.length);
 		if(selected_date_array.length>0){
 			$.each(selected_date_array,function(index,clickedSelectedDay){
@@ -44,6 +45,7 @@ $(".day").on("click",function(e){
 	
 	//$("#timesheetModal").modal("show");
 	console.log(selectedDate);
+	$('#display_selected_date').html(selectedDate.join());
 	$('input[name="selected_date"]').val(selectedDate.join());
 });
 
@@ -55,7 +57,17 @@ function get_timesheet_stat(){
 	XHR.data = {via: 'ajax'};
 	var promise = XHR.init();		
 	promise.done(function(response){
-		//console.log(response.data.data_rows);
+		console.log(r=response.data.stat_data);
+		if(response.data.stat_data.total_days != 'undefined'){
+			$('#total_days').html(response.data.stat_data.total_days);		
+		}
+		if(response.data.stat_data.total_hrs != 'undefined'){			
+			$('#total_hrs').html(response.data.stat_data.total_hrs);
+		}
+		if(response.data.stat_data.avg_hrs != 'undefined'){			
+			$('#average_worked_hrs').html(response.data.stat_data.avg_hrs);
+		}
+		
 		$.each(response.data.data_rows,function(i,obj){
 			$(".day").each(function(){
 				var calDay= $(this).text();

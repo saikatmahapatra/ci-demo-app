@@ -228,7 +228,7 @@ select.form-control.dob-inline {
   text-decoration: none !important;
 }
 .ci-calendar .selected {
-  background: #b3cdf8;
+  background: #b3cdf8 !important;
 }
 .ci-calendar .holiday {
   background: #f1a0b4;
