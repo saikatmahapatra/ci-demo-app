@@ -49,6 +49,12 @@ $(".day").on("click",function(e){
 	$('input[name="selected_date"]').val(selectedDate.join());
 });
 
+$("#clear_selected_days").on("click",function(e){
+	e.preventDefault();
+	selectedDate = [];
+	$('input[name="selected_date"]').val('');
+	$(".day").removeClass("selected");
+});
 
 function get_timesheet_stat(){
 	var XHR = new Ajax();

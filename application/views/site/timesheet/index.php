@@ -12,6 +12,7 @@
 
     <div class="col-md-3">		
 		<?php echo $cal; ?>
+		<div><a id="clear_selected_days" class="btn btn-outline-secondary btn-sm v-hidden" href="#"><i class="fa fa-fw fa-times-circle"></i> Clear all selected days</a></div>		
 		<?php echo form_error('selected_date'); ?>
 		<div class="mt-3 small">
 			<div class="d-inline-block"><span class="i-today pr-2 pl-2 m-1 text-white"></span>Today</div>
@@ -26,7 +27,7 @@
 			<div class="">Average hours worked: <span id="average_worked_hrs">0.0</span> hrs/day</div>
 		</div>
 		
-		<a class="text-centre" href="#"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Download this month's timesheet</a>
+		<a class="text-centre d-none" href="#"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Download this month's timesheet</a>
 	</div>
 	
 	
@@ -112,8 +113,7 @@
 			<?php echo form_error('timesheet_description'); ?>
 			</div>
 			
-			  
-			  <?php echo form_submit(array('name' => 'submit', 'value' => 'Submit', 'id' => 'btn_submit', 'class' => 'btn btn-primary')); ?> 
+			<button type="submit" class="btn btn-primary"><i class="fa fa-fw fa-check-circle"></i> Submit</button>
 			<?php echo form_close(); ?>
 			</div><!--/#nav-add-->
 			
