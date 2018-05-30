@@ -11,7 +11,7 @@ class Timesheet_model extends CI_Model {
 
     function insert($postdata, $table = NULL) {
         if ($table == NULL) {
-            $this->db->insert('cms', $postdata);
+            $this->db->insert('timesheet', $postdata);
         } else {
             $this->db->insert($table, $postdata);
         }
@@ -23,7 +23,7 @@ class Timesheet_model extends CI_Model {
     function update($postdata, $where_array = NULL, $table = NULL) {
         $this->db->where($where_array);
         if ($table == NULL) {
-            $result = $this->db->update('cms', $postdata);
+            $result = $this->db->update('timesheet', $postdata);
         } else {
             $result = $this->db->update($table, $postdata);
         }
@@ -34,7 +34,7 @@ class Timesheet_model extends CI_Model {
     function delete($where_array = NULL, $table = NULL) {
         $this->db->where($where_array);
         if ($table == NULL) {
-            $result = $this->db->delete('cms');
+            $result = $this->db->delete('timesheet');
         } else {
             $result = $this->db->delete($table);
         }

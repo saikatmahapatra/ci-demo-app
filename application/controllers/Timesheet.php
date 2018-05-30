@@ -35,6 +35,8 @@ class Timesheet extends CI_Controller {
             'default-user-access'			
         ));
 		
+		$this->load->model('timesheet_model');
+		
 		//View Page Config
 		$this->data['view_dir'] = 'site/'; // inner view and layout directory name inside application/view
 		$this->data['page_heading'] = $this->router->class.' : '.$this->router->method;
@@ -81,8 +83,8 @@ class Timesheet extends CI_Controller {
              );
 		$this->load->library('calendar',$prefs);
 		
-		$year = $this->uri->segment(2) ? $this->uri->segment(2) : date('Y');
-		$month = $this->uri->segment(3) ? $this->uri->segment(3) : date('m');
+		$year = $this->uri->segment(3) ? $this->uri->segment(3) : date('Y');
+		$month = $this->uri->segment(4) ? $this->uri->segment(4) : date('m');
 		$day = date('d');
 		
 		$this->data['entry_for'] = date('Y/m/d');
@@ -91,9 +93,52 @@ class Timesheet extends CI_Controller {
 		
 		$data = array();
 		$this->data['cal'] = $this->calendar->generate($year,$month,$data);
-		$this->data['page_heading'] = 'Timesheet Entry';
+		$this->data['page_heading'] = 'Timesheet';
+		
+		$this->add();
+		
         $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'timesheet/index', $this->data, true);
         $this->load->view($this->data['view_dir'].'_layouts/layout_default', $this->data);
+    }
+	
+	
+	function add() {
+        //Check user permission by permission name mapped to db
+        //$is_granted = $this->common_lib->check_user_role_permission('timesheet-add');
+        
+        $this->data['alert_message'] = $this->session->flashdata('flash_message');
+        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
+        if ($this->input->post('form_action') == 'add') {
+            if ($this->validate_form_data('add') == true) {
+                $postdata = array(
+                    'timesheet_date' => date('Y-m-d'),
+                    'project_id' => $this->input->post('project_id'),
+                    'activity_id' => $this->input->post('activity_id'),
+                    'timesheet_hours' => $this->input->post('timesheet_hours'),
+                    'timesheet_description' => $this->input->post('timesheet_description'),
+                    'timesheet_created_by' => $this->sess_user_id					
+                );
+                $insert_id = $this->timesheet_model->insert($postdata);
+                if ($insert_id) {
+                    $this->session->set_flashdata('flash_message', '<i class="icon fa fa-check" aria-hidden="true"></i>Added successfully.');
+                    $this->session->set_flashdata('flash_message_css', 'alert-success');
+                    redirect(current_url());
+                }
+            }
+        }
+    }
+	
+	function validate_form_data($action = NULL) {
+        $this->form_validation->set_rules('project_id', 'project selection', 'required');
+        $this->form_validation->set_rules('activity_id', 'activity selection', 'required');
+        $this->form_validation->set_rules('timesheet_hours', 'hours spent', 'required');
+        $this->form_validation->set_rules('timesheet_description', 'description', 'required');
+        $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
+        if ($this->form_validation->run() == true) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

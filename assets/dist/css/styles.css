@@ -235,6 +235,9 @@ select.form-control.dob-inline {
 .ci-calendar .leave {
   background: #eb9d85;
 }
+.ci-calendar .filled {
+  background: #a6ffa6;
+}
 /*end .ci-calendar*/
 /*Calendar Indicator*/
 .i-today {
@@ -248,4 +251,7 @@ select.form-control.dob-inline {
 }
 .i-holiday {
   background-color: #f1a0b4;
+}
+.i-has-data {
+  background-color: #a6ffa6;
 }
