@@ -42,7 +42,7 @@
 		
 		<div class="tab-content" id="nav-tabContent">
 		
-			<div class="tab-pane fade show active" id="nav-add" role="tabpanel" aria-labelledby="nav-add-tab">
+			<div class="mt-3 tab-pane fade show active" id="nav-add" role="tabpanel" aria-labelledby="nav-add-tab">
 			<?php
 			// Show server side flash messages
 			if (isset($alert_message)) {
@@ -135,9 +135,9 @@
 				'value' => set_value('timesheet_description'),
 				'id' => 'timesheet_description',
 				'class' => 'form-control',
-				'rows' => '1',
+				'rows' => '2',
 				'cols' => '4',
-				'placeholder' => 'Description',
+				'placeholder' => 'Write some short description...(200 characters)',
 				'maxlength' => '200'
 			));
 			?>
@@ -149,8 +149,24 @@
 			<?php echo form_close(); ?>
 			</div><!--/#nav-add-->
 			
-			<div class="tab-pane fade" id="nav-list" role="tabpanel" aria-labelledby="nav-list-tab">
-			list will be displayed here
+			<div class="mt-3 tab-pane fade" id="nav-list" role="tabpanel" aria-labelledby="nav-list-tab">
+				
+				<div class="table-responsive">
+					<table id="timesheet-datatable" class="table table-sm w-100">
+						<thead>
+							<tr>
+								<th scope="col">Date</th>
+								<th scope="col">Project</th>
+								<th scope="col">Activity</th>
+								<th scope="col">Hours</th>
+								<th scope="col">Status</th>
+								<th scope="col">Action</th>
+							</tr>
+						</thead>
+						<tbody></tbody>
+					</table>
+				</div>
+				
 			</div><!--/#nav-list-->
 		
 		</div><!--/.tab-content #nav-tabContent-->

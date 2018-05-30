@@ -57,8 +57,8 @@ var Product = function(){
 			XHR.url = SITE_URL+ROUTER_DIRECTORY+ROUTER_CLASS+'/delete_file';
 			XHR.data = {id: upload_id, file_path: file_path};
 			var promise = XHR.init();		
-			promise.done(function(data){
-				if (data == 'success') {
+			promise.done(function(response){
+				if (response == 'success') {
 					data_row.remove();
 				}
 			});

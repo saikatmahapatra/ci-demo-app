@@ -34,8 +34,8 @@ var User = function(){
 		XHR.url = SITE_URL+ROUTER_DIRECTORY+ROUTER_CLASS+'/change_account_status';
 		XHR.data = {active: new_status, user_id: user_id};
 		var promise = XHR.init();		
-		promise.done(function(data){
-			if (data.status == 'success') {
+		promise.done(function(response){
+			if (response.status == 'success') {
 				window.location.reload();
 				if (that.attr('data-status') == 'Y') {
 					that.attr('data-status', 'N');

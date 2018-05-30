@@ -637,9 +637,9 @@ class User extends CI_Controller {
 
     function change_account_status() {
         $response = array(
-            'status' => 'no',
-            'alert_message' => 'No message',
-            'alert_message_css' => 'alert alert-info',
+            'status' => 'init',
+            'message' => '',
+            'message_css' => '',
             'data' => array(),
         );
         $is_active = $this->input->post('active');
@@ -649,15 +649,15 @@ class User extends CI_Controller {
         if ($res == true) {
             $response = array(
                 'status' => 'success',
-                'alert_message' => 'Account Status Changed',
-                'alert_message_css' => 'alert alert-success',
+                'message' => 'Account Status Changed',
+                'message_css' => 'alert alert-success',
                 'data' => array(),
             );
         } else {
             $response = array(
                 'status' => 'error',
-                'alert_message' => 'Error Occured',
-                'alert_message_css' => 'alert alert-danger',
+                'message' => 'Error Occured',
+                'message_css' => 'alert alert-danger',
                 'data' => array(),
             );
         }

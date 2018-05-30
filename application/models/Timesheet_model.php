@@ -19,6 +19,17 @@ class Timesheet_model extends CI_Model {
         $insert_id = $this->db->insert_id();
         return $insert_id;
     }
+	
+	function insert_batch($postdata, $table = NULL) {
+        if ($table == NULL) {
+            $this->db->insert_batch('timesheet', $postdata);
+        } else {
+            $this->db->insert_batch($table, $postdata);
+        }
+        //echo $this->db->last_query(); die();
+        $insert_id = $this->db->insert_id();
+        return $insert_id;
+    }
 
     function update($postdata, $where_array = NULL, $table = NULL) {
         $this->db->where($where_array);
@@ -44,37 +55,35 @@ class Timesheet_model extends CI_Model {
 
     function get_rows($id = NULL, $limit = NULL, $offset = NULL, $dataTable = FALSE, $checkPaging = TRUE) {
         $result = array();
-        $this->db->select('t1.*,t2.user_email');
-        $this->db->join('users as t2', 't2.id = t1.pagecontent_user_id', 'left');
+        $this->db->select('
+		t1.*
+		');        
         if ($id) {
             $this->db->where('t1.id', $id);
         }
-
+		
         ####################################################################
         ##################### Display using Data Table #####################
         ####################################################################
         if ($dataTable == TRUE) {
             //set column field database for datatable orderable
             $column_order = array(
-                't1.pagecontent_title',
-                't1.pagecontent_type',
-                't1.pagecontent_text',
-                't1.pagecontent_status',
+                't1.timesheet_date',
+                't1.project_id',
+                't1.activity_id',
+                't1.timesheet_hours',
                 NULL,
             );            
             //set column field database(table column name) for datatable searchable
             $column_search = array(
-                't1.pagecontent_type',
-                't1.pagecontent_title',
-                't1.pagecontent_text',
-                't1.pagecontent_status',
-                't1.pagecontent_meta_keywords',
-                't1.pagecontent_meta_description',
-                't1.pagecontent_meta_author',
+                't1.timesheet_date',
+                't1.project_id',
+                't1.activity_id',
+                't1.timesheet_hours'
                 );
              // default order
             $order = array(
-                't1.id' => 'desc'
+                't1.timesheet_date' => 'desc'
                 );
             $i = 0;
             foreach ($column_search as $item) { // loop column
@@ -109,22 +118,37 @@ class Timesheet_model extends CI_Model {
                 $this->db->limit($limit, $offset);
             }
         }
-        $query = $this->db->get('cms as t1');
+        $query = $this->db->get('timesheet as t1');
         //print_r($this->db->last_query());
         $num_rows = $query->num_rows();
         $result = $query->result_array();
         return array('num_rows' => $num_rows, 'data_rows' => $result);
     }
 
-    function get_pagecontent_type() {
-        $data = array(
-            '' => 'Select',
-            'page' => 'Page',
-            'post' => 'Post',
-            'review' => 'Review',
-            'comment' => 'Comments'
-        );
-        return $data;
-    }
+    	
+	function get_timesheet_stats($year,$month){		
+		$this->db->select('
+		t1.id, 
+		t1.timesheet_date, 
+		DATE_FORMAT(t1.`timesheet_date`,"%Y") as timesheet_year,
+		DATE_FORMAT(t1.`timesheet_date`,"%m") as timesheet_month,
+		DATE_FORMAT(t1.`timesheet_date`,"%d") as timesheet_day,
+		t1.timesheet_hours,
+		t1.timesheet_review_status		
+		');        
+        $this->db->where(
+			array(
+			'YEAR(`timesheet_date`)' => $year,
+			'MONTH(`timesheet_date`)' => $month,
+			)
+		);
+		
+        $query = $this->db->get('timesheet as t1');
+		//echo $this->db->last_query(); //die();
+        $num_rows = $query->num_rows();
+        $result = $query->result_array();
+        return array('num_rows' => $num_rows, 'data_rows' => $result);
+        return $result;
+	}
 
 }
