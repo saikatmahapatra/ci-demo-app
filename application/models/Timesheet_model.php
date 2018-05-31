@@ -73,17 +73,19 @@ class Timesheet_model extends CI_Model {
             //set column field database for datatable orderable
             $column_order = array(
                 't1.timesheet_date',
-                't1.project_id',
-                't1.activity_id',
+                't2.project_name',
+                't3.task_activity_name',
                 't1.timesheet_hours',
                 NULL,
             );            
             //set column field database(table column name) for datatable searchable
             $column_search = array(
                 't1.timesheet_date',
-                't1.project_id',
-                't1.activity_id',
-                't1.timesheet_hours'
+                't2.project_name',
+                't3.task_activity_name',
+                't1.timesheet_hours',
+				't1.timesheet_description',
+				't1.timesheet_review_status'				
                 );
              // default order
             $order = array(

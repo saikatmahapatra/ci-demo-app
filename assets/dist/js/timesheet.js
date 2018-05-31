@@ -9,6 +9,7 @@ $(function(){
 		$('#display_selected_date').html(selectedDate.join());
 		//console.log(selected_date_array,selected_date_array.length);
 		if(selected_date_array.length>0){
+			//$("#clear_selected_days").removeClass('invisible').addClass('visible');
 			$.each(selected_date_array,function(index,clickedSelectedDay){
 				$(".day").each(function(){
 					var calDay= $(this).text();
@@ -44,7 +45,12 @@ $(".day").on("click",function(e){
 	}
 	
 	//$("#timesheetModal").modal("show");
-	console.log(selectedDate);
+	/*console.log(selectedDate);
+	if(selectedDate.length>0){
+		$("#clear_selected_days").removeClass('invisible').addClass('visible');
+	}else{
+		$("#clear_selected_days").addClass('invisible');
+	}*/
 	$('#display_selected_date').html(selectedDate.join());
 	$('input[name="selected_date"]').val(selectedDate.join());
 });

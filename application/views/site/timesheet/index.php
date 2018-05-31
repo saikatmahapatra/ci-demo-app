@@ -11,8 +11,7 @@
 
 
     <div class="col-md-3">		
-		<?php echo $cal; ?>
-		<div><a id="clear_selected_days" class="btn btn-outline-secondary btn-sm v-hidden" href="#"><i class="fa fa-fw fa-times-circle"></i> Clear all selected days</a></div>		
+		<?php echo $cal; ?>				
 		<?php echo form_error('selected_date'); ?>
 		<div class="mt-3 small">
 			<div class="d-inline-block"><span class="i-today pr-2 pl-2 m-1 text-white"></span>Today</div>
@@ -21,6 +20,7 @@
 			<div class="d-inline-block"><span class="i-leave pr-2 pl-2 m-1"></span>Leave</div>
 			<div class="d-inline-block"><span class="i-holiday pr-2 pl-2 m-1"></span>Holiday</div>
 		</div>
+		<div class="mt-2"><a id="clear_selected_days" class="btn btn-outline-secondary btn-sm" href="#"><i class="fa fa-fw fa-times-circle"></i> Clear all selected days</a></div>
 		<div class="mt-3">
 			<div class="">Days worked: <span id="total_days">0.0</span> days</div>
 			<div class="">Hours worked: <span id="total_hrs">0.0</span> hrs</div>
