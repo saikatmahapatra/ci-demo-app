@@ -42,7 +42,7 @@ class User extends CI_Controller {
     }
 
     function login() {
-        //echo $this->session->userdata('sess_post_login_redirect_uri');
+        //echo $this->session->userdata('sess_post_login_redirect_url');
 		$this->data['page_heading'] = "Please login to continue";
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
@@ -64,9 +64,9 @@ class User extends CI_Controller {
                     }
                     if ($login_status == 'success') {
                         $this->session->set_userdata('sess_user', $login_data);
-                        $post_login_redirect_uri = $this->session->userdata('sess_post_login_redirect_uri');
+                        $post_login_redirect_uri = $this->session->userdata('sess_post_login_redirect_url');
                         if(isset($post_login_redirect_uri) && $post_login_redirect_uri!=''){
-                            $this->session->unset_userdata('sess_post_login_redirect_uri');
+                            $this->session->unset_userdata('sess_post_login_redirect_url');
                             redirect($post_login_redirect_uri);
                         }else{
                             redirect('user/profile');
