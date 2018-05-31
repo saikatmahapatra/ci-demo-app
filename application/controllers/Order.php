@@ -168,7 +168,7 @@ class Order extends CI_Controller {
         $is_logged_in = $this->common_lib->is_logged_in();
         
         if ($is_logged_in == FALSE) {   
-            $this->session->set_userdata('sess_post_login_redirect_url', 'order/init_payment');                 
+            $this->session->set_userdata('sess_post_login_redirect_url', current_url());
             redirect('user/login');
         }
 		$this->data['alert_message'] = $this->session->flashdata('flash_message');
