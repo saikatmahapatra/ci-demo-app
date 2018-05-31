@@ -10,7 +10,7 @@
 <div class="row">
 
 
-    <div class="col-md-3">		
+    <div class="col-md-4">		
 		<?php echo $cal; ?>				
 		<?php echo form_error('selected_date'); ?>
 		<div class="mt-3 small">
@@ -22,9 +22,10 @@
 		</div>
 		<div class="mt-2"><a id="clear_selected_days" class="btn btn-outline-secondary btn-sm" href="#"><i class="fa fa-fw fa-times-circle"></i> Clear all selected days</a></div>
 		<div class="mt-3">
-			<div class="">Days worked: <span id="total_days">0.0</span> days</div>
-			<div class="">Hours worked: <span id="total_hrs">0.0</span> hrs</div>
-			<div class="">Average hours worked: <span id="average_worked_hrs">0.0</span> hrs/day</div>
+			<h6>Monthly timesheet entry summary</h6>
+			<div class="">Tasks logged for: <span id="total_days">0.0</span> days</div>
+			<div class="">Total hours logged: <span id="total_hrs">0.0</span> hrs</div>
+			<div class="">Avg. hours worked: <span class="" id="average_worked_hrs">0.0</span> hrs/day</div>
 		</div>
 		
 		<a class="text-centre d-none" href="#"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Download this month's timesheet</a>
@@ -32,7 +33,7 @@
 	
 	
 	
-	<div class="col-md-9">		
+	<div class="col-md-8">		
 		<nav>
 			<div class="nav nav-tabs ci-nav-tab" id="nav-tab" role="tablist">
 				<a class="nav-item nav-link active" id="nav-add-tab" data-toggle="tab" href="#nav-add" role="tab" aria-controls="nav-add" aria-selected="true">Timesheet Entry</a>
