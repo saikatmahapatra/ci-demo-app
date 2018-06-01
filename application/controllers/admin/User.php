@@ -16,6 +16,7 @@ class User extends CI_Controller {
 //        //Check if any user logged in else redirect to login
 //        $is_logged_in = $this->common_lib->is_logged_in();
 //        if ($is_logged_in == FALSE) {
+//			  $this->session->set_userdata('sess_post_login_redirect_url', current_url());	
 //            redirect($this->router->directory.'user/login');
 //        }
 //
@@ -68,6 +69,7 @@ class User extends CI_Controller {
     function manage() {        
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
+			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
             redirect($this->router->directory.'user/login');
         }
         //Has logged in user permission to access this page or method?        
@@ -218,6 +220,7 @@ class User extends CI_Controller {
 		########### Validate User Auth #############
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
+			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
             redirect($this->router->directory.'user/login');
         }
         //Has logged in user permission to access this page or method?        
@@ -479,6 +482,7 @@ class User extends CI_Controller {
         ########### Validate User Auth #############
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
+			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
             redirect($this->router->directory.'user/login');
         }
         //Has logged in user permission to access this page or method?        
@@ -578,6 +582,7 @@ class User extends CI_Controller {
         ########### Validate User Auth #############
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
+			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
             redirect($this->router->directory.'user/login');
         }
         //Has logged in user permission to access this page or method?        
@@ -667,6 +672,7 @@ class User extends CI_Controller {
     function add_address() {
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
+			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
             redirect($this->router->directory.'user/login');
         }
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
@@ -703,6 +709,7 @@ class User extends CI_Controller {
 	function edit_address() {
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
+			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
             redirect($this->router->directory.'user/login');
         }
         $this->data['alert_message'] = $this->session->flashdata('flash_message');

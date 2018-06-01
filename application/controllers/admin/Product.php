@@ -14,6 +14,7 @@ class Product extends CI_Controller {
         //Check if any user logged in else redirect to login
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
+			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
             redirect($this->router->directory.'user/login');
         }
 
