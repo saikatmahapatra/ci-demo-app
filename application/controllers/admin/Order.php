@@ -101,8 +101,8 @@ class Order extends CI_Controller {
 
             //add html for action
             $action_html = '';
-            $action_html.= anchor(base_url($this->router->directory.'order/edit/' . $result['id']), 'Edit', array(
-                'class' => 'btn btn-sm btn-dark',
+            $action_html.= anchor(base_url($this->router->directory.'order/edit/' . $result['id']), '<i class="fa fa-edit" aria-hidden="true"></i>', array(
+                'class' => 'text-dark mr-1',
                 'data-toggle' => 'tooltip',
                 'data-original-title' => 'Edit',
                 'title' => 'Edit',

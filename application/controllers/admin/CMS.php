@@ -96,15 +96,15 @@ class Cms extends CI_Controller {
             $row[] = (strtolower($result['pagecontent_status']) == 'y') ? 'Published' : 'Unpublished';
             //add html for action
             $action_html = '';
-            $action_html.= anchor(base_url($this->router->directory.'cms/edit/' . $result['id']), 'Edit', array(
-                'class' => 'btn btn-sm btn-dark',
+            $action_html.= anchor(base_url($this->router->directory.'cms/edit/' . $result['id']), '<i class="fa fa-edit" aria-hidden="true"></i>', array(
+                'class' => 'text-dark mr-1',
                 'data-toggle' => 'tooltip',
                 'data-original-title' => 'Edit',
                 'title' => 'Edit',
             ));
             $action_html.='&nbsp;';
-            $action_html.= anchor(base_url($this->router->directory.'cms/delete/' . $result['id']), 'Delete', array(
-                'class' => 'btn btn-sm btn-danger btn-delete',
+            $action_html.= anchor(base_url($this->router->directory.'cms/delete/' . $result['id']), '<i class="fa fa-trash" aria-hidden="true"></i>', array(
+                'class' => 'text-danger btn-delete ml-1',
 				'data-confirmation'=>true,
 				'data-confirmation-message'=>'Are you sure, you want to delete this?',
                 'data-toggle' => 'tooltip',
