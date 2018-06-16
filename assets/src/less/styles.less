@@ -254,7 +254,7 @@ select.form-control.dob-inline{
 		border:1px solid @calendar-grid-border;
 		vertical-align: center !important;		
 	}
-	td.day{
+	.allowed_m td.day{
 		cursor:pointer;		
 	}
 	.highlight{
@@ -300,6 +300,11 @@ select.form-control.dob-inline{
 }
 .i-has-data{
 	background-color:@has-data;
+}
+.disabled_m{
+	opacity: 0.5;
+	cursor: default !important;
+	background: @gray-lightest;
 }
 
 /*nav tab*/

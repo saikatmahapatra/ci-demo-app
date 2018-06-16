@@ -345,9 +345,29 @@ function initPage() {
     scrollToTop(500, 100);
     panelGroupToggle();
     renderFieldHelp();
+	setActiveTarget();
 }
 // End of initPage() i.e. document ready
 
 // Start of DOM Interaction Handler
 $(document).on('keypress keyup blur', '.numeric-decimal', numericOnly);
 $(document).on('click', '.btn-delete', askConfirmation);
+
+
+//Nav Tab Click : Display last clicked nav tab
+function setActiveTarget(){
+	var activeTab = localStorage.getItem('activeTab');
+	if(activeTab){
+		//console.log(activeTab);
+		//$('a[data-toggle="tab"]').removeClass('active');
+		$('a[data-toggle="tab"][id="'+activeTab+'"]').click();
+		
+	}
+	
+	
+}
+$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+  var target = $(e.target).attr("id") // activated tab, // prev target e.relatedTarget
+  localStorage.setItem('activeTab',target);
+  //console.log(target);
+});

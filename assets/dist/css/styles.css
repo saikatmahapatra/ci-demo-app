@@ -215,7 +215,7 @@ select.form-control.dob-inline {
   border: 1px solid #b3b3b3;
   vertical-align: center !important;
 }
-.ci-calendar td.day {
+.ci-calendar .allowed_m td.day {
   cursor: pointer;
 }
 .ci-calendar .highlight {
@@ -255,6 +255,11 @@ select.form-control.dob-inline {
 }
 .i-has-data {
   background-color: #a6ffa6;
+}
+.disabled_m {
+  opacity: 0.5;
+  cursor: default !important;
+  background: #f8f8f8;
 }
 /*nav tab*/
 .form-timesheet label {

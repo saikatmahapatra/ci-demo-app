@@ -29,7 +29,7 @@ $(function(){
 	renderDataTable();
 });
 
-$(".day").on("click",function(e){
+$(".allowed_m .day").on("click",function(e){
 	console.log(e);
 	var day = $(this).text();
 	if(day.trim().length>0){
