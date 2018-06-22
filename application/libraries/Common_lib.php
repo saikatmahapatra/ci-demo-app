@@ -105,35 +105,35 @@ class Common_lib {
         $config['per_page'] = ($limit_per_page == NULL) ? '20' : $limit_per_page;
         $config['uri_segment'] = $this->CI->uri->total_segments(); #print_r(end($this->CI->uri->segment_array()));
         $config['num_links'] = 1;
-        $config['full_tag_open'] = '<ul class="pagination">';
-        $config['full_tag_close'] = '</ul>';
+        $config['full_tag_open'] = '<nav aria-label="Page navigation"><ul class="pagination">';
+        $config['full_tag_close'] = '</ul></nav>';
 
-        $config['cur_tag_open'] = '<li class="active"><a>';
+        $config['cur_tag_open'] = '<li class="page-item active"><a class="page-link">';
         $config['cur_tag_close'] = '</a></li>';
 
 
-        $config['prev_link'] = '&laquo;';
-        $config['prev_tag_open'] = '<li class="prev">';
+        $config['prev_link'] = 'Prev';
+        $config['prev_tag_open'] = '<li class="page-item prev">';
         $config['prev_tag_close'] = '</li>';
 
 
-        $config['next_link'] = '&raquo;';
-        $config['next_tag_open'] = '<li>';
+        $config['next_link'] = 'Next';
+        $config['next_tag_open'] = '<li class="page-item">';
         $config['next_tag_close'] = '</li>';
 
 
         $config['first_link'] = 'First';
-        $config['first_tag_open'] = '<li>';
+        $config['first_tag_open'] = '<li class="page-item">';
         $config['first_tag_close'] = '</li>';
 
 
         $config['last_link'] = 'Last';
-        $config['last_tag_open'] = '<li>';
+        $config['last_tag_open'] = '<li class="page-item">';
         $config['last_tag_close'] = '</li>';
 
-        $config['num_tag_open'] = '<li>';
+        $config['num_tag_open'] = '<li class="page-item">';
         $config['num_tag_close'] = '</li>';
-        //$config['anchor_class'] 	= 'my_css_class_name';
+        $config['anchor_class'] = 'page-link';
         $config['display_pages'] = TRUE; // TRUE = Show number | FALSE = Hide Nos, Show Next, Prev Link
         $config['use_page_numbers'] = TRUE;
         $this->CI->pagination->initialize($config);

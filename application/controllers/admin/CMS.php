@@ -56,6 +56,9 @@ class Cms extends CI_Controller {
 		$this->breadcrumbs->push('CMS', '/admin/cms');		
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
 		
+		//Pagination
+		 $this->load->library('pagination');
+		
     }
 
     function index() {
@@ -70,6 +73,44 @@ class Cms extends CI_Controller {
 		
 		$this->data['page_heading'] = 'Website CMS - Contents';
         $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'cms/index', $this->data, true);
+        $this->load->view($this->data['view_dir'].'_layouts/layout_authenticated', $this->data);
+    }
+	
+	function index_ci_pagination() {
+        // Check user permission by permission name mapped to db
+        // $is_granted = $this->common_lib->check_user_role_permission('cms-list-view');
+			
+		$this->breadcrumbs->push('View','/');				
+		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
+		
+        $this->data['alert_message'] = $this->session->flashdata('flash_message');
+        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
+
+        // Display using CI Pagination: Total filtered rows - check without limit query. Refer to model method definition
+		
+		$result_array = $this->cms_model->get_rows(NULL, NULL, NULL, FALSE, FALSE);
+		$total_num_rows = $result_array['num_rows'];
+		
+		//pagination config
+		$additional_segment = 'admin/cms/index_ci_pagination';
+		$per_page = 10;
+		$config['uri_segment'] = 5;
+		$config['num_links'] = 1;
+		$config['use_page_numbers'] = TRUE;
+		//$this->pagination->initialize($config);
+		
+		$page = ($this->uri->segment(5)) ? ($this->uri->segment(5)-1) : 0;
+		$offset = ($page*$per_page);
+		$this->data['pagination_link'] = $this->common_lib->render_pagination($total_num_rows, $per_page, $additional_segment);
+		//end of pagination config
+        
+
+        // Data Rows - Refer to model method definition
+        $result_array = $this->cms_model->get_rows(NULL, $per_page, $offset, FALSE, TRUE);
+        $this->data['data_rows'] = $result_array['data_rows'];
+		
+		$this->data['page_heading'] = 'Website Contents (CI Pagination Version)';
+        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'cms/index_ci_pagination', $this->data, true);
         $this->load->view($this->data['view_dir'].'_layouts/layout_authenticated', $this->data);
     }
 

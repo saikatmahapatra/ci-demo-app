@@ -86,6 +86,39 @@ class User extends CI_Controller {
         $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'user/manage', $this->data, true);
         $this->load->view($this->data['view_dir'].'_layouts/layout_authenticated', $this->data);
     }
+	
+	function users() {        
+        $is_logged_in = $this->common_lib->is_logged_in();
+        if ($is_logged_in == FALSE) {
+			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
+            redirect($this->router->directory.'user/login');
+        }
+        //Has logged in user permission to access this page or method?        
+        $this->common_lib->check_user_role_permission(array(
+            'default-super-admin-access',
+            'default-admin-access',
+        ));        
+		$this->breadcrumbs->push('View', '/');		
+		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
+        $this->data['alert_message'] = $this->session->flashdata('flash_message');
+        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
+		
+		//Total rows - Refer to model method definition
+        $result_array = $this->user_model->get_rows();
+        $total_rows = $result_array['num_rows'];
+
+        // Total filtered rows - check without limit query. Refer to model method definition
+        $result_array = $this->user_model->get_rows(NULL, NULL, NULL, FALSE, FALSE);
+        $total_filtered = $result_array['num_rows'];
+
+        // Data Rows - Refer to model method definition
+        $result_array = $this->user_model->get_rows(NULL, NULL, FALSE, TRUE);
+        $this->data['data_rows'] = $result_array['data_rows'];
+		
+		$this->data['page_heading'] = 'Manage Users';
+        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'user/user_thumb', $this->data, true);
+        $this->load->view($this->data['view_dir'].'_layouts/layout_authenticated', $this->data);
+    }
 
     function render_datatable() {
         //Total rows - Refer to model method definition
