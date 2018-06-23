@@ -26,7 +26,24 @@
 <div class="row">
    <div class="col-md-12">
    <div class="media">
-   <img class="img align-self-start mr-3 dp" src="<?php echo base_url('assets/dist/img/avatar_2x.png'); ?>">
+   <?php   
+	$img_src = "";
+	$default_path = "assets/dist/img/avatar_2x.png";
+	if(isset($profile_pic) && sizeof($profile_pic)>0){					
+		$user_dp = "assets/uploads/user/profile_pic/".$profile_pic[0]['upload_file_name'];					
+		if (file_exists(FCPATH . $user_dp)) {
+			$img_src = $user_dp;
+		}else{
+			$img_src = $default_path;
+		}
+	}else{
+		$img_src = $default_path;
+	}
+	?>
+	<div class="profile-pic">
+		<img class="img align-self-start mr-3 dp" src="<?php echo base_url($img_src);?>">
+		<div class="edit"><a href="<?php echo base_url($this->router->directory.'user/profile_pic');?>"><i class="fa fa-pencil"></i> Change</a></div>
+	</div>
   <div class="media-body">
     <h5 class="mt-0">
         <?php

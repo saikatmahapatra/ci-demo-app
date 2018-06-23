@@ -370,6 +370,26 @@ class User_model extends CI_Model {
         $result = $query->result_array();        
         return $result;
     }
+	
+	function get_uploads($upload_object_name = NULL, $upload_object_id = NULL, $id = NULL, $upload_file_document_type_name = NULL) {
+        $this->db->select('t1.*');
+        if ($id) {
+            $this->db->where('id', $id);
+        }
+        if ($upload_object_name) {
+            $this->db->where('upload_object_name', $upload_object_name);
+        }
+
+        if ($upload_object_id) {
+            $this->db->where('upload_object_id', $upload_object_id);
+        }
+        if ($upload_file_document_type_name) {
+            $this->db->where('upload_document_type_name', $upload_file_document_type_name);
+        }
+        $query = $this->db->get('uploads t1');
+        $result = $query->result_array();
+        return $result;
+    }
 
 }
 

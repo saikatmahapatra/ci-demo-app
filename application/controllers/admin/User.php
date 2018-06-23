@@ -603,59 +603,16 @@ class User extends CI_Controller {
 		//die($user_id);
 		//$this->sess_user_id;
         $rows = $this->user_model->get_rows($user_id);
+		$this->data['profile_pic'] = $this->user_model->get_uploads('user', $user_id, NULL, 'profile_pic');
         $this->data['row'] = $rows['data_rows'];
 		$this->data['address'] = $this->user_model->get_user_address(NULL,$user_id,NULL);
 		$this->data['education'] = $this->user_model->get_user_education(NULL, $user_id);
 		$this->data['page_heading'] = 'Profile';
         $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'user/profile', $this->data, true);
         $this->load->view($this->data['view_dir'].'_layouts/layout_authenticated', $this->data);
-    }
-
-    function edit_profile() {
-        ########### Validate User Auth #############
-        $is_logged_in = $this->common_lib->is_logged_in();
-        if ($is_logged_in == FALSE) {
-			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
-            redirect($this->router->directory.'user/login');
-        }
-        //Has logged in user permission to access this page or method?        
-        $this->common_lib->check_user_role_permission(array(
-            'default-super-admin-access',
-            'default-admin-access',
-        ));
-        ########### Validate User Auth End #############
-        $this->data['alert_message'] = $this->session->flashdata('flash_message');
-        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
-        $rows = $this->user_model->get_rows($this->sess_user_id);
-        $this->data['row'] = $rows['data_rows'];
-
-        if ($this->input->post('form_action') == 'update_profile') {
-            if ($this->validate_edit_profile_form() == true) {
-                $postdata = array(
-                    //'user_firstname' => $this->input->post('user_firstname'),
-                    //'user_lastname' => $this->input->post('user_lastname'),
-                    'user_bio' => $this->input->post('user_bio'),
-                    //'user_gender' => $this->input->post('user_gender'),                   
-                    //'user_dob' => $dob,
-                    'user_mobile_phone1' => $this->input->post('user_mobile_phone1'),
-                    'user_mobile_phone2' => $this->input->post('user_mobile_phone2')                    
-                );
-                $where = array('id' => $this->sess_user_id);
-                $res = $this->user_model->update($postdata, $where);
-                if ($res) {
-                    $this->session->set_flashdata('flash_message', 'Basic info has been updated successfully');
-                    $this->session->set_flashdata('flash_message_css', 'alert-success');
-                    redirect(current_url());
-                }
-            }
-        }
+    }    
 	
-		$this->data['page_heading'] = 'Edit Profile';
-        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'user/edit_profile', $this->data, true);
-        $this->load->view($this->data['view_dir'].'_layouts/layout_authenticated', $this->data);
-    }
-
-    function validate_edit_profile_form() {
+	function validate_edit_profile_form() {
         //$this->form_validation->set_rules('user_firstname', 'first name', 'required');
         //$this->form_validation->set_rules('user_lastname', 'last name', 'required');
         //$this->form_validation->set_rules('user_gender', 'gender selection', 'required');        
@@ -982,6 +939,172 @@ class User extends CI_Controller {
             return false;
         }
     }
+	
+	function edit_profile() {
+        ########### Validate User Auth #############
+        $is_logged_in = $this->common_lib->is_logged_in();
+        if ($is_logged_in == FALSE) {
+			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
+            redirect($this->router->directory.'user/login');
+        }
+        //Has logged in user permission to access this page or method?        
+        $this->common_lib->check_user_role_permission(array(
+            'default-super-admin-access',
+            'default-admin-access',
+        ));
+        ########### Validate User Auth End #############
+        $this->data['alert_message'] = $this->session->flashdata('flash_message');
+        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
+        $rows = $this->user_model->get_rows($this->sess_user_id);
+        $this->data['row'] = $rows['data_rows'];
+
+        if ($this->input->post('form_action') == 'update_profile') {
+            if ($this->validate_edit_profile_form() == true) {
+                $postdata = array(
+                    //'user_firstname' => $this->input->post('user_firstname'),
+                    //'user_lastname' => $this->input->post('user_lastname'),
+                    'user_bio' => $this->input->post('user_bio'),
+                    //'user_gender' => $this->input->post('user_gender'),                   
+                    //'user_dob' => $dob,
+                    'user_mobile_phone1' => $this->input->post('user_mobile_phone1'),
+                    'user_mobile_phone2' => $this->input->post('user_mobile_phone2')                    
+                );
+                $where = array('id' => $this->sess_user_id);
+                $res = $this->user_model->update($postdata, $where);
+                if ($res) {
+                    $this->session->set_flashdata('flash_message', 'Basic info has been updated successfully');
+                    $this->session->set_flashdata('flash_message_css', 'alert-success');
+                    redirect(current_url());
+                }
+            }
+        }
+	
+		$this->data['page_heading'] = 'Edit Profile';
+        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'user/edit_profile', $this->data, true);
+        $this->load->view($this->data['view_dir'].'_layouts/layout_authenticated', $this->data);
+    }
+	
+	function profile_pic() {
+        ########### Validate User Auth #############
+        $is_logged_in = $this->common_lib->is_logged_in();
+        if ($is_logged_in == FALSE) {
+			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
+            redirect($this->router->directory.'user/login');
+        }
+        //Has logged in user permission to access this page or method?        
+        $this->common_lib->check_user_role_permission(array(
+            'default-super-admin-access',
+            'default-admin-access',
+        ));
+        ########### Validate User Auth End #############
+        $this->data['alert_message'] = $this->session->flashdata('flash_message');
+        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
+        
+		$this->data['user_id'] = $this->sess_user_id;
+		$this->data['profile_pic'] = $this->user_model->get_uploads('user', $this->sess_user_id, NULL, 'profile_pic');
+
+        if ($this->input->post('form_action') == 'file_upload') {
+            $this->upload_file();
+        }
+	
+		$this->data['page_heading'] = 'Profile Photo';
+        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'user/profile_pic', $this->data, true);
+        $this->load->view($this->data['view_dir'].'_layouts/layout_authenticated', $this->data);
+    }
+	
+	function validate_uplaod_form_data() {
+        return true;
+    }
+	
+	function upload_file() {
+        if ($this->validate_uplaod_form_data() == true) {
+            $upload_object_name = 'user';
+            $upload_object_id = $this->sess_user_id;
+            $upload_document_type_name = 'profile_pic';
+
+            //Create directory for object specific
+            $upload_path = 'assets/uploads/user/profile_pic';
+            if (!is_dir($upload_path)) {
+                mkdir($upload_path, 0777, TRUE);
+            }
+            $allowed_ext = 'png|jpg|jpeg|doc|docx|pdf';
+            if ($upload_document_type_name == 'profile_pic') {
+                $allowed_ext = 'jpg|jpeg';
+            }
+            $upload_param = array(
+                'upload_path' => $upload_path, // original upload folder
+                'allowed_types' => $allowed_ext, // allowed file types,
+                'max_size' => '1024', // max 1MB size,
+                'file_new_name' => $upload_object_id . '_' . md5($upload_document_type_name . '_' . time()),
+            );
+            $upload_result = $this->common_lib->upload_file('userfile', $upload_param);
+            if (isset($upload_result['file_name']) && empty($upload_result['upload_error'])) {
+                $uploaded_file_name = $upload_result['file_name'];
+                $postdata = array(
+                    'upload_object_name' => $upload_object_name,
+                    'upload_object_id' => $upload_object_id,
+                    'upload_document_type_name' => $upload_document_type_name,
+                    'upload_file_name' => $uploaded_file_name,
+                    'upload_mime_type' => $upload_result['file_type'],
+                    'upload_by_user_id' => $this->sess_user_id
+                );
+
+                //Check if already 1 file of same upload_document_type_name is uploaded, over ride it.
+				//If you do not want to override, want to keep multiple uploaded copy, 
+				//add those upload_document_type_name in skip_checking_existing_doc_type_name array
+                $skip_checking_existing_doc_type_name = array();
+
+                if (!in_array($upload_document_type_name, $skip_checking_existing_doc_type_name)) {
+                    $uploads = $this->user_model->get_uploads($upload_object_name, $upload_object_id, NULL, $upload_document_type_name);
+                }
+                if (isset($uploads[0]) && ($uploads[0]['id'] != '')) {
+                    //Unlink previously uploaded file                    
+                    $file_path = $upload_param['upload_path'] . '/' . $uploads[0]['upload_file_name'];
+                    if (file_exists(FCPATH . $file_path)) {
+                        $this->common_lib->unlink_file(array(FCPATH . $file_path));
+                    }
+                    // Now update table
+                    $update_upload = $this->user_model->update($postdata, array('id' => $uploads[0]['id']), 'uploads');
+                    $this->session->set_flashdata('flash_message', '<i class="icon fa fa-check" aria-hidden="true"></i> File uploaded successfully.');
+                    $this->session->set_flashdata('flash_message_css', 'alert-success');
+                    redirect(current_url());
+                } else {
+                    $upload_insert_id = $this->user_model->insert($postdata, 'uploads');
+                    $this->session->set_flashdata('flash_message', '<i class="icon fa fa-check" aria-hidden="true"></i> File uploaded successfully.');
+                    $this->session->set_flashdata('flash_message_css', 'alert-success');
+                    redirect(current_url());
+                }
+            } else if (sizeof($upload_result['upload_error']) > 0) {
+                $error_message = $upload_result['upload_error'];
+                $this->session->set_flashdata('flash_message', '<strong>Error!</strong> ' . $error_message);
+                $this->session->set_flashdata('flash_message_css', 'alert-danger');
+                redirect(current_url());
+            }
+        }
+    }
+	
+	function delete_profile_pic(){
+		$uploaded_file_id = $this->uri->segment(4);
+		$uploaded_file_name = $this->uri->segment(5);
+		//if($uploaded_file_name){
+			//Unlink previously uploaded file                    
+			$file_path = 'assets/uploads/user/profile_pic/'.$uploaded_file_name;
+			if (file_exists(FCPATH . $file_path)) {
+				$this->common_lib->unlink_file(array(FCPATH . $file_path));
+				$res = $this->user_model->delete(array('id'=>$uploaded_file_id),'uploads');
+				if($res){
+					$this->session->set_flashdata('flash_message', 'Profile picture has been deleted.');
+					$this->session->set_flashdata('flash_message_css', 'alert-success');
+					redirect($this->router->directory.'user/profile_pic');
+				}else{
+					$this->session->set_flashdata('flash_message', 'Error occured while processing your request.');
+					$this->session->set_flashdata('flash_message_css', 'alert-danger');
+					redirect($this->router->directory.'user/profile_pic');
+				}
+			}
+		//}
+	}
+	
 
 }
 

@@ -235,7 +235,7 @@ class Product extends CI_Controller {
         $this->data['all_uploads'] = $this->product_model->get_uploads($upload_object_name, $this->id, NULL, NULL);
         $this->data['arr_upload_document_type_name'] = $this->get_upload_document_type_names();
         if ($this->input->post('form_action') == 'file_upload') {
-            $this->upload_documents();
+            $this->upload_file();
         }
 		$this->data['page_heading'] = 'Edit Product';
         $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'product/edit', $this->data, true);
@@ -268,7 +268,7 @@ class Product extends CI_Controller {
         return $upload_document_type_name;
     }
 
-    function upload_documents() {
+    function upload_file() {
         if ($this->validate_uplaod_form_data() == true) {
             $upload_object_name = 'product';
             $upload_object_id = $this->id;

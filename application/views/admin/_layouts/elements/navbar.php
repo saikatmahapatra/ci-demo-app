@@ -22,7 +22,7 @@ $segment3 = $this->uri->segment(3);
 		<ul class="navbar-nav ">                
 			<li class="nav-item mr-2">
 				<div class="media text-white">					 
-					<img data-src="holder.js/75x75" class="mr-3 rounded" alt="50x50" style="width: 50px; height: 50px;" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2275%22%20height%3D%2275%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2075%2075%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_16422628995%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A10pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_16422628995%22%3E%3Crect%20width%3D%2275%22%20height%3D%2275%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2219.34375%22%20y%3D%2242%22%3E75x75%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true">					  
+					<img class="mr-3 rounded" alt="50x50" style="width: 50px; height: 50px;" src="<?php echo base_url('assets/dist/img/avatar_2x.png');?>">					  
 				  <div class="media-body">
 					<div class="mt-0">Hello, Saikat Mahapatra</div>						
 					<div class="mt-0 small">mahapatra.saikat@gmail.com</div>						
@@ -42,11 +42,17 @@ $segment3 = $this->uri->segment(3);
 <nav class="navbar navbar-expand-md navbar-dark pt-0 bg-dark pb-0 fixed-top" id="navbar2">
 	
 	<div class="collapse navbar-collapse" id="navbarsExampleDefault">
-		<ul class="navbar-nav">
+		<ul class="navbar-nav mr-auto">
 			<li class="nav-item <?php echo ($segment2=='home') ? 'active':''?>">
 				<a class="nav-link" href="<?php echo base_url($this->router->directory.'home'); ?>">Home
 					<span class="sr-only">(current)</span>
 				</a>
+			</li>
+			<li class="nav-item <?php echo ($segment2=='home') ? 'active':''?>">
+				<a class="nav-link" href="<?php echo base_url($this->router->directory.'user/profile/'.$this->session->userdata['sess_user']['id']); ?>">Profile</a>
+			</li>
+			<li class="nav-item <?php echo ($segment2=='home') ? 'active':''?>">
+				<a class="nav-link" href="<?php echo base_url($this->router->directory.'user/change_password'); ?>">Change Password</a>
 			</li>	
 			<li class="nav-item dropdown <?php echo ($segment2=='cms') ? 'active':''?>">
 				<a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
@@ -78,7 +84,7 @@ $segment3 = $this->uri->segment(3);
 			<?php if (isset($this->session->userdata['sess_user']['id'])) {  ?>
 			<li class="nav-item dropdown <?php echo ($segment2 == 'user' && ($segment3 != 'manage' || $segment3 != 'create_account')) ? 'active':''?>">
 				<a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"><i aria-hidden="true" class="fa fa-user-circle"></i> My Account </a>
+					aria-expanded="false">My Account </a>
 				<div class="dropdown-menu" aria-labelledby="dropdown03">
 					
 					<div class="dropdown-item welcome-user-container">
@@ -98,5 +104,8 @@ $segment3 = $this->uri->segment(3);
 			</li>
 			<?php } ?>
 		</ul>
+		<form class="form-inline my-2 my-lg-0">
+		  <input class="form-control form-control-sm mr-sm-2" type="search" placeholder="Enterprise Search" aria-label="Search">
+		</form>
 	</div>
 </nav>

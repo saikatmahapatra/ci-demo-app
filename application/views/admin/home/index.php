@@ -7,127 +7,43 @@
     </div>
 </div><!--/.heading-container-->
 <div class="row justify-content-center">
-			<div class="col-sm-6 col-md-2">
+			<div class="col-sm-6 col-md-3 col-lg-2">
 				<div class="block">
 					<div class="circle bg-ca text-white">
-						<div class="">
-							<i class="fa fa-cloud-download fa-2x" aria-hidden="true"></i>
-							<p>Some Text here Some text here</p>
+						<div class="circle-body">
+							<i class="fa fa-user fa-3x" aria-hidden="true"></i>
+							<p>My Documents</p>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-6 col-md-2">
+			<div class="col-sm-6 col-md-3 col-lg-2">
 				<div class="block">
 					<div class="circle bg-ca text-white">
-						<p>Some Text here Some text here</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-6 col-md-2">
-				<div class="block">
-					<div class="circle bg-ca text-white">
-						<p>Some Text here Some text here</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-6 col-md-2">
-				<div class="block">
-					<div class="circle bg-ca text-white">
-						<p>Some Text here Some text here</p>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row justify-content-center">
-			<div class="col-sm-6 col-md-2">
-				<div class="block">
-					<div class="circle bg-ca text-white">
-						<p>Some Text here Some text here</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-6 col-md-2">
-				<div class="block">
-					<div class="circle bg-ca text-white">
-						<p>Some Text here Some text here</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-6 col-md-2">
-				<div class="block">
-					<div class="circle bg-ca text-white">
-						<p>Some Text here Some text here</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-6 col-md-2">
-				<div class="block">
-					<div class="circle bg-ca text-white">
-						<p>Some Text here Some text here</p>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row justify-content-center">
-			<div class="col-sm-6 col-md-2">
-				<div class="block">
-					<div class="circle bg-ca text-white">
-						<div class="">
-							<i class="fa fa-cloud-download fa-2x" aria-hidden="true"></i>
-							<p>Some Text here Some text here</p>
+						<div class="circle-body">
+							<i class="fa fa-cloud-download fa-3x" aria-hidden="true"></i>
+							<p>My Documents</p>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-6 col-md-2">
+			<div class="col-sm-6 col-md-3 col-lg-2">
 				<div class="block">
 					<div class="circle bg-ca text-white">
-						<p>Some Text here Some text here</p>
+						<div class="circle-body">
+							<i class="fa fa-calendar fa-3x" aria-hidden="true"></i>
+							<p>My Documents</p>
+						</div>
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-6 col-md-2">
+			<div class="col-sm-6 col-md-3 col-lg-2">
 				<div class="block">
 					<div class="circle bg-ca text-white">
-						<p>Some Text here Some text here</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-6 col-md-2">
-				<div class="block">
-					<div class="circle bg-ca text-white">
-						<p>Some Text here Some text here</p>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row justify-content-center">
-			<div class="col-sm-6 col-md-2">
-				<div class="block">
-					<div class="circle bg-ca text-white">
-						<p>Some Text here Some text here</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-6 col-md-2">
-				<div class="block">
-					<div class="circle bg-ca text-white">
-						<p>Some Text here Some text here</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-6 col-md-2">
-				<div class="block">
-					<div class="circle bg-ca text-white">
-						<p>Some Text here Some text here</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-6 col-md-2">
-				<div class="block">
-					<div class="circle bg-ca text-white">
-						<p>Some Text here Some text here</p>
+						<div class="circle-body">
+							<i class="fa fa-cloud-download fa-3x" aria-hidden="true"></i>
+							<p>My Documents</p>
+						</div>
 					</div>
 				</div>
 			</div>
