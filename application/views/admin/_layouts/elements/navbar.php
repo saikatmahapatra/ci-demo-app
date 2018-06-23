@@ -3,6 +3,7 @@
 $segment1 = $this->uri->segment(1);
 $segment2 = $this->uri->segment(2);
 $segment3 = $this->uri->segment(3);
+//print_r($user_profile_image);
 ?>
 <nav class="navbar navbar-expand-md navbar-dark bg-ca fixed-top" id="navbar1">
 	<a class="navbar-brand" href="<?php echo base_url($this->router->directory); ?>">
@@ -19,18 +20,35 @@ $segment3 = $this->uri->segment(3);
 				<a class="nav-link" href="#"><h1>Admin Portal</h1></a>
 			</li>
 		</ul>
-		<ul class="navbar-nav ">                
-			<li class="nav-item mr-2">
-				<div class="media text-white">					 
-					<img class="mr-3 rounded" alt="50x50" style="width: 50px; height: 50px;" src="<?php echo base_url('assets/dist/img/avatar_2x.png');?>">					  
-				  <div class="media-body">
-					<div class="mt-0">Hello, Saikat Mahapatra</div>						
-					<div class="mt-0 small">mahapatra.saikat@gmail.com</div>						
-					<div class="mt-0"><i class="fa fa-power-off" aria-hidden="true"></i> Logout</div>					
-				  </div>
-				</div>
-			</li>
-			
+		<ul class="navbar-nav ">
+
+			<?php if (isset($this->session->userdata['sess_user']['id'])) {  ?>					
+				<li class="nav-item mr-2">
+					<div class="media text-white">					 
+					<?php   
+						$img_src = "";
+						$default_path = "assets/dist/img/avatar_2x.png";
+						if(isset($user_profile_image) && sizeof($user_profile_image)>0){					
+							$user_dp = "assets/uploads/user/profile_pic/".$user_profile_image[0]['upload_file_name'];					
+							if (file_exists(FCPATH . $user_dp)) {
+								$img_src = $user_dp;
+							}else{
+								$img_src = $default_path;
+							}
+						}else{
+							$img_src = $default_path;
+						}
+					?>
+					 <img class="mr-3 rounded" alt="50x50" style="width: 50px; height: 50px;" src="<?php echo base_url($img_src);?>">					  
+					  <div class="media-body">
+						<div class="mt-0"><?php echo isset($this->session->userdata['sess_user']['user_firstname']) ? 'Hello, '.$this->session->userdata['sess_user']['user_firstname'].' '.$this->session->userdata['sess_user']['user_lastname']:'Hello, Guest';?></div>
+						<div class="mt-0 small"><?php echo isset($this->session->userdata['sess_user']['user_email']) ? $this->session->userdata['sess_user']['user_email'] :'';?></div>
+						<!--<div class="mt-0 small">Role: <?php echo isset($this->session->userdata['sess_user']['user_role_name']) ? $this->session->userdata['sess_user']['user_role_name'] :'';?></div>-->
+						<div class="mt-0"><a class="nav-link ml-0 p-0" href="<?php echo base_url($this->router->directory.'user/logout'); ?>"><i class="fa fa-power-off" aria-hidden="true"></i> Logout</a></div>					
+					  </div>
+					</div>
+				</li>			
+			<?php } ?>			
 			<!--<li class="nav-item">
 				<a class="nav-link" href="#">Pricing</a>
 			</li>-->
@@ -39,8 +57,7 @@ $segment3 = $this->uri->segment(3);
 	</div>
 </nav>
 	
-<nav class="navbar navbar-expand-md navbar-dark pt-0 bg-dark pb-0 fixed-top" id="navbar2">
-	
+<nav class="navbar navbar-expand-md navbar-dark pt-0 bg-dark pb-0 fixed-top" id="navbar2">	
 	<div class="collapse navbar-collapse" id="navbarsExampleDefault">
 		<ul class="navbar-nav mr-auto">
 			<li class="nav-item <?php echo ($segment2=='home') ? 'active':''?>">
@@ -48,12 +65,17 @@ $segment3 = $this->uri->segment(3);
 					<span class="sr-only">(current)</span>
 				</a>
 			</li>
-			<li class="nav-item <?php echo ($segment2=='home') ? 'active':''?>">
-				<a class="nav-link" href="<?php echo base_url($this->router->directory.'user/profile/'.$this->session->userdata['sess_user']['id']); ?>">Profile</a>
+			<?php if (isset($this->session->userdata['sess_user']['id'])) {  ?>
+			<li class="nav-item <?php echo ($segment3 == 'profile') ? 'active':''?>">
+				<a class="nav-link" href="<?php echo base_url($this->router->directory.'user/profile/'.$this->session->userdata['sess_user']['id']); ?>">My Profile</a>
 			</li>
-			<li class="nav-item <?php echo ($segment2=='home') ? 'active':''?>">
+			<?php } ?>
+			
+			<?php if (isset($this->session->userdata['sess_user']['id'])) {  ?>
+			<li class="nav-item <?php echo ($segment3 == 'change_password') ? 'active':''?>">
 				<a class="nav-link" href="<?php echo base_url($this->router->directory.'user/change_password'); ?>">Change Password</a>
-			</li>	
+			</li>
+			<?php } ?>
 			<li class="nav-item dropdown <?php echo ($segment2=='cms') ? 'active':''?>">
 				<a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false">CMS</a>
@@ -81,7 +103,8 @@ $segment3 = $this->uri->segment(3);
 				<a class="nav-link" href="<?php echo base_url($this->router->directory.'order'); ?>">Orders</a>
 			</li>
 			
-			<?php if (isset($this->session->userdata['sess_user']['id'])) {  ?>
+			
+			<?php if (isset($this->session->userdata['sess_user']['id'])) {  /* ?>
 			<li class="nav-item dropdown <?php echo ($segment2 == 'user' && ($segment3 != 'manage' || $segment3 != 'create_account')) ? 'active':''?>">
 				<a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false">My Account </a>
@@ -102,7 +125,7 @@ $segment3 = $this->uri->segment(3);
 					<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'user/logout'); ?>">Logout</a>			
 				</div>
 			</li>
-			<?php } ?>
+			<?php */ } ?>
 		</ul>
 		<form class="form-inline my-2 my-lg-0">
 		  <input class="form-control form-control-sm mr-sm-2" type="search" placeholder="Enterprise Search" aria-label="Search">

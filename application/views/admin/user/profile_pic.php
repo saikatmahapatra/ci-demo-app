@@ -1,4 +1,4 @@
-<?php $row = $profile_pic[0]; ?>
+<?php //$row = $profile_pic; ?>
 <div class="row heading-container">
     <div class="col-md-5">
         <h1 class="page-header"><?php echo isset($page_heading)? $page_heading:'Page Heading'; ?></h1>
@@ -17,8 +17,8 @@
 				<?php
 				$img_src = "";
 				$default_path = "assets/src/img/125x125.jpg";
-				if(isset($row) && sizeof($row)>0){					
-					$user_dp = "assets/uploads/user/profile_pic/".$row['upload_file_name'];					
+				if(isset($profile_pic) && sizeof($profile_pic)>0){					
+					$user_dp = "assets/uploads/user/profile_pic/".$profile_pic[0]['upload_file_name'];					
 					if (file_exists(FCPATH . $user_dp)) {
 						$img_src = $user_dp;
 					}else{
@@ -29,8 +29,8 @@
 				}
 				?>
 				<img style="width:150px; height: 150px;" src="<?php echo base_url($img_src);?>" alt="" class="img align-self-start mr-3 dp">
-				<?php if(isset($row) && sizeof($row)>0){ ?>
-					<div class="edit"><a href="<?php echo base_url($this->router->directory.'user/delete_profile_pic/'.$row['id'].'/'.$row['upload_file_name']);?>"><i class="fa fa-remove"></i> Remove</a></div>
+				<?php if(isset($profile_pic) && sizeof($profile_pic)>0){ ?>
+					<div class="edit"><a href="<?php echo base_url($this->router->directory.'user/delete_profile_pic/'.$profile_pic[0]['id'].'/'.$profile_pic[0]['upload_file_name']);?>"><i class="fa fa-remove"></i> Remove</a></div>
 				<?php } ?>
 			</div>
 			<div class="col-md-9">
@@ -45,7 +45,7 @@
 				?>
 				<?php echo form_open_multipart(current_url(), array('method' => 'post', 'class'=>'ci-form','role' => 'form'));?>
 				<?php echo form_hidden('form_action', 'file_upload'); ?>
-				<?php echo form_hidden('id',$row['id']); ?>
+				
 					
 				<div class="form-group">								
 					<label for="userfile" class="control-label">Select File</label>

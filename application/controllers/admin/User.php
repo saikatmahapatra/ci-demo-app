@@ -1001,8 +1001,14 @@ class User extends CI_Controller {
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
         
 		$this->data['user_id'] = $this->sess_user_id;
-		$this->data['profile_pic'] = $this->user_model->get_uploads('user', $this->sess_user_id, NULL, 'profile_pic');
-
+		
+		$res = array();
+		$res_upload = $this->user_model->get_uploads('user', $this->sess_user_id, NULL, 'profile_pic');
+		if(isset($res_upload)){
+			$this->data['profile_pic'] = $res_upload;
+		}else{
+			$this->data['profile_pic'] = $res;
+		}
         if ($this->input->post('form_action') == 'file_upload') {
             $this->upload_file();
         }
@@ -1013,7 +1019,13 @@ class User extends CI_Controller {
     }
 	
 	function validate_uplaod_form_data() {
-        return true;
+        //$this->form_validation->set_rules('userfile', 'file selection field', 'required');        
+        //$this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
+        //if ($this->form_validation->run() == true) {
+            return true;
+        //} else {
+            //return false;
+        //}
     }
 	
 	function upload_file() {

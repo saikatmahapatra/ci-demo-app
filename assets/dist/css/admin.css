@@ -116,9 +116,6 @@ h2 {
   padding: 0px;
   background: #fff;
 }
-.nav-item.active {
-  font-weight: bold;
-}
 .dob-inline {
   display: inline !important;
   width: auto;
@@ -170,7 +167,7 @@ h2 {
   color: #fff;
 }
 .navbar-dark .navbar-nav .nav-item.active .nav-link {
-  color: #26ff93;
+  color: #1fff04;
 }
 .ajax-loader {
   position: absolute;
