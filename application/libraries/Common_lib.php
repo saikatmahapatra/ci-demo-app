@@ -108,7 +108,7 @@ class Common_lib {
         $config['total_rows'] = $total_rows;
         $config['per_page'] = ($limit_per_page == NULL) ? '20' : $limit_per_page;
         $config['uri_segment'] = $this->CI->uri->total_segments(); #print_r(end($this->CI->uri->segment_array()));
-        $config['num_links'] = 1;
+        $config['num_links'] = 2;
         $config['full_tag_open'] = '<nav aria-label="Page navigation"><ul class="pagination">';
         $config['full_tag_close'] = '</ul></nav>';
 
@@ -116,12 +116,12 @@ class Common_lib {
         $config['cur_tag_close'] = '</a></li>';
 
 
-        $config['prev_link'] = 'Prev';
+        $config['prev_link'] = '&lt;&lt;';
         $config['prev_tag_open'] = '<li class="page-item prev">';
         $config['prev_tag_close'] = '</li>';
 
 
-        $config['next_link'] = 'Next';
+        $config['next_link'] = '&gt;&gt;';
         $config['next_tag_open'] = '<li class="page-item">';
         $config['next_tag_close'] = '</li>';
 
@@ -129,6 +129,7 @@ class Common_lib {
         $config['first_link'] = 'First';
         $config['first_tag_open'] = '<li class="page-item">';
         $config['first_tag_close'] = '</li>';
+        $config['first_url'] = ''; //An alternative URL to use for the “first page” link.
 
 
         $config['last_link'] = 'Last';
@@ -138,8 +139,11 @@ class Common_lib {
         $config['num_tag_open'] = '<li class="page-item">';
         $config['num_tag_close'] = '</li>';
         $config['anchor_class'] = 'page-link';
+		$config['attributes'] = array('class' => 'page-link');
         $config['display_pages'] = TRUE; // TRUE = Show number | FALSE = Hide Nos, Show Next, Prev Link
         $config['use_page_numbers'] = TRUE;
+        $config['page_query_string'] = FALSE;
+        $config['reuse_query_string'] = FALSE;
         $this->CI->pagination->initialize($config);
         return $this->CI->pagination->create_links();
     }

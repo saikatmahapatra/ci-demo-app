@@ -86,8 +86,7 @@ class Cms extends CI_Controller {
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
 
-        // Display using CI Pagination: Total filtered rows - check without limit query. Refer to model method definition
-		
+        // Display using CI Pagination: Total filtered rows - check without limit query. Refer to model method definition		
 		$result_array = $this->cms_model->get_rows(NULL, NULL, NULL, FALSE, FALSE);
 		$total_num_rows = $result_array['num_rows'];
 		

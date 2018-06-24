@@ -103,19 +103,29 @@ class User extends CI_Controller {
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
 		
-		//Total rows - Refer to model method definition
-        $result_array = $this->user_model->get_rows();
-        $total_rows = $result_array['num_rows'];
-
-        // Total filtered rows - check without limit query. Refer to model method definition
-        $result_array = $this->user_model->get_rows(NULL, NULL, NULL, FALSE, FALSE);
-        $total_filtered = $result_array['num_rows'];
+		// Display using CI Pagination: Total filtered rows - check without limit query. Refer to model method definition		
+		$result_array = $this->user_model->get_rows(NULL, NULL, NULL, FALSE, FALSE);
+		$total_num_rows = $result_array['num_rows'];
+		
+		//pagination config
+		$additional_segment = 'admin/user/users';
+		$per_page = 50;
+		$config['uri_segment'] = 5;
+		$config['num_links'] = 1;
+		$config['use_page_numbers'] = TRUE;
+		//$this->pagination->initialize($config);
+		
+		$page = ($this->uri->segment(5)) ? ($this->uri->segment(5)-1) : 0;
+		$offset = ($page*$per_page);
+		$this->data['pagination_link'] = $this->common_lib->render_pagination($total_num_rows, $per_page, $additional_segment);
+		//end of pagination config
+        
 
         // Data Rows - Refer to model method definition
-        $result_array = $this->user_model->get_rows(NULL, NULL, FALSE, TRUE);
+        $result_array = $this->user_model->get_rows(NULL, $per_page, $offset, FALSE, TRUE);
         $this->data['data_rows'] = $result_array['data_rows'];
 		
-		$this->data['page_heading'] = 'Manage Users';
+		$this->data['page_heading'] = 'People';
         $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'user/user_thumb', $this->data, true);
         $this->load->view($this->data['view_dir'].'_layouts/layout_authenticated', $this->data);
     }

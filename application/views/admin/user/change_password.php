@@ -8,7 +8,7 @@
 </div><!--/.heading-container-->
 
 <div class="row">
-	<div class="col-md-8">
+	<div class="col-md-4">
 		<?php
 		// Show server side flash messages
 		if (isset($alert_message)) {
@@ -17,11 +17,11 @@
 			echo $html_alert_ui;
 		}
 		?>
-		<div class="card ">
+		<!--<div class="card ">
 			<div class="card-header">Change Password</div>
 			<div class="card-body">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-4">-->
                         <?php
                         // Show server side messages
                         if (isset($alert_message)) {
@@ -91,11 +91,11 @@
 
                         <?php echo form_button(array('name' => 'submit_btn','type' => 'submit','content' => '<i class="fa fa-fw fa-check-circle"></i> Submit','class' => 'btn btn-primary'));?>
                         <?php echo form_close(); ?>
-                    </div>
+                    <!--</div>
                 </div>
 			</div>
-		</div>
-		<!-- /.panel -->
+		</div>-->
+		<!-- /.card -->
 	</div>
 	<!-- /.col-md-12 -->
 </div>

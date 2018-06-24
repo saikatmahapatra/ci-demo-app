@@ -338,6 +338,7 @@ var closeBootstrapAlertMsg = false; // true|false
 
 // Start of document ready
 $(document).ready(initPage);
+showAjaxLoader();
 function initPage() {
     //Alert message close after few seconds
     autoCloseAlertMessage(closeBootstrapAlertMsg);
@@ -346,6 +347,7 @@ function initPage() {
     panelGroupToggle();
     renderFieldHelp();
 	setActiveTarget();
+	hideAjaxLoader();
 }
 // End of initPage() i.e. document ready
 
@@ -371,3 +373,15 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
   localStorage.setItem('activeTab',target);
   //console.log(target);
 });
+
+
+/**
+* Display Ajax Loader
+*/
+
+function showAjaxLoader(){
+	$("#ajax-loader").css("display","block");
+}
+function hideAjaxLoader(){
+	$("#ajax-loader").css("display","none");
+}
