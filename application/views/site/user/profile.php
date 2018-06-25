@@ -44,8 +44,8 @@
     </div>
     <div class="">
         <i class="fa fa-phone" aria-hidden="true"></i>
-        <a class="mr-2" href="tel:<?php echo isset($row['user_mobile_phone1']) ? $row['user_mobile_phone1'] : ''; ?>"><?php echo isset($row['user_mobile_phone1']) ? $row['user_mobile_phone1'] : ''; ?></a>
-        <a href="tel:<?php echo isset($row['user_mobile_phone2']) ? $row['user_mobile_phone2'] : ''; ?>"><?php echo isset($row['user_mobile_phone2']) ? $row['user_mobile_phone2'] : ''; ?></a>        
+        <a class="mr-2" href="tel:<?php echo isset($row['user_phone1']) ? $row['user_phone1'] : ''; ?>"><?php echo isset($row['user_phone1']) ? $row['user_phone1'] : ''; ?></a>
+        <a href="tel:<?php echo isset($row['user_phone2']) ? $row['user_phone2'] : ''; ?>"><?php echo isset($row['user_phone2']) ? $row['user_phone2'] : ''; ?></a>        
     </div>
 	
     <div>
@@ -102,9 +102,9 @@
         
         <div class="row">
             <div class="col-md-2">Phone # 1</div>
-            <div class="col-md-4"><?php echo isset($row['user_mobile_phone1']) ? $row['user_mobile_phone1'] : ''; ?></div>
+            <div class="col-md-4"><?php echo isset($row['user_phone1']) ? $row['user_phone1'] : ''; ?></div>
             <div class="col-md-2">Phone # 2</div>
-            <div class="col-md-4"><?php echo isset($row['user_mobile_phone2']) ? $row['user_mobile_phone2'] : ''; ?></div>
+            <div class="col-md-4"><?php echo isset($row['user_phone2']) ? $row['user_phone2'] : ''; ?></div>
         </div>
         <!--/.row-->
         

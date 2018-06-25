@@ -7,7 +7,7 @@ $segment3 = $this->uri->segment(3);
 ?>
 <nav class="navbar navbar-expand-md navbar-dark bg-ca fixed-top" id="navbar1">
 	<a class="navbar-brand" href="<?php echo base_url($this->router->directory); ?>">
-		<img src="<?php echo base_url('assets/src/img/logo.png');?>" width="180px">
+		<img src="<?php echo base_url('assets/src/img/logo.png');?>">
 	</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault"
 		aria-expanded="false" aria-label="Toggle navigation">
@@ -17,7 +17,7 @@ $segment3 = $this->uri->segment(3);
 	<div class="navbar-collapse collapse ">		
 		<ul class="navbar-nav mr-auto">                
 			<li class="nav-item">
-				<a class="nav-link" href="#"><h1>Admin Portal</h1></a>
+				<a class="nav-link" href="#"><h1>CI App</h1></a>
 			</li>
 		</ul>
 		<ul class="navbar-nav ">

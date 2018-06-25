@@ -43,9 +43,9 @@
 							  <div class="card-body">
 								<h5 class="card-title"><?php echo $row['user_firstname'].' '.$row['user_lastname']; ?></h5>
 								<div class="card-text"><?php echo $row['user_email']; ?></div>
-								<div class="card-text"><?php echo $row['user_mobile_phone1']; ?></div>
-								<div class="card-text"><?php echo $row['user_mobile_phone2']; ?></div>
-								<a  target="blank" href="<?php echo base_url($this->router->directory.'user/profile/'.$row['id']);?>" class="btn btn-info btn-sm">View Profile</a>
+								<div class="card-text"><?php echo $row['user_phone1']; ?></div>
+								<div class="card-text"><?php echo $row['user_phone2']; ?></div>
+								<a href="<?php echo base_url($this->router->directory.'user/profile/'.$row['id']);?>" class="btn btn-info btn-sm">View Profile</a>
 							  </div>
 							</div>
 						</div>

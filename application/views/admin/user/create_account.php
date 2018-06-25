@@ -67,18 +67,18 @@
 				<?php echo form_error('user_email'); ?>
 			</div>
 			<div class="form-group col-md-6">                           
-				<label for="user_mobile_phone1" class="">Mobile Number <span class="required">*</span></label>
+				<label for="user_phone1" class="">Mobile Number <span class="required">*</span></label>
 				<?php
 				echo form_input(array(
-					'name' => 'user_mobile_phone1',
-					'value' => set_value('user_mobile_phone1'),
-					'id' => 'user_mobile_phone1',
+					'name' => 'user_phone1',
+					'value' => set_value('user_phone1'),
+					'id' => 'user_phone1',
 					'maxlength' => '10',
 					'class' => 'form-control',
 					'placeholder' => 'Enter 10 digit mobile number',
 				));
 				?>
-				<?php echo form_error('user_mobile_phone1'); ?>
+				<?php echo form_error('user_phone1'); ?>
 			</div>
 		</div>
 			

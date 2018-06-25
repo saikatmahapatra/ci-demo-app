@@ -102,7 +102,7 @@ $row = $rows[0];
 						</div>
 						<div><?php echo isset($row['user_email']) ? $row['user_email']: '';?></div>						
 						<div>
-							<?php echo isset($row['user_mobile_phone1']) ? $row['user_mobile_phone1'] : '';?>
+							<?php echo isset($row['user_phone1']) ? $row['user_phone1'] : '';?>
 						</div>						
 					</div>
 				</div>

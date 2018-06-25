@@ -122,32 +122,32 @@
         
             <div class="form-row">                
 				<div class="form-group col-md-6">
-					<label for="user_mobile_phone1" class="">Mobile #1 <span class="required">*</span></label>
+					<label for="user_phone1" class="">Mobile #1 <span class="required">*</span></label>
 					<?php
 					echo form_input(array(
-						'name' => 'user_mobile_phone1',
-						'value' => isset($row['user_mobile_phone1']) ? $row['user_mobile_phone1'] : set_value('user_mobile_phone1'),
-						'id' => 'user_mobile_phone1',
+						'name' => 'user_phone1',
+						'value' => isset($row['user_phone1']) ? $row['user_phone1'] : set_value('user_phone1'),
+						'id' => 'user_phone1',
 						'class' => 'form-control',
 						'maxlength' => '10',
 						'minlength' => '10',
 					));
 					?>
-					<?php echo form_error('user_mobile_phone1'); ?>
+					<?php echo form_error('user_phone1'); ?>
 				</div>                
 				<div class="form-group col-md-6">
-					<label for="user_mobile_phone2" class="">Mobile #2</label>
+					<label for="user_phone2" class="">Mobile #2</label>
 					<?php
 					echo form_input(array(
-						'name' => 'user_mobile_phone2',
-						'value' => isset($row['user_mobile_phone2']) ? $row['user_mobile_phone2'] : set_value('user_mobile_phone2'),
-						'id' => 'user_mobile_phone2',
+						'name' => 'user_phone2',
+						'value' => isset($row['user_phone2']) ? $row['user_phone2'] : set_value('user_phone2'),
+						'id' => 'user_phone2',
 						'class' => 'form-control',
 						'maxlength' => '10',
 						'minlength' => '10',
 					));
 					?>
-					<?php echo form_error('user_mobile_phone2'); ?>
+					<?php echo form_error('user_phone2'); ?>
 				</div>                
             </div><!--/.row-->
 			

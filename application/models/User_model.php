@@ -60,7 +60,7 @@ class User_model extends CI_Model {
             $column_order = array(
                 't1.user_firstname',
                 't1.user_email',
-                't1.user_mobile_phone1',
+                't1.user_phone1',
                 't2.role_name',
                 NULL,
             );
@@ -69,8 +69,8 @@ class User_model extends CI_Model {
                 't1.user_firstname',
                 't1.user_lastname',
                 't1.user_email',
-                't1.user_mobile_phone1',
-                't1.user_mobile_phone2',
+                't1.user_phone1',
+                't1.user_phone2',
                 't2.role_name',
             );
             // default order

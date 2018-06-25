@@ -61,8 +61,8 @@
     </div>
     <div class="">
         <i class="fa fa-phone" aria-hidden="true"></i>
-        <a class="mr-2" href="tel:<?php echo isset($row['user_mobile_phone1']) ? $row['user_mobile_phone1'] : ''; ?>"><?php echo isset($row['user_mobile_phone1']) ? $row['user_mobile_phone1'] : ''; ?></a>
-        <a href="tel:<?php echo isset($row['user_mobile_phone2']) ? $row['user_mobile_phone2'] : ''; ?>"><?php echo isset($row['user_mobile_phone2']) ? $row['user_mobile_phone2'] : ''; ?></a>
+        <a class="mr-2" href="tel:<?php echo isset($row['user_phone1']) ? $row['user_phone1'] : ''; ?>"><?php echo isset($row['user_phone1']) ? $row['user_phone1'] : ''; ?></a>
+        <a href="tel:<?php echo isset($row['user_phone2']) ? $row['user_phone2'] : ''; ?>"><?php echo isset($row['user_phone2']) ? $row['user_phone2'] : ''; ?></a>
         
     </div>            
     <div>
@@ -71,8 +71,8 @@
 		<a href="<?php echo base_url($this->router->directory.'user/edit_profile');?>">Edit</a>
 		<?php } ?>
     </div>
-    <hr style="m-8 auto">
-    <!--<span class="label label-default">some text</span>
+    <!--<hr style="m-8 auto">
+    <span class="label label-default">some text</span>
     <span class="label label-default">some text</span>-->
   </div>
 </div>
@@ -121,9 +121,9 @@
         
         <div class="row">
             <div class="col-md-2">Phone # 1</div>
-            <div class="col-md-4"><?php echo isset($row['user_mobile_phone1']) ? $row['user_mobile_phone1'] : ''; ?></div>
+            <div class="col-md-4"><?php echo isset($row['user_phone1']) ? $row['user_phone1'] : ''; ?></div>
             <div class="col-md-2">Phone # 2</div>
-            <div class="col-md-4"><?php echo isset($row['user_mobile_phone2']) ? $row['user_mobile_phone2'] : ''; ?></div>
+            <div class="col-md-4"><?php echo isset($row['user_phone2']) ? $row['user_phone2'] : ''; ?></div>
         </div>
         <!--/.row-->
         
@@ -135,10 +135,6 @@
         </div>
         <!--/.row-->
 
-        <div class="row">
-            <div class="col-md-2">Blood Group</div>
-            <div class="col-md-4"></div>
-        </div>
         <!--/.row-->
 		</div>
 	</div>

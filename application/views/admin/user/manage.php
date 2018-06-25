@@ -33,7 +33,7 @@
 							<tr>
 								<th>Name</th>
 								<th>Email</th>
-								<th>Mobile</th>
+								<th>Phone</th>
 								<th>Role</th>
 								<th>Account Status</th>
 								<th>Action</th>
@@ -44,7 +44,7 @@
 							<tr>
 								<th>Name</th>
 								<th>Email</th>
-								<th>Mobile</th>
+								<th>Phone</th>
 								<th>Role</th>
 								<th>Account Status</th>
 								<th>Action</th>

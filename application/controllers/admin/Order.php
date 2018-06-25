@@ -96,7 +96,7 @@ class Order extends CI_Controller {
             $html_user_details = '';
             $html_user_details.= isset($result['user_firstname']) ? '<div class="">' . $result['user_firstname'] . '&nbsp;' . $result['user_lastname'] . '</div>' : '';
             $html_user_details.= isset($result['user_email']) ? '<div class="">' . $result['user_email'] . '</div>' : '';
-            $html_user_details.= isset($result['user_mobile_phone1']) ? '<div class="">' . $result['user_mobile_phone1'] . '</div>' : '';
+            $html_user_details.= isset($result['user_phone1']) ? '<div class="">' . $result['user_phone1'] . '</div>' : '';
             $row[] = $html_user_details;
 
             //add html for action

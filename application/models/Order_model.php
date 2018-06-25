@@ -64,7 +64,7 @@ class order_model extends CI_Model {
 
     function get_rows($id = NULL, $limit = NULL, $offset = NULL, $dataTable = FALSE, $checkPaging = TRUE) {
         $result = array();
-        $this->db->select('t1.*,t2.user_firstname,t2.user_lastname,t2.user_email,t2.user_mobile_phone1');
+        $this->db->select('t1.*,t2.user_firstname,t2.user_lastname,t2.user_email,t2.user_phone1');
         $this->db->join('users as t2', 't2.id = t1.order_user_id', 'left');
         if ($id) {
             $this->db->where('t1.id', $id);
@@ -95,7 +95,7 @@ class order_model extends CI_Model {
                 't2.user_email',
                 't2.user_lastname',
                 't2.user_lastname',
-                't2.user_mobile_phone1',
+                't2.user_phone1',
                 );
              // default order
             $order = array(

@@ -149,7 +149,7 @@ class User extends CI_Controller {
             $row = array();
             $row[] = $result['user_firstname'] . ' ' . $result['user_lastname'];
             $row[] = $result['user_email'];
-            $row[] = $result['user_mobile_phone1'];
+            $row[] = $result['user_phone1'];
             $row[] = $result['role_name'];
             $row[] = ($result['user_account_active'] == 'Y') ? '<span class="badge badge-success">Active</span>' : '<span class="badge badge-danger">Inactive</span>';
             //add html for action
@@ -287,7 +287,7 @@ class User extends CI_Controller {
                     'user_email' => $this->input->post('user_email'),
                     'user_dob' => $dob,
                     'user_role' => $this->input->post('user_role'),
-                    'user_mobile_phone1' => $this->input->post('user_mobile_phone1'),
+                    'user_phone1' => $this->input->post('user_phone1'),
                     'user_password' => md5($password),
                     'user_registration_date' => date('Y-m-d H:i:s'),
                     'user_activation_key' => $activation_token,
@@ -333,7 +333,7 @@ class User extends CI_Controller {
         $this->form_validation->set_rules('user_gender', 'gender selection', 'required');
         $this->form_validation->set_rules('user_email', 'email', 'trim|required|valid_email|callback_is_email_registered');
         //$this->form_validation->set_rules('user_password', 'password', 'required|trim|min_length[6]');
-        $this->form_validation->set_rules('user_mobile_phone1', 'mobile number', 'required|trim|min_length[10]|max_length[10]|numeric');
+        $this->form_validation->set_rules('user_phone1', 'mobile number', 'required|trim|min_length[10]|max_length[10]|numeric');
         //$this->form_validation->set_rules('user_password_confirm', 'confirm password', 'required|matches[user_password]');
         $this->form_validation->set_rules('dob_day', 'birth day selection', 'required');
         $this->form_validation->set_rules('dob_month', 'birth month selection', 'required');
@@ -630,8 +630,8 @@ class User extends CI_Controller {
         //$this->form_validation->set_rules('user_firstname', 'first name', 'required');
         //$this->form_validation->set_rules('user_lastname', 'last name', 'required');
         //$this->form_validation->set_rules('user_gender', 'gender selection', 'required');        
-        $this->form_validation->set_rules('user_mobile_phone1', 'primary mobile', 'required|trim|min_length[10]|max_length[10]|numeric');
-        $this->form_validation->set_rules('user_mobile_phone2', 'secondary mobile', 'trim|min_length[10]|max_length[10]|numeric');
+        $this->form_validation->set_rules('user_phone1', 'primary mobile', 'required|trim|min_length[10]|max_length[10]|numeric');
+        $this->form_validation->set_rules('user_phone2', 'secondary mobile', 'trim|min_length[10]|max_length[10]|numeric');
         $this->form_validation->set_rules('user_bio', 'about you', 'max_length[100]');
         /* $this->form_validation->set_rules('dob_day', 'birth day selection', 'required');
           $this->form_validation->set_rules('dob_month', 'birth month selection', 'required');
@@ -980,8 +980,8 @@ class User extends CI_Controller {
                     'user_bio' => $this->input->post('user_bio'),
                     //'user_gender' => $this->input->post('user_gender'),                   
                     //'user_dob' => $dob,
-                    'user_mobile_phone1' => $this->input->post('user_mobile_phone1'),
-                    'user_mobile_phone2' => $this->input->post('user_mobile_phone2')                    
+                    'user_phone1' => $this->input->post('user_phone1'),
+                    'user_phone2' => $this->input->post('user_phone2')                    
                 );
                 $where = array('id' => $this->sess_user_id);
                 $res = $this->user_model->update($postdata, $where);

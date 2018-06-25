@@ -97,10 +97,10 @@ h2{
 /*Profile*/
 .dp
 {
-    border:10px solid #eee;
+    border:6px solid #eee;
     transition: all 0.2s ease-in-out;
-	height: 100px;
-	width: 100px;
+	height: 120px;
+	width: 120px;
 }
 .dp:hover
 {
@@ -236,4 +236,19 @@ h2{
 .edit {	
 	position: absolute;	
 	display: none;
+}
+
+.ci-nav-tab{	
+	.nav-link{
+		border: 2px solid transparent;
+		border-top-left-radius: .25rem;
+		border-top-right-radius: .25rem;
+		&:hover{
+			border-color: transparent transparent;
+		}
+	}	
+	.nav-link.active{
+		border-color: transparent transparent @color_blue;
+		border-bottom: 2px solid @color_blue !important;
+	}	
 }
