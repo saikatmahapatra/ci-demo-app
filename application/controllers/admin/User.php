@@ -87,7 +87,7 @@ class User extends CI_Controller {
         $this->load->view($this->data['view_dir'].'_layouts/layout_authenticated', $this->data);
     }
 	
-	function users() {        
+	function people() {        
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
@@ -104,11 +104,11 @@ class User extends CI_Controller {
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
 		
 		// Display using CI Pagination: Total filtered rows - check without limit query. Refer to model method definition		
-		$result_array = $this->user_model->get_rows(NULL, NULL, NULL, FALSE, FALSE);
+		$result_array = $this->user_model->get_users(NULL, NULL, NULL);
 		$total_num_rows = $result_array['num_rows'];
 		
 		//pagination config
-		$additional_segment = 'admin/user/users';
+		$additional_segment = 'admin/user/people';
 		$per_page = 50;
 		$config['uri_segment'] = 5;
 		$config['num_links'] = 1;
@@ -122,11 +122,11 @@ class User extends CI_Controller {
         
 
         // Data Rows - Refer to model method definition
-        $result_array = $this->user_model->get_rows(NULL, $per_page, $offset, FALSE, TRUE);
+        $result_array = $this->user_model->get_users(NULL, $per_page, $offset);
         $this->data['data_rows'] = $result_array['data_rows'];
 		
 		$this->data['page_heading'] = 'People';
-        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'user/user_thumb', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'user/people', $this->data, true);
         $this->load->view($this->data['view_dir'].'_layouts/layout_authenticated', $this->data);
     }
 
@@ -612,6 +612,10 @@ class User extends CI_Controller {
 		$user_id = $this->uri->segment(4);
 		//die($user_id);
 		//$this->sess_user_id;
+		$this->data['my_profile'] = FALSE;
+		if($this->sess_user_id == $user_id){
+			$this->data['my_profile'] = TRUE;
+		}
         $rows = $this->user_model->get_rows($user_id);
 		$this->data['profile_pic'] = $this->user_model->get_uploads('user', $user_id, NULL, 'profile_pic');
         $this->data['row'] = $rows['data_rows'];
@@ -1056,8 +1060,12 @@ class User extends CI_Controller {
             $upload_param = array(
                 'upload_path' => $upload_path, // original upload folder
                 'allowed_types' => $allowed_ext, // allowed file types,
-                'max_size' => '1024', // max 1MB size,
+                'max_size' => '2048', // max 1MB size,
                 'file_new_name' => $upload_object_id . '_' . md5($upload_document_type_name . '_' . time()),
+				'thumb_img_require' => TRUE,
+				'thumb_img_path'=>$upload_path,
+				'thumb_img_width'=>'250',
+				'thumb_img_height'=>'300'
             );
             $upload_result = $this->common_lib->upload_file('userfile', $upload_param);
             if (isset($upload_result['file_name']) && empty($upload_result['upload_error'])) {

@@ -42,7 +42,9 @@
 	?>
 	<div class="profile-pic">
 		<img class="img align-self-start mr-3 dp" src="<?php echo base_url($img_src);?>">
+		<?php if($my_profile == TRUE){ ?>
 		<div class="edit"><a href="<?php echo base_url($this->router->directory.'user/profile_pic');?>"><i class="fa fa-pencil"></i> Change</a></div>
+		<?php } ?>
 	</div>
   <div class="media-body">
     <h5 class="mt-0">
@@ -65,11 +67,13 @@
     </div>            
     <div>
         <?php echo (isset($row['user_bio']) && strlen($row['user_bio'])>0) ? $row['user_bio'] : '<span class="text-greyed-out">Describe who you are...</span>'; ?>
-        <a href="<?php echo base_url($this->router->directory.'user/edit_profile');?>">Edit</a>
+        <?php if($my_profile == TRUE){ ?>
+		<a href="<?php echo base_url($this->router->directory.'user/edit_profile');?>">Edit</a>
+		<?php } ?>
     </div>
     <hr style="m-8 auto">
-    <span class="label label-default">some text</span>
-    <span class="label label-default">some text</span>
+    <!--<span class="label label-default">some text</span>
+    <span class="label label-default">some text</span>-->
   </div>
 </div>
 </div>
@@ -95,7 +99,9 @@
   <div class="tab-pane fade show active" id="nav-basic" role="tabpanel" aria-labelledby="nav-basic-tab">
 	<div class="row mt-3">
 		<div class="col-md-12">
+		<?php if($my_profile == TRUE){ ?>
         <a class="btn btn-info btn-sm" href="<?php echo base_url($this->router->directory.'user/edit_profile');?>"><i class="fa fa-edit" aria-hidden="true"></i> Edit</a>
+		<?php } ?>
         <!--<h6>Basic Info</h6><hr>-->
         <div class="row">
             <div class="col-md-2">Name</div>
@@ -141,7 +147,9 @@
   <div class="tab-pane fade" id="nav-address" role="tabpanel" aria-labelledby="nav-address-tab">
 	<div class="row mt-3">
 		<div class="col-md-12">
+		<?php if($my_profile == TRUE){ ?>
 		<a class="btn btn-success btn-sm" href="<?php echo base_url($this->router->directory.'user/add_address');?>"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add New</a>
+		<?php } ?>
 			<!--<h6>Communication Address</h6><hr>-->
 				<?php if(isset($address)){
 					foreach($address as $key=>$addr){
@@ -161,9 +169,11 @@
 								<div>
 								</div>
 							</div>
-							<div class="col-md-2">			
+							<div class="col-md-2">	
+								<?php if($my_profile == TRUE){ ?>
 								<a href="<?php echo base_url($this->router->directory.'user/edit_address/'.$addr["id"]);?>" class="btn btn-outline-secondary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></a>
 								<a href="<?php echo base_url($this->router->directory.'user/delete_address/'.$addr["id"]);?>" class="btn btn-outline-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></a>
+								<?php } ?>
 							</div>
 						</div>
 						<!--/.row-->
@@ -178,7 +188,9 @@
   <div class="tab-pane fade" id="nav-education" role="tabpanel" aria-labelledby="nav-education-tab">
 	<div class="row mt-3">
 		<div class="col-md-12">
+			<?php if($my_profile == TRUE){ ?>
 			<a class="btn btn-success btn-sm" href="<?php echo base_url($this->router->directory.'user/add_education');?>"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add New</a>
+			<?php } ?>
 			<!--<h6>Educational Qualification</h6><hr>-->
 				<table class="table table-sm mt-1">
 					<thead>
@@ -202,8 +214,10 @@
 								<td><?php echo isset($edu['institute_name']) ? $edu['institute_name']: $edu['academic_other_inst'];?></td>
 								<td><?php echo isset($edu['academic_marks_percentage'])?$edu['academic_marks_percentage']:'';?></td>
 								<td>
+									<?php if($my_profile == TRUE){ ?>
 									<a href="<?php echo base_url($this->router->directory.'user/edit_education/'.$edu["id"]);?>" class="btn btn-outline-secondary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></a>
 									<a href="<?php echo base_url($this->router->directory.'user/delete_education/'.$edu["id"]);?>" class="btn btn-outline-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></a>
+									<?php } ?>
 								</td>
 								
 							</tr>
@@ -220,7 +234,9 @@
   <div class="tab-pane fade" id="nav-exp" role="tabpanel" aria-labelledby="nav-exp-tab">
 	<div class="row mt-3">
 		<div class="col-md-12">
-		<a class="btn btn-success btn-sm" href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add New</a>
+		<?php if($my_profile == TRUE){ ?>
+		<a class="btn btn-success btn-sm" href=""><i class="fa fa-plus-circle" aria-hidden="true"></i> Add New</a>
+		<?php } ?>
 		</div>
 	</div>
   </div><!--/#nav-exp-->

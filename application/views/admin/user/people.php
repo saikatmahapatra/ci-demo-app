@@ -7,10 +7,7 @@
     </div>
 </div><!--/.heading-container-->
 
-<a href="<?php echo base_url($this->router->directory.'user/create_account');?>" class="btn btn-sm btn-success" title="Add"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add New</a>
-
-<div class="row">    
-	
+<div class="row">	
 	
 	<?php
 	// Show server side flash messages
@@ -26,13 +23,29 @@
 				if(isset($data_rows)){
 					foreach($data_rows as $key=>$row){
 						?>						
-						<div class="col-md-3">
+						<div class="col-md-3">							
 							<div class="card mb-1">
-							  <img class="card-img-top" src="" alt="Card image cap">
+							<?php
+							$img_src = "";
+							$default_path = "assets/src/img/125x125.jpg";
+							if(isset($row['upload_file_name'])){					
+								$user_dp = "assets/uploads/user/profile_pic/".$row['upload_file_name'];					
+								if (file_exists(FCPATH . $user_dp)) {
+									$img_src = $user_dp;
+								}else{
+									$img_src = $default_path;
+								}
+							}else{
+								$img_src = $default_path;
+							}
+							?>
+							  <img class="card-img-top" src="<?php echo base_url($img_src);?>" alt="Card image cap">
 							  <div class="card-body">
 								<h5 class="card-title"><?php echo $row['user_firstname'].' '.$row['user_lastname']; ?></h5>
-								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-								<a href="#" class="btn btn-primary">Go somewhere</a>
+								<div class="card-text"><?php echo $row['user_email']; ?></div>
+								<div class="card-text"><?php echo $row['user_mobile_phone1']; ?></div>
+								<div class="card-text"><?php echo $row['user_mobile_phone2']; ?></div>
+								<a  target="blank" href="<?php echo base_url($this->router->directory.'user/profile/'.$row['id']);?>" class="btn btn-info btn-sm">View Profile</a>
 							  </div>
 							</div>
 						</div>

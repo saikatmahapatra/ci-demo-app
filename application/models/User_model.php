@@ -391,6 +391,23 @@ class User_model extends CI_Model {
         return $result;
     }
 
+	function get_users($id = NULL, $limit = NULL, $offset = NULL) {
+        $this->db->select('t1.*,t2.role_name, t2.role_weight, t3.upload_file_name');
+        if ($id) {
+            $this->db->where('t1.id', $id);
+        }
+        $this->db->join('roles t2', 't1.user_role=t2.id', 'left');
+        $this->db->join('uploads t3', 't1.id=t3.upload_object_id', 'left');        
+		//$this->db->where('t3.upload_object_name', 'user');
+        if ($limit) {
+            $this->db->limit($limit, $offset);
+        }
+        $query = $this->db->get('users t1');
+        //echo $this->db->last_query();
+        $num_rows = $query->num_rows();
+        $result = $query->result_array();
+        return array('num_rows' => $num_rows, 'data_rows' => $result);
+    }
 }
 
 ?>

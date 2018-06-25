@@ -97,7 +97,10 @@ $segment3 = $this->uri->segment(3);
 			</li>
 			
 			<li class="nav-item <?php echo ($segment3 == 'manage' || $segment3 == 'create_account') ? 'active':''?>">
-				<a class="nav-link"href="<?php echo base_url($this->router->directory.'user/manage'); ?>">Customers</a>
+				<a class="nav-link"href="<?php echo base_url($this->router->directory.'user/manage'); ?>">Manage Users</a>
+			</li>
+			<li class="nav-item <?php echo ($segment3 == 'people' || $segment3 == 'create_account') ? 'active':''?>">
+				<a class="nav-link"href="<?php echo base_url($this->router->directory.'user/people'); ?>">People</a>
 			</li>
 			<li class="nav-item <?php echo ($segment2=='order') ? 'active':''?>">
 				<a class="nav-link" href="<?php echo base_url($this->router->directory.'order'); ?>">Orders</a>
