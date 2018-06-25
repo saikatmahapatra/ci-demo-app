@@ -26,10 +26,10 @@
 						<?php echo form_password(array('name' => 'user_password','value' => set_value('user_password'),'id' =>'user_password','placeholder' => 'Enter password','class' => 'form-control','maxlength' => '16'));?>
 						<?php echo form_error('user_password'); ?>
 					</div>
-					<div class="form-group">
+					<!--<div class="form-group">
 						<input id="remember" name="remember" type="checkbox" value="1">
 						<label class="form-check-label" for="remember">Remember Password</label>
-					</div>												
+					</div>	-->											
 					<?php echo form_button(array('name' => 'submit_btn','type' => 'submit','content' => '<i class="fa fa-fw fa-check-circle"></i> Login','class' => 'btn btn-primary btn-block'));?>
 					
 					<?php form_close(); ?>
