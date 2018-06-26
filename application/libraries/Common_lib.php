@@ -41,7 +41,7 @@ class Common_lib {
         if (strtolower($el_type) == 'site') {
             $this->CI->data['el_html_tag_title'] = isset($title) ? $title : $this->CI->config->item('app_html_title');
 			
-			$this->CI->data['user_profile_image'] = isset($this->CI->session->userdata['sess_user']['id'])? $this->get_user_profile_img(): null;
+			//$this->CI->data['el_user_profile_pic'] = isset($this->CI->session->userdata['sess_user']['id'])? $this->get_user_profile_img(): null;
             $this->CI->data['el_html_tag_meta_keywords'] = isset($meta_keyword) ? $meta_keyword : $this->CI->config->item('app_meta_keywords');
             $this->CI->data['el_html_tag_meta_description'] = isset($meta_desc) ? $meta_desc : $this->CI->config->item('app_meta_description');
             $this->CI->data['el_html_tag_meta_author'] = isset($meta_author) ? $meta_author : $this->CI->config->item('app_meta_author');
@@ -52,7 +52,7 @@ class Common_lib {
         }
         if (strtolower($el_type) == 'admin') {
             $this->CI->data['el_html_tag_title'] = isset($title) ? $title : $this->CI->config->item('app_admin_html_title');
-			$this->CI->data['user_profile_image'] = isset($this->CI->session->userdata['sess_user']['id'])? $this->get_user_profile_img(): null;
+			//$this->CI->data['el_user_profile_pic'] = isset($this->CI->session->userdata['sess_user']['id'])? $this->get_user_profile_img(): null;
             $this->CI->data['el_html_head'] = $this->CI->load->view('admin/_layouts/elements/html_head', $this->CI->data, true);
             $this->CI->data['el_navbar'] = $this->CI->load->view('admin/_layouts/elements/navbar', $this->CI->data, true);            
             $this->CI->data['el_footer'] = $this->CI->load->view('admin/_layouts/elements/footer', $this->CI->data, true);
@@ -394,12 +394,9 @@ class Common_lib {
 	
 	/*Get User profile Image*/
 	function get_user_profile_img() {
-		$res = array();
-        $data = $this->CI->user_model->get_uploads('user', $this->CI->session->userdata['sess_user']['id'], NULL, 'profile_pic');
-		if(isset($data)){
-			$res = $data;
-		}
-		return $res;
+		//$res = array();
+        $data = $this->CI->user_model->get_user_profile_pic($this->CI->session->userdata['sess_user']['id']);
+		return $data[0]['user_profile_pic'];
     }
 
 }

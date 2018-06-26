@@ -17,8 +17,8 @@
 				<?php
 				$img_src = "";
 				$default_path = "assets/src/img/125x125.jpg";
-				if(isset($profile_pic) && sizeof($profile_pic)>0){					
-					$user_dp = "assets/uploads/user/profile_pic/".$profile_pic[0]['upload_file_name'];					
+				if(isset($profile_pic)){					
+					$user_dp = "assets/uploads/user/profile_pic/".$profile_pic;					
 					if (file_exists(FCPATH . $user_dp)) {
 						$img_src = $user_dp;
 					}else{
@@ -30,7 +30,7 @@
 				?>
 				<img style="width:150px; height: 150px;" src="<?php echo base_url($img_src);?>" alt="" class="img align-self-start mr-3 dp">
 				<?php if(isset($profile_pic) && sizeof($profile_pic)>0){ ?>
-					<div class="edit"><a href="<?php echo base_url($this->router->directory.'user/delete_profile_pic/'.$profile_pic[0]['id'].'/'.$profile_pic[0]['upload_file_name']);?>"><i class="fa fa-remove"></i> Remove</a></div>
+					<div class="edit"><a href="<?php echo base_url($this->router->directory.'user/delete_profile_pic');?>"><i class="fa fa-remove"></i> Remove</a></div>
 				<?php } ?>
 			</div>
 			<div class="col-md-9">

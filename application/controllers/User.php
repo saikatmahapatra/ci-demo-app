@@ -104,15 +104,14 @@ class User extends CI_Controller {
                     //'user_midname' => $this->input->post('user_midname'),
                     'user_lastname' => $this->input->post('user_lastname'),
                     'user_gender' => $this->input->post('user_gender'),
-                    'user_email' => $this->input->post('user_email'),
+                    'user_email' => strtolower($this->input->post('user_email')),
                     'user_dob' => $dob,
                     'user_role' => '3', //as per role table 1=Super Admin, 2=Admin 3=User (user)
                     'user_phone1' => $this->input->post('user_phone1'),
                     'user_password' => md5($this->input->post('user_password')),
-                    'user_registration_date' => date('Y-m-d H:i:s'),
                     'user_activation_key' => $activation_token,
                     'user_registration_ip' => $_SERVER['REMOTE_ADDR'],
-                        //'user_account_active' => 'Y'
+                    //'user_account_active' => 'Y'
                 );
                 $insert_id = $this->user_model->insert($postdata);
                 if ($insert_id) {

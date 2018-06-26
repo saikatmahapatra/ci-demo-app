@@ -28,8 +28,8 @@
 							<?php
 							$img_src = "";
 							$default_path = "assets/src/img/125x125.jpg";
-							if(isset($row['upload_file_name'])){					
-								$user_dp = "assets/uploads/user/profile_pic/".$row['upload_file_name'];					
+							if(isset($row['user_profile_pic'])){					
+								$user_dp = "assets/uploads/user/profile_pic/".$row['user_profile_pic'];					
 								if (file_exists(FCPATH . $user_dp)) {
 									$img_src = $user_dp;
 								}else{

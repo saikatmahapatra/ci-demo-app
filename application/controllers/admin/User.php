@@ -284,12 +284,11 @@ class User extends CI_Controller {
                     'user_firstname' => $this->input->post('user_firstname'),                    
                     'user_lastname' => $this->input->post('user_lastname'),
                     'user_gender' => $this->input->post('user_gender'),
-                    'user_email' => $this->input->post('user_email'),
+                    'user_email' => strtolower($this->input->post('user_email')),
                     'user_dob' => $dob,
                     'user_role' => $this->input->post('user_role'),
                     'user_phone1' => $this->input->post('user_phone1'),
                     'user_password' => md5($password),
-                    'user_registration_date' => date('Y-m-d H:i:s'),
                     'user_activation_key' => $activation_token,
                     'user_registration_ip' => $_SERVER['REMOTE_ADDR'],
                     'user_account_active' => 'Y'
@@ -617,7 +616,9 @@ class User extends CI_Controller {
 			$this->data['my_profile'] = TRUE;
 		}
         $rows = $this->user_model->get_rows($user_id);
-		$this->data['profile_pic'] = $this->user_model->get_uploads('user', $user_id, NULL, 'profile_pic');
+		//$this->data['profile_pic'] = $this->user_model->get_uploads('user', $user_id, NULL, 'profile_pic');
+		$res_pic = $this->user_model->get_user_profile_pic($user_id);
+		$this->data['profile_pic'] = $res_pic[0]['user_profile_pic'];
         $this->data['row'] = $rows['data_rows'];
 		$this->data['address'] = $this->user_model->get_user_address(NULL,$user_id,NULL);
 		$this->data['education'] = $this->user_model->get_user_education(NULL, $user_id);
@@ -1016,13 +1017,9 @@ class User extends CI_Controller {
         
 		$this->data['user_id'] = $this->sess_user_id;
 		
-		$res = array();
-		$res_upload = $this->user_model->get_uploads('user', $this->sess_user_id, NULL, 'profile_pic');
-		if(isset($res_upload)){
-			$this->data['profile_pic'] = $res_upload;
-		}else{
-			$this->data['profile_pic'] = $res;
-		}
+		$res_pic = $this->user_model->get_user_profile_pic($this->sess_user_id);
+		$this->data['profile_pic'] = $res_pic[0]['user_profile_pic'];
+		
         if ($this->input->post('form_action') == 'file_upload') {
             $this->upload_file();
         }
@@ -1070,14 +1067,20 @@ class User extends CI_Controller {
             $upload_result = $this->common_lib->upload_file('userfile', $upload_param);
             if (isset($upload_result['file_name']) && empty($upload_result['upload_error'])) {
                 $uploaded_file_name = $upload_result['file_name'];
-                $postdata = array(
+                /*$postdata = array(
                     'upload_object_name' => $upload_object_name,
                     'upload_object_id' => $upload_object_id,
                     'upload_document_type_name' => $upload_document_type_name,
                     'upload_file_name' => $uploaded_file_name,
                     'upload_mime_type' => $upload_result['file_type'],
                     'upload_by_user_id' => $this->sess_user_id
+                );*/
+				
+				$postdata = array(                    
+                    'user_profile_pic' => $uploaded_file_name
                 );
+				$where_array = array('id'=>$this->sess_user_id);
+				
 
                 //Check if already 1 file of same upload_document_type_name is uploaded, over ride it.
 				//If you do not want to override, want to keep multiple uploaded copy, 
@@ -1094,12 +1097,14 @@ class User extends CI_Controller {
                         $this->common_lib->unlink_file(array(FCPATH . $file_path));
                     }
                     // Now update table
-                    $update_upload = $this->user_model->update($postdata, array('id' => $uploads[0]['id']), 'uploads');
+                    //$update_upload = $this->user_model->update($postdata, array('id' => $uploads[0]['id']), 'uploads');
+                    $update_upload = $this->user_model->update($postdata, $where_array);
                     $this->session->set_flashdata('flash_message', '<i class="icon fa fa-check" aria-hidden="true"></i> File uploaded successfully.');
                     $this->session->set_flashdata('flash_message_css', 'alert-success');
                     redirect(current_url());
                 } else {
-                    $upload_insert_id = $this->user_model->insert($postdata, 'uploads');
+                    //$upload_insert_id = $this->user_model->insert($postdata, 'uploads');
+                    $update_upload = $this->user_model->update($postdata, $where_array);
                     $this->session->set_flashdata('flash_message', '<i class="icon fa fa-check" aria-hidden="true"></i> File uploaded successfully.');
                     $this->session->set_flashdata('flash_message_css', 'alert-success');
                     redirect(current_url());
@@ -1121,7 +1126,12 @@ class User extends CI_Controller {
 			$file_path = 'assets/uploads/user/profile_pic/'.$uploaded_file_name;
 			if (file_exists(FCPATH . $file_path)) {
 				$this->common_lib->unlink_file(array(FCPATH . $file_path));
-				$res = $this->user_model->delete(array('id'=>$uploaded_file_id),'uploads');
+				//$res = $this->user_model->delete(array('id'=>$uploaded_file_id),'uploads');
+				$postdata = array(                    
+                    'user_profile_pic' => NULL
+                );
+				$where_array = array('id'=>$this->sess_user_id);
+				$res = $this->user_model->update($postdata, $where_array);
 				if($res){
 					$this->session->set_flashdata('flash_message', 'Profile picture has been deleted.');
 					$this->session->set_flashdata('flash_message_css', 'alert-success');

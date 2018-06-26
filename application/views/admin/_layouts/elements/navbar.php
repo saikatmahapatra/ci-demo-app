@@ -28,8 +28,9 @@ $segment3 = $this->uri->segment(3);
 					<?php   
 						$img_src = "";
 						$default_path = "assets/dist/img/avatar_2x.png";
-						if(isset($user_profile_image) && sizeof($user_profile_image)>0){					
-							$user_dp = "assets/uploads/user/profile_pic/".$user_profile_image[0]['upload_file_name'];					
+						//print_r($el_user_profile_pic); die();
+						if(isset($this->session->userdata['sess_user']['user_profile_pic'])){					
+							$user_dp = "assets/uploads/user/profile_pic/".$this->session->userdata['sess_user']['user_profile_pic'];					
 							if (file_exists(FCPATH . $user_dp)) {
 								$img_src = $user_dp;
 							}else{

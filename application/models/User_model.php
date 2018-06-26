@@ -118,7 +118,7 @@ class User_model extends CI_Model {
     }
 
     function authenticate_user_depricated($user_email, $user_password) {
-        $this->db->select('t1.id,t1.user_email,t1.user_firstname,t1.user_lastname,t1.user_role,t1.user_image,t1.user_account_active,t1.user_archived,t2.role_name,t2.role_weight');
+        $this->db->select('t1.id,t1.user_email,t1.user_firstname,t1.user_lastname,t1.user_role,t1.user_profile_pic,t1.user_account_active,t1.user_archived,t2.role_name,t2.role_weight');
         $this->db->join('roles t2', 't1.user_role=t2.id');
         $this->db->where(array(
             't1.user_email' => $user_email,
@@ -139,7 +139,7 @@ class User_model extends CI_Model {
                 'user_firstname' => $row['user_firstname'],
                 'user_lastname' => $row['user_lastname'],
                 'user_email' => $row['user_email'],
-                'user_image' => $row['user_image'],
+                'user_profile_pic' => $row['user_profile_pic'],
             );
             $this->session->set_userdata('sess_user', $loggedin_data);
             return true;
@@ -154,7 +154,7 @@ class User_model extends CI_Model {
         $loggedin_data = array();
         $auth_result = array('status' => $login_status, 'message' => $message, 'data' => $loggedin_data);
 
-        $this->db->select('t1.id,t1.user_email,t1.user_firstname,t1.user_lastname,t1.user_role,t1.user_image,t1.user_account_active,t1.user_archived,t2.role_name,t2.role_weight');
+        $this->db->select('t1.id,t1.user_email,t1.user_firstname,t1.user_lastname,t1.user_role,t1.user_profile_pic,t1.user_account_active,t1.user_archived,t2.role_name,t2.role_weight');
 		$this->db->join('roles t2', 't1.user_role=t2.id');
         $this->db->where(array(
             't1.user_email' => $user_email,
@@ -185,7 +185,7 @@ class User_model extends CI_Model {
                     'user_firstname' => $row['user_firstname'],
                     'user_lastname' => $row['user_lastname'],
                     'user_email' => $row['user_email'],
-                    'user_image' => $row['user_image'],
+                    'user_profile_pic' => $row['user_profile_pic'],
                 );
                 $auth_result = array('status' => $login_status, 'message' => $message, 'data' => $loggedin_data);
                 return $auth_result;
@@ -392,21 +392,32 @@ class User_model extends CI_Model {
     }
 
 	function get_users($id = NULL, $limit = NULL, $offset = NULL) {
-        $this->db->select('t1.*,t2.role_name, t2.role_weight, t3.upload_file_name');
+        $this->db->select('t1.*,t2.role_name, t2.role_weight');
         if ($id) {
             $this->db->where('t1.id', $id);
         }
         $this->db->join('roles t2', 't1.user_role=t2.id', 'left');
-        $this->db->join('uploads t3', 't1.id=t3.upload_object_id', 'left');        
-		//$this->db->where('t3.upload_object_name', 'user');
         if ($limit) {
             $this->db->limit($limit, $offset);
         }
+		$this->db->order_by('t1.user_firstname');
         $query = $this->db->get('users t1');
         //echo $this->db->last_query();
         $num_rows = $query->num_rows();
         $result = $query->result_array();
         return array('num_rows' => $num_rows, 'data_rows' => $result);
+    }
+	
+	function get_user_profile_pic($id = NULL) {
+        $this->db->select('t1.user_profile_pic');
+        if ($id) {
+            $this->db->where('t1.id', $id);
+        }
+        $query = $this->db->get('users t1');
+        //echo $this->db->last_query();
+        $num_rows = $query->num_rows();
+        $result = $query->result_array();
+        return $result;
     }
 }
 

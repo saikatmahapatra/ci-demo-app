@@ -29,8 +29,8 @@
    <?php   
 	$img_src = "";
 	$default_path = "assets/dist/img/avatar_2x.png";
-	if(isset($profile_pic) && sizeof($profile_pic)>0){					
-		$user_dp = "assets/uploads/user/profile_pic/".$profile_pic[0]['upload_file_name'];					
+	if(isset($profile_pic)){					
+		$user_dp = "assets/uploads/user/profile_pic/".$profile_pic;					
 		if (file_exists(FCPATH . $user_dp)) {
 			$img_src = $user_dp;
 		}else{
