@@ -73,7 +73,7 @@ class Cms extends CI_Controller {
 		
 		$this->data['page_heading'] = 'Website CMS - Contents';
         $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'cms/index', $this->data, true);
-        $this->load->view($this->data['view_dir'].'_layouts/layout_authenticated', $this->data);
+        $this->load->view($this->data['view_dir'].'_layouts/layout_default', $this->data);
     }
 	
 	function index_ci_pagination() {
@@ -110,7 +110,7 @@ class Cms extends CI_Controller {
 		
 		$this->data['page_heading'] = 'Website Contents (CI Pagination Version)';
         $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'cms/index_ci_pagination', $this->data, true);
-        $this->load->view($this->data['view_dir'].'_layouts/layout_authenticated', $this->data);
+        $this->load->view($this->data['view_dir'].'_layouts/layout_default', $this->data);
     }
 
     function render_datatable() {
@@ -196,7 +196,7 @@ class Cms extends CI_Controller {
         }
 		$this->data['page_heading'] = 'Add Contents';
         $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'cms/add', $this->data, true);
-        $this->load->view($this->data['view_dir'].'_layouts/layout_authenticated', $this->data);
+        $this->load->view($this->data['view_dir'].'_layouts/layout_default', $this->data);
     }
 
     function edit() {
@@ -232,7 +232,7 @@ class Cms extends CI_Controller {
         $this->data['rows'] = $result_array['data_rows'];
 		$this->data['page_heading'] = 'Edit Contents';
         $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'cms/edit', $this->data, true);
-        $this->load->view($this->data['view_dir'].'_layouts/layout_authenticated', $this->data);
+        $this->load->view($this->data['view_dir'].'_layouts/layout_default', $this->data);
     }
 
     function delete() {

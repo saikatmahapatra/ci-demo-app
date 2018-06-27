@@ -67,7 +67,7 @@ class Product extends CI_Controller {
 		
 		$this->data['page_heading'] = 'Products';
         $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'product/index', $this->data, true);
-        $this->load->view($this->data['view_dir'].'_layouts/layout_authenticated', $this->data);
+        $this->load->view($this->data['view_dir'].'_layouts/layout_default', $this->data);
     }
 
     function render_datatable() {
@@ -189,7 +189,7 @@ class Product extends CI_Controller {
         }
 		$this->data['page_heading'] = 'Add Product';
         $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'product/add', $this->data, true);
-        $this->load->view($this->data['view_dir'].'_layouts/layout_authenticated', $this->data);
+        $this->load->view($this->data['view_dir'].'_layouts/layout_default', $this->data);
     }
 
     function edit() {
@@ -239,7 +239,7 @@ class Product extends CI_Controller {
         }
 		$this->data['page_heading'] = 'Edit Product';
         $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'product/edit', $this->data, true);
-        $this->load->view($this->data['view_dir'].'_layouts/layout_authenticated', $this->data);
+        $this->load->view($this->data['view_dir'].'_layouts/layout_default', $this->data);
     }
 
     function delete() {
