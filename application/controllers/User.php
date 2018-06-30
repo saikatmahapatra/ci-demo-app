@@ -188,14 +188,14 @@ class User extends CI_Controller {
             $act_res = $this->user_model->update($postdata, $where);
             if ($act_res) {
                 $this->session->set_flashdata('flash_message', 'Your account has been activated successfully');
-                redirect('users/login');
+                redirect($this->router->directory.'user/login');
             } else {
                 $this->session->set_flashdata('flash_message', 'Sorry ! Unable to activate your account');
-                redirect('users/login');
+                redirect($this->router->directory.'user/login');
             }
         } else {
             $this->session->set_flashdata('flash_message', 'No activation token match found for you');
-            redirect('users/login');
+            redirect($this->router->directory.'user/login');
         }
     }
 

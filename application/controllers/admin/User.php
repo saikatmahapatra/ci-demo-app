@@ -151,24 +151,25 @@ class User extends CI_Controller {
             $row[] = $result['user_email'];
             $row[] = $result['user_phone1'];
             $row[] = $result['role_name'];
-            $row[] = ($result['user_account_active'] == 'Y') ? '<span class="badge badge-success">Active</span>' : '<span class="badge badge-danger">Inactive</span>';
+            $row[] = ($result['user_account_active'] == 'Y') ? '<span data-user-id="'.$result['id'].'" class="account-status badge badge-success">Active</span>' : '<span data-user-id="'.$result['id'].'" class="account-status badge badge-danger">Inactive</span>';
             //add html for action
             $action_html = '';
 
 
-            $acc_status_text = ($result['user_account_active'] == 'Y') ? 'Deactivate' : 'Activate';
-            $acc_status_class = ($result['user_account_active'] == 'Y') ? 'btn-danger' : 'btn-success';
+            $acc_status_icon = ($result['user_account_active'] == 'Y') ? '<i class="fa fa-toggle-on" aria-hidden="true"></i>' : '<i class="fa fa-toggle-off" aria-hidden="true"></i>';
+            $acc_status_text = ($result['user_account_active'] == 'Y') ? 'Deactivate Account' : 'Activate Account';
+            $acc_status_class = ($result['user_account_active'] == 'Y') ? 'text-info' : 'text-info';
             $acc_status_set = ($result['user_account_active'] == 'Y') ? 'N' : 'Y';
-            $action_html.= anchor(base_url($this->router->directory.'user/profile/' . $result['id']), 'Profile', array(
-                'class' => 'btn btn-sm btn-secondary',
+            $action_html.= anchor(base_url($this->router->directory.'user/profile/' . $result['id']), '<i class="fa fa-eye" aria-hidden="true"></i>', array(
+                'class' => 'text-secondary mr-1',
                 'data-toggle' => 'tooltip',
-                'data-original-title' => 'Profile',
-                'title' => 'Profile',
+                'data-original-title' => 'View Profile',
+                'title' => 'View Profile',
             ));
 			$action_html.='&nbsp;';
 			if($result['role_weight'] <= 90){
-				$action_html.= anchor(base_url($this->router->directory.'user/manage#'), $acc_status_text, array(
-					'class' => 'change_account_status btn btn-sm ' . $acc_status_class,
+				$action_html.= anchor(base_url($this->router->directory.'user/manage'), $acc_status_icon, array(
+					'class' => 'change_account_status ' . $acc_status_class,
 					'data-toggle' => 'tooltip',
 					'data-original-title' => $acc_status_text,
 					'title' => $acc_status_text,
@@ -368,14 +369,14 @@ class User extends CI_Controller {
             $act_res = $this->user_model->update($postdata, $where);
             if ($act_res) {
                 $this->session->set_flashdata('flash_message', 'Your account has been activated successfully');
-                redirect('users/admin/login');
+                redirect($this->router->directory.'user/login');
             } else {
                 $this->session->set_flashdata('flash_message', 'Sorry ! Unable to activate your account');
-                redirect('users/admin/login');
+                redirect($this->router->directory.'user/login');
             }
         } else {
             $this->session->set_flashdata('flash_message', 'No activation token match found for you');
-            redirect('users/admin/login');
+            redirect($this->router->directory.'user/login');
         }
     }
 

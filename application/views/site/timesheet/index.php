@@ -10,7 +10,7 @@
 <div class="row">
 
 
-    <div class="col-md-4">		
+    <div class="col-md-3">		
 		<?php echo $cal; ?>				
 		<?php echo form_error('selected_date'); ?>
 		<div class="mt-3 small">
@@ -33,7 +33,7 @@
 	
 	
 	
-	<div class="col-md-8">		
+	<div class="col-md-9">		
 		<nav>
 			<div class="nav nav-tabs ci-nav-tab" id="nav-tab" role="tablist">
 				<a class="nav-item nav-link active" id="nav-add-tab" data-toggle="tab" href="#nav-add" role="tab" aria-controls="nav-add" aria-selected="true">Timesheet Entry</a>

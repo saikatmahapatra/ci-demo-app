@@ -1,7 +1,13 @@
-console.log("Timesheet Loaded...");
+/**
+ * ------------------------------------------------------------------------------
+ * Controller Specific DOM Interaction (Ready/Load, Click, Hover, Change)
+ * ------------------------------------------------------------------------------
+ */
 var selectedDate = [];
-
-$(function(){	
+var table;
+$(domReady);
+function domReady(){
+	console.log("Timesheet Loaded...");
 	var selected_date = $('input[name="selected_date"]').val();
 	if(selected_date){
 		var selected_date_array = selected_date.split(',');
@@ -27,8 +33,7 @@ $(function(){
 	
 	//Render Data Table
 	renderDataTable();
-});
-
+}
 $(".allowed_m .day").on("click",function(e){
 	console.log(e);
 	var day = $(this).text();
@@ -62,12 +67,26 @@ $("#clear_selected_days").on("click",function(e){
 	$(".day").removeClass("selected");
 });
 
+
+
+
+
+
+
+
+
+
+/**
+ * ------------------------------------------------------------------------------
+ * Controller Specific JS Function
+ * ------------------------------------------------------------------------------
+ */
 function get_timesheet_stat(){
-	var XHR = new Ajax();
-	XHR.type ='POST';
-	XHR.url = SITE_URL+ROUTER_DIRECTORY+ROUTER_CLASS+'/timesheet_stats';
-	XHR.data = {via: 'ajax'};
-	var promise = XHR.init();		
+	var xhr = new Ajax();
+	xhr.type ='POST';
+	xhr.url = SITE_URL+ROUTER_DIRECTORY+ROUTER_CLASS+'/timesheet_stats';
+	xhr.data = {via: 'ajax'};
+	var promise = xhr.init();		
 	promise.done(function(response){
 		console.log(r=response.data.stat_data);
 		if(response.data.stat_data.total_days != 'undefined'){
@@ -99,7 +118,7 @@ function get_timesheet_stat(){
 }
 
 function renderDataTable(){
-	this.table = $('#timesheet-datatable').DataTable({
+	table = $('#timesheet-datatable').DataTable({
 		/*dom: 'Bfrtip',
 		buttons: [
 			'copy', 'csv', 'excel', 'pdf', 'print'
