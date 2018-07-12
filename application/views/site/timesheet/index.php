@@ -16,7 +16,7 @@
 		<div class="mt-3 small">
 			<div class="d-inline-block"><span class="i-today pr-2 pl-2 m-1 text-white"></span>Today</div>
 			<div class="d-inline-block"><span class="i-selected pr-2 pl-2 m-1"></span>Selected</div>
-			<div class="d-inline-block"><span class="i-has-data pr-2 pl-2 m-1"></span>Task Filled</div>
+			<div class="d-inline-block"><span class="i-has-data pr-2 pl-2 m-1"></span>Task Logged</div>
 			<div class="d-inline-block"><span class="i-leave pr-2 pl-2 m-1"></span>Leave</div>
 			<div class="d-inline-block"><span class="i-holiday pr-2 pl-2 m-1"></span>Holiday</div>
 		</div>
@@ -36,9 +36,9 @@
 	<div class="col-md-9">		
 		<nav>
 			<div class="nav nav-tabs ci-nav-tab" id="nav-tab" role="tablist">
-				<a class="nav-item nav-link active" id="nav-add-tab" data-toggle="tab" href="#nav-add" role="tab" aria-controls="nav-add" aria-selected="true">Timesheet Entry</a>
+				<a class="nav-item nav-link active" id="nav-add-tab" data-toggle="tab" href="#nav-add" role="tab" aria-controls="nav-add" aria-selected="true">Log Tasks</a>
 				
-				<a class="nav-item nav-link" id="nav-list-tab" data-toggle="tab" href="#nav-list" role="tab" aria-controls="nav-list" aria-selected="false">Tasks Filled</a>
+				<a class="nav-item nav-link" id="nav-list-tab" data-toggle="tab" href="#nav-list" role="tab" aria-controls="nav-list" aria-selected="false">View Logged Tasks</a>
 			</div>
 		</nav>
 		
@@ -66,7 +66,7 @@
 				
 			<div class="form-row">
 				<div class="form-group col-md-4">
-				  <label for="project_id" class="">Projects <span class="required">*</span></label>
+				  <label for="project_id" class="bmd-label-floating">Projects <span class="required">*</span></label>
 					<?php
 					echo form_dropdown('project_id', $project_arr, set_value('project_id'), array(
 						'class' => 'form-control',
@@ -76,7 +76,7 @@
 				</div>
 						
 				<div class="form-group col-md-4">
-				  <label for="activity_id" class="">Activity <span class="required">*</span></label>
+				  <label for="activity_id" class="bmd-label-floating">Activity <span class="required">*</span></label>
 					<?php
 					echo form_dropdown('activity_id', $task_task_activity_type_array, set_value('activity_id'), array(
 						'class' => 'form-control',
@@ -86,7 +86,7 @@
 				</div>
 					
 				<div class="form-group col-md-4">
-					<label for="timesheet_hours" class="">Hours <span class="required">*</span></label>		
+					<label for="timesheet_hours" class="bmd-label-floating">Hours <span class="required">*</span></label>		
 					<?php					
 					echo form_dropdown('timesheet_hours', $timesheet_hours, set_value('timesheet_hours'), array(
 						'class' => 'form-control',
@@ -98,7 +98,7 @@
 			 
 			
 			<div class="form-group">
-			<label for="timesheet_description" class="">Description <span class="required">*</span></label>
+			<label for="timesheet_description" class="bmd-label-floating">Description <span class="required">*</span></label>
 			<?php
 			echo form_textarea(array(
 				'name' => 'timesheet_description',
@@ -107,7 +107,6 @@
 				'class' => 'form-control',
 				'rows' => '2',
 				'cols' => '4',
-				'placeholder' => 'Write some short description...(200 characters)',
 				'maxlength' => '200'
 			));
 			?>
@@ -123,13 +122,16 @@
 				<div class="table-responsive">
 					<table id="timesheet-datatable" class="table table-sm w-100">
 						<thead>
-							<tr>
+							<!--<tr>
 								<th scope="col">Date</th>
 								<th scope="col">Project</th>
 								<th scope="col">Activity</th>
 								<th scope="col">Hours</th>
 								<th scope="col">Status</th>
 								<th scope="col">Action</th>
+							</tr>-->
+							<tr>
+								<th scope="col">Date & Tasks</th>
 							</tr>
 						</thead>
 						<tbody></tbody>

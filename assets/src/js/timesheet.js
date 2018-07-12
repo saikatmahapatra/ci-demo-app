@@ -1,13 +1,10 @@
-/**
- * ------------------------------------------------------------------------------
- * Controller Specific DOM Interaction (Ready/Load, Click, Hover, Change)
- * ------------------------------------------------------------------------------
- */
+console.log("Timesheet Loaded...");
 var selectedDate = [];
-var table;
-$(domReady);
-function domReady(){
-	console.log("Timesheet Loaded...");
+var splitted_uri;
+var month = '';
+var year = '';
+
+$(function(){	
 	var selected_date = $('input[name="selected_date"]').val();
 	if(selected_date){
 		var selected_date_array = selected_date.split(',');
@@ -28,12 +25,22 @@ function domReady(){
 		}
 	}
 	
+	splitted_uri = window.location.href.split('timesheet/index/');
+	if(splitted_uri[1] != undefined){
+		var arr_month_year = splitted_uri[1].split('/');
+		if(arr_month_year){
+			month = arr_month_year[1];
+			year = arr_month_year[0];
+		}
+	}
+	console.log(month,year);
 	//Load Timesheet Data On Page Load
 	get_timesheet_stat();
 	
 	//Render Data Table
 	renderDataTable();
-}
+});
+
 $(".allowed_m .day").on("click",function(e){
 	console.log(e);
 	var day = $(this).text();
@@ -67,28 +74,18 @@ $("#clear_selected_days").on("click",function(e){
 	$(".day").removeClass("selected");
 });
 
-
-
-
-
-
-
-
-
-
-/**
- * ------------------------------------------------------------------------------
- * Controller Specific JS Function
- * ------------------------------------------------------------------------------
- */
 function get_timesheet_stat(){
 	var xhr = new Ajax();
 	xhr.type ='POST';
 	xhr.url = SITE_URL+ROUTER_DIRECTORY+ROUTER_CLASS+'/timesheet_stats';
-	xhr.data = {via: 'ajax'};
+	xhr.beforeSend = function(){
+		showAjaxLoader();
+	};
+	xhr.data = {via: 'ajax', month:month, year: year};
 	var promise = xhr.init();		
 	promise.done(function(response){
 		console.log(r=response.data.stat_data);
+		hideAjaxLoader();
 		if(response.data.stat_data.total_days != 'undefined'){
 			$('#total_days').html(response.data.stat_data.total_days);		
 		}
@@ -118,18 +115,20 @@ function get_timesheet_stat(){
 }
 
 function renderDataTable(){
-	table = $('#timesheet-datatable').DataTable({
+	this.table = $('#timesheet-datatable').DataTable({
 		/*dom: 'Bfrtip',
 		buttons: [
 			'copy', 'csv', 'excel', 'pdf', 'print'
 		],
 		iDisplayLength: 10,*/
+		iDisplayLength: 25,
 		processing: true, //Feature control the processing indicator.
 		serverSide: true, //Feature control DataTables' server-side processing mode.
 		order: [], //Initial no order.
 		// Load data for the table's content from an Ajax source
 		ajax: {
 			url: SITE_URL+ROUTER_DIRECTORY+ROUTER_CLASS+'/render_datatable',
+			data: {year:year, month: month}
 		},
 		//Set column definition initialisation properties.
 		columnDefs: [

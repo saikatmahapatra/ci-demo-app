@@ -77,13 +77,11 @@ class Timesheet extends CI_Controller {
 		$template.='{cal_cell_no_content}{day}{/cal_cell_no_content}';
 		$template.='{cal_cell_no_content_today}<div class="highlight">{day}</div>{/cal_cell_no_content_today}';
 		$template.='{cal_cell_blank}&nbsp;{/cal_cell_blank}';
-		$template.='{cal_cell_end}</td>{/cal_cell_end}';
-		
-		$template.='{cal_row_end}</tr>{/cal_row_end}';
-		
-		
+		$template.='{cal_cell_end}</td>{/cal_cell_end}';		
+		$template.='{cal_row_end}</tr>{/cal_row_end}';	
 		
 		$template.='{table_close}</table>{/table_close}';
+		
 		$prefs = array (
                'start_day'    => 'monday',
                'month_type'   => 'short',
@@ -93,22 +91,20 @@ class Timesheet extends CI_Controller {
              );
 		$this->load->library('calendar',$prefs);
 		
-		
-		
 		$this->data['entry_for'] = date('Y/m/d');
 		
 		
 		
 		$data = array();
 		$this->data['cal'] = $this->calendar->generate($year,$month,$data);
-		$this->data['page_heading'] = 'Timesheet';
+		$month_name = date('M', mktime(0, 0, 0, $month, 10));		
+		$this->data['page_heading'] = 'Timesheet : '.$month_name.' '.$year;
 		
 		$this->add();
 		
         $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'timesheet/index', $this->data, true);
         $this->load->view($this->data['view_dir'].'_layouts/layout_default', $this->data);
     }
-	
 	
 	function add() {
         //Check user permission by permission name mapped to db
@@ -157,15 +153,10 @@ class Timesheet extends CI_Controller {
             return false;
         }
     }
-	
-	function get_uri_seg($no){
-		return $this->uri->segment($no);
-	}
-	
+		
 	function timesheet_stats(){		
-		$year = $this->uri->segment(3) ? $this->uri->segment(3) : date('Y');
-		$month = $this->uri->segment(4) ? $this->uri->segment(4) : date('m');
-		//die($this->get_uri_seg(4));
+		$year = $this->input->get_post('year') ? $this->input->get_post('year') : date('Y');
+		$month = $this->input->get_post('month') ? $this->input->get_post('month') : date('m');		
 		$response = array(
             'status' => 'init',
             'message' => '',
@@ -195,49 +186,57 @@ class Timesheet extends CI_Controller {
 		}
 	}
 	
-	
 	function render_datatable() {
+		$year = $this->input->get_post('year') ? $this->input->get_post('year') : date('Y');
+		$month = $this->input->get_post('month') ? $this->input->get_post('month') : date('m');	
         //Total rows - Refer to model method definition
-        $result_array = $this->timesheet_model->get_rows();
+        $result_array = $this->timesheet_model->get_rows(NULL, NULL, NULL, FALSE, FALSE, TRUE, $year, $month);
         $total_rows = $result_array['num_rows'];
 
         // Total filtered rows - check without limit query. Refer to model method definition
-        $result_array = $this->timesheet_model->get_rows(NULL, NULL, NULL, TRUE, FALSE);
+        $result_array = $this->timesheet_model->get_rows(NULL, NULL, NULL, TRUE, FALSE, TRUE, $year, $month);
         $total_filtered = $result_array['num_rows'];
 
         // Data Rows - Refer to model method definition
-        $result_array = $this->timesheet_model->get_rows(NULL, NULL, NULL, TRUE);
+        $result_array = $this->timesheet_model->get_rows(NULL, NULL, NULL, TRUE, TRUE, TRUE, $year, $month);
         $data_rows = $result_array['data_rows'];
         $data = array();
         $no = $_REQUEST['start'];
         foreach ($data_rows as $result) {
             $no++;
             $row = array();
-            $row[] = date('d/m/Y',strtotime($result['timesheet_date']));
-            $row[] = $result['project_name'];
-            $row[] = $result['task_activity_name'];
-            $row[] = $result['timesheet_hours'];
-            $row[] = $result['timesheet_review_status'];
+            //$row[] = date('d/m/Y',strtotime($result['timesheet_date']));
+            //$row[] = $result['project_name'];
+            //$row[] = $result['task_activity_name'];
+            //$row[] = $result['timesheet_hours'];
+            //$row[] = $result['timesheet_review_status'];
+			
+			$html = '<div class="font-weight-bold">'.date('d/m/Y',strtotime($result['timesheet_date'])).' <span class="float-right">'.$result['timesheet_hours'].' hrs</span></div>';			
+			$html.= '<div class="small">'.$result['project_name'].'<span class="float-right">'.$result['task_activity_name'].'</span></div>';			
+			
             
             //add html for action
-            $action_html = '';
-            $action_html.= anchor(base_url($this->router->directory.'timesheet/edit/' . $result['id']), 'Edit', array(
-                'class' => '',
+            $action_html = '<span class="float-right">';
+            /*$action_html.= anchor(base_url($this->router->directory.'timesheet/edit/' . $result['id']), '<i class="fa fa-edit" aria-hidden="true"></i>', array(
+                'class' => 'text-dark mr-2',
                 'data-toggle' => 'tooltip',
                 'data-original-title' => 'Edit',
                 'title' => 'Edit',
-            ));
-            $action_html.='&nbsp;';
-            $action_html.= anchor(base_url($this->router->directory.'timesheet/delete/' . $result['id']), 'Delete', array(
-                'class' => 'btn-delete',
+            ));*/            
+            $action_html.= anchor(base_url($this->router->directory.'timesheet/delete/' . $result['id']), '<i class="fa fa-trash" aria-hidden="true"></i>', array(
+                'class' => 'text-danger btn-delete ml-2',
 				'data-confirmation'=>false,
 				'data-confirmation-message'=>'Are you sure, you want to delete this?',
                 'data-toggle' => 'tooltip',
                 'data-original-title' => 'Delete',
                 'title' => 'Delete',
             ));
+			$action_html.='</span>';
+			$html.= '<div>'.$result['timesheet_description'].' '.$action_html.'</div>';		
+			//$html.=$action_html;
 
-            $row[] = $action_html;
+            //$row[] = $action_html;
+			$row[] = $html;
             $data[] = $row;
         }
 
