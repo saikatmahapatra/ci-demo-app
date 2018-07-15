@@ -1,5 +1,5 @@
 RewriteEngine On
-RewriteBase /sample-code-igniter-project/
+RewriteBase /sample-codeigniter-app/
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond $1 !^(index\.php)
