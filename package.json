@@ -1,8 +1,8 @@
 {
-  "name": "CI_Demo_App",
+  "name": "sample-code-igniter-project",
   "title": "CodeIgniter Sample Project",
   "version": "3.1.4",
-  "homepage": "http://192.168.1.100:8009/CI_Demo_App",
+  "homepage": "http://192.168.1.100:8009/sample-code-igniter-project",
   "author": "Saikat Mahapatra",
   "license": {
     "type": "MIT",
@@ -33,7 +33,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/saikatmahapatra/ci-demo-app.git"
+    "url": "https://github.com/saikatmahapatra/sample-code-igniter-project.git"
   },
   "dependencies": {
     "bootstrap": "^4.1.0",
