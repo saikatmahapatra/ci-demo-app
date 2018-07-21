@@ -2,7 +2,7 @@
   "name": "sample-codeigniter-app",
   "title": "CodeIgniter Sample Project",
   "version": "3.1.4",
-  "homepage": "http://192.168.1.100:8009/sample-codeigniter-app",
+  "homepage": "http://192.168.1.100:8009/codeigniter-sample-app",
   "author": "Saikat Mahapatra",
   "license": {
     "type": "MIT",
@@ -33,7 +33,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/saikatmahapatra/sample-codeigniter-app.git"
+    "url": "https://github.com/saikatmahapatra/codeigniter-sample-app.git"
   },
   "dependencies": {
     "bootstrap": "^4.1.0",
