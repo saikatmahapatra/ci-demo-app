@@ -47,6 +47,6 @@
     "font-awesome": "^4.7.0",
     "jquery": "^3.3.1",
     "popper.js": "^1.14.3",
-	"select2-bootstrap-theme": "0.1.0-beta.10"
+    "select2-bootstrap-theme": "0.1.0-beta.10"
   }
 }
