@@ -1,18 +1,15 @@
 <!DOCTYPE html>
     <head>
         <?php echo $el_html_head; ?>
-        <!-- Bootstrap Core CSS -->
-        <link href="<?php echo base_url('node_modules/bootstrap/dist/css/bootstrap.min.css');?>" rel="stylesheet">
+        <!-- Customized Boostrap Theme CSS -->
+        <link href="<?php echo base_url('assets/dist/css/styles.css');?>" rel="stylesheet">
         <!-- Font Awesome Icons -->        
         <link href="<?php echo base_url('node_modules/font-awesome/css/font-awesome.min.css');?>" rel="stylesheet">
 		
 		<!-- jQuery DataTables Core CSS -->    
 		<link href="<?php //echo base_url('node_modules/datatables.net-dt/css/jquery.dataTables.css');?>" rel="stylesheet">
 		<!-- Bootstrap 4 DataTables CSS -->    
-		<link href="<?php echo base_url('node_modules/datatables.net-bs4/css/dataTables.bootstrap4.css');?>" rel="stylesheet">		
-        
-        <!-- Custom CSS -->
-        <link href="<?php echo base_url('assets/dist/css/styles.min.css');?>" rel="stylesheet">
+		<link href="<?php echo base_url('node_modules/datatables.net-bs4/css/dataTables.bootstrap4.css');?>" rel="stylesheet">
         
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
