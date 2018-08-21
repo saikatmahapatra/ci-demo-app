@@ -1,25 +1,19 @@
-/* Site Style*/
+// This files are essential for the theme
+@import 'fonts';
+@import 'vars';
+@import 'customize-bootstrap';
+@import 'node_modules/bootstrap/scss/bootstrap';
 
-@import "./variables.less";
+
 body {
     margin-top: 5rem;
     margin-bottom: 3rem;
-	font-size: 0.875rem;
-}
-
-h1{
-    font-size: 2rem;
-}
-
-h2{
-    font-size: 1.25rem;
 }
 
 h1.page-header{
 	font-size: 1.5rem;
 }
 
-/*Scroll up*/
 .scrollup {
     width: 40px;
     height: 40px;
@@ -28,18 +22,22 @@ h1.page-header{
     bottom: 50px;
     right: 5px;
     display: none;
-    /*text-indent: -9999px;*/
 }
-.framework-info{
-    font-size: 11px;
-}
-/*Scroll up end*/
+
 .validation-error{
-    color: @red;
-    font-size: 13px;
+    color: $validation-error-color;
+	font-size: .75rem;
 }
+
+.tnc-content{
+	font-size: .75rem;
+	h1,h2{
+		font-size: 1rem;
+	}
+}
+
 .required{
-	color: @red;
+	color: $mandatory_field_star-color;
 	font-weight:bold;
 }
 
@@ -55,7 +53,7 @@ h1.page-header{
 {
     float: none;
     width: 100%;
-    background-color: @white;
+    background-color: $white;
     margin-bottom: 10px;
 }
 .item.list-group-item:nth-of-type(odd):hover,.item.list-group-item:hover
@@ -99,21 +97,6 @@ select.form-control.dob-inline{
     display: inline !important;
     width: auto;
 }
-.text-bold{
-	font-weight: bold;
-}
-.text-upper{
- text-transform: uppercase;
-}
-/*.row.cart-item{
-	margin-bottom:20px;
-	padding-bottom:10px;
-	border-bottom: 1px solid #f5f5f5;
-}*/
-
-
-
-/*Profile*/
 .dp
 {
     border:10px solid #eee;
@@ -143,168 +126,80 @@ select.form-control.dob-inline{
 }
 
 
-/* Help Info */
-.info-help{
-	border: 1px solid #666;
-	background-color: #f2f2f2;
-	border-radius: 0px;
-	padding: 10px;
-	font-size: 11px;
-}
-
-.tnc-content{
-	font-size: 11px;
-	h1,h2{
-		font-size: 18px;
-	}
-}
-
-.bg-brand {
-    background: linear-gradient(to bottom, @brand-light, @brand-dark);
-    background: -moz-linear-gradient(top, @brand-light, @brand-dark);
-    background: -ms-linear-gradient(top, @brand-light, @brand-dark);
-    background: -o-linear-gradient(top, @brand-light, @brand-dark);
-    background: -webkit-linear-gradient(top, @brand-light, @brand-dark);
-    background: -webkit-gradient(linear, left top, left bottom, from(@brand-light), to(@brand-dark));
-}
-
-.btn-brand{
-	background-color: @brand-light;
-    border-color: @brand-light;
-	&:hover{
-		background-color: @brand-dark;
-		border-color: @brand-dark;
-	}
-	&:active{
-		background-color: @brand-dark;
-		border-color: @brand-dark;
-	}
-}
-
-.nav-item.active {
-    font-weight: bold;	
-}
-
-&.bg-purple, &.bg-blue, &.bg-red, &.bg-orange, &.bg-green {
-    color: @white;
-  }
-  
-  &.bg-purple {
-    background: @color_purple;
-
-		&:hover {
-			background: darken(@color_purple, 10%);
-		}		
-  }
-  
-  &.bg-red {
-    background: @color_red;
-
-		&:hover {
-			background: darken(@color_red, 10%);
-		}		
-  }
-  
-  &.bg-green {
-    background: @color_green;
-
-		&:hover {
-			background: darken(@color_green, 10%);
-		}		
-  }
-  
-  &.bg-blue {
-    background: @color_blue;
-
-		&:hover {
-			background: darken(@color_blue, 10%);
-		}	
-  }
-  
-  &.bg-orange {
-    background: @color_orange;
-
-		&:hover {
-			background: darken(@color_orange, 10%);
-		}	
-  }
-  
-  
-  /*CI Calendar*/
 .ci-calendar{
-	border:5px solid @calendar-border;
+	border:5px solid $calendar-border;
 	margin-top: 15px;
 	
 	th{
-		background:@color_blue;
+		background:$color_blue;
 		font-size:1rem;
-		color:@white;
+		color:$white;
 		vertical-align: center !important;
 		text-align: center;
 	}
 	
 	tr.wk_nm{
-		background:@calendar-week;
-		color:@white;
+		background:$calendar-week;
+		color:$white;
 		font-weight:bold;
 	}
 	
 	td{
 		text-align:center;
-		border:1px solid @calendar-grid-border;
+		border:1px solid $calendar-grid-border;
 		vertical-align: center !important;		
 	}
 	.allowed_m td.day{
 		cursor:pointer;		
 	}
 	.highlight{
-		background:@today-highlight;
-		color:@white;
+		background:$today-highlight;
+		color:$white;
 	}	
 	.prevcell a,
 	.nextcell a{
-		color: @white !important;
+		color: $white !important;
 		text-decoration:none !important;
 	}
 	
 	.selected{
-		background:@day_selected !important;
+		background:$day_selected !important;
 	}
 	
 	.holiday{
-		background:@holiday;
+		background:$holiday;
 	}
 	
 	.leave{
-		background:@leave;
+		background:$leave;
 	}
 	
 	.filled{
-		background:@has-data;
+		background:$has-data;
 	}
 	
 }/*end .ci-calendar*/
 
 /*Calendar Indicator*/
 .i-today{
-	background-color:@today-highlight;
+	background-color:$today-highlight;
 }	
 .i-selected{
-	background-color:@day_selected;
+	background-color:$day_selected;
 }
 .i-leave{
-	background-color:@leave;
+	background-color:$leave;
 }
 .i-holiday{
-	background-color:@holiday;
+	background-color:$holiday;
 }
 .i-has-data{
-	background-color:@has-data;
+	background-color:$has-data;
 }
 .disabled_m{
 	opacity: 0.5;
 	cursor: default !important;
-	background: @gray-lightest;
+	background: $gray-lightest;
 }
 
 /*nav tab*/
@@ -323,8 +218,8 @@ select.form-control.dob-inline{
 		}
 	}	
 	.nav-link.active{
-		border-color: transparent transparent @color_blue;
-		border-bottom: 2px solid @color_blue !important;
+		border-color: transparent transparent $color_blue;
+		border-bottom: 2px solid $color_blue !important;
 	}	
 }
 

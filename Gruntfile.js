@@ -5,11 +5,11 @@ module.exports = function (grunt) { // jshint ignore:line
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     watch: {
-      less: {
+      /*less: {
         // Compiles less files upon saving
         files: ['assets/src/less/*.less'],
         tasks: ['less:development', 'less:production', 'notify:less']
-      },
+      },*/
 	  sass : {        
         files: ['assets/src/sass/*.scss'],
         tasks: ['sass','notify:sass']
@@ -299,7 +299,7 @@ module.exports = function (grunt) { // jshint ignore:line
   // JS task
   grunt.registerTask('js', ['copy', 'concat', 'uglify']);
   // CSS Task
-  grunt.registerTask('css', ['less:development', 'less:production', 'image', 'sass','postcss']);
+  grunt.registerTask('css', ['image', 'sass','postcss']);
 
   // The default task (running 'grunt' in console) is 'watch'
   grunt.registerTask('default', ['watch']);
