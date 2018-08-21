@@ -16,15 +16,6 @@ $white: #FFF;
 // Brown : #795548
 // Purple: #673AB7
 
-
-//microsoft metro menu color
-$color_purple: #5133AB;
-$color_red: #AC193D;
-$color_orange: #DC572E;
-$color_green: #00A600;
-$color_blue: #2672EC;
-
-//Other color
 $black: #000;
 $gray-lightest: lighten($black, 97.25%);
 $gray-lighter: lighten($black, 93.5%);
@@ -34,6 +25,12 @@ $gray-dark: lighten($black, 20%);
 $gray-darker: lighten($black, 13.5%);
 $red: #ff0000;
 
+//microsoft metro menu color
+$color_purple: #5133AB;
+$color_red: #AC193D;
+$color_orange: #DC572E;
+$color_green: #00A600;
+$color_blue: #2672EC;
 
 //Override primary color (Nav, Button, Link)
 $brand-color: $color_purple;

@@ -82,7 +82,7 @@
   <div class="tab-pane fade show active" id="nav-basic" role="tabpanel" aria-labelledby="nav-basic-tab">
 	<div class="row mt-3">
 		<div class="col-md-12">
-        <a class="btn btn-info btn-sm" href="<?php echo base_url($this->router->directory.'user/edit_profile');?>"><i class="fa fa-edit" aria-hidden="true"></i> Edit</a>
+        <a class="btn btn-primary btn-sm" href="<?php echo base_url($this->router->directory.'user/edit_profile');?>"><i class="fa fa-edit" aria-hidden="true"></i> Edit</a>
         <!--<h6>Basic Info</h6><hr>-->
         <div class="row">
             <div class="col-md-2">Name</div>
@@ -128,7 +128,7 @@
   <div class="tab-pane fade" id="nav-address" role="tabpanel" aria-labelledby="nav-address-tab">
 	<div class="row mt-3">
 		<div class="col-md-12">
-		<a class="btn btn-success btn-sm" href="<?php echo base_url($this->router->directory.'user/add_address');?>"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add New</a>
+		<a class="btn btn-primary btn-sm" href="<?php echo base_url($this->router->directory.'user/add_address');?>"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add New</a>
 			<!--<h6>Communication Address</h6><hr>-->
 				<?php if(isset($address)){
 					foreach($address as $key=>$addr){
@@ -165,7 +165,7 @@
   <div class="tab-pane fade" id="nav-education" role="tabpanel" aria-labelledby="nav-education-tab">
 	<div class="row mt-3">
 		<div class="col-md-12">
-			<a class="btn btn-success btn-sm" href="<?php echo base_url($this->router->directory.'user/add_education');?>"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add New</a>
+			<a class="btn btn-primary btn-sm" href="<?php echo base_url($this->router->directory.'user/add_education');?>"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add New</a>
 			<!--<h6>Educational Qualification</h6><hr>-->
 				<table class="table table-sm mt-1">
 					<thead>
@@ -207,7 +207,7 @@
   <div class="tab-pane fade" id="nav-exp" role="tabpanel" aria-labelledby="nav-exp-tab">
 	<div class="row mt-3">
 		<div class="col-md-12">
-		<a class="btn btn-success btn-sm" href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add New</a>
+		<a class="btn btn-primary btn-sm" href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add New</a>
 		</div>
 	</div>
   </div><!--/#nav-exp-->

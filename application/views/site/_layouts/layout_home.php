@@ -4,7 +4,7 @@
         <!-- Customized Boostrap Theme CSS -->
         <link href="<?php echo base_url('assets/dist/css/styles.css');?>" rel="stylesheet">
         <!-- Font Awesome Icons -->        
-        <link href="<?php echo base_url('node_modules/font-awesome/css/font-awesome.min.css');?>" rel="stylesheet">
+        <link href="<?php echo base_url('assets/vendors/font-awesome/css/font-awesome.min.css');?>" rel="stylesheet">
 		
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -44,11 +44,11 @@
 	
 		<!-- jQuery -->    
         <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="<?php echo base_url('node_modules/jquery/dist/jquery.min.js'); ?>" type="text/javascript"><\/script>')</script>
+        <script>window.jQuery || document.write('<script src="<?php echo base_url('assets/vendors/jquery/dist/jquery.min.js'); ?>" type="text/javascript"><\/script>')</script>
         <!-- Bootstrap dependency popper.js -->
-        <script src="<?php echo base_url('node_modules/popper.js/dist/umd/popper.min.js'); ?>"></script>
+        <script src="<?php echo base_url('assets/vendors/popper.js/dist/umd/popper.min.js'); ?>"></script>
         <!-- Bootstrap Core JavaScript -->
-        <script src="<?php echo base_url('node_modules/bootstrap/dist/js/bootstrap.min.js'); ?>"></script>               
+        <script src="<?php echo base_url('assets/vendors/bootstrap/dist/js/bootstrap.min.js'); ?>"></script>               
         	
         <!--Application Specific JS Loading Through Controllers-->
         <?php echo isset($app_js) ? $app_js : ''; ?>

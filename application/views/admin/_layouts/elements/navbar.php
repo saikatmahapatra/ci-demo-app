@@ -5,113 +5,70 @@ $segment2 = $this->uri->segment(2);
 $segment3 = $this->uri->segment(3);
 //print_r($user_profile_image);
 ?>
-<nav class="navbar navbar-expand-md navbar-dark bg-ca fixed-top" id="navbar1">
-	<a class="navbar-brand" href="<?php echo base_url($this->router->directory); ?>">
-		<img src="<?php echo base_url('assets/src/img/logo.png');?>">
-	</a>
+
+
+<nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
+	<a class="navbar-brand" href="<?php echo site_url('admin/home'); ?>"><?php echo $this->config->item('app_logo_name_dashboard'); ?></a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault"
 		aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
-	
-	<div class="navbar-collapse collapse ">		
-		<ul class="navbar-nav mr-auto">                
-			<li class="nav-item">
-				<a class="nav-link" href="#"><h1>CI App</h1></a>
-			</li>
-		</ul>
-		<ul class="navbar-nav ">
 
-			<?php if (isset($this->session->userdata['sess_user']['id'])) {  ?>					
-				<li class="nav-item mr-2">
-					<div class="media text-white">					 
-					<?php   
-						$img_src = "";
-						$default_path = "assets/dist/img/avatar_2x.png";
-						//print_r($el_user_profile_pic); die();
-						if(isset($this->session->userdata['sess_user']['user_profile_pic'])){					
-							$user_dp = "assets/uploads/user/profile_pic/".$this->session->userdata['sess_user']['user_profile_pic'];					
-							if (file_exists(FCPATH . $user_dp)) {
-								$img_src = $user_dp;
-							}else{
-								$img_src = $default_path;
-							}
-						}else{
-							$img_src = $default_path;
-						}
-					?>
-					 <img class="mr-3 rounded" alt="50x50" style="width: 50px; height: 50px;" src="<?php echo base_url($img_src);?>">					  
-					  <div class="media-body">
-						<div class="mt-0"><?php echo isset($this->session->userdata['sess_user']['user_firstname']) ? 'Hello, '.$this->session->userdata['sess_user']['user_firstname'].' '.$this->session->userdata['sess_user']['user_lastname']:'Hello, Guest';?></div>
-						<div class="mt-0 small"><?php echo isset($this->session->userdata['sess_user']['user_email']) ? $this->session->userdata['sess_user']['user_email'] :'';?></div>
-						<!--<div class="mt-0 small">Role: <?php echo isset($this->session->userdata['sess_user']['user_role_name']) ? $this->session->userdata['sess_user']['user_role_name'] :'';?></div>-->
-						<div class="mt-0"><a class="nav-link ml-0 p-0" href="<?php echo base_url($this->router->directory.'user/logout'); ?>"><i class="fa fa-power-off" aria-hidden="true"></i> Logout</a></div>					
-					  </div>
-					</div>
-				</li>			
-			<?php } ?>			
-			<!--<li class="nav-item">
-				<a class="nav-link" href="#">Pricing</a>
-			</li>-->
-		</ul>			
-		
-	</div>
-</nav>
-	
-<nav class="navbar navbar-expand-md navbar-dark pt-0 bg-dark pb-0 fixed-top" id="navbar2">	
 	<div class="collapse navbar-collapse" id="navbarsExampleDefault">
-		<ul class="navbar-nav mr-auto">
-			<li class="nav-item <?php echo ($segment2=='home') ? 'active':''?>">
-				<a class="nav-link" href="<?php echo base_url($this->router->directory.'home'); ?>">Home
+		<ul class="navbar-nav">
+			<li class="nav-item">
+				<a class="nav-link" href="<?php echo site_url('admin/home'); ?>">Home
 					<span class="sr-only">(current)</span>
 				</a>
 			</li>
-			<?php if (isset($this->session->userdata['sess_user']['id'])) {  ?>
-			<li class="nav-item <?php echo ($segment3 == 'profile') ? 'active':''?>">
-				<a class="nav-link" href="<?php echo base_url($this->router->directory.'user/profile/'.$this->session->userdata['sess_user']['id']); ?>">My Profile</a>
+			<!--<li class="nav-item">
+				<a class="nav-link" href="#">Link</a>
 			</li>
-			<?php } ?>
+			<li class="nav-item">
+				<a class="nav-link disabled" href="#">Disabled</a>
+			</li>
+
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false">Dropdown</a>
+				<div class="dropdown-menu" aria-labelledby="dropdown01">
+					<a class="dropdown-item" href="#">Action</a>
+					<a class="dropdown-item" href="#">Another action</a>
+					<a class="dropdown-item" href="#">Something else here</a>
+				</div>
+			</li>-->
 			
-			<?php if (isset($this->session->userdata['sess_user']['id'])) {  ?>
-			<li class="nav-item <?php echo ($segment3 == 'change_password') ? 'active':''?>">
-				<a class="nav-link" href="<?php echo base_url($this->router->directory.'user/change_password'); ?>">Change Password</a>
-			</li>
-			<?php } ?>
-			<li class="nav-item dropdown <?php echo ($segment2=='cms') ? 'active':''?>">
+			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false">CMS</a>
 				<div class="dropdown-menu" aria-labelledby="dropdown01">
-					<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'cms');?>">View All</a>
-					<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'cms/add');?>">Add</a>
+					<a class="dropdown-item" href="<?php echo site_url('admin/cms');?>">View All</a>
+					<a class="dropdown-item" href="<?php echo site_url('admin/cms/add');?>">Add</a>
 				</div>
 			</li>
 
-			<li class="nav-item dropdown <?php echo ($segment2=='product' || $segment2 == 'category') ? 'active':''?>">
+			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false">Products</a>
 				<div class="dropdown-menu" aria-labelledby="dropdown02">
-					<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'product');?>">View Products</a>
-					<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'product/add');?>">Add Product</a>
-					<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'category');?>">View Categories</a>
-					<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'category/add');?>">Add Category</a>
+					<a class="dropdown-item" href="<?php echo site_url('admin/product');?>">View Products</a>
+					<a class="dropdown-item" href="<?php echo site_url('admin/product/add');?>">Add Product</a>
+					<a class="dropdown-item" href="<?php echo site_url('admin/category');?>">View Categories</a>
+					<a class="dropdown-item" href="<?php echo site_url('admin/category/add');?>">Add Category</a>
 				</div>
 			</li>
 			
-			<li class="nav-item <?php echo ($segment3 == 'manage' || $segment3 == 'create_account') ? 'active':''?>">
-				<a class="nav-link"href="<?php echo base_url($this->router->directory.'user/manage'); ?>">Manage Users</a>
+			<li class="nav-item">
+				<a class="nav-link"href="<?php echo site_url('admin/user/manage'); ?>">Customers</a>
 			</li>
-			<li class="nav-item <?php echo ($segment3 == 'people' || $segment3 == 'create_account') ? 'active':''?>">
-				<a class="nav-link"href="<?php echo base_url($this->router->directory.'user/people'); ?>">People</a>
-			</li>
-			<li class="nav-item <?php echo ($segment2=='order') ? 'active':''?>">
-				<a class="nav-link" href="<?php echo base_url($this->router->directory.'order'); ?>">Orders</a>
+			<li class="nav-item">
+				<a class="nav-link" href="<?php echo site_url('admin/order'); ?>">Orders</a>
 			</li>
 			
-			
-			<?php if (isset($this->session->userdata['sess_user']['id'])) {  /* ?>
-			<li class="nav-item dropdown <?php echo ($segment2 == 'user' && ($segment3 != 'manage' || $segment3 != 'create_account')) ? 'active':''?>">
-				<a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false">My Account </a>
+			<?php if (isset($this->session->userdata['sess_user']['id'])) {	?>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false"><i aria-hidden="true" class="fa fa-user-circle"></i> My Account </a>
 				<div class="dropdown-menu" aria-labelledby="dropdown03">
 					
 					<div class="dropdown-item welcome-user-container">
@@ -119,7 +76,7 @@ $segment3 = $this->uri->segment(3);
 						<div class=""><?php echo isset($this->session->userdata['sess_user']['user_firstname']) ? $this->session->userdata['sess_user']['user_firstname'].' '.$this->session->userdata['sess_user']['user_lastname']:'Guest';?></div>
 						<div class="small"><?php echo isset($this->session->userdata['sess_user']['user_email']) ? $this->session->userdata['sess_user']['user_email'] :'';?></div>
 						<div class="small">Role: <?php echo isset($this->session->userdata['sess_user']['user_role_name']) ? $this->session->userdata['sess_user']['user_role_name'] :'';?></div>
-						<div class="small d-none">Last Login: 03/04/2018 10.30am</div>
+						<div class="small d-none">Last Login: DD/MM/YYYY HH:MM am</div>
 					<!--</a>-->
 					</div><!--/.welcome-user-container-->
 					
@@ -128,11 +85,10 @@ $segment3 = $this->uri->segment(3);
 					<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'user/change_password'); ?>">Change Password</a>
 					<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'user/logout'); ?>">Logout</a>			
 				</div>
-			</li>
-			<?php */ } ?>
+				</li>
+			<?php } ?>
+			
+
 		</ul>
-		<form class="form-inline my-2 my-lg-0">
-		  <input class="form-control form-control-sm mr-sm-2" type="search" placeholder="Enterprise Search" aria-label="Search">
-		</form>
 	</div>
 </nav>
