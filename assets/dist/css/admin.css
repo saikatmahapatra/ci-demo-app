@@ -8440,6 +8440,9 @@ body {
   margin-bottom: 3rem;
 }
 
+/*.navbar{
+	min-height: 4rem;
+}*/
 h1.page-header {
   font-size: 1.5rem;
 }
@@ -8532,4 +8535,11 @@ h1.page-header {
   border: 0;
   border-bottom: 3px solid #5133AB;
   font-weight: bold;
+}
+
+.navbar-nav .show > .nav-link,
+.navbar-nav .active > .nav-link,
+.navbar-nav .nav-link.show,
+.navbar-nav .nav-link.active {
+  font-weight: 700;
 }

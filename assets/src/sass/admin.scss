@@ -9,6 +9,10 @@ body {
     margin-bottom: 3rem;
 }
 
+/*.navbar{
+	min-height: 4rem;
+}*/
+
 h1.page-header{
 	font-size: 1.5rem;
 }
@@ -107,3 +111,13 @@ h1.page-header{
 	border-bottom: 3px solid $nav-tabs-border-color;
 	font-weight: bold;
 }
+
+// Nav Bar 
+.navbar-nav {
+    .show > .nav-link,
+    .active > .nav-link,
+    .nav-link.show,
+    .nav-link.active {
+      font-weight: 700;
+    }
+  }

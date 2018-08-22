@@ -16,7 +16,7 @@ $segment3 = $this->uri->segment(3);
 
 	<div class="collapse navbar-collapse" id="navbarsExampleDefault">
 		<ul class="navbar-nav">
-			<li class="nav-item">
+			<li class="nav-item <?php echo ($segment2=='home') ? 'active':''?>">
 				<a class="nav-link" href="<?php echo site_url('admin/home'); ?>">Home
 					<span class="sr-only">(current)</span>
 				</a>
@@ -59,7 +59,10 @@ $segment3 = $this->uri->segment(3);
 			</li>
 			
 			<li class="nav-item">
-				<a class="nav-link"href="<?php echo site_url('admin/user/manage'); ?>">Customers</a>
+				<a class="nav-link"href="<?php echo site_url('admin/user/manage'); ?>">Manage Users</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link"href="<?php echo site_url('admin/user/people'); ?>">People</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="<?php echo site_url('admin/order'); ?>">Orders</a>
