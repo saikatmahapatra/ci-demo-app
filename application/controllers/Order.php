@@ -77,7 +77,7 @@ class Order extends CI_Controller {
 		}
 		
 		$this->data['page_heading'] = 'My Cart';
-        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'order/my_cart', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].$this->router->class.'/my_cart', $this->data, true);
         $this->load->view($this->data['view_dir'].'_layouts/layout_default', $this->data);
     }
 
@@ -190,7 +190,7 @@ class Order extends CI_Controller {
 		}
 		
 		$this->data['page_heading'] = 'Checkout';		
-		$this->data['maincontent'] = $this->load->view($this->data['view_dir'].'order/init_payment', $this->data, true);
+		$this->data['maincontent'] = $this->load->view($this->data['view_dir'].$this->router->class.'/init_payment', $this->data, true);
         $this->load->view($this->data['view_dir'].'_layouts/layout_default', $this->data);
 	}
 
@@ -321,7 +321,7 @@ class Order extends CI_Controller {
 		//$this->data = array();
 		$this->data['order_no'] = '8278783799829080';
 		$this->data['page_heading'] = 'Your Online Transaction Summary';
-		$this->data['maincontent'] = $this->load->view($this->data['view_dir'].'order/transaction_response', $this->data, true);
+		$this->data['maincontent'] = $this->load->view($this->data['view_dir'].$this->router->class.'/transaction_response', $this->data, true);
         $this->load->view($this->data['view_dir'].'_layouts/layout_default', $this->data);
     }
 }

@@ -134,7 +134,7 @@ class Contact extends CI_Controller {
         $this->data['captcha_image'] = $cap['image'];
 		
 		$this->data['page_heading'] = 'Contact Us';
-        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'contact/index', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].$this->router->class.'/index', $this->data, true);
         $this->load->view($this->data['view_dir'].'_layouts/layout_default', $this->data);
     }
 

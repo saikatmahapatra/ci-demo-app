@@ -39,7 +39,7 @@ class Product extends CI_Controller {
         $this->data['total_products'] = $products['num_rows'];
         $this->data['products'] = $products['data_rows'];
 		$this->data['page_heading'] = 'Products';
-        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'product/index', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].$this->router->class.'/index', $this->data, true);
         $this->load->view($this->data['view_dir'].'_layouts/layout_default', $this->data);
     }
 
