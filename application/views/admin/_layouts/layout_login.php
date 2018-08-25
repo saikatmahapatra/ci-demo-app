@@ -33,8 +33,7 @@
 	<div class="ajax-loader-ui" id="ajax-loader" style="display:none;"><img src="<?php echo base_url('assets/src/img/ajax-loader.svg');?>" class="ajax-loader-img" alt="Loading..."></div>
 
     <!-- jQuery -->    
-	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-	<script>window.jQuery || document.write('<script src="<?php echo base_url('assets/vendors/jquery/dist/jquery.min.js'); ?>" type="text/javascript"><\/script>')</script>
+	<script type="text/javascript" src="<?php echo base_url('assets/vendors/jquery/dist/jquery.min.js'); ?>"></script>
     <!-- Bootstrap dependency popper.js -->
     <script src="<?php echo base_url('assets/vendors/popper.js/dist/umd/popper.min.js'); ?>"></script>
     <!-- Bootstrap Core JavaScript -->
@@ -45,9 +44,7 @@
     <!-- Bootstrap4 DataTables JavaScript -->
     <script src="<?php echo base_url('assets/vendors/datatables.net-bs4/js/dataTables.bootstrap4.js'); ?>"></script>    
 	
-    <!-- CK Editor -->
-    <script src="https://cdn.ckeditor.com/4.5.7/standard/ckeditor.js"></script>	
-	<!--Application Specific JS Loading Through Controllers-->
+    <!--Application Specific JS Loading Through Controllers-->
     <?php echo isset($app_js) ? $app_js : ''; ?>
 </body>
 </html>
