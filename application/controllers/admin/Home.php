@@ -32,7 +32,9 @@ class Home extends CI_Controller {
         $this->common_lib->init_template_elements('admin');
 
         //add required js files for this controller
-        $app_js_src = array('assets/data/morris-data.js');
+        $app_js_src = array(
+			'assets/dist/js/'.$this->router->class.'.js', //create js file name same as controller name
+		);
         $this->data['app_js'] = $this->common_lib->add_javascript($app_js_src);
 
         $this->load->model('home_model');

@@ -32,7 +32,7 @@ class Product extends CI_Controller {
 
         //add required js files for this controller        
         $app_js_src = array(
-            'assets/dist/js/product.js',
+            'assets/dist/js/'.$this->router->class.'.js', //create js file name same as controller name
         );
         $this->data['app_js'] = $this->common_lib->add_javascript($app_js_src);
 
