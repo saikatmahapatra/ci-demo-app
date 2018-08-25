@@ -43,7 +43,7 @@
                 'id' => 'user_password',
                 'class' => 'form-control',
                 'maxlength' => '16',
-                'placeholder' => 'Enter password',
+                'placeholder' => '',
             ));
             ?> 
             <?php echo form_error('user_password'); ?>

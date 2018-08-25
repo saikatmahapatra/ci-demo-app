@@ -22,14 +22,14 @@
         <?php echo form_hidden('password_reset_key', $password_reset_key); ?>
         
         <div class="form-group">                    
-			<label for="user_email" class="">Email<span class="required">*</span></label>
+			<label for="user_email" class="">Registered Email Address <span class="required">*</span></label>
             <?php
             echo form_input(array(
                 'name' => 'user_email',
                 'value' => set_value('user_email'),
                 'id' => 'name',
                 'class' => 'form-control',
-                'placeholder' => 'Please enter your registered email',
+                'placeholder' => '',
                 'maxlength' => '255',
                 'autofocus' => '',
             ));

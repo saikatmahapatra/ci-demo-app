@@ -26,7 +26,7 @@
         ?> 
         <?php echo form_hidden('form_action', 'reset_password'); ?>
         <div class="form-group">                    
-			<label for="user_email" class="">Registered Email <span class="required">*</span></label>
+			<label for="user_email" class="">Registered Email Address <span class="required">*</span></label>
             <?php
             echo form_input(array(
                 'name' => 'user_email',
@@ -35,7 +35,7 @@
                 'maxlength' => '255',
                 'class' => 'form-control',
                 'autofocus' => '',
-                'placeholder' => 'Email address',
+                'placeholder' => '',
                 'data-hint' => 'Password reset link will be sent to this email id.'
             ));
             ?> 
