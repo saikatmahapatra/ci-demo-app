@@ -135,7 +135,7 @@
 								), set_radio('user_gender', 'T')
 						);
 						?>
-						<label class="form-radio-label" for="t">Trans-gender</span></label>
+						<label class="form-radio-label" for="t">Others</span></label>
 					</div>
 					<?php echo form_error('user_gender'); ?>
 			  </div>
