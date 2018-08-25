@@ -60,15 +60,15 @@ select.form-control.dob-inline{
 }
 .dp
 {
-    border:10px solid #eee;
-    transition: all 0.2s ease-in-out;
+    border: 3px solid $gray-lighter;
+    //transition: all 0.2s ease-in-out;
 	height: 100px;
 	width: 100px;
 	&:hover{
-		border:2px solid #eee;
-		transform:rotate(360deg);
-		-ms-transform:rotate(360deg);  
-		-webkit-transform:rotate(360deg);  
+		//border:2px solid #eee;
+		//transform:rotate(360deg);
+		//-ms-transform:rotate(360deg);  
+		//-webkit-transform:rotate(360deg);  
 		/*-webkit-font-smoothing:antialiased;*/
 	}
 }
