@@ -100,7 +100,7 @@ class Order extends CI_Controller {
 
             //add html for action
             $action_html = '';
-            $action_html.= anchor(base_url($this->router->directory.'order/edit/' . $result['id']), '<i class="fa fa-edit" aria-hidden="true"></i>', array(
+            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/edit/' . $result['id']), '<i class="fa fa-edit" aria-hidden="true"></i>', array(
                 'class' => 'text-dark mr-1',
                 'data-toggle' => 'tooltip',
                 'data-original-title' => 'Edit',
@@ -160,7 +160,7 @@ class Order extends CI_Controller {
 					if ($res) {
 						$this->session->set_flashdata('flash_message', '<i class="icon fa fa-check" aria-hidden="true"></i>Order updated successfully.');
 						$this->session->set_flashdata('flash_message_css', 'bg-success text-white');
-						redirect($this->router->directory.'order/edit/'.$this->id);
+						redirect($this->router->directory.$this->router->class.'/edit/'.$this->id);
 					}
 				}
             //}

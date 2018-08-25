@@ -187,7 +187,7 @@ class Cms extends CI_Controller {
                 if ($insert_id) {
                     $this->session->set_flashdata('flash_message', '<i class="icon fa fa-check" aria-hidden="true"></i>Added successfully.');
                     $this->session->set_flashdata('flash_message_css', 'bg-success text-white');
-                    redirect($this->router->directory.'cms/add');
+                    redirect($this->router->directory.$this->router->class.'/add');
                 }
             }
         }

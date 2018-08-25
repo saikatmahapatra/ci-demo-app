@@ -69,7 +69,7 @@ class User extends CI_Controller {
                             $this->session->unset_userdata('sess_post_login_redirect_url');
                             redirect($post_login_redirect_uri);
                         }else{
-                            redirect('user/profile');
+                            redirect($this->router->class.'/profile');
                         }
                         
                     }
@@ -188,14 +188,14 @@ class User extends CI_Controller {
             $act_res = $this->user_model->update($postdata, $where);
             if ($act_res) {
                 $this->session->set_flashdata('flash_message', 'Your account has been activated successfully');
-                redirect($this->router->directory.'user/login');
+                redirect($this->router->directory.$this->router->class.'/login');
             } else {
                 $this->session->set_flashdata('flash_message', 'Sorry ! Unable to activate your account');
-                redirect($this->router->directory.'user/login');
+                redirect($this->router->directory.$this->router->class.'/login');
             }
         } else {
             $this->session->set_flashdata('flash_message', 'No activation token match found for you');
-            redirect($this->router->directory.'user/login');
+            redirect($this->router->directory.$this->router->class.'/login');
         }
     }
 
@@ -219,7 +219,7 @@ class User extends CI_Controller {
                     $html.='<div style="font:14px Arial,Helvetica,sans-serif;margin-bottom:5px;color:#222222;padding:0px 0 10px 0">';
                     $html.='<p>Please click on the password reset link to create a new login password.</p>';
                     $html.='<p><strong>Password Reset Link:</strong><br />';
-                    $html.= anchor(base_url('user/reset_password/' . md5($password_reset_key)), NULL);
+                    $html.= anchor(base_url($this->router->class.'/reset_password/' . md5($password_reset_key)), NULL);
                     $html.='</p>';
                     $html.='</div>';
                     $html.='</div>';
@@ -343,7 +343,7 @@ class User extends CI_Controller {
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
-            redirect('user/login');
+            redirect($this->router->class.'/login');
         }
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
@@ -394,9 +394,9 @@ class User extends CI_Controller {
             $this->session->unset_userdata('post_login_redirect_uri');
             $this->session->set_flashdata('flash_message', 'You have been logged out successfully.');
             $this->session->set_flashdata('flash_message_css', 'bg-success text-white');
-            redirect('user/login');
+            redirect($this->router->class.'/login');
         } else {
-            redirect('user/login');
+            redirect($this->router->class.'/login');
         }
     }
 
@@ -404,7 +404,7 @@ class User extends CI_Controller {
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
-            redirect('user/login');
+            redirect($this->router->class.'/login');
         }
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
@@ -421,7 +421,7 @@ class User extends CI_Controller {
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
-            redirect('user/login');
+            redirect($this->router->class.'/login');
         }
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
@@ -444,7 +444,7 @@ class User extends CI_Controller {
                 if ($res) {
                     $this->session->set_flashdata('flash_message', 'Your basic info has been updated successfully');
                     $this->session->set_flashdata('flash_message_css', 'bg-success text-white');
-                    redirect('user/profile');
+                    redirect($this->router->class.'/profile');
                 }
             }
         }
@@ -479,7 +479,7 @@ class User extends CI_Controller {
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
-            redirect('user/login');
+            redirect($this->router->class.'/login');
         }
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');		
@@ -503,7 +503,7 @@ class User extends CI_Controller {
                 if ($res) {
                     $this->session->set_flashdata('flash_message', 'Your address has been added successfully');
                     $this->session->set_flashdata('flash_message_css', 'bg-success text-white');
-                    redirect('user/profile');
+                    redirect($this->router->class.'/profile');
                 }
             }
         }
@@ -516,7 +516,7 @@ class User extends CI_Controller {
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
-            redirect('user/login');
+            redirect($this->router->class.'/login');
         }
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
@@ -557,7 +557,7 @@ class User extends CI_Controller {
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
-            redirect('user/login');
+            redirect($this->router->class.'/login');
         }
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
@@ -568,11 +568,11 @@ class User extends CI_Controller {
 		if ($res) {
 			$this->session->set_flashdata('flash_message', 'Your address has been deleted successfully.');
 			$this->session->set_flashdata('flash_message_css', 'bg-success text-white');
-			redirect('user/profile');
+			redirect($this->router->class.'/profile');
 		}else{
 			$this->session->set_flashdata('flash_message', 'We\'re unable to process your request.');
 			$this->session->set_flashdata('flash_message_css', 'bg-danger text-white');
-			redirect('user/profile');
+			redirect($this->router->class.'/profile');
 		}
     }
 	
@@ -662,7 +662,7 @@ class User extends CI_Controller {
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
-            redirect('user/login');
+            redirect($this->router->class.'/login');
         }
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
@@ -686,7 +686,7 @@ class User extends CI_Controller {
                 if ($res) {
                     $this->session->set_flashdata('flash_message', 'Your education has been added successfully');
                     $this->session->set_flashdata('flash_message_css', 'bg-success text-white');
-                    redirect('user/profile');
+                    redirect($this->router->class.'/profile');
                 }
             }
         }
@@ -699,7 +699,7 @@ class User extends CI_Controller {
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
-            redirect('user/login');
+            redirect($this->router->class.'/login');
         }
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
@@ -739,7 +739,7 @@ class User extends CI_Controller {
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
-            redirect('user/login');
+            redirect($this->router->class.'/login');
         }
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
@@ -749,11 +749,11 @@ class User extends CI_Controller {
 		if ($res) {
 			$this->session->set_flashdata('flash_message', 'Your education details has been deleted successfully.');
 			$this->session->set_flashdata('flash_message_css', 'bg-success text-white');
-			redirect('user/profile');
+			redirect($this->router->class.'/profile');
 		}else{
 			$this->session->set_flashdata('flash_message', 'We\'re unable to process your request.');
 			$this->session->set_flashdata('flash_message_css', 'bg-danger text-white');
-			redirect('user/profile');
+			redirect($this->router->class.'/profile');
 		}
     }
 	
