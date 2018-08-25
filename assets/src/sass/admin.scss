@@ -70,20 +70,14 @@ h1.page-header{
     }
 }
 
+
 .dob-inline{
     display: inline !important;
     width: auto;
 }
 
 
-.profile-pic:hover .edit {
-	display: block;
-}
 
-.edit {	
-	position: absolute;	
-	display: none;
-}
 
 // Ajax Loader
 .ajax-loader-ui {  
@@ -123,9 +117,11 @@ h1.page-header{
   }
   
 // Close Button
-button.close{
-	color: $white;
-	&:hover{
+.alert {
+	button.close{
 		color: $white;
+		&:hover{
+			color: $white;
+		}
 	}
 }

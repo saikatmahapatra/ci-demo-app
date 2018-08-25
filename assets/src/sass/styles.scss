@@ -73,6 +73,7 @@ select.form-control.dob-inline{
 	}
 }
 
+
 .more-less {
     float: right;
     color: #212121;
@@ -201,9 +202,11 @@ select.form-control.dob-inline{
   }
 
 // Close Button
-button.close{
-	color: $white;
-	&:hover{
+.alert {
+	button.close{
 		color: $white;
+		&:hover{
+			color: $white;
+		}
 	}
 }

@@ -8496,15 +8496,6 @@ h1.page-header {
   width: auto;
 }
 
-.profile-pic:hover .edit {
-  display: block;
-}
-
-.edit {
-  position: absolute;
-  display: none;
-}
-
 .ajax-loader-ui {
   position: absolute;
   top: 0;
@@ -8539,10 +8530,10 @@ h1.page-header {
   font-weight: 700;
 }
 
-button.close {
+.alert button.close {
   color: #FFF;
 }
 
-button.close:hover {
+.alert button.close:hover {
   color: #FFF;
 }
