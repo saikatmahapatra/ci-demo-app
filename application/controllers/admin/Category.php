@@ -46,8 +46,8 @@ class Category extends CI_Controller {
 
         //View Page Config
 		$this->data['view_dir'] = 'admin/'; // inner view and layout directory name inside application/view
-        $this->data['page_heading'] = $this->router->class.' : '.$this->router->method;
-        $this->data['datatable']['dt_id']= array('heading'=>'Data Table','cols'=>array());
+		$this->data['class_view_dir'] = $this->router->class; // create directory same as controller name
+        $this->data['page_heading'] = $this->router->class.' : '.$this->router->method;        
 		
 		// load Breadcrumbs
 		$this->load->library('breadcrumbs');
@@ -64,7 +64,7 @@ class Category extends CI_Controller {
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
 		$this->data['page_heading'] = 'Product Category';
-        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'category/index', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].$this->data['class_view_dir'].'/index', $this->data, true);
         $this->load->view($this->data['view_dir'].'_layouts/layout_default', $this->data);
     }
 
@@ -166,7 +166,7 @@ class Category extends CI_Controller {
             }
         }
 		$this->data['page_heading'] = 'Add Product Category';
-        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'category/add', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].$this->data['class_view_dir'].'/add', $this->data, true);
         $this->load->view($this->data['view_dir'].'_layouts/layout_default', $this->data);
     }
 
@@ -197,7 +197,7 @@ class Category extends CI_Controller {
         $result_array = $this->category_model->get_rows($this->uri->segment(4));
         $this->data['rows'] = $result_array['data_rows'];
 		$this->data['page_heading'] = 'Edit Product Category';
-        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].'category/edit', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].$this->data['class_view_dir'].'/edit', $this->data, true);
         $this->load->view($this->data['view_dir'].'_layouts/layout_default', $this->data);
     }
 
