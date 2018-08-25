@@ -45,8 +45,7 @@ class Cms extends CI_Controller {
         $this->data['arr_content_type'] = $this->cms_model->get_pagecontent_type();
 
         //View Page Config
-		$this->data['view_dir'] = 'admin/'; // inner view and layout directory name inside application/view
-		$this->data['class_view_dir'] = $this->router->class; // create directory same as controller name
+		$this->data['view_dir'] = 'admin/'; // inner view and layout directory name inside application/view		
         $this->data['page_heading'] = $this->router->class.' : '.$this->router->method;
 		
 		// load Breadcrumbs
@@ -72,7 +71,7 @@ class Cms extends CI_Controller {
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
 		
 		$this->data['page_heading'] = 'Website CMS - Contents';
-        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].$this->data['class_view_dir'].'/index', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].$this->router->class.'/index', $this->data, true);
         $this->load->view($this->data['view_dir'].'_layouts/layout_default', $this->data);
     }
 	
@@ -109,7 +108,7 @@ class Cms extends CI_Controller {
         $this->data['data_rows'] = $result_array['data_rows'];
 		
 		$this->data['page_heading'] = 'Website Contents (CI Pagination Version)';
-        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].$this->data['class_view_dir'].'/index_ci_pagination', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].$this->router->class.'/index_ci_pagination', $this->data, true);
         $this->load->view($this->data['view_dir'].'_layouts/layout_default', $this->data);
     }
 
@@ -193,7 +192,7 @@ class Cms extends CI_Controller {
             }
         }
 		$this->data['page_heading'] = 'Add Contents';
-        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].$this->data['class_view_dir'].'/add', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].$this->router->class.'/add', $this->data, true);
         $this->load->view($this->data['view_dir'].'_layouts/layout_default', $this->data);
     }
 
@@ -228,7 +227,7 @@ class Cms extends CI_Controller {
         $result_array = $this->cms_model->get_rows($this->uri->segment(4));
         $this->data['rows'] = $result_array['data_rows'];
 		$this->data['page_heading'] = 'Edit Contents';
-        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].$this->data['class_view_dir'].'/edit', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].$this->router->class.'/edit', $this->data, true);
         $this->load->view($this->data['view_dir'].'_layouts/layout_default', $this->data);
     }
 
