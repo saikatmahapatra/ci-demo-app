@@ -29,7 +29,7 @@
 					'id' => 'user_firstname',
 					'class' => 'form-control',
 					'maxlength' => '30',
-					'placeholder' => 'Enter first name'
+					'placeholder' => ''
 				));
 				?>
 				<?php echo form_error('user_firstname'); ?>
@@ -44,7 +44,7 @@
 					'id' => 'user_lastname',
 					'class' => 'form-control',
 					'maxlength' => '50',
-					'placeholder' => 'Enter last name'
+					'placeholder' => ''
 				));
 				?>
 				<?php echo form_error('user_lastname'); ?>
@@ -61,7 +61,7 @@
                         'id' => 'user_email',
                         'class' => 'form-control',
                         'maxlength' => '255',
-						'placeholder' => 'Enter email address'
+						'placeholder' => ''
                     ));
                     ?> 
                     <?php echo form_error('user_email'); ?>
@@ -75,7 +75,7 @@
                         'id' => 'user_phone1',
                         'maxlength' => '10',
                         'class' => 'form-control',
-						'placeholder' => 'Enter 10 digit mobile number'
+						'placeholder' => ''
                     ));
                     ?>
                     <?php echo form_error('user_phone1'); ?>
@@ -92,7 +92,7 @@
                         'id' => 'user_password',
                         'class' => 'form-control',
                         'maxlength' => '15',
-						'placeholder' => 'Enter password'
+						'placeholder' => ''
                     ));
                     ?> 
                     <?php echo form_error('user_password'); ?>
@@ -106,7 +106,7 @@
                         'id' => 'user_password_confirm',
                         'class' => 'form-control',
                         'maxlength' => '15',
-						'placeholder' => 'Confirm the entered password'
+						'placeholder' => ''
                     ));
                     ?> 
                     <?php echo form_error('user_password_confirm'); ?>
@@ -167,7 +167,7 @@
 						), set_radio('user_gender', 'T')
 				);
 				?>
-				<label class="form-radio-label" for="t">Trans-gender</span></label>
+				<label class="form-radio-label" for="t">Others</span></label>
 			</div>
 			<?php echo form_error('user_gender'); ?>
 		  </div>

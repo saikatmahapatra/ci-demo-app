@@ -24,7 +24,7 @@
 								'value' => set_value('user_email'),
 								'id' => 'name',
 								'class' => 'form-control',
-								'placeholder' => 'Email',
+								'placeholder' => '',
 								'maxlength' => '100',
 								'autofocus' => true,
 							));
@@ -37,7 +37,7 @@
 							'name' => 'confirm_user_new_password',
 							'value' => set_value('confirm_user_new_password'),
 							'id' => 'confirm_user_new_password',
-							'placeholder' => 'Confirm password',
+							'placeholder' => '',
 							'class' => 'form-control',
 							'maxlength' => '16',
 						));
@@ -50,7 +50,7 @@
 						'name' => 'user_new_password',
 						'value' => set_value('user_new_password'),
 						'id' => 'user_new_password',
-						'placeholder' => 'New password',
+						'placeholder' => '',
 						'class' => 'form-control',
 						'maxlength' => '16',
 					));

@@ -30,7 +30,7 @@
 					'id' => 'address',
 					'class' => 'form-control',
 					'maxlength' => '100',
-					'placeholder'=>'Name',
+					'placeholder'=>'',
 					));
 					?>
 					<?php echo form_error('name'); ?>
@@ -44,7 +44,7 @@
 					'id' => 'phone1',
 					'class' => 'form-control',
 					'maxlength' => '10',
-					'placeholder'=>'Phone Number',
+					'placeholder'=>'',
 					));
 					?>
 					<?php echo form_error('phone1'); ?>
@@ -61,7 +61,7 @@
 						'id' => 'zip',
 						'class' => 'form-control',
 						'maxlength' => '10',
-						'placeholder'=>'Pincode'
+						'placeholder'=>''
 					));
 					?>
 					<?php echo form_error('zip'); ?>
@@ -74,7 +74,7 @@
 						'value' => set_value('locality'),
 						'id' => 'locality',
 						'class' => 'form-control',
-						'placeholder'=>'Locality'
+						'placeholder'=>''
 					));
 					?>
 					<?php echo form_error('locality'); ?>
@@ -105,7 +105,7 @@
 					'id' => 'city',
 					'class' => 'form-control',
 					'maxlength' => '30',
-					'placeholder'=>'City/District/Town',
+					'placeholder'=>'',
 					));
 					?>
 					<?php echo form_error('city'); ?>
@@ -119,7 +119,7 @@
 					'id' => 'state',
 					'class' => 'form-control',
 					'maxlength' => '30',
-					'placeholder'=>'State',
+					'placeholder'=>'',
 					));
 					?>
 					<?php echo form_error('state'); ?>
@@ -137,7 +137,7 @@
 					'id' => 'landmark',
 					'class' => 'form-control',
 					'maxlength' => '100',
-					'placeholder'=>'bus stop, railway, metro station',
+					'placeholder'=>'',
 					));
 					?>
 					<?php echo form_error('landmark'); ?>
@@ -151,7 +151,7 @@
 					'id' => 'phone2',
 					'class' => 'form-control',
 					'maxlength' => '10',
-					'placeholder'=>'Alternate Phone',
+					'placeholder'=>'',
 					));
 					?>
 					<?php echo form_error('phone2'); ?>

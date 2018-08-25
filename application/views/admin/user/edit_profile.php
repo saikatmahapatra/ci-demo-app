@@ -64,8 +64,7 @@
 					'value' => isset($row['user_bio']) ? $row['user_bio'] : set_value('user_bio'),
 					'id' => 'user_bio',
 					'class' => 'form-control',
-					'placeholder' => 'About me',
-					'title' => 'About me',							
+					'placeholder' => 'write brief intro',							
 					'maxlength' => '100',
 				));
 				?>

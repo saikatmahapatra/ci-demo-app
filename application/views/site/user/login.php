@@ -29,7 +29,7 @@
                 'id' => 'user_email',
                 'class' => 'form-control',
                 'maxlength' => '255',
-                'placeholder' => 'Enter email address',
+                'placeholder' => '',
             ));
             ?> 
             <?php echo form_error('user_email'); ?>

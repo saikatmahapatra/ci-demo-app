@@ -45,7 +45,7 @@
                 'name' => 'user_new_password',
                 'value' => set_value('user_new_password'),
                 'id' => 'user_new_password',
-                'placeholder' => 'Please enter a new password',
+                'placeholder' => '',
                 'class' => 'form-control',
                 'maxlength' => '16',
             ));
@@ -60,7 +60,7 @@
                 'name' => 'confirm_user_new_password',
                 'value' => set_value('confirm_user_new_password'),
                 'id' => 'confirm_user_new_password',
-                'placeholder' => 'Please confirm the new password',
+                'placeholder' => '',
                 'class' => 'form-control',
                 'maxlength' => '16',
             ));

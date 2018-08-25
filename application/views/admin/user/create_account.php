@@ -29,7 +29,7 @@
 					'id' => 'user_firstname',
 					'class' => 'form-control',
 					'maxlength' => '30',
-					'placeholder' => 'Enter first name',
+					'placeholder' => '',
 				));
 				?>
 				<?php echo form_error('user_firstname'); ?>
@@ -44,7 +44,7 @@
 					'id' => 'user_lastname',
 					'class' => 'form-control',
 					'maxlength' => '50',
-					'placeholder' => 'Enter last name',
+					'placeholder' => '',
 				));
 				?>
 				<?php echo form_error('user_lastname'); ?>
@@ -61,13 +61,13 @@
 					'id' => 'user_email',
 					'class' => 'form-control',
 					'maxlength' => '255',
-					'placeholder' => 'Enter organization\'s email address',
+					'placeholder' => '',
 				));
 				?> 
 				<?php echo form_error('user_email'); ?>
 			</div>
 			<div class="form-group col-md-6">                           
-				<label for="user_phone1" class="">Mobile Number <span class="required">*</span></label>
+				<label for="user_phone1" class="">Mobile (Primary) <span class="required">*</span></label>
 				<?php
 				echo form_input(array(
 					'name' => 'user_phone1',
@@ -75,7 +75,7 @@
 					'id' => 'user_phone1',
 					'maxlength' => '10',
 					'class' => 'form-control',
-					'placeholder' => 'Enter 10 digit mobile number',
+					'placeholder' => '',
 				));
 				?>
 				<?php echo form_error('user_phone1'); ?>
