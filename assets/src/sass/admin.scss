@@ -121,3 +121,11 @@ h1.page-header{
       font-weight: 700;
     }
   }
+  
+// Close Button
+button.close{
+	color: $white;
+	&:hover{
+		color: $white;
+	}
+}

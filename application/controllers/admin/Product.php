@@ -182,7 +182,7 @@ class Product extends CI_Controller {
                 $insert_id = $this->product_model->insert($postdata);
                 if ($insert_id) {
                     $this->session->set_flashdata('flash_message', '<i class="icon fa fa-check" aria-hidden="true"></i>Added successfully.');
-                    $this->session->set_flashdata('flash_message_css', 'alert-success');
+                    $this->session->set_flashdata('flash_message_css', 'bg-success text-white');
                     redirect($this->router->directory.'product/add');
                 }
             }
@@ -221,7 +221,7 @@ class Product extends CI_Controller {
 
                 if ($res) {
                     $this->session->set_flashdata('flash_message', '<i class="icon fa fa-check" aria-hidden="true"></i>Updated successfully.');
-                    $this->session->set_flashdata('flash_message_css', 'alert-success');
+                    $this->session->set_flashdata('flash_message_css', 'bg-success text-white');
                     redirect($this->router->directory.'product');
                 }
             }
@@ -249,7 +249,7 @@ class Product extends CI_Controller {
             $upload_object_name = 'product';
             $this->delete_uploads($upload_object_name,$this->id);
             $this->session->set_flashdata('flash_message', '<i class="icon fa fa-check" aria-hidden="true"></i>Deleted successfully.');
-            $this->session->set_flashdata('flash_message_css', 'alert-success');
+            $this->session->set_flashdata('flash_message_css', 'bg-success text-white');
             redirect($this->router->directory.'product');
         }
     }
@@ -316,18 +316,18 @@ class Product extends CI_Controller {
                     // Now update table
                     $update_upload = $this->product_model->update($postdata, array('id' => $uploads[0]['id']), 'uploads');
                     $this->session->set_flashdata('flash_message', '<i class="icon fa fa-check" aria-hidden="true"></i> Document uploaded successfully.');
-                    $this->session->set_flashdata('flash_message_css', 'alert-success');
+                    $this->session->set_flashdata('flash_message_css', 'bg-success text-white');
                     redirect(current_url());
                 } else {
                     $upload_insert_id = $this->product_model->insert($postdata, 'uploads');
                     $this->session->set_flashdata('flash_message', '<i class="icon fa fa-check" aria-hidden="true"></i> Document uploaded successfully.');
-                    $this->session->set_flashdata('flash_message_css', 'alert-success');
+                    $this->session->set_flashdata('flash_message_css', 'bg-success text-white');
                     redirect(current_url());
                 }
             } else if (sizeof($upload_result['upload_error']) > 0) {
                 $error_message = $upload_result['upload_error'];
                 $this->session->set_flashdata('flash_message', '<strong>Error!</strong> ' . $error_message);
-                $this->session->set_flashdata('flash_message_css', 'alert-danger');
+                $this->session->set_flashdata('flash_message_css', 'bg-danger text-white');
                 redirect(current_url());
             }
         }

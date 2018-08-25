@@ -224,7 +224,7 @@ class User extends CI_Controller {
                     $login_data = $login_result['data'];
                     if ($login_status == 'error') {
                         $this->session->set_flashdata('flash_message', $message);
-                        $this->session->set_flashdata('flash_message_css', 'alert-danger');
+                        $this->session->set_flashdata('flash_message_css', 'bg-danger text-white');
                         redirect(current_url());
                     }
                     if ($login_status == 'success') {
@@ -317,7 +317,7 @@ class User extends CI_Controller {
                     $this->email->send();
                     //echo $this->email->print_debugger();
                     $this->session->set_flashdata('flash_message', '<i class="icon fa fa-check" aria-hidden="true"></i> User has been added succesfully.');
-                    $this->session->set_flashdata('flash_message_css', 'alert-success');
+                    $this->session->set_flashdata('flash_message_css', 'bg-success text-white');
                     redirect(current_url());
                 }
             }
@@ -417,11 +417,11 @@ class User extends CI_Controller {
                     //echo $this->email->print_debugger();
 
                     $this->session->set_flashdata('flash_message', '<i class="icon fa fa-check" aria-hidden="true"></i> Password reset link has been sent to ' . $email);
-                    $this->session->set_flashdata('flash_message_css', 'alert-success');
+                    $this->session->set_flashdata('flash_message_css', 'bg-success text-white');
                     redirect(current_url());
                 } else {
                     $this->session->set_flashdata('flash_message', '<i class="icon fa fa-warning" aria-hidden="true"></i> Unable to send reset password link');
-                    $this->session->set_flashdata('flash_message_css', 'alert-danger');
+                    $this->session->set_flashdata('flash_message_css', 'bg-danger text-white');
                     redirect(current_url());
                 }
             }
@@ -448,7 +448,7 @@ class User extends CI_Controller {
 
         if (!isset($this->data['password_reset_key'])) {
             $this->data['alert_message'] = 'The password reset token not found.';
-            $this->data['alert_message_css'] = 'alert-danger';
+            $this->data['alert_message_css'] = 'bg-danger text-white';
         }
 
         if ($this->input->post('form_action') == 'reset_password') {
@@ -469,12 +469,12 @@ class User extends CI_Controller {
                         // End Set user_reset_password_key to NULL on password update    
 
                         $this->session->set_flashdata('flash_message', '<strong>Great! </strong> New password saved successfully.');
-                        $this->session->set_flashdata('flash_message_css', 'alert-success');
+                        $this->session->set_flashdata('flash_message_css', 'bg-success text-white');
                         redirect(current_url());
                     }
                 } else {
                     $this->session->set_flashdata('flash_message', '<strong>Sorry! </strong> Invalid email or password reset link.');
-                    $this->session->set_flashdata('flash_message_css', 'alert-danger');
+                    $this->session->set_flashdata('flash_message_css', 'bg-danger text-white');
                     redirect(current_url());
                 }
             }
@@ -543,7 +543,7 @@ class User extends CI_Controller {
                 $where = array('id' => $this->sess_user_id);
                 $this->user_model->update($postdata, $where);
                 $this->session->set_flashdata('flash_message', '<strong>Success! </strong>Password Changed Successfully');
-                $this->session->set_flashdata('flash_message_css', 'alert-success');
+                $this->session->set_flashdata('flash_message_css', 'bg-success text-white');
                 redirect(current_url());
             }
         }
@@ -582,7 +582,7 @@ class User extends CI_Controller {
         if (isset($this->session->userdata['sess_user'])) {
             $this->session->unset_userdata('sess_user');
             $this->session->set_flashdata('flash_message', '<i class="icon fa fa-check" aria-hidden="true"></i> You have been logged out successfully.');
-            $this->session->set_flashdata('flash_message_css', 'alert-success');
+            $this->session->set_flashdata('flash_message_css', 'bg-success text-white');
             redirect($this->router->directory.'user/login');
         } else {
             redirect($this->router->directory.'home');
@@ -661,14 +661,14 @@ class User extends CI_Controller {
             $response = array(
                 'status' => 'success',
                 'message' => 'Account Status Changed',
-                'message_css' => 'alert alert-success',
+                'message_css' => 'alert bg-success text-white',
                 'data' => array(),
             );
         } else {
             $response = array(
                 'status' => 'error',
                 'message' => 'Error Occured',
-                'message_css' => 'alert alert-danger',
+                'message_css' => 'alert bg-danger text-white',
                 'data' => array(),
             );
         }
@@ -702,7 +702,7 @@ class User extends CI_Controller {
                 $res = $this->user_model->insert($postdata,'user_addresses');
                 if ($res) {
                     $this->session->set_flashdata('flash_message', 'Your address has been added successfully');
-                    $this->session->set_flashdata('flash_message_css', 'alert-success');
+                    $this->session->set_flashdata('flash_message_css', 'bg-success text-white');
                     redirect($this->router->directory.'user/profile');
                 }
             }
@@ -743,7 +743,7 @@ class User extends CI_Controller {
                 $res = $this->user_model->update($postdata, $where,'user_addresses');
                 if ($res) {
                     $this->session->set_flashdata('flash_message', 'Address has been updated successfully');
-                    $this->session->set_flashdata('flash_message_css', 'alert-success');
+                    $this->session->set_flashdata('flash_message_css', 'bg-success text-white');
                     redirect($this->router->directory.'user/profile');
                 }
             }
@@ -767,11 +767,11 @@ class User extends CI_Controller {
 		$res = $this->user_model->delete($where,'user_addresses');
 		if ($res) {
 			$this->session->set_flashdata('flash_message', 'Your address has been deleted successfully.');
-			$this->session->set_flashdata('flash_message_css', 'alert-success');
+			$this->session->set_flashdata('flash_message_css', 'bg-success text-white');
 			redirect($this->router->directory.'user/profile');
 		}else{
 			$this->session->set_flashdata('flash_message', 'We\'re unable to process your request.');
-			$this->session->set_flashdata('flash_message_css', 'alert-danger');
+			$this->session->set_flashdata('flash_message_css', 'bg-danger text-white');
 			redirect($this->router->directory.'user/profile');
 		}
     }
@@ -871,7 +871,7 @@ class User extends CI_Controller {
                 $res = $this->user_model->insert($postdata,'user_academics');
                 if ($res) {
                     $this->session->set_flashdata('flash_message', 'Your education has been added successfully');
-                    $this->session->set_flashdata('flash_message_css', 'alert-success');
+                    $this->session->set_flashdata('flash_message_css', 'bg-success text-white');
                     redirect($this->router->directory.'user/profile');
                 }
             }
@@ -910,7 +910,7 @@ class User extends CI_Controller {
                 $res = $this->user_model->update($postdata, $where,'user_academics');
                 if ($res) {
                     $this->session->set_flashdata('flash_message', 'Education has been updated successfully');
-                    $this->session->set_flashdata('flash_message_css', 'alert-success');
+                    $this->session->set_flashdata('flash_message_css', 'bg-success text-white');
                     redirect(current_url());
                 }
             }
@@ -932,11 +932,11 @@ class User extends CI_Controller {
 		$res = $this->user_model->delete($where,'user_academics');
 		if ($res) {
 			$this->session->set_flashdata('flash_message', 'Your education details has been deleted successfully.');
-			$this->session->set_flashdata('flash_message_css', 'alert-success');
+			$this->session->set_flashdata('flash_message_css', 'bg-success text-white');
 			redirect('user/profile');
 		}else{
 			$this->session->set_flashdata('flash_message', 'We\'re unable to process your request.');
-			$this->session->set_flashdata('flash_message_css', 'alert-danger');
+			$this->session->set_flashdata('flash_message_css', 'bg-danger text-white');
 			redirect('user/profile');
 		}
     }
@@ -989,7 +989,7 @@ class User extends CI_Controller {
                 $res = $this->user_model->update($postdata, $where);
                 if ($res) {
                     $this->session->set_flashdata('flash_message', 'Basic info has been updated successfully');
-                    $this->session->set_flashdata('flash_message_css', 'alert-success');
+                    $this->session->set_flashdata('flash_message_css', 'bg-success text-white');
                     redirect(current_url());
                 }
             }
@@ -1101,19 +1101,19 @@ class User extends CI_Controller {
                     //$update_upload = $this->user_model->update($postdata, array('id' => $uploads[0]['id']), 'uploads');
                     $update_upload = $this->user_model->update($postdata, $where_array);
                     $this->session->set_flashdata('flash_message', '<i class="icon fa fa-check" aria-hidden="true"></i> File uploaded successfully.');
-                    $this->session->set_flashdata('flash_message_css', 'alert-success');
+                    $this->session->set_flashdata('flash_message_css', 'bg-success text-white');
                     redirect(current_url());
                 } else {
                     //$upload_insert_id = $this->user_model->insert($postdata, 'uploads');
                     $update_upload = $this->user_model->update($postdata, $where_array);
                     $this->session->set_flashdata('flash_message', '<i class="icon fa fa-check" aria-hidden="true"></i> File uploaded successfully.');
-                    $this->session->set_flashdata('flash_message_css', 'alert-success');
+                    $this->session->set_flashdata('flash_message_css', 'bg-success text-white');
                     redirect(current_url());
                 }
             } else if (sizeof($upload_result['upload_error']) > 0) {
                 $error_message = $upload_result['upload_error'];
                 $this->session->set_flashdata('flash_message', '<strong>Error!</strong> ' . $error_message);
-                $this->session->set_flashdata('flash_message_css', 'alert-danger');
+                $this->session->set_flashdata('flash_message_css', 'bg-danger text-white');
                 redirect(current_url());
             }
         }
@@ -1135,11 +1135,11 @@ class User extends CI_Controller {
 				$res = $this->user_model->update($postdata, $where_array);
 				if($res){
 					$this->session->set_flashdata('flash_message', 'Profile picture has been deleted.');
-					$this->session->set_flashdata('flash_message_css', 'alert-success');
+					$this->session->set_flashdata('flash_message_css', 'bg-success text-white');
 					redirect($this->router->directory.'user/profile_pic');
 				}else{
 					$this->session->set_flashdata('flash_message', 'Error occured while processing your request.');
-					$this->session->set_flashdata('flash_message_css', 'alert-danger');
+					$this->session->set_flashdata('flash_message_css', 'bg-danger text-white');
 					redirect($this->router->directory.'user/profile_pic');
 				}
 			}

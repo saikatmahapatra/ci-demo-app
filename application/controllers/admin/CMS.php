@@ -47,7 +47,6 @@ class Cms extends CI_Controller {
         //View Page Config
 		$this->data['view_dir'] = 'admin/'; // inner view and layout directory name inside application/view
         $this->data['page_heading'] = $this->router->class.' : '.$this->router->method;
-        $this->data['datatable']['dt_id']= array('heading'=>'Data Table','cols'=>array());
 		
 		// load Breadcrumbs
 		$this->load->library('breadcrumbs');
@@ -91,7 +90,7 @@ class Cms extends CI_Controller {
 		$total_num_rows = $result_array['num_rows'];
 		
 		//pagination config
-		$additional_segment = 'admin/cms/index_ci_pagination';
+		$additional_segment = $this->router->directory.$this->router->class.'/index_ci_pagination';
 		$per_page = 10;
 		$config['uri_segment'] = 5;
 		$config['num_links'] = 1;
@@ -136,14 +135,14 @@ class Cms extends CI_Controller {
             $row[] = (strtolower($result['pagecontent_status']) == 'y') ? 'Published' : 'Unpublished';
             //add html for action
             $action_html = '';
-            $action_html.= anchor(base_url($this->router->directory.'cms/edit/' . $result['id']), '<i class="fa fa-edit" aria-hidden="true"></i>', array(
+            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/edit/' . $result['id']), '<i class="fa fa-edit" aria-hidden="true"></i>', array(
                 'class' => 'text-dark mr-1',
                 'data-toggle' => 'tooltip',
                 'data-original-title' => 'Edit',
                 'title' => 'Edit',
             ));
             $action_html.='&nbsp;';
-            $action_html.= anchor(base_url($this->router->directory.'cms/delete/' . $result['id']), '<i class="fa fa-trash" aria-hidden="true"></i>', array(
+            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/delete/' . $result['id']), '<i class="fa fa-trash" aria-hidden="true"></i>', array(
                 'class' => 'text-danger btn-delete ml-1',
 				'data-confirmation'=>true,
 				'data-confirmation-message'=>'Are you sure, you want to delete this?',
@@ -169,15 +168,13 @@ class Cms extends CI_Controller {
 
     function add() {
         //Check user permission by permission name mapped to db
-        //$is_granted = $this->common_lib->check_user_role_permission('cms-add');
-        //$this->data['page_heading'] = "Add Page Content";
+        //$is_granted = $this->common_lib->check_user_role_permission('cms-add');        
 		$this->breadcrumbs->push('Add','/');				
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
         if ($this->input->post('form_action') == 'insert') {
             if ($this->validate_form_data('add') == true) {
-
                 $postdata = array(
                     'pagecontent_type' => $this->input->post('pagecontent_type'),
                     'pagecontent_title' => $this->input->post('pagecontent_title'),
@@ -189,7 +186,7 @@ class Cms extends CI_Controller {
                 $insert_id = $this->cms_model->insert($postdata);
                 if ($insert_id) {
                     $this->session->set_flashdata('flash_message', '<i class="icon fa fa-check" aria-hidden="true"></i>Added successfully.');
-                    $this->session->set_flashdata('flash_message_css', 'alert-success');
+                    $this->session->set_flashdata('flash_message_css', 'bg-success text-white');
                     redirect($this->router->directory.'cms/add');
                 }
             }
@@ -201,8 +198,7 @@ class Cms extends CI_Controller {
 
     function edit() {
         //Check user permission by permission name mapped to db
-        //$is_granted = $this->common_lib->check_user_role_permission('cms-edit');
-		//$this->data['page_heading'] = "Edit Page Content";
+        //$is_granted = $this->common_lib->check_user_role_permission('cms-edit');		
 		$this->breadcrumbs->push('Edit','/');				
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
@@ -223,7 +219,7 @@ class Cms extends CI_Controller {
                 $res = $this->cms_model->update($postdata, $where_array);
                 if ($res) {
                     $this->session->set_flashdata('flash_message', '<i class="icon fa fa-check" aria-hidden="true"></i>Updated successfully.');
-                    $this->session->set_flashdata('flash_message_css', 'alert-success');
+                    $this->session->set_flashdata('flash_message_css', 'bg-success text-white');
                     redirect(current_url());
                 }
             }
@@ -243,8 +239,8 @@ class Cms extends CI_Controller {
         $res = $this->cms_model->delete($where_array);
         if ($res) {
             $this->session->set_flashdata('flash_message', '<strong>Deleted </strong> successfully.');
-            $this->session->set_flashdata('flash_message_css', 'alert-success');
-            redirect($this->router->directory.'cms');
+            $this->session->set_flashdata('flash_message_css', 'bg-success text-white');
+            redirect($this->router->directory.$this->router->class);
         }
     }
 

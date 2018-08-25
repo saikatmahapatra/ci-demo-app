@@ -105,11 +105,11 @@ class Contact extends CI_Controller {
                 //die($html);
                 if ($eml == true) {
                     $this->session->set_flashdata('flash_message', '<i class="icon fa fa-check" aria-hidden="true"></i> Email sent.');
-                    $this->session->set_flashdata('flash_message_css', 'alert-success');
+                    $this->session->set_flashdata('flash_message_css', 'bg-success text-white');
                     redirect(current_url());
                 } else {
                     $this->session->set_flashdata('flash_message', '<strong>Oops!</strong>Email not sent.');
-                    $this->session->set_flashdata('flash_message_css', 'alert-danger');
+                    $this->session->set_flashdata('flash_message_css', 'bg-danger text-white');
                     redirect(current_url());
                 }
             } else {

@@ -160,7 +160,7 @@ class Order extends CI_Controller {
 					$res = $this->order_model->update_batch($postdata, 'id', NULL);
 					if ($res) {
 						$this->session->set_flashdata('flash_message', '<i class="icon fa fa-check" aria-hidden="true"></i>Order updated successfully.');
-						$this->session->set_flashdata('flash_message_css', 'alert-success');
+						$this->session->set_flashdata('flash_message_css', 'bg-success text-white');
 						redirect($this->router->directory.'order/edit/'.$this->id);
 					}
 				}

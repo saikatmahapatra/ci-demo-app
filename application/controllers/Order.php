@@ -126,7 +126,7 @@ class Order extends CI_Controller {
                 die();
             }
             $this->session->set_flashdata('flash_message', 'Item has been added to your cart');
-            $this->session->set_flashdata('flash_message_css', 'alert-success');
+            $this->session->set_flashdata('flash_message_css', 'bg-success text-white');
             redirect('order/my_cart');
         }
     }
@@ -141,7 +141,7 @@ class Order extends CI_Controller {
             $result = $this->cart->update($data);
         }
         $this->session->set_flashdata('flash_message', 'You cart has been updated successfully.');
-        $this->session->set_flashdata('flash_message_css', 'alert-success');
+        $this->session->set_flashdata('flash_message_css', 'bg-success text-white');
         redirect('order/my_cart');
     }
 
@@ -153,14 +153,14 @@ class Order extends CI_Controller {
         );
         $result = $this->cart->update($data);
         $this->session->set_flashdata('flash_message', 'Item has been removed from your cart');
-        $this->session->set_flashdata('flash_message_css', 'alert-success');
+        $this->session->set_flashdata('flash_message_css', 'bg-success text-white');
         redirect('order/my_cart');
     }
 
     function remove_all() {
         $result = $this->cart->destroy();
         $this->session->set_flashdata('flash_message', 'Item has been removed from your cart');
-        $this->session->set_flashdata('flash_message_css', 'alert-success');
+        $this->session->set_flashdata('flash_message_css', 'bg-success text-white');
         redirect('order/my_cart');
     }
 	
@@ -291,7 +291,7 @@ class Order extends CI_Controller {
 			$this->order_model->insert_batch($order_details_post_data, 'order_details');
 			
 			$this->session->set_flashdata('flash_message', 'Thank you! We have received your order. Your Order Number '.$order_number.' Payment Done (Test)');
-			$this->session->set_flashdata('flash_message_css', 'alert-success');
+			$this->session->set_flashdata('flash_message_css', 'bg-success text-white');
 			redirect('order/transaction_response');
 		}
     }
