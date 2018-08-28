@@ -408,7 +408,16 @@ class User extends CI_Controller {
         }
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
-        $rows = $this->user_model->get_rows($this->sess_user_id);		
+        $rows = $this->user_model->get_rows($this->sess_user_id);	
+		$user_id = $this->sess_user_id;
+		$this->data['my_profile'] = TRUE;
+		/*if($this->sess_user_id == $user_id){
+			$this->data['my_profile'] = TRUE;
+		}*/
+        $rows = $this->user_model->get_rows($user_id);
+		//$this->data['profile_pic'] = $this->user_model->get_uploads('user', $user_id, NULL, 'profile_pic');
+		$res_pic = $this->user_model->get_user_profile_pic($user_id);
+		$this->data['profile_pic'] = $res_pic[0]['user_profile_pic'];
         $this->data['row'] = $rows['data_rows'];
 		$this->data['address'] = $this->user_model->get_user_address(NULL,$this->sess_user_id,NULL);
 		$this->data['education'] = $this->user_model->get_user_education(NULL, $this->sess_user_id);
@@ -453,6 +462,151 @@ class User extends CI_Controller {
         $this->load->view($this->data['view_dir'].'_layouts/layout_default', $this->data);
     }
 	
+	function profile_pic() {
+        ########### Validate User Auth #############
+        $is_logged_in = $this->common_lib->is_logged_in();
+        if ($is_logged_in == FALSE) {
+			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
+            redirect($this->router->directory.$this->router->class.'/login');
+        }
+        //Has logged in user permission to access this page or method?        
+        /*$this->common_lib->check_user_role_permission(array(           
+            'default-user-access',
+        ));*/
+        ########### Validate User Auth End #############
+        $this->data['alert_message'] = $this->session->flashdata('flash_message');
+        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
+        
+		$this->data['user_id'] = $this->sess_user_id;
+		
+		$res_pic = $this->user_model->get_user_profile_pic($this->sess_user_id);
+		$this->data['profile_pic'] = $res_pic[0]['user_profile_pic'];
+		
+        if ($this->input->post('form_action') == 'file_upload') {
+            $this->upload_file();
+        }
+	
+		$this->data['page_heading'] = 'Profile Photo';
+        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].$this->router->class.'/profile_pic', $this->data, true);
+        $this->load->view($this->data['view_dir'].'_layouts/layout_default', $this->data);
+    }
+	
+	function validate_uplaod_form_data() {
+        //$this->form_validation->set_rules('userfile', 'file selection field', 'required');        
+        //$this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
+        //if ($this->form_validation->run() == true) {
+            return true;
+        //} else {
+            //return false;
+        //}
+    }
+	
+	function upload_file() {
+        if ($this->validate_uplaod_form_data() == true) {
+            $upload_object_name = 'user';
+            $upload_object_id = $this->sess_user_id;
+            $upload_document_type_name = 'profile_pic';
+
+            //Create directory for object specific
+            $upload_path = 'assets/uploads/user/profile_pic';
+            if (!is_dir($upload_path)) {
+                mkdir($upload_path, 0777, TRUE);
+            }
+            $allowed_ext = 'png|jpg|jpeg|doc|docx|pdf';
+            if ($upload_document_type_name == 'profile_pic') {
+                $allowed_ext = 'jpg|jpeg';
+            }
+            $upload_param = array(
+                'upload_path' => $upload_path, // original upload folder
+                'allowed_types' => $allowed_ext, // allowed file types,
+                'max_size' => '2048', // max 1MB size,
+                'file_new_name' => $upload_object_id . '_' . md5($upload_document_type_name . '_' . time()),
+				'thumb_img_require' => TRUE,
+				'thumb_img_path'=>$upload_path,
+				'thumb_img_width'=>'250',
+				'thumb_img_height'=>'300'
+            );
+            $upload_result = $this->common_lib->upload_file('userfile', $upload_param);
+            if (isset($upload_result['file_name']) && empty($upload_result['upload_error'])) {
+                $uploaded_file_name = $upload_result['file_name'];
+                /*$postdata = array(
+                    'upload_object_name' => $upload_object_name,
+                    'upload_object_id' => $upload_object_id,
+                    'upload_document_type_name' => $upload_document_type_name,
+                    'upload_file_name' => $uploaded_file_name,
+                    'upload_mime_type' => $upload_result['file_type'],
+                    'upload_by_user_id' => $this->sess_user_id
+                );*/
+				
+				$postdata = array(                    
+                    'user_profile_pic' => $uploaded_file_name
+                );
+				$where_array = array('id'=>$this->sess_user_id);
+				
+
+                //Check if already 1 file of same upload_document_type_name is uploaded, over ride it.
+				//If you do not want to override, want to keep multiple uploaded copy, 
+				//add those upload_document_type_name in skip_checking_existing_doc_type_name array
+                $skip_checking_existing_doc_type_name = array();
+
+                if (!in_array($upload_document_type_name, $skip_checking_existing_doc_type_name)) {
+                    $uploads = $this->user_model->get_uploads($upload_object_name, $upload_object_id, NULL, $upload_document_type_name);
+                }
+                if (isset($uploads[0]) && ($uploads[0]['id'] != '')) {
+                    //Unlink previously uploaded file                    
+                    $file_path = $upload_param['upload_path'] . '/' . $uploads[0]['upload_file_name'];
+                    if (file_exists(FCPATH . $file_path)) {
+                        $this->common_lib->unlink_file(array(FCPATH . $file_path));
+                    }
+                    // Now update table
+                    //$update_upload = $this->user_model->update($postdata, array('id' => $uploads[0]['id']), 'uploads');
+                    $update_upload = $this->user_model->update($postdata, $where_array);
+                    $this->session->set_flashdata('flash_message', '<i class="icon fa fa-check" aria-hidden="true"></i> File uploaded successfully.');
+                    $this->session->set_flashdata('flash_message_css', 'bg-success text-white');
+                    redirect(current_url());
+                } else {
+                    //$upload_insert_id = $this->user_model->insert($postdata, 'uploads');
+                    $update_upload = $this->user_model->update($postdata, $where_array);
+                    $this->session->set_flashdata('flash_message', '<i class="icon fa fa-check" aria-hidden="true"></i> File uploaded successfully.');
+                    $this->session->set_flashdata('flash_message_css', 'bg-success text-white');
+                    redirect(current_url());
+                }
+            } else if (sizeof($upload_result['upload_error']) > 0) {
+                $error_message = $upload_result['upload_error'];
+                $this->session->set_flashdata('flash_message', '<strong>Error!</strong> ' . $error_message);
+                $this->session->set_flashdata('flash_message_css', 'bg-danger text-white');
+                redirect(current_url());
+            }
+        }
+    }
+	
+	function delete_profile_pic(){
+		$uploaded_file_id = $this->uri->segment(3);
+		$uploaded_file_name = $this->uri->segment(4);
+		//if($uploaded_file_name){
+			//Unlink previously uploaded file                    
+			$file_path = 'assets/uploads/user/profile_pic/'.$uploaded_file_name;
+			if (file_exists(FCPATH . $file_path)) {
+				$this->common_lib->unlink_file(array(FCPATH . $file_path));
+				//$res = $this->user_model->delete(array('id'=>$uploaded_file_id),'uploads');
+				$postdata = array(                    
+                    'user_profile_pic' => NULL
+                );
+				$where_array = array('id'=>$this->sess_user_id);
+				$res = $this->user_model->update($postdata, $where_array);
+				if($res){
+					$this->session->set_flashdata('flash_message', 'Profile picture has been deleted.');
+					$this->session->set_flashdata('flash_message_css', 'bg-success text-white');
+					redirect($this->router->directory.$this->router->class.'/profile_pic');
+				}else{
+					$this->session->set_flashdata('flash_message', 'Error occured while processing your request.');
+					$this->session->set_flashdata('flash_message_css', 'bg-danger text-white');
+					redirect($this->router->directory.$this->router->class.'/profile_pic');
+				}
+			}
+		//}
+	}
+	
 	function validate_user_address_form_data($mode) {
 		if($mode == 'add'){
 			$this->form_validation->set_rules('address_type', 'address type selection', 'required');        
@@ -474,6 +628,8 @@ class User extends CI_Controller {
             return false;
         }
     }
+	
+
 	
 	function add_address() {
         $is_logged_in = $this->common_lib->is_logged_in();

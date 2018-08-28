@@ -8498,11 +8498,6 @@ select.form-control.dob-inline {
   /*-webkit-font-smoothing:antialiased;*/
 }
 
-.more-less {
-  float: right;
-  color: #212121;
-}
-
 .ci-calendar {
   border: 5px solid #2672EC;
   margin-top: 15px;
