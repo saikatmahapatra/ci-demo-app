@@ -47,8 +47,9 @@
         <!-- Bootstrap dependency popper.js -->
         <script src="<?php echo base_url('assets/vendors/popper.js/dist/umd/popper.min.js'); ?>"></script>
         <!-- Bootstrap Core JavaScript -->
-        <script src="<?php echo base_url('assets/vendors/bootstrap/dist/js/bootstrap.min.js'); ?>"></script>               
-        	
+        <script src="<?php echo base_url('assets/vendors/bootstrap/dist/js/bootstrap.min.js'); ?>"></script>                       
+		<!-- Pace JS for page load progress -->
+		<script src="<?php echo base_url('assets/vendors/pace-js/pace.min.js'); ?>"></script>
         <!--Application Specific JS Loading Through Controllers-->
         <?php echo isset($app_js) ? $app_js : ''; ?>
     </body>

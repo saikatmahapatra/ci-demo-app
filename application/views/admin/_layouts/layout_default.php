@@ -47,7 +47,8 @@
     <script src="<?php echo base_url('assets/vendors/datatables.net/js/jquery.dataTables.js'); ?>"></script>    
     <!-- Bootstrap4 DataTables JavaScript -->
     <script src="<?php echo base_url('assets/vendors/datatables.net-bs4/js/dataTables.bootstrap4.js'); ?>"></script>    
-	
+	<!-- Pace JS for page load progress -->
+	<script src="<?php echo base_url('assets/vendors/pace-js/pace.min.js'); ?>"></script>
     <!-- CK Editor -->
     <script src="https://cdn.ckeditor.com/4.5.7/standard/ckeditor.js"></script>	
 	<!--Application Specific JS Loading Through Controllers-->

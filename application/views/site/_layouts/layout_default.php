@@ -46,7 +46,9 @@
 		<!-- jQuery DataTables Core JavaScript -->
 		<script src="<?php echo base_url('assets/vendors/datatables.net/js/jquery.dataTables.js'); ?>"></script>    
 		<!-- Bootstrap4 DataTables JavaScript -->
-		<script src="<?php echo base_url('assets/vendors/datatables.net-bs4/js/dataTables.bootstrap4.js'); ?>"></script>		
+		<script src="<?php echo base_url('assets/vendors/datatables.net-bs4/js/dataTables.bootstrap4.js'); ?>"></script>		<!-- Bootstrap4 DataTables JavaScript -->
+		<!-- Pace JS for page load progress -->
+		<script src="<?php echo base_url('assets/vendors/pace-js/pace.min.js'); ?>"></script>		
         	
         <!--Application Specific JS Loading Through Controllers-->
         <?php echo isset($app_js) ? $app_js : ''; ?>
