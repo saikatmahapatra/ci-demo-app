@@ -15,7 +15,7 @@ $segment3 = $this->uri->segment(3);
 	</button>
 
 	<div class="collapse navbar-collapse" id="navbarsExampleDefault">
-		<ul class="navbar-nav">
+		<ul class="navbar-nav mr-auto">
 			<li class="nav-item <?php echo ($segment2=='home') ? 'active':''?>">
 				<a class="nav-link" href="<?php echo site_url('admin/home'); ?>">Home
 					<span class="sr-only">(current)</span>
@@ -67,19 +67,20 @@ $segment3 = $this->uri->segment(3);
 			<li class="nav-item">
 				<a class="nav-link" href="<?php echo site_url('admin/order'); ?>">Orders</a>
 			</li>
-			
-			<?php if (isset($this->session->userdata['sess_user']['id'])) {	?>
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"><i aria-hidden="true" class="fa fa-user-circle"></i> My Account </a>
+		</ul>
+		<ul class="navbar-nav my-2 my-lg-0">
+			<?php if (isset($this->session->userdata['sess_user']['id'])) {   ?>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false">Welcome, <?php echo isset($this->session->userdata['sess_user']['user_title'])? $this->session->userdata['sess_user']['user_title']:''; ?> <?php echo isset($this->session->userdata['sess_user']['user_firstname']) ? $this->session->userdata['sess_user']['user_firstname'].' '.$this->session->userdata['sess_user']['user_lastname']:'Guest';?></a>
 				<div class="dropdown-menu" aria-labelledby="dropdown03">
 					
 					<div class="dropdown-item welcome-user-container">
 					<!--<a class="dropdown-item" href="#">-->				
-						<div class=""><?php echo isset($this->session->userdata['sess_user']['user_firstname']) ? $this->session->userdata['sess_user']['user_firstname'].' '.$this->session->userdata['sess_user']['user_lastname']:'Guest';?></div>
+						<div class=""><?php echo isset($this->session->userdata['sess_user']['user_title'])? $this->session->userdata['sess_user']['user_title']:''; ?> <?php echo isset($this->session->userdata['sess_user']['user_firstname']) ? $this->session->userdata['sess_user']['user_firstname'].' '.$this->session->userdata['sess_user']['user_lastname']:'Guest';?></div>
 						<div class="small"><?php echo isset($this->session->userdata['sess_user']['user_email']) ? $this->session->userdata['sess_user']['user_email'] :'';?></div>
 						<div class="small">Role: <?php echo isset($this->session->userdata['sess_user']['user_role_name']) ? $this->session->userdata['sess_user']['user_role_name'] :'';?></div>
-						<div class="small d-none">Last Login: DD/MM/YYYY HH:MM am</div>
+						<div class="small">Last Login: <?php echo isset($this->session->userdata['sess_user']['user_login_date_time']) ? $this->session->userdata['sess_user']['user_login_date_time'] :'';?></div>
 					<!--</a>-->
 					</div><!--/.welcome-user-container-->
 					
@@ -88,10 +89,13 @@ $segment3 = $this->uri->segment(3);
 					<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'user/change_password'); ?>">Change Password</a>
 					<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'user/logout'); ?>">Logout</a>			
 				</div>
-				</li>
-			<?php } ?>
+			</li>
+			<?php  } ?>				
 			
-
+			<li class="nav-item">
+				<a class="nav-link" href="<?php echo base_url($this->router->directory.'user/logout'); ?>">
+					<i class="fa fa-power-off"></i> Logout</a>
+			</li>
 		</ul>
 	</div>
 </nav>
