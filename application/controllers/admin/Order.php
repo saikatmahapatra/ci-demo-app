@@ -85,7 +85,7 @@ class Order extends CI_Controller {
             $no++;
             $row = array();
             $row[] = isset($result['order_no']) ? $result['order_no'] : '';
-            $row[] = date('d/m/Y H:i:s', strtotime($result['order_datetime']));
+            $row[] = $this->common_lib->display_date($result['order_datetime'],true);
 			$amt_wrapper = ($result['order_payment_debit_credit']=='C') ? '' : '';
             $row[] = isset($result['order_total_amt']) ? '<span class="'.$amt_wrapper.'"> &#8377;'.$result['order_total_amt'].'</span>' : '';
             $row[] = isset($result['order_payment_status']) ? $result['order_payment_status'] : '';

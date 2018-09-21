@@ -129,7 +129,7 @@
         
         <div class="row">
             <div class="col-md-2">Date of Birth</div>
-            <div class="col-md-4"><?php echo isset($row['user_dob']) ? date('d-m-Y', strtotime($row['user_dob'])) : ''; ?></div>
+            <div class="col-md-4"><?php echo isset($row['user_dob']) ? $this->common_lib->display_date($row['user_dob']) : ''; ?></div>
             <div class="col-md-2">Gender</div>
             <div class="col-md-4"><?php echo isset($row['user_gender']) ? (($row['user_gender'] == 'M') ? 'Male' : 'Female') : ''; ?></div>
         </div>
