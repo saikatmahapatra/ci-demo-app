@@ -168,8 +168,8 @@
 								</div>
 							</div>
 							<div class="col-md-2">			
-								<a href="<?php echo base_url($this->router->directory.'user/edit_address/'.$addr["id"]);?>" class="btn btn-outline-secondary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></a>
-								<a href="<?php echo base_url($this->router->directory.'user/delete_address/'.$addr["id"]);?>" class="btn btn-outline-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></a>
+								<a href="<?php echo base_url($this->router->directory.'user/edit_address/'.$this->common_lib->encode($addr["id"]));?>" class="btn btn-outline-secondary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></a>
+								<a href="<?php echo base_url($this->router->directory.'user/delete_address/'.$this->common_lib->encode($addr["id"]));?>" class="btn btn-outline-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></a>
 							</div>
 						</div>
 						<!--/.row-->
@@ -208,8 +208,8 @@
 								<td><?php echo isset($edu['institute_name']) ? $edu['institute_name']: $edu['academic_other_inst'];?></td>
 								<td><?php echo isset($edu['academic_marks_percentage'])?$edu['academic_marks_percentage']:'';?></td>
 								<td>
-									<a href="<?php echo base_url($this->router->directory.'user/edit_education/'.$edu["id"]);?>" class="btn btn-outline-secondary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></a>
-									<a href="<?php echo base_url($this->router->directory.'user/delete_education/'.$edu["id"]);?>" class="btn btn-outline-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></a>
+									<a href="<?php echo base_url($this->router->directory.'user/edit_education/'.$this->common_lib->encode($edu["id"]));?>" class="btn btn-outline-secondary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></a>
+									<a href="<?php echo base_url($this->router->directory.'user/delete_education/'.$this->common_lib->encode($edu["id"]));?>" class="btn btn-outline-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></a>
 								</td>
 								
 							</tr>

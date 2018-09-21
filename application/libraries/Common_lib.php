@@ -384,7 +384,7 @@ class Common_lib {
             $result = array('is_granted' => TRUE, 'status' => '6', 'message' => 'no permissions checking array passed');
         }
         //print_r($result);
-        //die();
+        //die();;
         if ($redirect == TRUE && $result['is_granted'] == FALSE) {
             $uri = isset($redirect_uri) ? $redirect_uri : $this->router->directory.'/user/auth_error';
             redirect($uri);
@@ -412,7 +412,28 @@ class Common_lib {
 			return date('d-m-Y',strtotime($date));
 		}		
 	}
-
+	
+	/* URL-safe encoding */	
+	function encode($string, $key="", $url_safe=TRUE){
+		$output = $string;
+		$required_encryption = true;
+		$this->CI->load->library('MY_Encrypt');
+		if($required_encryption==true){
+			$output =  $this->CI->my_encrypt->encode($string, $key="", $url_safe=TRUE);
+		}
+		return $output;
+	}
+	
+	/* URL-safe decoding */
+	function decode($string, $key=""){
+		$output = $string;
+		$required_encryption = true;
+		$this->CI->load->library('MY_Encrypt');
+		if($required_encryption==true){
+			$output =  $this->CI->my_encrypt->decode($string, $key="");
+		}
+		return $output;
+	}
 }
 
 ?>

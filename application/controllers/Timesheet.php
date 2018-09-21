@@ -219,13 +219,13 @@ class Timesheet extends CI_Controller {
             
             //add html for action
             $action_html = '<span class="float-right">';
-            /*$action_html.= anchor(base_url($this->router->directory.'timesheet/edit/' . $result['id']), '<i class="fa fa-edit" aria-hidden="true"></i>', array(
+            /*$action_html.= anchor(base_url($this->router->directory.'timesheet/edit/' .$this->common_lib->encode($result['id'])), '<i class="fa fa-edit" aria-hidden="true"></i>', array(
                 'class' => 'text-dark mr-2',
                 'data-toggle' => 'tooltip',
                 'data-original-title' => 'Edit',
                 'title' => 'Edit',
             ));*/            
-            $action_html.= anchor(base_url($this->router->directory.'timesheet/delete/' . $result['id']), '<i class="fa fa-trash" aria-hidden="true"></i>', array(
+            $action_html.= anchor(base_url($this->router->directory.'timesheet/delete/' . $this->common_lib->encode($result['id'])), '<i class="fa fa-trash" aria-hidden="true"></i>', array(
                 'class' => 'text-danger btn-delete ml-2',
 				'data-confirmation'=>false,
 				'data-confirmation-message'=>'Are you sure, you want to delete this?',
@@ -254,7 +254,7 @@ class Timesheet extends CI_Controller {
     }
 	
 	function delete() {
-		$this->id= $this->uri->segment(3);
+		$this->id= $this->common_lib->decode($this->uri->segment(3));
         $where_array = array('id' => $this->id);
         $res = $this->timesheet_model->delete($where_array);
         if ($res) {

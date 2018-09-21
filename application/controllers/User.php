@@ -676,7 +676,7 @@ class User extends CI_Controller {
         }
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
-		$address_id = $this->uri->segment(3);        
+		$address_id = $this->common_lib->decode($this->uri->segment(3));        
         $this->data['address'] = $this->user_model->get_user_address($address_id, $this->sess_user_id,NULL);
 
         if ($this->input->post('form_action') == 'update_address') {
@@ -717,7 +717,7 @@ class User extends CI_Controller {
         }
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
-		$address_id = $this->uri->segment(3);        
+		$address_id = $this->common_lib->decode($this->uri->segment(3));
         $this->data['address'] = $this->user_model->get_user_address($address_id, $this->sess_user_id,NULL);
 		$where = array('id'=>$address_id, 'user_id' => $this->sess_user_id);
 		$res = $this->user_model->delete($where,'user_addresses');
@@ -859,7 +859,7 @@ class User extends CI_Controller {
         }
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
-		$education_id = $this->uri->segment(3);
+		$education_id = $this->common_lib->decode($this->uri->segment(3));
 		$this->data['arr_academic_qualification'] = $this->user_model->get_qualification_dropdown();
 		$this->data['arr_academic_inst'] = $this->user_model->get_institute_dropdown();
 		$this->data['arr_academic_specialization'] = $this->user_model->get_specialization_dropdown();
@@ -899,7 +899,7 @@ class User extends CI_Controller {
         }
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
-		$id = $this->uri->segment(3);
+		$id = $this->common_lib->decode($this->uri->segment(3));
 		$where = array('id'=>$id, 'user_id' => $this->sess_user_id);
 		$res = $this->user_model->delete($where,'user_academics');
 		if ($res) {

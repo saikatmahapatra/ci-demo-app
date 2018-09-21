@@ -91,7 +91,7 @@ class Order extends CI_Controller {
     }
 
     function add_to_cart() {
-        $product_id = $this->input->get_post('product_id') ? $this->input->get_post('product_id') : $this->uri->segment(3);
+        $product_id = $this->input->get_post('product_id') ? $this->input->get_post('product_id') : $this->common_lib->decode($this->uri->segment(3));
         $result = $this->find_item($product_id);
         $qty = ($this->input->get_post('quantity') > 0) ? $this->input->get_post('quantity') : '1';
 

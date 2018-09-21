@@ -58,7 +58,7 @@ $segment3 = $this->uri->segment(3);
 					</div><!--/.welcome-user-container-->
 					
 					<div class="dropdown-divider mt-3"></div>			
-					<a class="dropdown-item"  href="<?php echo base_url($this->router->directory.'user/profile/'.$this->session->userdata['sess_user']['id']); ?>">Profile</a>
+					<a class="dropdown-item"  href="<?php echo base_url($this->router->directory.'user/profile/'.$this->common_lib->encode($this->session->userdata['sess_user']['id'])); ?>">Profile</a>
 					<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'user/change_password'); ?>">Change Password</a>
 					<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'user/logout'); ?>">Logout</a>			
 				</div>

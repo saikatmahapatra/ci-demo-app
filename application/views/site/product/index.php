@@ -38,7 +38,7 @@
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                       <a href="<?php echo base_url($this->router->directory.'product/index/');?>" class="btn btn-info">Details</a>
-                      <a href="<?php echo base_url($this->router->directory.'order/add_to_cart/'. $product['id']);?>" class="btn btn-primary">Add to cart</a>
+                      <a href="<?php echo base_url($this->router->directory.'order/add_to_cart/'.$this->common_lib->encode($product['id']));?>" class="btn btn-primary">Add to cart</a>
                     </div>
                     <small class="text-muted">9 reviews</small>
                   </div>
