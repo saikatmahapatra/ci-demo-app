@@ -39,7 +39,7 @@ class Category extends CI_Controller {
         
         
         $this->load->model('category_model');
-        $this->id = $this->uri->segment(4);
+        $this->id = $this->common_lib->decode($this->uri->segment(4));
         $this->data['alert_message'] = NULL;
         $this->data['alert_message_css'] = NULL;
         $this->data['category_dropdown'] = $this->category_model->get_category_dropdown();
@@ -88,14 +88,14 @@ class Category extends CI_Controller {
             $row[] = $result['category_status'];
             //add html for action
             $action_html = '';
-            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/edit/' . $result['id']), '<i class="fa fa-edit" aria-hidden="true"></i>', array(
+            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/edit/' . $this->common_lib->encode($result['id'])), '<i class="fa fa-edit" aria-hidden="true"></i>', array(
                 'class' => 'text-dark mr-1',
                 'data-toggle' => 'tooltip',
                 'data-original-title' => 'Edit',
                 'title' => 'Edit',
             ));
             $action_html.='&nbsp;';
-            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/delete/' . $result['id']), '<i class="fa fa-trash" aria-hidden="true"></i>', array(
+            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/delete/' . $this->common_lib->encode($result['id'])), '<i class="fa fa-trash" aria-hidden="true"></i>', array(
                 'class' => 'text-danger btn-delete ml-1',
 				'data-confirmation'=>true,
 				'data-confirmation-message'=>'Are you sure, you want to delete this?',				
@@ -193,7 +193,7 @@ class Category extends CI_Controller {
                 }
             }
         }
-        $result_array = $this->category_model->get_rows($this->uri->segment(4));
+        $result_array = $this->category_model->get_rows($this->common_lib->decode($this->uri->segment(4)));
         $this->data['rows'] = $result_array['data_rows'];
 		$this->data['page_heading'] = 'Edit Product Category';
         $this->data['maincontent'] = $this->load->view($this->data['view_dir'].$this->router->class.'/edit', $this->data, true);

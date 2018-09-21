@@ -159,7 +159,7 @@ class User extends CI_Controller {
             $acc_status_text = ($result['user_account_active'] == 'Y') ? 'Deactivate Account' : 'Activate Account';
             $acc_status_class = ($result['user_account_active'] == 'Y') ? 'text-info' : 'text-info';
             $acc_status_set = ($result['user_account_active'] == 'Y') ? 'N' : 'Y';
-            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/profile/' . $result['id']), '<i class="fa fa-eye" aria-hidden="true"></i>', array(
+            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/profile/' . $this->common_lib->encode($result['id'])), '<i class="fa fa-eye" aria-hidden="true"></i>', array(
                 'class' => 'text-secondary mr-1',
                 'data-toggle' => 'tooltip',
                 'data-original-title' => 'View Profile',

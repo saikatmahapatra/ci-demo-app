@@ -147,7 +147,7 @@
   <div class="tab-pane fade" id="nav-address" role="tabpanel" aria-labelledby="nav-address-tab">
 	<div class="row mt-3">
 		<div class="col-md-12">
-		<a class="btn btn-primary btn-sm" href="<?php echo base_url($this->router->directory.'user/add_address');?>"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add New</a>
+		<a class="btn btn-primary btn-sm" href="<?php echo base_url($this->router->directory.'user/add_address');?>"> Add New</a>
 			<!--<h6>Communication Address</h6><hr>-->
 				<?php if(isset($address)){
 					foreach($address as $key=>$addr){
@@ -184,7 +184,7 @@
   <div class="tab-pane fade" id="nav-education" role="tabpanel" aria-labelledby="nav-education-tab">
 	<div class="row mt-3">
 		<div class="col-md-12">
-			<a class="btn btn-primary btn-sm" href="<?php echo base_url($this->router->directory.'user/add_education');?>"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add New</a>
+			<a class="btn btn-primary btn-sm" href="<?php echo base_url($this->router->directory.'user/add_education');?>"> Add New</a>
 			<!--<h6>Educational Qualification</h6><hr>-->
 				<table class="table table-sm mt-1">
 					<thead>
@@ -226,7 +226,7 @@
   <div class="tab-pane fade" id="nav-exp" role="tabpanel" aria-labelledby="nav-exp-tab">
 	<div class="row mt-3">
 		<div class="col-md-12">
-		<a class="btn btn-primary btn-sm" href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add New</a>
+		<a class="btn btn-primary btn-sm" href="#"> Add New</a>
 		</div>
 	</div>
   </div><!--/#nav-exp-->

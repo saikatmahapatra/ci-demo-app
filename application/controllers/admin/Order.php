@@ -41,7 +41,7 @@ class Order extends CI_Controller {
         $this->load->model('order_model');
         $this->data['alert_message'] = NULL;
         $this->data['alert_message_css'] = NULL;
-        $this->id = $this->uri->segment(4);
+        $this->id = $this->common_lib->decode($this->uri->segment(4));
 
         //View Page Config
 		$this->data['view_dir'] = 'admin/'; // inner view and layout directory name inside application/view
@@ -100,7 +100,7 @@ class Order extends CI_Controller {
 
             //add html for action
             $action_html = '';
-            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/edit/' . $result['id']), '<i class="fa fa-edit" aria-hidden="true"></i>', array(
+            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/edit/' . $this->common_lib->encode($result['id'])), '<i class="fa fa-edit" aria-hidden="true"></i>', array(
                 'class' => 'text-dark mr-1',
                 'data-toggle' => 'tooltip',
                 'data-original-title' => 'Edit',
