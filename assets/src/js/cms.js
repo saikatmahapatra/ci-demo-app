@@ -14,6 +14,16 @@ function domReady(){
 	if(ROUTER_METHOD == 'add' || ROUTER_METHOD == 'edit'){
 		
 	}
+	
+	// Classic CK Editor
+	ClassicEditor
+    .create( document.querySelector('#pagecontent_text') )
+    .then( editor => {
+        console.log( editor );
+    } )
+    .catch( error => {
+        console.error( error );
+    } );
 }
 
 
