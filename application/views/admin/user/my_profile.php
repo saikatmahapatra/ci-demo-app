@@ -41,7 +41,8 @@
 	}
 	?>
 	<div class="profile-pic">
-		<img class="img align-self-start mr-3 dp" src="<?php echo base_url($img_src);?>">		
+		<img class="img align-self-start mr-3 dp" src="<?php echo base_url($img_src);?>">
+		<div class="edit"><a href="<?php echo base_url($this->router->directory.'user/profile_pic');?>"><i class="fa fa-pencil"></i> Change</a></div>
 	</div>
   <div class="media-body">
     <h5 class="mt-0">
@@ -63,7 +64,8 @@
         
     </div>            
     <div>
-        <?php echo (isset($row['user_bio']) && strlen($row['user_bio'])>0) ? $row['user_bio'] : '<span class="text-muted">Describe who you are...</span>'; ?>        
+        <?php echo (isset($row['user_bio']) && strlen($row['user_bio'])>0) ? $row['user_bio'] : '<span class="text-muted">Describe who you are...</span>'; ?>
+        <a href="<?php echo base_url($this->router->directory.'user/edit_profile');?>">Edit</a>
     </div>
     <!--<hr style="m-8 auto">
     <span class="label label-default">some text</span>
@@ -92,7 +94,8 @@
 <div class="tab-content" id="nav-tabContent">
   <div class="tab-pane fade show active" id="nav-basic" role="tabpanel" aria-labelledby="nav-basic-tab">
 	<div class="row mt-3">
-		<div class="col-md-12">        
+		<div class="col-md-12">
+        <a class="btn btn-primary btn-sm" href="<?php echo base_url($this->router->directory.'user/edit_profile');?>"> Edit</a>		
         <!--<h6>Basic Info</h6><hr>-->
         <div class="row">
             <div class="col-md-2">Name</div>
@@ -133,14 +136,15 @@
   
   <div class="tab-pane fade" id="nav-address" role="tabpanel" aria-labelledby="nav-address-tab">
 	<div class="row mt-3">
-		<div class="col-md-12">			
+		<div class="col-md-12">
+			<a class="btn btn-primary btn-sm" href="<?php echo base_url($this->router->directory.'user/add_address');?>">Add New</a>
 			<!--<h6>Communication Address</h6><hr>-->
 				<?php if(isset($address)){
 					foreach($address as $key=>$addr){
 					?>
 						<div class="row mb-3">
 							<div class="col-md-2"><?php echo isset($address_type[$addr['address_type']])?$address_type[$addr['address_type']]:'Address'; ?></div>
-							<div class="col-md-10">
+							<div class="col-md-8">
 								<div class="">
 									<?php echo isset($addr['name'])? $addr['name'].',&nbsp;' :'';?>
 									<?php echo isset($addr['phone1'])? $addr['phone1'].', ':'';?>
@@ -152,6 +156,10 @@
 								</div>
 								<div>
 								</div>
+							</div>
+							<div class="col-md-2">									
+								<a href="<?php echo base_url($this->router->directory.'user/edit_address/'.$addr["id"]);?>" class="btn btn-outline-secondary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></a>
+								<a href="<?php echo base_url($this->router->directory.'user/delete_address/'.$addr["id"]);?>" class="btn btn-outline-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></a>							
 							</div>
 						</div>
 						<!--/.row-->
@@ -165,7 +173,8 @@
   
   <div class="tab-pane fade" id="nav-education" role="tabpanel" aria-labelledby="nav-education-tab">
 	<div class="row mt-3">
-		<div class="col-md-12">			
+		<div class="col-md-12">
+			<a class="btn btn-primary btn-sm" href="<?php echo base_url($this->router->directory.'user/add_education');?>"> Add New</a>
 			<!--<h6>Educational Qualification</h6><hr>-->
 				<table class="table table-sm mt-1">
 					<thead>
@@ -175,6 +184,7 @@
 							<th>Duration</th>
 							<th>Institute/University</th>
 							<th>Marks(%)</th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -186,7 +196,12 @@
 								<td><?php echo isset($edu['specialization_name'])?$edu['specialization_name']:$edu['academic_other_specialization'];?></td>
 								<td><?php echo isset($edu['academic_from_year'])?$edu['academic_from_year'].'-'.$edu['academic_to_year']:'';?></td>
 								<td><?php echo isset($edu['institute_name']) ? $edu['institute_name']: $edu['academic_other_inst'];?></td>
-								<td><?php echo isset($edu['academic_marks_percentage'])?$edu['academic_marks_percentage']:'';?></td>																
+								<td><?php echo isset($edu['academic_marks_percentage'])?$edu['academic_marks_percentage']:'';?></td>
+								<td>
+									<a href="<?php echo base_url($this->router->directory.'user/edit_education/'.$edu["id"]);?>" class="btn btn-outline-secondary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></a>
+									<a href="<?php echo base_url($this->router->directory.'user/delete_education/'.$edu["id"]);?>" class="btn btn-outline-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></a>									
+								</td>
+								
 							</tr>
 						<?php
 						}
@@ -201,7 +216,7 @@
   <div class="tab-pane fade" id="nav-exp" role="tabpanel" aria-labelledby="nav-exp-tab">
 	<div class="row mt-3">
 		<div class="col-md-12">
-			
+		<a class="btn btn-primary btn-sm" href=""> Add New</a>
 		</div>
 	</div>
   </div><!--/#nav-exp-->

@@ -70,7 +70,7 @@ $segment3 = $this->uri->segment(3);
 		</ul>
 		<ul class="navbar-nav my-2 my-lg-0">
 			<?php if (isset($this->session->userdata['sess_user']['id'])) {   ?>
-			<li class="nav-item dropdown <?php echo ($segment2 == 'profile' || $segment2 == 'change_password') ? 'active':''?>">
+			<li class="nav-item dropdown <?php echo ($segment2 == 'my_profile' || $segment2 == 'change_password') ? 'active':''?>">
 				<a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true"
 				aria-expanded="false"><i aria-hidden="true" class="fa fa-user"></i> Hi, <?php echo isset($this->session->userdata['sess_user']['user_firstname']) ? $this->session->userdata['sess_user']['user_firstname'].' '.$this->session->userdata['sess_user']['user_lastname']:'Guest';?></a>				
 				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown03">				
@@ -82,7 +82,7 @@ $segment3 = $this->uri->segment(3);
 					</div><!--/.welcome-user-container-->
 					
 					<div class="dropdown-divider mt-3"></div>			
-					<a class="dropdown-item"  href="<?php echo base_url($this->router->directory.'user/profile/'.$this->session->userdata['sess_user']['id']); ?>">Profile</a>
+					<a class="dropdown-item"  href="<?php echo base_url($this->router->directory.'user/my_profile/'); ?>">My Profile</a>
 					<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'user/change_password'); ?>">Change Password</a>
 					<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'user/logout'); ?>">Logout</a>			
 				</div>

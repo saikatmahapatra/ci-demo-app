@@ -39,14 +39,14 @@
 									$img_src = $default_path;
 								}
 								?>
-							 <a target="blank" href="<?php echo base_url($this->router->directory.'user/profile/'.$row['id']);?>">
+							 <a target="blank" href="<?php echo base_url($this->router->directory.'user/profile/'.$this->common_lib->encode($row['id']));?>">
 							 <img class="mr-3" style="width:80px; height: 80px;" src="<?php echo base_url($img_src);?>" alt="Generic placeholder image">
 							 </a>
 							  <div class="media-body">
 								<div><?php echo $row['user_firstname'].' '.$row['user_lastname']; ?></div>																
 								<div class=""><a href="mailto:<?php echo isset($row['user_email']) ? $row['user_email'] : ''; ?>"><?php echo isset($row['user_email']) ? $row['user_email'] : ''; ?></a></div>
 								<div class=""><a href="tel:<?php echo isset($row['user_phone1']) ? $row['user_phone1'] : ''; ?>"><?php echo isset($row['user_phone1']) ? $row['user_phone1'] : ''; ?></a></div>								
-								<!--<a href="<?php echo base_url($this->router->directory.'user/profile/'.$row['id']);?>" class="btn btn-info btn-sm">View Profile</a>-->
+								<!--<a href="<?php echo base_url($this->router->directory.'user/profile/'.$this->common_lib->encode($row['id']));?>" class="btn btn-info btn-sm">View Profile</a>-->
 							  </div>
 							</div>
 						</div>
