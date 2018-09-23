@@ -30,15 +30,15 @@ $segment3 = $this->uri->segment(3);
 			<a class="nav-link" href="<?php echo base_url($this->router->directory.'timesheet');?>">Timesheet</a>
 		</li>
 
-		<li class="nav-item dropdown <?php echo ($segment1 == 'ci_example') ? 'active':''?>">
+		<li class="nav-item dropdown <?php echo ($segment1 == 'example') ? 'active':''?>">
 			<a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true"
 				aria-expanded="false">Examples Modules</a>
 				<div class="dropdown-menu" aria-labelledby="dropdown02">                                
-					<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'ci_example/form_helper');?>">Form Helper</a>
-					<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'ci_example/date_helper');?>">Date Helper</a>
-					<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'ci_example/directory_helper');?>">Directory Helper</a>               
-					<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'ci_example/dom_pdf_gen_pdf');?>">Download as PDF/DOM PDF</a>					
-					<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'ci_example/calendar_lib');?>">Calendar Library</a>
+					<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'example/form_helper');?>">Form Helper</a>
+					<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'example/date_helper');?>">Date Helper</a>
+					<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'example/directory_helper');?>">Directory Helper</a>               
+					<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'example/dom_pdf_gen_pdf');?>">Download as PDF/DOM PDF</a>					
+					<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'example/calendar_lib');?>">Calendar Library</a>
 				</div>
 		</li>
 	</ul>
