@@ -47,11 +47,13 @@ class User_model extends CI_Model {
     }
 
     function get_rows($id = NULL, $limit = NULL, $offset = NULL, $dataTable = FALSE, $checkPaging = TRUE) {
-        $this->db->select('t1.*,t2.role_name, t2.role_weight');
+        $this->db->select('t1.*,t2.role_name, t2.role_weight,t3.department_name, t4.designation_name');
         if ($id) {
             $this->db->where('t1.id', $id);
         }
         $this->db->join('roles t2', 't1.user_role=t2.id', 'left');
+        $this->db->join('departments t3', 't1.user_department=t3.id', 'left');
+        $this->db->join('designations t4', 't1.user_designation=t4.id', 'left');
         ####################################################################
         ##################### Display using Data Table #####################
         ####################################################################
@@ -59,19 +61,23 @@ class User_model extends CI_Model {
             //set column field database for datatable orderable
             $column_order = array(
                 't1.user_firstname',
+                't1.user_emp_id',
                 't1.user_email',
-                't1.user_phone1',
-                't2.role_name',
+                't1.user_account_active',
                 NULL,
             );
             //set column field database(table column name) for datatable searchable
             $column_search = array(
                 't1.user_firstname',
+                't1.user_emp_id',
                 't1.user_lastname',
                 't1.user_email',
+                't1.user_email_secondary',
                 't1.user_phone1',
                 't1.user_phone2',
                 't2.role_name',
+				't3.department_name',
+				't4.designation_name',
             );
             // default order
             $order = array(
@@ -117,49 +123,22 @@ class User_model extends CI_Model {
         return array('num_rows' => $num_rows, 'data_rows' => $result);
     }
 
-    function authenticate_user_depricated($user_email, $user_password) {
-        $this->db->select('t1.id,t1.user_email,t1.user_firstname,t1.user_lastname,t1.user_role,t1.user_profile_pic,t1.user_account_active,t1.user_archived,t2.role_name,t2.role_weight');
-        $this->db->join('roles t2', 't1.user_role=t2.id');
-        $this->db->where(array(
-            't1.user_email' => $user_email,
-            't1.user_password' => $user_password,
-                /* 't1.user_account_active' => 'Y', 
-                  't1.user_archived' => 'N', */
-        ));
-        $query = $this->db->get('users as t1');
-        //echo $this->db->last_query();die();
-        if ($query->num_rows() > 0) {
-            $result = $query->result_array();
-            $row = $result[0];
-            $loggedin_data = array(
-                'id' => $row['id'],
-                'user_role' => $row['user_role'],
-                'user_role_name' => $row['role_name'],
-                'user_role_weight' => $row['role_weight'],
-                'user_firstname' => $row['user_firstname'],
-                'user_lastname' => $row['user_lastname'],
-                'user_email' => $row['user_email'],
-                'user_profile_pic' => $row['user_profile_pic'],
-            );
-            $this->session->set_userdata('sess_user', $loggedin_data);
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     function authenticate_user($user_email, $user_password) {
         $login_status = 'error';
         $message = '';
         $loggedin_data = array();
         $auth_result = array('status' => $login_status, 'message' => $message, 'data' => $loggedin_data);
 
-        $this->db->select('t1.id,t1.user_email,t1.user_firstname,t1.user_lastname,t1.user_role,t1.user_profile_pic,t1.user_account_active,t1.user_archived,t2.role_name,t2.role_weight, t1.user_login_date_time');
+        $this->db->select('t1.id,t1.user_email,t1.user_title, t1.user_firstname,t1.user_lastname,t1.user_role,t1.user_profile_pic,t1.user_account_active,t1.user_archived,t2.role_name,t2.role_weight,t1.user_login_date_time');
 		$this->db->join('roles t2', 't1.user_role=t2.id');
         $this->db->where(array(
             't1.user_email' => $user_email,
             't1.user_password' => $user_password
         ));
+		/*$this->db->or_where(array(
+            't1.user_emp_id' => $user_email,
+            't1.user_password' => $user_password
+        ));*/
         $query = $this->db->get('users as t1');
         //echo $this->db->last_query();die();
         if ($query->num_rows() > 0) {
@@ -167,12 +146,12 @@ class User_model extends CI_Model {
             $row = $result[0];            
             if (isset($row) && ($row['user_account_active'] == 'N')) {
                 $login_status = 'error';
-                $message = '<i class="icon fa fa-warning" aria-hidden="true"></i> Your account is not activated yet. Please activate your account to login.';
+                $message = 'Your account is not activated yet. Please activate your account to login.';
                 $auth_result = array('status' => $login_status,'message' => $message, 'data' => $loggedin_data);
                 return $auth_result;
             } else if (isset($row) && ($row['user_archived'] == 'Y')) {
                 $login_status = 'error';
-                $message = '<i class="icon fa fa-warning" aria-hidden="true"></i> Your account has been deactivated.';
+                $message = 'Your account has been deactivated.';
                 $auth_result = array('status' => $login_status, 'message' => $message, 'data' => $loggedin_data);
                 return $auth_result;
             } else {
@@ -182,11 +161,12 @@ class User_model extends CI_Model {
                     'id' => $row['id'],
                     'user_role' => $row['user_role'],
 					'user_role_name' => $row['role_name'],
+                    'user_title' => $row['user_title'],
                     'user_firstname' => $row['user_firstname'],
                     'user_lastname' => $row['user_lastname'],
                     'user_email' => $row['user_email'],
                     'user_profile_pic' => $row['user_profile_pic'],
-					'user_login_date_time' => $row['user_login_date_time'],
+                    'user_login_date_time' => $row['user_login_date_time'],
                 );
                 $auth_result = array('status' => $login_status, 'message' => $message, 'data' => $loggedin_data);
 				// update login date time
@@ -197,7 +177,7 @@ class User_model extends CI_Model {
             }
         } else {
             $login_status = 'error';
-            $message = '<i class="icon fa fa-warning" aria-hidden="true"></i> Login failed. Please try again.';
+            $message = 'Login failed. Please try again.';
             $auth_result = array('status' => $login_status, 'message' => $message, 'data' => $loggedin_data);
             return $auth_result;
         }
@@ -265,12 +245,55 @@ class User_model extends CI_Model {
 	function get_user_role_dropdown() {
         $result = array();
         $this->db->select('id,role_name,role_weight');
+        $this->db->where('role_active','Y');
         $query = $this->db->get('roles');
-        $result = array('' => 'Select Role');
+        $result = array('' => 'Select');
         if ($query->num_rows()) {
             $res = $query->result();
             foreach ($res as $r) {
                 $result[$r->id] = $r->role_name;
+            }
+        }
+        return $result;
+    }
+	
+	function get_department_dropdown() {
+        $result = array();
+        $this->db->select('id,department_name');
+        $this->db->where('department_status','Y');
+        $this->db->order_by('department_name');
+        $this->db->select('id,department_name');
+        $query = $this->db->get('departments');
+        $result = array('' => 'Select');
+        if ($query->num_rows()) {
+            $res = $query->result();
+            foreach ($res as $r) {
+                $result[$r->id] = $r->department_name;
+            }
+        }
+        return $result;
+    }
+	
+	
+	function get_designation_dropdown($status=NULL) {
+        $result = array();
+        $this->db->select('id,designation_name');
+        if($status){
+            $this->db->where('designation_status',$status);
+        }        
+        $this->db->order_by('designation_name');
+        $query = $this->db->get('designations');
+        if($status == NULL){
+            $result = array('' => 'Select','-1'=>'ADD NEW');
+        }else{
+            $result = array('' => 'Select');
+        }
+        
+        
+        if ($query->num_rows()) {
+            $res = $query->result();
+            foreach ($res as $r) {
+                $result[$r->id] = $r->designation_name;
             }
         }
         return $result;
@@ -293,8 +316,24 @@ class User_model extends CI_Model {
         return $main_res;
     }
 
+    function get_state_dropdown() {
+        $result = array();
+        $this->db->select('id,state_name');
+        $this->db->where('state_status','Y');
+		$this->db->order_by('state_name');
+        $query = $this->db->get('states');
+        $result = array('' => 'Select');
+        if ($query->num_rows()) {
+            $res = $query->result();
+            foreach ($res as $r) {
+                $result[$r->id] = $r->state_name;
+            }
+        }
+        return $result;
+    }
+
     function get_user_address($id = NULL, $user_id, $address_type) {
-        $this->db->select('t1.*');    
+        $this->db->select('t1.*,t2.state_name');    
         if(isset($id)){
             $this->db->where(array('t1.id' => $id));
         }  
@@ -303,7 +342,8 @@ class User_model extends CI_Model {
         } 
         if(isset($address_type)){
             $this->db->where(array('t1.address_type' => $address_type));
-        }    
+        }  
+        $this->db->join('states as t2', 't1.state=t2.id', 'left');  
         $query = $this->db->get('user_addresses as t1');
         //echo $this->db->last_query();
         $result = $query->result_array();        
@@ -315,12 +355,28 @@ class User_model extends CI_Model {
         $this->db->select('id,qualification_name');
         $this->db->where('qualification_status','Y');
 		$this->db->order_by('qualification_name');
-        $query = $this->db->get('academic_qualification');
-        $result = array('' => 'Select');
+        $query = $this->db->get('academic_qualification'); 
+        $result = array('' => 'Select');       
         if ($query->num_rows()) {
             $res = $query->result();
             foreach ($res as $r) {
                 $result[$r->id] = $r->qualification_name;
+            }
+        }
+        return $result;
+    }
+
+    function get_degree_dropdown() {
+        $result = array();
+        $this->db->select('id,degree_name');
+        $this->db->where('degree_status','Y');
+		$this->db->order_by('degree_name');
+        $query = $this->db->get('academic_degree');
+        $result = array('' => 'Select','-1'=>'ADD NEW');
+        if ($query->num_rows()) {
+            $res = $query->result();
+            foreach ($res as $r) {
+                $result[$r->id] = $r->degree_name;
             }
         }
         return $result;
@@ -332,7 +388,7 @@ class User_model extends CI_Model {
         $this->db->where('specialization_status','Y');
 		$this->db->order_by('specialization_name');
         $query = $this->db->get('academic_specialization');
-        $result = array('' => 'Select');
+        $result = array('' => 'Select','-1'=>'ADD NEW');
         if ($query->num_rows()) {
             $res = $query->result();
             foreach ($res as $r) {
@@ -348,7 +404,7 @@ class User_model extends CI_Model {
         $this->db->where('institute_status','Y');
         $this->db->order_by('institute_name');
         $query = $this->db->get('academic_institute');
-        $result = array('' => 'Select');
+        $result = array('' => 'Select','-1'=>'ADD NEW');
         if ($query->num_rows()) {
             $res = $query->result();
             foreach ($res as $r) {
@@ -359,7 +415,7 @@ class User_model extends CI_Model {
     }
 	
 	function get_user_education($id = NULL, $user_id) {
-        $this->db->select('t1.*,t2.qualification_name,t3.specialization_name,t4.institute_name');    
+        $this->db->select('t1.*,t2.qualification_name,t3.specialization_name,t4.institute_name, t5.degree_name');    
         if(isset($id)){
             $this->db->where(array('t1.id' => $id));
         }  
@@ -368,8 +424,9 @@ class User_model extends CI_Model {
         }
 		$this->db->join('academic_qualification t2', 't1.academic_qualification=t2.id', 'left');
 		$this->db->join('academic_specialization t3', 't1.academic_specialization=t3.id', 'left');
-		$this->db->join('academic_institute t4', 't1.academic_inst=t4.id', 'left');	
-		$this->db->order_by('t1.academic_to_year','desc');
+		$this->db->join('academic_institute t4', 't1.academic_institute=t4.id', 'left');	
+		$this->db->join('academic_degree t5', 't1.academic_degree=t5.id', 'left');	
+		$this->db->order_by('t1.academic_qualification','desc');
         $query = $this->db->get('user_academics as t1');
         //echo $this->db->last_query();
         $result = $query->result_array();        
@@ -396,12 +453,24 @@ class User_model extends CI_Model {
         return $result;
     }
 
-	function get_users($id = NULL, $limit = NULL, $offset = NULL) {
-        $this->db->select('t1.*,t2.role_name, t2.role_weight');
+	function get_users($id = NULL, $limit = NULL, $offset = NULL, $search_keywords=NULL) {
+        $this->db->select('t1.*,t2.role_name, t2.role_weight,t3.department_name, t4.designation_name');
         if ($id) {
             $this->db->where('t1.id', $id);
         }
+        if($search_keywords){
+            $this->db->like('t1.user_firstname', $search_keywords);
+            $this->db->or_like('t1.user_lastname', $search_keywords);
+            $this->db->or_like('t1.user_emp_id', $search_keywords);
+            $this->db->or_like('t1.user_email', $search_keywords);
+            $this->db->or_like('t1.user_email_secondary', $search_keywords);
+            $this->db->or_like('t1.user_phone1', $search_keywords);
+            $this->db->or_like('t1.user_phone2', $search_keywords);
+            $this->db->or_like('t4.designation_name', $search_keywords);
+        }		
         $this->db->join('roles t2', 't1.user_role=t2.id', 'left');
+		$this->db->join('departments t3', 't1.user_department=t3.id', 'left');
+        $this->db->join('designations t4', 't1.user_designation=t4.id', 'left');
         if ($limit) {
             $this->db->limit($limit, $offset);
         }
@@ -424,6 +493,76 @@ class User_model extends CI_Model {
         $result = $query->result_array();
         return $result;
     }
+	
+	function get_new_emp_id() {
+        $this->db->select('max(user_emp_id)+1 as new_emp_id');        
+        $query = $this->db->get('users as t1');
+        $result = $query->result_array();
+		if($result){
+			return str_pad($result[0]['new_emp_id'], 4, '0', STR_PAD_LEFT);		
+		}else{
+			return 0;
+		}        
+    }
+
+    function check_address_type_exists($user_id, $address_type) {
+        $this->db->select('id');
+        $this->db->where(array('user_id' => $user_id, 'address_type' => $address_type));
+        $qury = $this->db->get('user_addresses');
+        if ($qury->num_rows() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function get_company_dropdown() {
+        $result = array();
+        $this->db->select('id,company_name');        
+        $this->db->order_by('company_name');
+        $query = $this->db->get('companies');
+        $result = array('' => 'Select','-1'=>'ADD NEW');
+        if ($query->num_rows()) {
+            $res = $query->result();
+            foreach ($res as $r) {
+                $result[$r->id] = $r->company_name;
+            }
+        }
+        return $result;
+    }
+
+    function get_bank_dropdown() {
+        $result = array();
+        $this->db->select('id,bank_name');        
+        $this->db->order_by('bank_name');
+        $query = $this->db->get('banks');
+        $result = array('' => 'Select');
+        if ($query->num_rows()) {
+            $res = $query->result();
+            foreach ($res as $r) {
+                $result[$r->id] = $r->bank_name;
+            }
+        }
+        return $result;
+    }
+
+    function get_user_work_experience($id = NULL, $user_id) {
+        $this->db->select('t1.*, t2.company_name,t3.designation_name');    
+        if(isset($id)){
+            $this->db->where(array('t1.id' => $id));
+        }  
+        if(isset($user_id)){
+            $this->db->where(array('t1.user_id' => $user_id));
+        }
+		$this->db->join('companies t2', 't1.company_id=t2.id', 'left');
+		$this->db->join('designations t3', 't1.designation_id=t3.id', 'left');
+		$this->db->order_by('t1.to_date','desc');
+        $query = $this->db->get('user_work_exp as t1');
+        //echo $this->db->last_query();
+        $result = $query->result_array();        
+        return $result;
+    }
+
 }
 
 ?>

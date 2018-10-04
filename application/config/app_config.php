@@ -17,28 +17,31 @@ $config['admin_view_dir'] = 'admin/'; //application/views/admin/
 /*
  * Email Config Application Team/Admin
  */
-$config['app_admin_email'] = 'mahapatra.saikat29@gmail.com';
+$config['app_admin_email'] = 'webuidevs@gmail.com';
 $config['app_admin_email_cc'] = '';
 $config['app_admin_email_bcc'] = '';
 $config['app_admin_email_name'] = 'CI App';
-$config['app_email_subject_prefix'] = 'CI App';
+$config['app_email_subject_prefix'] = 'CI App ';
 
 
 /*
  * Template Config
  */
+$config['app_company_product'] = 'CI App';
 $config['app_logo_name_login'] = '<b>Admin</b> Dashboard';
-$config['app_logo_name_dashboard'] = '<b>Admin</b>';
-$config['app_logo_name_dashboard_xs'] = '<b>CI</b>A';
+$config['app_logo_name_admin_dashboard'] = 'Admin';
+$config['app_logo_name_dashboard'] = 'App';
+$config['app_logo_name_dashboard_xs'] = '<b>U</b>Aadmin';
 
 $config['app_html_title'] = 'CI App';
-$config['app_admin_html_title'] = 'CI App Admin';
-$config['app_meta_keywords'] = 'Code Igniter project';
-$config['app_meta_description'] = '';
-$config['app_meta_author'] = 'Saikat Mahapatra';
+$config['app_admin_html_title'] = 'CI App';
+
+$config['app_meta_keywords'] = 'CI Project';
+$config['app_meta_description'] = 'CI Project';
+$config['app_meta_author'] = 'Saikat Mahapatra webuidevs@gmail.com';
 
 
 $config['app_copy_right'] = 'Copyright '.date('Y').' &copy; CI App';
 $config['app_admin_copy_right'] = 'Copyright &copy; '.date('Y').' <a href="#">CI App</a>. All rights reserved.';
 $config['app_ui_version'] = 'v1.0.1';
-$config['app_admin_ui_version'] = '2.3.6';
+$config['app_admin_ui_version'] = '2.6 , CI '.CI_VERSION;

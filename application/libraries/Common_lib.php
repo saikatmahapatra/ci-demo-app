@@ -32,31 +32,23 @@ class Common_lib {
      * @param type $meta_author
      * @return type
      */
-    function init_template_elements($template_view_elements_dir_name = NULL, $title = NULL, $meta_keywords = NULL, $meta_desc = NULL, $meta_author = NULL) {
-        $el_type = isset($template_view_elements_dir_name) ? $template_view_elements_dir_name : 'site';
-
+    function init_template_elements($html_title = NULL, $meta_keywords = NULL, $meta_desc = NULL, $meta_author = NULL) {
         $this->CI->data['sess_user_name'] = isset($this->CI->session->userdata['sess_user']['user_firstname']) ? ucwords(strtolower($this->CI->session->userdata['sess_user']['user_firstname'])) : 'Guest';
         $this->CI->data['sess_user_id'] = isset($this->CI->session->userdata['sess_user']['id']) ? ucwords(strtolower($this->CI->session->userdata['sess_user']['id'])) : NULL;
+        
+        //Public, Common, Site Template
+        $this->CI->data['el_html_tag_title'] = isset($html_title) ? $html_title : $this->CI->config->item('app_html_title');			
+        //$this->CI->data['el_user_profile_pic'] = isset($this->CI->session->userdata['sess_user']['id'])? $this->get_user_profile_img(): null;
+        $this->CI->data['el_html_tag_meta_keywords'] = isset($meta_keyword) ? $meta_keyword : $this->CI->config->item('app_meta_keywords');
+        $this->CI->data['el_html_tag_meta_description'] = isset($meta_desc) ? $meta_desc : $this->CI->config->item('app_meta_description');
+        $this->CI->data['el_html_tag_meta_author'] = isset($meta_author) ? $meta_author : $this->CI->config->item('app_meta_author');
+        $this->CI->data['el_html_head'] = $this->CI->load->view('_layouts/elements/html_head', $this->CI->data, true);
+        $this->CI->data['el_navbar'] = $this->CI->load->view('_layouts/elements/navbar', $this->CI->data, true);        
+        $this->CI->data['el_footer'] = $this->CI->load->view('_layouts/elements/footer', $this->CI->data, true);
 
-        if (strtolower($el_type) == 'site') {
-            $this->CI->data['el_html_tag_title'] = isset($title) ? $title : $this->CI->config->item('app_html_title');
-			
-			//$this->CI->data['el_user_profile_pic'] = isset($this->CI->session->userdata['sess_user']['id'])? $this->get_user_profile_img(): null;
-            $this->CI->data['el_html_tag_meta_keywords'] = isset($meta_keyword) ? $meta_keyword : $this->CI->config->item('app_meta_keywords');
-            $this->CI->data['el_html_tag_meta_description'] = isset($meta_desc) ? $meta_desc : $this->CI->config->item('app_meta_description');
-            $this->CI->data['el_html_tag_meta_author'] = isset($meta_author) ? $meta_author : $this->CI->config->item('app_meta_author');
-            $this->CI->data['el_html_head'] = $this->CI->load->view('site/_layouts/elements/html_head', $this->CI->data, true);
-            $this->CI->data['el_navbar'] = $this->CI->load->view('site/_layouts/elements/navbar', $this->CI->data, true);
-            $this->CI->data['el_footer'] = $this->CI->load->view('site/_layouts/elements/footer', $this->CI->data, true);
-            
-        }
-        if (strtolower($el_type) == 'admin') {
-            $this->CI->data['el_html_tag_title'] = isset($title) ? $title : $this->CI->config->item('app_admin_html_title');
-			//$this->CI->data['el_user_profile_pic'] = isset($this->CI->session->userdata['sess_user']['id'])? $this->get_user_profile_img(): null;
-            $this->CI->data['el_html_head'] = $this->CI->load->view('admin/_layouts/elements/html_head', $this->CI->data, true);
-            $this->CI->data['el_navbar'] = $this->CI->load->view('admin/_layouts/elements/navbar', $this->CI->data, true);            
-            $this->CI->data['el_footer'] = $this->CI->load->view('admin/_layouts/elements/footer', $this->CI->data, true);
-        }
+        //Admin Template
+        $this->CI->data['el_navbar_admin'] = $this->CI->load->view('_layouts/elements/navbar_admin', $this->CI->data, true);
+
         return $this->CI->data;
     }
 
@@ -155,8 +147,8 @@ class Common_lib {
         $file_name = $_FILES[$html_control]['name'];
         $config['file_name'] = isset($upload_param['file_new_name']) ? $upload_param['file_new_name'] : $file_name;
         $this->CI->load->library('upload', $config);
-        if (!$this->CI->upload->do_upload($html_control)) {
-            return array('upload_error' => $this->CI->upload->display_errors());
+        if (!$this->CI->upload->do_upload($html_control)) {            
+            return array('upload_error' => $this->CI->upload->display_errors('<div>', '</div>'));
             //$this->CI->form_validation->set_message($html_control, $this->CI->upload->display_errors());
             //return false;
         } else {
@@ -362,32 +354,36 @@ class Common_lib {
      * @param type $redirect
      * @param type $redirect_uri
      */
-    function check_user_role_permission($check_permissions, $redirect = TRUE, $redirect_uri = NULL) {
+    function is_auth($check_permissions, $redirect = TRUE, $redirect_uri = NULL) {
         $match_count = 0;
-        $result = array('is_granted' => FALSE, 'status' => '0', 'message' => 'checking permission');
+        $result = array('is_authorized' => FALSE, 'status' => '0', 'message' => 'checking permission');
         $user_role_id = $this->CI->session->userdata['sess_user']['user_role'];
         $arr_user_permissions = $this->CI->user_model->get_user_role_permission($user_role_id);
         if (isset($check_permissions) && count($check_permissions) > 0) {
             if (isset($arr_user_permissions) && count($arr_user_permissions) > 0) {
                 $match_count = count(array_intersect($arr_user_permissions, $check_permissions));
                 if ($match_count > 0) {
-                    $result = array('is_granted' => TRUE, 'status' => '2', 'message' => 'some of the permissions match found and validated');
-                } else {
-                    $this->CI->session->unset_userdata('sess_user');
-                    $result = array('is_granted' => FALSE, 'status' => '3', 'message' => 'no permissions match found or validated');
+                    $result = array('is_authorized' => TRUE, 'status' => '2', 'message' => 'some of the permissions match found and validated');
+                } else {                    
+                    $result = array('is_authorized' => FALSE, 'status' => '3', 'message' => 'no permissions match found or validated');
                 }
-            } else {
-                $this->CI->session->unset_userdata('sess_user');
-                $result = array('is_granted' => FALSE, 'status' => '5', 'message' => 'user role and permission list not found in database');
+            } else {                
+                $result = array('is_authorized' => FALSE, 'status' => '5', 'message' => 'user role and permission list not found in database');
             }
         } else {
-            $result = array('is_granted' => TRUE, 'status' => '6', 'message' => 'no permissions checking array passed');
+            $result = array('is_authorized' => TRUE, 'status' => '6', 'message' => 'no permissions checking array passed');
         }
         //print_r($result);
-        //die();;
-        if ($redirect == TRUE && $result['is_granted'] == FALSE) {
-            $uri = isset($redirect_uri) ? $redirect_uri : $this->router->directory.'/user/auth_error';
-            redirect($uri);
+        //die();
+        if ($redirect == TRUE) {
+            if($result['is_authorized'] == FALSE){
+                $this->CI->session->unset_userdata('sess_user');
+                $uri = isset($redirect_uri) ? $redirect_uri : $this->router->directory.'/user/auth_error';
+                redirect($uri);
+            }            
+        }
+        if($redirect == FALSE){
+            return $result['is_authorized'];
         }
         //return $result;
     }
@@ -405,18 +401,36 @@ class Common_lib {
 	}
 	
 	/*Convert date to display format date*/
-	function display_date($date, $time=null){
+	function display_date($date, $time=null, $birthday=null){
 		if($time == true){
 			return date('d-m-Y h:i:s a',strtotime($date));
-		}else{
+        }
+        if($birthday == true){
+            $dob = explode('-',$date);            
+			return $this->display_ordinal_suffix($dob[2]).' '.date('F',strtotime($date));
+        }
+        else{
 			return date('d-m-Y',strtotime($date));
 		}		
-	}
+    }
+    
+    /*Display ordinal_suffix st, th, rd*/    
+    function display_ordinal_suffix($num){
+        $num = $num % 100; // protect against large numbers
+        if($num < 11 || $num > 13){
+             switch($num % 10){
+                case 1: return $num.'<sup>st</sup>';
+                case 2: return $num.'<sup>nd</sup>';
+                case 3: return $num.'<sup>rd</sup>';
+            }
+        }
+        return $num.'<sup>th</sup>';
+    }
 	
 	/* URL-safe encoding */	
 	function encode($string, $key="", $url_safe=TRUE){
 		$output = $string;
-		$required_encryption = true;
+		$required_encryption = FALSE;
 		$this->CI->load->library('MY_Encrypt');
 		if($required_encryption==true){
 			$output =  $this->CI->my_encrypt->encode($string, $key="", $url_safe=TRUE);
@@ -427,13 +441,14 @@ class Common_lib {
 	/* URL-safe decoding */
 	function decode($string, $key=""){
 		$output = $string;
-		$required_encryption = true;
+		$required_encryption = FALSE;
 		$this->CI->load->library('MY_Encrypt');
 		if($required_encryption==true){
 			$output =  $this->CI->my_encrypt->decode($string, $key="");
 		}
 		return $output;
 	}
+
 }
 
 ?>

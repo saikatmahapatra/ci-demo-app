@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+date_default_timezone_set('Asia/Kolkata');
 /*
 |--------------------------------------------------------------------------
 | Base Site URL
@@ -308,7 +308,7 @@ $config['cache_query_string'] = FALSE;
 | http://codeigniter.com/user_guide/libraries/encryption.html
 |
 */
-$config['encryption_key'] = 'q72keVNJtpaZgJdxfwuKt';
+$config['encryption_key'] = 'a1z3-d5rt-6k4n';
 
 /*
 |--------------------------------------------------------------------------
@@ -362,7 +362,7 @@ $config['sess_driver'] = 'database';
 $config['sess_cookie_name'] = 'ci_sessions';
 $config['sess_expiration'] = 0;
 $config['sess_save_path'] = 'ci_sessions';
-$config['sess_match_ip'] = TRUE;
+$config['sess_match_ip'] = FALSE;
 $config['sess_time_to_update'] = 300;
 $config['sess_regenerate_destroy'] = FALSE;
 

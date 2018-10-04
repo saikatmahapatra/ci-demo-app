@@ -21,16 +21,13 @@ class Example extends CI_Controller {
         
         $this->data['alert_message'] = NULL;
         $this->data['alert_message_css'] = NULL;
-		
-		//View Page Config
-		$this->data['view_dir'] = 'site/'; // inner view and layout directory name inside application/view
 		$this->data['page_heading'] = $this->router->class.' : '.$this->router->method;
         
     }
 
     function index() {
-        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].$this->router->class.'/index', $this->data, true);
-        $this->load->view($this->data['view_dir'].'_layouts/layout_default', $this->data);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/index', $this->data, true);
+        $this->load->view('_layouts/layout_default', $this->data);
     }
 
     function form_helper() {
@@ -64,15 +61,17 @@ class Example extends CI_Controller {
             ),
         );
 
-        if ($this->input->post('form_action') == 'add') {
+        if ($this->input->post('form_action') == 'add') {            
             if ($this->validate_form() == TRUE) {
+                print_r($this->input->post());
                 $this->session->set_flashdata('flash_message', '<strong>Ok! </strong>Validated and Ready to Insert Data.');
                 $this->session->set_flashdata('flash_message_css', 'alert-info');
                 redirect(current_url());
             }
         }
-        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].$this->router->class.'/form_helper', $this->data, true);
-        $this->load->view($this->data['view_dir'].'_layouts/layout_default', $this->data);
+        $this->data['page_heading'] = 'CI Form Syntax';
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/form_helper', $this->data, true);
+        $this->load->view('_layouts/layout_default', $this->data);
     }
 
     function validate_form() {
@@ -100,12 +99,12 @@ class Example extends CI_Controller {
     }
     
     function download_as_pdf(){
-       $this->load->view($this->data['view_dir'].$this->router->class.'/dom_pdf_gen_pdf'); 
+       $this->load->view($this->router->class.'/dom_pdf_gen_pdf'); 
     }
             
     function dom_pdf_gen_pdf() {
         // Load all views as normal
-        $this->load->view($this->data['view_dir'].$this->router->class.'/dom_pdf_gen_pdf');
+        $this->load->view($this->router->class.'/dom_pdf_gen_pdf');
         // Get output html
         $html = $this->output->get_output();
         // Load library
@@ -119,8 +118,8 @@ class Example extends CI_Controller {
     function date_helper() {
         $this->load->helper('date');
 
-        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].$this->router->class.'/date_helper', $this->data, true);
-        $this->load->view($this->data['view_dir'].'_layouts/layout_default', $this->data);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/date_helper', $this->data, true);
+        $this->load->view('_layouts/layout_default', $this->data);
     }
 
     function directory_helper() {
@@ -131,8 +130,14 @@ class Example extends CI_Controller {
         $map = directory_map('./assets', 1);
         $this->data['sub_folders'] = $map;
 
-        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].$this->router->class.'/directory_helper', $this->data, true);
-        $this->load->view($this->data['view_dir'].'_layouts/layout_default', $this->data);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/directory_helper', $this->data, true);
+        $this->load->view('_layouts/layout_default', $this->data);
+    }
+
+    function bootstrap() {
+        $this->data['page_heading'] = 'Bootstrap SASS Customized Theme Components : UX Guide';
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/bootstrap', $this->data, true);
+        $this->load->view('_layouts/layout_default', $this->data);
     }
 	
 	function calendar_lib() {
@@ -192,8 +197,110 @@ class Example extends CI_Controller {
 		$data = array();
 		$this->data['cal'] = $this->calendar->generate($year,$month,$data);
 		$this->data['page_heading'] = 'Calendar';
-        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].$this->router->class.'/calendar_lib', $this->data, true);
-        $this->load->view($this->data['view_dir'].'_layouts/layout_default', $this->data);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/calendar_lib', $this->data, true);
+        $this->load->view('_layouts/layout_default', $this->data);
+    }
+
+    function contact_form() {
+        $this->data['alert_message'] = $this->session->flashdata('flash_message');
+        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
+
+        if ($this->input->post('form_action') == 'send') {
+            if ($this->validate_contact_form() == true) {
+                $name = $this->input->post('name');
+                $email = $this->input->post('email');
+                $phone_number = $this->input->post('phone_number');
+                $message = $this->input->post('message');
+                $from_name = $name;
+                $from_email = $email;
+                $html = '';
+                $html.='<table align="center" width="100%" border="0" cellpadding="3" cellspacing="0">';
+                $html.='<tr bgcolor="#EBEBEB">';
+                $html.='<td valign="top" align="left" width="20%"><b>Name</b></td>';
+                $html.='<td valign="top" width="2%" style="font-weight:bold;">:</td>';
+                $html.='<td valign="top" width="78%">' . $name . '</td>';
+                $html.='</tr>';
+                $html.='<tr bgcolor="#F5F5F5">';
+                $html.='<td valign="top" align="left"><b>Email</b></td>';
+                $html.='<td valign="top" style="font-weight:bold;">:</td>';
+                $html.='<td valign="top">' . $email . '</td>';
+                $html.='</tr>';
+                $html.='<tr bgcolor="#EBEBEB">';
+                $html.='<td valign="top" align="left"><b>Phone Number</b></td>';
+                $html.='<td valign="top" style="font-weight:bold;">:</td>';
+                $html.='<td valign="top">' . $phone_number . '</td>';
+                $html.='</tr>';
+                $html.='<tr bgcolor="#F5F5F5">';
+                $html.='<td valign="top" align="left"><b>Message</b></td>';
+                $html.='<td valign="top" style="font-weight:bold;">:</td>';
+                $html.='<td valign="top">' . $message . '</td>';
+                $html.='</tr>';
+                $html.='</table>';
+
+                $config['mailtype'] = 'html';
+                $this->email->initialize($config);
+                $this->email->to($this->config->item('app_admin_email'));
+                $this->email->from($from_email, $from_name);
+                $this->email->subject($this->config->item('app_email_subject_prefix') . ' Contact Us Email');
+                $this->email->message($html);
+                $result = $this->email->send();
+                //echo $this->email->print_debugger(); die($html);
+                if ($result == true) {
+                    $this->session->set_flashdata('flash_message', 'Your message has been sent successfully.');
+                    $this->session->set_flashdata('flash_message_css', 'alert-success');
+                    redirect(current_url());
+                } else {
+                    $this->session->set_flashdata('flash_message', 'Error occured while sending your message.');
+                    $this->session->set_flashdata('flash_message_css', 'alert-danger');
+                    redirect(current_url());
+                }
+            } else {
+                $data['error_message'] = validation_errors();
+            }
+        }
+        //Create Captcha
+        $this->load->helper('captcha');
+        $data = array(
+            'img_path' => './assets/captcha/images/',
+            'img_url' => base_url('assets/captcha/images/'),
+            'font_path' => './assets/captcha/fonts/arialbd.ttf',
+            'img_width' => '160',
+            'img_height' => 40,
+            'border' => 1,
+            'expiration' => 90
+        );
+
+        $cap = create_captcha($data);
+
+        $this->data['captcha_word'] = $cap['word'];
+        $this->data['captcha_image'] = $cap['image'];
+		
+		$this->data['page_heading'] = 'Contact Us';
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/contact_form', $this->data, true);
+        $this->load->view('_layouts/layout_default', $this->data);
+    }
+
+    function validate_contact_form() {
+        $this->form_validation->set_rules('name', 'name', 'required');
+        $this->form_validation->set_rules('email', 'email address', 'trim|required|valid_email');
+        $this->form_validation->set_rules('phone_number', 'mobile number', 'trim|is_natural|numeric|max_length[10]');
+        $this->form_validation->set_rules('message', 'message', 'required');
+        $this->form_validation->set_rules('captcha', 'captcha verification', 'trim|callback_validate_captcha');
+        $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
+        if ($this->form_validation->run() == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function validate_captcha($str) {
+        if ($str != $this->input->post('hdn_captcha_word')) {
+            $this->form_validation->set_message('validate_captcha', 'Invalid CAPTCHA.');
+            return false;
+        } else {
+            return true;
+        }
     }
 
 }

@@ -15,6 +15,13 @@ function domReady(){
 		
 	}
 	
+	//Display Start end date picker 
+	$('.cms-datepicker').datepicker({
+		format: "dd-mm-yyyy",
+		weekStart: 1,
+		autoclose: true
+	});
+	
 	// Classic CK Editor
 	ClassicEditor
     .create( document.querySelector('#pagecontent_text') )

@@ -34,7 +34,7 @@ class Timesheet extends CI_Controller {
         }
 
         //Has logged in user permission to access this page or method?        
-        $this->common_lib->check_user_role_permission(array(
+        $this->common_lib->is_auth(array(
             'default-super-admin-access',
             'default-admin-access',
             'default-user-access'			
@@ -48,8 +48,6 @@ class Timesheet extends CI_Controller {
 		$this->data['task_task_activity_type_array'] = $this->timesheet_model->get_activity_dropdown();
 		$this->data['timesheet_hours'] = $this->timesheet_model->get_timesheet_hours_dropdown();
 		
-		//View Page Config
-		$this->data['view_dir'] = 'site/'; // inner view and layout directory name inside application/view
 		$this->data['page_heading'] = $this->router->class.' : '.$this->router->method;
         
     }
@@ -104,13 +102,13 @@ class Timesheet extends CI_Controller {
 		
 		$this->add();
 		
-        $this->data['maincontent'] = $this->load->view($this->data['view_dir'].$this->router->class.'/index', $this->data, true);
-        $this->load->view($this->data['view_dir'].'_layouts/layout_default', $this->data);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/index', $this->data, true);
+        $this->load->view('_layouts/layout_default', $this->data);
     }
 	
 	function add() {
         //Check user permission by permission name mapped to db
-        //$is_granted = $this->common_lib->check_user_role_permission('timesheet-add');
+        //$is_authorized = $this->common_lib->is_auth('timesheet-add');
         
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
@@ -134,8 +132,8 @@ class Timesheet extends CI_Controller {
 				}
                 $insert_id = $this->timesheet_model->insert_batch($batch_post_data);
                 if ($insert_id) {
-                    $this->session->set_flashdata('flash_message', '<i class="icon fa fa-check" aria-hidden="true"></i> Timesheet entry added successfully.');
-                    $this->session->set_flashdata('flash_message_css', 'bg-success text-white');
+                    $this->session->set_flashdata('flash_message', 'Timesheet Entry Added Successfully.');
+                    $this->session->set_flashdata('flash_message_css', 'alert-success');
                     redirect(current_url());
                 }
             }
@@ -146,7 +144,7 @@ class Timesheet extends CI_Controller {
         $this->form_validation->set_rules('selected_date', 'calendar date selection', 'required');
         $this->form_validation->set_rules('project_id', 'project selection', 'required');
         $this->form_validation->set_rules('activity_id', 'activity selection', 'required');
-        $this->form_validation->set_rules('timesheet_hours', 'hours spent', 'required');
+        $this->form_validation->set_rules('timesheet_hours', 'time spent', 'required|numeric|less_than[18]|greater_than[0]');
         $this->form_validation->set_rules('timesheet_description', 'description', 'required|max_length[200]');
         $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
         if ($this->form_validation->run() == true) {
@@ -171,14 +169,14 @@ class Timesheet extends CI_Controller {
 				$response = array(
 					'status' => 'ok',
 					'message' => 'Records fetched',
-					'message_css' => 'alert bg-success text-white',
+					'message_css' => 'alert alert-success',
 					'data' => $result_array,
 				);
 			}else{
 				$response = array(
 					'status' => 'ok',
 					'message' => 'No records found',
-					'message_css' => 'alert bg-danger text-white',
+					'message_css' => 'alert alert-danger',
 					'data' => $result_array,
 				);
 			}
@@ -213,19 +211,19 @@ class Timesheet extends CI_Controller {
             //$row[] = $result['timesheet_hours'];
             //$row[] = $result['timesheet_review_status'];
 			
-			$html = '<div class="font-weight-bold">'.$this->common_lib->display_date($result['timesheet_date']).' <span class="float-right">'.$result['timesheet_hours'].' hrs</span></div>';			
-			$html.= '<div class="small">'.$result['project_name'].'<span class="float-right">'.$result['task_activity_name'].'</span></div>';			
+			$html = '<div class="font-weight-bold">'.$this->common_lib->display_date($result['timesheet_date']).' <span class="float-right"><i class="fa fa-clock-o" aria-hidden="true"></i> '.$result['timesheet_hours'].' hrs</span></div>';			
+			$html.= '<div class="">'.$result['project_name'].'<span class="float-right">'.$result['task_activity_name'].'</span></div>';			
 			
             
             //add html for action
             $action_html = '<span class="float-right">';
-            /*$action_html.= anchor(base_url($this->router->directory.'timesheet/edit/' .$this->common_lib->encode($result['id'])), '<i class="fa fa-edit" aria-hidden="true"></i>', array(
+            /*$action_html.= anchor(base_url($this->router->directory.$this->router->class.'/edit/' . $result['id']), '<i class="fa fa-edit" aria-hidden="true"></i>', array(
                 'class' => 'text-dark mr-2',
                 'data-toggle' => 'tooltip',
                 'data-original-title' => 'Edit',
                 'title' => 'Edit',
             ));*/            
-            $action_html.= anchor(base_url($this->router->directory.'timesheet/delete/' . $this->common_lib->encode($result['id'])), '<i class="fa fa-trash" aria-hidden="true"></i>', array(
+            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/delete/' . $result['id']), '<i class="fa fa-trash" aria-hidden="true"></i>', array(
                 'class' => 'text-danger btn-delete ml-2',
 				'data-confirmation'=>false,
 				'data-confirmation-message'=>'Are you sure, you want to delete this?',
@@ -254,13 +252,13 @@ class Timesheet extends CI_Controller {
     }
 	
 	function delete() {
-		$this->id= $this->common_lib->decode($this->uri->segment(3));
+		$this->id= $this->uri->segment(3);
         $where_array = array('id' => $this->id);
         $res = $this->timesheet_model->delete($where_array);
         if ($res) {
-            $this->session->set_flashdata('flash_message', '<i class="icon fa fa-check" aria-hidden="true"></i> Deleted successfully.');
-            $this->session->set_flashdata('flash_message_css', 'bg-success text-white');
-            redirect($this->router->directory.'timesheet');
+            $this->session->set_flashdata('flash_message', 'Timesheet Entry Deleted Successfully.');
+            $this->session->set_flashdata('flash_message_css', 'alert-success');
+            redirect($this->router->directory.$this->router->class.'');
         }
     }
 
