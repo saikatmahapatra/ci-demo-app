@@ -18,7 +18,7 @@
 		?>
 		<div class="card ">
 			<div class="card-header">
-				<span class="">Employees</span>
+				<span class="">Data Table</span>
 				<span class="float-right">
 					<a href="<?php echo base_url($this->router->directory.$this->router->class.'/create_account');?>" class="btn btn-sm btn-primary" title="Add"> Add New</a>
 				</span>

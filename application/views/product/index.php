@@ -17,7 +17,7 @@
 		?>
 		<div class="card ">
 			<div class="card-header">
-				<span class="">Products</span>
+				<span class="">Data Table</span>
 				<span class="float-right">
 					<a href="<?php echo base_url($this->router->directory.'product/add');?>" class="btn btn-sm btn-primary" title="Add"> Add New</a>
 				</span>
