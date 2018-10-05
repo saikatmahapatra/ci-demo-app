@@ -13,17 +13,17 @@ class Order extends CI_Controller {
         parent::__construct();
         
         //Check if any user logged in else redirect to login
-        $is_logged_in = $this->common_lib->is_logged_in();
+        /*$is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
             redirect($this->router->directory.'user/login');
-        }
+        }*/
 
         //Has logged in user permission to access this page or method?        
-        $this->common_lib->is_auth(array(
+        /*$this->common_lib->is_auth(array(
             'default-super-admin-access',
             'default-admin-access'
-        ));
+        ));*/
 
         // Get logged  in user id
         $this->sess_user_id = $this->common_lib->get_sess_user('id');
@@ -59,8 +59,18 @@ class Order extends CI_Controller {
     }
 
     function index() {
+        //Check if any user logged in else redirect to login
+        $is_logged_in = $this->common_lib->is_logged_in();
+        if ($is_logged_in == FALSE) {
+			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
+            redirect($this->router->directory.'user/login');
+        }
         // Check user permission by permission name mapped to db
-        // $is_granted = $this->common_lib->is_auth('payment-list-view');
+        $is_auth = $this->common_lib->is_auth(array(
+            'default-super-admin-access',
+            'default-admin-access'
+        ));
+
 		$this->breadcrumbs->push('View','/');				
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
@@ -71,6 +81,18 @@ class Order extends CI_Controller {
     }
 
     function render_datatable() {
+        //Check if any user logged in else redirect to login
+        $is_logged_in = $this->common_lib->is_logged_in();
+        if ($is_logged_in == FALSE) {
+			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
+            redirect($this->router->directory.'user/login');
+        }
+        // Check user permission by permission name mapped to db
+        $is_auth = $this->common_lib->is_auth(array(
+            'default-super-admin-access',
+            'default-admin-access'
+        ));
+
         //Total rows - Refer to model method definition
         $result_array = $this->order_model->get_rows();
         $total_rows = $result_array['num_rows'];
@@ -127,6 +149,18 @@ class Order extends CI_Controller {
     }
 	
 	function edit() {
+        //Check if any user logged in else redirect to login
+        $is_logged_in = $this->common_lib->is_logged_in();
+        if ($is_logged_in == FALSE) {
+			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
+            redirect($this->router->directory.'user/login');
+        }
+        // Check user permission by permission name mapped to db
+        $is_auth = $this->common_lib->is_auth(array(
+            'default-super-admin-access',
+            'default-admin-access'
+        ));
+
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
 		
@@ -207,6 +241,13 @@ class Order extends CI_Controller {
 	}
 
     function my_cart() {
+        //Check if any user logged in else redirect to login
+        /*$is_logged_in = $this->common_lib->is_logged_in();
+        if ($is_logged_in == FALSE) {
+			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
+            redirect($this->router->directory.'user/login');
+        }*/
+
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
         
@@ -309,12 +350,13 @@ class Order extends CI_Controller {
     }
 	
 	function init_payment(){
+        //Check if any user logged in else redirect to login
         $is_logged_in = $this->common_lib->is_logged_in();
-        
-        if ($is_logged_in == FALSE) {   
-            $this->session->set_userdata('sess_post_login_redirect_url', current_url());
-            redirect('user/login');
+        if ($is_logged_in == FALSE) {
+			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
+            redirect($this->router->directory.'user/login');
         }
+
 		$this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
         
@@ -347,7 +389,14 @@ class Order extends CI_Controller {
         return $result;
     }
 
-    function place_order() {        
+    function place_order() {  
+        //Check if any user logged in else redirect to login
+        $is_logged_in = $this->common_lib->is_logged_in();
+        if ($is_logged_in == FALSE) {
+			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
+            redirect($this->router->directory.'user/login');
+        }
+
 		$cart_data = $this->get_cart_data();
 		//echo '<pre>';print_r($cart_data);die();
 		/*
@@ -458,12 +507,19 @@ class Order extends CI_Controller {
     }
 
     function transaction_response() {
+        //Check if any user logged in else redirect to login
+        $is_logged_in = $this->common_lib->is_logged_in();
+        if ($is_logged_in == FALSE) {
+			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
+            redirect($this->router->directory.'user/login');
+        }
+
 		$this->cart->destroy(); // remove cart items
 		$this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
         //Update table with payment response
 		//$this->data = array();
-		$this->data['order_no'] = '8278783799829080';
+		$this->data['order_no'] = '1234';
 		$this->data['page_heading'] = 'Your Online Transaction Summary';
 		$this->data['maincontent'] = $this->load->view($this->router->class.'/transaction_response', $this->data, true);
         $this->load->view('_layouts/layout_default', $this->data);

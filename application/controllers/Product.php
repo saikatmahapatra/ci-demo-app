@@ -12,17 +12,17 @@ class Product extends CI_Controller {
         parent::__construct();
 
         //Check if any user logged in else redirect to login
-        $is_logged_in = $this->common_lib->is_logged_in();
+        /*$is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
             redirect($this->router->directory.'user/login');
-        }
+        }*/
 
         //Has logged in user permission to access this page or method?        
-        $this->common_lib->is_auth(array(
+        /*$this->common_lib->is_auth(array(
             'default-super-admin-access',
             'default-admin-access'
-        ));
+        ));*/
 
         // Get logged  in user id
         $this->sess_user_id = $this->common_lib->get_sess_user('id');
@@ -55,6 +55,19 @@ class Product extends CI_Controller {
     }
 
     function index() {
+        //Check if any user logged in else redirect to login
+        $is_logged_in = $this->common_lib->is_logged_in();
+        if ($is_logged_in == FALSE) {
+			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
+            redirect($this->router->directory.'user/login');
+        }
+
+        //Has logged in user permission to access this page or method?        
+        $this->common_lib->is_auth(array(
+            'default-super-admin-access',
+            'default-admin-access'
+        ));
+
 		$this->breadcrumbs->push('View', '/');		
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
 		
@@ -67,6 +80,19 @@ class Product extends CI_Controller {
     }
 
     function render_datatable() {
+        //Check if any user logged in else redirect to login
+        $is_logged_in = $this->common_lib->is_logged_in();
+        if ($is_logged_in == FALSE) {
+			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
+            redirect($this->router->directory.'user/login');
+        }
+
+        //Has logged in user permission to access this page or method?        
+        $this->common_lib->is_auth(array(
+            'default-super-admin-access',
+            'default-admin-access'
+        ));
+
         //Total rows - Refer to model method definition
         $result_array = $this->product_model->get_rows();
         $total_rows = $result_array['num_rows'];
@@ -153,6 +179,19 @@ class Product extends CI_Controller {
     }
 
     function add() {
+        //Check if any user logged in else redirect to login
+        $is_logged_in = $this->common_lib->is_logged_in();
+        if ($is_logged_in == FALSE) {
+			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
+            redirect($this->router->directory.'user/login');
+        }
+
+        //Has logged in user permission to access this page or method?        
+        $this->common_lib->is_auth(array(
+            'default-super-admin-access',
+            'default-admin-access'
+        ));
+
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
 		
@@ -189,6 +228,19 @@ class Product extends CI_Controller {
     }
 
     function edit() {
+        //Check if any user logged in else redirect to login
+        $is_logged_in = $this->common_lib->is_logged_in();
+        if ($is_logged_in == FALSE) {
+			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
+            redirect($this->router->directory.'user/login');
+        }
+
+        //Has logged in user permission to access this page or method?        
+        $this->common_lib->is_auth(array(
+            'default-super-admin-access',
+            'default-admin-access'
+        ));
+
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
 		
@@ -239,6 +291,19 @@ class Product extends CI_Controller {
     }
 
     function delete() {
+        //Check if any user logged in else redirect to login
+        $is_logged_in = $this->common_lib->is_logged_in();
+        if ($is_logged_in == FALSE) {
+			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
+            redirect($this->router->directory.'user/login');
+        }
+
+        //Has logged in user permission to access this page or method?        
+        $this->common_lib->is_auth(array(
+            'default-super-admin-access',
+            'default-admin-access'
+        ));
+
         $where_array = array('id' => $this->id);
         $res = $this->product_model->delete($where_array);
         if ($res) {            
@@ -341,6 +406,19 @@ class Product extends CI_Controller {
     }
 
     function delete_file() {
+        //Check if any user logged in else redirect to login
+        $is_logged_in = $this->common_lib->is_logged_in();
+        if ($is_logged_in == FALSE) {
+			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
+            redirect($this->router->directory.'user/login');
+        }
+
+        //Has logged in user permission to access this page or method?        
+        $this->common_lib->is_auth(array(
+            'default-super-admin-access',
+            'default-admin-access'
+        ));
+
         $id = $this->input->get_post('id');
         $file_path = $this->input->get_post('file_path');
         if ($id) {
