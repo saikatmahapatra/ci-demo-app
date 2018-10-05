@@ -17,7 +17,7 @@ require APPPATH . 'libraries/REST_Controller.php';
  * @license         MIT
  * @link            
  */
-class Ci_api extends REST_Controller {
+class Api extends REST_Controller {
     
     var $api_response = array();
 
