@@ -84,6 +84,35 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
 </div>
+<div id="calendar_basic" style="width: 1000px; height: 350px;"></div>
 
 </body>
 </html>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:["calendar"]});
+      google.charts.setOnLoadCallback(drawChart);
+
+   function drawChart() {
+       var dataTable = new google.visualization.DataTable();
+       dataTable.addColumn({ type: 'date', id: 'Date' });
+       dataTable.addColumn({ type: 'number', id: 'Won/Loss' });
+       dataTable.addRows([
+          [ new Date(2018, 3, 13), 37032 ],
+          [ new Date(2018, 3, 14), 38024 ],
+          [ new Date(2018, 3, 15), 38024 ],
+          [ new Date(2018, 3, 16), 38108 ],
+          [ new Date(2018, 3, 17), 38229 ]
+        ]);
+
+       var chart = new google.visualization.Calendar(document.getElementById('calendar_basic'));
+
+       var options = {
+         title: "Red Sox Attendance",
+         height: 550,
+       };
+
+       chart.draw(dataTable, options);
+   }
+    </script>
