@@ -20,7 +20,7 @@ class Order extends CI_Controller {
         }*/
 
         //Has logged in user permission to access this page or method?        
-        /*$this->common_lib->is_auth(array(
+        /*$is_authorized = $this->common_lib->is_auth(array(
             'default-super-admin-access',
             'default-admin-access'
         ));*/
@@ -66,7 +66,7 @@ class Order extends CI_Controller {
             redirect($this->router->directory.'user/login');
         }
         // Check user permission by permission name mapped to db
-        $is_auth = $this->common_lib->is_auth(array(
+        $is_authorized = $this->common_lib->is_auth(array(
             'default-super-admin-access',
             'default-admin-access'
         ));
@@ -88,7 +88,7 @@ class Order extends CI_Controller {
             redirect($this->router->directory.'user/login');
         }
         // Check user permission by permission name mapped to db
-        $is_auth = $this->common_lib->is_auth(array(
+        $is_authorized = $this->common_lib->is_auth(array(
             'default-super-admin-access',
             'default-admin-access'
         ));
@@ -156,7 +156,7 @@ class Order extends CI_Controller {
             redirect($this->router->directory.'user/login');
         }
         // Check user permission by permission name mapped to db
-        $is_auth = $this->common_lib->is_auth(array(
+        $is_authorized = $this->common_lib->is_auth(array(
             'default-super-admin-access',
             'default-admin-access'
         ));

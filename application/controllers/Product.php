@@ -19,7 +19,7 @@ class Product extends CI_Controller {
         }*/
 
         //Has logged in user permission to access this page or method?        
-        /*$this->common_lib->is_auth(array(
+        /*$is_authorized = $this->common_lib->is_auth(array(
             'default-super-admin-access',
             'default-admin-access'
         ));*/
@@ -63,7 +63,7 @@ class Product extends CI_Controller {
         }
 
         //Has logged in user permission to access this page or method?        
-        $this->common_lib->is_auth(array(
+        $is_authorized = $this->common_lib->is_auth(array(
             'default-super-admin-access',
             'default-admin-access'
         ));
@@ -88,7 +88,7 @@ class Product extends CI_Controller {
         }
 
         //Has logged in user permission to access this page or method?        
-        $this->common_lib->is_auth(array(
+        $is_authorized = $this->common_lib->is_auth(array(
             'default-super-admin-access',
             'default-admin-access'
         ));
@@ -187,7 +187,7 @@ class Product extends CI_Controller {
         }
 
         //Has logged in user permission to access this page or method?        
-        $this->common_lib->is_auth(array(
+        $is_authorized = $this->common_lib->is_auth(array(
             'default-super-admin-access',
             'default-admin-access'
         ));
@@ -236,7 +236,7 @@ class Product extends CI_Controller {
         }
 
         //Has logged in user permission to access this page or method?        
-        $this->common_lib->is_auth(array(
+        $is_authorized = $this->common_lib->is_auth(array(
             'default-super-admin-access',
             'default-admin-access'
         ));
@@ -299,7 +299,7 @@ class Product extends CI_Controller {
         }
 
         //Has logged in user permission to access this page or method?        
-        $this->common_lib->is_auth(array(
+        $is_authorized = $this->common_lib->is_auth(array(
             'default-super-admin-access',
             'default-admin-access'
         ));
@@ -414,7 +414,7 @@ class Product extends CI_Controller {
         }
 
         //Has logged in user permission to access this page or method?        
-        $this->common_lib->is_auth(array(
+        $is_authorized = $this->common_lib->is_auth(array(
             'default-super-admin-access',
             'default-admin-access'
         ));
