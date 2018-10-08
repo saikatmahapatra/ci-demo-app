@@ -36,12 +36,9 @@ class Document extends CI_Controller {
         );
         $this->data['app_js'] = $this->common_lib->add_javascript($app_js_src);
 
-        
-        $this->load->model('category_model');
-        $this->load->model('product_model');
+        $this->load->model('upload_model');
         $this->data['alert_message'] = NULL;
         $this->data['alert_message_css'] = NULL;
-        $this->data['category_dropdown'] = $this->category_model->get_category_dropdown();
 
         $this->data['id'] = $this->uri->segment(3) ? $this->uri->segment(3) : $this->sess_user_id;
         $this->data['page_heading'] = $this->router->class.' : '.$this->router->method;
@@ -85,7 +82,7 @@ class Document extends CI_Controller {
         //Uploads
         $upload_object_name = 'user';
         $this->data['upload_object_name'] = $upload_object_name;
-        $this->data['all_uploads'] = $this->product_model->get_uploads($upload_object_name, $this->data['id'], NULL, NULL);
+        $this->data['all_uploads'] = $this->upload_model->get_uploads($upload_object_name, $this->data['id'], NULL, NULL);
         if ($this->input->post('form_action') == 'file_upload') {
             $this->upload_file();
         }
@@ -125,11 +122,11 @@ class Document extends CI_Controller {
                     'upload_date' => date('Y-m-d H:i:s')
                 );
 
-                // Check if already files uploaded or not
-                $skip_checking_existing_doc_type_name = array('product_image');
+                // Check if already files uploaded or not to allow multiple file upload for that category
+                $skip_checking_existing_doc_type_name = array('work_exp_letter');
 
                 if (!in_array($upload_document_type_name, $skip_checking_existing_doc_type_name)) {
-                    $uploads = $this->product_model->get_uploads($upload_object_name, $upload_object_id, NULL, $upload_document_type_name);
+                    $uploads = $this->upload_model->get_uploads($upload_object_name, $upload_object_id, NULL, $upload_document_type_name);
                 }
                 if (isset($uploads[0]) && ($uploads[0]['id'] != '')) {
                     //Unlink previously uploaded file
@@ -138,12 +135,12 @@ class Document extends CI_Controller {
                         $this->common_lib->unlink_file(array(FCPATH . $file_path));
                     }
                     // Now update table
-                    $update_upload = $this->product_model->update($postdata, array('id' => $uploads[0]['id']), 'uploads');
+                    $update_upload = $this->upload_model->update($postdata, array('id' => $uploads[0]['id']), 'uploads');
                     $this->session->set_flashdata('flash_message', 'File has been uploaded successfully.');
                     $this->session->set_flashdata('flash_message_css', 'alert-success');
                     redirect(current_url());
                 } else {
-                    $upload_insert_id = $this->product_model->insert($postdata, 'uploads');
+                    $upload_insert_id = $this->upload_model->insert($postdata, 'uploads');
                     $this->session->set_flashdata('flash_message', 'File has been uploaded successfully.');
                     $this->session->set_flashdata('flash_message_css', 'alert-success');
                     redirect(current_url());
@@ -192,7 +189,7 @@ class Document extends CI_Controller {
     
     function delete_uploads($upload_object_name, $upload_object_id) {
         $where_array = array('upload_object_name' => $upload_object_name, 'upload_object_id' => $upload_object_id);
-        $res = $this->product_model->delete($where_array, 'uploads');
+        $res = $this->upload_model->delete($where_array, 'uploads');
         if ($res) {
             $upload_path = 'assets/uploads/'.$upload_object_name.'/' . $upload_object_id;
             $this->common_lib->recursive_remove_directory(FCPATH . $upload_path);

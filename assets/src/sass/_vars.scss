@@ -50,5 +50,5 @@ $holiday: lighten($color_red, 40%);
 $leave: lighten($color_orange, 20%);
 $has-data: lighten($color_green, 50%);
 // Validation Error Message Colors
-$validation-error-color: $color_red;
-$mandatory_field_star-color: $color_red;
+$validation-error-color: $red;
+$mandatory_field_star-color: $red;

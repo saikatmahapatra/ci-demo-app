@@ -8463,7 +8463,7 @@ h1.page-header {
 }
 
 .validation-error {
-  color: #AC193D;
+  color: #ff0000;
   font-size: .875rem;
 }
 
@@ -8477,7 +8477,7 @@ h1.page-header {
 }
 
 .required {
-  color: #AC193D;
+  color: #ff0000;
   font-weight: bold;
 }
 
