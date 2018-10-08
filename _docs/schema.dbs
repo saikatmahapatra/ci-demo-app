@@ -341,3 +341,5 @@ SELECT * FROM timesheet WHERE YEAR(`timesheet_date`) = YEAR(CURRENT_DATE()) AND 
 
 ALTER TABLE `users` ADD `user_last_login_time` DATETIME NULL AFTER `user_account_active`;
 ALTER TABLE `users` CHANGE `user_last_login_time` `user_login_date_time` DATETIME NULL DEFAULT NULL;
+--08/10/2018
+ALTER TABLE `uploads` ADD `upload_is_verified` CHAR(1) NULL DEFAULT 'N' AFTER `upload_date`, ADD `upload_verified_by` INT(11) NULL AFTER `upload_is_verified`, ADD `upload_verified_on` DATETIME NULL AFTER `upload_verified_by`;
