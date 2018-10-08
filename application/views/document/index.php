@@ -30,7 +30,13 @@
 
 					<div class="form-group col-md-4">
 						<label for="userfile" class="">Select File <span class="required">*</span></label>
-						<?php echo form_upload(array('name' => 'userfile', 'id' => 'userfile','class' => 'form-control',));?>
+						<?php echo form_upload(array('name' => 'userfile', 'id' => 'userfile','class' => 'form-control','aria-describedby'=>'docHelp'));?>
+						<small id="docHelp" class="form-text text-muted bg-light p-1">
+							<ul>
+								<li>Only png, jpg, jpeg, doc, docx, pdf files are allowed.</li>
+								<li>File size should not larger than 2 MB(2048 KB).</li>
+							</ul>							 
+						</small>
 						<?php echo form_error('userfile'); ?>
 					</div>		
 				</div>
@@ -48,7 +54,7 @@
 	<div class="col-md-12">
 		<div class="card card-legend">
 			<div class="card-body">
-				<h6 class="card-title text-on-card">Upload New Documents</h6>
+				<h6 class="card-title text-on-card">Uploaded Documents</h6>
 				<?php
 				if (isset($all_uploads) && sizeof($all_uploads) > 0) {
 					foreach ($all_uploads as $key => $upload) {
