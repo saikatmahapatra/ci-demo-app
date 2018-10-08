@@ -3,7 +3,7 @@
 * @Support 
 * @Email   <mahapatra.saikat29@gmail.com>
 * @version 3.1.4
-* @repository https://github.com/saikatmahapatra/ci-demo-portal.git
+* @repository https://github.com/saikatmahapatra/ci-demo-app.git
 * @license MIT <http://opensource.org/licenses/MIT>
 */
 

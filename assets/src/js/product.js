@@ -78,11 +78,11 @@ function deleteUploadedFiles(e){
 		var upload_id = that.attr('data-upload_id');
 		var file_path = that.attr('data-path');
 		
-		var XHR = new Ajax();
-		XHR.type ='POST';
-		XHR.url = SITE_URL+ROUTER_DIRECTORY+ROUTER_CLASS+'/delete_file';
-		XHR.data = {id: upload_id, file_path: file_path};
-		var promise = XHR.init();		
+		var xhr = new Ajax();
+		xhr.type ='POST';
+		xhr.url = SITE_URL+ROUTER_DIRECTORY+ROUTER_CLASS+'/delete_file';
+		xhr.data = {id: upload_id, file_path: file_path};
+		var promise = xhr.init();		
 		promise.done(function(response){
 			if (response == 'success') {
 				data_row.remove();

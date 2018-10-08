@@ -51,8 +51,8 @@ $segment3 = $this->uri->segment(3);
 			<li class="d-none nav-item <?php echo ($segment1=='timesheet') ? 'active':''?>">
 				<a class="nav-link" href="<?php echo base_url($this->router->directory.'timesheet'); ?>">Timesheet</a>
 			</li>
-			<li class="d-none nav-item <?php echo ($segment1=='timesheet') ? 'active':''?>">
-				<a class="nav-link" href="#">My Documents</a>
+			<li class="nav-item <?php echo ($segment1=='document') ? 'active':''?>">
+				<a class="nav-link" href="<?php echo base_url($this->router->directory.'document'); ?>">My Documents</a>
 			</li>			
 		</ul>
 		
