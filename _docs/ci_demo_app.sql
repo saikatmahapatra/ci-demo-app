@@ -1336,3 +1336,5 @@ ALTER TABLE `role_permission`
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+ALTER TABLE `uploads` ADD `upload_is_verified` CHAR(1) NULL DEFAULT 'N' AFTER `upload_date`, ADD `upload_verified_by` INT(11) NULL AFTER `upload_is_verified`, ADD `upload_verified_on` DATETIME NULL AFTER `upload_verified_by`;
