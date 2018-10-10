@@ -29,19 +29,19 @@
 					<table id="user-datatable" class="table table-sm">
 						<thead>
 							<tr>
-								<th>Name & Info</th>
-								<th>Corp Details</th>
-								<th>Contact Info</th>
+								<th>Employee Name</th>
+								<th>Registered Email (W)</th>
+								<th>Phone Number (P)</th>
 								<th>Action</th>
 							</tr>
 						</thead>
 						<tbody></tbody>
 						<tfoot>
 							<tr>
-							<th>Name & Info</th>
-							<th>Corp Details</th>
-							<th>Contact Info</th>
-							<th>Action</th>
+								<th>Employee Name</th>
+								<th>Registered Email (W)</th>
+								<th>Phone Number (P)</th>
+								<th>Action</th>
 							</tr>
 						</tfoot>
 					</table>
