@@ -151,7 +151,7 @@ class User extends CI_Controller {
             //$html_name.= '<div class="small"> Reg. On : '.$this->common_lib->display_date($result['user_registration_date'], true).'</div>';
             //$html_name.= '<div class="small"> Last Login : '.($result['user_login_date_time'] != NULL ? $this->common_lib->display_date($result['user_login_date_time'], true) : '').'</div>';
             //$html_name.= ($result['user_account_active'] == 'Y') ? '<span data-user-id="'.$result['id'].'" class="account-status badge badge-success">Active Account</span>' : '<span data-user-id="'.$result['id'].'" class="account-status badge badge-danger">Inactive Account</span>';
-            $row[] = $html_name;           
+            $row[] = $html_name;
 
             // $html_corp=''; 
             // $html_corp.= '<div class=""> Emp # : '.$result['user_emp_id'].'</div>';
