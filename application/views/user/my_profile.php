@@ -76,7 +76,7 @@
 			<div class="card-body">
 				<nav>
 					<div class="nav nav-tabs ci-nav-tab" id="nav-tab" role="tablist">
-						<a class="nav-item nav-link active" id="nav-basic-tab" data-toggle="tab" href="#nav-basic" role="tab" aria-controls="nav-basic" aria-selected="true">Basic Information</a>			
+						<a class="nav-item nav-link active" id="nav-basic-tab" data-toggle="tab" href="#nav-basic" role="tab" aria-controls="nav-basic" aria-selected="true">Personal Info</a>			
 						<a class="nav-item nav-link" id="nav-address-tab" data-toggle="tab" href="#nav-address" role="tab" aria-controls="nav-address" aria-selected="false">Address</a>									
 						<a class="nav-item nav-link" id="nav-education-tab" data-toggle="tab" href="#nav-education" role="tab" aria-controls="nav-education" aria-selected="false">Academic Qualification</a>			
 						<a class="nav-item nav-link" id="nav-exp-tab" data-toggle="tab" href="#nav-exp" role="tab" aria-controls="nav-exp" aria-selected="false">Work Experience</a>
@@ -252,6 +252,18 @@
 					<div class="tab-pane fade" id="nav-account-stat" role="tabpanel" aria-labelledby="nav-account-stat-tab">
 						<div class="row mt-3">
 							<div class="col-md-12">
+								<dl class="row">
+									<dt class="col-sm-2">Account/Login Status</dt>
+									<dd class="col-sm-10"><?php echo isset($row['user_account_active']) ? ($row['user_account_active']=='Y' ? 'Active' : ($row['user_account_active']=='N' ? 'Inactive' : '' )) : '-'; ?></dd>
+									<dt class="col-sm-2">Registered on</dt>
+									<dd class="col-sm-10"><?php echo isset($row['user_registration_date']) ? $this->common_lib->display_date($row['user_registration_date'],true) : '-'; ?></dd>									
+									<dt class="col-sm-2">Registered from IP</dt>
+									<dd class="col-sm-10"><?php echo isset($row['user_registration_ip']) ? $row['user_registration_ip'] : '-'; ?></dd>
+									<dt class="col-sm-2">Last Login Date Time</dt>
+									<dd class="col-sm-10"><?php echo isset($row['user_login_date_time']) ? $this->common_lib->display_date($row['user_login_date_time'],true) : '-'; ?></dd>
+									<dt class="col-sm-2">User Archived</dt>
+									<dd class="col-sm-10"><?php echo isset($row['user_archived']) ? ($row['user_archived']=='Y' ? 'Yes' : ($row['user_archived']=='N' ? 'No' : '' )) : '-'; ?></dd>
+								</dl>
 							</div>
 						</div>
 					</div><!--/#nav-account-stat-->
