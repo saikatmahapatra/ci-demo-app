@@ -44,7 +44,7 @@
 				<div class="row">
 					<div class="col-md-2">
 						<img class="align-self-center mr-3 rounded dp" src="<?php echo base_url($img_src);?>">
-						<div class="mt-2"><a href="<?php echo base_url($this->router->directory.$this->router->class.'/profile_pic');?>"><i class="fa fa-pencil"></i> Change/Remove</a></div>
+						<div class="mt-2"><a href="<?php echo base_url($this->router->directory.$this->router->class.'/profile_pic');?>"><i class="fa fa-pencil"></i> Change</a></div>
 					</div>
 					<div class="col-md-10">
 						<div class="h6 mt-2">
@@ -81,6 +81,7 @@
 						<a class="nav-item nav-link" id="nav-education-tab" data-toggle="tab" href="#nav-education" role="tab" aria-controls="nav-education" aria-selected="false">Academic Qualification</a>			
 						<a class="nav-item nav-link" id="nav-exp-tab" data-toggle="tab" href="#nav-exp" role="tab" aria-controls="nav-exp" aria-selected="false">Work Experience</a>
 						<!--<a class="nav-item nav-link" id="nav-bank-tab" data-toggle="tab" href="#nav-bank" role="tab" aria-controls="nav-bank" aria-selected="false">Bank Account</a>-->
+						<a class="nav-item nav-link" id="nav-account-stat-tab" data-toggle="tab" href="#nav-account-stat" role="tab" aria-controls="nav-account-stat" aria-selected="false">Account Statistics</a>
 					</div>
 				</nav>
 
@@ -247,6 +248,13 @@
 							</div>
 						</div>
 					</div><!--/#nav-bank-->
+
+					<div class="tab-pane fade" id="nav-account-stat" role="tabpanel" aria-labelledby="nav-account-stat-tab">
+						<div class="row mt-3">
+							<div class="col-md-12">
+							</div>
+						</div>
+					</div><!--/#nav-account-stat-->
 					
 					</div><!--/.tab-content-->
 			</div><!--/.carrd-body-->
