@@ -18,6 +18,11 @@ body.login {
 	min-height: 4rem;
 }*/
 
+nav.navbar.fixed-top {
+    max-height:100%;
+    overflow-y:auto;
+}
+
 h1.page-header {
     font-size: 1.25rem;
 }

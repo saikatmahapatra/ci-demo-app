@@ -16,7 +16,9 @@ class Example extends CI_Controller {
         $this->common_lib->init_template_elements();
         
         //add required js files for this controller
-        $app_js_src = array();         
+        $app_js_src = array(
+            'assets/dist/js/'.$this->router->class.'.js', //create js file name same as controller name
+        );
         $this->data['app_js'] = $this->common_lib->add_javascript($app_js_src);
         
         $this->data['alert_message'] = NULL;
@@ -141,64 +143,77 @@ class Example extends CI_Controller {
     }
 	
 	function calendar_lib() {
-		//add required js files for this controller
-        $app_js_src = array(
-            'assets/dist/js/timesheet.js',
-        );
-        $this->data['app_js'] = $this->common_lib->add_javascript($app_js_src);
+        $this->data['alert_message'] = $this->session->flashdata('flash_message');
+        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
+        
+		$year = $this->uri->segment(3) ? $this->uri->segment(3) : date('Y');
+		$month = $this->uri->segment(4) ? $this->uri->segment(4) : date('m');
+		$day = date('d');
+		
+		$template='';
+		$template.='{table_open}<table class="table ci-calendar table-sm" border="0" cellpadding="" cellspacing="">{/table_open}';
+		$template.='{heading_row_start}<tr class="mn">{/heading_row_start}';
+		$template.='{heading_previous_cell}<th class="prevcell"><a href="{previous_url}">&lt;&lt;</a></th>{/heading_previous_cell}';
+		$template.='{heading_title_cell}<th colspan="{colspan}">{heading}</th>{/heading_title_cell}';
+		$template.='{heading_next_cell}<th class="nextcell"><a href="{next_url}" >&gt;&gt;</a></th>{/heading_next_cell}';
+		$template.='{heading_row_end}</tr>{/heading_row_end}';
+		$template.='{week_row_start}<tr class="wk_nm">{/week_row_start}';
+		$template.='{week_day_cell}<td>{week_day}</td>{/week_day_cell}';
+		$template.='{week_row_end}</tr>{/week_row_end}';
+		
+		$css_days_rows = ($month != date('m'))? 'disabled_m': 'allowed_m';
+		$template.='{cal_row_start}<tr class="'.$css_days_rows.'">{/cal_row_start}';
+		
+		$template.='{cal_cell_start}<td class="day">{/cal_cell_start}';
+		$template.='{cal_cell_content}<a href="{content}">{day}</a>{/cal_cell_content}';
+		$template.='{cal_cell_content_today}<div class="highlight"><a href="{content}">{day}</a></div>{/cal_cell_content_today}';
+		$template.='{cal_cell_no_content}{day}{/cal_cell_no_content}';
+		$template.='{cal_cell_no_content_today}<div class="highlight">{day}</div>{/cal_cell_no_content_today}';
+		$template.='{cal_cell_blank}&nbsp;{/cal_cell_blank}';
+		$template.='{cal_cell_end}</td>{/cal_cell_end}';		
+		$template.='{cal_row_end}</tr>{/cal_row_end}';	
+		
+		$template.='{table_close}</table>{/table_close}';
 		
 		$prefs = array (
                'start_day'    => 'monday',
                'month_type'   => 'short',
                'day_type'     => 'short',
-			   'show_next_prev'=>TRUE,
-			   'template'	  =>  '
-			   {table_open}<table class="ci-calendar table-sm" border="0" cellpadding="" cellspacing="">{/table_open}
-
-				{heading_row_start}<tr>{/heading_row_start}
-
-				{heading_previous_cell}<th class="prevcell"><a href="{previous_url}">&lt;&lt;</a></th>{/heading_previous_cell}
-				{heading_title_cell}<th colspan="{colspan}">{heading}</th>{/heading_title_cell}
-				{heading_next_cell}<th class="nextcell"><a href="{next_url}" >&gt;&gt;</a></th>{/heading_next_cell}
-
-				{heading_row_end}</tr>{/heading_row_end}
-
-				{week_row_start}<tr class="wk_nm">{/week_row_start}
-				{week_day_cell}<td>{week_day}</td>{/week_day_cell}
-				{week_row_end}</tr>{/week_row_end}
-
-				{cal_row_start}<tr>{/cal_row_start}
-				{cal_cell_start}<td class="day">{/cal_cell_start}
-
-				{cal_cell_content}<a href="{content}">{day}</a>{/cal_cell_content}
-				{cal_cell_content_today}<div class="highlight"><a href="{content}">{day}</a></div>{/cal_cell_content_today}
-
-				{cal_cell_no_content}{day}{/cal_cell_no_content}
-				{cal_cell_no_content_today}<div class="highlight">{day}</div>{/cal_cell_no_content_today}
-
-				{cal_cell_blank}&nbsp;{/cal_cell_blank}
-
-				{cal_cell_end}</td>{/cal_cell_end}
-				{cal_row_end}</tr>{/cal_row_end}
-
-				{table_close}</table>{/table_close}
-			   '
+			   'show_next_prev'=>TRUE,			   
+			   'template'	  =>  $template
              );
 		$this->load->library('calendar',$prefs);
 		
 		$year = $this->uri->segment(3) ? $this->uri->segment(3) : date('Y');
 		$month = $this->uri->segment(4) ? $this->uri->segment(4) : date('m');
-		$day = date('d');
-		
+		$day = date('d');		
 		$this->data['entry_for'] = date('Y/m/d');
-		
-		
-		
 		$data = array();
 		$this->data['cal'] = $this->calendar->generate($year,$month,$data);
 		$this->data['page_heading'] = 'Calendar';
+        
+
+        //Simulate Form Submit
+        if ($this->input->post('form_action') == 'add') {
+            if ($this->validate_form_calander_data('add') == true) {
+                $this->session->set_flashdata('flash_message', 'Validation Successful.');
+                $this->session->set_flashdata('flash_message_css', 'alert-success');
+                redirect(current_url());
+            }
+        }
+
         $this->data['maincontent'] = $this->load->view($this->router->class.'/calendar_lib', $this->data, true);
         $this->load->view('_layouts/layout_default', $this->data);
+    }
+
+    function validate_form_calander_data($action = NULL) {
+        $this->form_validation->set_rules('selected_date', 'calendar date selection', 'required');
+        $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
+        if ($this->form_validation->run() == true) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     function contact_form() {
