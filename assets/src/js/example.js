@@ -76,7 +76,7 @@ function get_timesheet_stat(){
 	var response = [
 			{"id":"1","timesheet_date":"2018-10-17","timesheet_year":"2018","timesheet_month":"10","timesheet_day":"03","timesheet_hours":"7.00","timesheet_review_status":"pending"},
 			{"id":"2","timesheet_date":"2018-10-19","timesheet_year":"2018","timesheet_month":"10","timesheet_day":"19","timesheet_hours":"6.00","timesheet_review_status":"pending"},
-			{"id":"2","timesheet_date":"2018-10-19","timesheet_year":"2018","timesheet_month":"10","timesheet_day":"20","timesheet_hours":"9.00","timesheet_review_status":"pending"}];
+			{"id":"2","timesheet_date":"2018-10-20","timesheet_year":"2018","timesheet_month":"10","timesheet_day":"20","timesheet_hours":"9.00","timesheet_review_status":"pending"}];
 	$.each(response,function(i,obj){
 		$(".day").each(function(){
 			var calDay= $(this).text();
