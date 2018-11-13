@@ -6,7 +6,7 @@ $segment3 = $this->uri->segment(3);
 //print_r($user_profile_image);
 ?>
 
-<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">	
+<nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">	
 	<a class="navbar-brand" href="<?php echo base_url('admin'); ?>">
 	<img class="" style="width:80px;" src="<?php echo base_url('assets/src/img/logo.png');?>">
 		<?php //echo $this->config->item('app_logo_name_admin_dashboard'); ?>
@@ -49,11 +49,7 @@ $segment3 = $this->uri->segment(3);
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="<?php echo base_url('order'); ?>">Orders</a>
-			</li>			
-			<li class="nav-item <?php echo ($segment1=='home') ? 'active':''?>">
-				<a class="nav-link" href="<?php echo base_url('holiday'); ?>">Add Holiday
-				</a>
-			</li>
+			</li>						
 		</ul>
 		
 		
