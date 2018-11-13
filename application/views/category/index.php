@@ -25,8 +25,8 @@
 			<!-- /.card-header -->
 			<div class="card-body">
 				<div class="table-responsive">
-					<table id="category-datatable" class="table table-sm">
-						<thead>
+					<table id="category-datatable" class="table ci-table table-striped">
+						<thead class="thead-dark">
 							<tr>
 								<th>Category Name</th>
 								<th>Visible Status</th>

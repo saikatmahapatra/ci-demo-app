@@ -393,3 +393,17 @@ a[data-link-type="user-profile-card"] {
     // Customize the `:focus` state to imitate native WebKit styles.
     @include form-control-focus();
 }
+
+//DataTable Style Override
+table.ci-table.dataTable {
+    clear: both;
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+    max-width: none !important;
+    border-collapse: collapse !important;
+}
+
+
+/*.dataTables_wrapper .dataTables_processing {
+    background-color: rgba(0, 0, 0, .5);
+}*/

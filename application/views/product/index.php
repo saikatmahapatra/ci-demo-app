@@ -25,8 +25,8 @@
 			<!-- /.card-header -->
 			<div class="card-body">
 				<div class="table-responsive">
-					<table id="product-datatable" class="table table-sm">
-						<thead>
+					<table id="product-datatable" class="table ci-table table-striped">
+						<thead class="thead-dark">
 							<tr>
 								<th>SKU</th>
 								<th>Product</th>

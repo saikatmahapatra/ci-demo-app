@@ -32,8 +32,8 @@
 					<input type="hidden" name="form_action" value="download">
 					<button class="btn btn-sm btn-success" title="Download"> Download</button>
 				</form>
-					<table id="user-datatable" class="table table-sm">
-						<thead>
+					<table id="user-datatable" class="table ci-table table-striped">
+						<thead class="thead-dark">
 							<tr>
 								<th>Employee Name</th>
 								<th>Registered Email (W)</th>

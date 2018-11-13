@@ -8802,3 +8802,15 @@ a[data-link-type="user-profile-card"] {
   outline: 0;
   box-shadow: 0 0 0 0.2rem rgba(81, 51, 171, 0.25);
 }
+
+table.ci-table.dataTable {
+  clear: both;
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+  max-width: none !important;
+  border-collapse: collapse !important;
+}
+
+/*.dataTables_wrapper .dataTables_processing {
+    background-color: rgba(0, 0, 0, .5);
+}*/

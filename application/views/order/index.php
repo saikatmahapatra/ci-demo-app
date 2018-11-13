@@ -19,8 +19,8 @@
 			<div class="card-header">Data Table</div><!-- /.card-header -->
 			<div class="card-body">
 				<div class="table-responsive">
-					<table id="example1" class="table table-sm">
-						<thead>
+					<table id="example1" class="table ci-table table-striped">
+						<thead class="thead-dark">
 							<tr>
 								<th>Order #</th>
 								<th>Date</th>
