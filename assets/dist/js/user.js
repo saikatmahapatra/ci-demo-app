@@ -13,10 +13,12 @@ function domReady() {
     }
 
     //Date of Birth Date Picker
-    $('.dob-datepicker, .job-exp-datepicker').datepicker({
+    $('#user_doj').datepicker({
         format: "dd-mm-yyyy",
         weekStart: 1,
-        autoclose: true
+        autoclose: true,
+		container: jQuery('input#user_doj').parent()
+		
     });
 
     //select2  #academic_specialization
