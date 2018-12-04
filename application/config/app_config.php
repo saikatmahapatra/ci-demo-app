@@ -43,5 +43,4 @@ $config['app_meta_author'] = 'Saikat Mahapatra webuidevs@gmail.com';
 
 $config['app_copy_right'] = 'Copyright '.date('Y').' &copy; CI App';
 $config['app_admin_copy_right'] = 'Copyright &copy; '.date('Y').' <a href="#">CI App</a>. All rights reserved.';
-$config['app_ui_version'] = 'v1.0.1';
-$config['app_admin_ui_version'] = '2.6 , CI '.CI_VERSION;
+$config['app_version'] = 'App. Ver. '.CI_VERSION.'.3';

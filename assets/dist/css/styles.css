@@ -8662,7 +8662,7 @@ a[data-link-type="user-profile-card"] {
 }
 
 .ajax-loader-ui {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -8672,7 +8672,7 @@ a[data-link-type="user-profile-card"] {
 }
 
 .ajax-loader-img {
-  position: absolute;
+  position: fixed;
   left: 50%;
   top: 50%;
   margin-left: -32px;
