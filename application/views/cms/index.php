@@ -1,7 +1,7 @@
 <?php //echo isset($breadcrumbs) ? $breadcrumbs : ''; ?>
 <div class="row heading-container">
     <div class="col-12">
-        <h1 class="page-header"><?php echo isset($page_heading)? $page_heading:'Page Heading'; ?></h1>
+        <h1 class="h3 mb-3 font-weight-normal"><?php echo isset($page_heading)? $page_heading:'Page Heading'; ?></h1>
     </div>
 </div><!--/.heading-container-->
 
@@ -15,38 +15,39 @@
 			echo $html_alert_ui;
 		}
 		?>
-		<div class="card">
-			<div class="card-header">
-				<span class="">Data Table</span>
-				<span class="float-right">
-					<a href="<?php echo base_url($this->router->directory.$this->router->class.'/add');?>" class="btn btn-sm btn-primary" title="Add"> Add New</a>
-				</span>
+		
+		<div class="grid-action-holder row my-2 px-3">
+			<div class="col-md-8">
+			<span class="mx-2"><i class="fa fa-circle text-success" aria-hidden="true"></i> Published Content</span>
+			<span class="mx-2"><i class="fa fa-circle text-warning" aria-hidden="true"></i> Unpublished Content</span>
 			</div>
-			<div class="card-body">
-				<div class="table-responsive">
-					<table id="cms-datatable" class="table ci-table table-striped">
-						<thead class="thead-dark">
-							<tr>
-								<th scope="col">Type</th>								
-								<th scope="col">Title</th>
-								<th scope="col">Created On</th>
-								<th scope="col">Status</th>								
-								<th scope="col">Action</th>
-							</tr>
-						</thead>
-						<tbody></tbody>
-						<tfoot>
-							<tr>
-								<th scope="col">Type</th>								
-								<th scope="col">Title</th>
-								<th scope="col">Created On</th>
-								<th scope="col">Status</th>								
-								<th scope="col">Action</th>
-							</tr>
-						</tfoot>
-					</table>
-				</div>
-			</div>
-		</div>
+			<div class="col-md-4 text-right">
+			<a href="<?php echo base_url($this->router->directory.$this->router->class.'/add');?>" class="btn btn-sm btn-outline-success" title="Add"> <i class="fa fa-plus"></i> Add New</a>
+			</div>		
+		</div><!--/.grid-action-holder-->
+		
+		<div class="table-responsive">
+			<table id="cms-datatable" class="table ci-table table-striped">
+				<thead class="thead-dark">
+					<tr>
+						<th scope="col">Type</th>								
+						<th scope="col">Title</th>
+						<th scope="col">Created On</th>
+						<th scope="col">Status</th>								
+						<th scope="col">Action</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+				<tfoot>
+					<tr>
+						<th scope="col">Type</th>								
+						<th scope="col">Title</th>
+						<th scope="col">Created On</th>
+						<th scope="col">Status</th>								
+						<th scope="col">Action</th>
+					</tr>
+				</tfoot>
+			</table>
+		</div><!--/.table-responsive-->
 	</div>
 </div><!--/.row-->

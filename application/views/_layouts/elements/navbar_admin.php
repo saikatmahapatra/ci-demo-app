@@ -6,9 +6,9 @@ $segment3 = $this->uri->segment(3);
 //print_r($user_profile_image);
 ?>
 
-<nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">	
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top nav-colorgraph">	
 	<a class="navbar-brand" href="<?php echo base_url('admin'); ?>">
-	<img class="" style="width:80px;" src="<?php echo base_url('assets/src/img/logo.png');?>">
+	<img class="logo" src="<?php echo base_url('assets/src/img/logo.png');?>">
 		<?php //echo $this->config->item('app_logo_name_admin_dashboard'); ?>
 	</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault"
@@ -54,13 +54,13 @@ $segment3 = $this->uri->segment(3);
 		
 		
 		<ul class="navbar-nav my-2 my-lg-0">
-			<li class="nav-item d-none">
+			<li class="nav-item mt-1 d-none">
 				<?php echo form_open(base_url('search/index'), array( 'method' => 'get','class'=>'form-inline','name' => '','id' => 'ci-form-helper',)); ?>
 				<?php echo form_hidden('form_action', 'search'); ?>
 				<div class="input-group">
-						<input type="text" name="q" class="form-control" placeholder="Search Employee..." aria-label="Search" aria-describedby="basic-addon2">
+						<input type="text" name="q" class="form-control form-control-sm" placeholder="Search Employee..." aria-label="Search" aria-describedby="basic-addon2">
 						<div class="input-group-append">
-							<button class="btn btn-light" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+							<button class="btn btn-sm" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
 						</div>
 					</div>
 				<?php echo form_close(); ?>
@@ -74,7 +74,7 @@ $segment3 = $this->uri->segment(3);
 			<?php if (isset($this->session->userdata['sess_user']['id'])) {   ?>
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i> My Account</a>
+					aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i> Welcome, <?php echo isset($this->session->userdata['sess_user']['user_firstname']) ? $this->session->userdata['sess_user']['user_firstname'] : 'Guest';?></a>
 				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown03">					
 					<div class="dropdown-item welcome-user-container">					
 						<div class=""><?php echo isset($this->session->userdata['sess_user']['user_title'])? $this->session->userdata['sess_user']['user_title']:''; ?> <?php echo isset($this->session->userdata['sess_user']['user_firstname']) ? $this->session->userdata['sess_user']['user_firstname'].' '.$this->session->userdata['sess_user']['user_lastname']:'Guest';?></div>

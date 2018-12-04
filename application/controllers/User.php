@@ -150,7 +150,7 @@ class User extends CI_Controller {
             if($result['user_account_active'] == 'N'){
                 $account_status_indicator = 'text-danger';
             }
-            $html_name.= '<div class=""><i class="fa fa-circle-o '.$account_status_indicator.'" aria-hidden="true"></i> '.$result['user_title'].'&nbsp;'.$result['user_firstname'] . '&nbsp;' . $result['user_lastname'].' (#'.$result['user_emp_id'].')</div>';
+            $html_name.= '<div class=""><i class="fa fa-circle '.$account_status_indicator.'" aria-hidden="true"></i> '.$result['user_title'].'&nbsp;'.$result['user_firstname'] . '&nbsp;' . $result['user_lastname'].' (#'.$result['user_emp_id'].')</div>';
             //$html_name.= '<div> DOB : '.$this->common_lib->display_date($result['user_dob']).'</div>';
             //$html_name.= '<div> Gender : '.$result['user_gender'].'</div>';
             //$html_name.= '<div> Blood Gr : '.$result['user_blood_group'].'</div>';
@@ -264,7 +264,7 @@ class User extends CI_Controller {
                 }
             }
         }
-		$this->data['page_heading'] = 'Login';
+		$this->data['page_heading'] = 'Please sign in';
         $this->data['maincontent'] = $this->load->view($this->router->class.'/login', $this->data, true);
         $this->load->view('_layouts/layout_login', $this->data);
     }

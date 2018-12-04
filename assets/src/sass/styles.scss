@@ -11,6 +11,34 @@ body {
 body.login {
     margin-top: 1rem;
     margin-bottom: 1rem;
+    background-color: $gray-100;
+}
+
+.form-signin {
+    width: 100%;
+    max-width: 350px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+.form-signin .checkbox {
+    font-weight: 400;
+}
+
+.form-signin .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.logo-2x {
+    width: 160px;
+}
+
+.logo {
+    width: 100px;
 }
 
 
@@ -43,10 +71,6 @@ body.login {
         max-height: 340px;
         overflow-y: auto;
     }
-}
-
-h1.page-header {
-    font-size: 1.25rem;
 }
 
 .scrollup {
@@ -310,7 +334,7 @@ a[data-link-type="user-profile-card"] {
 
 [data-cms-type="notice"] {
     border-top: 2px solid $blue;
-    background-color: lighten($blue, 50%);
+    background-color: lighten($blue, 47%);
 }
 
 [data-cms-type="news"] {
@@ -566,3 +590,21 @@ table.ci-table.dataTable {
 
 
 /*END Form ci-wizard*/
+
+.colorgraph {
+    height: 5px;
+    border-top: 0;
+    background: #c4e17f;
+    background-image: -webkit-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+    background-image: -moz-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+    background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+    background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+}
+
+.nav-colorgraph {
+    border-bottom: 2px solid lighten($primary-color, 10%);
+    .nav-link {
+        font-weight: bold;
+        color: $black;
+    }
+}
