@@ -27,12 +27,13 @@ $segment3 = $this->uri->segment(3);
 				<a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false">Examples</a>
 					<div class="dropdown-menu" aria-labelledby="dropdown02">
+						<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'example/bootstrap');?>">Bootstrap Theme</a>
 						<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'example/form_helper');?>">Form Helper</a>
 						<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'example/date_helper');?>">Date Helper</a>
 						<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'example/directory_helper');?>">Directory Helper</a>               
 						<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'example/dom_pdf_gen_pdf');?>">Download as PDF/DOM PDF</a>					
 						<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'example/calendar_lib');?>">Calendar Library</a>
-						<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'example/bootstrap');?>">Bootstrap SASS Theme Components</a>
+						
 						<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'example/contact_form');?>">Contact Form (Email Test)</a>
 					</div>
 			</li>

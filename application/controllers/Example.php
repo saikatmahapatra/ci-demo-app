@@ -28,8 +28,9 @@ class Example extends CI_Controller {
     }
 
     function index() {
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/index', $this->data, true);
-        $this->load->view('_layouts/layout_default', $this->data);
+		$this->bootstrap();
+        //$this->data['maincontent'] = $this->load->view($this->router->class.'/index', $this->data, true);
+        //$this->load->view('_layouts/layout_default', $this->data);
     }
 
     function form_helper() {
@@ -137,7 +138,7 @@ class Example extends CI_Controller {
     }
 
     function bootstrap() {
-        $this->data['page_heading'] = 'Bootstrap SASS Customized Theme Components : UX Guide';
+        $this->data['page_heading'] = 'Bootstrap Style Guide';
         $this->data['maincontent'] = $this->load->view($this->router->class.'/bootstrap', $this->data, true);
         $this->load->view('_layouts/layout_default', $this->data);
     }
