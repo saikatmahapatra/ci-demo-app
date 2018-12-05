@@ -54,7 +54,7 @@ body.login {
 
 .navbar{
 	/*min-height: 4rem;*/
-	@include linear-gradient(lighten($primary-color,35%),$white);
+	//@include linear-gradient(lighten($primary-color,35%),$white);
 }
 
 .nav-colorgraph {

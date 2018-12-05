@@ -23,14 +23,12 @@ function domReady(){
 	});
 	
 	// Classic CK Editor
-	ClassicEditor
-    .create( document.querySelector('#pagecontent_text') )
-    .then( editor => {
-        console.log( editor );
-    } )
-    .catch( error => {
-        console.error( error );
-    } );
+    CKEDITOR.replace('pagecontent_text', {
+        filebrowserBrowseUrl: SITE_URL + 'assets/vendors/ckfinder/ckfinder.html',
+        filebrowserImageBrowseUrl: SITE_URL + 'assets/vendors/ckfinder/ckfinder.html?type=Images',
+        filebrowserUploadUrl: SITE_URL + 'assets/vendors/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+        filebrowserImageUploadUrl: SITE_URL + 'assets/vendors/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images'
+    });
 }
 
 

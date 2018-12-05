@@ -8475,13 +8475,6 @@ body.login {
 
 .navbar {
   /*min-height: 4rem;*/
-  background: #fff;
-  background: -moz-linear-gradient(top, #b3d7ff 0%, #fff 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #b3d7ff), color-stop(100%, #fff));
-  background: -webkit-linear-gradient(top, #b3d7ff 0%, #fff 100%);
-  background: -o-linear-gradient(top, #b3d7ff 0%, #fff 100%);
-  background: linear-gradient(to bottom, #b3d7ff 0%, #fff 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#b3d7ff, endColorstr=#fff);
 }
 
 .nav-colorgraph {
