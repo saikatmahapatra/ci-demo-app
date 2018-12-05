@@ -294,7 +294,7 @@ class Cms extends CI_Controller {
 	function upload_file() {
         if ($this->validate_banner_form_data() == true) {
             $upload_related_to = 'slider'; // related to user, product, album, contents etc
-            $upload_related_to_id = $this->id; // related to id user id (pk), product id(pk), album id(pk), content id (pk)
+            $upload_related_to_id = $this->id; // related to id user id, product id, album id etc
             $upload_file_type_name = $this->input->post('upload_file_type_name'); // file type name            
 			$upload_text_1 = $this->input->post('upload_text_1');
             $upload_text_2 = $this->input->post('upload_text_2');
@@ -334,7 +334,7 @@ class Cms extends CI_Controller {
 					'upload_text_3' => $upload_text_3,					
                 );
 
-                //Allow mutiple file upload for a file type.
+                // Allow mutiple file upload for a file type.
                 $multiple_allowed_upload_file_type = array('slider_img');
                 if (!in_array($upload_file_type_name, $multiple_allowed_upload_file_type)) {
                     $uploads = $this->cms_model->get_uploads($upload_related_to, $upload_related_to_id, NULL, $upload_file_type_name);

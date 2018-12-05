@@ -23,9 +23,9 @@
 		<?php echo isset($upload_error_message) ? $upload_error_message : ''; ?>
 		<div class="form-row">
 			<div class="form-group col-md-12">
-				<label for="upload_document_type_name" class="">Document <span class="required">*</span></label>
-				<?php echo form_dropdown('upload_document_type_name', $arr_upload_document_type_name, set_value('upload_document_type_name'), array('class' => 'form-control','id' => 'upload_document_type_name',));?>
-				<?php echo form_error('upload_document_type_name'); ?>
+				<label for="upload_file_type_name" class="">Document <span class="required">*</span></label>
+				<?php echo form_dropdown('upload_file_type_name', $arr_upload_file_type_name, set_value('upload_file_type_name'), array('class' => 'form-control','id' => 'upload_file_type_name',));?>
+				<?php echo form_error('upload_file_type_name'); ?>
 			</div>
 		</div>
 		<div class="form-row">
@@ -44,7 +44,7 @@
 	<div class="col-md-7">	
 		
 		<div class="table-responsive">
-			<table class="table ci-table table-striped table-sm">
+			<table class="table ci-table table-bordered table-sm">
 				<thead class="thead-dark">
 					<tr>
 						<th scope="col">Document</th>
@@ -58,7 +58,7 @@
 				?>
 				<tr class="file-container" id="upload_grid_<?php echo $upload['id']; ?>">
 						<?php
-							$file_path = 'assets/uploads/'.$upload_object_name.'/docs/' . $id . '/' . $upload['upload_file_name'];
+							$file_path = 'assets/uploads/'.$upload_related_to.'/docs/' . $id . '/' . $upload['upload_file_name'];
 							if (file_exists(FCPATH . $file_path)) {
 								$file_src = base_url($file_path);
 								$btn_class='';
@@ -68,11 +68,11 @@
 							}
 						?>
 						<td>
-							<a href="<?php echo $file_src;?>" title="<?php echo $upload['upload_document_type_name'];?>" data-file-name="<?php echo $upload['upload_file_name']; ?>" class="<?php echo $btn_class;?>" target="_new"><?php echo $arr_upload_document_type_name[$upload['upload_document_type_name']]; ?></a>
+							<a href="<?php echo $file_src;?>" title="<?php echo $upload['upload_file_type_name'];?>" data-file-name="<?php echo $upload['upload_file_name']; ?>" class="<?php echo $btn_class;?>" target="_new"><?php echo $arr_upload_file_type_name[$upload['upload_file_type_name']]; ?></a>
 						</td>
 												
 						<td>
-							<a href="#" class="btn btn-outline-danger btn-sm btn-delete-file" data-confirmation="1" data-confirmation-message="Are you sure, you want to delete this?" data-upload_id="<?php echo $upload['id'];?>" title="Delete <?php echo $upload['upload_document_type_name']; ?>" data-path="<?php echo $file_path;?>"><i class="fa fa-close"></i> Delete</a>
+							<a href="#" class="btn btn-outline-danger btn-sm btn-delete-file" data-confirmation="1" data-confirmation-message="Are you sure, you want to delete this?" data-upload_id="<?php echo $upload['id'];?>" title="Delete <?php echo $upload['upload_file_type_name']; ?>" data-path="<?php echo $file_path;?>"><i class="fa fa-close"></i> Delete</a>
 						</td>
 					
 				</tr>

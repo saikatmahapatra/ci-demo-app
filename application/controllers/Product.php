@@ -331,9 +331,9 @@ class Product extends CI_Controller {
 
     function upload_file() {
         if ($this->validate_uplaod_form_data() == true) {
-            $upload_related_to = 'product';
-            $upload_related_to_id = $this->id;
-            $upload_file_type_name = $this->input->post('upload_file_type_name');
+            $upload_related_to = 'product'; // related to user, product, album, contents etc
+            $upload_related_to_id = $this->id; // related to id user id, product id, album id etc
+            $upload_file_type_name = $this->input->post('upload_file_type_name'); // file type name
 
             //Create directory for object specific
             $upload_path = 'assets/uploads/' . $upload_related_to . '/' . $upload_related_to_id;
@@ -362,9 +362,8 @@ class Product extends CI_Controller {
                     'upload_by_user_id' => $this->sess_user_id
                 );
 
-                // Check if already files uploaded or not
+                // Allow mutiple file upload for a file type.
                 $multiple_allowed_upload_file_type = array('product_image');
-
                 if (!in_array($upload_file_type_name, $multiple_allowed_upload_file_type)) {
                     $uploads = $this->product_model->get_uploads($upload_related_to, $upload_related_to_id, NULL, $upload_file_type_name);
                 }
@@ -396,7 +395,9 @@ class Product extends CI_Controller {
 
     function validate_uplaod_form_data() {
         $this->form_validation->set_rules('upload_file_type_name', 'type selection', 'required');
-        //$this->form_validation->set_rules('userfile', 'file selection', 'required');
+        if (empty($_FILES['userfile']['name'])){
+			$this->form_validation->set_rules('userfile', ' ', 'required');
+		}
         $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
         if ($this->form_validation->run() == true) {
             return true;

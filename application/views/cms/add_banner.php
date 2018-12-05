@@ -6,7 +6,7 @@
 </div><!--/.heading-container-->
 
 <div class="row">
-	<div class="col-md-9">
+	<div class="col-md-6">
 		<?php
 		// Show server side flash messages
 		if (isset($alert_message)) {
@@ -21,7 +21,7 @@
 
 		
 		<div class="form-row">			
-			<div class="form-group col-md-8">									
+			<div class="form-group col-md-12">									
 				<label for="userfile" class="">Image <span class="required">*</span></label>
 				<?php
 					echo form_upload(array(

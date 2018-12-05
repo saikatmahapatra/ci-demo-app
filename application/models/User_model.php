@@ -446,7 +446,7 @@ class User_model extends CI_Model {
             $this->db->where('upload_related_to_id', $upload_related_to_id);
         }
         if ($upload_file_type_name) {
-            $this->db->where('upload_document_type_name', $upload_file_type_name);
+            $this->db->where('upload_file_type_name', $upload_file_type_name);
         }
         $query = $this->db->get('uploads t1');
         $result = $query->result_array();

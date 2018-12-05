@@ -157,9 +157,9 @@ $row = $rows[0];
 						</div>
 						
 						<div class="form-group">									
-							<label for="upload_document_type_name" class="control-label">Document Type <span class="required">*</span></label>
-							<?php echo form_dropdown('upload_document_type_name', $arr_upload_document_type_name, set_value('upload_document_type_name'), array('class' => 'form-control','id' => 'upload_document_type_name',));?>
-							<?php echo form_error('upload_document_type_name'); ?>
+							<label for="upload_file_type_name" class="control-label">Document Type <span class="required">*</span></label>
+							<?php echo form_dropdown('upload_file_type_name', $arr_upload_file_type_name, set_value('upload_file_type_name'), array('class' => 'form-control','id' => 'upload_file_type_name',));?>
+							<?php echo form_error('upload_file_type_name'); ?>
 						</div>
 						
 						<div class="form-group">								
@@ -186,14 +186,14 @@ $row = $rows[0];
                             foreach ($all_uploads as $key => $upload) {
                                 echo '<div class="file-container row" id="upload_grid_' . $upload['id'] . '">';
                                 echo '<div class="col-md-4">';
-                                echo strtoupper($upload['upload_document_type_name']);
+                                echo strtoupper($upload['upload_file_type_name']);
                                 echo '</div>';
                                 echo '<div class="col-md-6">';
                                 //echo $upload['upload_file_name'];
-                                $file_path = 'assets/uploads/'.$upload_object_name.'/' . $row['id'] . '/' . $upload['upload_file_name'];
+                                $file_path = 'assets/uploads/'.$upload_related_to.'/' . $row['id'] . '/' . $upload['upload_file_name'];
                                 if (file_exists(FCPATH . $file_path)) {
                                     $file_src = base_url($file_path);
-                                    echo '<a href="' . $file_src . '" title="' . $upload['upload_document_type_name'] . '" target="_blank">' . $upload['upload_file_name'] . '</a>';
+                                    echo '<a href="' . $file_src . '" title="' . $upload['upload_file_type_name'] . '" target="_blank">' . $upload['upload_file_name'] . '</a>';
                                 } else {
                                     $file_src = '';
                                     echo 'File not found';
@@ -201,7 +201,7 @@ $row = $rows[0];
 
                                 echo '</div>';
                                 echo '<div class="col-md-2">';
-                                echo '<a href="#" class="btn btn-sm btn-danger btn-delete-file" data-confirmation="1" data-confirmation-message="Are you sure, you want to delete this?" data-upload_id="' . $upload['id'] . '" title="Delete ' . $upload['upload_document_type_name'] . '" data-path="' . $file_path . '">Delete</a>';
+                                echo '<a href="#" class="btn btn-sm btn-danger btn-delete-file" data-confirmation="1" data-confirmation-message="Are you sure, you want to delete this?" data-upload_id="' . $upload['id'] . '" title="Delete ' . $upload['upload_file_type_name'] . '" data-path="' . $file_path . '">Delete</a>';
                                 echo '</div>';
                                 echo '</div>';                                
                             }
