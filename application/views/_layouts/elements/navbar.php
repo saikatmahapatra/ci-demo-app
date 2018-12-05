@@ -42,19 +42,18 @@ $segment3 = $this->uri->segment(3);
 			</li>
 			<li class="nav-item <?php echo ($segment1 == 'order') ? 'active':''?>">
 				<a class="nav-link" href="<?php echo base_url($this->router->directory.'order/my_cart');?>">Cart</a>
-			</li>
-			<li class="nav-item <?php echo ($segment1 == 'timesheet') ? 'active':''?>">
-				<a class="nav-link" href="<?php echo base_url($this->router->directory.'timesheet');?>">Timesheet</a>
-			</li>
+			</li>	
+			<?php if (isset($this->session->userdata['sess_user']['id'])) {   ?>
 			<li class="nav-item <?php echo ($segment2 == 'people') ? 'active':''?>">
 				<a class="nav-link" href="<?php echo base_url($this->router->directory.'user/people'); ?>">People</a>
-			</li>									
+			</li>			
 			<li class="d-none nav-item <?php echo ($segment1=='timesheet') ? 'active':''?>">
 				<a class="nav-link" href="<?php echo base_url($this->router->directory.'timesheet'); ?>">Timesheet</a>
 			</li>
 			<li class="nav-item <?php echo ($segment1=='document') ? 'active':''?>">
 				<a class="nav-link" href="<?php echo base_url($this->router->directory.'document'); ?>">My Documents</a>
-			</li>			
+			</li>
+			<?php } ?>
 		</ul>
 		
 		

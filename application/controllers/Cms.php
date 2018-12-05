@@ -264,6 +264,106 @@ class Cms extends CI_Controller {
             return false;
         }
     }
+	
+	function add_banner() {
+		$this->breadcrumbs->push('Add','/');				
+		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
+        $this->data['alert_message'] = $this->session->flashdata('flash_message');
+        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
+        if ($this->input->post('form_action') == 'insert') {
+			$this->upload_file();            
+        }
+		$this->data['page_heading'] = 'Create a Carousel Slider';
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/add_banner', $this->data, true);
+        $this->load->view('_layouts/layout_admin_default', $this->data);
+    }
+	
+	function validate_banner_form_data($action = NULL) {        
+        $this->form_validation->set_rules('upload_status', 'upload status', 'required');
+		if (empty($_FILES['userfile']['name'])){
+			$this->form_validation->set_rules('userfile', 'file', 'required');
+		}
+        $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
+        if ($this->form_validation->run() == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+	
+	function upload_file() {
+        if ($this->validate_banner_form_data() == true) {
+            $upload_related_to = 'slider'; // related to user, product, album, contents etc
+            $upload_related_to_id = $this->id; // related to id user id (pk), product id(pk), album id(pk), content id (pk)
+            $upload_file_type_name = $this->input->post('upload_file_type_name'); // file type name            
+			$upload_text_1 = $this->input->post('upload_text_1');
+            $upload_text_2 = $this->input->post('upload_text_2');
+            $upload_text_3 = $this->input->post('upload_text_3');
+
+            //Create directory for object specific
+            $upload_path = 'assets/uploads/banner_img';
+            if (!is_dir($upload_path)) {
+                mkdir($upload_path, 0777, TRUE);
+            }
+            $allowed_ext = 'png|jpg|jpeg|doc|docx|pdf';
+            if ($upload_file_type_name == 'slider_img') {
+                $allowed_ext = 'png|jpg|jpeg';
+            }
+            $upload_param = array(
+                'upload_path' => $upload_path, // original upload folder
+                'allowed_types' => $allowed_ext, // allowed file types,
+                'max_size' => '2048', // max 2MB size,
+                'file_new_name' => $upload_related_to_id . '_' . $upload_file_type_name . '_' . time(),
+            );
+            $upload_result = $this->common_lib->upload_file('userfile', $upload_param);
+            if (isset($upload_result['file_name']) && empty($upload_result['upload_error'])) {
+                $uploaded_file_name = $upload_result['file_name'];
+                $postdata = array(
+                    'upload_related_to' => $upload_related_to,
+                    'upload_related_to_id' => $upload_related_to_id,
+                    'upload_file_type_name' => $upload_file_type_name,
+                    'upload_file_name' => $uploaded_file_name,
+                    'upload_mime_type' => $upload_result['file_type'],									
+                    'upload_by_user_id' => $this->sess_user_id,
+					'upload_is_featured'=>'N',
+					'upload_is_verified' => 'N',
+					'upload_status'=>'Y',
+					'upload_datetime' => date('Y-m-d H:i:s'),
+					'upload_text_1' => $upload_text_1,
+					'upload_text_2' => $upload_text_2,
+					'upload_text_3' => $upload_text_3,					
+                );
+
+                //Allow mutiple file upload for a file type.
+                $multiple_allowed_upload_file_type = array('slider_img');
+                if (!in_array($upload_file_type_name, $multiple_allowed_upload_file_type)) {
+                    $uploads = $this->cms_model->get_uploads($upload_related_to, $upload_related_to_id, NULL, $upload_file_type_name);
+                }
+                if (isset($uploads[0]) && ($uploads[0]['id'] != '')) {
+                    //Unlink previously uploaded file                    
+                    $file_path = $upload_param['upload_path'] . '/' . $uploads[0]['upload_file_name'];
+                    if (file_exists(FCPATH . $file_path)) {
+                        $this->common_lib->unlink_file(array(FCPATH . $file_path));
+                    }
+                    // Now update table
+                    $update_upload = $this->cms_model->update($postdata, array('id' => $uploads[0]['id']), 'uploads');
+                    $this->session->set_flashdata('flash_message', 'File uploaded successfully.');
+                    $this->session->set_flashdata('flash_message_css', 'alert-success');
+                    redirect(current_url());
+                } else {
+                    $upload_insert_id = $this->cms_model->insert($postdata, 'uploads');
+                    $this->session->set_flashdata('flash_message', 'File uploaded successfully.');
+                    $this->session->set_flashdata('flash_message_css', 'alert-success');
+                    redirect(current_url());
+                }
+            } else if (sizeof($upload_result['upload_error']) > 0) {
+                $error_message = $upload_result['upload_error'];
+                $this->session->set_flashdata('flash_message', $error_message);
+                $this->session->set_flashdata('flash_message_css', 'alert-danger');
+                redirect(current_url());
+            }
+        }
+    }
 
 }
 

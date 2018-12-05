@@ -278,10 +278,10 @@ class Product extends CI_Controller {
         $this->data['rows'] = $result_array['data_rows'];
 
         //Uploads        
-        $upload_object_name = 'product';
-        $this->data['upload_object_name'] = $upload_object_name;
-        $this->data['all_uploads'] = $this->product_model->get_uploads($upload_object_name, $this->id, NULL, NULL);
-        $this->data['arr_upload_document_type_name'] = $this->get_upload_document_type_names();
+        $upload_related_to = 'product';
+        $this->data['upload_related_to'] = $upload_related_to;
+        $this->data['all_uploads'] = $this->product_model->get_uploads($upload_related_to, $this->id, NULL, NULL);
+        $this->data['arr_upload_file_type_name'] = $this->get_upload_file_type_names();
         if ($this->input->post('form_action') == 'file_upload') {
             $this->upload_file();
         }
@@ -307,16 +307,16 @@ class Product extends CI_Controller {
         $where_array = array('id' => $this->id);
         $res = $this->product_model->delete($where_array);
         if ($res) {            
-            $upload_object_name = 'product';
-            $this->delete_uploads($upload_object_name,$this->id);
+            $upload_related_to = 'product';
+            $this->delete_uploads($upload_related_to,$this->id);
             $this->session->set_flashdata('flash_message', 'Data deleted successfully.');
             $this->session->set_flashdata('flash_message_css', 'alert-success');
             redirect($this->router->directory.$this->router->class.'');
         }
     }
 
-    function get_upload_document_type_names() {
-        $upload_document_type_name = array(
+    function get_upload_file_type_names() {
+        $upload_file_type_name = array(
             "" => "Select",
             "aadhar_card" => "Aadhar Card",
             "bgc_doc" => "BGC Verification Supporting Doc",
@@ -326,47 +326,47 @@ class Product extends CI_Controller {
             "product_image" => "Product Image",            
             "voter_card" => "Voter Card",
         );
-        return $upload_document_type_name;
+        return $upload_file_type_name;
     }
 
     function upload_file() {
         if ($this->validate_uplaod_form_data() == true) {
-            $upload_object_name = 'product';
-            $upload_object_id = $this->id;
-            $upload_document_type_name = $this->input->post('upload_document_type_name');
+            $upload_related_to = 'product';
+            $upload_related_to_id = $this->id;
+            $upload_file_type_name = $this->input->post('upload_file_type_name');
 
             //Create directory for object specific
-            $upload_path = 'assets/uploads/' . $upload_object_name . '/' . $upload_object_id;
+            $upload_path = 'assets/uploads/' . $upload_related_to . '/' . $upload_related_to_id;
             if (!is_dir($upload_path)) {
                 mkdir($upload_path, 0777, TRUE);
             }
             $allowed_ext = 'png|jpg|jpeg|doc|docx|pdf';
-            if ($upload_document_type_name == 'product_image') {
+            if ($upload_file_type_name == 'product_image') {
                 $allowed_ext = 'png|jpg|jpeg';
             }
             $upload_param = array(
                 'upload_path' => $upload_path, // original upload folder
                 'allowed_types' => $allowed_ext, // allowed file types,
                 'max_size' => '2048', // max 2MB size,
-                'file_new_name' => $upload_object_id . '_' . $upload_document_type_name . '_' . time(),
+                'file_new_name' => $upload_related_to_id . '_' . $upload_file_type_name . '_' . time(),
             );
             $upload_result = $this->common_lib->upload_file('userfile', $upload_param);
             if (isset($upload_result['file_name']) && empty($upload_result['upload_error'])) {
                 $uploaded_file_name = $upload_result['file_name'];
                 $postdata = array(
-                    'upload_object_name' => $upload_object_name,
-                    'upload_object_id' => $upload_object_id,
-                    'upload_document_type_name' => $upload_document_type_name,
+                    'upload_related_to' => $upload_related_to,
+                    'upload_related_to_id' => $upload_related_to_id,
+                    'upload_file_type_name' => $upload_file_type_name,
                     'upload_file_name' => $uploaded_file_name,
                     'upload_mime_type' => $upload_result['file_type'],
                     'upload_by_user_id' => $this->sess_user_id
                 );
 
                 // Check if already files uploaded or not
-                $skip_checking_existing_doc_type_name = array('product_image');
+                $multiple_allowed_upload_file_type = array('product_image');
 
-                if (!in_array($upload_document_type_name, $skip_checking_existing_doc_type_name)) {
-                    $uploads = $this->product_model->get_uploads($upload_object_name, $upload_object_id, NULL, $upload_document_type_name);
+                if (!in_array($upload_file_type_name, $multiple_allowed_upload_file_type)) {
+                    $uploads = $this->product_model->get_uploads($upload_related_to, $upload_related_to_id, NULL, $upload_file_type_name);
                 }
                 if (isset($uploads[0]) && ($uploads[0]['id'] != '')) {
                     //Unlink previously uploaded file                    
@@ -395,7 +395,7 @@ class Product extends CI_Controller {
     }
 
     function validate_uplaod_form_data() {
-        $this->form_validation->set_rules('upload_document_type_name', 'type selection', 'required');
+        $this->form_validation->set_rules('upload_file_type_name', 'type selection', 'required');
         //$this->form_validation->set_rules('userfile', 'file selection', 'required');
         $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
         if ($this->form_validation->run() == true) {
@@ -433,11 +433,11 @@ class Product extends CI_Controller {
         }
     }
     
-    function delete_uploads($upload_object_name, $upload_object_id) {
-        $where_array = array('upload_object_name' => $upload_object_name, 'upload_object_id' => $upload_object_id);
+    function delete_uploads($upload_related_to, $upload_related_to_id) {
+        $where_array = array('upload_related_to' => $upload_related_to, 'upload_related_to_id' => $upload_related_to_id);
         $res = $this->product_model->delete($where_array, 'uploads');
         if ($res) {
-            $upload_path = 'assets/uploads/'.$upload_object_name.'/' . $upload_object_id;
+            $upload_path = 'assets/uploads/'.$upload_related_to.'/' . $upload_related_to_id;
             $this->common_lib->recursive_remove_directory(FCPATH . $upload_path);
         }
     }
