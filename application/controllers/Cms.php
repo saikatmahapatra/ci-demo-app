@@ -317,7 +317,7 @@ class Cms extends CI_Controller {
                 'title' => 'Edit',
             ));
             $action_html.='&nbsp;';
-            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/delete_banner/' . $result['id']), '<i class="fa fa-trash" aria-hidden="true"></i> Delete', array(
+            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/delete_banner/' . $result['id'].'/'.$result['upload_file_name']), '<i class="fa fa-trash" aria-hidden="true"></i> Delete', array(
                 'class' => 'btn btn-sm btn-outline-danger btn-delete ml-1',
 				'data-confirmation'=>true,
 				'data-confirmation-message'=>'Are you sure, you want to delete this?',
@@ -386,6 +386,28 @@ class Cms extends CI_Controller {
         $this->data['maincontent'] = $this->load->view($this->router->class.'/edit_banner', $this->data, true);
         $this->load->view('_layouts/layout_admin_default', $this->data);
     }
+	
+	function delete_banner(){
+		$uploaded_file_id = $this->uri->segment(3);
+		$uploaded_file_name = $this->uri->segment(4);
+		//if($uploaded_file_name){
+			//Unlink previously uploaded file                    
+			$file_path = 'assets/uploads/banner_img/'.$uploaded_file_name;
+			//if (file_exists(FCPATH . $file_path)) {
+				$this->common_lib->unlink_file(array(FCPATH . $file_path));
+				$res = $this->upload_model->delete(array('id'=>$uploaded_file_id),'uploads');
+				if($res){
+					$this->session->set_flashdata('flash_message', 'Banner has been deleted successfully.');
+					$this->session->set_flashdata('flash_message_css', 'alert-success');
+					redirect($this->router->directory.$this->router->class.'/manage_banner');
+				}else{
+					$this->session->set_flashdata('flash_message', 'Error occured while processing your request.');
+					$this->session->set_flashdata('flash_message_css', 'alert-danger');
+					redirect($this->router->directory.$this->router->class.'/manage_banner');
+				}
+			//}
+		//}
+	}
 	
 	function validate_banner_form_data($action = NULL) {        
         $this->form_validation->set_rules('upload_status', 'upload status', 'required');
