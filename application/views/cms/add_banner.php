@@ -18,11 +18,12 @@
 		<?php echo form_open_multipart(current_url(), array('method' => 'post', 'class'=>'ci-form','name' => 'myform','id' => 'myform','role' =>'form')); ?>
 		<?php echo form_hidden('form_action', 'insert'); ?>
 		<?php echo form_hidden('upload_file_type_name', 'slider_img'); ?>
+		<?php echo form_hidden('upload_status', 'Y'); ?>
 
 		
 		<div class="form-row">			
 			<div class="form-group col-md-12">									
-				<label for="userfile" class="">Image <span class="required">*</span></label>
+				<label for="userfile" class="">Image (Only 1200x300 dimensions are allowed)<span class="required">*</span></label>
 				<?php
 					echo form_upload(array(
 						'name' => 'userfile',
@@ -53,7 +54,7 @@
 			</div>
 		</div>
 		
-
+		<?php /* ?>
 		<div class="form-row">
 			<div class="form-group col-md-12">									
 				<label for="upload_status" class="">Status <span class="required">*</span></label>
@@ -77,6 +78,7 @@
 				<?php echo form_error('upload_status'); ?>
 			</div>		
 		</div>
+		<?php */ ?>
 
 
 		<?php echo form_button(array('name' => 'submit_btn','type' => 'submit','content' => '<i class="fa fa-fw fa-check-circle"></i> Submit','class' => 'btn btn-primary'));?>

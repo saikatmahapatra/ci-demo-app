@@ -447,6 +447,9 @@ class Cms extends CI_Controller {
                 'allowed_types' => $allowed_ext, // allowed file types,
                 'max_size' => '2048', // max 2MB size,
                 'file_new_name' => $upload_related_to_id . '_' . $upload_file_type_name . '_' . time(),
+				'check_img_size'=> true, //only specific dimention image are uploadable
+				'allowed_img_width'=> 1200, // int img dimention
+				'allowed_img_height'=>300 // int img dimention
             );
 			
 			// If user chhose file to upload
@@ -463,7 +466,7 @@ class Cms extends CI_Controller {
 						'upload_by_user_id' => $this->sess_user_id,
 						'upload_is_featured'=>'N',
 						'upload_is_verified' => 'N',
-						'upload_status'=>$upload_status,
+						//'upload_status'=>$upload_status,
 						'upload_datetime' => date('Y-m-d H:i:s'),
 						'upload_text_1' => $upload_text_1,
 						'upload_text_2' => $upload_text_2,

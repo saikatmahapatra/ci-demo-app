@@ -215,7 +215,7 @@ class Common_lib {
                     @unlink($this->large_image_path);
                     @unlink($this->thumb_image_path);
                     @unlink($this->small_image_path);
-                    return array('upload_error' => 'Image dimension not matching.');
+                    return array('upload_error' => 'Image dimension is not allowed to upload. Image dimension should be '.$allowed_img_width.'x'.$allowed_img_height);
                 }
             }
             if (isset($upload_param['unlink_source_file']) && ($upload_param['unlink_source_file'] == TRUE)) {
@@ -226,11 +226,8 @@ class Common_lib {
         }
     }
 
-    function is_valid_dimension($image_width, $image_height, $name) {
-        $image_valid_dimensions = $this->CI->config->item('image_valid_dimensions');
-        $validate_dimension = $image_valid_dimensions[$name];
-        $value = explode("|", $validate_dimension);
-        if ($value[0] == $image_width and $value[1] == $image_height) {
+    function is_valid_dimension($image_width, $image_height, $allowed_img_width, $allowed_img_height) {        
+        if (($image_width == $allowed_img_width) && ($image_height == $allowed_img_height)) {
             return TRUE;
         } else {
             return FALSE;
