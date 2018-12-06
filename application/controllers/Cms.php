@@ -410,9 +410,9 @@ class Cms extends CI_Controller {
 	}
 	
 	function validate_banner_form_data($action = NULL) {        
-        $this->form_validation->set_rules('upload_status', 'upload status', 'required');
+        $this->form_validation->set_rules('upload_status', ' ', 'required');
 		if(($this->input->post('form_action') == 'insert') && (empty($_FILES['userfile']['name']))){
-			$this->form_validation->set_rules('userfile', 'file', 'required');
+			$this->form_validation->set_rules('userfile', ' ', 'required');
 		}
         $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
         if ($this->form_validation->run() == true) {
@@ -507,7 +507,7 @@ class Cms extends CI_Controller {
 						$upload_insert_id = $this->cms_model->insert($postdata, 'uploads');
 						$this->session->set_flashdata('flash_message', 'File uploaded successfully.');
 						$this->session->set_flashdata('flash_message_css', 'alert-success');
-						redirect(current_url());
+						redirect($this->router->directory.$this->router->class.'/edit_banner/'.$upload_insert_id);
 					}
 				} else if (sizeof($upload_result['upload_error']) > 0) {
 					$error_message = $upload_result['upload_error'];

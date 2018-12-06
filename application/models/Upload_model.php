@@ -128,6 +128,7 @@ class Upload_model extends CI_Model {
             $this->db->where('t1.id', $id);
         }
 		$this->db->where('t1.upload_status', 'Y');
+		$this->db->where('t1.upload_related_to', 'slider');
         $query = $this->db->get('uploads as t1');
         $num_rows = $query->num_rows();
         return $result = $query->result_array();

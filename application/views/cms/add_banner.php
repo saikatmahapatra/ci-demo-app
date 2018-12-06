@@ -23,7 +23,7 @@
 		
 		<div class="form-row">			
 			<div class="form-group col-md-12">									
-				<label for="userfile" class="">Image (Only 1200x300 dimensions are allowed)<span class="required">*</span></label>
+				<label for="userfile" class="">Image (Only 1200x300 dimensions are allowed) <span class="required">*</span></label>
 				<?php
 					echo form_upload(array(
 						'name' => 'userfile',
