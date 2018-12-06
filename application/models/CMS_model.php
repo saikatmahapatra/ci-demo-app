@@ -145,24 +145,5 @@ class Cms_model extends CI_Model {
         return $data;
     }
 	
-	function get_uploads($upload_related_to = NULL, $upload_related_to_id = NULL, $id = NULL, $upload_file_type_name = NULL) {
-        $this->db->select('t1.*');
-        if ($id) {
-            $this->db->where('id', $id);
-        }
-        if ($upload_related_to) {
-            $this->db->where('upload_related_to', $upload_related_to);
-        }
-
-        if ($upload_related_to_id) {
-            $this->db->where('upload_related_to_id', $upload_related_to_id);
-        }
-        if ($upload_file_type_name) {
-            $this->db->where('upload_file_type_name', $upload_file_type_name);
-        }
-        $query = $this->db->get('uploads t1');
-        $result = $query->result_array();
-        return $result;
-    }
-
+	
 }

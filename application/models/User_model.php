@@ -433,26 +433,6 @@ class User_model extends CI_Model {
         return $result;
     }
 	
-	function get_uploads($upload_related_to = NULL, $upload_related_to_id = NULL, $id = NULL, $upload_file_type_name = NULL) {
-        $this->db->select('t1.*');
-        if ($id) {
-            $this->db->where('id', $id);
-        }
-        if ($upload_related_to) {
-            $this->db->where('upload_related_to', $upload_related_to);
-        }
-
-        if ($upload_related_to_id) {
-            $this->db->where('upload_related_to_id', $upload_related_to_id);
-        }
-        if ($upload_file_type_name) {
-            $this->db->where('upload_file_type_name', $upload_file_type_name);
-        }
-        $query = $this->db->get('uploads t1');
-        $result = $query->result_array();
-        return $result;
-    }
-
 	function get_users($id = NULL, $limit = NULL, $offset = NULL, $search_keywords=NULL) {
         $this->db->select('t1.*,t2.role_name, t2.role_weight,t3.department_name, t4.designation_name');
         if ($id) {

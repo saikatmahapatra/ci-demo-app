@@ -10,6 +10,7 @@ class User extends CI_Controller {
         parent::__construct();
         
         $this->load->model('user_model');
+        $this->load->model('upload_model');
         $this->data['alert_message'] = NULL;
         $this->data['alert_message_css'] = NULL;
 
@@ -1357,8 +1358,14 @@ class User extends CI_Controller {
 				//add those upload_file_type_name in skip_checking_existing_doc_type_name array
                 $multiple_allowed_upload_file_type = array();
 
-                if (!in_array($upload_file_type_name, $multiple_allowed_upload_file_type)) {
-                    $uploads = $this->user_model->get_uploads($upload_related_to, $upload_related_to_id, NULL, $upload_file_type_name);
+                if (!in_array($upload_file_type_name, $multiple_allowed_upload_file_type)) {					
+                    $cond = array(
+						'upload_related_to' => $upload_related_to,
+						'upload_related_to_id' => $upload_related_to_id,
+						'upload_file_type_name' => $upload_file_type_name
+					);
+                    $upload_data = $this->upload_model->get_uploads(NULL, NULL, NULL, FALSE, FALSE, $cond);
+					$uploads = $upload_data['data_rows'];
                 }
                 if (isset($uploads[0]) && ($uploads[0]['id'] != '')) {
                     //Unlink previously uploaded file                    

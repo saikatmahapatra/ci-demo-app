@@ -28,8 +28,10 @@ $segment3 = $this->uri->segment(3);
 				<a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false">CMS</a>
 				<div class="dropdown-menu" aria-labelledby="dropdown01">
-					<a class="dropdown-item" href="<?php echo base_url('cms');?>">View All</a>
-					<a class="dropdown-item" href="<?php echo base_url('cms/add');?>">Add</a>
+					<a class="dropdown-item" href="<?php echo base_url('cms/index');?>">Manage Content</a>
+					<a class="dropdown-item" href="<?php echo base_url('cms/add');?>">Add Content</a>
+					<a class="dropdown-item" href="<?php echo base_url('cms/manage_banner');?>">Manage Carousel</a>
+					<a class="dropdown-item" href="<?php echo base_url('cms/add_banner');?>">Add Carousel </a>
 				</div>
 			</li>
 

@@ -49,13 +49,11 @@
 					<?php echo form_upload(array('name' => 'userfile', 'id' => 'userfile','class' => '',));?>
 					<?php echo form_error('userfile'); ?>
 					<?php echo isset($upload_error_message) ? $upload_error_message : ''; ?>
-					
-					<div class="text-muted help-block mt-3">
-						<h6>Instructions:</h6>
+					<div class="form-text small text-muted bg-light p-1">						
 						<ul>
+							<li>The image should be in <span class="font-weight-bold">.jpg, .jpeg</span> format and should be less than <span class="font-weight-bold">1 MB</span> in size. Verify the quality and size of the image before uploading it.</li>
 							<li>Upload your individual photo and not a group photo or logo/animation or cartoon etc.</li>
-							<li>Upload photos taken in professional attire only.</li>
-							<li>The image should be in <span class="font-weight-bold">.JPG, .JPEG</span> format and should be less than <span class="font-weight-bold">1 MB</span> in size. Verify the quality and size of the image before uploading it.</li>
+							<li>Upload photos taken in professional attire only.</li>							
 							<li>Photos must have plain back ground.</li>
 							<li>You can delete the uploaded photo anytime if you want.</li>
 						</ul>						

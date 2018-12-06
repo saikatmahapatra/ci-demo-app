@@ -10,10 +10,10 @@
 $count = 1;
 foreach($data_rows as $key=>$row){
 	?>
-	<?php //if ($count%3 == 1){ echo '<div class="row mb-5">'; } ?>
-		<div class="col-md-12 mb-3" data-id="<?php echo $row['id'];?>">
+	<?php if ($count%3 == 1){ echo '<div class="row my-3">'; } ?>
+		<div class="col-md-4 mb-2" data-id="<?php echo $row['id'];?>">
 			<div data-cms-type="<?php echo $row['pagecontent_type'];?>" class="card-news pl-2">
-				<div class="card-news-header h6">
+				<div class="card-news-header h4">
 					<a class="" href="<?php echo base_url($this->router->directory.$this->router->class.'/details/'.$row['id']);?>"><?php echo isset($row['pagecontent_title']) ? $row['pagecontent_title'] : '';?></a>
 				</div>
 				<div class="card-news-sig text-muted small">
@@ -25,11 +25,11 @@ foreach($data_rows as $key=>$row){
 					</div>
 				</div>
 				<div class="card-news-body">
-					<?php echo isset($row['pagecontent_text']) ? word_limiter($row['pagecontent_text'],50) : '';?>
-					<a class="" href="<?php echo base_url($this->router->directory.$this->router->class.'/details/'.$row['id']);?>">Read more</a>				
+					<?php echo isset($row['pagecontent_text']) ? word_limiter($row['pagecontent_text'],30) : '';?>
+					<a class="d-none" href="<?php echo base_url($this->router->directory.$this->router->class.'/details/'.$row['id']);?>">Read more</a>				
 				</div>
 			</div>
-		<?php //if ($count%3 == 0){ echo '</div>'; } ?>
+		<?php if ($count%3 == 0){ echo '</div>'; } ?>
 	</div>
 	<?php
 	$count++;

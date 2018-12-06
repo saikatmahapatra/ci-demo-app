@@ -39,6 +39,7 @@ class Cms extends CI_Controller {
 
         
         $this->load->model('cms_model');
+		$this->load->model('upload_model');
         $this->id = $this->uri->segment(3);
 
         $this->data['alert_message'] = NULL;
@@ -265,6 +266,99 @@ class Cms extends CI_Controller {
         }
     }
 	
+	
+	#### Banner Slider Section ###
+	function render_banner_datatable() {		
+        //Total rows - Refer to model method definition
+		$cond = array(
+			'upload_related_to' => 'slider',
+			'upload_related_to_id' => NULL,
+			'upload_file_type_name' => NULL
+		);
+        $result_array = $this->upload_model->get_uploads(NULL, NULL, NULL, FALSE, FALSE, $cond);
+        $total_rows = $result_array['num_rows'];
+
+        // Total filtered rows - check without limit query. Refer to model method definition
+        $result_array = $this->upload_model->get_uploads(NULL, NULL, NULL, TRUE, FALSE, $cond);
+        $total_filtered = $result_array['num_rows'];
+
+        // Data Rows - Refer to model method definition
+        $result_array = $this->upload_model->get_uploads(NULL, NULL, NULL, TRUE, TRUE, $cond);
+        $data_rows = $result_array['data_rows'];
+        $data = array();
+        $no = $_REQUEST['start'];
+        foreach ($data_rows as $result) {
+            $no++;
+            $row = array();
+			
+			$img_src = "";
+			$default_path = "assets/src/img/no-image.png";
+			if(isset($result['upload_file_name'])){					
+				$banner_img = "assets/uploads/banner_img/".$result['upload_file_name'];					
+				if (file_exists(FCPATH . $banner_img)) {
+					$img_src = $banner_img;
+				}else{
+					$img_src = $default_path;
+				}
+			}else{
+				$img_src = $default_path;
+			}
+            //$row[] = $result['upload_file_name'].'<div>'.$result['upload_mime_type'].'</div>';
+            $row[] = '<img class="img banner-img-xs" src="'.base_url($img_src).'"><div>'.$result['upload_mime_type'].'</div>';
+            //$row[] = $result['upload_mime_type'];
+            //$row[] = $this->common_lib->display_date($result['upload_datetime'], true);
+            $row[] = (strtolower($result['upload_status']) == 'y') ? 'Published' : 'Unpublished';            
+            //add html for action
+            $action_html = '';
+            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/edit_banner/' .$result['id']), '<i class="fa fa-edit" aria-hidden="true"></i> Edit', array(
+                'class' => 'btn btn-sm btn-outline-secondary mr-1',
+                'data-toggle' => 'tooltip',
+                'data-original-title' => 'Edit',
+                'title' => 'Edit',
+            ));
+            $action_html.='&nbsp;';
+            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/delete_banner/' . $result['id']), '<i class="fa fa-trash" aria-hidden="true"></i> Delete', array(
+                'class' => 'btn btn-sm btn-outline-danger btn-delete ml-1',
+				'data-confirmation'=>true,
+				'data-confirmation-message'=>'Are you sure, you want to delete this?',
+                'data-toggle' => 'tooltip',
+                'data-original-title' => 'Delete',
+                'title' => 'Delete',
+            ));
+
+            $row[] = $action_html;
+            $data[] = $row;
+        }
+
+        /* jQuery Data Table JSON format */
+        $output = array(
+            'draw' => isset($_REQUEST['draw']) ? $_REQUEST['draw'] : '',
+            'recordsTotal' => $total_rows,
+            'recordsFiltered' => $total_filtered,
+            'data' => $data,
+        );
+        //output to json format
+        echo json_encode($output);
+    }
+
+	function manage_banner() {
+        // Check user permission by permission name mapped to db
+        // $is_authorized = $this->common_lib->is_auth('cms-list-view');
+		
+		// Get logged  in user id
+        $this->sess_user_id = $this->common_lib->get_sess_user('id');
+			
+		$this->breadcrumbs->push('View','/');				
+		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
+		
+        $this->data['alert_message'] = $this->session->flashdata('flash_message');
+        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
+		
+		$this->data['page_heading'] = 'Carousel';
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/manage_banner', $this->data, true);
+        $this->load->view('_layouts/layout_admin_default', $this->data);
+    }
+	
 	function add_banner() {
 		$this->breadcrumbs->push('Add','/');				
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
@@ -278,9 +372,24 @@ class Cms extends CI_Controller {
         $this->load->view('_layouts/layout_admin_default', $this->data);
     }
 	
+	function edit_banner() {
+		$this->breadcrumbs->push('Edit','/');				
+		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
+        $this->data['alert_message'] = $this->session->flashdata('flash_message');
+        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
+        if ($this->input->post('form_action') == 'update') {
+			$this->upload_file();            
+        }
+		$result_array = $this->upload_model->get_uploads($this->id, NULL, NULL, FALSE, FALSE, NULL);
+        $this->data['rows'] = $result_array['data_rows'];		
+		$this->data['page_heading'] = 'Edit Carousel Slider';
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/edit_banner', $this->data, true);
+        $this->load->view('_layouts/layout_admin_default', $this->data);
+    }
+	
 	function validate_banner_form_data($action = NULL) {        
         $this->form_validation->set_rules('upload_status', 'upload status', 'required');
-		if (empty($_FILES['userfile']['name'])){
+		if(($this->input->post('form_action') == 'insert') && (empty($_FILES['userfile']['name']))){
 			$this->form_validation->set_rules('userfile', 'file', 'required');
 		}
         $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
@@ -299,6 +408,8 @@ class Cms extends CI_Controller {
 			$upload_text_1 = $this->input->post('upload_text_1');
             $upload_text_2 = $this->input->post('upload_text_2');
             $upload_text_3 = $this->input->post('upload_text_3');
+            $upload_status = $this->input->post('upload_status');
+			$upload_id = $this->input->post('id');
 
             //Create directory for object specific
             $upload_path = 'assets/uploads/banner_img';
@@ -315,53 +426,87 @@ class Cms extends CI_Controller {
                 'max_size' => '2048', // max 2MB size,
                 'file_new_name' => $upload_related_to_id . '_' . $upload_file_type_name . '_' . time(),
             );
-            $upload_result = $this->common_lib->upload_file('userfile', $upload_param);
-            if (isset($upload_result['file_name']) && empty($upload_result['upload_error'])) {
-                $uploaded_file_name = $upload_result['file_name'];
-                $postdata = array(
-                    'upload_related_to' => $upload_related_to,
-                    'upload_related_to_id' => $upload_related_to_id,
-                    'upload_file_type_name' => $upload_file_type_name,
-                    'upload_file_name' => $uploaded_file_name,
-                    'upload_mime_type' => $upload_result['file_type'],									
-                    'upload_by_user_id' => $this->sess_user_id,
-					'upload_is_featured'=>'N',
-					'upload_is_verified' => 'N',
-					'upload_status'=>'Y',
-					'upload_datetime' => date('Y-m-d H:i:s'),
-					'upload_text_1' => $upload_text_1,
-					'upload_text_2' => $upload_text_2,
-					'upload_text_3' => $upload_text_3,					
-                );
+			
+			// If user chhose file to upload
+			if(!empty($_FILES['userfile']['name'])){
+				$upload_result = $this->common_lib->upload_file('userfile', $upload_param);
+				if (isset($upload_result['file_name']) && empty($upload_result['upload_error'])) {
+					$uploaded_file_name = $upload_result['file_name'];
+					$postdata = array(
+						'upload_related_to' => $upload_related_to,
+						'upload_related_to_id' => $upload_related_to_id,
+						'upload_file_type_name' => $upload_file_type_name,
+						'upload_file_name' => $uploaded_file_name,
+						'upload_mime_type' => $upload_result['file_type'],									
+						'upload_by_user_id' => $this->sess_user_id,
+						'upload_is_featured'=>'N',
+						'upload_is_verified' => 'N',
+						'upload_status'=>$upload_status,
+						'upload_datetime' => date('Y-m-d H:i:s'),
+						'upload_text_1' => $upload_text_1,
+						'upload_text_2' => $upload_text_2,
+						'upload_text_3' => $upload_text_3,					
+					);
 
-                // Allow mutiple file upload for a file type.
-                $multiple_allowed_upload_file_type = array('slider_img');
-                if (!in_array($upload_file_type_name, $multiple_allowed_upload_file_type)) {
-                    $uploads = $this->cms_model->get_uploads($upload_related_to, $upload_related_to_id, NULL, $upload_file_type_name);
-                }
-                if (isset($uploads[0]) && ($uploads[0]['id'] != '')) {
-                    //Unlink previously uploaded file                    
-                    $file_path = $upload_param['upload_path'] . '/' . $uploads[0]['upload_file_name'];
-                    if (file_exists(FCPATH . $file_path)) {
-                        $this->common_lib->unlink_file(array(FCPATH . $file_path));
-                    }
-                    // Now update table
-                    $update_upload = $this->cms_model->update($postdata, array('id' => $uploads[0]['id']), 'uploads');
-                    $this->session->set_flashdata('flash_message', 'File uploaded successfully.');
-                    $this->session->set_flashdata('flash_message_css', 'alert-success');
-                    redirect(current_url());
-                } else {
-                    $upload_insert_id = $this->cms_model->insert($postdata, 'uploads');
-                    $this->session->set_flashdata('flash_message', 'File uploaded successfully.');
-                    $this->session->set_flashdata('flash_message_css', 'alert-success');
-                    redirect(current_url());
-                }
-            } else if (sizeof($upload_result['upload_error']) > 0) {
-                $error_message = $upload_result['upload_error'];
-                $this->session->set_flashdata('flash_message', $error_message);
-                $this->session->set_flashdata('flash_message_css', 'alert-danger');
-                redirect(current_url());
-            }
+					
+					if($this->input->post('form_action') == 'update'){
+						$upload_data = $this->upload_model->get_uploads($upload_id, NULL, NULL, FALSE, FALSE, NULL);
+						$uploads = $upload_data['data_rows'];
+					}else{
+						// Allow mutiple file upload for a file type.
+						$multiple_allowed_upload_file_type = array('slider_img');
+						if (!in_array($upload_file_type_name, $multiple_allowed_upload_file_type)) {
+							$cond = array(
+								'upload_related_to' => $upload_related_to,
+								'upload_related_to_id' => $upload_related_to_id,
+								'upload_file_type_name' => $upload_file_type_name
+							);
+							$upload_data = $this->upload_model->get_uploads(NULL, NULL, NULL, FALSE, FALSE, $cond);
+							$uploads = $upload_data['data_rows'];
+						}
+					}
+					//print_r($uploads); die();
+					
+					if (isset($uploads[0]) && ($uploads[0]['id'] != '')) {
+						//Unlink previously uploaded file                    
+						$file_path = $upload_param['upload_path'] . '/' . $uploads[0]['upload_file_name'];
+						if (file_exists(FCPATH . $file_path)) {
+							$this->common_lib->unlink_file(array(FCPATH . $file_path));
+						}
+						// Now update table
+						$update_upload = $this->cms_model->update($postdata, array('id' => $uploads[0]['id']), 'uploads');
+						$this->session->set_flashdata('flash_message', 'File uploaded successfully.');
+						$this->session->set_flashdata('flash_message_css', 'alert-success');
+						redirect(current_url());
+					} else {
+						$upload_insert_id = $this->cms_model->insert($postdata, 'uploads');
+						$this->session->set_flashdata('flash_message', 'File uploaded successfully.');
+						$this->session->set_flashdata('flash_message_css', 'alert-success');
+						redirect(current_url());
+					}
+				} else if (sizeof($upload_result['upload_error']) > 0) {
+					$error_message = $upload_result['upload_error'];
+					$this->session->set_flashdata('flash_message', $error_message);
+					$this->session->set_flashdata('flash_message_css', 'alert-danger');
+					redirect(current_url());
+				}
+			}
+			//if user only update text etc not changing images
+			else{
+				$postdata = array(
+						'upload_status'=>$upload_status,						
+						'upload_text_1' => $upload_text_1,
+						'upload_text_2' => $upload_text_2,
+						'upload_text_3' => $upload_text_3,					
+					);
+				$id = $this->input->post('id');
+				$update_upload = $this->cms_model->update($postdata, array('id' => $id), 'uploads');
+				$this->session->set_flashdata('flash_message', 'Data updated successfully.');
+				$this->session->set_flashdata('flash_message_css', 'alert-success');
+				redirect(current_url());
+			}
+			
+            
         }
     }
 

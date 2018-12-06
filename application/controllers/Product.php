@@ -39,6 +39,7 @@ class Product extends CI_Controller {
         
         $this->load->model('category_model');
         $this->load->model('product_model');
+        $this->load->model('upload_model');
         $this->data['alert_message'] = NULL;
         $this->data['alert_message_css'] = NULL;
         $this->data['category_dropdown'] = $this->category_model->get_category_dropdown();
@@ -280,7 +281,13 @@ class Product extends CI_Controller {
         //Uploads        
         $upload_related_to = 'product';
         $this->data['upload_related_to'] = $upload_related_to;
-        $this->data['all_uploads'] = $this->product_model->get_uploads($upload_related_to, $this->id, NULL, NULL);
+        $cond = array(
+			'upload_related_to' => $upload_related_to,
+			'upload_related_to_id' => $this->id,
+			'upload_file_type_name' => NULL
+		);
+        $upload_data = $this->upload_model->get_uploads(NULL, NULL, NULL, FALSE, FALSE, $cond);		 
+		$this->data['all_uploads'] = $upload_data['data_rows'];
         $this->data['arr_upload_file_type_name'] = $this->get_upload_file_type_names();
         if ($this->input->post('form_action') == 'file_upload') {
             $this->upload_file();
@@ -365,7 +372,13 @@ class Product extends CI_Controller {
                 // Allow mutiple file upload for a file type.
                 $multiple_allowed_upload_file_type = array('product_image');
                 if (!in_array($upload_file_type_name, $multiple_allowed_upload_file_type)) {
-                    $uploads = $this->product_model->get_uploads($upload_related_to, $upload_related_to_id, NULL, $upload_file_type_name);
+                    $cond = array(
+						'upload_related_to' => $upload_related_to,
+						'upload_related_to_id' => $upload_related_to_id,
+						'upload_file_type_name' => $upload_file_type_name
+					);
+                    $upload_data = $this->upload_model->get_uploads(NULL, NULL, NULL, FALSE, FALSE, $cond);
+					$uploads = $upload_data['data_rows'];
                 }
                 if (isset($uploads[0]) && ($uploads[0]['id'] != '')) {
                     //Unlink previously uploaded file                    

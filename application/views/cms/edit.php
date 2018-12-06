@@ -103,8 +103,8 @@ $row = $rows[0];
 		<?php */ ?>
 
 		<div class="form-row">
-		<div class="form-group col-md-12">									
-			<label for="pagecontent_status" class="">Display Status <span class="required">*</span></label>
+			<div class="form-group col-md-12">									
+				<label for="pagecontent_status" class="">Display Status <span class="required">*</span></label>
 				<?php //echo form_dropdown('pagecontent_status', array('Y'=>'Yes','N'=>'No'), (isset($_POST['pagecontent_status']) ? set_value('pagecontent_status') : $row['pagecontent_status']), array('class' => 'form-control')); ?>
 				  	<!--<div class="">-->
 						<div class="custom-control custom-radio custom-control-inline">
@@ -127,10 +127,7 @@ $row = $rows[0];
 					<!--</div>-->
 					<small id="emailHelp" class="form-text text-muted">If you unpublish this, it will not displayed for public user(employees)</small>
 					<?php echo form_error('pagecontent_status'); ?>
-
-
 			</div>
-
 		</div>
 
 		<?php echo form_button(array('name' => 'submit_btn','type' => 'submit','content' => '<i class="fa fa-fw fa-check-circle"></i> Submit','class' => 'btn btn-primary'));?>
