@@ -37,6 +37,7 @@ class Home extends CI_Controller {
 
         $this->load->model('home_model');
         $this->load->model('cms_model');
+        $this->load->model('upload_model');
         $this->id = $this->uri->segment(3);
 
         $this->data['alert_message'] = NULL;
@@ -84,10 +85,9 @@ class Home extends CI_Controller {
 
         // Data Rows - Refer to model method definition
         $result_array = $this->cms_model->get_contents(NULL, $per_page, $offset, FALSE, TRUE);
-        $this->data['data_rows'] = $result_array['data_rows'];
-		
-
-        
+        $this->data['data_rows'] = $result_array['data_rows'];		
+		$this->data['sliders'] = $this->upload_model->get_slider();
+		//print_r($sliders);
 		$this->data['page_heading'] = 'Welcome to '.$this->config->item('app_company_product');
         $this->data['maincontent'] = $this->load->view($this->router->class.'/index', $this->data, true);
         $this->load->view('_layouts/layout_home', $this->data);

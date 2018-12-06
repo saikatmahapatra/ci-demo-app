@@ -42,50 +42,6 @@
         
 
         <div class="container">
-            <div class="row my-2">
-                <div class="col-12">
-                    <div id="demo" class="carousel slide" data-ride="carousel">
-                    <ul class="carousel-indicators">
-                        <li data-target="#demo" data-slide-to="0" class="active"></li>
-                        <li data-target="#demo" data-slide-to="1"></li>
-                        <li data-target="#demo" data-slide-to="2"></li>
-                    </ul>
-                    <div class="carousel-inner w-100 h-100">
-                        <div class="carousel-item active">
-                            <img src="<?php echo base_url('assets/src/img/carousel/1.jpg');?>">
-                            <div class="carousel-caption">
-                                <h3>Some title goes here...</h3>
-                                <p>Some text, another text...</p>
-                            </div>   
-                        </div><!--/.carousel-item-->
-
-                        <div class="carousel-item">
-                            <img src="<?php echo base_url('assets/src/img/carousel/2.jpg');?>">
-                            <div class="carousel-caption">
-                                <h3>Darjeeling</h3>
-                                <p>We miss you!</p>
-                            </div>   
-                        </div><!--/.carousel-item-->
-
-                        <div class="carousel-item">
-                            <img src="<?php echo base_url('assets/src/img/carousel/3.jpg');?>">
-                            <div class="carousel-caption">
-                                <h3>Some title goes here...</h3>
-                                <p>Some text, another text...</p>
-                            </div>   
-                        </div><!--/.carousel-item-->
-
-                    </div><!--/.carousel-inner-->
-                    <a class="carousel-control-prev" href="#demo" data-slide="prev">
-                        <span class="carousel-control-prev-icon"></span>
-                    </a>
-                    <a class="carousel-control-next" href="#demo" data-slide="next">
-                        <span class="carousel-control-next-icon"></span>
-                    </a>
-                    </div>
-                </div><!--/.col-->
-            </div><!--/.row-->
-
             <div class="row">
                 <div class="col-12"><?php echo $maincontent; ?></div>
             </div><!--/.row-->			

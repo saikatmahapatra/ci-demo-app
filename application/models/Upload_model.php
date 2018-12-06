@@ -120,6 +120,18 @@ class Upload_model extends CI_Model {
         $result = $query->result_array();
         return array('num_rows' => $num_rows, 'data_rows' => $result);
     }
+	
+	function get_slider($id = NULL) {
+        $result = array();
+        $this->db->select('t1.id, t1.upload_file_name,t1.upload_text_1, t1.upload_text_2,t1.upload_text_3');
+        if($id) {
+            $this->db->where('t1.id', $id);
+        }
+		$this->db->where('t1.upload_status', 'Y');
+        $query = $this->db->get('uploads as t1');
+        $num_rows = $query->num_rows();
+        return $result = $query->result_array();
+    }
     
 
 }
