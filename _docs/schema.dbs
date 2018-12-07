@@ -353,3 +353,6 @@ ALTER TABLE `uploads` CHANGE `upload_document_type_name` `upload_file_type_name`
 
 ALTER TABLE `uploads`  ADD `upload_text_1` TEXT NULL DEFAULT NULL  AFTER `upload_file_description`,  ADD `upload_text_2` TEXT NULL DEFAULT NULL  AFTER `upload_text_1`,  ADD `upload_text_3` TEXT NULL DEFAULT NULL  AFTER `upload_text_2`;
 ALTER TABLE `uploads` CHANGE `upload_date` `upload_datetime` DATETIME NULL DEFAULT CURRENT_TIMESTAMP;
+
+ALTER TABLE `users` CHANGE `user_account_active` `user_status` ENUM('Y','N','A') CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT 'N';
+ALTER TABLE `users` CHANGE `user_status` `user_status` ENUM('Y','N','A') CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT 'N' COMMENT 'Y = active, N = Inactive, A = Archived';

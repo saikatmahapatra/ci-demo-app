@@ -43,6 +43,13 @@ class Timesheet extends CI_Controller {
 		$this->load->model('timesheet_model');
 		$this->id = $this->uri->segment(3);
 		
+		// Status flag indicator for showing in table grid etc
+		$this->data['status_flag'] = array(
+            'Y'=>array('text'=>'Active', 'css'=>'text-success', 'icon'=>'<i class="fa fa-circle text-success" aria-hidden="true"></i>'),
+            'N'=>array('text'=>'Inactive', 'css'=>'text-warning', 'icon'=>'<i class="fa fa-circle text-warning" aria-hidden="true"></i>'),
+            'A'=>array('text'=>'Archived', 'css'=>'text-danger', 'icon'=>'<i class="fa fa-circle text-danger" aria-hidden="true"></i>')
+        );
+		
 		//Dropdown
 		$this->data['project_arr'] = $this->timesheet_model->get_project_dropdown();
 		$this->data['task_task_activity_type_array'] = $this->timesheet_model->get_activity_dropdown();

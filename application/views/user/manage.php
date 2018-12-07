@@ -18,8 +18,18 @@
 		?>		
 		<div class="grid-action-holder row my-2 px-3">
 			<div class="col-md-8">
-			<span class="mx-2"><i class="fa fa-circle text-success" aria-hidden="true"></i> Active</span>
-			<span class="mx-2"><i class="fa fa-circle text-warning" aria-hidden="true"></i> Inactive</span>
+				<?php
+				if(isset($status_flag)){
+					foreach($status_flag as $key => $status){
+						?>
+						<span class="mx-2">
+							<?php echo $status['icon']; ?>
+							<?php echo $status['text']; ?>
+						</span>
+						<?php
+					}
+				}
+				?>			
 			</div>
 			<div class="col-md-4 text-right">
 			<a href="<?php echo base_url($this->router->directory.$this->router->class.'/create_account');?>" class="btn btn-sm btn-outline-success" title="Add"> <i class="fa fa-plus"></i> Add New</a>
@@ -28,25 +38,27 @@
 		
 		
 		<div class="table-responsive">
-			<form class="form-inline my-3 " name="download" method="post" action="<?php echo current_url();?>">
+			<form class="form-inline mb-2" name="download" method="post" action="<?php echo current_url();?>">
 				<input type="hidden" name="form_action" value="download">
-				<button class="btn btn-sm btn-success" title="Download"> Download</button>
+				<button class="btn btn-sm btn-outline-secondary" title="Download"> Download</button>
 			</form>
 				<table id="user-datatable" class="table ci-table table-striped">
 					<thead class="thead-dark">
 						<tr>
-							<th>Employee Name</th>
-							<th>Registered Email (W)</th>
-							<th>Phone Number (P)</th>
+							<th>Name</th>
+							<th>Email</th>
+							<th>Mobile</th>
+							<th>Status</th>
 							<th>Action</th>
 						</tr>
 					</thead>
 					<tbody></tbody>
 					<tfoot>
 						<tr>
-							<th>Employee Name</th>
-							<th>Registered Email (W)</th>
-							<th>Phone Number (P)</th>
+							<th>Name</th>
+							<th>Email</th>
+							<th>Mobile</th>
+							<th>Status</th>
 							<th>Action</th>
 						</tr>
 					</tfoot>

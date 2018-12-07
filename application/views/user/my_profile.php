@@ -254,15 +254,13 @@
 							<div class="col-md-12">
 								<dl class="row">
 									<dt class="col-sm-2">Account/Login Status</dt>
-									<dd class="col-sm-4"><?php echo isset($row['user_account_active']) ? ($row['user_account_active']=='Y' ? 'Active' : ($row['user_account_active']=='N' ? 'Inactive' : '' )) : '-'; ?></dd>
+									<dd class="col-sm-4"><?php echo isset($row['user_status']) ? $status_flag[$row['user_status']]['icon'].' '.$status_flag[$row['user_status']]['text']: '-'; ?></dd>
 									<dt class="col-sm-2">Registered on</dt>
 									<dd class="col-sm-4"><?php echo isset($row['user_registration_date']) ? $this->common_lib->display_date($row['user_registration_date'],true) : '-'; ?></dd>									
 									<dt class="col-sm-2">Registered from IP</dt>
 									<dd class="col-sm-4"><?php echo isset($row['user_registration_ip']) ? $row['user_registration_ip'] : '-'; ?></dd>
 									<dt class="col-sm-2">Last Login Date Time</dt>
-									<dd class="col-sm-4"><?php echo isset($row['user_login_date_time']) ? $this->common_lib->display_date($row['user_login_date_time'],true) : '-'; ?></dd>
-									<dt class="col-sm-2">User Archived</dt>
-									<dd class="col-sm-4"><?php echo isset($row['user_archived']) ? ($row['user_archived']=='Y' ? 'Yes' : ($row['user_archived']=='N' ? 'No' : '' )) : '-'; ?></dd>
+									<dd class="col-sm-4"><?php echo isset($row['user_login_date_time']) ? $this->common_lib->display_date($row['user_login_date_time'],true) : '-'; ?></dd>									
 								</dl>
 							</div>
 						</div>

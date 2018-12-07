@@ -50,6 +50,13 @@ class User extends CI_Controller {
 		$this->data['arr_departments'] = $this->user_model->get_department_dropdown();
 		$this->data['arr_user_title'] = array(''=>'Select Title','Mr.'=>'Mr.','Mrs.'=>'Mrs.','Dr.'=>'Dr.','Ms.'=>'Ms.');
 		$this->data['blood_group'] = array(''=>'Select','O+'=>'O+','O-'=>'O-','A+'=>'A+','A-'=>'A-','B+'=>'B+','B-'=>'B-','AB+'=>'AB+','AB-'=>'AB-');
+		
+		// Status flag indicator for showing in table grid etc
+		$this->data['status_flag'] = array(
+            'Y'=>array('text'=>'Active', 'css'=>'text-success', 'icon'=>'<i class="fa fa-circle text-success" aria-hidden="true"></i>'),
+            'N'=>array('text'=>'Inactive', 'css'=>'text-warning', 'icon'=>'<i class="fa fa-circle text-warning" aria-hidden="true"></i>'),
+            'A'=>array('text'=>'Archived', 'css'=>'text-danger', 'icon'=>'<i class="fa fa-circle text-danger" aria-hidden="true"></i>')
+        );
     }
 
     function index() {
@@ -143,49 +150,17 @@ class User extends CI_Controller {
         foreach ($data_rows as $result) {
             $no++;
             $row = array();
-            $html_name='';
-            $account_status_indicator = 'text-secondary';
-            if($result['user_account_active'] == 'Y'){
-                $account_status_indicator = 'text-success';
-            }
-            if($result['user_account_active'] == 'N'){
-                $account_status_indicator = 'text-danger';
-            }
-            $html_name.= '<div class=""><i class="fa fa-circle '.$account_status_indicator.'" aria-hidden="true"></i> '.$result['user_title'].'&nbsp;'.$result['user_firstname'] . '&nbsp;' . $result['user_lastname'].' (#'.$result['user_emp_id'].')</div>';
-            //$html_name.= '<div> DOB : '.$this->common_lib->display_date($result['user_dob']).'</div>';
-            //$html_name.= '<div> Gender : '.$result['user_gender'].'</div>';
-            //$html_name.= '<div> Blood Gr : '.$result['user_blood_group'].'</div>';
-            //$html_name.= '<div class="small"> Reg. On : '.$this->common_lib->display_date($result['user_registration_date'], true).'</div>';
-            //$html_name.= '<div class="small"> Last Login : '.($result['user_login_date_time'] != NULL ? $this->common_lib->display_date($result['user_login_date_time'], true) : '').'</div>';
-            //$html_name.= ($result['user_account_active'] == 'Y') ? '<span data-user-id="'.$result['id'].'" class="account-status badge badge-success">Active Account</span>' : '<span data-user-id="'.$result['id'].'" class="account-status badge badge-danger">Inactive Account</span>';
-            $row[] = $html_name;
-
-            // $html_corp=''; 
-            // $html_corp.= '<div class=""> Emp # : '.$result['user_emp_id'].'</div>';
-            // $html_corp.= '<div> DOJ : '.($result['user_doj'] != NULL ? $this->common_lib->display_date($result['user_doj']) : '').'</div>';
-            // $html_corp.= '<div class=""> Designation : '.$result['designation_name'].'</div>';
-            // $html_corp.= '<div class=""> RBAC Group : '.$result['role_name'].'</div>';
-            // $row[] = $html_corp;
-            
+            $row[] = '<div class="">'.$result['user_title'].'&nbsp;'.$result['user_firstname'] . '&nbsp;' . $result['user_lastname'].' (#'.$result['user_emp_id'].')</div>';
             $row[] = $result['user_email'];
-
-            // $html_contact=''; 
-            // $html_contact.= '<div class=""> Email (W) : '.$result['user_email'].'</div>';
-            // $html_contact.= '<div> Mobile (P) : '.$result['user_phone1'].'</div>';
-            // $html_contact.= '<div> Email (P) : '.$result['user_email_secondary'].'</div>';            
-            // $html_contact.= '<div> Mobile (W) : '.$result['user_phone2'].'</div>';
-            // $row[] = $html_contact;
-            $row[] = $result['user_phone1'];
-
-            //$row[] = ($result['user_account_active'] == 'Y') ? '<span data-user-id="'.$result['id'].'" class="account-status badge badge-success">Active</span>' : '<span data-user-id="'.$result['id'].'" class="account-status badge badge-danger">Inactive</span>';
-            //add html for action
+            $row[] = $result['user_phone1'];			
+			$row[] = isset($result['user_status']) ? $this->data['status_flag'][$result['user_status']]['icon'] : '';           
+            
+			//add html for action
             $action_html = '';
-
-
-            $acc_status_icon = ($result['user_account_active'] == 'Y') ? '' : '';
-            $acc_status_text = ($result['user_account_active'] == 'Y') ? 'Deactivate' : 'Activate';
-            $acc_status_class = ($result['user_account_active'] == 'Y') ? 'btn btn-sm btn-outline-danger' : 'btn btn-sm btn-outline-success';
-            $acc_status_set = ($result['user_account_active'] == 'Y') ? 'N' : 'Y';
+            $acc_status_icon = ($result['user_status'] == 'Y') ? '' : '';
+            $acc_status_text = ($result['user_status'] == 'Y') ? 'Deactivate' : 'Activate';
+            $acc_status_class = ($result['user_status'] == 'Y') ? 'btn btn-sm btn-outline-danger' : 'btn btn-sm btn-outline-success';
+            $acc_status_set = ($result['user_status'] == 'Y') ? 'N' : 'Y';
             
             $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/profile/' . $result['id']), '<i class="fa fa-info-circle" aria-hidden="true"></i> Details', array(
                 'class' => 'btn btn-sm btn-outline-secondary mr-1',
@@ -330,7 +305,7 @@ class User extends CI_Controller {
                     'user_password' => md5($password),
                     'user_activation_key' => $activation_token,
                     'user_registration_ip' => $_SERVER['REMOTE_ADDR'],
-                    'user_account_active' => 'Y',
+                    'user_status' => 'Y',
                     'user_emp_id' => $user_emp_id
                 );
 				//print_r($postdata); die();
@@ -418,7 +393,7 @@ class User extends CI_Controller {
                     'user_password' => md5($this->input->post('user_password')),
                     'user_activation_key' => $activation_token,
                     'user_registration_ip' => $_SERVER['REMOTE_ADDR'],
-                    'user_account_active' => 'N',
+                    'user_status' => 'N',
                     'user_emp_id' => $user_emp_id
                 );
 				//print_r($postdata); die();
@@ -510,7 +485,7 @@ class User extends CI_Controller {
 		$activation_key = $this->uri->segment(4);
         $res = $this->user_model->check_user_activation_key($user_id, $activation_key);
         if ($res) {
-            $postdata = array('user_account_active' => 'Y');
+            $postdata = array('user_status' => 'Y');
             $where = array('id' => $user_id, 'user_activation_key' => $activation_key);
             $act_res = $this->user_model->update($postdata, $where);
             if ($act_res) {
@@ -829,7 +804,7 @@ class User extends CI_Controller {
             'data' => array(),
         );
         $is_active = $this->input->post('active');
-        $postdata = array('user_account_active' => $is_active);
+        $postdata = array('user_status' => $is_active);
         $where = array('id' => $this->input->post('user_id'));
         $res = $this->user_model->update($postdata, $where);
         if ($res == true) {
@@ -1231,7 +1206,7 @@ class User extends CI_Controller {
                     //'user_role' => $this->input->post('user_role'),
                     'user_department' => $this->input->post('user_department'),
                     'user_designation' => $this->input->post('user_designation'),
-                    'user_account_active' => $this->input->post('user_account_active')                
+                    'user_status' => $this->input->post('user_status')                
                 );
                 $where = array('id' => $user_id);
                 $res = $this->user_model->update($postdata, $where);
@@ -1261,7 +1236,7 @@ class User extends CI_Controller {
         //$this->form_validation->set_rules('user_role', 'access group', 'required');
         //$this->form_validation->set_rules('user_designation', 'designation', 'required');
         //$this->form_validation->set_rules('user_department', 'department', 'required');
-        //$this->form_validation->set_rules('user_account_active', 'account status', 'required');
+        //$this->form_validation->set_rules('user_status', 'account status', 'required');
         $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
         if ($this->form_validation->run() == true) {
             return true;
@@ -1780,11 +1755,11 @@ class User extends CI_Controller {
             $sheet->setCellValue('C' . $excel_row, $row['user_email']);
             $sheet->setCellValue('D' . $excel_row, $row['user_phone1']);
             
-            $sheet->setCellValue('E' . $excel_row, $row['user_account_active']);
-            if($row['user_account_active'] == 'N'){
+            $sheet->setCellValue('E' . $excel_row, $row['user_status']);
+            if($row['user_status'] == 'N'){
                 $color = 'ef0909'; //red
             }  
-            if($row['user_account_active'] == 'Y'){
+            if($row['user_status'] == 'Y'){
                 $color = '09bc09'; //green
             }        
             

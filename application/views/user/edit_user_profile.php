@@ -47,21 +47,10 @@
 					echo isset($row['user_lastname']) ? $row['user_lastname'] . '&nbsp;' : '';
 				?>
 			</div>
-			<?php 
-				if($row['user_account_active']=='Y'){
-					?>
-					<span class="badge badge-success">Active Account</span>                        
-					<?php
-				}
-				if($row['user_account_active']=='N'){
-					?>
-					<span class="badge badge-danger">Inactive Account</span>
-					<?php
-				}
-			?> 
-			<!--<div class="small"><?php //echo isset($row['role_name']) ? $row['role_name'] : ''; ?></div>-->
-			<div class="small"><?php echo isset($row['user_emp_id']) ? 'Emp # '.$row['user_emp_id'] : ''; ?></div>
-			<div class="small"><?php echo isset($row['designation_name']) ? $row['designation_name'] : ''; ?></div>
+			<div class="<?php echo $status_flag[$row['user_status']]['css']; ?>"><?php echo isset($row['user_status']) ? $status_flag[$row['user_status']]['icon'].' '.$status_flag[$row['user_status']]['text']: '-'; ?></div>
+			<div class=""><?php echo isset($row['role_name']) ? 'Role : '.$row['role_name'] : ''; ?></div>
+			<div class=""><?php echo isset($row['user_emp_id']) ? 'Emp ID : '.$row['user_emp_id'] : ''; ?></div>
+			<div class=""><?php echo isset($row['designation_name']) ? 'Designation : '.$row['designation_name'] : ''; ?></div>
 			<div class="">
 				<i class="fa fa-envelope-o" aria-hidden="true"></i> 
 				<a class="" href="mailto:<?php echo isset($row['user_email']) ? $row['user_email'] : ''; ?>"><?php echo isset($row['user_email']) ? $row['user_email'] : ''; ?></a>
@@ -249,32 +238,42 @@
 
             <div class="form-row">				
 				<div class="form-group col-md-12">
-				  <label for="user_account_active" class="">Account Active ? <span class="required">*</span></label>
+				  <label for="user_status" class="">Account Status <span class="required">*</span></label>
 				  	<div class="">
 						<div class="custom-control custom-radio custom-control-inline">
 							<?php
-								$radio_is_checked = isset($_POST['user_account_active']) ? $_POST['user_account_active'] == 'Y' : ($row['user_account_active'] == 'Y');
+								$radio_is_checked = isset($_POST['user_status']) ? $_POST['user_status'] == 'Y' : ($row['user_status'] == 'Y');
 
-								echo form_radio(array('name' => 'user_account_active','value' => 'Y','id' => 'Y','checked' => $radio_is_checked,'class' => 'custom-control-input'), set_radio('user_account_active', 'Y'));
+								echo form_radio(array('name' => 'user_status','value' => 'Y','id' => 'Y','checked' => $radio_is_checked,'class' => 'custom-control-input'), set_radio('user_status', 'Y'));
 							?>
-							<label class="custom-control-label" for="Y">Yes</span></label>
+							<label class="custom-control-label" for="Y">Active</span></label>
 						</div>
 						
 						<div class="custom-control custom-radio custom-control-inline">
 							<?php
-								$radio_is_checked = isset($_POST['user_account_active']) ? $_POST['user_account_active'] == 'N' : ($row['user_account_active'] == 'N');
+								$radio_is_checked = isset($_POST['user_status']) ? $_POST['user_status'] == 'N' : ($row['user_status'] == 'N');
 
-								echo form_radio(array('name' => 'user_account_active', 'value' => 'N', 'id' => 'N', 'checked' => $radio_is_checked, 'class' => 'custom-control-input'), set_radio('user_account_active', 'N'));
+								echo form_radio(array('name' => 'user_status', 'value' => 'N', 'id' => 'N', 'checked' => $radio_is_checked, 'class' => 'custom-control-input'), set_radio('user_status', 'N'));
 							?>
-							<label class="custom-control-label" for="N">No</span></label>
-						</div>								
+							<label class="custom-control-label" for="N">Inactive</span></label>
+						</div>
+						
+						<div class="custom-control custom-radio custom-control-inline">
+							<?php
+								$radio_is_checked = isset($_POST['user_status']) ? $_POST['user_status'] == 'A' : ($row['user_status'] == 'A');
+
+								echo form_radio(array('name' => 'user_status', 'value' => 'A', 'id' => 'A', 'checked' => $radio_is_checked, 'class' => 'custom-control-input'), set_radio('user_status', 'A'));
+							?>
+							<label class="custom-control-label" for="A">Archive</span></label>
+						</div>	
+						
 					</div>
 					<small id="emailHelp" class="form-text text-muted">If you deactivate this user account, user will  not be able to login.</small>
-					<?php echo form_error('user_account_active'); ?>
+					<?php echo form_error('user_status'); ?>
 				</div>
 			</div>
 			<?php }else{
-				echo form_hidden('user_account_active', $row['user_account_active']);
+				echo form_hidden('user_status', $row['user_status']);
 			} ?>
         <?php echo form_button(array('name' => 'submit_btn','type' => 'submit','content' => '<i class="fa fa-fw fa-check-circle"></i> Submit','class' => 'btn btn-primary'));?>
 		<a href="<?php echo base_url($this->router->directory.$this->router->class.'/manage');?>" class="ml-2 btn btn-secondary"><i class="fa fa-fw fa-times-circle"></i> Cancel</a>

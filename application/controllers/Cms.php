@@ -56,6 +56,13 @@ class Cms extends CI_Controller {
 		
 		//Pagination
 		 $this->load->library('pagination');
+		 
+		// Status flag indicator for showing in table grid etc
+		$this->data['status_flag'] = array(
+            'Y'=>array('text'=>'Active', 'css'=>'text-success', 'icon'=>'<i class="fa fa-circle text-success" aria-hidden="true"></i>'),
+            'N'=>array('text'=>'Inactive', 'css'=>'text-warning', 'icon'=>'<i class="fa fa-circle text-warning" aria-hidden="true"></i>'),
+            'A'=>array('text'=>'Archived', 'css'=>'text-danger', 'icon'=>'<i class="fa fa-circle text-danger" aria-hidden="true"></i>')
+        );
 		
     }
 
@@ -130,7 +137,7 @@ class Cms extends CI_Controller {
             $row[] = $result['pagecontent_type'];
             $row[] = $result['pagecontent_title'];
             $row[] = $this->common_lib->display_date($result['pagecontent_created_on'], true);
-            $row[] = (strtolower($result['pagecontent_status']) == 'y') ? 'Published' : 'Unpublished';            
+            $row[] = isset($result['pagecontent_status']) ? $this->data['status_flag'][$result['pagecontent_status']]['icon'] : '';
             //add html for action
             $action_html = '';
             $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/edit/' .$result['id']), '<i class="fa fa-edit" aria-hidden="true"></i> Edit', array(
@@ -307,7 +314,7 @@ class Cms extends CI_Controller {
             $row[] = '<img class="img banner-img-xs" src="'.base_url($img_src).'"><div>'.$result['upload_mime_type'].'</div>';
             //$row[] = $result['upload_mime_type'];
             //$row[] = $this->common_lib->display_date($result['upload_datetime'], true);
-            $row[] = (strtolower($result['upload_status']) == 'y') ? 'Published' : 'Unpublished';            
+            $row[] = isset($result['upload_status']) ? $this->data['status_flag'][$result['upload_status']]['icon'] : '';           
             //add html for action
             $action_html = '';
             $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/edit_banner/' .$result['id']), '<i class="fa fa-edit" aria-hidden="true"></i> Edit', array(

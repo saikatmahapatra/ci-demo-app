@@ -45,6 +45,13 @@ class Project extends CI_Controller {
 
         $this->data['page_heading'] = $this->router->class.' : '.$this->router->method;
 		
+		// Status flag indicator for showing in table grid etc
+		$this->data['status_flag'] = array(
+            'Y'=>array('text'=>'Active', 'css'=>'text-success', 'icon'=>'<i class="fa fa-circle text-success" aria-hidden="true"></i>'),
+            'N'=>array('text'=>'Inactive', 'css'=>'text-warning', 'icon'=>'<i class="fa fa-circle text-warning" aria-hidden="true"></i>'),
+            'A'=>array('text'=>'Archived', 'css'=>'text-danger', 'icon'=>'<i class="fa fa-circle text-danger" aria-hidden="true"></i>')
+        );
+		
 		// load Breadcrumbs
 		$this->load->library('breadcrumbs');
 		// add breadcrumbs. push() - Append crumb to stack
@@ -91,7 +98,7 @@ class Project extends CI_Controller {
             $row = array();
             $row[] = $result['project_name'];
             $row[] = $result['project_desc'];            
-            $row[] = (strtolower($result['project_status']) == 'y') ? 'Active' : 'Inactive';
+            $row[] = isset($result['project_status']) ? $this->data['status_flag'][$result['project_status']]['icon'] : '';
             //add html for action
             $action_html = '';
             $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/edit/' .$result['id']), '<i class="fa fa-edit" aria-hidden="true"></i> Edit', array(

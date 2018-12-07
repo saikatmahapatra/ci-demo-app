@@ -20,6 +20,13 @@ class Example extends CI_Controller {
             'assets/dist/js/'.$this->router->class.'.js', //create js file name same as controller name
         );
         $this->data['app_js'] = $this->common_lib->add_javascript($app_js_src);
+		
+		// Status flag indicator for showing in table grid etc
+		$this->data['status_flag'] = array(
+            'Y'=>array('text'=>'Active', 'css'=>'text-success', 'icon'=>'<i class="fa fa-circle text-success" aria-hidden="true"></i>'),
+            'N'=>array('text'=>'Inactive', 'css'=>'text-warning', 'icon'=>'<i class="fa fa-circle text-warning" aria-hidden="true"></i>'),
+            'A'=>array('text'=>'Archived', 'css'=>'text-danger', 'icon'=>'<i class="fa fa-circle text-danger" aria-hidden="true"></i>')
+        );
         
         $this->data['alert_message'] = NULL;
         $this->data['alert_message_css'] = NULL;
