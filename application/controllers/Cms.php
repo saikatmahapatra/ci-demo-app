@@ -74,7 +74,7 @@ class Cms extends CI_Controller {
 		
 		$this->data['page_heading'] = 'Website CMS - Contents';
         $this->data['maincontent'] = $this->load->view($this->router->class.'/index', $this->data, true);
-        $this->load->view('_layouts/layout_admin_default', $this->data);
+        $this->load->view('_layouts/layout_default', $this->data);
     }
 	
 	function index_ci_pagination() {
@@ -107,7 +107,7 @@ class Cms extends CI_Controller {
 		
 		$this->data['page_heading'] = 'Website Contents (CI Pagination Version)';
         $this->data['maincontent'] = $this->load->view($this->router->class.'/index_ci_pagination', $this->data, true);
-        $this->load->view('_layouts/layout_admin_default', $this->data);
+        $this->load->view('_layouts/layout_default', $this->data);
     }
 
     function render_datatable() {
@@ -197,7 +197,7 @@ class Cms extends CI_Controller {
         }
 		$this->data['page_heading'] = 'Add Contents';
         $this->data['maincontent'] = $this->load->view($this->router->class.'/add', $this->data, true);
-        $this->load->view('_layouts/layout_admin_default', $this->data);
+        $this->load->view('_layouts/layout_default', $this->data);
     }
 
     function edit() {
@@ -236,7 +236,7 @@ class Cms extends CI_Controller {
         $this->data['rows'] = $result_array['data_rows'];
 		$this->data['page_heading'] = 'Edit Contents';
         $this->data['maincontent'] = $this->load->view($this->router->class.'/edit', $this->data, true);
-        $this->load->view('_layouts/layout_admin_default', $this->data);
+        $this->load->view('_layouts/layout_default', $this->data);
     }
 
     function delete() {
@@ -356,7 +356,7 @@ class Cms extends CI_Controller {
 		
 		$this->data['page_heading'] = 'Carousel';
         $this->data['maincontent'] = $this->load->view($this->router->class.'/manage_banner', $this->data, true);
-        $this->load->view('_layouts/layout_admin_default', $this->data);
+        $this->load->view('_layouts/layout_default', $this->data);
     }
 	
 	function add_banner() {
@@ -369,7 +369,7 @@ class Cms extends CI_Controller {
         }
 		$this->data['page_heading'] = 'Create a Carousel Slider';
         $this->data['maincontent'] = $this->load->view($this->router->class.'/add_banner', $this->data, true);
-        $this->load->view('_layouts/layout_admin_default', $this->data);
+        $this->load->view('_layouts/layout_default', $this->data);
     }
 	
 	function edit_banner() {
@@ -384,7 +384,7 @@ class Cms extends CI_Controller {
         $this->data['rows'] = $result_array['data_rows'];		
 		$this->data['page_heading'] = 'Edit Carousel Slider';
         $this->data['maincontent'] = $this->load->view($this->router->class.'/edit_banner', $this->data, true);
-        $this->load->view('_layouts/layout_admin_default', $this->data);
+        $this->load->view('_layouts/layout_default', $this->data);
     }
 	
 	function delete_banner(){
@@ -410,9 +410,9 @@ class Cms extends CI_Controller {
 	}
 	
 	function validate_banner_form_data($action = NULL) {        
-        $this->form_validation->set_rules('upload_status', ' ', 'required');
+        $this->form_validation->set_rules('upload_status', 'upload status', 'required');
 		if(($this->input->post('form_action') == 'insert') && (empty($_FILES['userfile']['name']))){
-			$this->form_validation->set_rules('userfile', ' ', 'required');
+			$this->form_validation->set_rules('userfile', 'file', 'required');
 		}
         $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
         if ($this->form_validation->run() == true) {
@@ -507,7 +507,7 @@ class Cms extends CI_Controller {
 						$upload_insert_id = $this->cms_model->insert($postdata, 'uploads');
 						$this->session->set_flashdata('flash_message', 'File uploaded successfully.');
 						$this->session->set_flashdata('flash_message_css', 'alert-success');
-						redirect($this->router->directory.$this->router->class.'/edit_banner/'.$upload_insert_id);
+						redirect(current_url());
 					}
 				} else if (sizeof($upload_result['upload_error']) > 0) {
 					$error_message = $upload_result['upload_error'];

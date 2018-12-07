@@ -18,6 +18,29 @@ $segment3 = $this->uri->segment(3);
 	
 	<div class="collapse navbar-collapse" id="navbarsExampleDefault">
 		<ul class="navbar-nav mr-auto">
+			
+			<?php if (isset($this->session->userdata['sess_user']) && $this->session->userdata['sess_user']['user_role'] == 1) { ?>			
+				<li class="nav-item dropdown <?php echo ($segment1 == 'example') ? 'active':''?>">
+					<a class="nav-link dropdown-toggle" href="#" id="dropdown_admin" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false">Admin Links</a>
+					<div class="dropdown-menu" aria-labelledby="dropdown_admin">
+						<a class="dropdown-item" href="<?php echo base_url('home/dashboard'); ?>">Dashboard</a>
+						<a class="dropdown-item" href="<?php echo base_url('cms/index');?>">Manage CMS</a>
+						<a class="dropdown-item" href="<?php echo base_url('cms/add');?>">Create Content</a>
+						<a class="dropdown-item" href="<?php echo base_url('cms/manage_banner');?>">Manage Carousel</a>
+						<a class="dropdown-item" href="<?php echo base_url('cms/add_banner');?>">Create Carousel</a>
+						<a class="dropdown-item" href="<?php echo base_url('product');?>">Manage Products</a>
+						<a class="dropdown-item" href="<?php echo base_url('product/add');?>">Create Product</a>
+						<a class="dropdown-item" href="<?php echo base_url('category');?>">Manage Categories</a>
+						<a class="dropdown-item" href="<?php echo base_url('category/add');?>">Create Category</a>
+						<a class="dropdown-item" href="<?php echo base_url('user/manage'); ?>">Manage Users</a>
+						<a class="dropdown-item" href="<?php echo base_url('user/create_account'); ?>">Create User</a>
+						<a class="dropdown-item" href="<?php echo base_url('order'); ?>">Manage Orders</a>
+					</div>
+				</li>
+				
+			<?php } ?>
+			
 			<li class="nav-item <?php echo ($segment1=='home') ? 'active':''?>">
 				<a class="nav-link" href="<?php echo base_url($this->router->directory.'home'); ?>">Home
 					<span class="sr-only">(current)</span>
@@ -70,18 +93,10 @@ $segment3 = $this->uri->segment(3);
 				<?php echo form_close(); ?>
 			</li>
 
-			<?php if (isset($this->session->userdata['sess_user']) && $this->session->userdata['sess_user']['user_role'] == 1) { ?>			
-				<li class="nav-item">
-					<a class="nav-link" href="<?php echo base_url($this->router->directory.'admin'); ?>"><i class="fa fa-globe" aria-hidden="true"></i> Admin</a>
-				</li>
-				
-			<?php } ?>
-
-
 			<?php if (isset($this->session->userdata['sess_user']['id'])) {   ?>
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i> Welcome, <?php echo isset($this->session->userdata['sess_user']['user_firstname']) ? $this->session->userdata['sess_user']['user_firstname'] : 'Guest';?></a>
+					aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i> Hi, <?php echo isset($this->session->userdata['sess_user']['user_firstname']) ? $this->session->userdata['sess_user']['user_firstname'] : 'Guest';?></a>
 				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown03">					
 					<div class="dropdown-item welcome-user-container">					
 						<div class=""><?php echo isset($this->session->userdata['sess_user']['user_title'])? $this->session->userdata['sess_user']['user_title']:''; ?> <?php echo isset($this->session->userdata['sess_user']['user_firstname']) ? $this->session->userdata['sess_user']['user_firstname'].' '.$this->session->userdata['sess_user']['user_lastname']:'Guest';?></div>

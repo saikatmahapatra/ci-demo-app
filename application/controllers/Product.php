@@ -77,7 +77,7 @@ class Product extends CI_Controller {
 		
 		$this->data['page_heading'] = 'Products';
         $this->data['maincontent'] = $this->load->view($this->router->class.'/index', $this->data, true);
-        $this->load->view('_layouts/layout_admin_default', $this->data);
+        $this->load->view('_layouts/layout_default', $this->data);
     }
 
     function render_datatable() {
@@ -225,7 +225,7 @@ class Product extends CI_Controller {
         }
 		$this->data['page_heading'] = 'Add Product';
         $this->data['maincontent'] = $this->load->view($this->router->class.'/add', $this->data, true);
-        $this->load->view('_layouts/layout_admin_default', $this->data);
+        $this->load->view('_layouts/layout_default', $this->data);
     }
 
     function edit() {
@@ -294,7 +294,7 @@ class Product extends CI_Controller {
         }
 		$this->data['page_heading'] = 'Edit Product';
         $this->data['maincontent'] = $this->load->view($this->router->class.'/edit', $this->data, true);
-        $this->load->view('_layouts/layout_admin_default', $this->data);
+        $this->load->view('_layouts/layout_default', $this->data);
     }
 
     function delete() {

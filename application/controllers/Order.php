@@ -77,7 +77,7 @@ class Order extends CI_Controller {
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
 		$this->data['page_heading'] = 'Online Orders';
         $this->data['maincontent'] = $this->load->view($this->router->class.'/index', $this->data, true);
-        $this->load->view('_layouts/layout_admin_default', $this->data);
+        $this->load->view('_layouts/layout_default', $this->data);
     }
 
     function render_datatable() {
@@ -212,7 +212,7 @@ class Order extends CI_Controller {
 		
 		$this->data['page_heading'] = 'Manage Order';
         $this->data['maincontent'] = $this->load->view($this->router->class.'/edit', $this->data, true);
-        $this->load->view('_layouts/layout_admin_default', $this->data);
+        $this->load->view('_layouts/layout_default', $this->data);
     }
 
     //Public Exposed

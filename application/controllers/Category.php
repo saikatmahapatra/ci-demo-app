@@ -64,7 +64,7 @@ class Category extends CI_Controller {
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
 		$this->data['page_heading'] = 'Product Category';
         $this->data['maincontent'] = $this->load->view($this->router->class.'/index', $this->data, true);
-        $this->load->view('_layouts/layout_admin_default', $this->data);
+        $this->load->view('_layouts/layout_default', $this->data);
     }
 
     function render_datatable() {
@@ -166,7 +166,7 @@ class Category extends CI_Controller {
         }
 		$this->data['page_heading'] = 'Add Product Category';
         $this->data['maincontent'] = $this->load->view($this->router->class.'/add', $this->data, true);
-        $this->load->view('_layouts/layout_admin_default', $this->data);
+        $this->load->view('_layouts/layout_default', $this->data);
     }
 
     function edit() {
@@ -197,7 +197,7 @@ class Category extends CI_Controller {
         $this->data['rows'] = $result_array['data_rows'];
 		$this->data['page_heading'] = 'Edit Product Category';
         $this->data['maincontent'] = $this->load->view($this->router->class.'/edit', $this->data, true);
-        $this->load->view('_layouts/layout_admin_default', $this->data);
+        $this->load->view('_layouts/layout_default', $this->data);
     }
 
     function delete() {

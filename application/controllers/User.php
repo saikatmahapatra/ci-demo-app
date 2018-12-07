@@ -80,7 +80,7 @@ class User extends CI_Controller {
 		
 		$this->data['page_heading'] = 'Manage Employees';
         $this->data['maincontent'] = $this->load->view($this->router->class.'/manage', $this->data, true);
-        $this->load->view('_layouts/layout_admin_default', $this->data);
+        $this->load->view('_layouts/layout_default', $this->data);
     }
 	
 	function people() {        
@@ -367,7 +367,7 @@ class User extends CI_Controller {
         }
 		$this->data['page_heading'] = "Add New Employee";
         $this->data['maincontent'] = $this->load->view($this->router->class.'/create_account', $this->data, true);
-        $this->load->view('_layouts/layout_admin_default', $this->data);
+        $this->load->view('_layouts/layout_default', $this->data);
     }
 
     function validate_create_account_form_data() {
@@ -1245,7 +1245,7 @@ class User extends CI_Controller {
 	
 		$this->data['page_heading'] = 'Edit Employee Profile';
         $this->data['maincontent'] = $this->load->view($this->router->class.'/edit_user_profile', $this->data, true);
-        $this->load->view('_layouts/layout_admin_default', $this->data);
+        $this->load->view('_layouts/layout_default', $this->data);
     }
 
     function validate_edit_user_profile_form() {
@@ -1458,25 +1458,7 @@ class User extends CI_Controller {
         } else {
             return false;
         }
-	}
-	
-	function administrator() {
-		########### Validate User Auth #############
-        $is_logged_in = $this->common_lib->is_logged_in();
-        if ($is_logged_in == FALSE) {
-			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
-            redirect($this->router->directory.$this->router->class.'/login');
-        }
-        //Has logged in user permission to access this page or method?        
-        $is_authorized = $this->common_lib->is_auth(array(
-            'default-super-admin-access',
-            'default-admin-access',
-        ));
-        ########### Validate User Auth End #############
-		$this->data['page_heading'] = "Administrator Control Panel";
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/administrator', $this->data, true);
-        $this->load->view('_layouts/layout_admin_default', $this->data);
-    }
+	}	
     
     function add_user_input_specialization(){
         $message = array('is_valid'=>false, 'insert_id'=>'','msg'=>'');

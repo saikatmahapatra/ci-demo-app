@@ -86,11 +86,41 @@ class Home extends CI_Controller {
         // Data Rows - Refer to model method definition
         $result_array = $this->cms_model->get_contents(NULL, $per_page, $offset, FALSE, TRUE);
         $this->data['data_rows'] = $result_array['data_rows'];		
+		
+		//Carousel Slider
 		$this->data['sliders'] = $this->upload_model->get_slider();
 		//print_r($sliders);
 		$this->data['page_heading'] = 'Welcome to '.$this->config->item('app_company_product');
         $this->data['maincontent'] = $this->load->view($this->router->class.'/index', $this->data, true);
         $this->load->view('_layouts/layout_home', $this->data);
+    }
+	
+	function dashboard() {
+		########### Validate User Auth #############
+        $is_logged_in = $this->common_lib->is_logged_in();
+        if ($is_logged_in == FALSE) {
+			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
+            redirect('user/login');
+        }
+        //Has logged in user permission to access this page or method?        
+        $is_authorized = $this->common_lib->is_auth(array(
+            'default-super-admin-access',
+            'default-admin-access',
+        ));
+        ########### Validate User Auth End #############
+		
+		$this->breadcrumbs->push('View','/');				
+		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
+		
+        $this->data['alert_message'] = $this->session->flashdata('flash_message');
+        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
+		
+		//Carousel Slider
+		$this->data['sliders'] = $this->upload_model->get_slider();
+		
+		$this->data['page_heading'] = "Administrator Dashboard";
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/dashboard', $this->data, true);
+        $this->load->view('_layouts/layout_default', $this->data);
     }
 	
 	function details() {

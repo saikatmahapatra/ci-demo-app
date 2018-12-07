@@ -1,4 +1,9 @@
 <?php //echo isset($breadcrumbs) ? $breadcrumbs : ''; ?>
+<div class="row heading-container mb-3">
+    <div class="col-12">
+        <h1 class="h3 mb-3 font-weight-normal"><?php echo isset($page_heading)? $page_heading:'Page Heading'; ?></h1>
+    </div>
+</div><!--/.heading-container-->
 <?php if(isset($sliders) && sizeof($sliders)>0){ ?>
 <div class="row my-2">
 	<div class="col-md-12">
@@ -47,19 +52,6 @@
 </div><!--/.row-->
 <?php } ?>
 
-
-
-<div class="row heading-container mb-3">
-    <div class="col-12">
-        <h1 class="h3 mb-3 font-weight-normal"><?php echo isset($page_heading)? $page_heading:'Page Heading'; ?></h1>
-    </div>
-</div><!--/.heading-container-->
-
-
-
-
-
-
 <?php
 if(isset($data_rows) && sizeof($data_rows)> 0 ){
 	$count = 1;
@@ -97,3 +89,4 @@ if(isset($data_rows) && sizeof($data_rows)> 0 ){
 	<?php
 }
 ?>
+
