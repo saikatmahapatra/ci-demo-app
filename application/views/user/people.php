@@ -68,14 +68,15 @@
 						?>
 						<?php 
 						$disabled_css = '';
-						if((isset($row['user_status']) && ($row['user_status'] == 'N' || $row['user_status'] == 'A')){
+						//echo $row['user_status'];
+						if(isset($row['user_status']) && ($row['user_status'] == 'N' || $row['user_status'] == 'A')){
 							$disabled_css = 'disabled disabled-user';
 						}
 						?>
 						
 						<?php if ($count%3 == 1){ echo '<div class="row">'; } ?>
 						
-						<div class="col-md-4 content-wrap">
+						<div class="col-md-4 content-wrap <?php echo $disabled_css;?>">
 							<a href="<?php echo base_url($this->router->directory.$this->router->class.'/profile/'.$row['id']);?>" data-link-type="user-profile-card">
 							<div class="media border mb-2 mt-2 p-2">
 								<img class="align-self-center mr-3 rounded dp-sm" src="<?php echo base_url($img_src);?>">
