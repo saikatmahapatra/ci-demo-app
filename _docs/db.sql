@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 04, 2018 at 08:16 PM
+-- Generation Time: Dec 08, 2018 at 01:49 PM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 5.6.19
 
@@ -99,7 +99,8 @@ INSERT INTO `academic_institute` (`id`, `institute_name`, `institute_status`) VA
 (27, 'ICSE', 'Y'),
 (28, 'WBBSE', 'Y'),
 (29, 'WBCHSE', 'Y'),
-(30, 'WBBME (Madrasha Board)', 'Y');
+(30, 'WBBME (Madrasha Board)', 'Y'),
+(31, 'Nexas', 'Y');
 
 -- --------------------------------------------------------
 
@@ -541,17 +542,10 @@ CREATE TABLE `products` (
 CREATE TABLE `projects` (
   `id` int(11) NOT NULL,
   `project_name` varchar(100) NOT NULL,
+  `project_number` varchar(10) DEFAULT NULL,
   `project_desc` varchar(300) NOT NULL,
   `project_status` enum('Y','N') NOT NULL DEFAULT 'Y'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `projects`
---
-
-INSERT INTO `projects` (`id`, `project_name`, `project_desc`, `project_status`) VALUES
-(1, 'P001-Online Exam', '', 'Y'),
-(2, 'P002-Axis Bank UI', '', 'Y');
 
 -- --------------------------------------------------------
 
@@ -709,27 +703,6 @@ CREATE TABLE `task_activities` (
   `task_activity_status` enum('Y','N') NOT NULL DEFAULT 'Y'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `task_activities`
---
-
-INSERT INTO `task_activities` (`id`, `task_activity_name`, `task_activity_status`) VALUES
-(1, 'Project Analysis', 'Y'),
-(2, 'Planning', 'Y'),
-(3, 'Estimation', 'Y'),
-(4, 'Development & Coding', 'Y'),
-(5, 'Documentation', 'Y'),
-(6, 'Client Meeting', 'Y'),
-(7, 'Internal Meeting', 'Y'),
-(8, 'Site Visit', 'Y'),
-(9, 'KT (Knowledge Transfer)', 'Y'),
-(10, 'OOO (Out of Office)', 'Y'),
-(11, 'Bidding', 'Y'),
-(12, 'Account Management', 'Y'),
-(13, 'Conducting Training', 'Y'),
-(14, 'Self Learning', 'Y'),
-(15, 'Participation in Trainings', 'Y');
-
 -- --------------------------------------------------------
 
 --
@@ -747,7 +720,8 @@ CREATE TABLE `timesheet` (
   `timesheet_updated_by` int(11) NOT NULL,
   `timesheet_reviewd_by` int(11) NOT NULL,
   `timesheet_review_status` enum('pending','approved','rejected') NOT NULL DEFAULT 'pending',
-  `timesheet_status` enum('Y','N') NOT NULL DEFAULT 'Y'
+  `timesheet_status` enum('Y','N') NOT NULL DEFAULT 'Y',
+  `timesheet_created_on` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -758,19 +732,31 @@ CREATE TABLE `timesheet` (
 
 CREATE TABLE `uploads` (
   `id` int(11) NOT NULL,
-  `album_id` int(11) DEFAULT NULL,
-  `upload_object_name` varchar(50) DEFAULT NULL,
-  `upload_object_id` int(11) DEFAULT NULL,
-  `upload_document_type_name` varchar(50) DEFAULT NULL,
+  `upload_related_to` varchar(50) DEFAULT NULL COMMENT 'related to user, album, product etc',
+  `upload_related_to_id` int(11) DEFAULT NULL COMMENT 'user id, album id, product id etc primary key',
+  `upload_file_type_name` varchar(50) DEFAULT NULL COMMENT 'user_dp, album_img, product_img',
   `upload_file_name` varchar(254) DEFAULT NULL,
   `upload_file_binary_obj` blob,
-  `upload_file_description` text,
+  `upload_text_1` text,
+  `upload_text_2` text,
+  `upload_text_3` text,
   `upload_mime_type` varchar(100) DEFAULT NULL,
   `upload_by_user_id` int(11) DEFAULT NULL,
   `upload_is_featured` enum('Y','N') NOT NULL DEFAULT 'N',
   `upload_status` enum('Y','N') NOT NULL DEFAULT 'Y',
-  `upload_date` datetime DEFAULT CURRENT_TIMESTAMP
+  `upload_datetime` datetime DEFAULT CURRENT_TIMESTAMP,
+  `upload_is_verified` char(1) DEFAULT 'N',
+  `upload_verified_by` int(11) DEFAULT NULL,
+  `upload_verified_on` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `uploads`
+--
+
+INSERT INTO `uploads` (`id`, `upload_related_to`, `upload_related_to_id`, `upload_file_type_name`, `upload_file_name`, `upload_file_binary_obj`, `upload_text_1`, `upload_text_2`, `upload_text_3`, `upload_mime_type`, `upload_by_user_id`, `upload_is_featured`, `upload_status`, `upload_datetime`, `upload_is_verified`, `upload_verified_by`, `upload_verified_on`) VALUES
+(19, 'slider', NULL, 'slider_img', '_slider_img_1544117740.jpg', NULL, 'Welcome to', 'test', NULL, 'image/jpeg', 1, 'N', 'Y', '2018-12-06 23:05:40', 'N', NULL, NULL),
+(20, 'slider', NULL, 'slider_img', '_slider_img_1544117879.jpg', NULL, 'Test Text', 'text line 2', NULL, 'image/jpeg', 1, 'N', 'Y', '2018-12-06 23:07:59', 'N', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -803,9 +789,8 @@ CREATE TABLE `users` (
   `user_registration_ip` varchar(40) DEFAULT NULL,
   `user_reset_password_key` char(128) DEFAULT NULL,
   `user_activation_key` char(128) DEFAULT NULL,
-  `user_account_active` enum('Y','N') DEFAULT 'N',
-  `user_login_date_time` datetime DEFAULT NULL,
-  `user_archived` enum('Y','N') NOT NULL DEFAULT 'N'
+  `user_status` enum('Y','N','A') DEFAULT 'N' COMMENT 'Y = active, N = Inactive, A = Archived',
+  `user_login_date_time` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1151,7 +1136,7 @@ ALTER TABLE `academic_degree`
 -- AUTO_INCREMENT for table `academic_institute`
 --
 ALTER TABLE `academic_institute`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 --
 -- AUTO_INCREMENT for table `academic_qualification`
 --
@@ -1211,7 +1196,7 @@ ALTER TABLE `holidays`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `order_details`
 --
@@ -1231,7 +1216,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `projects`
 --
 ALTER TABLE `projects`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `project_allocation`
 --
@@ -1261,7 +1246,7 @@ ALTER TABLE `states`
 -- AUTO_INCREMENT for table `task_activities`
 --
 ALTER TABLE `task_activities`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `timesheet`
 --
@@ -1271,7 +1256,7 @@ ALTER TABLE `timesheet`
 -- AUTO_INCREMENT for table `uploads`
 --
 ALTER TABLE `uploads`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT for table `users`
 --
@@ -1336,5 +1321,3 @@ ALTER TABLE `role_permission`
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
-ALTER TABLE `uploads` ADD `upload_is_verified` CHAR(1) NULL DEFAULT 'N' AFTER `upload_date`, ADD `upload_verified_by` INT(11) NULL AFTER `upload_is_verified`, ADD `upload_verified_on` DATETIME NULL AFTER `upload_verified_by`;
