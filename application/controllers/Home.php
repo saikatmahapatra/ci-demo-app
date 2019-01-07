@@ -99,7 +99,7 @@ class Home extends CI_Controller {
 		//print_r($sliders);
 		$this->data['page_heading'] = 'Welcome to '.$this->config->item('app_company_product');
         $this->data['maincontent'] = $this->load->view($this->router->class.'/index', $this->data, true);
-        $this->load->view('_layouts/layout_home', $this->data);
+        $this->load->view('_layouts/layout_new', $this->data);
     }
 	
 	function dashboard() {
