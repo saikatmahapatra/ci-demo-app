@@ -113,7 +113,7 @@ $segment3 = $this->uri->segment(3);
 			</li>
 			<?php  } else{
 				?>
-				<li class="nav-item <?php echo ($segment2 == 'create_account') ? 'active':''?>">            
+				<li class="nav-item <?php echo ($segment2 == 'create_account') ? 'active':''?>">
 					<a class="nav-link" href="<?php echo base_url($this->router->directory.'user/registration');?>">Register</a>
 				</li>
 				<li class="nav-item <?php echo ($segment2 == 'login') ? 'active':''?>">

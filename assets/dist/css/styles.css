@@ -8473,6 +8473,7 @@ a.text-dark:hover, a.text-dark:focus {
   margin-top: 50px;
   padding: 0px 30px 0px 30px;
   transition: margin-left 0.3s ease;
+  background-color: #f8f9fa;
 }
 
 @media (min-width: 768px) {
@@ -8689,6 +8690,25 @@ a.text-dark:hover, a.text-dark:focus {
 
 .notification-message {
   line-height: 1.2;
+}
+
+@media (max-width: 575px) {
+  .navbar-nav {
+    flex-direction: row;
+  }
+  .navbar-nav .dropdown-menu {
+    position: absolute;
+  }
+  .navbar-nav .nav-link {
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+  }
+  .navbar-collapse {
+    display: flex !important;
+    flex-basis: auto;
+    margin-right: 1.5rem;
+    margin-left: 1rem;
+  }
 }
 
 .sidebar {
@@ -8967,13 +8987,6 @@ body.login {
     max-height: 340px;
     overflow-y: auto;
 }*/
-@media (max-width: 576px) {
-  .navbar-collapse {
-    max-height: 340px;
-    overflow-y: auto;
-  }
-}
-
 .scrollup {
   width: 40px;
   height: 40px;

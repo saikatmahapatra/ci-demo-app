@@ -175,3 +175,23 @@
 .notification-meta {
     @extend .text-muted;
 }
+
+@media (max-width: 575px) {
+  .navbar-nav {
+    flex-direction: row;
+  }
+  .navbar-nav .dropdown-menu {
+    position: absolute;
+  }
+  .navbar-nav .nav-link {
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+  }
+  .navbar-collapse {
+    display: flex !important;
+    flex-basis: auto;
+    margin-right: 1.5rem;
+    margin-left: 1rem;
+  }
+  
+}

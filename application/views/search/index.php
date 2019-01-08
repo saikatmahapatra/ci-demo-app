@@ -11,7 +11,7 @@ if(isset($data_rows) && sizeof($data_rows)<=0 || !isset($data_rows)){
     ?>
     <div class="row">
         <div class="alert alert-danger col-md-12">We're sorry! No result found based on your search keyword. Please verify the search keyword.</div>
-    </div>        
+    </div>
     <?php
 }
 ?>
@@ -37,7 +37,7 @@ if(isset($data_rows)){
         ?>
         <?php 
         $disabled_css = '';
-        if((isset($row['user_status']) && ($row['user_status'] == 'N' || $row['user_status'] == 'A')){
+        if( (isset($row['user_account_active']) && $row['user_account_active'] == 'N') || (isset($row['user_archived']) && $row['user_archived'] == 'Y') ){
             $disabled_css = 'disabled disabled-user';
         }
         ?>
