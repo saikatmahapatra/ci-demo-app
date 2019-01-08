@@ -18,12 +18,14 @@
     }
 }
 
-.header-logo {
+.navbar-brand {
     flex: 1 0 auto;
     color: #fff;
     text-align: center;
     padding: 0 15px;
-    font-size: 26px;
+    padding-right: 0;
+    margin: 0;
+    font-size: 1rem;
     line-height: 50px;
     @media(min-width: 768px) {
         flex: 0 0 auto;
@@ -64,26 +66,19 @@
     }
 }
 
-.nav {
-    @extend .list-unstyled;
-    display: flex;
-    margin-bottom: 0;
-    justify-content: flex-end;
+.navbar {
+    padding: 0;
     @media(min-width: 768px) {
         flex: 1 0 auto;
     }
-}
-
-.nav-item {
-    display: block;
-    padding: 15px;
-    line-height: 20px;
-    color: #fff;
-    transition: background-color 0.3s ease;
-    &:hover,
-    &:focus {
-        background: rgba(0, 0, 0, 0.1);
-        color: #f6f6f6;
+    .dropdown-toggle {
+        &:after {
+            content: none;
+        }
+    }
+    .nav-icon-adjust {
+        padding: 5px;
+        display: block;
     }
 }
 

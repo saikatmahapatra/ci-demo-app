@@ -47,10 +47,12 @@
     @extend .rounded-circle;
     flex: 0 0 auto;
     margin-right: 15px;
+    height: 48px;
+    width: 48px;
 }
 
 .sidebar-user-name {
-    font-size: 17px;
+    font-size: 1rem;
     line-height: 1.3;
 }
 
