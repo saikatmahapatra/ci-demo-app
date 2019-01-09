@@ -30,7 +30,7 @@ $config['app_email_subject_prefix'] = 'CI App ';
 $config['app_company_product'] = 'CI App';
 $config['app_logo_name_login'] = '<b>Admin</b> Dashboard';
 $config['app_logo_name_admin_dashboard'] = 'Admin';
-$config['app_logo_name_dashboard'] = 'App';
+$config['app_logo_name_dashboard'] = 'App Title';
 $config['app_logo_name_dashboard_xs'] = '<b>U</b>Aadmin';
 
 $config['app_html_title'] = 'CI App';

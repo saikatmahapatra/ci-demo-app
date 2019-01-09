@@ -1,6 +1,9 @@
 <header class="header">
     <nav class="navbar navbar-expand-sm navbar-dark bg-primary fixed-top">
-        <a class="navbar-brand" href="<?php echo base_url();?>">Brand Logo</a>
+        <a class="navbar-brand" href="<?php echo base_url($this->router->directory); ?>">
+			<!--<img class="logo" src="<?php echo base_url('assets/src/img/logo.png');?>">-->
+			<?php echo $this->config->item('app_logo_name_dashboard'); ?>
+		</a>
         <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault"
             aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -14,12 +17,12 @@
                     <?php echo form_open(base_url('search/index'), array( 'method' => 'get','class'=>'form-inline','name' => '','id' => 'ci-form-helper',)); ?>
 				    <?php echo form_hidden('form_action', 'search'); ?>
 					  <input name="q" class="search-input" type="search" placeholder="Search" aria-label="Search">
-					  <button class="search-button" type="submit"><i class="fa fa-search"></i></button>
+					  <button class="search-button" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
 					<?php echo form_close(); ?>
                 </li>
 
                 <li class="nav-item dropdown nav-icon-adjust">
-                    <a class="nav-link dropdown-toggle" id="dropdown_notification" href="#" data-toggle="dropdown" aria-label="Show notifications"><i class="fa fa-bell-o fa-lg"></i></a>
+                    <a class="nav-link dropdown-toggle" id="dropdown_notification" href="#" data-toggle="dropdown" aria-label="Show notifications"><i class="fa fa-bell-o fa-lg" aria-hidden="true"></i></a>
                     <ul class="notification dropdown-menu dropdown-menu-right">
                         <li class="notification-title">You have 4 new notifications.</li>
                             <div class="notification-content">
