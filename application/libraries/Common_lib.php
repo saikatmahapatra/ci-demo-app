@@ -56,21 +56,22 @@ class Common_lib {
 
     /**
      * This will add javascript(controller and its all view specific) through controller.
-     * @param type $app_js
+     * @param type $files | file name
      * @return string
      */
-    function add_javascript($app_js = array()) {
-        $common_js_src = array(
-            'assets/dist/js/ajax.js',            
-            'assets/dist/js/app.js'         
+    function add_javascript($files = array()) {
+		$file_path = 'assets/dist/js/';
+		$ext = '.js'; // .js | .min.js
+        $common_files = array(
+            'ajax',            
+            'app'         
         );
-        $scripts_src = array_merge($common_js_src, $app_js);
-        $script_tag = '';
-        $current_timestamp = time();        
-        foreach ($scripts_src as $key => $src) {
-            $script_tag.='<script src="' . base_url($src.'?t='.$current_timestamp) . '"></script>' . "\n";
+        $load_files = array_merge($common_files, $files);
+        $create_tag = '';
+        foreach ($load_files as $index => $file_name) {
+            $create_tag.='<script src="' . base_url($file_path.$file_name.$ext) . '"></script>' . "\n";
         }
-        return $script_tag;
+        return $create_tag;
     }
 
     /**

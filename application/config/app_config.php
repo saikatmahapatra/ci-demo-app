@@ -28,17 +28,17 @@ $config['app_email_subject_prefix'] = 'CI App ';
  * Template Config
  */
 $config['app_company_product'] = 'CI App';
-$config['app_logo_name_login'] = '<b>Admin</b> Dashboard';
-$config['app_logo_name_admin_dashboard'] = 'Admin';
-$config['app_logo_name_dashboard'] = 'App Title';
-$config['app_logo_name_dashboard_xs'] = '<b>U</b>Aadmin';
+$config['app_logo_name_login'] = 'Brand Logo';
+$config['app_logo_name_admin_dashboard'] = 'Brand Logo';
+$config['app_logo_name_dashboard'] = 'Brand Logo';
+$config['app_logo_name_dashboard_xs'] = 'Brand Logo';
 
 $config['app_html_title'] = 'CI App';
 $config['app_admin_html_title'] = 'CI App';
 
-$config['app_meta_keywords'] = 'CI Project';
-$config['app_meta_description'] = 'CI Project';
-$config['app_meta_author'] = 'Saikat Mahapatra webuidevs@gmail.com';
+$config['app_meta_keywords'] = '';
+$config['app_meta_description'] = '';
+$config['app_meta_author'] = '';
 
 
 $config['app_copy_right'] = 'Copyright '.date('Y').' &copy; CI App';
