@@ -140,7 +140,8 @@ class User_model extends CI_Model {
 		t1.user_status,
 		t2.role_name,
 		t2.role_weight,
-		t1.user_login_date_time
+		t1.user_login_date_time,
+		t1.user_emp_id
 		');
 		$this->db->join('roles t2', 't1.user_role=t2.id');
         $this->db->where(array(
@@ -178,6 +179,7 @@ class User_model extends CI_Model {
                     'user_lastname' => $row['user_lastname'],
                     'user_email' => $row['user_email'],
                     'user_profile_pic' => $row['user_profile_pic'],
+					'user_emp_id' => $row['user_emp_id'],
                     'user_login_date_time' => $row['user_login_date_time'],
                 );
                 $auth_result = array('status' => $login_status, 'message' => $message, 'data' => $loggedin_data);
@@ -552,6 +554,56 @@ class User_model extends CI_Model {
         $query = $this->db->get('user_work_exp as t1');
         //echo $this->db->last_query();
         $result = $query->result_array();        
+        return $result;
+    }
+	
+	function get_user_approvers($user_id = NULL) {
+        $this->db->select('
+        t1.*, 
+        t2.user_firstname as supervisor_firstname,
+        t2.user_lastname as supervisor_lastname,
+        t2.user_emp_id as supervisor_emp_id,
+        t2.user_email as supervisor_email,
+
+        t3.user_firstname as hr_firstname,
+        t3.user_lastname as hr_lastname,
+        t3.user_emp_id as hr_emp_id,
+        t3.user_email as hr_email,
+
+        t4.user_firstname as director_firstname,
+        t4.user_lastname as director_lastname,
+        t4.user_emp_id as director_emp_id,
+        t4.user_email as director_email,
+
+        t5.user_firstname as finance_firstname,
+        t5.user_lastname as finance_lastname,
+        t5.user_emp_id as finance_emp_id,
+        t5.user_email as finance_email
+        ');
+        if ($user_id) {
+            $this->db->where('t1.user_id', $user_id);
+        }        	
+        $this->db->join('users t2', 't1.user_supervisor_id = t2.id' , 'left');       
+        $this->db->join('users t3', 't1.user_hr_approver_id = t3.id', 'left');       
+        $this->db->join('users t4', 't1.user_director_approver_id = t4.id', 'left');       
+        $this->db->join('users t5', 't1.user_finance_approver_id = t5.id', 'left');       
+        //$this->db->join('users t6', 't1.user_finance_approver_id = t5.id', 'left');       
+        $query = $this->db->get('user_approvers t1');
+        //echo $this->db->last_query();
+        $num_rows = $query->num_rows();
+        $result = $query->result_array();
+        return $result;
+    }
+
+    function has_user_approvers($user_id = NULL) {
+        $this->db->select('t1.id');
+        if ($user_id) {
+            $this->db->where('t1.user_id', $user_id);
+        }     
+        $query = $this->db->get('user_approvers t1');
+        //echo $this->db->last_query();
+        $num_rows = $query->num_rows();
+        $result = $query->result_array();
         return $result;
     }
 
