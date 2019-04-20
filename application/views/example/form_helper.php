@@ -1,13 +1,13 @@
 <?php //echo isset($breadcrumbs) ? $breadcrumbs : ''; ?>
 <div class="row heading-container">
     <div class="col-md-5">
-        <h1 class="h3 mb-3 font-weight-normal"><?php echo isset($page_heading)? $page_heading:'Page Heading'; ?></h1>
+        <h1 class="page-heading"><?php echo isset($page_heading)? $page_heading:'Page Heading'; ?></h1>
     </div>
 </div><!--/.heading-container-->
 
 
 <div class="row">
-	<div class="col-md-8">
+	<div class="col-md-6">
 		<?php
 		// Show server side flash messages
 		if (isset($alert_message)) {
@@ -159,14 +159,6 @@
 							echo form_radio(array('name' => 'user_gender', 'value' => 'F', 'id' => 'F', 'checked' => $radio_is_checked, 'class' => 'custom-control-input'), set_radio('user_gender', 'F'));
 						?>
 						<label class="custom-control-label" for="F">Female</span></label>
-					</div>
-					
-					<div class="custom-control custom-radio custom-control-inline">
-						<?php
-						$radio_is_checked = $this->input->post('user_gender') === 'T';
-						echo form_radio(array('name' => 'user_gender', 'value' => 'T', 'id' => 'T', 'checked' => $radio_is_checked, 'class' => 'custom-control-input'), set_radio('user_gender', 'T'));
-						?>
-						<label class="custom-control-label" for="T">Better, I would not say</span></label>
 					</div>
 				</div>
 				<?php echo form_error('user_gender'); ?>

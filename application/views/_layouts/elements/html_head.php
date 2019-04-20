@@ -7,7 +7,7 @@
 <meta name="keywords" content="<?php echo $el_html_tag_meta_keywords; ?>">
 <meta name="author" content="<?php echo $el_html_tag_meta_author; ?>">
 
-<link rel="icon" href="<?php echo base_url('assets/dist/img/favicon.png'); ?>">
+<link rel="icon" href="<?php echo base_url('assets/dist/img/favicon.ico'); ?>">
 
 <title><?php echo $el_html_tag_title; ?></title>
 <noscript>

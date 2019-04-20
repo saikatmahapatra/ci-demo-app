@@ -42,5 +42,5 @@ $config['app_meta_author'] = '';
 
 
 $config['app_copy_right'] = 'Copyright '.date('Y').' &copy; CI App';
-$config['app_admin_copy_right'] = 'Copyright &copy; '.date('Y').' <a href="#">CI App</a>. All rights reserved.';
-$config['app_version'] = 'App. Ver. '.CI_VERSION.'.3';
+$config['app_admin_copy_right'] = 'Copyright &copy; '.date('Y').' <a href="#">CI App</a>';
+$config['app_version'] = 'App. Version '.CI_VERSION.'.3';

@@ -1,7 +1,7 @@
 <header class="header">
     <nav class="navbar navbar-expand-sm navbar-dark bg-primary fixed-top">
         <a class="navbar-brand" href="<?php echo base_url($this->router->directory); ?>">
-			<!--<img class="logo" src="<?php echo base_url('assets/src/img/logo.png');?>">-->
+			<img class="logo" src="<?php echo base_url('assets/src/img/logo.png');?>">
 			<?php echo $this->config->item('app_logo_name_dashboard'); ?>
 		</a>
         <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault"
@@ -45,7 +45,7 @@
                         aria-expanded="false"><i class="fa fa-user fa-lg" aria-hidden="true"></i></a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown03">					
                         <div class="dropdown-item welcome-user-container">					
-                            <div class=""><?php echo isset($this->session->userdata['sess_user']['user_title'])? $this->session->userdata['sess_user']['user_title']:''; ?> <?php echo isset($this->session->userdata['sess_user']['user_firstname']) ? $this->session->userdata['sess_user']['user_firstname'].' '.$this->session->userdata['sess_user']['user_lastname']:'Guest';?></div>
+                            <div class="mb-1"><?php echo isset($this->session->userdata['sess_user']['user_title'])? $this->session->userdata['sess_user']['user_title']:''; ?> <?php echo isset($this->session->userdata['sess_user']['user_firstname']) ? $this->session->userdata['sess_user']['user_firstname'].' '.$this->session->userdata['sess_user']['user_lastname']:'Guest';?></div>
                             <div class="small"><?php echo isset($this->session->userdata['sess_user']['user_email']) ? $this->session->userdata['sess_user']['user_email'] :'';?></div>
                             <div class="small">Access Group: <?php echo isset($this->session->userdata['sess_user']['user_role_name']) ? $this->session->userdata['sess_user']['user_role_name'] :'';?></div>
                             <div class="small">Last Login: <?php echo isset($this->session->userdata['sess_user']['user_login_date_time']) ? $this->common_lib->display_date($this->session->userdata['sess_user']['user_login_date_time'], true) :'';?></div>					

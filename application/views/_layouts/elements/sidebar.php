@@ -55,17 +55,7 @@ $segment3 = $this->uri->segment(3);
 				<a class="treeview-item" href="<?php echo base_url($this->router->directory.'example/contact_form');?>">Contact Form (Email Test)</a></li>
             </ul>
         </li>
-		
-		<li class="treeview">
-            <a class="menu-item" href="#" data-toggle="treeview"><i class="menu-icon fa fa-envelope" aria-hidden="true"></i><span class="menu-label">Leave</span><i class="treeview-indicator fa fa-angle-right"></i></a>
-            <ul class="treeview-menu">
-                <li><a class="treeview-item" href="<?php echo base_url($this->router->directory.'leave');?>">Apply</a></li>
-                <li><a class="treeview-item" href="<?php echo base_url($this->router->directory.'leave/history');?>">History</a></li>
-				<li><a class="treeview-item" href="<?php echo base_url($this->router->directory.'leave/leave_balance');?>">Balance</a></li>				
-				<li><a class="treeview-item" href="<?php echo base_url($this->router->directory.'leave/manage/pending');?>">Manage</a></li>				
-				<li><a class="treeview-item" href="<?php echo base_url($this->router->directory.'leave/manage/all');?>">All</a></li>				
-            </ul>
-        </li>
+        
         <?php if (isset($this->session->userdata['sess_user']) && $this->session->userdata['sess_user']['user_role'] == 1) { ?>			
             <li class="treeview">
                 <a class="menu-item" href="#" data-toggle="treeview"><i class="menu-icon fa fa-laptop" aria-hidden="true"></i><span class="menu-label">Admin Links</span><i class="treeview-indicator fa fa-angle-right" aria-hidden="true"></i></a>
