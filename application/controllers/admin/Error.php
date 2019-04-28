@@ -14,7 +14,7 @@ class Error extends CI_Controller {
         $this->sess_user_id = $this->common_lib->get_sess_user('id');        
         
         //Render header, footer, navbar, sidebar etc common elements of templates
-        $this->common_lib->init_template_elements('site');
+        $this->common_lib->init_template_elements('admin');
         
         // Load required js files for this controller
         $javascript_files = array();
@@ -30,15 +30,15 @@ class Error extends CI_Controller {
     function page_not_found() {
         $data = array();
 		$this->data['page_heading'] = "404 Not Found";
-        $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/page_not_found', $this->data, true);
-        $this->load->view('site/_layouts/layout_default', $this->data);
+        $this->data['maincontent'] = $this->load->view('admin/'.$this->router->class.'/page_not_found', $this->data, true);
+        $this->load->view('admin/_layouts/layout_default', $this->data);
     }
 	
 	function auth() {
 		$data = array();
 		$this->data['page_heading'] = "Auth Error";
-        $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/auth_error', $this->data, true);
-        $this->load->view('site/_layouts/layout_default', $this->data);
+        $this->data['maincontent'] = $this->load->view('admin/'.$this->router->class.'/auth_error', $this->data, true);
+        $this->load->view('admin/_layouts/layout_default', $this->data);
     }
 
 }

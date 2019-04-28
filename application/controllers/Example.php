@@ -13,7 +13,7 @@ class Example extends CI_Controller {
         $this->sess_user_id = $this->common_lib->get_sess_user('id');        
         
         //Render header, footer, navbar, sidebar etc common elements of templates
-        $this->common_lib->init_template_elements();
+        $this->common_lib->init_template_elements('site');
         
         // Load required js files for this controller
         $javascript_files = array(
@@ -36,8 +36,8 @@ class Example extends CI_Controller {
 
     function index() {
 		$this->bootstrap();
-        //$this->data['maincontent'] = $this->load->view($this->router->class.'/index', $this->data, true);
-        //$this->load->view('_layouts/layout_default', $this->data);
+        //$this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/index', $this->data, true);
+        //$this->load->view('site/_layouts/layout_default', $this->data);
     }
 
     function form_helper() {
@@ -80,8 +80,8 @@ class Example extends CI_Controller {
             }
         }
         $this->data['page_heading'] = 'CI Form Syntax';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/form_helper', $this->data, true);
-        $this->load->view('_layouts/layout_default', $this->data);
+        $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/form_helper', $this->data, true);
+        $this->load->view('site/_layouts/layout_default', $this->data);
     }
 
     function validate_form() {
@@ -109,12 +109,12 @@ class Example extends CI_Controller {
     }
     
     function download_as_pdf(){
-       $this->load->view($this->router->class.'/dom_pdf_gen_pdf'); 
+       $this->load->view('site/'.$this->router->class.'/dom_pdf_gen_pdf'); 
     }
             
     function dom_pdf_gen_pdf() {
         // Load all views as normal
-        $this->load->view($this->router->class.'/dom_pdf_gen_pdf');
+        $this->load->view('site/'.$this->router->class.'/dom_pdf_gen_pdf');
         // Get output html
         $html = $this->output->get_output();
         // Load library
@@ -128,8 +128,8 @@ class Example extends CI_Controller {
     function date_helper() {
         $this->load->helper('date');
 
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/date_helper', $this->data, true);
-        $this->load->view('_layouts/layout_default', $this->data);
+        $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/date_helper', $this->data, true);
+        $this->load->view('site/_layouts/layout_default', $this->data);
     }
 
     function directory_helper() {
@@ -140,14 +140,14 @@ class Example extends CI_Controller {
         $map = directory_map('./assets', 1);
         $this->data['sub_folders'] = $map;
 
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/directory_helper', $this->data, true);
-        $this->load->view('_layouts/layout_default', $this->data);
+        $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/directory_helper', $this->data, true);
+        $this->load->view('site/_layouts/layout_default', $this->data);
     }
 
     function bootstrap() {
         $this->data['page_heading'] = 'Bootstrap Style Guide';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/bootstrap', $this->data, true);
-        $this->load->view('_layouts/layout_default', $this->data);
+        $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/bootstrap', $this->data, true);
+        $this->load->view('site/_layouts/layout_default', $this->data);
     }
 	
 	function calendar_lib() {
@@ -210,8 +210,8 @@ class Example extends CI_Controller {
             }
         }
 
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/calendar_lib', $this->data, true);
-        $this->load->view('_layouts/layout_default', $this->data);
+        $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/calendar_lib', $this->data, true);
+        $this->load->view('site/_layouts/layout_default', $this->data);
     }
 
     function validate_form_calander_data($action = NULL) {
@@ -299,8 +299,8 @@ class Example extends CI_Controller {
         $this->data['captcha_image'] = $cap['image'];
 		
 		$this->data['page_heading'] = 'Contact Us';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/contact_form', $this->data, true);
-        $this->load->view('_layouts/layout_default', $this->data);
+        $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/contact_form', $this->data, true);
+        $this->load->view('site/_layouts/layout_default', $this->data);
     }
 
     function validate_contact_form() {

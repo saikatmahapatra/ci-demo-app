@@ -32,25 +32,29 @@ class Common_lib {
      * @param type $meta_author
      * @return type
      */
-    function init_template_elements($html_title = NULL, $meta_keywords = NULL, $meta_desc = NULL, $meta_author = NULL) {
+    function init_template_elements($view_dir = NULL, $html_title = NULL, $meta_keyword = NULL, $meta_desc = NULL, $meta_author = NULL) {
         $this->CI->data['sess_user_name'] = isset($this->CI->session->userdata['sess_user']['user_firstname']) ? ucwords(strtolower($this->CI->session->userdata['sess_user']['user_firstname'])) : 'Guest';
         $this->CI->data['sess_user_id'] = isset($this->CI->session->userdata['sess_user']['id']) ? ucwords(strtolower($this->CI->session->userdata['sess_user']['id'])) : NULL;
         
-        //Public, Common, Site Template
-        $this->CI->data['el_html_tag_title'] = isset($html_title) ? $html_title : $this->CI->config->item('app_html_title');			
-        //$this->CI->data['el_user_profile_pic'] = isset($this->CI->session->userdata['sess_user']['id'])? $this->get_user_profile_img(): null;
-        $this->CI->data['el_html_tag_meta_keywords'] = isset($meta_keyword) ? $meta_keyword : $this->CI->config->item('app_meta_keywords');
-        $this->CI->data['el_html_tag_meta_description'] = isset($meta_desc) ? $meta_desc : $this->CI->config->item('app_meta_description');
-        $this->CI->data['el_html_tag_meta_author'] = isset($meta_author) ? $meta_author : $this->CI->config->item('app_meta_author');
-        $this->CI->data['el_html_head'] = $this->CI->load->view('_layouts/elements/html_head', $this->CI->data, true);
-        $this->CI->data['el_navbar'] = $this->CI->load->view('_layouts/elements/navbar', $this->CI->data, true);        
-        $this->CI->data['el_footer'] = $this->CI->load->view('_layouts/elements/footer', $this->CI->data, true);
-        $this->CI->data['el_header'] = $this->CI->load->view('_layouts/elements/header', $this->CI->data, true);
-        $this->CI->data['el_sidebar'] = $this->CI->load->view('_layouts/elements/sidebar', $this->CI->data, true);
-
-        //Admin Template
-        $this->CI->data['el_navbar_admin'] = $this->CI->load->view('_layouts/elements/navbar_admin', $this->CI->data, true);
-
+        if($view_dir == 'site'){
+            $this->CI->data['el_html_tag_title'] = isset($html_title) ? $html_title : $this->CI->config->item('app_html_title');
+            $this->CI->data['el_html_tag_meta_keywords'] = isset($meta_keyword) ? $meta_keyword : $this->CI->config->item('app_meta_keywords');
+            $this->CI->data['el_html_tag_meta_description'] = isset($meta_desc) ? $meta_desc : $this->CI->config->item('app_meta_description');
+            $this->CI->data['el_html_tag_meta_author'] = isset($meta_author) ? $meta_author : $this->CI->config->item('app_meta_author');
+            $this->CI->data['el_html_head'] = $this->CI->load->view('site/_layouts/elements/html_head', $this->CI->data, true);
+            $this->CI->data['el_navbar'] = $this->CI->load->view('site/_layouts/elements/navbar', $this->CI->data, true);
+            $this->CI->data['el_footer'] = $this->CI->load->view('site/_layouts/elements/footer', $this->CI->data, true);            
+        }
+        if($view_dir == 'admin'){
+            $this->CI->data['el_html_tag_title'] = isset($html_title) ? $html_title : $this->CI->config->item('app_html_title');
+            $this->CI->data['el_html_tag_meta_keywords'] = isset($meta_keyword) ? $meta_keyword : $this->CI->config->item('app_meta_keywords');
+            $this->CI->data['el_html_tag_meta_description'] = isset($meta_desc) ? $meta_desc : $this->CI->config->item('app_meta_description');
+            $this->CI->data['el_html_tag_meta_author'] = isset($meta_author) ? $meta_author : $this->CI->config->item('app_meta_author');
+            $this->CI->data['el_html_head'] = $this->CI->load->view('admin/_layouts/elements/html_head', $this->CI->data, true);
+            $this->CI->data['el_footer'] = $this->CI->load->view('admin/_layouts/elements/footer', $this->CI->data, true);
+            $this->CI->data['el_header'] = $this->CI->load->view('admin/_layouts/elements/header', $this->CI->data, true);
+            $this->CI->data['el_sidebar'] = $this->CI->load->view('admin/_layouts/elements/sidebar', $this->CI->data, true);
+        }
         return $this->CI->data;
     }
 
@@ -443,7 +447,139 @@ class Common_lib {
 			$output =  $this->CI->my_encrypt->decode($string, $key="");
 		}
 		return $output;
-	}
+    }
+    
+    function force_balance_tags( $text ) {
+        $tagstack = array();
+        $stacksize = 0;
+        $tagqueue = '';
+        $newtext = '';
+        // Known single-entity/self-closing tags
+        $single_tags = array( 'area', 'base', 'basefont', 'br', 'col', 'command', 'embed', 'frame', 'hr', 'img', 'input', 'isindex', 'link', 'meta', 'param', 'source' );
+        // Tags that can be immediately nested within themselves
+        $nestable_tags = array( 'blockquote', 'div', 'object', 'q', 'span' );
+     
+        // WP bug fix for comments - in case you REALLY meant to type '< !--'
+        $text = str_replace('< !--', '<    !--', $text);
+        // WP bug fix for LOVE <3 (and other situations with '<' before a number)
+        $text = preg_replace('#<([0-9]{1})#', '&lt;$1', $text);
+     
+        while ( preg_match("/<(\/?[\w:]*)\s*([^>]*)>/", $text, $regex) ) {
+            $newtext .= $tagqueue;
+     
+            $i = strpos($text, $regex[0]);
+            $l = strlen($regex[0]);
+     
+            // clear the shifter
+            $tagqueue = '';
+            // Pop or Push
+            if ( isset($regex[1][0]) && '/' == $regex[1][0] ) { // End Tag
+                $tag = strtolower(substr($regex[1],1));
+                // if too many closing tags
+                if ( $stacksize <= 0 ) {
+                    $tag = '';
+                    // or close to be safe $tag = '/' . $tag;
+                }
+                // if stacktop value = tag close value then pop
+                elseif ( $tagstack[$stacksize - 1] == $tag ) { // found closing tag
+                    $tag = '</' . $tag . '>'; // Close Tag
+                    // Pop
+                    array_pop( $tagstack );
+                    $stacksize--;
+                } else { // closing tag not at top, search for it
+                    for ( $j = $stacksize-1; $j >= 0; $j-- ) {
+                        if ( $tagstack[$j] == $tag ) {
+                        // add tag to tagqueue
+                            for ( $k = $stacksize-1; $k >= $j; $k--) {
+                                $tagqueue .= '</' . array_pop( $tagstack ) . '>';
+                                $stacksize--;
+                            }
+                            break;
+                        }
+                    }
+                    $tag = '';
+                }
+            } else { // Begin Tag
+                $tag = strtolower($regex[1]);
+     
+                // Tag Cleaning
+     
+                // If it's an empty tag "< >", do nothing
+                if ( '' == $tag ) {
+                    // do nothing
+                }
+                // ElseIf it presents itself as a self-closing tag...
+                elseif ( substr( $regex[2], -1 ) == '/' ) {
+                    // ...but it isn't a known single-entity self-closing tag, then don't let it be treated as such and
+                    // immediately close it with a closing tag (the tag will encapsulate no text as a result)
+                    if ( ! in_array( $tag, $single_tags ) )
+                        $regex[2] = trim( substr( $regex[2], 0, -1 ) ) . "></$tag";
+                }
+                // ElseIf it's a known single-entity tag but it doesn't close itself, do so
+                elseif ( in_array($tag, $single_tags) ) {
+                    $regex[2] .= '/';
+                }
+                // Else it's not a single-entity tag
+                else {
+                    // If the top of the stack is the same as the tag we want to push, close previous tag
+                    if ( $stacksize > 0 && !in_array($tag, $nestable_tags) && $tagstack[$stacksize - 1] == $tag ) {
+                        $tagqueue = '</' . array_pop( $tagstack ) . '>';
+                        $stacksize--;
+                    }
+                    $stacksize = array_push( $tagstack, $tag );
+                }
+     
+                // Attributes
+                $attributes = $regex[2];
+                if ( ! empty( $attributes ) && $attributes[0] != '>' )
+                    $attributes = ' ' . $attributes;
+     
+                $tag = '<' . $tag . $attributes . '>';
+                //If already queuing a close tag, then put this tag on, too
+                if ( !empty($tagqueue) ) {
+                    $tagqueue .= $tag;
+                    $tag = '';
+                }
+            }
+            $newtext .= substr($text, 0, $i) . $tag;
+            $text = substr($text, $i + $l);
+        }
+     
+        // Clear Tag Queue
+        $newtext .= $tagqueue;
+     
+        // Add Remaining text
+        $newtext .= $text;
+     
+        // Empty Stack
+        while( $x = array_pop($tagstack) )
+            $newtext .= '</' . $x . '>'; // Add remaining tags to close
+     
+        // WP fix for the bug with HTML comments
+        $newtext = str_replace("< !--","<!--",$newtext);
+        $newtext = str_replace("<    !--","< !--",$newtext);
+     
+        return $newtext;
+    }
+    
+    function remove_empty_p( $content ) {
+        $content = $this->force_balance_tags( $content );
+        $content = preg_replace( '#<p>\s*+(<br\s*/*>)?\s*</p>#i', '', $content );
+        $content = preg_replace( '~\s?<p>(\s|&nbsp;)+</p>\s?~', '', $content );
+        return $content;
+    }
+
+    function get_greetings(){
+        // 24-hour format of an hour without leading zeros (0 through 23)
+        $h = date('G');
+        if ( $h >= 5 && $h <= 11 ) {
+            return "Good Morning";
+        } else if ( $h >= 12 && $h <= 18 ) {
+            return "Good Afternoon";
+        } else if ( $h >= 19 || $h <= 4 ) {
+            return "Good Evening";
+        }
+    }
 
 }
 

@@ -8539,7 +8539,6 @@ a.text-dark:hover, a.text-dark:focus {
     flex: 0 0 auto;
     display: block;
     width: 230px;
-    background-color: #1a429c;
   }
 }
 
@@ -8567,9 +8566,8 @@ a.text-dark:hover, a.text-dark:focus {
   font-size: 21px;
 }
 
-.admin-header .sidebar-toggle:focus, .admin-header .sidebar-toggle:hover {
+.admin-header .sidebar-toggle:hover {
   color: #fff;
-  background-color: #173986;
   text-decoration: none;
 }
 
@@ -8950,6 +8948,14 @@ body.login {
 }
 
 .form-signin .form-control {
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.form-signin-site .form-control {
   position: relative;
   box-sizing: border-box;
   height: auto;
