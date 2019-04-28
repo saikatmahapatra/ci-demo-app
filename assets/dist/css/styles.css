@@ -1,5 +1,3 @@
-@import url(https://fonts.googleapis.com/css?family=Lato:300,400,400i,700);
-@import url(https://fonts.googleapis.com/css?family=Niconne);
 /*!
  * Bootstrap v4.1.0 (https://getbootstrap.com/)
  * Copyright 2011-2018 The Bootstrap Authors
@@ -8341,7 +8339,7 @@ a.text-dark:hover, a.text-dark:focus {
   color: #212529 !important;
 }
 
-.text-muted, .notification-meta {
+.text-muted, .admin-header .notification-meta {
   color: #6c757d !important;
 }
 
@@ -8502,7 +8500,7 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 /*----- Componant: Top Navigation Bar ----- */
-.header {
+.admin-header {
   position: fixed;
   left: 0;
   right: 0;
@@ -8515,18 +8513,18 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 @media (min-width: 768px) {
-  .header {
+  .admin-header {
     padding-right: 30px;
   }
 }
 
 @media print {
-  .header {
+  .admin-header {
     display: none;
   }
 }
 
-.navbar-brand {
+.admin-header .navbar-brand {
   flex: 1 0 auto;
   color: #fff;
   text-align: center;
@@ -8534,11 +8532,10 @@ a.text-dark:hover, a.text-dark:focus {
   padding-right: 0;
   margin: 0;
   font-size: 1rem;
-  line-height: 50px;
 }
 
 @media (min-width: 768px) {
-  .navbar-brand {
+  .admin-header .navbar-brand {
     flex: 0 0 auto;
     display: block;
     width: 230px;
@@ -8546,12 +8543,12 @@ a.text-dark:hover, a.text-dark:focus {
   }
 }
 
-.navbar-brand:focus, .navbar-brand:hover {
+.admin-header .navbar-brand:focus, .admin-header .navbar-brand:hover {
   text-decoration: none;
   color: #fff;
 }
 
-.sidebar-toggle {
+.admin-header .sidebar-toggle {
   padding: 0 15px;
   font-family: fontAwesome;
   color: #fff;
@@ -8560,42 +8557,42 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 @media (max-width: 767px) {
-  .sidebar-toggle {
+  .admin-header .sidebar-toggle {
     order: -1;
   }
 }
 
-.sidebar-toggle:before {
+.admin-header .sidebar-toggle:before {
   content: "\f0c9";
   font-size: 21px;
 }
 
-.sidebar-toggle:focus, .sidebar-toggle:hover {
+.admin-header .sidebar-toggle:focus, .admin-header .sidebar-toggle:hover {
   color: #fff;
   background-color: #173986;
   text-decoration: none;
 }
 
-.navbar {
+.admin-header .navbar {
   padding: 0;
 }
 
 @media (min-width: 768px) {
-  .navbar {
+  .admin-header .navbar {
     flex: 1 0 auto;
   }
 }
 
-.navbar .dropdown-toggle:after {
+.admin-header .navbar .dropdown-toggle:after {
   content: none;
 }
 
-.navbar .nav-icon-adjust {
+.admin-header .navbar .nav-icon-adjust {
   padding: 5px;
   display: block;
 }
 
-.search {
+.admin-header .search {
   position: relative;
   display: flex;
   align-self: center;
@@ -8604,12 +8601,12 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 @media (max-width: 480px) {
-  .search {
+  .admin-header .search {
     display: none;
   }
 }
 
-.search-input {
+.admin-header .search-input {
   border: 0;
   padding: 5px 10px;
   padding-right: 30px;
@@ -8618,11 +8615,11 @@ a.text-dark:hover, a.text-dark:focus {
   transition: background-color 0.3s ease;
 }
 
-.search-input::placeholder {
+.admin-header .search-input::placeholder {
   color: rgba(0, 0, 0, 0.4);
 }
 
-.search-button {
+.admin-header .search-button {
   position: absolute;
   right: 0;
   top: 10px;
@@ -8634,37 +8631,37 @@ a.text-dark:hover, a.text-dark:focus {
   cursor: pointer;
 }
 
-.notification {
+.admin-header .notification {
   min-width: 270px;
 }
 
-.notification-title {
+.admin-header .notification-title {
   padding: 8px 20px;
   text-align: center;
   background-color: rgba(30, 75, 178, 0.4);
   color: #333;
 }
 
-.notification-footer {
+.admin-header .notification-footer {
   padding: 8px 20px;
   text-align: center;
   background-color: #eee;
 }
 
-.notification-content {
+.admin-header .notification-content {
   max-height: 220px;
   overflow-y: auto;
 }
 
-.notification-content::-webkit-scrollbar {
+.admin-header .notification-content::-webkit-scrollbar {
   width: 6px;
 }
 
-.notification-content::-webkit-scrollbar-thumb {
+.admin-header .notification-content::-webkit-scrollbar-thumb {
   background: rgba(0, 0, 0, 0.2);
 }
 
-.notification-item {
+.admin-header .notification-item {
   display: flex;
   padding: 8px 20px;
   color: inherit;
@@ -8672,37 +8669,37 @@ a.text-dark:hover, a.text-dark:focus {
   transition: background-color 0.3s ease;
 }
 
-.notification-item:focus, .notification-item:hover {
+.admin-header .notification-item:focus, .admin-header .notification-item:hover {
   color: inherit;
   text-decoration: none;
   background-color: #e0e0e0;
 }
 
-.notification-message,
-.notification-meta {
+.admin-header .notification-message,
+.admin-header .notification-meta {
   margin-bottom: 0;
 }
 
-.notification-icon {
+.admin-header .notification-icon {
   padding-right: 10px;
 }
 
-.notification-message {
+.admin-header .notification-message {
   line-height: 1.2;
 }
 
 @media (max-width: 575px) {
-  .navbar-nav {
+  .admin-header .navbar-nav {
     flex-direction: row;
   }
-  .navbar-nav .dropdown-menu {
+  .admin-header .navbar-nav .dropdown-menu {
     position: absolute;
   }
-  .navbar-nav .nav-link {
+  .admin-header .navbar-nav .nav-link {
     padding-right: 0.5rem;
     padding-left: 0.5rem;
   }
-  .navbar-collapse {
+  .admin-header .navbar-collapse {
     display: flex !important;
     flex-basis: auto;
     margin-right: 1.5rem;
@@ -8973,16 +8970,7 @@ h1.page-heading {
 }
 
 .navbar {
-  /*min-height: 4rem;*/
-}
-
-.nav-colorgraph {
-  border-bottom: 2px solid #285fdb;
-}
-
-.nav-colorgraph .nav-link {
-  font-weight: bold;
-  color: #000;
+  min-height: 4rem;
 }
 
 /*.navbar-collapse {
@@ -9191,13 +9179,6 @@ a[data-link-type="user-profile-card"] {
 .nav-link.active {
   border: 0;
   border-bottom: 1px solid #1e4bb2;
-}
-
-.navbar-nav .show > .nav-link,
-.navbar-nav .active > .nav-link,
-.navbar-nav .nav-link.show,
-.navbar-nav .nav-link.active {
-  font-weight: 700;
 }
 
 /*.alert {

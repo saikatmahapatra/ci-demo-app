@@ -1,5 +1,5 @@
 // This files are essential for the theme
-@import 'fonts';
+//@import 'fonts';
 @import 'vars';
 @import 'customize-bootstrap';
 @import 'assets/vendors/bootstrap/scss/bootstrap';
@@ -58,16 +58,8 @@ h1.page-heading {
 }
 
 .navbar {
-    /*min-height: 4rem;*/
+    min-height: 4rem;
     //@include linear-gradient(lighten($primary-color,35%),$white);
-}
-
-.nav-colorgraph {
-    border-bottom: 2px solid lighten($primary-color, 10%);
-    .nav-link {
-        font-weight: bold;
-        color: $black;
-    }
 }
 
 // Extra small devices (portrait phones, less than 576px)
@@ -301,16 +293,6 @@ a[data-link-type="user-profile-card"] {
 .nav-link.active {
     border: 0;
     border-bottom: 1px solid $nav-tabs-border-color;
-}
-
-// Nav Bar 
-.navbar-nav {
-    .show>.nav-link,
-    .active>.nav-link,
-    .nav-link.show,
-    .nav-link.active {
-        font-weight: 700;
-    }
 }
 
 // Close Button
