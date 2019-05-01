@@ -378,7 +378,7 @@ class Common_lib {
         if ($redirect == TRUE) {
             if($result['is_authorized'] == FALSE){
                 $this->CI->session->unset_userdata('sess_user');
-                $uri = isset($redirect_uri) ? $redirect_uri : $this->router->directory.'/user/auth_error';
+                $uri = isset($redirect_uri) ? $redirect_uri : $this->CI->router->directory.'error/auth';
                 redirect($uri);
             }            
         }

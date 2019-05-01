@@ -35,8 +35,8 @@ class Timesheet extends CI_Controller {
 
         //Has logged in user permission to access this page or method?        
         $this->common_lib->is_auth(array(
-            'default-super-admin-access',
-            'default-admin-access'
+            'default-super-admin-accessX',
+            'default-admin-accessX'
         ));
 		
 		$this->load->model('timesheet_model');

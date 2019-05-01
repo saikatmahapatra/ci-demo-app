@@ -1,5 +1,5 @@
 // This files are essential for the theme
-//@import 'fonts';
+// @import 'fonts';
 @import 'vars';
 @import 'customize-bootstrap';
 @import 'assets/vendors/bootstrap/scss/bootstrap';
@@ -55,6 +55,15 @@ h1.page-heading {
     font-size: 1.75rem;
 }
 
+h1.error-heading {
+    color: $custom_error_info;
+}
+
+.error-info {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
 @mixin linear-gradient($from, $to) {
     background: $to;
     background: -moz-linear-gradient(top, $from 0%, $to 100%);
@@ -84,17 +93,12 @@ h1.page-heading {
 // Extra large devices (large desktops, 1200px and up)
 @media (min-width: 1200px) {}
 
-
-/*.navbar-collapse {
-    max-height: 340px;
-    overflow-y: auto;
-}*/
-
+// Make nav bar scrolable in SM devices once menu items are many
 @media (max-width: 576px) {
-    // .navbar-collapse {
-    //     max-height: 340px;
-    //     overflow-y: auto;
-    // }
+    .navbar-collapse {
+        max-height: 340px;
+        overflow-y: auto;
+    }
 }
 
 .scrollup {
