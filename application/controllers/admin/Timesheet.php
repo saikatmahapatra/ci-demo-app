@@ -35,8 +35,8 @@ class Timesheet extends CI_Controller {
 
         //Has logged in user permission to access this page or method?        
         $this->common_lib->is_auth(array(
-            'default-super-admin-accessX',
-            'default-admin-accessX'
+            'default-super-admin-access',
+            'default-admin-access'
         ));
 		
 		$this->load->model('timesheet_model');
@@ -132,7 +132,7 @@ class Timesheet extends CI_Controller {
             }
         }
 
-		$this->data['page_heading'] = 'Search Timesheet Report';
+		$this->data['page_heading'] = 'Timesheet Report';
         $this->data['maincontent'] = $this->load->view('admin/'.$this->router->class.'/report', $this->data, true);
         $this->load->view('admin/_layouts/layout_default', $this->data);
     }
