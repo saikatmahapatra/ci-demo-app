@@ -11,6 +11,6 @@
         <p class="error-info">
             You are not authorized to access the link you clicked. For security reason you have been logged out. Please contact to system administrator for more details.
         </p>
-        <a href="<?php echo base_url($this->router->directory.$this->router->class.'/login');?>" class="btn btn-primary my-4"><i class="fa fa-fw fa-check-circle" aria-hidden="true"></i> Please login to continue...</a>        
+        <a href="<?php echo base_url($this->router->directory.'user/login');?>" class="btn btn-primary my-4"><i class="fa fa-fw fa-check-circle" aria-hidden="true"></i> Please login to continue...</a>        
     </div>
 </div>

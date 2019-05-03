@@ -8519,6 +8519,7 @@ body.login {
 
 h1.page-heading {
   font-size: 1.75rem;
+  font-weight: 300;
 }
 
 h1.error-heading {
@@ -8552,11 +8553,6 @@ h1.error-heading {
 .tnc-content h1,
 .tnc-content h2 {
   font-size: 1rem;
-}
-
-.required {
-  color: #dc3545;
-  font-weight: bold;
 }
 
 .thumbnail {
@@ -9102,6 +9098,25 @@ a[data-link-type="user-profile-card"] {
     max-height: 340px;
     overflow-y: auto;
   }
+}
+
+label {
+  cursor: pointer;
+}
+
+.required {
+  color: #dc3545;
+  font-weight: bold;
+}
+
+label.w-600 {
+  font-weight: 600;
+}
+
+label.required:after {
+  content: ' *';
+  color: #dc3545;
+  font-weight: bold;
 }
 
 .form-signin {

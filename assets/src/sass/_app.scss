@@ -94,6 +94,7 @@ body.login {
 
 h1.page-heading {
     font-size: 1.75rem;
+    font-weight: 300;
 }
 
 h1.error-heading {
@@ -126,11 +127,6 @@ h1.error-heading {
     h2 {
         font-size: 1rem;
     }
-}
-
-.required {
-    color: $mandatory_field_star-color;
-    font-weight: bold;
 }
 
 .thumbnail {

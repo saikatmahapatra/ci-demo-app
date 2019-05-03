@@ -30,7 +30,9 @@
 	
 	<?php //echo $el_navbar; ?>
     <?php echo $el_header; ?>
+    <?php if (isset($this->session->userdata['sess_user']['id'])) {   ?>
     <?php echo $el_sidebar; ?>
+    <?php } ?>
     
 
     <main role="main" class="main-content">
