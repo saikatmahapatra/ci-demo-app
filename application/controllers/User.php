@@ -570,6 +570,8 @@ class User extends CI_Controller {
     function logout() {
         if (isset($this->session->userdata['sess_user'])) {
             $this->session->unset_userdata('sess_user');
+            $this->session->unset_userdata('sess_post_login_redirect_url');
+            $this->session->sess_destroy();
             $this->session->set_flashdata('flash_message', 'You have been logged out successfully.');
             $this->session->set_flashdata('flash_message_css', 'alert-success');
             redirect($this->router->directory.$this->router->class.'/login');
