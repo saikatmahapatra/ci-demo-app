@@ -18,7 +18,7 @@ class User extends CI_Controller {
         $this->sess_user_id = $this->common_lib->get_sess_user('id');
 
         //Render header, footer, navbar, sidebar etc common elements of templates
-        $this->common_lib->init_template_elements();
+        $this->common_lib->init_template_elements('site');
 
         // Load required js files for this controller
         $javascript_files = array(
@@ -63,33 +63,6 @@ class User extends CI_Controller {
         $this->login();
     }
 
-    function manage() {        
-        $is_logged_in = $this->common_lib->is_logged_in();
-        if ($is_logged_in == FALSE) {
-			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
-            redirect($this->router->directory.$this->router->class.'/login');
-        }
-        //Has logged in user permission to access this page or method?        
-        $is_authorized = $this->common_lib->is_auth(array(
-            'default-super-admin-access',
-            'default-admin-access',
-        ));
-        
-        //Download Data 
-        if($this->input->post('form_action') == 'download'){
-            $this->download_to_excel();
-        }
-        
-		$this->breadcrumbs->push('View', '/');		
-		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
-        $this->data['alert_message'] = $this->session->flashdata('flash_message');
-        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
-		
-		$this->data['page_heading'] = 'Manage Employees';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/manage', $this->data, true);
-        $this->load->view('_layouts/layout_default', $this->data);
-    }
-	
 	function people() {        
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
@@ -129,8 +102,8 @@ class User extends CI_Controller {
         $this->data['data_rows'] = $result_array['data_rows'];
 		
 		$this->data['page_heading'] = 'People';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/people', $this->data, true);
-        $this->load->view('_layouts/layout_default', $this->data);
+        $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/people', $this->data, true);
+        $this->load->view('site/_layouts/layout_default', $this->data);
     }
 
     function render_datatable() {
@@ -235,14 +208,18 @@ class User extends CI_Controller {
                     }
                     if ($login_status == 'success') {
                         $this->session->set_userdata('sess_user', $login_data);
-                        redirect($this->router->directory.'home');
+                        if($this->session->userdata('sess_post_login_redirect_url')){
+                            redirect($this->session->userdata('sess_post_login_redirect_url'));
+                        }else{
+                            redirect($this->router->directory.'home');
+                        }
                     }
                 }
             }
         }
 		$this->data['page_heading'] = 'Please sign in';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/login', $this->data, true);
-        $this->load->view('_layouts/layout_login', $this->data);
+        $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/login', $this->data, true);
+        $this->load->view('site/_layouts/layout_default', $this->data);
     }
 
     function home() {
@@ -251,119 +228,13 @@ class User extends CI_Controller {
 
     function auth_error() {        
 		$this->data['page_heading'] = 'Authorization Error Occured';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/auth_error', $this->data, true);
-        $this->load->view('_layouts/layout_login', $this->data);
+        $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/auth_error', $this->data, true);
+        $this->load->view('site/_layouts/layout_default', $this->data);
     }
 
     function validate_login_form_data() {
         $this->form_validation->set_rules('user_email', 'email', 'trim|required|valid_email');
         $this->form_validation->set_rules('user_password', 'password', 'required');
-        $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
-        if ($this->form_validation->run() == true) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-	
-	function create_account() {
-		########### Validate User Auth #############
-        $is_logged_in = $this->common_lib->is_logged_in();
-        if ($is_logged_in == FALSE) {
-			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
-            redirect($this->router->directory.$this->router->class.'/login');
-        }
-        //Has logged in user permission to access this page or method?        
-        $is_authorized = $this->common_lib->is_auth(array(
-            'default-super-admin-access',
-            'default-admin-access',
-        ));
-        ########### Validate User Auth End #############
-		
-        $this->data['alert_message'] = $this->session->flashdata('flash_message');
-        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
-        if ($this->input->post('form_action') == 'create_account') {
-            if ($this->validate_create_account_form_data() == true) {
-                $activation_token = md5(time('Y-m-d h:i:s'));
-                $dob = $this->input->post('dob_year') . '-' . $this->input->post('dob_month') . '-' . $this->input->post('dob_day');
-				$user_emp_id = $this->user_model->get_new_emp_id();
-				$password = $this->generate_password();				
-                $postdata = array(
-                    'user_title' => $this->input->post('user_title'),                    
-                    'user_firstname' => ucwords(strtolower($this->input->post('user_firstname'))),                   
-                    'user_lastname' => ucwords(strtolower($this->input->post('user_lastname'))),
-                    'user_gender' => $this->input->post('user_gender'),
-                    'user_email' => strtolower($this->input->post('user_email')),
-                    'user_email_secondary' => strtolower($this->input->post('user_email_secondary')),
-                    'user_dob' => $dob,
-                    'user_doj' => $this->common_lib->convert_to_mysql($this->input->post('user_doj')),
-                    'user_role' => $this->input->post('user_role'),
-                    'user_department' => $this->input->post('user_department'),
-                    'user_designation' => $this->input->post('user_designation'),
-                    'user_phone1' => $this->input->post('user_phone1'),
-                    'user_phone2' => $this->input->post('user_phone2'),
-                    'user_password' => md5($password),
-                    'user_activation_key' => $activation_token,
-                    'user_registration_ip' => $_SERVER['REMOTE_ADDR'],
-                    'user_status' => 'Y',
-                    'user_emp_id' => $user_emp_id
-                );
-				//print_r($postdata); die();
-                $insert_id = $this->user_model->insert($postdata);
-                if ($insert_id) {
-                    $message_html = '';
-                    $message_html.='<div id="message_wrapper" style="font-family:Arial, Helvetica, sans-serif; border: 3px solid #5133AB; border-left:0px; border-right: 0px; font-size:13px;">';
-                    $message_html.='<div id="message_header" style="display:none;background-color:#5133AB; padding: 10px;"></div>';
-                    $message_html.='<div id="message_body" style="padding: 10px;">';
-                    $message_html.='<h4>Hi '. ucwords(strtolower($this->input->post('user_firstname'))).' '.ucwords(strtolower($this->input->post('user_lasttname'))) .' ,</h4>';
-                    $message_html.='<p>Welcome to smCI research & development. Your have been successfully registered. Please click on the below link to activate your account. Once your account is activated you will be able to login.</p>';
-                    $message_html.='<p>'.anchor(base_url($this->router->class.'/activate_account/'.$insert_id.'/'.$activation_token),NULL).'</p>';
-                    $message_html.='<p>Here is your details -</p>';
-                    $message_html.='<p>Portal URL : '.anchor(base_url()).' <br> Username/Email : '.strtolower($this->input->post('user_email')).'<br> Password : '. $password .'</p>';
-                    $message_html.='</div><!--/#message_body-->';
-                    $message_html.='<div id="message_footer" style="padding: 10px; font-size: 11px;">';
-                    $message_html.='<p>* This is a system generated email message. Please do not reply.</p>';
-                    $message_html.='</div><!--/#message_footer-->';
-                    $message_html.='</div><!--/#message_wrapper-->';
-                    //echo $message_html; die();
-                    $config['mailtype'] = 'html';
-                    $this->email->initialize($config);
-                    $this->email->to($this->input->post('user_email'));
-                    $this->email->from($this->config->item('app_admin_email'), $this->config->item('app_admin_email_name'));
-                    $this->email->subject('Welcome to '.$this->config->item('app_email_subject_prefix') . 'Your Account Details');
-                    $this->email->message($message_html);
-                    $this->email->send();
-                    //echo $this->email->print_debugger();
-                    $this->session->set_flashdata('flash_message', 'Employee account has been created successfully. <br>System generated Employee ID <span class="font-weight-bold h5">'.$user_emp_id.'</span>. <br>Account activation link will be sent to the registered email address.');
-                    $this->session->set_flashdata('flash_message_css', 'alert-success');
-                    redirect(current_url());
-                }
-            }
-        }
-		$this->data['page_heading'] = "Add New Employee";
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/create_account', $this->data, true);
-        $this->load->view('_layouts/layout_default', $this->data);
-    }
-
-    function validate_create_account_form_data() {
-        $this->form_validation->set_rules('user_title', 'title', 'required');
-        $this->form_validation->set_rules('user_firstname', 'first name', 'required|alpha|min_length[3]|max_length[25]');
-        $this->form_validation->set_rules('user_lastname', 'last name', 'required|alpha_numeric_spaces|min_length[3]|max_length[30]');
-        $this->form_validation->set_rules('user_gender', 'gender selection', 'required');
-        $this->form_validation->set_rules('user_email', 'email', 'trim|required|valid_email|callback_valid_email_domain|callback_is_email_registered');
-        $this->form_validation->set_rules('user_email_secondary', 'personal email', 'valid_email|differs[user_email]');
-        //$this->form_validation->set_rules('user_password', 'password', 'required|trim|min_length[6]');
-        $this->form_validation->set_rules('user_phone1', 'mobile (personal)', 'required|trim|min_length[10]|max_length[10]|numeric');
-        $this->form_validation->set_rules('user_phone2', 'mobile (work)', 'trim|min_length[10]|max_length[10]|numeric|differs[user_phone1]');
-        //$this->form_validation->set_rules('user_password_confirm', 'confirm password', 'required|matches[user_password]');
-        $this->form_validation->set_rules('dob_day', 'birth day selection', 'required');
-        $this->form_validation->set_rules('dob_month', 'birth month selection', 'required');
-        $this->form_validation->set_rules('dob_year', 'birth year selection', 'required');
-        //$this->form_validation->set_rules('user_dob', 'date of birth', 'required');
-        //$this->form_validation->set_rules('user_doj', 'date of joining', 'required');
-        $this->form_validation->set_rules('user_role', 'access group', 'required');
-        //$this->form_validation->set_rules('user_designation', 'designation', 'required');
-        //$this->form_validation->set_rules('user_department', 'department', 'required');
         $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
         if ($this->form_validation->run() == true) {
             return true;
@@ -393,7 +264,7 @@ class User extends CI_Controller {
                     'user_password' => md5($this->input->post('user_password')),
                     'user_activation_key' => $activation_token,
                     'user_registration_ip' => $_SERVER['REMOTE_ADDR'],
-                    'user_status' => 'N',
+                    'user_status' => 'Y', // Set N for prod
                     'user_emp_id' => $user_emp_id
                 );
 				//print_r($postdata); die();
@@ -422,15 +293,15 @@ class User extends CI_Controller {
                     $this->email->message($message_html);
                     $this->email->send();
                     //echo $this->email->print_debugger();
-                    $this->session->set_flashdata('flash_message', 'Your account has been created successfully.<br>Your System generated Employee ID is <span class="font-weight-bold h5">'.$user_emp_id.'</span>. <br>You will receive account activation link in your registered email. Please activate your account to login.');
+                    $this->session->set_flashdata('flash_message', 'Your account has been created successfully. You will receive account activation link in your registered email. Please activate your account to login.');
                     $this->session->set_flashdata('flash_message_css', 'alert-success');
                     redirect(current_url());
                 }
             }
         }
-		$this->data['page_heading'] = "Create Account";
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/registration', $this->data, true);
-        $this->load->view('_layouts/layout_default', $this->data);
+		$this->data['page_heading'] = "Sign Up";
+        $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/registration', $this->data, true);
+        $this->load->view('site/_layouts/layout_default', $this->data);
     }
 
     function validate_registration_form_data() {
@@ -551,8 +422,8 @@ class User extends CI_Controller {
             }
         }
 		$this->data['page_heading'] = 'Forgot Password?';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/forgot_password', $this->data, true);
-        $this->load->view('_layouts/layout_login', $this->data);
+        $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/forgot_password', $this->data, true);
+        $this->load->view('site/_layouts/layout_default', $this->data);
     }
 
     function validate_forgot_password_form() {		
@@ -604,8 +475,8 @@ class User extends CI_Controller {
             }
         }
 		$this->data['page_heading'] = 'Create New Password';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/reset_password', $this->data, true);
-        $this->load->view('_layouts/layout_login', $this->data);
+        $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/reset_password', $this->data, true);
+        $this->load->view('site/_layouts/layout_default', $this->data);
     }
 
     function validate_reset_password_form() {
@@ -666,8 +537,8 @@ class User extends CI_Controller {
             }
         }
 		$this->data['page_heading'] = 'Change Password';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/change_password', $this->data, true);
-        $this->load->view('_layouts/layout_default', $this->data);
+        $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/change_password', $this->data, true);
+        $this->load->view('site/_layouts/layout_default', $this->data);
     }
 
     function validate_changepassword_form() {
@@ -699,6 +570,8 @@ class User extends CI_Controller {
     function logout() {
         if (isset($this->session->userdata['sess_user'])) {
             $this->session->unset_userdata('sess_user');
+            $this->session->unset_userdata('sess_post_login_redirect_url');
+            $this->session->sess_destroy();
             $this->session->set_flashdata('flash_message', 'You have been logged out successfully.');
             $this->session->set_flashdata('flash_message_css', 'alert-success');
             redirect($this->router->directory.$this->router->class.'/login');
@@ -713,12 +586,6 @@ class User extends CI_Controller {
         if ($is_logged_in == FALSE) {
             redirect($this->router->directory.$this->router->class.'/login');
         }
-        //Has logged in user permission to access this page or method?        
-        /*$is_authorized = $this->common_lib->is_auth(array(
-            'default-super-admin-access',
-            'default-admin-access',
-        ));*/
-        ########### Validate User Auth End #############
 		
 		//View Page Config
         $this->data['page_heading'] = "My Profile";
@@ -736,8 +603,8 @@ class User extends CI_Controller {
         $this->data['education'] = $this->user_model->get_user_education(NULL, $user_id);
         $this->data['job_exp'] = $this->user_model->get_user_work_experience(NULL, $user_id);
 		$this->data['page_heading'] = 'My Profile';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/my_profile', $this->data, true);
-        $this->load->view('_layouts/layout_default', $this->data);
+        $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/my_profile', $this->data, true);
+        $this->load->view('site/_layouts/layout_default', $this->data);
     }
 	
 	
@@ -747,12 +614,6 @@ class User extends CI_Controller {
         if ($is_logged_in == FALSE) {
             redirect($this->router->directory.$this->router->class.'/login');
         }
-        //Has logged in user permission to access this page or method?        
-        /*$is_authorized = $this->common_lib->is_auth(array(
-            'default-super-admin-access',
-            'default-admin-access',
-        ));*/
-        ########### Validate User Auth End #############
 		
 		//View Page Config
         $this->data['page_heading'] = "Profile";
@@ -770,8 +631,8 @@ class User extends CI_Controller {
         $this->data['education'] = $this->user_model->get_user_education(NULL, $user_id);
         $this->data['job_exp'] = $this->user_model->get_user_work_experience(NULL, $user_id);
 		$this->data['page_heading'] = 'Profile';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/profile', $this->data, true);
-        $this->load->view('_layouts/layout_default', $this->data);
+        $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/profile', $this->data, true);
+        $this->load->view('site/_layouts/layout_default', $this->data);
     }
 	
 	function validate_edit_profile_form() {
@@ -859,8 +720,8 @@ class User extends CI_Controller {
             }
         }
 		$this->data['page_heading'] = 'Add Address';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/add_address', $this->data, true);
-        $this->load->view('_layouts/layout_default', $this->data);
+        $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/add_address', $this->data, true);
+        $this->load->view('site/_layouts/layout_default', $this->data);
     }
 	
 	function edit_address() {
@@ -902,8 +763,8 @@ class User extends CI_Controller {
         }
 		
 		$this->data['page_heading'] = 'Edit Address';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/edit_address', $this->data, true);
-        $this->load->view('_layouts/layout_default', $this->data);
+        $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/edit_address', $this->data, true);
+        $this->load->view('site/_layouts/layout_default', $this->data);
     }
 	
 	/*function delete_address() {
@@ -1044,8 +905,8 @@ class User extends CI_Controller {
             }
         }
 		$this->data['page_heading'] = "Add Educational Qualification";
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/add_education', $this->data, true);
-        $this->load->view('_layouts/layout_default', $this->data);
+        $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/add_education', $this->data, true);
+        $this->load->view('site/_layouts/layout_default', $this->data);
     }
 	
 	function edit_education() {
@@ -1083,8 +944,8 @@ class User extends CI_Controller {
             }
         }
 		$this->data['page_heading'] = "Edit Educational Qualification";
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/edit_education', $this->data, true);
-        $this->load->view('_layouts/layout_default', $this->data);
+        $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/edit_education', $this->data, true);
+        $this->load->view('site/_layouts/layout_default', $this->data);
     }
 	
 	/*function delete_education() {
@@ -1132,11 +993,6 @@ class User extends CI_Controller {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
             redirect($this->router->directory.$this->router->class.'/login');
         }
-        //Has logged in user permission to access this page or method?        
-        /*$is_authorized = $this->common_lib->is_auth(array(
-            'default-super-admin-access',
-            'default-admin-access',
-        ));*/
         ########### Validate User Auth End #############
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
@@ -1167,82 +1023,8 @@ class User extends CI_Controller {
         }
 	
 		$this->data['page_heading'] = 'Edit My Profile';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/edit_profile', $this->data, true);
-        $this->load->view('_layouts/layout_default', $this->data);
-    }
-
-    function edit_user_profile() {
-        ########### Validate User Auth #############
-        $is_logged_in = $this->common_lib->is_logged_in();
-        if ($is_logged_in == FALSE) {
-			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
-            redirect($this->router->directory.$this->router->class.'/login');
-        }
-        //Has logged in user permission to access this page or method?        
-        $is_authorized = $this->common_lib->is_auth(array(
-            'default-super-admin-access',
-            'default-admin-access',
-            'update-emp-profile'
-        ));
-        ########### Validate User Auth End #############
-        $user_id = $this->uri->segment(3);
-        $this->data['alert_message'] = $this->session->flashdata('flash_message');
-        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
-        $rows = $this->user_model->get_rows($user_id);
-        $this->data['row'] = $rows['data_rows'];
-        $res_pic = $this->user_model->get_user_profile_pic($user_id);
-		$this->data['profile_pic'] = $res_pic[0]['user_profile_pic'];
-
-        if ($this->input->post('form_action') == 'update_profile') {
-            if ($this->validate_edit_user_profile_form() == true) {
-                $dob = $this->input->post('dob_year') . '-' . $this->input->post('dob_month') . '-' . $this->input->post('dob_day');
-                $postdata = array(
-                    'user_title' => $this->input->post('user_title'),                    
-                    'user_firstname' => ucwords(strtolower($this->input->post('user_firstname'))),
-                    'user_lastname' => ucwords(strtolower($this->input->post('user_lastname'))),
-                    'user_gender' => $this->input->post('user_gender'),
-                    'user_dob' => $dob,
-                    'user_doj' => $this->common_lib->convert_to_mysql($this->input->post('user_doj')),
-                    //'user_role' => $this->input->post('user_role'),
-                    'user_department' => $this->input->post('user_department'),
-                    'user_designation' => $this->input->post('user_designation'),
-                    'user_status' => $this->input->post('user_status')                
-                );
-                $where = array('id' => $user_id);
-                $res = $this->user_model->update($postdata, $where);
-                if ($res) {
-                    $this->session->set_flashdata('flash_message', 'Employee information has been updated successfully.');
-                    $this->session->set_flashdata('flash_message_css', 'alert-success');
-                    redirect(current_url());
-                }
-            }
-        }
-	
-		$this->data['page_heading'] = 'Edit Employee Profile';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/edit_user_profile', $this->data, true);
-        $this->load->view('_layouts/layout_default', $this->data);
-    }
-
-    function validate_edit_user_profile_form() {
-        $this->form_validation->set_rules('user_title', 'title', 'required');
-        $this->form_validation->set_rules('user_firstname', 'first name', 'required|alpha|min_length[3]|max_length[25]');
-        $this->form_validation->set_rules('user_lastname', 'last name', 'required|alpha_numeric_spaces|min_length[3]|max_length[30]');
-        $this->form_validation->set_rules('user_gender', 'gender selection', 'required');
-        $this->form_validation->set_rules('dob_day', 'birth day selection', 'required');
-        $this->form_validation->set_rules('dob_month', 'birth month selection', 'required');
-        $this->form_validation->set_rules('dob_year', 'birth year selection', 'required');
-        //$this->form_validation->set_rules('user_dob', 'date of birth', 'required');
-        //$this->form_validation->set_rules('user_doj', 'date of joining', 'required');
-        //$this->form_validation->set_rules('user_role', 'access group', 'required');
-        //$this->form_validation->set_rules('user_designation', 'designation', 'required');
-        //$this->form_validation->set_rules('user_department', 'department', 'required');
-        //$this->form_validation->set_rules('user_status', 'account status', 'required');
-        $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
-        if ($this->form_validation->run() == true) {
-            return true;
-        } else {
-            return false;
-        }
+        $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/edit_profile', $this->data, true);
+        $this->load->view('site/_layouts/layout_default', $this->data);
     }
 	
 	function profile_pic() {
@@ -1252,12 +1034,6 @@ class User extends CI_Controller {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
             redirect($this->router->directory.$this->router->class.'/login');
         }
-        //Has logged in user permission to access this page or method?        
-        /*$is_authorized = $this->common_lib->is_auth(array(
-            'default-super-admin-access',
-            'default-admin-access',
-        ));*/
-        ########### Validate User Auth End #############
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
         
@@ -1271,8 +1047,8 @@ class User extends CI_Controller {
         }
 	
 		$this->data['page_heading'] = 'Profile Photo';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/profile_pic', $this->data, true);
-        $this->load->view('_layouts/layout_default', $this->data);
+        $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/profile_pic', $this->data, true);
+        $this->load->view('site/_layouts/layout_default', $this->data);
     }
 	
 	function validate_uplaod_form_data() {
@@ -1421,8 +1197,8 @@ class User extends CI_Controller {
             }
         }
 		$this->data['page_heading'] = "Allocate Projects";
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/allocate_projects', $this->data, true);
-        $this->load->view('_layouts/layout_default', $this->data);
+        $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/allocate_projects', $this->data, true);
+        $this->load->view('site/_layouts/layout_default', $this->data);
     }
 	
 	function validate_user_project_assign_form_data(){
@@ -1564,8 +1340,8 @@ class User extends CI_Controller {
             }
         }
 		$this->data['page_heading'] = "Add Previous Work Experiences";
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/add_work_experience', $this->data, true);
-        $this->load->view('_layouts/layout_default', $this->data);
+        $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/add_work_experience', $this->data, true);
+        $this->load->view('site/_layouts/layout_default', $this->data);
     }
 	
 	function edit_work_experience() {
@@ -1599,8 +1375,8 @@ class User extends CI_Controller {
             }
         }
 		$this->data['page_heading'] = "Edit Previous Work Experiences";
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/edit_work_experience', $this->data, true);
-        $this->load->view('_layouts/layout_default', $this->data);
+        $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/edit_work_experience', $this->data, true);
+        $this->load->view('site/_layouts/layout_default', $this->data);
     }
 	
 	/*function delete_education() {

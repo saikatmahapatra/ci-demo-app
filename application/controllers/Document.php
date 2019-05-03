@@ -18,17 +18,11 @@ class Document extends CI_Controller {
             redirect($this->router->directory.'user/login');
         }
 
-        //Has logged in user permission to access this page or method?        
-        /*$is_authorized = $this->common_lib->is_auth(array(
-            'default-super-admin-access',
-            'default-admin-access'
-        ));*/
-
         // Get logged  in user id
         $this->sess_user_id = $this->common_lib->get_sess_user('id');
 
         //Render header, footer, navbar, sidebar etc common elements of templates
-        $this->common_lib->init_template_elements();
+        $this->common_lib->init_template_elements('site');
 
         // Load required js files for this controller
         $javascript_files = array(
@@ -42,40 +36,16 @@ class Document extends CI_Controller {
 
         $this->data['id'] = $this->uri->segment(3) ? $this->uri->segment(3) : $this->sess_user_id;
         $this->data['page_heading'] = $this->router->class.' : '.$this->router->method;
-		
-		// load Breadcrumbs
-		// $this->load->library('breadcrumbs');
-		// add breadcrumbs. push() - Append crumb to stack
-		// $this->breadcrumbs->push('Dashboard', '/admin');
-		// $this->breadcrumbs->push('Product', '/admin/product');		
-		// $this->data['breadcrumbs'] = $this->breadcrumbs->show();
         
         $this->data['arr_upload_file_type_name'] = array(
             "" => "Select",
-            "aadhar_card" => "Aadhar Card",
-            "pan_card" => "PAN Card",
-            "driving_license" => "Driving License",
-            "voter_card" => "Voter Card",
-            "medical_fit_certificate" => "Medical Fit Certificate",
-            "school_certificate" => "School Certificate",
-            "10_marksheet" => "10th Equivallent Mark Sheet",
-            "10_certificate" => "10th Certificate",
-            "12_marksheet" => "12th Equivallent Mark Sheet",
-            "12_certificate" => "12th Certificate",
-            "graduation_marksheet" => "Graduation Mark Sheet (Final Semistar Mark Sheet)",
-            "pg_marksheet" => "Post Graduation Marksheet (Final Semistar Mark Sheet)",
-            "work_exp_letter" => "Work Experience Letter",
+            "12_certificate" => "12th Certificate (Single)",
+            "work_exp_letter" => "Work Experience Letter (Multiple)",
         );
         ksort($this->data['arr_upload_file_type_name']);
     }
 
     function index() {
-        //Has logged in user permission to access this page or method?        
-        /*$is_authorized = $this->common_lib->is_auth(array(
-            'default-super-admin-access',
-            'default-admin-access'
-        ));*/
-
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
 
@@ -94,8 +64,8 @@ class Document extends CI_Controller {
             $this->upload_file();
         }
 		$this->data['page_heading'] = 'My Documents';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/index', $this->data, true);
-        $this->load->view('_layouts/layout_default', $this->data);
+        $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/index', $this->data, true);
+        $this->load->view('site/_layouts/layout_default', $this->data);
     }
 
     function upload_file() {

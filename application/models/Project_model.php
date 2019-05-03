@@ -11,7 +11,7 @@ class Project_model extends CI_Model {
 
     function insert($postdata, $table = NULL) {
         if ($table == NULL) {
-            $this->db->insert('projects', $postdata);
+            $this->db->insert('timesheet_projects', $postdata);
         } else {
             $this->db->insert($table, $postdata);
         }
@@ -23,7 +23,7 @@ class Project_model extends CI_Model {
     function update($postdata, $where_array = NULL, $table = NULL) {
         $this->db->where($where_array);
         if ($table == NULL) {
-            $result = $this->db->update('projects', $postdata);
+            $result = $this->db->update('timesheet_projects', $postdata);
         } else {
             $result = $this->db->update($table, $postdata);
         }
@@ -34,7 +34,7 @@ class Project_model extends CI_Model {
     function delete($where_array = NULL, $table = NULL) {
         $this->db->where($where_array);
         if ($table == NULL) {
-            $result = $this->db->delete('projects');
+            $result = $this->db->delete('timesheet_projects');
         } else {
             $result = $this->db->delete($table);
         }
@@ -103,7 +103,7 @@ class Project_model extends CI_Model {
                 $this->db->limit($limit, $offset);
             }
         }
-        $query = $this->db->get('projects as t1');
+        $query = $this->db->get('timesheet_projects as t1');
         //print_r($this->db->last_query());
         $num_rows = $query->num_rows();
         $result = $query->result_array();
@@ -115,7 +115,7 @@ class Project_model extends CI_Model {
         $this->db->select('id,project_name');
         $this->db->where('project_status','Y');
 		$this->db->order_by('project_name');
-        $query = $this->db->get('projects');
+        $query = $this->db->get('timesheet_projects');
         //$result = array('' => 'Choose Options');
         if ($query->num_rows()) {
             $res = $query->result();

@@ -19,17 +19,11 @@ class Home extends CI_Controller {
             redirect($this->router->directory.'user/login');
         }*/
 
-        //Has logged in user permission to access this page or method?        
-        /*$is_authorized = $this->common_lib->is_auth(array(
-            'default-super-admin-access',
-            'default-admin-access'
-        ));*/
-
         // Get logged  in user id
         $this->sess_user_id = $this->common_lib->get_sess_user('id');
 
         //Render header, footer, navbar, sidebar etc common elements of templates
-        $this->common_lib->init_template_elements();
+        $this->common_lib->init_template_elements('site');
 
         // Load required js files for this controller
         $javascript_files = array();
@@ -43,12 +37,11 @@ class Home extends CI_Controller {
         $this->data['alert_message'] = NULL;
         $this->data['alert_message_css'] = NULL;
         $this->data['page_heading'] = $this->router->class.' : '.$this->router->method;
-		
-		// Status flag indicator for showing in table grid etc
-		$this->data['status_flag'] = array(
-            'Y'=>array('text'=>'Active', 'css'=>'text-success', 'icon'=>'<i class="fa fa-circle text-success" aria-hidden="true"></i>'),
-            'N'=>array('text'=>'Inactive', 'css'=>'text-warning', 'icon'=>'<i class="fa fa-circle text-warning" aria-hidden="true"></i>'),
-            'A'=>array('text'=>'Archived', 'css'=>'text-danger', 'icon'=>'<i class="fa fa-circle text-danger" aria-hidden="true"></i>')
+
+        $this->data['content_type'] = array(
+            'news'=>array('text'=>'News', 'css'=>'text-warning'),
+            'policy'=>array('text'=>'Policy', 'css'=>'text-success'),
+            'notice'=>array('text'=>'Notice', 'css'=>'text-primary')
         );
 		
 		// load Breadcrumbs
@@ -98,39 +91,11 @@ class Home extends CI_Controller {
 		$this->data['sliders'] = $this->upload_model->get_slider();
 		//print_r($sliders);
 		$this->data['page_heading'] = 'Welcome to '.$this->config->item('app_company_product');
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/index', $this->data, true);
-        $this->load->view('_layouts/layout_home', $this->data);
+        $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/index', $this->data, true);
+        $this->load->view('site/_layouts/layout_home', $this->data);
     }
-	
-	function dashboard() {
-		########### Validate User Auth #############
-        $is_logged_in = $this->common_lib->is_logged_in();
-        if ($is_logged_in == FALSE) {
-			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
-            redirect('user/login');
-        }
-        //Has logged in user permission to access this page or method?        
-        $is_authorized = $this->common_lib->is_auth(array(
-            'default-super-admin-access',
-            'default-admin-access',
-        ));
-        ########### Validate User Auth End #############
-		
-		$this->breadcrumbs->push('View','/');				
-		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
-		
-        $this->data['alert_message'] = $this->session->flashdata('flash_message');
-        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
-		
-		//Carousel Slider
-		$this->data['sliders'] = $this->upload_model->get_slider();
-		
-		$this->data['page_heading'] = "Administrator Dashboard";
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/dashboard', $this->data, true);
-        $this->load->view('_layouts/layout_default', $this->data);
-    }
-	
-	function details() {
+
+    function details() {
         // Check user permission by permission name mapped to db
         // $is_authorized = $this->common_lib->is_auth('cms-list-view');
 		
@@ -147,8 +112,8 @@ class Home extends CI_Controller {
 		$result_array = $this->cms_model->get_contents($id, NULL, NULL, FALSE, FALSE);
         $this->data['data_rows'] = $result_array['data_rows'];        
 		$this->data['page_heading'] = 'Welcome';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/details', $this->data, true);
-        $this->load->view('_layouts/layout_default', $this->data);
+        $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/details', $this->data, true);
+        $this->load->view('site/_layouts/layout_default', $this->data);
     }
 
 }

@@ -61,8 +61,8 @@ class Timesheet_model extends CI_Model {
         t2.project_number,
 		t3.task_activity_name
 		');
-		$this->db->join('projects as t2', 't2.id = t1.project_id', 'left');        
-		$this->db->join('task_activities as t3', 't3.id = t1.activity_id', 'left');        
+		$this->db->join('timesheet_projects as t2', 't2.id = t1.project_id', 'left');        
+		$this->db->join('timesheet_activities as t3', 't3.id = t1.activity_id', 'left');        
         if ($id) {
             $this->db->where('t1.id', $id);
         }
@@ -191,7 +191,7 @@ class Timesheet_model extends CI_Model {
         $result = array();
         $this->db->select('id,project_name,project_number');		
         $this->db->where('project_status','Y');		
-        $query = $this->db->get('projects');
+        $query = $this->db->get('timesheet_projects');
         #echo $this->db->last_query();
         $result = array('' => 'Select');
         if ($query->num_rows()) {
@@ -206,7 +206,7 @@ class Timesheet_model extends CI_Model {
     function get_user_dropdown() {
         $result = array();
         $this->db->select('id,user_firstname,user_lastname, user_emp_id');		
-        $this->db->where('user_archived','N');
+        $this->db->where('user_status','Y');
         $this->db->order_by('user_firstname');		
         $query = $this->db->get('users');
         #echo $this->db->last_query();
@@ -225,7 +225,7 @@ class Timesheet_model extends CI_Model {
         $this->db->select('id,task_activity_name');
         $this->db->where('task_activity_status','Y');		
         $this->db->order_by('task_activity_name');		
-        $query = $this->db->get('task_activities');
+        $query = $this->db->get('timesheet_activities');
         #echo $this->db->last_query();
         $result = array('' => 'Select');
         if ($query->num_rows()) {
@@ -254,8 +254,8 @@ class Timesheet_model extends CI_Model {
 		t4.user_firstname,
 		t4.user_lastname
 		');
-		$this->db->join('projects as t2', 't2.id = t1.project_id', 'left');        
-		$this->db->join('task_activities as t3', 't3.id = t1.activity_id', 'left');        
+		$this->db->join('timesheet_projects as t2', 't2.id = t1.project_id', 'left');        
+		$this->db->join('timesheet_activities as t3', 't3.id = t1.activity_id', 'left');        
 		$this->db->join('users as t4', 't4.id = t1.timesheet_created_by', 'left');        
         if ($id) {
             $this->db->where('t1.id', $id);

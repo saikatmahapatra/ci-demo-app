@@ -1,0 +1,70 @@
+.ci-calendar {
+    border: 2px solid $calendar-border;
+    th {
+        background: $calendar-heading-bg;
+        font-size: 1rem;
+        color: $white;
+        vertical-align: center !important;
+        text-align: center;
+    }
+    tr.wk_nm {
+        background: $calendar-week-bg;
+        color: $white;
+        /*font-weight:bold;*/
+    }
+    td {
+        text-align: center;
+        border: 1px solid $calendar-grid-border;
+        vertical-align: center !important;
+    }
+    .allowed_m td.day {
+        cursor: pointer;
+    }
+    .highlight {
+        background: $today-highlight;
+        color: $white;
+    }
+    .prevcell a,
+    .nextcell a {
+        color: $white !important;
+        text-decoration: none !important;
+    }
+    .selected {
+        background: $day_selected !important;
+    }
+    .holiday {
+        background: $holiday;
+    }
+    .leave {
+        background: $leave;
+    }
+    .filled {
+        background: $has-data;
+    }
+}
+
+.i-today {
+    background-color: $today-highlight;
+}
+
+.i-selected {
+    background-color: $day_selected;
+}
+
+.i-leave {
+    background-color: $leave;
+}
+
+.i-holiday {
+    background-color: $holiday;
+}
+
+.i-has-data {
+    background-color: $has-data;
+}
+
+.disabled_m {
+    opacity: 0.5;
+    cursor: default !important;
+    background: $gray-lightest;
+}

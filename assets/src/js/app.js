@@ -319,7 +319,7 @@ function askConfirmation(event) {
 /**
  * Side Bar Toggle
  */
-function sidebarToggle(){
+function sidebarToggle() {
     // Toggle Sidebar
     var treeviewMenu = $('.menu');
     $('[data-toggle="sidebar"]').click(function(event) {
@@ -338,6 +338,21 @@ function sidebarToggle(){
     $("[data-toggle='treeview.'].is-expanded").parent().toggleClass('is-expanded');
 }
 
+/**
+ * Display bootstrap dropdown link on hover
+ */
+
+function displayBootstrapDropdownNavLinkOnHover() {
+    $(".nav-link.dropdown-toggle").on("mouseenter", function() {
+        // make sure it is not shown:
+        if (!$(this).parent().hasClass("show")) {
+            $(this).click();
+        }
+    });
+    $(".nav-link.dropdown-toggle").on("mouseleave", function() {
+        $(this).parent().removeClass("show");
+    });
+}
 
 /**
  * ------------------------------------------------------------------------------
@@ -357,6 +372,7 @@ function initPage() {
     panelGroupToggle();
     renderFieldHelp();
     setActiveTarget();
+    //displayBootstrapDropdownNavLinkOnHover();
 
     //Select 2
     $('.ci-js-select-2').select2();

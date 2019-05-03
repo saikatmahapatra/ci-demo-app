@@ -29,10 +29,10 @@
             display: block;
             width: 230px;
             @if $sidebar-accent==dark {
-                background-color: darken( $primary-color, 5%);
+                //background-color: darken( $primary-color, 5%);
             }
             @if $sidebar-accent==light {
-                background-color: lighten( $primary-color, 5%);
+                //background-color: lighten( $primary-color, 5%);
             }
         }
         &:focus,
@@ -54,10 +54,10 @@
             content: "\f0c9";
             font-size: 21px;
         }
-        &:focus,
+        //&:focus,
         &:hover {
             color: #fff;
-            background-color: darken($primary-color, 10);
+            //background-color: darken($primary-color, 10);
             text-decoration: none;
         }
     }
