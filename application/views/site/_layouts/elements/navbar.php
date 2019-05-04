@@ -26,6 +26,7 @@
 						<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'example/dom_pdf_gen_pdf');?>">Download as PDF/DOM PDF</a>					
 						<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'example/calendar_lib');?>">Calendar Library</a>						
 						<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'example/contact_form');?>">Contact Form (Email Test)</a>
+						<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'example/test_cron_job');?>">Cron Job</a>
 					</div>
 			</li>
 			<li class="nav-item">
