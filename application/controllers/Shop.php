@@ -217,6 +217,11 @@ class Shop extends CI_Controller {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
             redirect($this->router->directory.'user/login');
         }
+        
+        if($this->cart->total_items() <= 0){
+            $this->session->set_flashdata('flash_message', 'You don\'t have any items in your cart. Please add atleast one to proceed.');
+            $this->session->set_flashdata('flash_message_css', 'alert-danger');
+        }
 
 		$this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
@@ -234,8 +239,8 @@ class Shop extends CI_Controller {
             if ($this->validate_order_payment_form_data() == true) {
 				$this->place_order();
 			}
-		}
-		
+        }
+
 		$this->data['page_heading'] = 'Checkout';		
 		$this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/init_payment', $this->data, true);
         $this->load->view('site/_layouts/layout_default', $this->data);
@@ -259,40 +264,6 @@ class Shop extends CI_Controller {
         }
 
 		$cart_data = $this->get_cart_data();
-		//echo '<pre>';print_r($cart_data);die();
-		/*
-		Array
-		(
-			[cartrows] => Array
-				(
-					[0] => Array
-						(
-							[rowid] => ae9501535ac7c5595d4dc625d283838d
-							[id] => 4
-							[qty] => 2
-							[price] => 90
-							[name] => Moto G5 Back Cover
-							[line_total] => 180
-							[category_name] => Accessories
-						)
-
-					[1] => Array
-						(
-							[rowid] => b4c547233243f2317d8ad8343d699f5c
-							[id] => 5
-							[qty] => 2
-							[price] => 1500
-							[name] => Men's Nike Running Shoe
-							[line_total] => 3000
-							[category_name] => Shoes
-						)
-
-				)
-
-			[cart_total] => 3180
-			[total_items] => 4
-		)
-		*/
 		$cartrows = $cart_data['cartrows'];		
         $cart_total = $cart_data['cart_total']; // Returns:	Total amount
         $total_items = $cart_data['total_items']; //Returns:	Total number of added items of a cart
@@ -346,7 +317,7 @@ class Shop extends CI_Controller {
 			
 			$this->session->set_flashdata('flash_message', 'Thank you! We have received your order. Your Order Number '.$order_number.' Payment Done (Test)');
 			$this->session->set_flashdata('flash_message_css', 'alert-success');
-            redirect($this->router->directory.$this->router->class.'/transaction_response');
+            redirect($this->router->directory.$this->router->class.'/transaction_response/'.$order_number);
 		}
     }
 
@@ -380,7 +351,7 @@ class Shop extends CI_Controller {
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
         //Update table with payment response
 		//$this->data = array();
-		$this->data['order_no'] = '1234';
+		$this->data['order_no'] = $this->uri->segment(4);
 		$this->data['page_heading'] = 'Your Online Transaction Summary';
 		$this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/transaction_response', $this->data, true);
         $this->load->view('site/_layouts/layout_default', $this->data);

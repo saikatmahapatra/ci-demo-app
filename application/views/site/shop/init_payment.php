@@ -193,11 +193,22 @@
          </div>
          <div class="card-footer">
             <div class="row">
-                <div class="col-12 h5">
+                <div class="col-md-12 h5">
                 Amount Payble <span class="currency" id="INR">&#8377;</span><?php echo isset($cart_total) ? number_format($cart_total,2) :'';?>
                 </div>
-                <div class="col-12">
-                    <button type="submit" class="btn btn-primary">Place Order</button>
+                <div class="col-md-12">
+                     <?php 
+                     if($total_items <= 0){
+                        ?>
+                        <a href="<?php echo base_url($this->router->directory.'shop');?>" class="btn btn-primary">Continue Shopping</a>
+                        <?php
+                     }else{
+                        ?>
+                        <button type="submit" class="btn btn-primary">Place Order</button>
+                        <?php
+                     }
+                     ?>
+                    
                 </div>
             </div>
          </div>
