@@ -41,7 +41,7 @@
 											<div>Display product attribute 2</div>
 											<div>Display product attribute 3</div>
 											<div class="d-none"><?php echo '<span class="currency" id="INR">&#8377;</span> ' . number_format($row['price'], 2); ?></div>
-											<a href="<?php echo base_url($this->router->directory.'shop/remove_cart/'.$row['rowid']);?>" class="">Remove</a>
+											<a href="<?php echo base_url($this->router->directory.'shop/remove_cart/'.$row['rowid']);?>" class="my-3 btn btn-sm btn-outline-danger">Remove</a>
 										</div><!--/.media-body-->
 									</div><!--/.media-->
 								</div>
