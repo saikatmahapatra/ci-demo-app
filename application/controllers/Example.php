@@ -10,7 +10,7 @@ class Example extends CI_Controller {
     function __construct() {
         parent::__construct();
         //Loggedin user details
-        $this->sess_user_id = $this->common_lib->get_sess_user('id');        
+        $this->sess_user_id = $this->common_lib->get_sess_user('id');
         
         //Render header, footer, navbar, sidebar etc common elements of templates
         $this->common_lib->init_template_elements('site');
@@ -134,10 +134,10 @@ class Example extends CI_Controller {
 
     function directory_helper() {
         $this->load->helper('directory');
-        $map = directory_map('./assets', FALSE, TRUE);
+        $map = directory_map('./application/controllers', FALSE, TRUE);
         $this->data['read_dir'] = $map;
 
-        $map = directory_map('./assets', 1);
+        $map = directory_map('./application/controllers', 1);
         $this->data['sub_folders'] = $map;
 
         $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/directory_helper', $this->data, true);
@@ -284,17 +284,28 @@ class Example extends CI_Controller {
         //Create Captcha
         $this->load->helper('captcha');
         $data = array(
-            'img_path' => './assets/captcha/images/',
-            'img_url' => base_url('assets/captcha/images/'),
-            'font_path' => './assets/captcha/fonts/arialbd.ttf',
-            'img_width' => '160',
-            'img_height' => 40,
-            'border' => 1,
-            'expiration' => 90
+            //'word'          => 'Random word',
+            'img_path'      => './assets/captcha/images/',
+            'img_url'       => base_url('assets/captcha/images/'),
+            //'font_path'     => './assets/captcha/fonts/arialbd.ttf',
+            'img_width'     => 150,
+            'img_height'    => 30,
+            'expiration'    => 90,
+            'word_length'   => 8,
+            'font_size'     => 32,
+            'img_id'        => 'Imageid',
+            'pool'          => '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
+
+            // White background and border, black text and red grid
+            'colors' => array(
+                    'background' => array(255, 255, 255),
+                    'border' => array(255, 255, 255),
+                    'text' => array(0, 0, 0),
+                    'grid' => array(255, 40, 40)
+            )
         );
 
         $cap = create_captcha($data);
-
         $this->data['captcha_word'] = $cap['word'];
         $this->data['captcha_image'] = $cap['image'];
 		
@@ -308,7 +319,7 @@ class Example extends CI_Controller {
         $this->form_validation->set_rules('email', 'email address', 'trim|required|valid_email');
         $this->form_validation->set_rules('phone_number', 'mobile number', 'trim|is_natural|numeric|max_length[10]');
         $this->form_validation->set_rules('message', 'message', 'required');
-        $this->form_validation->set_rules('captcha', 'captcha verification', 'trim|callback_validate_captcha');
+        $this->form_validation->set_rules('captcha', 'captcha verification', 'required|trim|callback_validate_captcha');
         $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
         if ($this->form_validation->run() == true) {
             return true;
@@ -318,18 +329,24 @@ class Example extends CI_Controller {
     }
 
     function validate_captcha($str) {
-        if ($str != $this->input->post('hdn_captcha_word')) {
+        if ($str != $this->input->post('captcha_word')) {
             $this->form_validation->set_message('validate_captcha', 'Invalid CAPTCHA.');
             return false;
         } else {
             return true;
         }
     }
-	
-	function test_cron_job(){
+    
+    
+    function test_cron_job() {
+        $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/test_cron_job', $this->data, true);
+        $this->load->view('site/_layouts/layout_default', $this->data);
+    }
+
+	function send_mail_cron_job(){
         /**
          * Command in cPanel
-         * /usr/local/bin/php /home/unitedeipl/public_html/portal/index.php example test_cron_job
+         * /usr/local/bin/php /home/xxxx/public_html/webportal/index.php example send_mail_cron_job
          */
 
         $from_name = 'Web Tester';

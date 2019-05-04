@@ -79,12 +79,11 @@
                 <?php echo form_error('message'); ?>
             </div>
         </div>
-        <?php /* ?>
         <div class="form-row">
             <div class="form-group col-md-4">
                 <div><?php print_r($captcha_image); ?></div>
                 <br>
-                <?php echo form_hidden('hdn_captcha_word', $captcha_word); ?> 
+                <?php echo form_hidden('captcha_word', $captcha_word); ?> 
                 <?php
                 echo form_input(array(
                     'name' => 'captcha',
@@ -100,7 +99,6 @@
                 <?php echo form_error('captcha'); ?>
             </div>
         </div>
-        <?php */ ?>
         
 		<?php
 		echo form_submit(array(
