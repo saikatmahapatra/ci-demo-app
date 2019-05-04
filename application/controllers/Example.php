@@ -287,12 +287,12 @@ class Example extends CI_Controller {
             //'word'          => 'Random word',
             'img_path'      => './assets/captcha/images/',
             'img_url'       => base_url('assets/captcha/images/'),
-            //'font_path'     => './assets/captcha/fonts/arialbd.ttf',
-            'img_width'     => 150,
+            'font_path'     => './assets/captcha/fonts/arialbd.ttf',
+            'img_width'     => '150',
             'img_height'    => 30,
             'expiration'    => 90,
-            'word_length'   => 8,
-            'font_size'     => 32,
+            'word_length'   => 6,
+            'font_size'     => 16,
             'img_id'        => 'Imageid',
             'pool'          => '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
 
@@ -301,7 +301,7 @@ class Example extends CI_Controller {
                     'background' => array(255, 255, 255),
                     'border' => array(255, 255, 255),
                     'text' => array(0, 0, 0),
-                    'grid' => array(255, 40, 40)
+                    'grid' => array(192,192,192)
             )
         );
 
