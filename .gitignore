@@ -1,7 +1,7 @@
 .git/
 node_modules/
 assets/uploads/
-assets/captcha/
+assets/captcha/images/
 ci_sessions/
 bower_components/
 package-lock.json
