@@ -28,9 +28,9 @@ $config['app_email_subject_prefix'] = 'CI App ';
  * Template Config
  */
 $config['app_company_product'] = 'CI App';
-$config['app_logo_name_login'] = 'Brand Logo';
-$config['app_logo_name_admin_dashboard'] = 'Brand Logo';
-$config['app_logo_name_dashboard'] = 'Brand Logo';
+$config['app_logo_name_login'] = '<b>B</b>rand Logo';
+$config['app_logo_name_admin_dashboard'] = '<b>B</b>rand Logo';
+$config['app_logo_name_dashboard'] = '<b>B</b>rand Logo';
 $config['app_logo_name_dashboard_xs'] = 'Brand Logo';
 
 $config['app_html_title'] = 'CI App';
@@ -42,5 +42,5 @@ $config['app_meta_author'] = '';
 
 
 $config['app_copy_right'] = 'Copyright '.date('Y').' &copy; CI App';
-$config['app_admin_copy_right'] = 'Copyright &copy; '.date('Y').' <a href="#">CI App</a>';
-$config['app_version'] = 'App. Version '.CI_VERSION.'.3';
+$config['app_admin_copy_right'] = 'Copyright &copy; '.date('Y').' <a href="#" target="blank">CI App</a>';
+$config['app_version'] = CI_VERSION.'.5';

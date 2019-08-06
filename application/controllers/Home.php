@@ -36,7 +36,7 @@ class Home extends CI_Controller {
 
         $this->data['alert_message'] = NULL;
         $this->data['alert_message_css'] = NULL;
-        $this->data['page_heading'] = $this->router->class.' : '.$this->router->method;
+        $this->data['page_title'] = $this->router->class.' : '.$this->router->method;
 
         $this->data['content_type'] = array(
             'news'=>array('text'=>'News', 'css'=>'text-warning'),
@@ -90,7 +90,7 @@ class Home extends CI_Controller {
 		//Carousel Slider
 		$this->data['sliders'] = $this->upload_model->get_slider();
 		//print_r($sliders);
-		$this->data['page_heading'] = 'Welcome to '.$this->config->item('app_company_product');
+		$this->data['page_title'] = 'Welcome to '.$this->config->item('app_company_product');
         $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/index', $this->data, true);
         $this->load->view('site/_layouts/layout_home', $this->data);
     }
@@ -111,7 +111,7 @@ class Home extends CI_Controller {
         $id = $this->uri->segment(3);		
 		$result_array = $this->cms_model->get_contents($id, NULL, NULL, FALSE, FALSE);
         $this->data['data_rows'] = $result_array['data_rows'];        
-		$this->data['page_heading'] = 'Welcome';
+		$this->data['page_title'] = 'Welcome';
         $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/details', $this->data, true);
         $this->load->view('site/_layouts/layout_default', $this->data);
     }

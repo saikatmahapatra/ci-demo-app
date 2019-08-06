@@ -1,0 +1,726 @@
+body {
+    margin-top: 4.5rem;
+    margin-bottom: 1rem;
+}
+
+body.login {
+    margin-top: 0rem;
+}
+
+@mixin linear-gradient($from, $to) {
+    background: $to;
+    background: -moz-linear-gradient(top, $from 0%, $to 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, $from), color-stop(100%, $to));
+    background: -webkit-linear-gradient(top, $from 0%, $to 100%);
+    background: -o-linear-gradient(top, $from 0%, $to 100%);
+    background: linear-gradient(to bottom, $from 0%, $to 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#{$from}, endColorstr=#{$to})
+}
+
+//Site Logo
+.logo {
+    width: 30px;
+}
+
+.logo-login {
+    width: 40px;
+}
+
+// Breadcrumb
+.breadcrumb {
+    margin-top: 0px;
+    padding: 0px;
+    background: $white;
+}
+
+// View Page Title
+.page-title-container {
+    //margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.page-title {
+    font-size: 1.5rem;
+    //font-weight: 300;
+}
+
+// Extra small devices (portrait phones, less than 576px)
+// No media query since this is the default in Bootstrap
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) {}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) {}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {}
+
+//Scroll To Top
+.scrollup {
+    width: 40px;
+    height: 40px;
+    position: fixed;
+    padding: 6px 12px !important;
+    bottom: 50px;
+    right: 5px;
+    display: none;
+}
+
+// CI Server side Errors
+.validation-error {
+    color: $validation-error-color;
+}
+
+.tnc-content {
+    font-size: .75rem;
+    h1,
+    h2 {
+        font-size: 1rem;
+    }
+}
+
+// Images
+.thumbnail {
+    margin-bottom: 20px;
+    padding: 0px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+}
+
+.dp {
+    //transition: all 0.2s ease-in-out;
+    height: 110px;
+    width: 110px;
+}
+
+.dp-sm {
+    height: 70px;
+    width: 70px;
+}
+
+.dp-xs {
+    height: 50px;
+    width: 50px;
+}
+
+.dp-xxs {
+    height: 32px;
+    width: 32px;
+}
+
+.more-less {
+    float: right;
+    color: #212121;
+}
+
+// Profile Cards
+.content-wrap {
+    word-break: break-all;
+}
+
+a[data-link-type="user-profile-card"] {
+    text-decoration: none;
+    color: inherit;
+}
+
+.user-profile-card a {
+    text-decoration: none;
+}
+
+.user-profile-card {
+    .card-header,
+    .profile-header {
+        background-color: $gray-200 !important;
+        border-top: 2px solid $primary-color !important;
+        padding: 0.75rem 1.25rem !important;
+    }
+    dt {
+        /*font-weight: normal;*/
+        color: $gray-700;
+    }
+}
+
+// CI Calendar
+.ci-calendar {
+    border: 2px solid $calendar-border;
+    th {
+        background: $calendar-heading-bg;
+        font-size: 1rem;
+        color: $white;
+        vertical-align: center !important;
+        text-align: center;
+    }
+    tr.wk_nm {
+        background: $calendar-week-bg;
+        color: $white;
+        /*font-weight:bold;*/
+    }
+    td {
+        text-align: center;
+        border: 1px solid $calendar-grid-border;
+        vertical-align: center !important;
+    }
+    td[data-calday='allowed_day'].day {
+        cursor: pointer;
+        a {
+            color: inherit;
+            &:hover {
+                text-decoration: none;
+            }
+        }
+    }
+    td[data-calday='disabled_day'] {
+        opacity: 0.5;
+        cursor: default !important;
+        background: $gray-lightest;
+    }
+    .highlight {
+        background: $today-highlight;
+        color: $white;
+    }
+    .prevcell a,
+    .nextcell a {
+        color: $white !important;
+        text-decoration: none !important;
+    }
+    .day.selected {
+        background: $day_selected !important;
+    }
+    .day.holiday {
+        background: $holiday;
+    }
+    .day.leave {
+        background: $leave;
+    }
+    .day.filled {
+        background: $has-data;
+    }
+}
+
+.i-today {
+    background-color: $today-highlight;
+}
+
+.i-selected {
+    background-color: $day_selected;
+}
+
+.i-leave {
+    background-color: $leave;
+}
+
+.i-holiday {
+    background-color: $holiday;
+}
+
+.i-has-data {
+    background-color: $has-data;
+}
+
+// AJAX Loader
+.ajax-loader-ui {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, .5);
+    .ajax-loader-img {
+        width: 100px;
+        height: 100px;
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        margin-left: -32px;
+        /* -1 * image width / 2 */
+        margin-top: -32px;
+        /* -1 * image height / 2 */
+        display: block;
+    }
+}
+
+// Nav Tabs
+.nav-link.active {
+    border: 0;
+    border-bottom: 1px solid $nav-tabs-border-color;
+}
+
+// PACE JS
+.pace {
+    pointer-events: none;
+    user-select: none;
+    .pace-progress {
+        background: #a9289a;
+        position: fixed;
+        z-index: 2000;
+        top: 0;
+        right: 100%;
+        width: 100%;
+        height: 2px
+    }
+    .pace-progress-inner {
+        display: block;
+        position: absolute;
+        right: 0;
+        width: 100px;
+        height: 100%;
+        box-shadow: 0 0 10px #a9289a, 0 0 5px #a9289a;
+        opacity: 1;
+        transform: rotate(3deg) translate(0px, -4px)
+    }
+}
+
+.pace-inactive {
+    display: none
+}
+
+.disabled {
+    opacity: .5;
+}
+
+.no-pointer {
+    pointer-events: none;
+}
+
+.disabled-item {
+    border: 1px solid $red;
+}
+
+//Card Legend
+.card-legend {
+    border-top-width: 2px;
+    border-top-color: $primary-color;
+    .text-on-card {
+        background: #fff none repeat scroll 0 0;
+        height: auto;
+        padding: 3px 5px;
+        position: absolute;
+        margin-top: -43px;
+        border-radius: 8px;
+    }
+    .card-body {
+        padding-top: 30px !important;
+    }
+}
+
+//DataTable Style Override
+table.ci-table.dataTable {
+    clear: both;
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+    max-width: none !important;
+    border-collapse: collapse !important;
+}
+
+//CI Accordion 
+.ci-accordion-card {
+    border: none;
+    .card-header {
+        padding: 0.5rem 0.25rem;
+        margin-bottom: 0;
+        border-bottom: 1px solid $primary-color;
+        background-color: transparent;
+    }
+    .card-body {
+        padding-left: 0px;
+    }
+}
+
+// CI Wizard - Step wise progress indicator
+.ci-wizard {
+    padding: 0 0 10px 0;
+    >.ci-wizard-step {
+        padding: 0;
+        position: relative;
+        @media(max-width: 575px) {
+            margin-top: 15px;
+            margin-bottom: 30px;
+            padding-top: 15px;
+        }
+        +.ci-wizard-step {}
+        .ci-wizard-stepnum {
+            color: $gray-700;
+        }
+        .ci-wizard-info {
+            color: $gray-700;
+            label {
+                cursor: pointer;
+            }
+        }
+        > {
+            .ci-wizard-dot {
+                position: absolute;
+                width: 30px;
+                height: 30px;
+                display: block;
+                background: lighten($yellow, 30%);
+                top: 45px;
+                left: 50%;
+                margin-top: -15px;
+                margin-left: -15px;
+                border-radius: 50%;
+                @media(max-width: 575px) {
+                    top: 0px;
+                }
+                &:after {
+                    content: ' ';
+                    width: 14px;
+                    height: 14px;
+                    background: $yellow;
+                    border-radius: 50px;
+                    position: absolute;
+                    top: 8px;
+                    left: 8px;
+                }
+            }
+            .ci-wizard-dot.A {
+                background: lighten($green, 30%);
+                &:after {
+                    background: $green;
+                }
+            }
+            .ci-wizard-dot.R {
+                background: lighten($red, 30%);
+                &:after {
+                    background: $red;
+                }
+            }
+            .progress {
+                position: relative;
+                border-radius: 0px;
+                height: 8px;
+                box-shadow: none;
+                margin: 20px 0;
+                @media(max-width: 575px) {
+                    display: none;
+                }
+                >.progress-bar {
+                    width: 0px;
+                    box-shadow: none;
+                    background: lighten($yellow, 30%);
+                }
+            }
+        }
+        &.complete>.progress>.progress-bar {
+            width: 100%;
+        }
+        &.active>.progress>.progress-bar {
+            width: 50%;
+        }
+        &:first-child.active>.progress>.progress-bar {
+            width: 0%;
+        }
+        &:last-child.active>.progress>.progress-bar {
+            width: 100%;
+        }
+        &.disabled>.ci-wizard-dot {
+            background-color: $gray-300;
+            &:after {
+                opacity: 0;
+            }
+        }
+        &:first-child>.progress {
+            left: 50%;
+            width: 50%;
+        }
+        &:last-child>.progress {
+            width: 50%;
+        }
+        &.disabled a.ci-wizard-dot {
+            pointer-events: none;
+        }
+    }
+}
+
+// Color Graph
+.colorgraph-1 {
+    height: 5px;
+    border-top: 0;
+    background: #c4e17f;
+    background-image: -webkit-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+    background-image: -moz-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+    background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+    background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+}
+
+.colorgraph-2 {
+    height: 5px;
+    border-top: 0;
+    background: #c4e17f;
+    background: -webkit-gradient(linear, left top, right top, from ($from_color), to ($to_color));
+    background: linear-gradient(to right, $from_color, $to_color);
+}
+
+.colorgraph-navbar::after {
+    content: "";
+    height: 5px;
+    background: -webkit-gradient(linear, left top, right top, from ($from_color), to ($to_color));
+    background: linear-gradient(to right, $from_color, $to_color);
+    width: 100%;
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+}
+
+//News Feed 
+.news-card {
+    .subject-title {
+        font-weight: 600;
+    }
+    .card-body {
+        padding: 15px;
+    }
+}
+
+// Generate Lighter Background
+// @each $color,
+// $value in $theme-colors {
+//     @include bg-variant(".bg-light-#{$color}", lighten($value, 30%));
+// }
+// CI card
+// .ci-card {
+//     border: none;
+//     .card-header {
+//         background-color: inherit;
+//         padding: 0.75rem 0rem;
+//     }
+//     .card-body {
+//         padding: 1.25rem 0rem;
+//     }
+// }
+//Navbar
+// Make nav bar scrolable in SM devices once menu items are many
+@media (max-width: 576px) {
+    .navbar-collapse {
+        max-height: 340px;
+        overflow-y: auto;
+    }
+}
+
+.no-toggle-icon {
+    .dropdown-toggle::after {
+        display: none;
+    }
+}
+
+.dropdown-toggle::after {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: -.3em 0 0 .4em;
+    vertical-align: middle;
+    content: "";
+    border: .3em solid;
+    border-width: 0 .15em .15em 0;
+    transform: rotatez(45deg);
+}
+
+.bg-black {
+    background-color: $black !important;
+}
+
+.navbar .nav-item {
+    margin: 0px 10px 0px 10px;
+}
+
+// .navbar-dark .navbar-nav .nav-link {
+//     &:hover,
+//     &:focus {
+//         text-decoration: underline;
+//     }
+// }
+.notification {
+    min-width: 270px;
+}
+
+.notification-title {
+    padding: 8px 20px;
+    text-align: center;
+    background-color: transparentize($primary-color, 0.6);
+    color: #333;
+}
+
+.notification-footer {
+    padding: 8px 20px;
+    text-align: center;
+    background-color: #eee;
+}
+
+.notification-content {
+    max-height: 220px;
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.2);
+    }
+}
+
+.notification-item {
+    display: flex;
+    padding: 8px 20px;
+    color: inherit;
+    border-bottom: 1px solid #ddd;
+    transition: background-color 0.3s ease;
+    &:focus,
+    &:hover {
+        color: inherit;
+        text-decoration: none;
+        background-color: #e0e0e0;
+    }
+}
+
+.notification-message,
+.notification-meta {
+    margin-bottom: 0;
+}
+
+.notification-icon {
+    padding-right: 10px;
+}
+
+.notification-message {
+    line-height: 1.2;
+}
+
+.notification-meta {
+    @extend .text-muted;
+}
+
+//Forms
+.form-signin {
+    padding: 15px;
+    width: 100%;
+    max-width: 350px;
+    /*margin:10vh auto;*/
+    .logo-2x {
+        width: 150px;
+    }
+}
+
+.form-signin .checkbox {
+    font-weight: 400;
+}
+
+.form-signin .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+}
+
+select.form-control.dob-inline {
+    display: inline !important;
+    width: auto;
+}
+
+.required {
+    color: $mandatory_field_star-color;
+    font-weight: bold;
+}
+
+// Custom Form Control
+.custom-control-label {
+    &::before {
+        border: $input-border-width solid $input-border-color;
+    }
+}
+
+// Select2 Style
+.select2-selection {
+    height: calc(2.0625rem + 2px) !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered,
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 31px !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 33px !important;
+}
+
+.select2-container--default .select2-selection--single {
+    border: $input-border-width solid $input-border-color !important;
+    // Note: This has no effect on <select>s in some browsers, due to the limited stylability of `<select>`s in CSS.
+    @if $enable-rounded {
+        // Manually use the if/else instead of the mixin to account for iOS override
+        border-radius: $input-border-radius;
+    }
+    @else {
+        // Otherwise undo the iOS default
+        border-radius: 0;
+    }
+    @include box-shadow($input-box-shadow);
+    @include transition($input-transition);
+    // Unstyle the caret on `<select>`s in IE10+.
+    &::-ms-expand {
+        background-color: transparent;
+        border: 0;
+    }
+    // Customize the `:focus` state to imitate native WebKit styles.
+    @include form-control-focus();
+}
+
+.ci-select2 {
+    .select2-container {
+        max-width: 100%;
+    }
+}
+
+.card-login {
+    max-width: 25rem;
+}
+
+// Bootstrap 4 Floating Label
+.form-label-group {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.form-label-group {
+    label,
+    input {
+        padding: 0.75rem 0.75rem;
+    }
+    label {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: block;
+        width: 100%;
+        margin-bottom: 0;
+        /* Override default `<label>` margin */
+        line-height: 1.5;
+        color: $gray-700;
+        border: 1px solid transparent;
+        border-radius: .25rem;
+        transition: all .1s ease-in-out;
+    }
+    input:-ms-input-placeholder,
+    input::-ms-input-placeholder,
+    input::-moz-placeholder,
+    input::placeholder {
+        color: transparent;
+    }
+    input:not(:placeholder-shown) {
+        padding-top: calc(0.75rem + 0.75rem * (2 / 3));
+        padding-bottom: calc(0.75rem / 3);
+    }
+    input:not(:placeholder-shown)~label {
+        padding-top: calc(0.75rem / 3);
+        padding-bottom: calc(0.75rem / 3);
+        font-size: 12px;
+        color: $gray-600;
+    }
+    .form-control {
+        height: auto;
+    }
+}

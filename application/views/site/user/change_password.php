@@ -1,7 +1,7 @@
 <?php //echo isset($breadcrumbs) ? $breadcrumbs : ''; ?>
 <div class="row heading-container">
     <div class="col-12">
-        <h1 class="page-heading"><?php echo isset($page_heading)? $page_heading:'Page Heading'; ?></h1>
+        <h1 class="page-title"><?php echo isset($page_title)? $page_title:'Page Heading'; ?></h1>
     </div>
 </div><!--/.heading-container-->
 
@@ -87,7 +87,7 @@
                             <?php echo form_error('confirm_user_new_password'); ?>
                         </div>
 
-                        <?php echo form_button(array('name' => 'submit_btn','type' => 'submit','content' => '<i class="fa fa-fw fa-check-circle"></i> Submit','class' => 'btn btn-primary'));?>
+                        <?php echo form_button(array('name' => 'submit_btn','type' => 'submit','content' => 'Submit','class' => 'btn btn-primary'));?>
                         <?php echo form_close(); ?>
                     <!--</div>
                 </div>

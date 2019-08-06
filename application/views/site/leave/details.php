@@ -5,7 +5,7 @@ $row = $data_rows[0];
 ?>
 <div class="row heading-container">
     <div class="col-12">
-        <h1 class="page-heading"><?php echo isset($page_heading)? $page_heading:'Page Heading'; ?></h1>
+        <h1 class="page-title"><?php echo isset($page_title)? $page_title:'Page Heading'; ?></h1>
     </div>
 </div><!--/.heading-container-->
 
@@ -255,8 +255,8 @@ $row = $data_rows[0];
         
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-fw fa-times-circle"></i> Close</button>
-        <button type="button" id="btnManageLeave" class="btn btn-primary"><i class="fa fa-fw fa-check-circle"></i> Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" id="btnManageLeave" class="btn btn-primary">Save changes</button>
         
       </div>
     </div>

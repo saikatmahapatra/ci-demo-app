@@ -1,6 +1,6 @@
 <div class="row heading-container mb-3">
     <div class="col-12">
-        <h1 class="page-heading"><?php echo isset($page_heading)? $page_heading:'Page Heading'; ?></h1>
+        <h1 class="page-title"><?php echo isset($page_title)? $page_title:'Page Heading'; ?></h1>
     </div>
 </div><!--/.heading-container-->
 <?php //echo isset($breadcrumbs) ? $breadcrumbs : ''; ?>
@@ -53,28 +53,46 @@
 <?php } ?>
 
 <?php if( isset($data_rows) && sizeof($data_rows) > 0 ){ ?>
-<div class="card mt-4">
-  <div class="card-header h5">
-  <i class="fa fa-newspaper-o text-primary" aria-hidden="true"></i> News & Updates
-  </div>
-  <div class="card-body">
-    <?php foreach($data_rows as $key=>$row) { ?>
-        <div class="my-2 py-2 border-bottom border-gray">
-            <div class="mb-0 lh-125" style="max-height: 130px; overflow: hidden;">
-                    <div class="text-gray-dark h4"><a class="" href="<?php echo base_url($this->router->directory.$this->router->class.'/details/'.$row['id']);?>"><?php echo isset($row['pagecontent_title']) ? $row['pagecontent_title'] : '';?></a></div>
-                    <strong class="text-muted text-gray-dark small">
-                        <?php echo $content_type[$row['pagecontent_type']]['text']; ?>
-                        <?php echo isset($row['user_firstname']) ? "By ".$row['user_firstname'] : '';?>
-                        <?php echo isset($row['user_lastname']) ? $row['user_lastname'].", " : '';?>
-                        <?php echo $this->common_lib->display_date($row['pagecontent_created_on'],true,null,'d-M-Y h:i:sa'); ?>
-                    </strong>
-                    <?php echo isset($row['pagecontent_text']) ? $this->common_lib->remove_empty_p($row['pagecontent_text']) : '';?>
+	<div class="card news-card">
+            <div class="card-header h6">
+            <i class="fa fa-newspaper-o fa-lg" aria-hidden="true"></i> News
             </div>
-        </div>
-    <?php } ?>
-    <div class="my-3">
-        <?php echo $pagination_link;?>
-    </div>
-  </div>
-</div>
+            <div class="card-body">
+            
+                <ul class="list-group list-group-flush">
+                <?php foreach($data_rows as $key=>$row) { ?>
+                    <li class="list-group-item">
+                        <div class="subject-title"><a class="" href="<?php echo base_url($this->router->directory.$this->router->class.'/details/'.$row['id']);?>"><?php echo isset($row['pagecontent_title']) ? $row['pagecontent_title'] : '';?></a></div>
+                        <div class="text-muted small">
+                            <?php echo $content_type[$row['pagecontent_type']]['text']; ?>
+                            <?php echo isset($row['user_firstname']) ? "By ".$row['user_firstname'] : '';?>
+                            <?php echo isset($row['user_lastname']) ? $row['user_lastname'].", " : '';?>
+                            <?php echo $this->common_lib->display_date($row['pagecontent_created_on'],true,null,'d-M-Y h:i:s a'); ?>
+                        </div>
+                        <div class="mb-0 lh-125" style="max-height: 120px; overflow: hidden;">
+                            <?php echo isset($row['pagecontent_text']) ? ($this->common_lib->remove_empty_p($row['pagecontent_text'])) : '';?>
+                        </div>
+                    </li>
+                <?php }  ?>
+                </ul>
+
+                <?php /*foreach($data_rows as $key=>$row) { ?>
+                    <div class="my-2 py-2 border-bottom border-gray">
+                        <div class="mb-0 lh-125" style="max-height: 130px; overflow: hidden;">
+                                <div class="subject-title"><a class="" href="<?php echo base_url($this->router->directory.$this->router->class.'/details/'.$row['id']);?>"><?php echo isset($row['pagecontent_title']) ? $row['pagecontent_title'] : '';?></a></div>
+                                <strong class="text-muted small">
+                                    <?php echo $content_type[$row['pagecontent_type']]['text']; ?>
+                                    <?php echo isset($row['user_firstname']) ? "By ".$row['user_firstname'] : '';?>
+                                    <?php echo isset($row['user_lastname']) ? $row['user_lastname'].", " : '';?>
+                                    <?php echo $this->common_lib->display_date($row['pagecontent_created_on'],true,null,'d-M-Y h:i:sa'); ?>
+                                </strong>
+                                <?php echo isset($row['pagecontent_text']) ? $this->common_lib->remove_empty_p($row['pagecontent_text']) : '';?>
+                        </div>
+                    </div>
+                <?php } */ ?>
+            </div>
+            <div class="card-footer text-center">
+                <?php echo $pagination_link;?>
+            </div>
+        </div><!--/.card-->
 <?php } ?>

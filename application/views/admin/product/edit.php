@@ -4,7 +4,7 @@ $row = $rows[0];
 <?php //echo isset($breadcrumbs) ? $breadcrumbs : ''; ?>
 <div class="row heading-container">
     <div class="col-md-12">
-        <h1 class="page-heading"><?php echo isset($page_heading)? $page_heading:'Page Heading'; ?></h1>
+        <h1 class="page-title"><?php echo isset($page_title)? $page_title:'Page Heading'; ?></h1>
     </div>
 </div><!--/.heading-container-->
 
@@ -139,8 +139,8 @@ $row = $rows[0];
 					</div>
 				</div>
 				
-				<?php echo form_button(array('name' => 'submit_btn','type' => 'submit','content' => '<i class="fa fa-fw fa-check-circle"></i> Submit','class' => 'btn btn-primary'));?>
-				<a href="<?php echo base_url($this->router->directory.'product');?>" class="ml-2 btn btn-secondary"><i class="fa fa-fw fa-times-circle"></i> Cancel</a>
+				<?php echo form_button(array('name' => 'submit_btn','type' => 'submit','content' => 'Submit','class' => 'btn btn-primary'));?>
+				<a href="<?php echo base_url($this->router->directory.'product');?>" class="ml-2 btn btn-secondary">Cancel</a>
 				<?php echo form_close(); ?>
 			</div><!--/#nav-info-->
 			
@@ -172,7 +172,7 @@ $row = $rows[0];
 								<span class="font-weight-bold">pdf, doc, docx, png, jpg, jpeg</span> are allowed for docs. <span class="font-weight-bold">jpg, jpeg, png</span> are allowed for images. Maximum file size: <span class="font-weight-bold">2MB</span>
 							</div>
 						</div>
-						<?php echo form_button(array('name' => 'submit_btn','type' => 'submit','content' => '<i class="fa fa-fw fa-check-circle"></i> Upload','class' => 'btn btn-primary'));?>
+						<?php echo form_button(array('name' => 'submit_btn','type' => 'submit','content' => 'Upload','class' => 'btn btn-primary'));?>
 						<?php echo form_close(); ?>
 					</div>
 					
