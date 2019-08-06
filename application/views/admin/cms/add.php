@@ -1,7 +1,7 @@
 <?php //echo isset($breadcrumbs) ? $breadcrumbs : ''; ?>
 <div class="row heading-container">
     <div class="col-12">
-        <h1 class="page-heading"><?php echo isset($page_heading)? $page_heading:'Page Heading'; ?></h1>
+        <h1 class="page-title"><?php echo isset($page_title)? $page_title:'Page Heading'; ?></h1>
     </div>
 </div><!--/.heading-container-->
 
@@ -20,19 +20,19 @@
 
 		
 		<div class="form-row">
-			<div class="form-group col-md-4">									
+			<div class="form-group col-md-4">
 				<label for="pagecontent_type" class="">Content Type <span class="required">*</span></label>
 				<?php echo form_dropdown('pagecontent_type', $arr_content_type, set_value('pagecontent_type'), array('class' => 'form-control',));?>
 				<?php echo form_error('pagecontent_type'); ?>
 			</div>
-			<div class="form-group col-md-8">									
+			<div class="form-group col-md-8">
 				<label for="pagecontent_title" class="">Content Title <span class="required">*</span></label>
 				<?php echo form_input(array('name' => 'pagecontent_title', 'value' => set_value('pagecontent_title'), 'id' => 'pagecontent_title', 'class' => 'form-control', 'placeholder' => ''));?>
 				<?php echo form_error('pagecontent_title'); ?>
 			</div>		
 		</div>
 		
-		<div class="form-group">									
+		<div class="form-group">
 			<label for="pagecontent_text" class="">Content (HTML) <span class="required">*</span></label>
 			<?php echo form_textarea(array('name' => 'pagecontent_text','value' => set_value('pagecontent_text'),'class' => 'form-control textarea','id' => 'pagecontent_text','rows' => '2','cols' => '50','placeholder' => '')); ?>
 			<?php echo form_error('pagecontent_text'); ?>
@@ -104,8 +104,8 @@
 		</div>
 
 
-		<?php echo form_button(array('name' => 'submit_btn','type' => 'submit','content' => '<i class="fa fa-fw fa-check-circle"></i> Submit','class' => 'btn btn-primary'));?>
-		<a href="<?php echo base_url($this->router->directory.$this->router->class);?>" class="ml-2 btn btn-secondary"><i class="fa fa-fw fa-times-circle"></i> Cancel</a>
+		<?php echo form_button(array('name' => 'submit_btn','type' => 'submit','content' => 'Submit','class' => 'btn btn-primary'));?>
+		<a href="<?php echo base_url($this->router->directory.$this->router->class);?>" class="ml-2 btn btn-secondary">Cancel</a>
 		<?php echo form_close(); ?>
 	</div>
 </div>

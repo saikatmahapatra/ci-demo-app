@@ -1,4 +1,4 @@
-<div class="text-muted my-2 text-center">
+<div class="text-muted my-2 text-center small">
     <div class="">
         <?php echo $this->config->item('app_admin_copy_right');?>
     </div>

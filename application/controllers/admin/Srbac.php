@@ -44,7 +44,7 @@ class Srbac extends CI_Controller {
         $this->id = $this->uri->segment(3);
         $this->data['arr_content_type'] = $this->cms_model->get_pagecontent_type();
 
-        $this->data['page_heading'] = $this->router->class.' : '.$this->router->method;
+        $this->data['page_title'] = $this->router->class.' : '.$this->router->method;
 		
 		// load Breadcrumbs
 		$this->load->library('breadcrumbs');
@@ -71,7 +71,7 @@ class Srbac extends CI_Controller {
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
 		
-		$this->data['page_heading'] = 'SRBAC';
+		$this->data['page_title'] = 'SRBAC';
         $this->data['maincontent'] = $this->load->view('admin/'.$this->router->class.'/index', $this->data, true);
         $this->load->view('admin/_layouts/layout_default', $this->data);
     }
@@ -108,7 +108,7 @@ class Srbac extends CI_Controller {
         $result_array = $this->cms_model->get_rows(NULL, $per_page, $offset, FALSE, TRUE);
         $this->data['data_rows'] = $result_array['data_rows'];
 		
-		$this->data['page_heading'] = 'Website Contents (CI Pagination Version)';
+		$this->data['page_title'] = 'Website Contents (CI Pagination Version)';
         $this->data['maincontent'] = $this->load->view('admin/'.$this->router->class.'/index_ci_pagination', $this->data, true);
         $this->load->view('admin/_layouts/layout_default', $this->data);
     }
@@ -170,7 +170,7 @@ class Srbac extends CI_Controller {
     function add() {
         //Check user permission by permission name mapped to db
         //$is_authorized = $this->common_lib->is_auth('cms-add');
-        //$this->data['page_heading'] = "Add Page Content";
+        //$this->data['page_title'] = "Add Page Content";
 		$this->breadcrumbs->push('Add','/');				
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
@@ -198,7 +198,7 @@ class Srbac extends CI_Controller {
                 }
             }
         }
-		$this->data['page_heading'] = 'Add Roles | Permission';
+		$this->data['page_title'] = 'Add Roles | Permission';
         $this->data['maincontent'] = $this->load->view('admin/'.$this->router->class.'/add', $this->data, true);
         $this->load->view('admin/_layouts/layout_default', $this->data);
     }
@@ -206,7 +206,7 @@ class Srbac extends CI_Controller {
     function edit() {
         //Check user permission by permission name mapped to db
         //$is_authorized = $this->common_lib->is_auth('cms-edit');
-		//$this->data['page_heading'] = "Edit Page Content";
+		//$this->data['page_title'] = "Edit Page Content";
 		$this->breadcrumbs->push('Edit','/');				
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
@@ -237,7 +237,7 @@ class Srbac extends CI_Controller {
         }
         $result_array = $this->cms_model->get_rows($this->id);
         $this->data['rows'] = $result_array['data_rows'];
-		$this->data['page_heading'] = 'Edit Roles | Permission';
+		$this->data['page_title'] = 'Edit Roles | Permission';
         $this->data['maincontent'] = $this->load->view('admin/'.$this->router->class.'/edit', $this->data, true);
         $this->load->view('admin/_layouts/layout_default', $this->data);
     }

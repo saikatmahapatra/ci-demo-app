@@ -42,7 +42,7 @@ class Timesheet extends CI_Controller {
 		$this->data['timesheet_hours'] = $this->timesheet_model->get_timesheet_hours_dropdown();
 		
 		//View Page Config
-		$this->data['page_heading'] = $this->router->class.' : '.$this->router->method;
+		$this->data['page_title'] = $this->router->class.' : '.$this->router->method;
         
     }
 	
@@ -92,7 +92,7 @@ class Timesheet extends CI_Controller {
 		$data = array();
 		$this->data['cal'] = $this->calendar->generate($year,$month,$data);
 		$month_name = date('M', mktime(0, 0, 0, $month, 10));		
-		$this->data['page_heading'] = 'My Timesheet : '.$month_name.' '.$year;
+		$this->data['page_title'] = 'My Timesheet : '.$month_name.' '.$year;
 		
 		$this->add();
 		
@@ -285,7 +285,7 @@ class Timesheet extends CI_Controller {
         if(sizeof($this->data['rows'])<=0){
             redirect($this->router->directory.$this->router->class);
         }
-		$this->data['page_heading'] = 'Edit Timesheet Entry for ';
+		$this->data['page_title'] = 'Edit Timesheet Entry for ';
         $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/edit', $this->data, true);
         $this->load->view('site/_layouts/layout_default', $this->data);
     }
