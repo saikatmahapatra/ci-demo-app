@@ -1,7 +1,7 @@
 <?php //echo isset($breadcrumbs) ? $breadcrumbs : ''; ?>
 <div class="row heading-container">
     <div class="col-md-12">
-        <h1 class="page-heading"><?php echo isset($page_heading)? $page_heading:'Page Heading'; ?></h1>
+        <h1 class="page-title"><?php echo isset($page_title)? $page_title:'Page Heading'; ?></h1>
     </div>
 </div><!--/.heading-container-->
 
@@ -38,7 +38,7 @@
 			<div id="display_selected_date">no date selected</div>
 			<?php echo form_error('selected_date'); ?>
 		</div>			
-		<button type="submit" class="btn btn-primary"><i class="fa fa-fw fa-check-circle"></i> Submit</button>
+		<button type="submit" class="btn btn-primary">Submit</button>
 		<?php echo form_close(); ?>
 	</div>
 </div>

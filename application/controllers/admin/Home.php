@@ -40,7 +40,7 @@ class Home extends CI_Controller {
 
         $this->data['alert_message'] = NULL;
         $this->data['alert_message_css'] = NULL;
-        $this->data['page_heading'] = $this->router->class.' : '.$this->router->method;
+        $this->data['page_title'] = $this->router->class.' : '.$this->router->method;
 		
 		// load Breadcrumbs
 		$this->load->library('breadcrumbs');
@@ -57,7 +57,7 @@ class Home extends CI_Controller {
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
 		
-		$this->data['page_heading'] = "Dashboard";
+		$this->data['page_title'] = "Dashboard";
         $this->data['maincontent'] = $this->load->view('admin/'.$this->router->class.'/index', $this->data, true);
         $this->load->view('admin/_layouts/layout_default', $this->data);
     }

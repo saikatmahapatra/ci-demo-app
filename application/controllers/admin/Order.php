@@ -55,7 +55,7 @@ class Order extends CI_Controller {
             'A'=>array('text'=>'Archived', 'css'=>'text-danger', 'icon'=>'<i class="fa fa-circle text-danger" aria-hidden="true"></i>')
         );
         
-        $this->data['page_heading'] = $this->router->class.' : '.$this->router->method;
+        $this->data['page_title'] = $this->router->class.' : '.$this->router->method;
 		
 		// load Breadcrumbs
 		$this->load->library('breadcrumbs');
@@ -70,7 +70,7 @@ class Order extends CI_Controller {
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
-		$this->data['page_heading'] = 'Online Orders';
+		$this->data['page_title'] = 'Online Orders';
         $this->data['maincontent'] = $this->load->view('admin/'.$this->router->class.'/index', $this->data, true);
         $this->load->view('admin/_layouts/layout_default', $this->data);
     }
@@ -181,7 +181,7 @@ class Order extends CI_Controller {
         $this->data['rows'] = $result_array['data_rows'];
         $this->data['odetails'] = $order_details_result_array['data_rows'];
 		
-		$this->data['page_heading'] = 'Manage Order';
+		$this->data['page_title'] = 'Manage Order';
         $this->data['maincontent'] = $this->load->view('admin/'.$this->router->class.'/edit', $this->data, true);
         $this->load->view('admin/_layouts/layout_default', $this->data);
     }

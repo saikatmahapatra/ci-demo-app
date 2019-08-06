@@ -44,7 +44,7 @@ class Cms extends CI_Controller {
 
         $this->data['alert_message'] = NULL;
         $this->data['alert_message_css'] = NULL;
-        $this->data['page_heading'] = $this->router->class.' : '.$this->router->method;
+        $this->data['page_title'] = $this->router->class.' : '.$this->router->method;
         
 		$this->data['arr_content_type'] = $this->cms_model->get_pagecontent_type();
 		// load Breadcrumbs
@@ -79,7 +79,7 @@ class Cms extends CI_Controller {
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
 		
-		$this->data['page_heading'] = 'Website CMS - Contents';
+		$this->data['page_title'] = 'Website CMS - Contents';
         $this->data['maincontent'] = $this->load->view('admin/'.$this->router->class.'/index', $this->data, true);
         $this->load->view('admin/_layouts/layout_default', $this->data);
     }
@@ -112,7 +112,7 @@ class Cms extends CI_Controller {
         $result_array = $this->cms_model->get_rows(NULL, $per_page, $offset, FALSE, TRUE);
         $this->data['data_rows'] = $result_array['data_rows'];
 		
-		$this->data['page_heading'] = 'Website Contents (CI Pagination Version)';
+		$this->data['page_title'] = 'Website Contents (CI Pagination Version)';
         $this->data['maincontent'] = $this->load->view('admin/'.$this->router->class.'/index_ci_pagination', $this->data, true);
         $this->load->view('admin/_layouts/layout_default', $this->data);
     }
@@ -174,7 +174,7 @@ class Cms extends CI_Controller {
     function add() {
         //Check user permission by permission name mapped to db
         //$is_authorized = $this->common_lib->is_auth('cms-add');
-        //$this->data['page_heading'] = "Add Page Content";
+        //$this->data['page_title'] = "Add Page Content";
 		$this->breadcrumbs->push('Add','/');				
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
@@ -202,7 +202,7 @@ class Cms extends CI_Controller {
                 }
             }
         }
-		$this->data['page_heading'] = 'Add Contents';
+		$this->data['page_title'] = 'Add Contents';
         $this->data['maincontent'] = $this->load->view('admin/'.$this->router->class.'/add', $this->data, true);
         $this->load->view('admin/_layouts/layout_default', $this->data);
     }
@@ -210,7 +210,7 @@ class Cms extends CI_Controller {
     function edit() {
         //Check user permission by permission name mapped to db
         //$is_authorized = $this->common_lib->is_auth('cms-edit');
-		//$this->data['page_heading'] = "Edit Page Content";
+		//$this->data['page_title'] = "Edit Page Content";
 		$this->breadcrumbs->push('Edit','/');				
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
@@ -241,7 +241,7 @@ class Cms extends CI_Controller {
         }
         $result_array = $this->cms_model->get_rows($this->id);
         $this->data['rows'] = $result_array['data_rows'];
-		$this->data['page_heading'] = 'Edit Contents';
+		$this->data['page_title'] = 'Edit Contents';
         $this->data['maincontent'] = $this->load->view('admin/'.$this->router->class.'/edit', $this->data, true);
         $this->load->view('admin/_layouts/layout_default', $this->data);
     }
@@ -361,7 +361,7 @@ class Cms extends CI_Controller {
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
 		
-		$this->data['page_heading'] = 'Carousel';
+		$this->data['page_title'] = 'Carousel';
         $this->data['maincontent'] = $this->load->view('admin/'.$this->router->class.'/manage_banner', $this->data, true);
         $this->load->view('admin/_layouts/layout_default', $this->data);
     }
@@ -374,7 +374,7 @@ class Cms extends CI_Controller {
         if ($this->input->post('form_action') == 'insert') {
 			$this->upload_file();            
         }
-		$this->data['page_heading'] = 'Create a Carousel Slider';
+		$this->data['page_title'] = 'Create a Carousel Slider';
         $this->data['maincontent'] = $this->load->view('admin/'.$this->router->class.'/add_banner', $this->data, true);
         $this->load->view('admin/_layouts/layout_default', $this->data);
     }
@@ -389,7 +389,7 @@ class Cms extends CI_Controller {
         }
 		$result_array = $this->upload_model->get_uploads($this->id, NULL, NULL, FALSE, FALSE, NULL);
         $this->data['rows'] = $result_array['data_rows'];		
-		$this->data['page_heading'] = 'Edit Carousel Slider';
+		$this->data['page_title'] = 'Edit Carousel Slider';
         $this->data['maincontent'] = $this->load->view('admin/'.$this->router->class.'/edit_banner', $this->data, true);
         $this->load->view('admin/_layouts/layout_default', $this->data);
     }

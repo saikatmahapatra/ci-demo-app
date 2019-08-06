@@ -20,7 +20,7 @@ class Error extends CI_Controller {
         $javascript_files = array();
         $this->data['app_js'] = $this->common_lib->add_javascript($javascript_files);
 		
-		$this->data['page_heading'] = $this->router->class.' : '.$this->router->method;
+		$this->data['page_title'] = $this->router->class.' : '.$this->router->method;
     }
 
     function index() {
@@ -29,14 +29,14 @@ class Error extends CI_Controller {
 
     function page_not_found() {
         $data = array();
-		$this->data['page_heading'] = "Error 404 Page not found";
+		$this->data['page_title'] = "Error 404 Page not found";
         $this->data['maincontent'] = $this->load->view('admin/errors/error_404', $this->data, true);
         $this->load->view('admin/_layouts/layout_default', $this->data);
     }
 	
 	function auth() {
 		$data = array();
-		$this->data['page_heading'] = "Authorization Error Occured";
+		$this->data['page_title'] = "Authorization Error Occured";
         $this->data['maincontent'] = $this->load->view('admin/errors/auth_error', $this->data, true);
         $this->load->view('admin/_layouts/layout_default', $this->data);
     }

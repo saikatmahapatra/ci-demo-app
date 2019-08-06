@@ -40,6 +40,8 @@ $color_orange: #DC572E;
 $color_green: #00A600;
 $color_blue: #2672EC;
 $bootstrap3_blue: #337ab7;
+//Override Default Colors
+//$blue: $bootstrap3_blue;
 //Generate Light Dark Colors
 $gray-lightest: lighten($black, 97.25%);
 $gray-lighter: lighten($black, 93.5%);
@@ -48,8 +50,7 @@ $gray: lighten($black, 33.5%);
 $gray-dark: lighten($black, 20%);
 $gray-darker: lighten($black, 13.5%);
 //Override primary color (Nav, Button, Link)
-$brand-color: #1e4bb2;
-$primary-color: $brand-color;
+$primary-color: #1e4bb2;
 // Complementry color is used to indecate the loading bar on the top
 // of the page with pace.js plugin
 $complementry-color: adjust_hue($primary-color, 180);
@@ -66,26 +67,6 @@ $has-data: lighten($color_green, 50%);
 // Validation Error Message Colors
 $validation-error-color: $red;
 $mandatory_field_star-color: $red;
-//Error Heading
-$custom_error_info: $red;
-//Ajax Loader
-$ajaxloader-color: $primary-color;
-// ------- Sidebar Width --------
-$sidebar-width: 230px;
-// ------- Sidebar Colors --------
-// Background color of sidebar
-$sidebar-color: $gray-900;
-// -- Suggested sidebar background colors
-// dark  : #222d32
-// light : #f8f8f8
-// Sidebar accent varible is used to determine the color of the links
-// of the sidebar. The allowed values are 'light' or 'dark' only
-$sidebar-accent: dark;
-// The following varibles indecate sidebar link color
-// and link hover color when using a dark sidebar color
-$sidebar-dark-color: $white;
-$sidebar-dark-link-color: $white;
-// The following varibles indecate sidebar link color
-// and link hover color when using a light sidebar color
-$sidebar-light-color: $black;
-$sidebar-light-link-color: $gray-600;
+// Colorgraph
+$from_color: #a8ff1b;
+$to_color: #cf1180;

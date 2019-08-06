@@ -26,7 +26,7 @@ class User extends CI_Controller {
         );
         $this->data['app_js'] = $this->common_lib->add_javascript($javascript_files);
         
-        $this->data['page_heading'] = $this->router->class.' : '.$this->router->method;
+        $this->data['page_title'] = $this->router->class.' : '.$this->router->method;
         
 		
 		// load Breadcrumbs
@@ -49,7 +49,7 @@ class User extends CI_Controller {
 		$this->data['arr_designations'] = $this->user_model->get_designation_dropdown('Y');
 		$this->data['arr_departments'] = $this->user_model->get_department_dropdown();
 		$this->data['arr_user_title'] = array(''=>'Select Title','Mr.'=>'Mr.','Mrs.'=>'Mrs.','Dr.'=>'Dr.','Ms.'=>'Ms.');
-		$this->data['blood_group'] = array(''=>'Select','O+'=>'O+','O-'=>'O-','A+'=>'A+','A-'=>'A-','B+'=>'B+','B-'=>'B-','AB+'=>'AB+','AB-'=>'AB-');
+		$this->data['blood_group'] = array(''=>'Select','O+'=>'O+','O-'=>'O-','A+'=>'A+','A-'=>'A-','B+'=>'B+','B-'=>'B-','AB+'=>'AB+','AB-'=>'AB-','NA'=>'Unknown');
 		
 		// Status flag indicator for showing in table grid etc
 		$this->data['status_flag'] = array(
@@ -85,7 +85,7 @@ class User extends CI_Controller {
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
 		
-		$this->data['page_heading'] = 'Manage Users';
+		$this->data['page_title'] = 'Manage Users';
         $this->data['maincontent'] = $this->load->view('admin/'.$this->router->class.'/manage', $this->data, true);
         $this->load->view('admin/_layouts/layout_default', $this->data);
     }
@@ -156,6 +156,7 @@ class User extends CI_Controller {
         ########### Validate User Auth End #############
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
+        
         if ($this->input->post('form_action') == 'login') {
             if ($this->validate_login_form_data() == true) {
                 $email = $this->input->post('user_email');
@@ -183,7 +184,8 @@ class User extends CI_Controller {
                 }
             }
         }
-		$this->data['page_heading'] = 'Please sign in';
+
+		$this->data['page_title'] = 'Please sign in';
         $this->data['maincontent'] = $this->load->view('admin/'.$this->router->class.'/login', $this->data, true);
         $this->load->view('admin/_layouts/layout_login', $this->data);
     }
@@ -193,7 +195,7 @@ class User extends CI_Controller {
     }
 
     function auth_error() {        
-		$this->data['page_heading'] = 'Authorization Error Occured';
+		$this->data['page_title'] = 'Authorization Error Occured';
         $this->data['maincontent'] = $this->load->view('admin/'.$this->router->class.'/auth_error', $this->data, true);
         $this->load->view('admin/_layouts/layout_login', $this->data);
     }
@@ -283,7 +285,7 @@ class User extends CI_Controller {
                 }
             }
         }
-		$this->data['page_heading'] = "Add New User";
+		$this->data['page_title'] = "Add New User";
         $this->data['maincontent'] = $this->load->view('admin/'.$this->router->class.'/create_account', $this->data, true);
         $this->load->view('admin/_layouts/layout_default', $this->data);
     }
@@ -387,7 +389,7 @@ class User extends CI_Controller {
                 }
             }
         }
-		$this->data['page_heading'] = 'Forgot Password?';
+		$this->data['page_title'] = 'Forgot Password?';
         $this->data['maincontent'] = $this->load->view('admin/'.$this->router->class.'/forgot_password', $this->data, true);
         $this->load->view('admin/_layouts/layout_login', $this->data);
     }
@@ -440,7 +442,7 @@ class User extends CI_Controller {
                 }
             }
         }
-		$this->data['page_heading'] = 'Create New Password';
+		$this->data['page_title'] = 'Create New Password';
         $this->data['maincontent'] = $this->load->view('admin/'.$this->router->class.'/reset_password', $this->data, true);
         $this->load->view('admin/_layouts/layout_login', $this->data);
     }
@@ -502,7 +504,7 @@ class User extends CI_Controller {
                 redirect(current_url());
             }
         }
-		$this->data['page_heading'] = 'Change Password';
+		$this->data['page_title'] = 'Change Password';
         $this->data['maincontent'] = $this->load->view('admin/'.$this->router->class.'/change_password', $this->data, true);
         $this->load->view('admin/_layouts/layout_default', $this->data);
     }
@@ -560,7 +562,7 @@ class User extends CI_Controller {
         ########### Validate User Auth End #############
 		
 		//View Page Config
-        $this->data['page_heading'] = "Profile";
+        $this->data['page_title'] = "Profile";
         $this->breadcrumbs->push('Profile','/');				
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
 
@@ -574,7 +576,7 @@ class User extends CI_Controller {
 		$this->data['address'] = $this->user_model->get_user_address(NULL,$user_id,NULL);
         $this->data['education'] = $this->user_model->get_user_education(NULL, $user_id);
         $this->data['job_exp'] = $this->user_model->get_user_work_experience(NULL, $user_id);
-		$this->data['page_heading'] = 'Profile';
+		$this->data['page_title'] = 'Profile';
         $this->data['maincontent'] = $this->load->view('admin/'.$this->router->class.'/profile', $this->data, true);
         $this->load->view('admin/_layouts/layout_default', $this->data);
     }
@@ -593,7 +595,7 @@ class User extends CI_Controller {
         ########### Validate User Auth End #############
 		
 		//View Page Config
-        $this->data['page_heading'] = "My Profile";
+        $this->data['page_title'] = "My Profile";
         $this->breadcrumbs->push('Profile','/');				
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
 
@@ -607,7 +609,7 @@ class User extends CI_Controller {
 		$this->data['address'] = $this->user_model->get_user_address(NULL,$user_id,NULL);
         $this->data['education'] = $this->user_model->get_user_education(NULL, $user_id);
         $this->data['job_exp'] = $this->user_model->get_user_work_experience(NULL, $user_id);
-		$this->data['page_heading'] = 'My Profile';
+		$this->data['page_title'] = 'My Profile';
         $this->data['maincontent'] = $this->load->view('admin/'.$this->router->class.'/my_profile', $this->data, true);
         $this->load->view('admin/_layouts/layout_default', $this->data);
     }
@@ -713,7 +715,7 @@ class User extends CI_Controller {
             }
         }
 	
-		$this->data['page_heading'] = 'Edit Basic Information';
+		$this->data['page_title'] = 'Edit Basic Information';
         $this->data['maincontent'] = $this->load->view('admin/'.$this->router->class.'/edit_profile', $this->data, true);
         $this->load->view('admin/_layouts/layout_default', $this->data);
     }
@@ -765,7 +767,7 @@ class User extends CI_Controller {
             $this->upload_file();
         }
 	
-		$this->data['page_heading'] = 'Profile Photo';
+		$this->data['page_title'] = 'Profile Photo';
         $this->data['maincontent'] = $this->load->view('admin/'.$this->router->class.'/profile_pic', $this->data, true);
         $this->load->view('admin/_layouts/layout_default', $this->data);
     }

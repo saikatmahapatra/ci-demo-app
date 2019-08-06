@@ -42,7 +42,7 @@ class Shop extends CI_Controller {
         $this->cart->product_name_rules = '[:print:]'; // allow any characters in product name while add to cart  
 		$this->data['payment_method'] = array('cod'=>'Cash On Delivery','debit_card' => 'Debit Card', 'credit_card' => 'Credit Card', 'net_banking' => 'Net Banking');
 		
-        $this->data['page_heading'] = $this->router->class.' : '.$this->router->method;
+        $this->data['page_title'] = $this->router->class.' : '.$this->router->method;
 		
 		// load Breadcrumbs
 		$this->load->library('breadcrumbs');
@@ -62,7 +62,7 @@ class Shop extends CI_Controller {
         $result = $this->product_model->get_rows();
         $this->data['total_products'] = $result['num_rows'];
         $this->data['products'] = $result['data_rows'];
-		$this->data['page_heading'] = 'Shop Online';
+		$this->data['page_title'] = 'Shop Online';
         $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/store', $this->data, true);
         $this->load->view('site/_layouts/layout_default', $this->data);
     }
@@ -73,7 +73,7 @@ class Shop extends CI_Controller {
         $result = $this->product_model->get_rows();
         $this->data['total_products'] = $result['num_rows'];
         $this->data['products'] = $result['data_rows'];
-		$this->data['page_heading'] = 'Item Details';
+		$this->data['page_title'] = 'Item Details';
         $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/store', $this->data, true);
         $this->load->view('site/_layouts/layout_default', $this->data);
     }
@@ -122,7 +122,7 @@ class Shop extends CI_Controller {
 			$this->update_cart();
 		}
 		
-		$this->data['page_heading'] = 'My Cart';
+		$this->data['page_title'] = 'My Cart';
         $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/my_cart', $this->data, true);
         $this->load->view('site/_layouts/layout_default', $this->data);
     }
@@ -241,7 +241,7 @@ class Shop extends CI_Controller {
 			}
         }
 
-		$this->data['page_heading'] = 'Checkout';		
+		$this->data['page_title'] = 'Checkout';		
 		$this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/init_payment', $this->data, true);
         $this->load->view('site/_layouts/layout_default', $this->data);
 	}
@@ -352,7 +352,7 @@ class Shop extends CI_Controller {
         //Update table with payment response
 		//$this->data = array();
 		$this->data['order_no'] = $this->uri->segment(4);
-		$this->data['page_heading'] = 'Your Online Transaction Summary';
+		$this->data['page_title'] = 'Your Online Transaction Summary';
 		$this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/transaction_response', $this->data, true);
         $this->load->view('site/_layouts/layout_default', $this->data);
     }

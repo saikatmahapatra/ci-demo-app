@@ -25,43 +25,31 @@
     <![endif]-->
 </head>
 
-<body class="app sidebar-mini" data-controller="<?php echo $this->router->class; ?>" data-method="<?php echo $this->router->method; ?>">
-	
-	
-	<?php //echo $el_navbar; ?>
-    <?php echo $el_header; ?>
-    <?php if (isset($this->session->userdata['sess_user']['id'])) {   ?>
-    <?php echo $el_sidebar; ?>
-    <?php } ?>
-    
-
-    <main role="main" class="main-content">
+<body data-controller="<?php echo $this->router->class; ?>" data-method="<?php echo $this->router->method; ?>">
+	<?php echo $el_navbar; ?>
+    <main role="main" class="container">
         <?php echo $maincontent; ?>
+        
+        <footer class="footer">
+            <?php echo $el_footer; ?>
+        </footer>
     </main>
-	
-	<footer class="footer">
-        <?php echo $el_footer; ?>
-    </footer>
-
-	<button class="btn btn-primary scrollup"><i aria-hidden="true" class="fa fa-arrow-up"></i></button>
+	<button class="btn btn-outline-secondary scrollup"><i aria-hidden="true" class="fa fa-arrow-up"></i></button>
 	<div class="ajax-loader-ui" id="ajax-loader" style="display:none;">
-		<!--<img src="<?php echo base_url('assets/src/img/ajax-loader.svg');?>" class="ajax-loader-img" alt="Loading...">-->
-		<div class="ajax-loader-img"></div>
-	</div>
-
+		<img src="<?php echo base_url('assets/dist/img/ajax-loader.svg');?>" class="ajax-loader-img" alt="Loading...">
+    </div>
     
-	<!-- jQuery -->    
+	<!-- jQuery -->
 	<script type="text/javascript" src="<?php echo base_url('assets/vendors/jquery/dist/jquery.min.js'); ?>"></script>	
     <!-- Bootstrap dependency popper.js -->
     <script src="<?php echo base_url('assets/vendors/popper.js/dist/umd/popper.min.js'); ?>"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="<?php echo base_url('assets/vendors/bootstrap/dist/js/bootstrap.min.js'); ?>"></script>
-	
-	
+
 	<!-- jQuery DataTables Core JavaScript -->
-    <script src="<?php echo base_url('assets/vendors/datatables.net/js/jquery.dataTables.js'); ?>"></script>    
+    <script src="<?php echo base_url('assets/vendors/datatables.net/js/jquery.dataTables.js'); ?>"></script>
     <!-- Bootstrap4 DataTables JavaScript -->
-    <script src="<?php echo base_url('assets/vendors/datatables.net-bs4/js/dataTables.bootstrap4.js'); ?>"></script>    
+    <script src="<?php echo base_url('assets/vendors/datatables.net-bs4/js/dataTables.bootstrap4.js'); ?>"></script>
 	<!--Select 2-->
     <script src="<?php echo base_url('assets/vendors/select2/dist/js/select2.min.js');?>"></script>	
 	<!-- Datepicker JS -->

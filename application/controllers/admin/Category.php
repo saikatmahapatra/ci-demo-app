@@ -46,7 +46,7 @@ class Category extends CI_Controller {
 
         //View Page Config
 		$this->data['view_dir'] = 'admin/'; //i.e application/view/admin
-        $this->data['page_heading'] = $this->router->class.' : '.$this->router->method;        
+        $this->data['page_title'] = $this->router->class.' : '.$this->router->method;        
 		
 		// load Breadcrumbs
 		$this->load->library('breadcrumbs');
@@ -70,7 +70,7 @@ class Category extends CI_Controller {
 		
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
-		$this->data['page_heading'] = 'Product Category';
+		$this->data['page_title'] = 'Product Category';
         $this->data['maincontent'] = $this->load->view('admin/'.$this->router->class.'/index', $this->data, true);
         $this->load->view('admin/_layouts/layout_default', $this->data);
     }
@@ -172,7 +172,7 @@ class Category extends CI_Controller {
                 }
             }
         }
-		$this->data['page_heading'] = 'Add Product Category';
+		$this->data['page_title'] = 'Add Product Category';
         $this->data['maincontent'] = $this->load->view('admin/'.$this->router->class.'/add', $this->data, true);
         $this->load->view('admin/_layouts/layout_default', $this->data);
     }
@@ -203,7 +203,7 @@ class Category extends CI_Controller {
         }
         $result_array = $this->category_model->get_rows($this->uri->segment(4));
         $this->data['rows'] = $result_array['data_rows'];
-		$this->data['page_heading'] = 'Edit Product Category';
+		$this->data['page_title'] = 'Edit Product Category';
         $this->data['maincontent'] = $this->load->view('admin/'.$this->router->class.'/edit', $this->data, true);
         $this->load->view('admin/_layouts/layout_default', $this->data);
     }

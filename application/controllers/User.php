@@ -26,7 +26,7 @@ class User extends CI_Controller {
         );
         $this->data['app_js'] = $this->common_lib->add_javascript($javascript_files);
         
-        $this->data['page_heading'] = $this->router->class.' : '.$this->router->method;
+        $this->data['page_title'] = $this->router->class.' : '.$this->router->method;
         
 		
 		// load Breadcrumbs
@@ -101,7 +101,7 @@ class User extends CI_Controller {
         $result_array = $this->user_model->get_users(NULL, $per_page, $offset, $search_keywords);
         $this->data['data_rows'] = $result_array['data_rows'];
 		
-		$this->data['page_heading'] = 'People';
+		$this->data['page_title'] = 'People';
         $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/people', $this->data, true);
         $this->load->view('site/_layouts/layout_default', $this->data);
     }
@@ -217,7 +217,7 @@ class User extends CI_Controller {
                 }
             }
         }
-		$this->data['page_heading'] = 'Please sign in';
+		$this->data['page_title'] = 'Please sign in';
         $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/login', $this->data, true);
         $this->load->view('site/_layouts/layout_default', $this->data);
     }
@@ -227,7 +227,7 @@ class User extends CI_Controller {
     }
 
     function auth_error() {        
-		$this->data['page_heading'] = 'Authorization Error Occured';
+		$this->data['page_title'] = 'Authorization Error Occured';
         $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/auth_error', $this->data, true);
         $this->load->view('site/_layouts/layout_default', $this->data);
     }
@@ -299,7 +299,7 @@ class User extends CI_Controller {
                 }
             }
         }
-		$this->data['page_heading'] = "Sign Up";
+		$this->data['page_title'] = "Sign Up";
         $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/registration', $this->data, true);
         $this->load->view('site/_layouts/layout_default', $this->data);
     }
@@ -421,7 +421,7 @@ class User extends CI_Controller {
                 }
             }
         }
-		$this->data['page_heading'] = 'Forgot Password?';
+		$this->data['page_title'] = 'Forgot Password?';
         $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/forgot_password', $this->data, true);
         $this->load->view('site/_layouts/layout_default', $this->data);
     }
@@ -474,7 +474,7 @@ class User extends CI_Controller {
                 }
             }
         }
-		$this->data['page_heading'] = 'Create New Password';
+		$this->data['page_title'] = 'Create New Password';
         $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/reset_password', $this->data, true);
         $this->load->view('site/_layouts/layout_default', $this->data);
     }
@@ -536,7 +536,7 @@ class User extends CI_Controller {
                 redirect(current_url());
             }
         }
-		$this->data['page_heading'] = 'Change Password';
+		$this->data['page_title'] = 'Change Password';
         $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/change_password', $this->data, true);
         $this->load->view('site/_layouts/layout_default', $this->data);
     }
@@ -588,7 +588,7 @@ class User extends CI_Controller {
         }
 		
 		//View Page Config
-        $this->data['page_heading'] = "My Profile";
+        $this->data['page_title'] = "My Profile";
         $this->breadcrumbs->push('Profile','/');				
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
 
@@ -602,7 +602,7 @@ class User extends CI_Controller {
 		$this->data['address'] = $this->user_model->get_user_address(NULL,$user_id,NULL);
         $this->data['education'] = $this->user_model->get_user_education(NULL, $user_id);
         $this->data['job_exp'] = $this->user_model->get_user_work_experience(NULL, $user_id);
-		$this->data['page_heading'] = 'My Profile';
+		$this->data['page_title'] = 'My Profile';
         $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/my_profile', $this->data, true);
         $this->load->view('site/_layouts/layout_default', $this->data);
     }
@@ -616,7 +616,7 @@ class User extends CI_Controller {
         }
 		
 		//View Page Config
-        $this->data['page_heading'] = "Profile";
+        $this->data['page_title'] = "Profile";
         $this->breadcrumbs->push('Profile','/');				
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
 
@@ -630,7 +630,7 @@ class User extends CI_Controller {
 		$this->data['address'] = $this->user_model->get_user_address(NULL,$user_id,NULL);
         $this->data['education'] = $this->user_model->get_user_education(NULL, $user_id);
         $this->data['job_exp'] = $this->user_model->get_user_work_experience(NULL, $user_id);
-		$this->data['page_heading'] = 'Profile';
+		$this->data['page_title'] = 'Profile';
         $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/profile', $this->data, true);
         $this->load->view('site/_layouts/layout_default', $this->data);
     }
@@ -719,7 +719,7 @@ class User extends CI_Controller {
                 }
             }
         }
-		$this->data['page_heading'] = 'Add Address';
+		$this->data['page_title'] = 'Add Address';
         $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/add_address', $this->data, true);
         $this->load->view('site/_layouts/layout_default', $this->data);
     }
@@ -762,7 +762,7 @@ class User extends CI_Controller {
             }
         }
 		
-		$this->data['page_heading'] = 'Edit Address';
+		$this->data['page_title'] = 'Edit Address';
         $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/edit_address', $this->data, true);
         $this->load->view('site/_layouts/layout_default', $this->data);
     }
@@ -904,7 +904,7 @@ class User extends CI_Controller {
                 }
             }
         }
-		$this->data['page_heading'] = "Add Educational Qualification";
+		$this->data['page_title'] = "Add Educational Qualification";
         $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/add_education', $this->data, true);
         $this->load->view('site/_layouts/layout_default', $this->data);
     }
@@ -943,7 +943,7 @@ class User extends CI_Controller {
                 }
             }
         }
-		$this->data['page_heading'] = "Edit Educational Qualification";
+		$this->data['page_title'] = "Edit Educational Qualification";
         $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/edit_education', $this->data, true);
         $this->load->view('site/_layouts/layout_default', $this->data);
     }
@@ -1022,7 +1022,7 @@ class User extends CI_Controller {
             }
         }
 	
-		$this->data['page_heading'] = 'Edit My Profile';
+		$this->data['page_title'] = 'Edit My Profile';
         $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/edit_profile', $this->data, true);
         $this->load->view('site/_layouts/layout_default', $this->data);
     }
@@ -1046,7 +1046,7 @@ class User extends CI_Controller {
             $this->upload_file();
         }
 	
-		$this->data['page_heading'] = 'Profile Photo';
+		$this->data['page_title'] = 'Profile Photo';
         $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/profile_pic', $this->data, true);
         $this->load->view('site/_layouts/layout_default', $this->data);
     }
@@ -1196,7 +1196,7 @@ class User extends CI_Controller {
                 }
             }
         }
-		$this->data['page_heading'] = "Allocate Projects";
+		$this->data['page_title'] = "Allocate Projects";
         $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/allocate_projects', $this->data, true);
         $this->load->view('site/_layouts/layout_default', $this->data);
     }
@@ -1339,7 +1339,7 @@ class User extends CI_Controller {
                 }
             }
         }
-		$this->data['page_heading'] = "Add Previous Work Experiences";
+		$this->data['page_title'] = "Add Previous Work Experiences";
         $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/add_work_experience', $this->data, true);
         $this->load->view('site/_layouts/layout_default', $this->data);
     }
@@ -1374,7 +1374,7 @@ class User extends CI_Controller {
                 }
             }
         }
-		$this->data['page_heading'] = "Edit Previous Work Experiences";
+		$this->data['page_title'] = "Edit Previous Work Experiences";
         $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/edit_work_experience', $this->data, true);
         $this->load->view('site/_layouts/layout_default', $this->data);
     }

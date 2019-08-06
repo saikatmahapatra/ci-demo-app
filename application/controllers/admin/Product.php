@@ -45,7 +45,7 @@ class Product extends CI_Controller {
         $this->data['category_dropdown'] = $this->category_model->get_category_dropdown();
 
         $this->id = $this->uri->segment(4);
-        $this->data['page_heading'] = $this->router->class.' : '.$this->router->method;
+        $this->data['page_title'] = $this->router->class.' : '.$this->router->method;
 		
 		// Status flag indicator for showing in table grid etc
 		$this->data['status_flag'] = array(
@@ -69,7 +69,7 @@ class Product extends CI_Controller {
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
 		
-		$this->data['page_heading'] = 'Products';
+		$this->data['page_title'] = 'Products';
         $this->data['maincontent'] = $this->load->view('admin/'.$this->router->class.'/index', $this->data, true);
         $this->load->view('admin/_layouts/layout_default', $this->data);
     }
@@ -191,7 +191,7 @@ class Product extends CI_Controller {
                 }
             }
         }
-		$this->data['page_heading'] = 'Add Product';
+		$this->data['page_title'] = 'Add Product';
         $this->data['maincontent'] = $this->load->view('admin/'.$this->router->class.'/add', $this->data, true);
         $this->load->view('admin/_layouts/layout_default', $this->data);
     }
@@ -247,7 +247,7 @@ class Product extends CI_Controller {
         if ($this->input->post('form_action') == 'file_upload') {
             $this->upload_file();
         }
-		$this->data['page_heading'] = 'Edit Product';
+		$this->data['page_title'] = 'Edit Product';
         $this->data['maincontent'] = $this->load->view('admin/'.$this->router->class.'/edit', $this->data, true);
         $this->load->view('admin/_layouts/layout_default', $this->data);
     }

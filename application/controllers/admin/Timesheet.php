@@ -56,7 +56,7 @@ class Timesheet extends CI_Controller {
 		
 		//View Page Config
 		$this->data['view_dir'] = 'site/'; // inner view and layout directory name inside application/view
-		$this->data['page_heading'] = $this->router->class.' : '.$this->router->method;
+		$this->data['page_title'] = $this->router->class.' : '.$this->router->method;
         
     }
 
@@ -132,7 +132,7 @@ class Timesheet extends CI_Controller {
             }
         }
 
-		$this->data['page_heading'] = 'Timesheet Report';
+		$this->data['page_title'] = 'Timesheet Report';
         $this->data['maincontent'] = $this->load->view('admin/'.$this->router->class.'/report', $this->data, true);
         $this->load->view('admin/_layouts/layout_default', $this->data);
     }
