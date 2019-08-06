@@ -45,6 +45,8 @@ $dropdown-item-padding-x: 20px;
 //$input-btn-border-width: 2px;
 //$input-btn-focus-box-shadow: none;
 //$input-btn-focus-width: 0;
+//$input-padding-y: 0.75rem;
+//$input-padding-x: 0.75rem;
 // Nav Tabs
 $nav-tabs-border-color: $primary-color;
 $nav-tabs-border-width: 1px;
@@ -59,7 +61,7 @@ $navbar-dark-active-color: $white;
 $navbar-padding-y: 0.5rem;
 $navbar-padding-x: 0.5rem;
 //Nav Bar Light Color
-$navbar-light-color : rgba($black, .7) !default;
-$navbar-light-hover-color : rgba($black, .7) !default;
-$navbar-light-active-color : rgba($black, .9) !default;
-$navbar-light-disabled-color : rgba($black, .3) !default;
+$navbar-light-color: rgba($black, .7) !default;
+$navbar-light-hover-color: rgba($black, .7) !default;
+$navbar-light-active-color: rgba($black, .9) !default;
+$navbar-light-disabled-color: rgba($black, .3) !default;
