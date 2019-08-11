@@ -46,7 +46,7 @@ class Cms extends CI_Controller {
         $this->data['alert_message_css'] = NULL;
         $this->data['page_title'] = $this->router->class.' : '.$this->router->method;
         
-		$this->data['arr_content_type'] = $this->cms_model->get_pagecontent_type();
+		$this->data['arr_content_type'] = $this->cms_model->get_content_type();
 		// load Breadcrumbs
 		$this->load->library('breadcrumbs');
 		// add breadcrumbs. push() - Append crumb to stack
@@ -134,10 +134,10 @@ class Cms extends CI_Controller {
         foreach ($data_rows as $result) {
             $no++;
             $row = array();
-            $row[] = $result['pagecontent_type'];
-            $row[] = $result['pagecontent_title'];
-            $row[] = $this->common_lib->display_date($result['pagecontent_created_on'], true);
-            $row[] = isset($result['pagecontent_status']) ? $this->data['status_flag'][$result['pagecontent_status']]['icon'] : '';
+            $row[] = $result['content_type'];
+            $row[] = $result['content_title'];
+            $row[] = $this->common_lib->display_date($result['content_created_on'], true);
+            $row[] = isset($result['content_status']) ? $this->data['status_flag'][$result['content_status']]['icon'] : '';
             //add html for action
             $action_html = '';
             $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/edit/' .$result['id']), '<i class="fa fa-edit" aria-hidden="true"></i> Edit', array(
@@ -183,16 +183,16 @@ class Cms extends CI_Controller {
             if ($this->validate_form_data('add') == true) {
 
                 $postdata = array(
-                    'pagecontent_type' => $this->input->post('pagecontent_type'),
-                    'pagecontent_title' => $this->input->post('pagecontent_title'),
-                    'pagecontent_text' => $this->input->post('pagecontent_text'),
-                    'pagecontent_meta_keywords' => $this->input->post('pagecontent_meta_keywords'),
-                    'pagecontent_meta_description' => $this->input->post('pagecontent_meta_description'),
-                    'pagecontent_display_start_date' => $this->common_lib->convert_to_mysql($this->input->post('pagecontent_display_start_date')),
-                    'pagecontent_display_end_date' => $this->common_lib->convert_to_mysql($this->input->post('pagecontent_display_end_date')),
-                    'pagecontent_meta_author' => $this->input->post('pagecontent_meta_author'),
-                    'pagecontent_user_id' => $this->sess_user_id,
-					'pagecontent_status' => $this->input->post('pagecontent_status')
+                    'content_type' => $this->input->post('content_type'),
+                    'content_title' => $this->input->post('content_title'),
+                    'content_text' => $this->input->post('content_text'),
+                    'content_meta_keywords' => $this->input->post('content_meta_keywords'),
+                    'content_meta_description' => $this->input->post('content_meta_description'),
+                    'content_display_from_date' => $this->common_lib->convert_to_mysql($this->input->post('content_display_from_date')),
+                    'content_display_to_date' => $this->common_lib->convert_to_mysql($this->input->post('content_display_to_date')),
+                    'content_meta_author' => $this->input->post('content_meta_author'),
+                    'content_created_by' => $this->sess_user_id,
+					'content_status' => $this->input->post('content_status')
                 );
                 $insert_id = $this->cms_model->insert($postdata);
                 if ($insert_id) {
@@ -218,17 +218,17 @@ class Cms extends CI_Controller {
         if ($this->input->post('form_action') == 'update') {
             if ($this->validate_form_data('edit') == true) {
                 $postdata = array(
-                    'pagecontent_type' => $this->input->post('pagecontent_type'),
-                    'pagecontent_title' => $this->input->post('pagecontent_title'),
-                    'pagecontent_text' => $this->input->post('pagecontent_text'),
-                    'pagecontent_meta_keywords' => $this->input->post('pagecontent_meta_keywords'),
-                    'pagecontent_meta_description' => $this->input->post('pagecontent_meta_description'),
-                    'pagecontent_meta_author' => $this->input->post('pagecontent_meta_author'),
-                    'pagecontent_status' => $this->input->post('pagecontent_status'),
-					'pagecontent_display_start_date' => $this->common_lib->convert_to_mysql($this->input->post('pagecontent_display_start_date')),
-                    'pagecontent_display_end_date' => $this->common_lib->convert_to_mysql($this->input->post('pagecontent_display_end_date')),
-                    'pagecontent_archived' => $this->input->post('pagecontent_archived'),
-					'pagecontent_user_id' => $this->sess_user_id
+                    'content_type' => $this->input->post('content_type'),
+                    'content_title' => $this->input->post('content_title'),
+                    'content_text' => $this->input->post('content_text'),
+                    'content_meta_keywords' => $this->input->post('content_meta_keywords'),
+                    'content_meta_description' => $this->input->post('content_meta_description'),
+                    'content_meta_author' => $this->input->post('content_meta_author'),
+                    'content_status' => $this->input->post('content_status'),
+					'content_display_from_date' => $this->common_lib->convert_to_mysql($this->input->post('content_display_from_date')),
+                    'content_display_to_date' => $this->common_lib->convert_to_mysql($this->input->post('content_display_to_date')),
+                    'content_archived' => $this->input->post('content_archived'),
+					'content_created_by' => $this->sess_user_id
                 );
                 $where_array = array('id' => $this->input->post('id'));
                 $res = $this->cms_model->update($postdata, $where_array);
@@ -260,10 +260,10 @@ class Cms extends CI_Controller {
     }
 
     function validate_form_data($action = NULL) {
-        $this->form_validation->set_rules('pagecontent_type', 'page content type', 'required');
-        $this->form_validation->set_rules('pagecontent_title', 'page content title', 'required');
-        $this->form_validation->set_rules('pagecontent_text', 'page content text', 'required');
-        $this->form_validation->set_rules('pagecontent_status', 'display status', 'required');
+        $this->form_validation->set_rules('content_type', 'page content type', 'required');
+        $this->form_validation->set_rules('content_title', 'page content title', 'required');
+        $this->form_validation->set_rules('content_text', 'page content text', 'required');
+        $this->form_validation->set_rules('content_status', 'display status', 'required');
 
         $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
         if ($this->form_validation->run() == true) {

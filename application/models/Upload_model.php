@@ -66,7 +66,7 @@ class Upload_model extends CI_Model {
             //set column field database for datatable orderable
             $column_order = array(
                 't1.upload_file_name',
-                't1.pagecontent_status',
+                't1.content_status',
                 NULL,
             );            
             //set column field database(table column name) for datatable searchable

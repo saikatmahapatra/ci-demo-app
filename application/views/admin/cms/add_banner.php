@@ -40,7 +40,7 @@
 		
 		<div class="form-row">
 			<div class="form-group col-md-12">									
-				<label for="pagecontent_title" class="">Text Line 1 (Optional)</label>
+				<label for="content_title" class="">Text Line 1 (Optional)</label>
 				<?php echo form_input(array('name' => 'upload_text_1', 'value' => set_value('upload_text_1'), 'id' => 'upload_text_1', 'class' => 'form-control', 'placeholder' => ''));?>
 				<?php echo form_error('upload_text_1'); ?>
 			</div>
@@ -48,7 +48,7 @@
 		
 		<div class="form-row">
 			<div class="form-group col-md-12">									
-				<label for="pagecontent_title" class="">Text Line 2 (Optional)</label>
+				<label for="content_title" class="">Text Line 2 (Optional)</label>
 				<?php echo form_input(array('name' => 'upload_text_2', 'value' => set_value('upload_text_2'), 'id' => 'upload_text_2', 'class' => 'form-control', 'placeholder' => ''));?>
 				<?php echo form_error('upload_text_2'); ?>
 			</div>
