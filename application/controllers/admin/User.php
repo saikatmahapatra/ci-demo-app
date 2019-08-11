@@ -561,9 +561,14 @@ class User extends CI_Controller {
         ));*/
         ########### Validate User Auth End #############
 		
-		//View Page Config
+        //View Page Config
+        $is_self_account = true;
+        if(!empty($this->uri->segment(4)) && ($this->uri->segment(4) != $this->sess_user_id)){
+            $is_self_account = false;
+        }
+        $this->data['is_self_account'] = $is_self_account;
         $this->data['page_title'] = "Profile";
-        $this->breadcrumbs->push('Profile','/');				
+        $this->breadcrumbs->push('Profile','/');
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
 
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
@@ -576,44 +581,11 @@ class User extends CI_Controller {
 		$this->data['address'] = $this->user_model->get_user_address(NULL,$user_id,NULL);
         $this->data['education'] = $this->user_model->get_user_education(NULL, $user_id);
         $this->data['job_exp'] = $this->user_model->get_user_work_experience(NULL, $user_id);
-		$this->data['page_title'] = 'Profile';
+		$this->data['page_title'] = ($is_self_account == true) ? "Profile" : "Customer Profile";
         $this->data['maincontent'] = $this->load->view('admin/'.$this->router->class.'/profile', $this->data, true);
         $this->load->view('admin/_layouts/layout_default', $this->data);
     }
 
-    function my_profile() {
-        ########### Validate User Auth #############
-        $is_logged_in = $this->common_lib->is_logged_in();
-        if ($is_logged_in == FALSE) {
-            redirect($this->router->directory.$this->router->class.'/login');
-        }
-        //Has logged in user permission to access this page or method?        
-        /*$is_authorized = $this->common_lib->is_auth(array(
-            'default-super-admin-access',
-            'default-admin-access',
-        ));*/
-        ########### Validate User Auth End #############
-		
-		//View Page Config
-        $this->data['page_title'] = "My Profile";
-        $this->breadcrumbs->push('Profile','/');				
-		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
-
-        $this->data['alert_message'] = $this->session->flashdata('flash_message');
-        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
-		$user_id =  $this->sess_user_id;		
-        $rows = $this->user_model->get_rows($user_id);		
-		$res_pic = $this->user_model->get_user_profile_pic($user_id);
-		$this->data['profile_pic'] = $res_pic[0]['user_profile_pic'];
-        $this->data['row'] = $rows['data_rows'];
-		$this->data['address'] = $this->user_model->get_user_address(NULL,$user_id,NULL);
-        $this->data['education'] = $this->user_model->get_user_education(NULL, $user_id);
-        $this->data['job_exp'] = $this->user_model->get_user_work_experience(NULL, $user_id);
-		$this->data['page_title'] = 'My Profile';
-        $this->data['maincontent'] = $this->load->view('admin/'.$this->router->class.'/my_profile', $this->data, true);
-        $this->load->view('admin/_layouts/layout_default', $this->data);
-    }
-	
 	function validate_edit_profile_form() {
         //$this->form_validation->set_rules('user_firstname', 'first name', 'required');
         //$this->form_validation->set_rules('user_lastname', 'last name', 'required');
@@ -710,7 +682,7 @@ class User extends CI_Controller {
                 if ($res) {
                     $this->session->set_flashdata('flash_message', 'Basic information has been updated successfully.');
                     $this->session->set_flashdata('flash_message_css', 'alert-success');
-                    redirect($this->router->directory.$this->router->class.'/my_profile');
+                    redirect($this->router->directory.$this->router->class.'/profile');
                 }
             }
         }
