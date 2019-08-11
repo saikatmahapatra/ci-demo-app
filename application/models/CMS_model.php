@@ -139,8 +139,9 @@ class Cms_model extends CI_Model {
         $data = array(
             '' => 'Select',
             'news' => 'News',
-            'notice' => 'Notice',
-            'policy' => 'Policy'
+            'post' => 'Post',
+            'page' => 'Page',
+            'review' => 'Review'
         );
         return $data;
     }

@@ -188,8 +188,8 @@ class Cms extends CI_Controller {
                     'content_text' => $this->input->post('content_text'),
                     'content_meta_keywords' => $this->input->post('content_meta_keywords'),
                     'content_meta_description' => $this->input->post('content_meta_description'),
-                    'content_display_from_date' => $this->common_lib->convert_to_mysql($this->input->post('content_display_from_date')),
-                    'content_display_to_date' => $this->common_lib->convert_to_mysql($this->input->post('content_display_to_date')),
+                    //'content_display_from_date' => $this->common_lib->convert_to_mysql($this->input->post('content_display_from_date')),
+                    //'content_display_to_date' => $this->common_lib->convert_to_mysql($this->input->post('content_display_to_date')),
                     'content_meta_author' => $this->input->post('content_meta_author'),
                     'content_created_by' => $this->sess_user_id,
 					'content_status' => $this->input->post('content_status')
@@ -225,10 +225,11 @@ class Cms extends CI_Controller {
                     'content_meta_description' => $this->input->post('content_meta_description'),
                     'content_meta_author' => $this->input->post('content_meta_author'),
                     'content_status' => $this->input->post('content_status'),
-					'content_display_from_date' => $this->common_lib->convert_to_mysql($this->input->post('content_display_from_date')),
-                    'content_display_to_date' => $this->common_lib->convert_to_mysql($this->input->post('content_display_to_date')),
+					//'content_display_from_date' => $this->common_lib->convert_to_mysql($this->input->post('content_display_from_date')),
+                    //'content_display_to_date' => $this->common_lib->convert_to_mysql($this->input->post('content_display_to_date')),
                     'content_archived' => $this->input->post('content_archived'),
-					'content_created_by' => $this->sess_user_id
+                    'content_updated_by' => $this->sess_user_id,
+                    'content_updated_on' => date('Y-m-d H:i:s'),
                 );
                 $where_array = array('id' => $this->input->post('id'));
                 $res = $this->cms_model->update($postdata, $where_array);
