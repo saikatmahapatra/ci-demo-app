@@ -9,7 +9,7 @@
 <div class="row">
     <div class="col-md-12">
         <p class="error-info">We're sorry! You are not authorized to access the link or page you are trying to access. Your session has been terminated forcefully.</p>
-        <a href="<?php echo base_url($this->router->directory.'user/login');?>" class="btn btn-primary my-4"><i class="fa fa-fw fa-check-circle" aria-hidden="true"></i> Please login to continue...</a>
+        <a href="<?php echo base_url($this->router->directory.'user/login');?>" class="btn btn-outline-primary">Please login to continue...</a>
         
     </div>
 </div>

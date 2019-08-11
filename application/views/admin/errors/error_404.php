@@ -9,7 +9,7 @@
         <p class="error-info">
             Sorry, the requested page could not found !
         </p>
-        <a href="<?php echo base_url($this->router->directory);?>" class="btn btn-primary my-4"><i class="fa fa-home" aria-hidden="true"></i> Take me home</a>
+        <a href="<?php echo base_url($this->router->directory);?>" class="btn btn-outline-primary">Go Back to Home</a>
         
     </div>
 </div>
