@@ -40,6 +40,7 @@
                     <div class="dropdown-menu" aria-labelledby="dropdown_3">
                         <a class="dropdown-item" href="<?php echo base_url($this->router->directory.'timesheet/report'); ?>">Timesheet</a>
                         <a class="dropdown-item" href="<?php echo base_url($this->router->directory.'cms'); ?>">Content Management</a>
+                        <a class="dropdown-item" href="<?php echo base_url($this->router->directory.'cms/manage_banner'); ?>">Carousel Slider Management</a>
                     </div>
                 </li>
             </ul>
