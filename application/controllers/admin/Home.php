@@ -36,11 +36,18 @@ class Home extends CI_Controller {
         $this->data['app_js'] = $this->common_lib->add_javascript($javascript_files);
 
         $this->load->model('home_model');
+        $this->load->model('cms_model');
         $this->id = $this->uri->segment(3);
 
         $this->data['alert_message'] = NULL;
         $this->data['alert_message_css'] = NULL;
         $this->data['page_title'] = $this->router->class.' : '.$this->router->method;
+
+        $this->data['content_type'] = array(
+            'news'=>array('text'=>'News', 'css'=>'text-warning'),
+            'policy'=>array('text'=>'Policy', 'css'=>'text-success'),
+            'notice'=>array('text'=>'Notice', 'css'=>'text-primary')
+        );
 		
 		// load Breadcrumbs
 		$this->load->library('breadcrumbs');
@@ -56,6 +63,34 @@ class Home extends CI_Controller {
 		
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
+
+        // Display using CI Pagination: Total filtered rows - check without limit query. Refer to model method definition		
+		$result_array = $this->cms_model->get_contents(NULL, NULL, NULL, FALSE, FALSE);
+		$total_num_rows = $result_array['num_rows'];
+		
+		//pagination config
+		$additional_segment = $this->router->directory.$this->router->class.'/index';
+		$per_page = 4;
+		$config['uri_segment'] = 4;
+		$config['num_links'] = 1;
+		$config['use_page_numbers'] = TRUE;
+		//$this->pagination->initialize($config);
+		
+		$page = ($this->uri->segment(4)) ? ($this->uri->segment(4)-1) : 0;
+		$offset = ($page*$per_page);
+		$this->data['pagination_link'] = $this->common_lib->render_pagination($total_num_rows, $per_page, $additional_segment);
+		//end of pagination config
+        
+
+        // Data Rows - Refer to model method definition
+        $result_array = $this->cms_model->get_contents(NULL, $per_page, $offset, FALSE, TRUE);
+        $this->data['data_rows'] = $result_array['data_rows'];
+		
+        // Dashboard Stats
+            $this->data['user_count'] = $this->home_model->get_user_count();
+            $this->data['post_count'] = $this->home_model->get_post_count();
+            $this->data['order_count'] = $this->home_model->get_order_count();
+        // Dashboard Stats
 		
 		$this->data['page_title'] = "Dashboard";
         $this->data['maincontent'] = $this->load->view('admin/'.$this->router->class.'/index', $this->data, true);
