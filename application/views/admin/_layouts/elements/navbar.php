@@ -23,7 +23,7 @@
                         <a class="dropdown-item" href="<?php echo base_url($this->router->directory.'product');?>">Manage Products</a>
                         <a class="dropdown-item" href="<?php echo base_url($this->router->directory.'product/add');?>">Add Product</a>
                         <a class="dropdown-item" href="<?php echo base_url($this->router->directory.'category');?>">Manage Categories</a>
-                        <a class="dropdown-item" href="<<?php echo base_url($this->router->directory.'category/add');?>">Add Category</a>
+                        <a class="dropdown-item" href="<?php echo base_url($this->router->directory.'category/add');?>">Add Category</a>
                     </div>
                 </li>
                 
@@ -39,6 +39,7 @@
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown_3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More...</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown_3">
                         <a class="dropdown-item" href="<?php echo base_url($this->router->directory.'timesheet/report'); ?>">Timesheet</a>
+                        <a class="dropdown-item" href="<?php echo base_url($this->router->directory.'cms'); ?>">Content Management</a>
                     </div>
                 </li>
             </ul>
