@@ -30,7 +30,7 @@
 				?>
 				<img class="align-self-center mr-3 rounded dp" src="<?php echo base_url($img_src);?>" alt="">
 				<?php if(isset($profile_pic) && sizeof($profile_pic)>0){ ?>
-					<div class="edit"><a class="btn btn-sm btn-link mt-2" href="<?php echo base_url($this->router->directory.$this->router->class.'/delete_profile_pic/'.$profile_pic);?>"><i class="fa fa-remove"></i> Remove</a></div>
+					<div class="edit"><a class="btn btn-sm btn-link mt-2" href="<?php echo base_url($this->router->directory.$this->router->class.'/delete_profile_pic/'.$profile_pic);?>"><i class="fa fa-fw fa-remove"></i> Remove</a></div>
 				<?php } ?>
 			</div>
 			<div class="col-md-9">

@@ -98,10 +98,10 @@
 			<h6 class="card-title text-on-card">Leave Details</h6>
 				<div class="table-responsive">
 					<div class="mb-2 d-none">
-						<span class="mx-2"><i class="fa fa-square text-secondary" aria-hidden="true"></i> Pending</span>					
-						<span class="mx-2"><i class="fa fa-square text-success" aria-hidden="true"></i> Approved</span>
-						<span class="mx-2"><i class="fa fa-square text-warning" aria-hidden="true"></i> Cancelled</span>
-						<span class="mx-2"><i class="fa fa-square text-danger" aria-hidden="true"></i> Rejected</span>
+						<span class="mx-2"><i class="fa fa-fw fa-square text-secondary" aria-hidden="true"></i> Pending</span>					
+						<span class="mx-2"><i class="fa fa-fw fa-square text-success" aria-hidden="true"></i> Approved</span>
+						<span class="mx-2"><i class="fa fa-fw fa-square text-warning" aria-hidden="true"></i> Cancelled</span>
+						<span class="mx-2"><i class="fa fa-fw fa-square text-danger" aria-hidden="true"></i> Rejected</span>
 					</div>
 					<table class="table table-striped">
 						<thead class="thead-dark">
@@ -128,7 +128,7 @@
 									<td><?php echo $this->common_lib->display_date($row['leave_to_date']);?></td>
 									<td><?php echo $row['leave_days'].' day(s)';?></td>
 									<td>
-										<!-- <span class="small"><i class="fa fa-square <?php echo $leave_status_arr[$row['leave_status']]['css'];?>" aria-hidden="true"></i></span>  -->
+										<!-- <span class="small"><i class="fa fa-fw fa-square <?php echo $leave_status_arr[$row['leave_status']]['css'];?>" aria-hidden="true"></i></span>  -->
 										<span class="<?php echo $leave_status_arr[$row['leave_status']]['css'];?>"> <?php echo $leave_status_arr[$row['leave_status']]['text'];?></span>
 									</td>
 									<!-- <td><?php echo isset($row['leave_reason']) ? word_limiter($row['leave_reason'], 5) : '';?></td> -->

@@ -15,7 +15,7 @@
 			?>
 			<?php echo form_error('user_search_keywords'); ?>
 		
-		<?php echo form_button(array('type' => 'submit', 'content' => '<i class="fa fa-search" aria-hidden="true"></i> Search', 'class' => 'btn btn-primary')); ?>&nbsp;
+		<?php echo form_button(array('type' => 'submit', 'content' => '<i class="fa fa-fw fa-search" aria-hidden="true"></i> Search', 'class' => 'btn btn-primary')); ?>&nbsp;
 		
 		
 	<?php echo form_close(); ?>

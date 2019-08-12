@@ -18,8 +18,8 @@
 	<div class="col-md-12">
 		<div class="grid-action-holder row my-2">
 			<div class="col-md-12">
-				<span class="mx-2"><i class="fa fa-check text-success" aria-hidden="true"></i> Leave Approved</span>
-				<span class="mx-2"><i class="fa fa-close text-danger" aria-hidden="true"></i> Leave Rejected</span>
+				<span class="mx-2"><i class="fa fa-fw fa-check text-success" aria-hidden="true"></i> Leave Approved</span>
+				<span class="mx-2"><i class="fa fa-fw fa-close text-danger" aria-hidden="true"></i> Leave Rejected</span>
 			</div>	
 		</div><!--/.grid-action-holder-->
 
@@ -64,7 +64,7 @@
 									$fa_icon = 'fa-close';
 								}
 								?>
-								<?php echo isset($row['supervisor_approver_status']) ? '<span class="'.$leave_status_arr[$row['supervisor_approver_status']]['css'].'"><i class="fa '.$fa_icon.'" aria-hidden="true"></i></span>' : ''; ?>
+								<?php echo isset($row['supervisor_approver_status']) ? '<span class="'.$leave_status_arr[$row['supervisor_approver_status']]['css'].'"><i class="fa fa-fw '.$fa_icon.'" aria-hidden="true"></i></span>' : ''; ?>
 								<?php echo isset($row['supervisor_approver_firstname']) ? $row['supervisor_approver_firstname'] : ''?>
 								<?php echo isset($row['supervisor_approver_lastname']) ? $row['supervisor_approver_lastname'] : ''?>
 								<?php echo isset($row['supervisor_approver_emp_id']) ? '('.$row['supervisor_approver_emp_id'].')' : ''?>							
@@ -79,7 +79,7 @@
 									$fa_icon = 'fa-close';
 								}
 								?>
-								<?php echo isset($row['director_approver_status']) ? '<span class="'.$leave_status_arr[$row['director_approver_status']]['css'].'"><i class="fa '.$fa_icon.'" aria-hidden="true"></i></span>': ''; ?>
+								<?php echo isset($row['director_approver_status']) ? '<span class="'.$leave_status_arr[$row['director_approver_status']]['css'].'"><i class="fa fa-fw '.$fa_icon.'" aria-hidden="true"></i></span>': ''; ?>
 								<?php echo isset($row['director_approver_firstname']) ? $row['director_approver_firstname'] : ''?>
 								<?php echo isset($row['director_approver_lastname']) ? $row['director_approver_lastname'] : ''?>
 								<?php echo isset($row['director_approver_emp_id']) ? '('.$row['director_approver_emp_id'].')' : ''?>

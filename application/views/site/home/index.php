@@ -51,7 +51,7 @@
 <?php if( isset($data_rows) && sizeof($data_rows) > 0 ){ ?>
 	<div class="card news-card">
             <div class="card-header h6">
-            <i class="fa fa-newspaper-o fa-lg" aria-hidden="true"></i> News
+            <i class="fa fa-fw fa-newspaper-o fa-lg" aria-hidden="true"></i> News
             </div>
             <div class="card-body">
             

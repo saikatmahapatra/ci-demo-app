@@ -4,7 +4,7 @@
     <div class="col-md-8 mb-3">
         <div class="card news-card">
             <div class="card-header h6">
-            <i class="fa fa-newspaper-o fa-lg" aria-hidden="true"></i> Recent Posts
+            <i class="fa fa-fw fa-newspaper-o fa-lg" aria-hidden="true"></i> Recent Posts
             </div>
             <div class="card-body">
                 <?php if( isset($data_rows) && sizeof($data_rows) > 0 ){ ?>
@@ -35,7 +35,7 @@
     <div class="col-md-4 mb-3">
         <div class="card card-stat">
             <div class="card-header h6">
-            <i class="fa fa-line-chart fa-lg" aria-hidden="true"></i> Statistics
+            <i class="fa fa-fw fa-line-chart fa-lg" aria-hidden="true"></i> Statistics
             </div>
             <div class="card-body">
                 <div class="d-flex flex-column">
@@ -78,7 +78,7 @@
                 </div><!--/.flex-column-->
             </div><!--/.card-body-->
             <div class="card-footer text-center text-muted small">
-            <i class="fa fa-clock-o" aria-hidden="true"></i> Updated on <?php echo date('d-M-Y h:i:s a');?>
+            <i class="fa fa-fw fa-clock-o" aria-hidden="true"></i> Updated on <?php echo date('d-M-Y h:i:s a');?>
             </div>
         </div><!--/.card-->
     </div>

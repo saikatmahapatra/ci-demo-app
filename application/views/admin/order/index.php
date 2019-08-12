@@ -13,8 +13,8 @@
 		?>
 		<div class="grid-action-holder row my-2 px-3">
 			<div class="col-md-8">
-			<span class="mx-2"><i class="fa fa-bookmark-o text-success" aria-hidden="true"></i> Success</span>
-			<span class="mx-2"><i class="fa fa-bookmark-o text-warning" aria-hidden="true"></i> Cancelled</span>
+			<span class="mx-2"><i class="fa fa-fw fa-bookmark-o text-success" aria-hidden="true"></i> Success</span>
+			<span class="mx-2"><i class="fa fa-fw fa-bookmark-o text-warning" aria-hidden="true"></i> Cancelled</span>
 			</div>
 			<div class="col-md-4 text-right">
 			

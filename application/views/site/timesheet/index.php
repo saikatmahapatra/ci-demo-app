@@ -56,7 +56,7 @@
 						<div class="d-none">Total hours logged: <span id="total_hrs">0.0</span> hrs</div>
 						<div class="d-none">Avg. hours worked: <span class="" id="average_worked_hrs">0.0</span> hrs/day</div>
 					</div>		
-					<a class="text-centre d-none" href="#"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Download this month's timesheet</a>
+					<a class="text-centre d-none" href="#"><i class="fa fa-fw fa-file-excel-o" aria-hidden="true"></i> Download this month's timesheet</a>
 				</div><!--/.col-md-3-->
 
 				<div class="col-md-8 offset-md-1">
