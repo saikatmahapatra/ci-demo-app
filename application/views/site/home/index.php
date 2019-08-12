@@ -1,8 +1,4 @@
-<div class="row heading-container mb-3">
-    <div class="col-12">
-        <h1 class="page-title"><?php echo isset($page_title)? $page_title:'Page Heading'; ?></h1>
-    </div>
-</div><!--/.heading-container-->
+<h1 class="page-title"><?php echo isset($page_title) ? $page_title : 'Page Heading'; ?></h1>
 <?php //echo isset($breadcrumbs) ? $breadcrumbs : ''; ?>
 <?php if(isset($sliders) && sizeof($sliders)>0){ ?>
 <div class="row my-2">

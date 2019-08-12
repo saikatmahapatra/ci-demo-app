@@ -1,11 +1,7 @@
 <?php
 $row = $data_rows[0];
 ?>
-<div class="row heading-container">
-    <div class="col-12">
-        <h1 class="page-title"><?php echo isset($row['content_title']) ? $row['content_title'] : '';?></h1>
-    </div>
-</div><!--/.heading-container-->
+<h1 class="page-title"><?php echo isset($page_title) ? $page_title : 'Page Heading'; ?></h1>
 
 <div class="row">
 	<div class="col-md-12 mb-4" data-id="<?php echo $row['id'];?>">

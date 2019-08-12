@@ -1,3 +1,4 @@
+/* App Specific CSS - Additional Customization*/
 body {
     margin-top: 4.5rem;
     margin-bottom: 1rem;
@@ -17,7 +18,7 @@ body.login {
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#{$from}, endColorstr=#{$to})
 }
 
-//Site Logo
+// Site Logo
 .logo {
     width: 30px;
 }
@@ -33,14 +34,9 @@ body.login {
     background: $white;
 }
 
-// View Page Title
-.page-title-container {
-    //margin-top: 1rem;
-    margin-bottom: 0.5rem;
-}
-
 .page-title {
     font-size: 1.25rem;
+    margin-bottom: .75rem;
 }
 
 // Extra small devices (portrait phones, less than 576px)
@@ -68,7 +64,6 @@ body.login {
     display: none;
 }
 
-// CI Server side Errors
 .validation-error {
     color: $validation-error-color;
 }
@@ -201,7 +196,7 @@ body.login {
     }
 }
 
-// Nav Tabs
+// Navtab
 .nav-link.active {
     border: 0;
     border-bottom: 1px solid $nav-tabs-border-color;
@@ -449,13 +444,7 @@ table.ci-table.dataTable {
 //     }
 // }
 //Navbar
-// Make nav bar scrolable in SM devices once menu items are many
-@media (max-width: 576px) {
-    .navbar-collapse {
-        max-height: 340px;
-        overflow-y: auto;
-    }
-}
+
 
 .no-toggle-icon {
     .dropdown-toggle::after {
