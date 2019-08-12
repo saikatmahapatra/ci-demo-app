@@ -62,7 +62,7 @@
                     <a class="nav-link dropdown-toggle" id="dropdown_notification" href="#" data-toggle="dropdown" aria-label="Show notifications"><i class="fa fa-bell-o "></i></a>
                     <ul class="notification dropdown-menu dropdown-menu-right">
                         <li class="notification-title">You have 0 new notifications.</li>
-                            <div class="notification-content">
+                            <!-- <div class="notification-content">
                                 <li><a class="notification-item" href="<?php echo base_url();?>"><span class="notification-icon"><span class="fa-stack "><i class="fa fa-bookmark-o-o fa-stack-2x text-primary"></i><i class="fa fa-envelope"></i></span></span><div><p class="notification-message">Lisa sent you a mail</p><p class="notification-meta">2 min ago</p></div></a></li>
                                 <li><a class="notification-item" href="<?php echo base_url();?>"><span class="notification-icon"><span class="fa-stack "><i class="fa fa-bookmark-o-o fa-stack-2x text-danger"></i><i class="fa fa-hdd-o "></i></span></span><div><p class="notification-message">Mail server not working</p><p class="notification-meta">5 min ago</p></div></a></li>
                                 <li><a class="notification-item" href="<?php echo base_url();?>"><span class="notification-icon"><span class="fa-stack "><i class="fa fa-bookmark-o-o fa-stack-2x text-success"></i><i class="fa fa-money "></i></span></span><div><p class="notification-message">Transaction complete</p><p class="notification-meta">2 days ago</p></div></a></li>
@@ -72,7 +72,7 @@
                                     <li><a class="notification-item" href="<?php echo base_url();?>"><span class="notification-icon"><span class="fa-stack "><i class="fa fa-bookmark-o-o fa-stack-2x text-danger"></i><i class="fa fa-hdd-o "></i></span></span><div><p class="notification-message">Mail server not working</p><p class="notification-meta">5 min ago</p></div></a></li>
                                     <li><a class="notification-item" href="<?php echo base_url();?>"><span class="notification-icon"><span class="fa-stack "><i class="fa fa-bookmark-o-o fa-stack-2x text-success"></i><i class="fa fa-money "></i></span></span><div><p class="notification-message">Transaction complete</p><p class="notification-meta">2 days ago</p></div></a></li>
                                 </div>
-                            </div>
+                            </div> -->
                         <li class="notification-footer"><a href="<?php echo base_url();?>">See all notifications.</a></li>
                     </ul>
                 </div>
