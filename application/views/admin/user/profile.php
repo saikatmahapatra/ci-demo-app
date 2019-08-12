@@ -98,18 +98,18 @@
 					<div class="col-lg-9">
 						<nav>
 							<div class="nav nav-tabs ci-nav-tab" id="nav-tab" role="tablist">
-								<a class="nav-item nav-link active" id="nav-1" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true"><i class="fa fa-fw fa-info-circle" aria-hidden="true"></i> Basic Info</a>
+								<a class="nav-item nav-link active" id="nav-1" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true"><!--<i class="fa fa-fw fa-info-circle" aria-hidden="true"></i>--> Basic Info</a>
 
 								<?php if($display_address == true){  ?>
-								<a class="nav-item nav-link" id="nav-2" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false"><i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> Address</a>
+								<a class="nav-item nav-link" id="nav-2" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false"><!--<i class="fa fa-fw fa-map-marker" aria-hidden="true"></i>--> Address</a>
 								<?php } ?>
 
 								<?php if($display_education == true){  ?>
-								<a class="nav-item nav-link" id="nav-3" data-toggle="tab" href="#tab-3" role="tab" aria-controls="tab-3" aria-selected="false"><i class="fa fa-fw fa-certificate" aria-hidden="true"></i> Education</a>
+								<a class="nav-item nav-link" id="nav-3" data-toggle="tab" href="#tab-3" role="tab" aria-controls="tab-3" aria-selected="false"><!--<i class="fa fa-fw fa-certificate" aria-hidden="true"></i>--> Education</a>
 								<?php } ?>
 
 								<?php if($display_experience == true){  ?>
-								<a class="nav-item nav-link" id="nav-4" data-toggle="tab" href="#tab-4" role="tab" aria-controls="tab-4" aria-selected="false"><i class="fa fa-fw fa-briefcase" aria-hidden="true"></i> Experiences</a>
+								<a class="nav-item nav-link" id="nav-4" data-toggle="tab" href="#tab-4" role="tab" aria-controls="tab-4" aria-selected="false"><!--<i class="fa fa-fw fa-briefcase" aria-hidden="true"></i>--> Experiences</a>
 								<?php } ?>
 							</div>
 						</nav>
