@@ -1,4 +1,5 @@
 /* App Specific CSS - Additional Customization*/
+
 body {
     margin-top: 4.5rem;
     margin-bottom: 1rem;
@@ -419,6 +420,16 @@ table.ci-table.dataTable {
     left: 0;
 }
 
+.colorgraph-navbar-2::after {
+    content: "";
+    height: 5px;
+    background-color: #007bff;
+    width: 100%;
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+}
+
 //News Feed 
 .card-stat {
     .card-body a {
@@ -444,8 +455,6 @@ table.ci-table.dataTable {
 //     }
 // }
 //Navbar
-
-
 .no-toggle-icon {
     .dropdown-toggle::after {
         display: none;

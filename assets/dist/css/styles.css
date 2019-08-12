@@ -8865,6 +8865,16 @@ table.ci-table.dataTable {
   left: 0;
 }
 
+.colorgraph-navbar-2::after {
+  content: "";
+  height: 5px;
+  background-color: #007bff;
+  width: 100%;
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+}
+
 .card-stat .card-body a {
   color: inherit !important;
   text-decoration: none;

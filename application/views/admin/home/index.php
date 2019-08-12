@@ -43,7 +43,7 @@
                     
                         <div class="pb-3 border-bottom">
                             <a title="View Details" href="<?php echo base_url($this->router->directory.'user/manage'); ?>">
-                            <i class="fa fa-fw fa-users fa-2x align-middle" aria-hidden="true" style="color: #a9289a;"></i> <span class="font-weight-bold"><?php echo isset($user_count) ? $user_count['data_rows'][0]['total'] : '0'; ?></span> customers
+                            <i class="fa fa-fw fa-user fa-2x align-middle" aria-hidden="true" style="color: #0062cc;"></i> <span class="font-weight-bold"><?php echo isset($user_count) ? $user_count['data_rows'][0]['total'] : '0'; ?></span> customers
                             </a>
                         </div>
 
