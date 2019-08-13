@@ -16,12 +16,12 @@
 
 <div class="row my-3">
 	<div class="col-md-12">
-		<div class="grid-action-holder row my-2">
+		<div class="status-icon-group status-icon-justify row my-2">
 			<div class="col-md-12">
 				<span class="mx-2"><i class="fa fa-fw fa-check text-success" aria-hidden="true"></i> Leave Approved</span>
 				<span class="mx-2"><i class="fa fa-fw fa-close text-danger" aria-hidden="true"></i> Leave Rejected</span>
 			</div>	
-		</div><!--/.grid-action-holder-->
+		</div><!--/.status-icon-group status-icon-justify-->
 
 		<div class="table-responsive">
 			<table class="table table-striped">
