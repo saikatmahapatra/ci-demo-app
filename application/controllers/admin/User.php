@@ -110,27 +110,23 @@ class User extends CI_Controller {
             $row[] = '<div class="">'.$result['user_firstname'] . '&nbsp;' . $result['user_lastname'].'</div>';
             $row[] = $result['user_email'];
             $row[] = $result['user_phone1'];			
-			$row[] = isset($result['user_status']) ? $this->data['status_flag'][$result['user_status']]['icon'] : '';           
+			$row[] = isset($result['user_status']) ? $this->data['status_flag'][$result['user_status']]['text'] : '';
             
 			//add html for action
             $action_html = '';
-            $acc_status_icon = ($result['user_status'] == 'Y') ? '' : '';
-            $acc_status_text = ($result['user_status'] == 'Y') ? 'Deactivate' : 'Activate';
-            $acc_status_class = ($result['user_status'] == 'Y') ? 'btn btn-sm btn-outline-danger' : 'btn btn-sm btn-outline-success';
-            $acc_status_set = ($result['user_status'] == 'Y') ? 'N' : 'Y';
             
-            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/profile/' . $result['id']), '<i class="fa fa-fw fa-info-circle" aria-hidden="true"></i>', array(
-                'class' => 'btn btn-sm btn-outline-secondary',
-                'data-toggle' => 'tooltip',
-                'data-original-title' => 'View Profile',
-                'title' => 'View Profile'
-            ));
-            $action_html.='&nbsp;';
             $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/edit_user_profile/' . $result['id']), '<i class="fa fa-fw fa-pencil" aria-hidden="true"></i>', array(
                 'class' => 'btn btn-sm btn-outline-secondary',
                 'data-toggle' => 'tooltip',
                 'data-original-title' => 'Edit Profile',
                 'title' => 'Edit Profile'
+            ));
+            $action_html.='&nbsp;';
+            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/profile/' . $result['id']), '<i class="fa fa-fw fa-info-circle" aria-hidden="true"></i>', array(
+                'class' => 'btn btn-sm btn-outline-info',
+                'data-toggle' => 'tooltip',
+                'data-original-title' => 'View Profile',
+                'title' => 'View Profile'
             ));
             $row[] = $action_html;
             $data[] = $row;

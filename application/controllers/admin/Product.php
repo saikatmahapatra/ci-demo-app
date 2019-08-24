@@ -111,7 +111,7 @@ class Product extends CI_Controller {
 			$row[] = isset($result['product_mrp']) ? $result['product_mrp'] :'';
 			$row[] = isset($result['product_price']) ? $result['product_price'] :'';
             //$row[] = word_limiter($result['product_description'], 6);
-            $row[] = isset($result['product_status']) ? $this->data['status_flag'][$result['product_status']]['icon'] : '';
+            $row[] = isset($result['product_status']) ? $this->data['status_flag'][$result['product_status']]['text'] : '';
             //add html for action
             $action_html = '';
             $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/edit/' .$result['id']), '<i class="fa fa-fw fa-pencil" aria-hidden="true"></i>', array(

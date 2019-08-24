@@ -11,15 +11,11 @@
 			echo $html_alert_ui;
 		}
 		?>
-		<div class="status-icon-group status-icon-justify row my-2 px-3">
-			<div class="col-md-8">
-			<span class="mx-2"><i class="fa fa-fw fa-bookmark-o text-success" aria-hidden="true"></i> Active</span>
-			<span class="mx-2"><i class="fa fa-fw fa-bookmark-o text-warning" aria-hidden="true"></i> Inactive</span>
-			</div>
-			<div class="col-md-4 text-right">
+		
+		<div class="ci-link-group">
 			<a href="<?php echo base_url($this->router->directory.$this->router->class.'/add');?>" class="btn btn-sm btn-outline-success" title="Add"> <i class="fa fa-fw fa-plus"></i> Add New</a>
-			</div>		
-		</div><!--/.status-icon-group status-icon-justify-->
+		</div>
+
 		<div class="table-responsive">
 			<table id="product-datatable" class="table ci-table table-striped">
 				<thead class="thead-dark">

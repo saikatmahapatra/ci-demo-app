@@ -11,33 +11,19 @@
 			$html_alert_ui.='<div class="auto-closable-alert alert ' . $alert_message_css . ' alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'.$alert_message.'</div>';
 			echo $html_alert_ui;
 		}
-		?>		
-		<div class="status-icon-group status-icon-justify row my-2 px-3">
-			<div class="col-md-8">
-				<?php
-				if(isset($status_flag)){
-					foreach($status_flag as $key => $status){
-						?>
-						<span class="mx-2">
-							<?php echo $status['icon']; ?>
-							<?php echo $status['text']; ?>
-						</span>
-						<?php
-					}
-				}
-				?>			
-			</div>
-			<div class="col-md-4 text-right">
-			<a href="<?php echo base_url($this->router->directory.$this->router->class.'/create_account');?>" class="btn btn-sm btn-outline-success" title="Add"> <i class="fa fa-fw fa-plus"></i> Add New</a>
-			</div>		
-		</div><!--/.status-icon-group status-icon-justify-->
+		?>
 		
-		
-		<div class="table-responsive">
-			<form class="form-inline mb-2" name="download" method="post" action="<?php echo current_url();?>">
+		<div class="ci-link-group">
+			<a href="<?php echo base_url($this->router->directory.$this->router->class.'/create_account');?>" class="btn btn-sm btn-outline-success" title="Add"> <i class="fa fa-fw fa-plus" aria-hidden="true"></i> Add New</a>
+			
+			<form class="form-inline ml-3" name="download" method="post" action="<?php echo current_url();?>">
 				<input type="hidden" name="form_action" value="download">
-				<button class="btn btn-sm btn-outline-secondary" title="Download"> Download</button>
+				<button class="btn btn-sm btn-outline-secondary" title="Download"> <i class="fa fa-fw fa-download" aria-hidden="true"></i> Download</button>
 			</form>
+
+		</div>
+
+		<div class="table-responsive">
 				<table id="user-datatable" class="table ci-table table-striped">
 					<thead class="thead-dark">
 						<tr>

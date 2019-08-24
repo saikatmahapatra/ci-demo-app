@@ -142,6 +142,8 @@ class Cms extends CI_Controller {
             $action_html = '';
             $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/edit/' .$result['id']), '<i class="fa fa-fw fa-pencil" aria-hidden="true"></i>', array(
                 'class' => 'btn btn-sm btn-outline-secondary',
+                'data-toggle' => 'tooltip',
+                'data-original-title' => 'Edit',
                 'title' => 'Edit',
             ));
             $action_html.='&nbsp;';
@@ -149,6 +151,8 @@ class Cms extends CI_Controller {
                 'class' => 'btn btn-sm btn-outline-danger btn-delete',
 				'data-confirmation'=>true,
 				'data-confirmation-message'=>'Are you sure, you want to delete this?',
+                'data-toggle' => 'tooltip',
+                'data-original-title' => 'Delete',
                 'title' => 'Delete',
             ));
 
@@ -311,7 +315,7 @@ class Cms extends CI_Controller {
             $row[] = '<img class="img banner-img-xs" src="'.base_url($img_src).'"><div>'.$result['upload_mime_type'].'</div>';
             //$row[] = $result['upload_mime_type'];
             //$row[] = $this->common_lib->display_date($result['upload_datetime'], true);
-            $row[] = isset($result['upload_status']) ? $this->data['status_flag'][$result['upload_status']]['icon'] : '';           
+            $row[] = isset($result['upload_status']) ? $this->data['status_flag'][$result['upload_status']]['text'] : '';
             //add html for action
             $action_html = '';
             $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/edit_banner/' .$result['id']), '<i class="fa fa-fw fa-pencil" aria-hidden="true"></i>', array(

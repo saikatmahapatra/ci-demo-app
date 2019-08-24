@@ -41,27 +41,39 @@
                 <div class="d-flex flex-column">
                     <?php if ($this->session->userdata['sess_user']['user_role'] == 1) { ?>
                     
-                        <div class="pb-3 border-bottom">
-                            <a title="View Details" href="<?php echo base_url($this->router->directory.'user/manage'); ?>">
-                            <i class="fa fa-fw fa-user fa-2x align-middle" aria-hidden="true" style="color: #0062cc;"></i> <span class="font-weight-bold"><?php echo isset($user_count) ? $user_count['data_rows'][0]['total'] : '0'; ?></span> customers
+                        <div class="stat media">
+                            <a title="View Details" class="d-flex" href="<?php echo base_url($this->router->directory.'user/manage'); ?>">
+                            <i class="fa fa-fw fa-user fa-2x align-middle" aria-hidden="true" style="color: #0062cc;"></i>
+                            <div class="media-body">
+                                <span class="count"><?php echo isset($user_count) ? $user_count['data_rows'][0]['total'] : '0'; ?></span> customers
+                            </div>
                             </a>
                         </div>
 
-                        <div class="py-3 border-bottom">
-                            <a title="View Details" href="<?php echo base_url($this->router->directory.'cms'); ?>">
-                            <i class="fa fa-fw fa-puzzle-piece fa-2x align-middle" aria-hidden="true" style="color: #007bff;"></i> <span class="font-weight-bold"><?php echo isset($post_count) ? $post_count['data_rows'][0]['total'] : '0'; ?></span> posts
+                        <div class="stat media">
+                            <a title="View Details" class="d-flex" href="<?php echo base_url($this->router->directory.'cms'); ?>">
+                            <i class="fa fa-fw fa-puzzle-piece fa-2x align-middle" aria-hidden="true" style="color: #007bff;"></i>
+                            <div class="media-body">
+                                <span class="count"><?php echo isset($post_count) ? $post_count['data_rows'][0]['total'] : '0'; ?></span> posts
+                            </div>
                             </a>
                         </div>
 
-                        <div class="py-3 border-bottom">
-                            <a title="View Details" href="<?php echo base_url($this->router->directory.'order'); ?>">
-                            <i class="fa fa-fw fa-shopping-cart fa-2x align-middle" aria-hidden="true" style="color: #495057;"></i> <span class="font-weight-bold"><?php echo isset($order_count) ? $order_count['data_rows'][0]['total'] : '0'; ?></span> orders
+                        <div class="stat media">
+                            <a title="View Details" class="d-flex" href="<?php echo base_url($this->router->directory.'order'); ?>">
+                            <i class="fa fa-fw fa-shopping-cart fa-2x align-middle" aria-hidden="true" style="color: #495057;"></i>
+                            <div class="media-body">
+                                <span class="count"><?php echo isset($order_count) ? $order_count['data_rows'][0]['total'] : '0'; ?></span> orders
+                            </div>
                             </a>
                         </div>
 
-                        <div class="py-3 border-bottom">
-                            <a title="View Details" href="#">
-                                <i class="fa fa-fw fa-inr fa-2x align-middle" aria-hidden="true" style="color: #fd7e14;"></i> <span class="font-weight-bold">8,706</span> net sale
+                        <div class="stat media">
+                            <a title="View Details" class="d-flex" href="#">
+                                <i class="fa fa-fw fa-inr fa-2x align-middle" aria-hidden="true" style="color: #fd7e14;"></i>
+                                <div class="media-body">
+                                    <span class="count">99,706</span> some analysis
+                                </div>
                             </a>
                         </div>
                     <?php } else{ ?>
@@ -70,9 +82,12 @@
                         </p> -->
                     <?php } ?>
 
-                    <div class="pt-3">
-                        <a title="View Details" href="#">
-                            <i class="fa fa-fw fa-check-square-o fa-2x align-middle" aria-hidden="true" style="color: #6f42c1;"></i> <span class="font-weight-bold">16</span> pending actions from you
+                    <div class="stat media">
+                        <a title="View Details" class="d-flex" href="#">
+                            <i class="fa fa-fw fa-check-square-o fa-2x align-middle" aria-hidden="true" style="color: #6f42c1;"></i>
+                            <div class="media-body">
+                                <span class="count">91,600</span> orders deliverd in this month across all locations
+                            </div>
                         </a>
                     </div>
                 </div><!--/.flex-column-->

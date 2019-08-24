@@ -11,15 +11,7 @@
 			echo $html_alert_ui;
 		}
 		?>
-		<div class="status-icon-group status-icon-justify row my-2 px-3">
-			<div class="col-md-8">
-			<span class="mx-2"><i class="fa fa-fw fa-bookmark-o text-success" aria-hidden="true"></i> Success</span>
-			<span class="mx-2"><i class="fa fa-fw fa-bookmark-o text-warning" aria-hidden="true"></i> Cancelled</span>
-			</div>
-			<div class="col-md-4 text-right">
-			
-			</div>		
-		</div><!--/.status-icon-group status-icon-justify-->
+		
 		<div class="table-responsive">
 			<table id="example1" class="table ci-table table-striped">
 				<thead class="thead-dark">
@@ -44,6 +36,6 @@
 					</tr>
 				</tfoot>
 			</table>
-		</div><!--/.status-icon-group status-icon-justify-->
+		</div>
     </div><!-- /.col-md-12 -->
 </div><!-- /.row -->

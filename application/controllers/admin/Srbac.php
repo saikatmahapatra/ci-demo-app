@@ -54,7 +54,14 @@ class Srbac extends CI_Controller {
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
 		
 		//Pagination
-		 $this->load->library('pagination');
+         $this->load->library('pagination');
+         
+         // Status flag indicator for showing in table grid etc
+		$this->data['status_flag'] = array(
+            'Y'=>array('text'=>'Active', 'css'=>'text-success', 'icon'=>'<i class="fa fa-fw fa-bookmark-o text-success" aria-hidden="true"></i>'),
+            'N'=>array('text'=>'Inactive', 'css'=>'text-warning', 'icon'=>'<i class="fa fa-fw fa-bookmark-o text-warning" aria-hidden="true"></i>'),
+            'A'=>array('text'=>'Archived', 'css'=>'text-danger', 'icon'=>'<i class="fa fa-fw fa-bookmark-o text-danger" aria-hidden="true"></i>')
+        );
 		
     }
 
@@ -133,7 +140,7 @@ class Srbac extends CI_Controller {
             $row[] = $result['content_type'];
             $row[] = $result['content_title'];
             $row[] = $this->common_lib->display_date($result['content_created_on'], true);
-            $row[] = (strtolower($result['content_status']) == 'y') ? 'Published' : 'Unpublished';            
+            $row[] = isset($result['content_status']) ? $this->data['status_flag'][$result['content_status']]['text'] : '';
             //add html for action
             $action_html = '';
             $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/edit/' . $result['id']), '<i class="fa fa-fw fa-pencil" aria-hidden="true"></i>', array(

@@ -8474,6 +8474,8 @@ body.login {
 
 .validation-error {
   color: #dc3545;
+  font-size: 80%;
+  margin-top: .25rem;
 }
 
 .tnc-content {
@@ -9118,5 +9120,22 @@ select.form-control.dob-inline {
 .user-profile-section .section-heading {
   color: #6c757d;
   font-weight: 700;
-  font-size: 80%;
+  font-size: 90%;
+}
+
+.user-profile-card-people {
+  color: inherit;
+  text-decoration: none !important;
+}
+
+.stat {
+  padding: 15px 0px 15px 0px;
+}
+
+.stat .count {
+  font-weight: 700;
+}
+
+.stat:not(:last-child) {
+  border-bottom: 1px solid #ced4da;
 }
