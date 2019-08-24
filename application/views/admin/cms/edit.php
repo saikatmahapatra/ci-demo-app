@@ -2,11 +2,7 @@
 $row = $rows[0];
 ?>
 <?php //echo isset($breadcrumbs) ? $breadcrumbs : ''; ?>
-<div class="row heading-container">
-    <div class="col-12">
-        <h1 class="page-title"><?php echo isset($page_title)? $page_title:'Page Heading'; ?></h1>
-    </div>
-</div><!--/.heading-container-->
+<h1 class="page-title"><?php echo isset($page_title) ? $page_title : 'Page Heading'; ?></h1>
 
 <div class="row">
 	<div class="col-md-9">
@@ -30,36 +26,36 @@ $row = $rows[0];
 		
 		<div class="form-row">
 			<div class="form-group col-md-4">
-				<label for="pagecontent_type" class="">Content Type <span class="required">*</span></label>
-				<?php echo form_dropdown('pagecontent_type', $arr_content_type, (isset($_POST['pagecontent_type']) ? set_value('pagecontent_type') : $row['pagecontent_type']), array('class' => 'form-control',));?>
-				<?php echo form_error('pagecontent_type'); ?>
+				<label for="content_type" class="">Content Type <span class="required">*</span></label>
+				<?php echo form_dropdown('content_type', $arr_content_type, (isset($_POST['content_type']) ? set_value('content_type') : $row['content_type']), array('class' => 'form-control',));?>
+				<?php echo form_error('content_type'); ?>
 			</div>		
 			<div class="form-group col-md-8">
-				<label for="pagecontent_title" class="">Content Title <span class="required">*</span></label>
-				<?php echo form_input(array('name' => 'pagecontent_title', 'value' => (isset($_POST['pagecontent_title']) ? set_value('pagecontent_title') : $row['pagecontent_title']), 'id' => 'pagecontent_title', 'class' => 'form-control', 'placeholder' => ''));?>
-				<?php echo form_error('pagecontent_title'); ?>
+				<label for="content_title" class="">Content Title <span class="required">*</span></label>
+				<?php echo form_input(array('name' => 'content_title', 'value' => (isset($_POST['content_title']) ? set_value('content_title') : $row['content_title']), 'id' => 'content_title', 'class' => 'form-control', 'placeholder' => ''));?>
+				<?php echo form_error('content_title'); ?>
 			</div>
 		</div>
 		
 		
 		
 		<div class="form-group">
-			<label for="pagecontent_text" class="">Content(HTML) <span class="required">*</span></label>
-			<?php echo form_textarea(array('name' => 'pagecontent_text','value' => (isset($_POST['pagecontent_text']) ? set_value('pagecontent_text') : $row['pagecontent_text']),'class' => 'form-control textarea','id' => 'pagecontent_text','rows' => '2','cols' => '50','placeholder' => '')); ?>
-			<?php echo form_error('pagecontent_text'); ?>
+			<label for="content_text" class="">Content(HTML) <span class="required">*</span></label>
+			<?php echo form_textarea(array('name' => 'content_text','value' => (isset($_POST['content_text']) ? set_value('content_text') : $row['content_text']),'class' => 'form-control textarea','id' => 'content_text','rows' => '2','cols' => '50','placeholder' => '')); ?>
+			<?php echo form_error('content_text'); ?>
 		</div>
 		
 		<?php /* ?>
 		<div class="form-row">			
 			<div class="form-group col-md-4 d-none">
-				<label for="pagecontent_display_start_date" class="">Display from date</label>
-				<?php echo form_input(array('name' => 'pagecontent_display_start_date','value' => (isset($_POST['pagecontent_display_start_date']) ? set_value('pagecontent_display_start_date') : $row['pagecontent_display_start_date']),'id' => 'pagecontent_display_start_date','class' => 'form-control cms-datepicker', 'placeholder' => 'dd-mm-yyyy','readonly'=>true));?>
-				<?php echo form_error('pagecontent_display_start_date'); ?>
+				<label for="content_display_from_date" class="">Display from date</label>
+				<?php echo form_input(array('name' => 'content_display_from_date','value' => (isset($_POST['content_display_from_date']) ? set_value('content_display_from_date') : $row['content_display_from_date']),'id' => 'content_display_from_date','class' => 'form-control cms-datepicker', 'placeholder' => 'dd-mm-yyyy','readonly'=>true));?>
+				<?php echo form_error('content_display_from_date'); ?>
 			</div>		
 			<div class="form-group col-md-4 d-none">
-				<label for="pagecontent_display_end_date" class="">Display to Date</label>
-				<?php echo form_input(array('name' => 'pagecontent_display_end_date','value' => (isset($_POST['pagecontent_display_end_date']) ? set_value('pagecontent_display_end_date') : $row['pagecontent_display_end_date']),'class' => 'form-control cms-datepicker','id' => 'pagecontent_display_end_date','placeholder' => 'dd-mm-yyyy','readonly'=>true));?>
-				<?php echo form_error('pagecontent_display_end_date'); ?>
+				<label for="content_display_to_date" class="">Display to Date</label>
+				<?php echo form_input(array('name' => 'content_display_to_date','value' => (isset($_POST['content_display_to_date']) ? set_value('content_display_to_date') : $row['content_display_to_date']),'class' => 'form-control cms-datepicker','id' => 'content_display_to_date','placeholder' => 'dd-mm-yyyy','readonly'=>true));?>
+				<?php echo form_error('content_display_to_date'); ?>
 			</div>			
 		</div>
 		<?php */ ?>
@@ -67,36 +63,36 @@ $row = $rows[0];
 		<?php /* ?>
 		<div class="form-row">		
 			<div class="form-group col-md-4">
-				<label for="pagecontent_meta_keywords" class="">Meta Keywords</label>
-				<?php echo form_input(array('name' => 'pagecontent_meta_keywords','value' => (isset($_POST['pagecontent_meta_keywords']) ? set_value('pagecontent_meta_keywords') : $row['pagecontent_meta_keywords']),'id' => 'pagecontent_meta_keywords','class' => 'form-control', 'placeholder' => '')); ?>
-				<?php echo form_error('pagecontent_meta_keywords'); ?>
+				<label for="content_meta_keywords" class="">Meta Keywords</label>
+				<?php echo form_input(array('name' => 'content_meta_keywords','value' => (isset($_POST['content_meta_keywords']) ? set_value('content_meta_keywords') : $row['content_meta_keywords']),'id' => 'content_meta_keywords','class' => 'form-control', 'placeholder' => '')); ?>
+				<?php echo form_error('content_meta_keywords'); ?>
 			</div>
 		
 			<div class="form-group col-md-4">
-				<label for="pagecontent_meta_description" class="">Meta Description</label>
-				<?php echo form_input(array('name' => 'pagecontent_meta_description','value' => (isset($_POST['pagecontent_meta_description']) ? set_value('pagecontent_meta_description') : $row['pagecontent_meta_description']),'id' => 'pagecontent_meta_description','class' => 'form-control', 'placeholder' => ''));?>
-				<?php echo form_error('pagecontent_meta_description'); ?>
+				<label for="content_meta_description" class="">Meta Description</label>
+				<?php echo form_input(array('name' => 'content_meta_description','value' => (isset($_POST['content_meta_description']) ? set_value('content_meta_description') : $row['content_meta_description']),'id' => 'content_meta_description','class' => 'form-control', 'placeholder' => ''));?>
+				<?php echo form_error('content_meta_description'); ?>
 			</div>
 		
 			<div class="form-group col-md-4">
-				<label for="pagecontent_meta_author" class="">Meta Author</label>
-				<?php echo form_input(array('name' => 'pagecontent_meta_author','value' => (isset($_POST['pagecontent_meta_author']) ? set_value('pagecontent_meta_author') : $row['pagecontent_meta_author']),'class' => 'form-control','id' => 'pagecontent_meta_author','placeholder' => ''));?>
-				<?php echo form_error('pagecontent_meta_author'); ?>
+				<label for="content_meta_author" class="">Meta Author</label>
+				<?php echo form_input(array('name' => 'content_meta_author','value' => (isset($_POST['content_meta_author']) ? set_value('content_meta_author') : $row['content_meta_author']),'class' => 'form-control','id' => 'content_meta_author','placeholder' => ''));?>
+				<?php echo form_error('content_meta_author'); ?>
 			</div>		
 		</div>
 		<?php */ ?>
 		<?php /* ?>
 		<div class="form-row">		
 			<div class="form-group col-md-3">									
-				<label for="pagecontent_status" class="">Publish</label>
-				<?php echo form_dropdown('pagecontent_status', array('Y'=>'Yes','N'=>'No'), (isset($_POST['pagecontent_status']) ? set_value('pagecontent_status') : $row['pagecontent_status']), array('class' => 'form-control')); ?>
-				<?php echo form_error('pagecontent_status'); ?>
+				<label for="content_status" class="">Publish</label>
+				<?php echo form_dropdown('content_status', array('Y'=>'Yes','N'=>'No'), (isset($_POST['content_status']) ? set_value('content_status') : $row['content_status']), array('class' => 'form-control')); ?>
+				<?php echo form_error('content_status'); ?>
 			</div>	
 			
 			<div class="form-group col-md-3">									
-				<label for="pagecontent_archived" class="">Archived</label>
-				<?php echo form_dropdown('pagecontent_archived', array('Y'=>'Yes','N'=>'No'), (isset($_POST['pagecontent_archived']) ? set_value('pagecontent_archived') : $row['pagecontent_archived']), array('class' => 'form-control'));?>
-				<?php echo form_error('pagecontent_archived'); ?>
+				<label for="content_archived" class="">Archived</label>
+				<?php echo form_dropdown('content_archived', array('Y'=>'Yes','N'=>'No'), (isset($_POST['content_archived']) ? set_value('content_archived') : $row['content_archived']), array('class' => 'form-control'));?>
+				<?php echo form_error('content_archived'); ?>
 			</div>	
 			
 		</div>
@@ -104,29 +100,29 @@ $row = $rows[0];
 
 		<div class="form-row">
 			<div class="form-group col-md-12">									
-				<label for="pagecontent_status" class="">Display Status <span class="required">*</span></label>
-				<?php //echo form_dropdown('pagecontent_status', array('Y'=>'Yes','N'=>'No'), (isset($_POST['pagecontent_status']) ? set_value('pagecontent_status') : $row['pagecontent_status']), array('class' => 'form-control')); ?>
+				<label for="content_status" class="">Display Status <span class="required">*</span></label>
+				<?php //echo form_dropdown('content_status', array('Y'=>'Yes','N'=>'No'), (isset($_POST['content_status']) ? set_value('content_status') : $row['content_status']), array('class' => 'form-control')); ?>
 				  	<!--<div class="">-->
 						<div class="custom-control custom-radio custom-control-inline">
 							<?php
-								$radio_is_checked = isset($_POST['pagecontent_status']) ? $_POST['pagecontent_status'] == 'Y' : ($row['pagecontent_status'] == 'Y');
+								$radio_is_checked = isset($_POST['content_status']) ? $_POST['content_status'] == 'Y' : ($row['content_status'] == 'Y');
 
-								echo form_radio(array('name' => 'pagecontent_status','value' => 'Y','id' => 'Y','checked' => $radio_is_checked,'class' => 'custom-control-input'), set_radio('pagecontent_status', 'Y'));
+								echo form_radio(array('name' => 'content_status','value' => 'Y','id' => 'Y','checked' => $radio_is_checked,'class' => 'custom-control-input'), set_radio('content_status', 'Y'));
 							?>
 							<label class="custom-control-label" for="Y">Publish</span></label>
 						</div>
 						
 						<div class="custom-control custom-radio custom-control-inline">
 							<?php
-								$radio_is_checked = isset($_POST['pagecontent_status']) ? $_POST['pagecontent_status'] == 'N' : ($row['pagecontent_status'] == 'N');
+								$radio_is_checked = isset($_POST['content_status']) ? $_POST['content_status'] == 'N' : ($row['content_status'] == 'N');
 
-								echo form_radio(array('name' => 'pagecontent_status', 'value' => 'N', 'id' => 'N', 'checked' => $radio_is_checked, 'class' => 'custom-control-input'), set_radio('pagecontent_status', 'N'));
+								echo form_radio(array('name' => 'content_status', 'value' => 'N', 'id' => 'N', 'checked' => $radio_is_checked, 'class' => 'custom-control-input'), set_radio('content_status', 'N'));
 							?>
 							<label class="custom-control-label" for="N">Unpublish</span></label>
 						</div>								
 					<!--</div>-->
 					<small id="emailHelp" class="form-text text-muted">If you unpublish this, it will not displayed for public user(employees)</small>
-					<?php echo form_error('pagecontent_status'); ?>
+					<?php echo form_error('content_status'); ?>
 			</div>
 		</div>
 

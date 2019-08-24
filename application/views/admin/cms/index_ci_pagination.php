@@ -1,13 +1,5 @@
 <?php //echo isset($breadcrumbs) ? $breadcrumbs : ''; ?>
-<div class="row heading-container">
-    <div class="col-12">
-        <h1 class="page-title"><?php echo isset($page_title)? $page_title:'Page Heading'; ?></h1>
-    </div>
-</div><!--/.heading-container-->
-
-
-
-
+<h1 class="page-title"><?php echo isset($page_title) ? $page_title : 'Page Heading'; ?></h1>
 <div class="row">
 	<div class="col-md-12">
 		<?php
@@ -18,7 +10,7 @@
 			echo $html_alert_ui;
 		}
 		?>
-		<div class="grid-action-holder row my-2 px-3">
+		<div class="status-icon-group status-icon-justify row my-2 px-3">
 			<div class="col-md-8">
 				<?php
 				if(isset($status_flag)){
@@ -34,9 +26,9 @@
 				?>			
 			</div>
 			<div class="col-md-4 text-right">
-			<a href="<?php echo base_url($this->router->directory.$this->router->class.'/add');?>" class="btn btn-sm btn-outline-success" title="Add"> <i class="fa fa-plus"></i> Add New</a>
+			<a href="<?php echo base_url($this->router->directory.$this->router->class.'/add');?>" class="btn btn-sm btn-outline-success" title="Add"> <i class="fa fa-fw fa-plus"></i> Add New</a>
 			</div>		
-		</div><!--/.grid-action-holder-->	
+		</div><!--/.status-icon-group status-icon-justify-->	
 		
 		<div class="table-responsive">
 			<table class="table ci-table table-striped">
@@ -55,10 +47,10 @@
 					foreach($data_rows as $row){
 						?>
 						<tr>
-							<td><?php echo $row['id'].' - '.$row['pagecontent_title'];?></td>
-							<td><?php echo $row['pagecontent_type'];?></td>
-							<td><?php echo $row['pagecontent_type'];?></td>
-							<td><?php echo $row['pagecontent_status'];?></td>
+							<td><?php echo $row['id'].' - '.$row['content_title'];?></td>
+							<td><?php echo $row['content_type'];?></td>
+							<td><?php echo $row['content_type'];?></td>
+							<td><?php echo $row['content_status'];?></td>
 							<td><a href="#">edit</a></td>
 							
 						</tr>

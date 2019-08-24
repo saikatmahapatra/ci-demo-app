@@ -1,56 +1,85 @@
 <?php //echo isset($breadcrumbs) ? $breadcrumbs : ''; ?>
-<div class="row heading-container mb-3">
-    <div class="col-12">
-        <h1 class="page-title"><?php echo isset($page_title)? $page_title:'Page Heading'; ?></h1>
+<h1 class="page-title"><?php echo isset($page_title) ? $page_title : 'Page Heading'; ?></h1>
+<div class="row">
+    <div class="col-md-8 mb-3">
+        <div class="card news-card">
+            <div class="card-header h6">
+            <i class="fa fa-fw fa-newspaper-o fa-lg" aria-hidden="true"></i> Recent Posts
+            </div>
+            <div class="card-body">
+                <?php if( isset($data_rows) && sizeof($data_rows) > 0 ){ ?>
+                <ul class="list-group list-group-flush">
+                <?php foreach($data_rows as $key=>$row) { ?>
+                    <li class="list-group-item">
+                        <div class="subject-title"><a target="blank" href="<?php echo base_url($this->router->class.'/details/'.$row['id']);?>"><?php echo isset($row['content_title']) ? $row['content_title'] : '';?></a></div>
+                        <div class="text-muted small">
+                            <?php echo $content_type[$row['content_type']]['text']; ?>
+                            <?php echo isset($row['user_firstname']) ? "By ".$row['user_firstname'] : '';?>
+                            <?php echo isset($row['user_lastname']) ? $row['user_lastname'].", " : '';?>
+                            <?php echo $this->common_lib->display_date($row['content_created_on'],true,null,'d-M-Y h:i:s a'); ?>
+                        </div>
+                        <div class="mb-0 lh-125" style="max-height: 120px; overflow: hidden;">
+                            <?php echo isset($row['content_text']) ? ($this->common_lib->remove_empty_p($row['content_text'])) : '';?>
+                        </div>
+                    </li>
+                <?php }  ?>
+                </ul>
+                <?php } ?>
+            </div>
+            <div class="card-footer text-center">
+                <?php echo $pagination_link;?>
+            </div>
+        </div><!--/.card-->
     </div>
-</div><!--/.heading-container-->
+    
+    <div class="col-md-4 mb-3">
+        <div class="card card-stat">
+            <div class="card-header h6">
+            <i class="fa fa-fw fa-line-chart fa-lg" aria-hidden="true"></i> Statistics
+            </div>
+            <div class="card-body">
+                <div class="d-flex flex-column">
+                    <?php if ($this->session->userdata['sess_user']['user_role'] == 1) { ?>
+                    
+                        <div class="pb-3 border-bottom">
+                            <a title="View Details" href="<?php echo base_url($this->router->directory.'user/manage'); ?>">
+                            <i class="fa fa-fw fa-user fa-2x align-middle" aria-hidden="true" style="color: #0062cc;"></i> <span class="font-weight-bold"><?php echo isset($user_count) ? $user_count['data_rows'][0]['total'] : '0'; ?></span> customers
+                            </a>
+                        </div>
 
-<div class="row text-center home-card">
-    <div class="col-sm-6 col-md-3">
-        <div class="card my-1 border border-danger">
-            <div class="card-header text-danger">
-                <i class="icon fa fa-lg fa-3x fa-calendar-check-o"></i>
-            </div>
-            <div class="card-body p-0 pt-2">
-                <h6 class="card-title mb-0">Data 1</h6>
-                <p class="card-text">28-Apr</p>
-            </div>
-        </div>
-    </div>
+                        <div class="py-3 border-bottom">
+                            <a title="View Details" href="<?php echo base_url($this->router->directory.'cms'); ?>">
+                            <i class="fa fa-fw fa-puzzle-piece fa-2x align-middle" aria-hidden="true" style="color: #007bff;"></i> <span class="font-weight-bold"><?php echo isset($post_count) ? $post_count['data_rows'][0]['total'] : '0'; ?></span> posts
+                            </a>
+                        </div>
 
-    <div class="col-sm-6 col-md-3">
-        <div class="card my-1 border border-info">
-            <div class="card-header text-info">
-                <i class="icon fa fa-lg fa-3x fa-user-o"></i>
-            </div>
-            <div class="card-body p-0 pt-2">
-                <h6 class="card-title mb-0">Data 2</h6>
-                <p class="card-text">38</p>
-            </div>
-        </div>
-    </div>
+                        <div class="py-3 border-bottom">
+                            <a title="View Details" href="<?php echo base_url($this->router->directory.'order'); ?>">
+                            <i class="fa fa-fw fa-shopping-cart fa-2x align-middle" aria-hidden="true" style="color: #495057;"></i> <span class="font-weight-bold"><?php echo isset($order_count) ? $order_count['data_rows'][0]['total'] : '0'; ?></span> orders
+                            </a>
+                        </div>
 
-    <div class="col-sm-6 col-md-3">
-        <div class="card my-1 border border-warning">
-            <div class="card-header text-warning">
-                <i class="icon fa fa-lg fa-3x fa-cubes"></i>
-            </div>
-            <div class="card-body p-0 pt-2">
-                <h6 class="card-title mb-0">Data 3</h6>
-                <p class="card-text">40</p>
-            </div>
-        </div>
-    </div>
+                        <div class="py-3 border-bottom">
+                            <a title="View Details" href="#">
+                                <i class="fa fa-fw fa-inr fa-2x align-middle" aria-hidden="true" style="color: #fd7e14;"></i> <span class="font-weight-bold">8,706</span> net sale
+                            </a>
+                        </div>
+                    <?php } else{ ?>
+                        <!-- <p>
+                            Oops! There are nothing to display here for you.
+                        </p> -->
+                    <?php } ?>
 
-    <div class="col-sm-6 col-md-3">
-        <div class="card my-1 border border-success">
-            <div class="card-header text-success">
-                <i class="icon fa fa-lg fa-3x fa-clock-o"></i>
+                    <div class="pt-3">
+                        <a title="View Details" href="#">
+                            <i class="fa fa-fw fa-check-square-o fa-2x align-middle" aria-hidden="true" style="color: #6f42c1;"></i> <span class="font-weight-bold">16</span> pending actions from you
+                        </a>
+                    </div>
+                </div><!--/.flex-column-->
+            </div><!--/.card-body-->
+            <div class="card-footer text-center text-muted small">
+            <i class="fa fa-fw fa-clock-o" aria-hidden="true"></i> Updated on <?php echo date('d-M-Y h:i:s a');?>
             </div>
-            <div class="card-body p-0 pt-2">
-                <h6 class="card-title mb-0">Data 4</h6>
-                <p class="card-text">1</p>
-            </div>
-        </div>
+        </div><!--/.card-->
     </div>
 </div>

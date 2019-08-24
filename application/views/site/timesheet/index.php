@@ -1,17 +1,7 @@
 <?php //echo isset($breadcrumbs) ? $breadcrumbs : ''; ?>
-<div class="row heading-container">
-    <div class="col-12">
-        <h1 class="page-title"><?php echo isset($page_title)? $page_title:'Page Heading'; ?></h1>
-    </div>
-</div><!--/.heading-container-->
+<h1 class="page-title"><?php echo isset($page_title) ? $page_title : 'Page Heading'; ?></h1>
 
 <div class="row">
-
-
-    
-	
-	
-	
 	<div class="col-md-12">		
 		<nav>
 			<div class="nav nav-tabs ci-nav-tab" id="nav-tab" role="tablist">
@@ -66,7 +56,7 @@
 						<div class="d-none">Total hours logged: <span id="total_hrs">0.0</span> hrs</div>
 						<div class="d-none">Avg. hours worked: <span class="" id="average_worked_hrs">0.0</span> hrs/day</div>
 					</div>		
-					<a class="text-centre d-none" href="#"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Download this month's timesheet</a>
+					<a class="text-centre d-none" href="#"><i class="fa fa-fw fa-file-excel-o" aria-hidden="true"></i> Download this month's timesheet</a>
 				</div><!--/.col-md-3-->
 
 				<div class="col-md-8 offset-md-1">

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top nav-colorgraph">	
+<nav class="navbar navbar-expand-lg navbar-dark bg-black fixed-top colorgraph-navbar-2">	
 	<a class="navbar-brand" href="<?php echo base_url($this->router->directory); ?>">
 		<img class="logo" alt="<?php echo $this->config->item('app_logo_name_dashboard'); ?>" src="<?php echo base_url('assets/src/img/logo.png');?>">
 		<?php //echo $this->config->item('app_logo_name_dashboard'); ?>
@@ -56,7 +56,7 @@
 				<div class="input-group">
 						<input type="text" name="q" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon2">
 						<div class="input-group-append">
-							<button class="btn btn-sm" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+							<button class="btn btn-sm" type="submit"><i class="fa fa-fw fa-search" aria-hidden="true"></i></button>
 						</div>
 					</div>
 				<?php echo form_close(); ?>
@@ -65,7 +65,7 @@
 			<?php if (isset($this->session->userdata['sess_user']['id'])) {   ?>
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"><i class="fa fa-user-circle" aria-hidden="true"></i> <?php echo isset($this->session->userdata['sess_user']['user_firstname']) ? $this->session->userdata['sess_user']['user_firstname'] : 'Guest';?></a>
+					aria-expanded="false"><i class="fa fa-fw fa-user-circle" aria-hidden="true"></i> <?php echo isset($this->session->userdata['sess_user']['user_firstname']) ? $this->session->userdata['sess_user']['user_firstname'] : 'Guest';?></a>
 				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown03">					
 					<div class="dropdown-item welcome-user-container">					
 						<div class="mb-2"><?php echo isset($this->session->userdata['sess_user']['user_title'])? $this->session->userdata['sess_user']['user_title']:''; ?> <?php echo isset($this->session->userdata['sess_user']['user_firstname']) ? $this->session->userdata['sess_user']['user_firstname'].' '.$this->session->userdata['sess_user']['user_lastname']:'Guest';?></div>
@@ -75,7 +75,7 @@
 					</div><!--/.welcome-user-container-->
 					
 					<div class="dropdown-divider mt-3"></div>			
-					<a class="dropdown-item"  href="<?php echo base_url($this->router->directory.'user/my_profile/'); ?>">My Profile</a>
+					<a class="dropdown-item"  href="<?php echo base_url($this->router->directory.'user/profile/'); ?>">My Profile</a>
 					<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'user/change_password'); ?>">Change Password</a>
 					<a class="dropdown-item" href="<?php echo base_url($this->router->directory.'user/logout'); ?>">Log Out</a>			
 				</div>

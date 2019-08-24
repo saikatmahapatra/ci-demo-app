@@ -1,13 +1,5 @@
 <?php //echo isset($breadcrumbs) ? $breadcrumbs : ''; ?>
-<div class="row heading-container">
-    <div class="col-12">
-        <h1 class="page-title"><?php echo isset($page_title)? $page_title:'Page Heading'; ?></h1>
-    </div>
-</div><!--/.heading-container-->
-
-
-
-
+<h1 class="page-title"><?php echo isset($page_title) ? $page_title : 'Page Heading'; ?></h1>
 <div class="row">
 	<div class="col-md-12">
 		<?php
@@ -54,7 +46,7 @@
 
 
 				</div>					
-				<?php echo form_button(array('name' => 'submit_btn','type' => 'submit','content' => '<i class="fa fa-search"></i> Search','class' => 'btn btn-primary'));?>
+				<?php echo form_button(array('name' => 'submit_btn','type' => 'submit','content' => '<i class="fa fa-fw fa-search"></i> Search','class' => 'btn btn-primary'));?>
 				<?php echo form_button(array('name' => 'reset_btn','type' => 'reset','content' => 'Reset','class' => 'btn btn-secondary','id'=>'reset_timesheet_form'));?>
 					
 				<?php echo form_close(); ?>
@@ -70,7 +62,7 @@
 				<input type="hidden" name="q_project" value="<?php echo $this->input->get('q_project');?>">
 				<input type="hidden" name="from_date" value="<?php echo $this->input->get('from_date');?>">
 				<input type="hidden" name="to_date" value="<?php echo $this->input->get('to_date');?>">
-				<button type="submit" class="btn btn-sm btn-outline-secondary" title="Download"> <i class="fa fa-download" aria-hidden="true"></i> Download as Excel</button>
+				<button type="submit" class="btn btn-sm btn-outline-secondary" title="Download"> <i class="fa fa-fw fa-download" aria-hidden="true"></i> Download as Excel</button>
 			<?php echo form_close(); ?>
 
 			<table class="table table-striped">

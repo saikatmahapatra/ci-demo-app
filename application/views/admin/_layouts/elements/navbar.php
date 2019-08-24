@@ -23,7 +23,7 @@
                         <a class="dropdown-item" href="<?php echo base_url($this->router->directory.'product');?>">Manage Products</a>
                         <a class="dropdown-item" href="<?php echo base_url($this->router->directory.'product/add');?>">Add Product</a>
                         <a class="dropdown-item" href="<?php echo base_url($this->router->directory.'category');?>">Manage Categories</a>
-                        <a class="dropdown-item" href="<<?php echo base_url($this->router->directory.'category/add');?>">Add Category</a>
+                        <a class="dropdown-item" href="<?php echo base_url($this->router->directory.'category/add');?>">Add Category</a>
                     </div>
                 </li>
                 
@@ -39,6 +39,8 @@
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown_3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More...</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown_3">
                         <a class="dropdown-item" href="<?php echo base_url($this->router->directory.'timesheet/report'); ?>">Timesheet</a>
+                        <a class="dropdown-item" href="<?php echo base_url($this->router->directory.'cms'); ?>">CMS</a>
+                        <a class="dropdown-item" href="<?php echo base_url($this->router->directory.'cms/manage_banner'); ?>">Banner</a>
                     </div>
                 </li>
             </ul>
@@ -50,34 +52,34 @@
                         <div class="input-group">
                             <input type="text" name="q" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon2">
                             <div class="input-group-append">
-                                <button class="btn btn-sm" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                <button class="btn btn-sm" type="submit"><i class="fa fa-fw fa-search" aria-hidden="true"></i></button>
                             </div>
                         </div>
                     <?php echo form_close(); ?>
                 </li>
                         
-                <li class="nav-item dropdown no-toggle-icon d-none">
-                    <a class="nav-link dropdown-toggle" id="dropdown_notification" href="#" data-toggle="dropdown" aria-label="Show notifications"><i class="fa fa-bell-o "></i></a>
+                <div class="nav-item dropdown no-toggle-icon">
+                    <a class="nav-link dropdown-toggle" id="dropdown_notification" href="#" data-toggle="dropdown" aria-label="Show notifications"><i class="fa fa-fw fa-bell-o "></i></a>
                     <ul class="notification dropdown-menu dropdown-menu-right">
                         <li class="notification-title">You have 0 new notifications.</li>
-                            <div class="notification-content">
-                                <!-- <li><a class="notification-item" href="<?php echo base_url();?>"><span class="notification-icon"><span class="fa-stack "><i class="fa fa-circle-o fa-stack-2x text-primary"></i><i class="fa fa-envelope fa-stack-1x fa-inverse"></i></span></span><div><p class="notification-message">Lisa sent you a mail</p><p class="notification-meta">2 min ago</p></div></a></li>
-                                <li><a class="notification-item" href="<?php echo base_url();?>"><span class="notification-icon"><span class="fa-stack "><i class="fa fa-circle-o fa-stack-2x text-danger"></i><i class="fa fa-hdd-o fa-stack-1x fa-inverse"></i></span></span><div><p class="notification-message">Mail server not working</p><p class="notification-meta">5 min ago</p></div></a></li>
-                                <li><a class="notification-item" href="<?php echo base_url();?>"><span class="notification-icon"><span class="fa-stack "><i class="fa fa-circle-o fa-stack-2x text-success"></i><i class="fa fa-money fa-stack-1x fa-inverse"></i></span></span><div><p class="notification-message">Transaction complete</p><p class="notification-meta">2 days ago</p></div></a></li>
+                            <!-- <div class="notification-content">
+                                <li><a class="notification-item" href="<?php echo base_url();?>"><span class="notification-icon"><span class="fa-stack "><i class="fa fa-fw fa-bookmark-o-o fa-stack-2x text-primary"></i><i class="fa fa-fw fa-envelope"></i></span></span><div><p class="notification-message">Lisa sent you a mail</p><p class="notification-meta">2 min ago</p></div></a></li>
+                                <li><a class="notification-item" href="<?php echo base_url();?>"><span class="notification-icon"><span class="fa-stack "><i class="fa fa-fw fa-bookmark-o-o fa-stack-2x text-danger"></i><i class="fa fa-fw fa-hdd-o "></i></span></span><div><p class="notification-message">Mail server not working</p><p class="notification-meta">5 min ago</p></div></a></li>
+                                <li><a class="notification-item" href="<?php echo base_url();?>"><span class="notification-icon"><span class="fa-stack "><i class="fa fa-fw fa-bookmark-o-o fa-stack-2x text-success"></i><i class="fa fa-fw fa-money "></i></span></span><div><p class="notification-message">Transaction complete</p><p class="notification-meta">2 days ago</p></div></a></li>
                                 <div
                                     class="notification-content">
-                                    <li><a class="notification-item" href="<?php echo base_url();?>"><span class="notification-icon"><span class="fa-stack "><i class="fa fa-circle-o fa-stack-2x text-primary"></i><i class="fa fa-envelope fa-stack-1x fa-inverse"></i></span></span><div><p class="notification-message">Lisa sent you a mail</p><p class="notification-meta">2 min ago</p></div></a></li>
-                                    <li><a class="notification-item" href="<?php echo base_url();?>"><span class="notification-icon"><span class="fa-stack "><i class="fa fa-circle-o fa-stack-2x text-danger"></i><i class="fa fa-hdd-o fa-stack-1x fa-inverse"></i></span></span><div><p class="notification-message">Mail server not working</p><p class="notification-meta">5 min ago</p></div></a></li>
-                                    <li><a class="notification-item" href="<?php echo base_url();?>"><span class="notification-icon"><span class="fa-stack "><i class="fa fa-circle-o fa-stack-2x text-success"></i><i class="fa fa-money fa-stack-1x fa-inverse"></i></span></span><div><p class="notification-message">Transaction complete</p><p class="notification-meta">2 days ago</p></div></a></li>
-                                </div> -->
-                            </div>
+                                    <li><a class="notification-item" href="<?php echo base_url();?>"><span class="notification-icon"><span class="fa-stack "><i class="fa fa-fw fa-bookmark-o-o fa-stack-2x text-primary"></i><i class="fa fa-fw fa-envelope "></i></span></span><div><p class="notification-message">Lisa sent you a mail</p><p class="notification-meta">2 min ago</p></div></a></li>
+                                    <li><a class="notification-item" href="<?php echo base_url();?>"><span class="notification-icon"><span class="fa-stack "><i class="fa fa-fw fa-bookmark-o-o fa-stack-2x text-danger"></i><i class="fa fa-fw fa-hdd-o "></i></span></span><div><p class="notification-message">Mail server not working</p><p class="notification-meta">5 min ago</p></div></a></li>
+                                    <li><a class="notification-item" href="<?php echo base_url();?>"><span class="notification-icon"><span class="fa-stack "><i class="fa fa-fw fa-bookmark-o-o fa-stack-2x text-success"></i><i class="fa fa-fw fa-money "></i></span></span><div><p class="notification-message">Transaction complete</p><p class="notification-meta">2 days ago</p></div></a></li>
+                                </div>
+                            </div> -->
                         <li class="notification-footer"><a href="<?php echo base_url();?>">See all notifications.</a></li>
                     </ul>
-                </li>
+                </div>
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown_5" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false"><i class="fa fa-user-circle " aria-hidden="true"></i> <?php echo isset($this->session->userdata['sess_user']['user_firstname']) ? $this->session->userdata['sess_user']['user_firstname'] : 'Guest';?></a>
+                        aria-expanded="false"><i class="fa fa-fw fa-user-circle " aria-hidden="true"></i> <?php echo isset($this->session->userdata['sess_user']['user_firstname']) ? $this->session->userdata['sess_user']['user_firstname'] : 'Guest';?></a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_5">					
                         <div class="dropdown-item welcome-user-container">	
                             
@@ -108,7 +110,7 @@
                         </div><!--/.welcome-user-container-->
                         
                         <div class="dropdown-divider mt-2"></div>			
-                        <a class="dropdown-item"  href="<?php echo base_url($this->router->directory.'user/my_profile/'); ?>">My Profile</a>
+                        <a class="dropdown-item"  href="<?php echo base_url($this->router->directory.'user/profile/'); ?>">My Profile</a>
                         <a class="dropdown-item" href="<?php echo base_url($this->router->directory.'user/change_password'); ?>">Change Password</a>
                         <a class="dropdown-item" href="<?php echo base_url($this->router->directory.'user/logout'); ?>">Logout</a>
                     </div>

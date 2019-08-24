@@ -53,9 +53,9 @@ class User extends CI_Controller {
 		
 		// Status flag indicator for showing in table grid etc
 		$this->data['status_flag'] = array(
-            'Y'=>array('text'=>'Active', 'css'=>'text-success', 'icon'=>'<i class="fa fa-circle text-success" aria-hidden="true"></i>'),
-            'N'=>array('text'=>'Inactive', 'css'=>'text-warning', 'icon'=>'<i class="fa fa-circle text-warning" aria-hidden="true"></i>'),
-            'A'=>array('text'=>'Archived', 'css'=>'text-danger', 'icon'=>'<i class="fa fa-circle text-danger" aria-hidden="true"></i>')
+            'Y'=>array('text'=>'Active', 'css'=>'text-success', 'icon'=>'<i class="fa fa-fw fa-bookmark-o text-success" aria-hidden="true"></i>'),
+            'N'=>array('text'=>'Inactive', 'css'=>'text-warning', 'icon'=>'<i class="fa fa-fw fa-bookmark-o text-warning" aria-hidden="true"></i>'),
+            'A'=>array('text'=>'Archived', 'css'=>'text-danger', 'icon'=>'<i class="fa fa-fw fa-bookmark-o text-danger" aria-hidden="true"></i>')
         );
     }
 
@@ -135,15 +135,15 @@ class User extends CI_Controller {
             $acc_status_class = ($result['user_status'] == 'Y') ? 'btn btn-sm btn-outline-danger' : 'btn btn-sm btn-outline-success';
             $acc_status_set = ($result['user_status'] == 'Y') ? 'N' : 'Y';
             
-            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/profile/' . $result['id']), '<i class="fa fa-info-circle" aria-hidden="true"></i> Details', array(
-                'class' => 'btn btn-sm btn-outline-secondary mr-1',
+            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/profile/' . $result['id']), '<i class="fa fa-fw fa-info-circle" aria-hidden="true"></i>', array(
+                'class' => 'btn btn-sm btn-outline-secondary',
                 'data-toggle' => 'tooltip',
                 'data-original-title' => 'View Profile',
                 'title' => 'View Profile'
             ));
 
-            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/edit_user_profile/' . $result['id']), '<i class="fa fa-edit" aria-hidden="true"></i> Edit', array(
-                'class' => 'btn btn-sm btn-outline-secondary mr-1',
+            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/edit_user_profile/' . $result['id']), '<i class="fa fa-fw fa-pencil" aria-hidden="true"></i>', array(
+                'class' => 'btn btn-sm btn-outline-secondary',
                 'data-toggle' => 'tooltip',
                 'data-original-title' => 'Edit Profile',
                 'title' => 'Edit Profile'
@@ -580,14 +580,19 @@ class User extends CI_Controller {
         }
     }
 
-    function my_profile() {
+    function profile() {
         ########### Validate User Auth #############
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
             redirect($this->router->directory.$this->router->class.'/login');
         }
 		
-		//View Page Config
+        //View Page Config
+        $is_self_account = true;
+        if(!empty($this->uri->segment(3)) && ($this->uri->segment(3) != $this->sess_user_id)){
+            $is_self_account = false;
+        }
+        $this->data['is_self_account'] = $is_self_account;
         $this->data['page_title'] = "My Profile";
         $this->breadcrumbs->push('Profile','/');				
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
@@ -603,34 +608,6 @@ class User extends CI_Controller {
         $this->data['education'] = $this->user_model->get_user_education(NULL, $user_id);
         $this->data['job_exp'] = $this->user_model->get_user_work_experience(NULL, $user_id);
 		$this->data['page_title'] = 'My Profile';
-        $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/my_profile', $this->data, true);
-        $this->load->view('site/_layouts/layout_default', $this->data);
-    }
-	
-	
-	function profile() {
-        ########### Validate User Auth #############
-        $is_logged_in = $this->common_lib->is_logged_in();
-        if ($is_logged_in == FALSE) {
-            redirect($this->router->directory.$this->router->class.'/login');
-        }
-		
-		//View Page Config
-        $this->data['page_title'] = "Profile";
-        $this->breadcrumbs->push('Profile','/');				
-		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
-
-        $this->data['alert_message'] = $this->session->flashdata('flash_message');
-        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
-		$user_id = $this->uri->segment(3)? $this->uri->segment(3): $this->sess_user_id;	
-        $rows = $this->user_model->get_rows($user_id);		
-		$res_pic = $this->user_model->get_user_profile_pic($user_id);
-		$this->data['profile_pic'] = $res_pic[0]['user_profile_pic'];
-        $this->data['row'] = $rows['data_rows'];
-		$this->data['address'] = $this->user_model->get_user_address(NULL,$user_id,NULL);
-        $this->data['education'] = $this->user_model->get_user_education(NULL, $user_id);
-        $this->data['job_exp'] = $this->user_model->get_user_work_experience(NULL, $user_id);
-		$this->data['page_title'] = 'Profile';
         $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/profile', $this->data, true);
         $this->load->view('site/_layouts/layout_default', $this->data);
     }
@@ -715,7 +692,7 @@ class User extends CI_Controller {
                 if ($res) {
                     $this->session->set_flashdata('flash_message', 'Address has been added successfully.');
                     $this->session->set_flashdata('flash_message_css', 'alert-success');
-                    redirect($this->router->directory.$this->router->class.'/my_profile');
+                    redirect($this->router->directory.$this->router->class.'/profile');
                 }
             }
         }
@@ -757,7 +734,7 @@ class User extends CI_Controller {
                 if ($res) {
                     $this->session->set_flashdata('flash_message', 'Address has been updated successfully.');
                     $this->session->set_flashdata('flash_message_css', 'alert-success');
-                    redirect($this->router->directory.$this->router->class.'/my_profile');
+                    redirect($this->router->directory.$this->router->class.'/profile');
                 }
             }
         }
@@ -781,11 +758,11 @@ class User extends CI_Controller {
 		if ($res) {
 			$this->session->set_flashdata('flash_message', 'Address has been deleted successfully.');
 			$this->session->set_flashdata('flash_message_css', 'alert-success');
-			redirect($this->router->directory.$this->router->class.'/my_profile');
+			redirect($this->router->directory.$this->router->class.'/profile');
 		}else{
 			$this->session->set_flashdata('flash_message', 'We\'re unable to process your request.');
 			$this->session->set_flashdata('flash_message_css', 'alert-danger');
-			redirect($this->router->directory.$this->router->class.'/my_profile');
+			redirect($this->router->directory.$this->router->class.'/profile');
 		}
     }*/
 	
@@ -900,7 +877,7 @@ class User extends CI_Controller {
                 if ($res) {
                     $this->session->set_flashdata('flash_message', 'Education has been added successfully.');
                     $this->session->set_flashdata('flash_message_css', 'alert-success');
-                    redirect($this->router->directory.$this->router->class.'/my_profile');
+                    redirect($this->router->directory.$this->router->class.'/profile');
                 }
             }
         }
@@ -939,7 +916,7 @@ class User extends CI_Controller {
                 if ($res) {
                     $this->session->set_flashdata('flash_message', 'Education has been updated successfully.');
                     $this->session->set_flashdata('flash_message_css', 'alert-success');
-                    redirect($this->router->directory.$this->router->class.'/my_profile');
+                    redirect($this->router->directory.$this->router->class.'/profile');
                 }
             }
         }
@@ -961,11 +938,11 @@ class User extends CI_Controller {
 		if ($res) {
 			$this->session->set_flashdata('flash_message', 'Education details has been deleted successfully.');
 			$this->session->set_flashdata('flash_message_css', 'alert-success');
-			redirect($this->router->directory.$this->router->class.'/my_profile');
+			redirect($this->router->directory.$this->router->class.'/profile');
 		}else{
 			$this->session->set_flashdata('flash_message', 'We\'re unable to process your request.');
 			$this->session->set_flashdata('flash_message_css', 'alert-danger');
-			redirect($this->router->directory.$this->router->class.'/my_profile');
+			redirect($this->router->directory.$this->router->class.'/profile');
 		}
     }*/
 	
@@ -1017,7 +994,7 @@ class User extends CI_Controller {
                 if ($res) {
                     $this->session->set_flashdata('flash_message', 'Basic information has been updated successfully.');
                     $this->session->set_flashdata('flash_message_css', 'alert-success');
-                    redirect($this->router->directory.$this->router->class.'/my_profile');
+                    redirect($this->router->directory.$this->router->class.'/profile');
                 }
             }
         }
@@ -1335,7 +1312,7 @@ class User extends CI_Controller {
                 if ($res) {
                     $this->session->set_flashdata('flash_message', 'Job experience has been added successfully.');
                     $this->session->set_flashdata('flash_message_css', 'alert-success');
-                    redirect($this->router->directory.$this->router->class.'/my_profile');
+                    redirect($this->router->directory.$this->router->class.'/profile');
                 }
             }
         }
@@ -1370,7 +1347,7 @@ class User extends CI_Controller {
                 if ($res) {
                     $this->session->set_flashdata('flash_message', 'Job experience has been updated successfully.');
                     $this->session->set_flashdata('flash_message_css', 'alert-success');
-                    redirect($this->router->directory.$this->router->class.'/my_profile');
+                    redirect($this->router->directory.$this->router->class.'/profile');
                 }
             }
         }
@@ -1392,11 +1369,11 @@ class User extends CI_Controller {
 		if ($res) {
 			$this->session->set_flashdata('flash_message', 'Education details has been deleted successfully.');
 			$this->session->set_flashdata('flash_message_css', 'alert-success');
-			redirect($this->router->directory.$this->router->class.'/my_profile');
+			redirect($this->router->directory.$this->router->class.'/profile');
 		}else{
 			$this->session->set_flashdata('flash_message', 'We\'re unable to process your request.');
 			$this->session->set_flashdata('flash_message_css', 'alert-danger');
-			redirect($this->router->directory.$this->router->class.'/my_profile');
+			redirect($this->router->directory.$this->router->class.'/profile');
 		}
     }*/
 	

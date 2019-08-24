@@ -1,9 +1,5 @@
 <?php //echo isset($breadcrumbs) ? $breadcrumbs : ''; ?>
-<div class="row heading-container">
-    <div class="col-12">
-        <h1 class="page-title"><?php echo isset($page_title)? $page_title:'Page Heading'; ?></h1>
-    </div>
-</div><!--/.heading-container-->
+<h1 class="page-title"><?php echo isset($page_title) ? $page_title : 'Page Heading'; ?></h1>
 
 <div class="row my-2">
 	<div class="col-md-12">
@@ -46,7 +42,7 @@
 							<td><?php echo $this->common_lib->display_date($row['leave_to_date']);?></td>
 							<td><?php echo $row['applied_for_days_count'].' day(s)';?></td>
 							<td>
-								<!-- <span class="small"><i class="fa fa-circle <?php echo $leave_status_arr[$row['leave_status']]['css'];?>" aria-hidden="true"></i></span>  -->
+								<!-- <span class="small"><i class="fa fa-fw fa-bookmark-o <?php echo $leave_status_arr[$row['leave_status']]['css'];?>" aria-hidden="true"></i></span>  -->
 								<span class="<?php echo $leave_status_arr[$row['leave_status']]['css'];?>"> <?php echo $leave_status_arr[$row['leave_status']]['text'];?></span>
 							</td>
 							<!-- <td><?php echo isset($row['leave_reason']) ? word_limiter($row['leave_reason'], 5) : '';?></td> -->

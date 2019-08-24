@@ -1,9 +1,5 @@
 <?php //echo isset($breadcrumbs) ? $breadcrumbs : ''; ?>
-<div class="row heading-container">
-    <div class="col-12">
-        <h1 class="page-title"><?php echo isset($page_title)? $page_title:'Page Heading'; ?></h1>
-    </div>
-</div><!--/.heading-container-->
+<h1 class="page-title"><?php echo isset($page_title) ? $page_title : 'Page Heading'; ?></h1>
 
 <div class="row">
 	<div class="col-md-12">
@@ -72,7 +68,7 @@
 						</td>
 												
 						<td>
-							<a href="#" class="btn btn-outline-danger btn-sm btn-delete-file" data-confirmation="1" data-confirmation-message="Are you sure, you want to delete this?" data-upload_id="<?php echo $upload['id'];?>" title="Delete <?php echo $upload['upload_file_type_name']; ?>" data-path="<?php echo $file_path;?>"><i class="fa fa-close"></i> Delete</a>
+							<a href="#" class="btn btn-outline-danger btn-sm btn-delete-file" data-confirmation="1" data-confirmation-message="Are you sure, you want to delete this?" data-upload_id="<?php echo $upload['id'];?>" title="Delete <?php echo $upload['upload_file_type_name']; ?>" data-path="<?php echo $file_path;?>"><i class="fa fa-fw fa-close"></i> Delete</a>
 						</td>
 					
 				</tr>
