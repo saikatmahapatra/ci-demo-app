@@ -284,7 +284,6 @@ class User extends CI_Controller {
     }
 
     function validate_create_account_form_data() {
-        $this->form_validation->set_rules('user_title', 'title', 'required');
         $this->form_validation->set_rules('user_firstname', 'first name', 'required|alpha|min_length[3]|max_length[25]');
         $this->form_validation->set_rules('user_lastname', 'last name', 'required|alpha_numeric_spaces|min_length[3]|max_length[30]');
         $this->form_validation->set_rules('user_gender', 'gender selection', 'required');
@@ -297,8 +296,7 @@ class User extends CI_Controller {
         $this->form_validation->set_rules('dob_day', 'birth day selection', 'required');
         $this->form_validation->set_rules('dob_month', 'birth month selection', 'required');
         $this->form_validation->set_rules('dob_year', 'birth year selection', 'required');
-        //$this->form_validation->set_rules('user_dob', 'date of birth', 'required');
-        //$this->form_validation->set_rules('user_doj', 'date of joining', 'required');
+        $this->form_validation->set_rules('user_dob', 'date of birth', 'required');
         $this->form_validation->set_rules('user_role', 'access group', 'required');
         //$this->form_validation->set_rules('user_designation', 'designation', 'required');
         //$this->form_validation->set_rules('user_department', 'department', 'required');

@@ -2,7 +2,7 @@
 <h1 class="page-title"><?php echo isset($page_title) ? $page_title : 'Page Heading'; ?></h1>
 
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-6">
         <?php
 		// Show server side flash messages
 		if (isset($alert_message)) {
@@ -14,18 +14,7 @@
         <?php echo form_open(current_url(), array('method' => 'post', 'class' => 'ci-form','name' => 'form','id' => 'form',));?>
         <?php echo form_hidden('form_action', 'create_account'); ?>        
         <div class="form-row">
-		
-			<div class="form-group col-md-3">
-			  <label for="user_title" class="required">Title</label>
-				<?php
-				echo form_dropdown('user_title', $arr_user_title, set_value('user_title'), array(
-					'class' => 'form-control field-help'
-				));
-				?> 
-				<?php echo form_error('user_title'); ?>
-			</div>
-		
-			<div class="form-group col-md-4">
+			<div class="form-group col-md-6">
 				<label for="user_firstname" class="required">First Name</label>
 				<?php
 				echo form_input(array(
@@ -40,7 +29,7 @@
 				<?php echo form_error('user_firstname'); ?>
 			</div>
 			
-			<div class="form-group col-md-5">
+			<div class="form-group col-md-6">
 				<label for="user_lastname" class="required">Last Name</label>
 				<?php
 				echo form_input(array(
@@ -119,14 +108,8 @@
 					<?php echo form_error('user_phone2'); ?>
             </div>
 		</div>
-			
-            
-		
-		
 		<div class="form-row">
-			
-			
-			<div class="form-group col-md-4">
+			<div class="form-group col-md-6">
 			  <label for="user_designation" class="">Designation </label>
 				<?php
 				echo form_dropdown('user_designation', $arr_designations, set_value('user_designation'), array(
@@ -136,7 +119,7 @@
 				<?php echo form_error('user_designation'); ?>
 			</div>	
 
-			<div class="form-group col-md-4">
+			<div class="form-group col-md-6">
 			  <label for="user_department" class="">Department </label>
 				<?php
 				echo form_dropdown('user_department', $arr_departments, set_value('user_department'), array(
@@ -200,10 +183,10 @@
 				</div>
 			</div>
 			<?php */ ?>
-			<?php echo form_hidden('user_role', 3); ?>
+		<?php echo form_hidden('user_role', 3); ?>
 
         <?php echo form_button(array('name' => 'submit_btn','type' => 'submit','content' => 'Submit','class' => 'btn btn-primary'));?>
-		<a href="<?php echo base_url($this->router->directory.$this->router->class.'/manage');?>" class="ml-2 btn btn-secondary">Cancel</a>
+		<a href="<?php echo base_url($this->router->directory.$this->router->class.'/manage');?>" class="btn btn-light">Cancel</a>
         <?php echo form_close(); ?>
     </div>
 </div>
