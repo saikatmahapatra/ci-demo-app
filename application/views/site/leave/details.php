@@ -234,7 +234,7 @@ $row = $data_rows[0];
 		<input type="hidden" id="leave_req_id" name="leave_req_id" value="<?php echo $row['leave_req_id'];?>">
 		<input type="hidden" id="action_by_approver" name="action_by_approver" value="">
 		<input type="hidden" id="action_by_approver_id" name="action_by_approver_id" value="">
-		<label class="bmd-label-floating required">Status</label>
+		<label class="required">Status</label>
 			<select class="form-control" name="leave_action_status" id="leave_action_status">
 				<option value="">Select Status</option>
 				<option value="A">Approve</option>
@@ -243,7 +243,7 @@ $row = $data_rows[0];
 			</select>
 		</div>
 		<div class="form-group col-md-12">
-			<label class="bmd-label-floating">Comments/Remarks (Optional)</label>
+			<label class="">Comments/Remarks (Optional)</label>
 			<textarea class="form-control" id="leave_action_comment" name="leave_action_comment" placeholder="Please enter your comments here"></textarea>				
 		</div>
 		
