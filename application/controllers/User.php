@@ -106,81 +106,6 @@ class User extends CI_Controller {
         $this->load->view('site/_layouts/layout_default', $this->data);
     }
 
-    function render_datatable() {
-        //Total rows - Refer to model method definition
-        $result_array = $this->user_model->get_rows();
-        $total_rows = $result_array['num_rows'];
-
-        // Total filtered rows - check without limit query. Refer to model method definition
-        $result_array = $this->user_model->get_rows(NULL, NULL, NULL, TRUE, FALSE);
-        $total_filtered = $result_array['num_rows'];
-
-        // Data Rows - Refer to model method definition
-        $result_array = $this->user_model->get_rows(NULL, NULL, NULL, TRUE);
-        $data_rows = $result_array['data_rows'];
-        $data = array();
-        $no = $_REQUEST['start'];
-        foreach ($data_rows as $result) {
-            $no++;
-            $row = array();
-            $row[] = '<div class="">'.$result['user_title'].'&nbsp;'.$result['user_firstname'] . '&nbsp;' . $result['user_lastname'].' (#'.$result['user_emp_id'].')</div>';
-            $row[] = $result['user_email'];
-            $row[] = $result['user_phone1'];			
-			$row[] = isset($result['user_status']) ? $this->data['status_flag'][$result['user_status']]['icon'] : '';           
-            
-			//add html for action
-            $action_html = '';
-            $acc_status_icon = ($result['user_status'] == 'Y') ? '' : '';
-            $acc_status_text = ($result['user_status'] == 'Y') ? 'Deactivate' : 'Activate';
-            $acc_status_class = ($result['user_status'] == 'Y') ? 'btn btn-sm btn-outline-danger' : 'btn btn-sm btn-outline-success';
-            $acc_status_set = ($result['user_status'] == 'Y') ? 'N' : 'Y';
-            
-            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/profile/' . $result['id']), '<i class="fa fa-fw fa-info-circle" aria-hidden="true"></i>', array(
-                'class' => 'btn btn-sm btn-outline-secondary',
-                'data-toggle' => 'tooltip',
-                'data-original-title' => 'View Profile',
-                'title' => 'View Profile'
-            ));
-
-            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/edit_user_profile/' . $result['id']), '<i class="fa fa-fw fa-pencil" aria-hidden="true"></i>', array(
-                'class' => 'btn btn-sm btn-outline-secondary',
-                'data-toggle' => 'tooltip',
-                'data-original-title' => 'Edit Profile',
-                'title' => 'Edit Profile'
-            ));
-			/*$action_html.= anchor(base_url($this->router->directory.$this->router->class.'/manage'), $acc_status_text, array(
-                'class' => 'change_account_status ' . $acc_status_class,
-                'data-toggle' => 'tooltip',
-                'data-original-title' => $acc_status_text,
-                'title' => $acc_status_text,
-                'data-status' => $acc_status_set,
-                'data-id' => $result['id'],
-            ));
-            /* $action_html.='&nbsp;';
-              $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/delete/' . $result['id']), 'Delete', array(
-              'class' => 'btn btn-sm btn-danger btn-delete',
-			  'data-confirmation'=>true,
-			  'data-confirmation-message'=>'Are you sure, you want to delete this?',
-              'data-toggle' => 'tooltip',
-              'data-original-title' => 'Delete',
-              'title' => 'Delete',
-              )); */
-
-            $row[] = $action_html;
-            $data[] = $row;
-        }
-
-        /* jQuery Data Table JSON format */
-        $output = array(
-            'draw' => isset($_REQUEST['draw']) ? $_REQUEST['draw'] : '',
-            'recordsTotal' => $total_rows,
-            'recordsFiltered' => $total_filtered,
-            'data' => $data,
-        );
-        //output to json format
-        echo json_encode($output);
-    }
-
     function login() {
         ########### Validate User Auth #############
         $is_logged_in = $this->common_lib->is_logged_in();
@@ -606,7 +531,6 @@ class User extends CI_Controller {
         $this->data['row'] = $rows['data_rows'];
 		$this->data['address'] = $this->user_model->get_user_address(NULL,$user_id,NULL);
         $this->data['education'] = $this->user_model->get_user_education(NULL, $user_id);
-        $this->data['job_exp'] = $this->user_model->get_user_work_experience(NULL, $user_id);
 		$this->data['page_title'] = 'My Profile';
         $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/profile', $this->data, true);
         $this->load->view('site/_layouts/layout_default', $this->data);
@@ -617,8 +541,7 @@ class User extends CI_Controller {
         //$this->form_validation->set_rules('user_lastname', 'last name', 'required');
         //$this->form_validation->set_rules('user_gender', 'gender selection', 'required');        
         $this->form_validation->set_rules('user_phone1', 'personal mobile', 'required|trim|min_length[10]|max_length[10]|numeric');
-        $this->form_validation->set_rules('user_phone2', 'office mobile', 'trim|min_length[10]|max_length[10]|numeric|differs[user_phone1]
-');
+        $this->form_validation->set_rules('user_phone2', 'office mobile', 'trim|min_length[10]|max_length[10]|numeric|differs[user_phone1]');
         $this->form_validation->set_rules('user_bio', 'about you', 'max_length[100]');
         $this->form_validation->set_rules('user_email', 'registered email (work)', 'required|valid_email');
         $this->form_validation->set_rules('user_email_secondary', 'personal email', 'required|valid_email|differs[user_email]');
@@ -632,35 +555,6 @@ class User extends CI_Controller {
         } else {
             return false;
         }
-    }
-
-    function change_account_status() {
-        $response = array(
-            'status' => 'init',
-            'message' => '',
-            'message_css' => '',
-            'data' => array(),
-        );
-        $is_active = $this->input->post('active');
-        $postdata = array('user_status' => $is_active);
-        $where = array('id' => $this->input->post('user_id'));
-        $res = $this->user_model->update($postdata, $where);
-        if ($res == true) {
-            $response = array(
-                'status' => 'success',
-                'message' => 'Account Status Changed',
-                'message_css' => 'alert alert-success',
-                'data' => array(),
-            );
-        } else {
-            $response = array(
-                'status' => 'error',
-                'message' => 'Error Occured',
-                'message_css' => 'alert alert-danger',
-                'data' => array(),
-            );
-        }
-        echo json_encode($response);
     }
 
     function add_address() {
@@ -744,14 +638,14 @@ class User extends CI_Controller {
         $this->load->view('site/_layouts/layout_default', $this->data);
     }
 	
-	/*function delete_address() {
+	function delete_address() {
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
             redirect($this->router->directory.$this->router->class.'/login');
         }
         $this->data['alert_message'] = $this->session->flashdata('flash_message');
         $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
-		$address_id = $this->uri->segment(3);        
+		$address_id = $this->uri->segment(3);
         $this->data['address'] = $this->user_model->get_user_address($address_id, $this->sess_user_id,NULL);
 		$where = array('id'=>$address_id, 'user_id' => $this->sess_user_id);
 		$res = $this->user_model->delete($where,'user_addresses');
@@ -764,7 +658,7 @@ class User extends CI_Controller {
 			$this->session->set_flashdata('flash_message_css', 'alert-danger');
 			redirect($this->router->directory.$this->router->class.'/profile');
 		}
-    }*/
+    }
 	
 	function get_address_types($char_address_type){
 		if(isset($char_address_type)){
@@ -925,7 +819,7 @@ class User extends CI_Controller {
         $this->load->view('site/_layouts/layout_default', $this->data);
     }
 	
-	/*function delete_education() {
+	function delete_education() {
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
             redirect($this->router->directory.$this->router->class.'/login');
@@ -944,7 +838,7 @@ class User extends CI_Controller {
 			$this->session->set_flashdata('flash_message_css', 'alert-danger');
 			redirect($this->router->directory.$this->router->class.'/profile');
 		}
-    }*/
+    }
 	
 	function validate_user_education_form_data($mode) {	
         $max_year = (date('Y')+4);	
@@ -1148,8 +1042,7 @@ class User extends CI_Controller {
 				}
 			}
 		//}
-	}
-	
+	}	
 	
 	function allocate_projects() {
         $is_logged_in = $this->common_lib->is_logged_in();
@@ -1206,7 +1099,6 @@ class User extends CI_Controller {
         echo json_encode($message); die();
     }
 
-
     function validate_add_user_input_specialization_data(){        
 		$this->form_validation->set_rules('specialization_name', 'specialization name', 'required|alpha_numeric_spaces|min_length[5]|max_length[100]|is_unique[academic_specialization.specialization_name]',
         array(                
@@ -1219,7 +1111,6 @@ class User extends CI_Controller {
             return false;
         }
     }
-    
 
     function add_user_input_degree(){
         $message = array('is_valid'=>false, 'insert_id'=>'','msg'=>'');
@@ -1239,7 +1130,6 @@ class User extends CI_Controller {
         echo json_encode($message); die();
     }
 
-
     function validate_add_user_input_degree_data(){        
 		$this->form_validation->set_rules('degree_name', 'degree name', 'required|alpha_numeric_spaces|min_length[5]|max_length[50]|is_unique[academic_degree.degree_name]',
         array(                
@@ -1252,7 +1142,6 @@ class User extends CI_Controller {
             return false;
         }
     }
-    
 
     function add_user_input_institute(){
         $message = array('is_valid'=>false, 'insert_id'=>'','msg'=>'');
@@ -1272,180 +1161,8 @@ class User extends CI_Controller {
         echo json_encode($message); die();
     }
 
-
     function validate_add_user_input_institute_data(){
 		$this->form_validation->set_rules('institute_name', 'institute name', 'required|alpha_numeric_spaces|min_length[5]|max_length[200]|is_unique[academic_institute.institute_name]',
-        array(                
-                'is_unique'     => 'This %s already exists.'
-        ));
-        $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
-        if ($this->form_validation->run() == true) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-    
-    function add_work_experience() {
-        $is_logged_in = $this->common_lib->is_logged_in();
-        if ($is_logged_in == FALSE) {
-            redirect($this->router->directory.$this->router->class.'/login');
-        }
-        $this->data['alert_message'] = $this->session->flashdata('flash_message');
-        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
-        		
-        $this->data['arr_company'] = $this->user_model->get_company_dropdown();
-        $this->data['arr_designation_prev_work'] = $this->user_model->get_designation_dropdown();
-        
-		
-        if ($this->input->post('form_action') == 'add') {
-            if ($this->validate_user_work_exp_form_data('add') == true) {
-                $postdata = array(
-					'user_id' => $this->sess_user_id,
-                    'company_id' => $this->input->post('company_id'),
-                    'from_date' => $this->common_lib->convert_to_mysql($this->input->post('from_date')),
-                    'to_date' => $this->common_lib->convert_to_mysql($this->input->post('to_date')),
-                    'designation_id' => $this->input->post('designation_id'), 
-                    'job_description' => $this->input->post('job_description')
-                );                
-                $res = $this->user_model->insert($postdata,'user_work_exp');
-                if ($res) {
-                    $this->session->set_flashdata('flash_message', 'Job experience has been added successfully.');
-                    $this->session->set_flashdata('flash_message_css', 'alert-success');
-                    redirect($this->router->directory.$this->router->class.'/profile');
-                }
-            }
-        }
-		$this->data['page_title'] = "Add Previous Work Experiences";
-        $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/add_work_experience', $this->data, true);
-        $this->load->view('site/_layouts/layout_default', $this->data);
-    }
-	
-	function edit_work_experience() {
-        $is_logged_in = $this->common_lib->is_logged_in();
-        if ($is_logged_in == FALSE) {
-            redirect($this->router->directory.$this->router->class.'/login');
-        }
-        $this->data['alert_message'] = $this->session->flashdata('flash_message');
-        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
-		$id = $this->uri->segment(3);
-		$this->data['arr_company'] = $this->user_model->get_company_dropdown();
-        $this->data['arr_designation_prev_work'] = $this->user_model->get_designation_dropdown();
-        $this->data['job_exp'] = $this->user_model->get_user_work_experience($id, $this->sess_user_id);
-
-        if ($this->input->post('form_action') == 'edit') {
-            if ($this->validate_user_work_exp_form_data('edit') == true) {
-                $postdata = array(                    
-                    'company_id' => $this->input->post('company_id'),
-                    'from_date' => $this->common_lib->convert_to_mysql($this->input->post('from_date')),
-                    'to_date' => $this->common_lib->convert_to_mysql($this->input->post('to_date')),
-                    'designation_id' => $this->input->post('designation_id'), 
-                    'job_description' => $this->input->post('job_description')                    
-                );
-                $where = array('id'=>$id, 'user_id' => $this->sess_user_id);
-                $res = $this->user_model->update($postdata, $where,'user_work_exp');
-                if ($res) {
-                    $this->session->set_flashdata('flash_message', 'Job experience has been updated successfully.');
-                    $this->session->set_flashdata('flash_message_css', 'alert-success');
-                    redirect($this->router->directory.$this->router->class.'/profile');
-                }
-            }
-        }
-		$this->data['page_title'] = "Edit Previous Work Experiences";
-        $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/edit_work_experience', $this->data, true);
-        $this->load->view('site/_layouts/layout_default', $this->data);
-    }
-	
-	/*function delete_education() {
-        $is_logged_in = $this->common_lib->is_logged_in();
-        if ($is_logged_in == FALSE) {
-            redirect($this->router->directory.$this->router->class.'/login');
-        }
-        $this->data['alert_message'] = $this->session->flashdata('flash_message');
-        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
-		$id = $this->uri->segment(3);
-		$where = array('id'=>$id, 'user_id' => $this->sess_user_id);
-		$res = $this->user_model->delete($where,'user_academics');
-		if ($res) {
-			$this->session->set_flashdata('flash_message', 'Education details has been deleted successfully.');
-			$this->session->set_flashdata('flash_message_css', 'alert-success');
-			redirect($this->router->directory.$this->router->class.'/profile');
-		}else{
-			$this->session->set_flashdata('flash_message', 'We\'re unable to process your request.');
-			$this->session->set_flashdata('flash_message_css', 'alert-danger');
-			redirect($this->router->directory.$this->router->class.'/profile');
-		}
-    }*/
-	
-	function validate_user_work_exp_form_data($mode) {	
-        $max_year = (date('Y')+4);	
-        $this->form_validation->set_rules('company_id', 'company selection', 'required|greater_than_equal_to[0]',array('greater_than_equal_to' => 'The %s field is required.')); 
-        $this->form_validation->set_rules('from_date', 'from date', 'required'); 
-		$this->form_validation->set_rules('to_date', 'to date', 'required');        
-        $this->form_validation->set_rules('designation_id', 'designation', 'required|greater_than_equal_to[0]',array('greater_than_equal_to' => 'The %s field is required.')); 
-        $this->form_validation->set_rules('job_description', 'job description', 'max_length[400]');
-        $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
-        if ($this->form_validation->run() == true) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    function add_user_input_company(){
-        $message = array('is_valid'=>false, 'insert_id'=>'','msg'=>'');
-        if(($this->input->post('action')=='add')){
-            if ($this->validate_add_user_input_company_data() == true) {
-                $postdata = array(					
-                    'company_name' => $this->input->post('company_name')
-                );                
-                $insert_id = $this->user_model->insert($postdata,'companies');
-                if ($insert_id) {
-                    $message = array('is_valid'=>true, 'insert_id'=>$insert_id,'msg'=>'<div class="alert alert-success">institute has been added succesfully.</div>'); 
-                }
-            }else{
-                $message = array('is_valid'=>false, 'insert_id'=>'','msg'=>validation_errors()); 
-            }
-        }
-        echo json_encode($message); die();
-    }
-
-
-    function validate_add_user_input_company_data(){
-		$this->form_validation->set_rules('company_name', 'company name', 'required|min_length[5]|max_length[200]|is_unique[companies.company_name]',
-        array(                
-                'is_unique'     => 'This %s already exists.'
-        ));
-        $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
-        if ($this->form_validation->run() == true) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    function add_user_input_designation(){
-        $message = array('is_valid'=>false, 'insert_id'=>'','msg'=>'');
-        if(($this->input->post('action')=='add')){
-            if ($this->validate_add_user_input_designation_data() == true) {
-                $postdata = array(					
-                    'designation_name' => $this->input->post('designation_name'),
-                    'designation_status' => 'N'
-                );                
-                $insert_id = $this->user_model->insert($postdata,'designations');
-                if ($insert_id) {
-                    $message = array('is_valid'=>true, 'insert_id'=>$insert_id,'msg'=>'<div class="alert alert-success">institute has been added succesfully.</div>'); 
-                }
-            }else{
-                $message = array('is_valid'=>false, 'insert_id'=>'','msg'=>validation_errors()); 
-            }
-        }
-        echo json_encode($message); die();
-    }
-
-
-    function validate_add_user_input_designation_data(){
-		$this->form_validation->set_rules('designation_name', 'designation name', 'required|min_length[3]|max_length[200]|is_unique[designations.designation_name]',
         array(                
                 'is_unique'     => 'This %s already exists.'
         ));

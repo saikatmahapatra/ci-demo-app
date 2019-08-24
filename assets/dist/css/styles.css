@@ -8895,6 +8895,10 @@ body.login {
   text-decoration: none;
 }
 
+.ci-card .card-header.h6 {
+  font-weight: 400;
+}
+
 .no-toggle-icon .dropdown-toggle::after {
   display: none;
 }
@@ -9111,6 +9115,15 @@ select.form-control.dob-inline {
   margin-bottom: 15px;
   display: flex;
   justify-content: flex-end !important;
+}
+
+.content-wrap {
+  word-break: break-all;
+}
+
+.ci-dl dt {
+  font-weight: 400;
+  color: #6c757d;
 }
 
 .user-profile-section {

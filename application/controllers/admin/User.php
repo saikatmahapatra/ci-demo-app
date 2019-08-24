@@ -576,7 +576,6 @@ class User extends CI_Controller {
         $this->data['row'] = $rows['data_rows'];
 		$this->data['address'] = $this->user_model->get_user_address(NULL,$user_id,NULL);
         $this->data['education'] = $this->user_model->get_user_education(NULL, $user_id);
-        $this->data['job_exp'] = $this->user_model->get_user_work_experience(NULL, $user_id);
 		$this->data['page_title'] = ($is_self_account == true) ? "Profile" : "Customer Profile";
         $this->data['maincontent'] = $this->load->view('admin/'.$this->router->class.'/profile', $this->data, true);
         $this->load->view('admin/_layouts/layout_default', $this->data);
