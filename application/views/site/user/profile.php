@@ -118,7 +118,7 @@
 								<div class="row mt-3">
 									<div class="col-md-12">
 									<?php if($is_self_account == true) { ?>
-									<a class="btn btn-outline-secondary btn-sm mb-3" href="<?php echo base_url($this->router->directory.$this->router->class.'/edit_profile');?>"><i class="fa fa-fw fa-edit" aria-hidden="true"></i> Edit Basic Info</a>
+									<a class="btn btn-outline-secondary btn-sm mb-3" href="<?php echo base_url($this->router->directory.$this->router->class.'/edit_profile');?>"><i class="fa fa-fw fa-pencil" aria-hidden="true"></i> Edit Basic Info</a>
 									<?php } ?>
 									<!--<h6>Basic Info</h6><hr>-->		
 									<dl class="row">
@@ -208,8 +208,8 @@
 																</td>
 																<?php if($is_self_account == true) { ?>
 																<td>
-																	<a href="<?php echo base_url($this->router->directory.$this->router->class.'/edit_address/'.$addr["id"]);?>" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" title="Edit"><i class="fa fa-fw fa-lg fa-edit" aria-hidden="true"></i></a>
-																	<!--<a href="<?php echo base_url($this->router->directory.$this->router->class.'/delete_address/'.$addr["id"]);?>" class="btn btn-outline-danger btn-sm ml-1"><i class="fa fa-fw fa-trash" aria-hidden="true"></i> Delete</a>-->
+																	<a href="<?php echo base_url($this->router->directory.$this->router->class.'/edit_address/'.$addr["id"]);?>" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" title="Edit"><i class="fa fa-fw fa-lg fa-pencil" aria-hidden="true"></i></a>
+																	<!--<a href="<?php echo base_url($this->router->directory.$this->router->class.'/delete_address/'.$addr["id"]);?>" class="btn btn-outline-danger btn-sm ml-1"><i class="fa fa-fw fa-trash-o" aria-hidden="true"></i> Delete</a>-->
 																</td>
 																<?php } ?>
 															</tr>
@@ -257,7 +257,7 @@
 																<td><?php echo isset($edu['academic_from_year']) ? $edu['academic_from_year'].'-'.$edu['academic_to_year']:'';?></td>
 																<td><?php echo isset($edu['academic_marks_percentage'])?$edu['academic_marks_percentage'].' %':'';?></td>
 																<?php if($is_self_account == true) { ?>
-																<td><a href="<?php echo base_url($this->router->directory.$this->router->class.'/edit_education/'.$edu["id"]);?>" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" title="Edit"><i class="fa fa-fw fa-lg fa-edit" aria-hidden="true"></i></a></td>
+																<td><a href="<?php echo base_url($this->router->directory.$this->router->class.'/edit_education/'.$edu["id"]);?>" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" title="Edit"><i class="fa fa-fw fa-lg fa-pencil" aria-hidden="true"></i></a></td>
 																<?php } ?>
 															</tr>
 															<?php
@@ -309,7 +309,7 @@
 																	<td><?php echo isset($row['designation_name']) ? $row['designation_name'] : '-'; ?></td>
 																	<td><?php echo isset($row['from_date']) ? $this->common_lib->display_date($row['from_date']) :'';?></td>
 																	<td><?php echo isset($row['to_date']) ? $this->common_lib->display_date($row['to_date']) :'';?></td>											<?php if($is_self_account == true) { ?>				
-																	<td><a href="<?php echo base_url($this->router->directory.$this->router->class.'/edit_work_experience/'.$row["id"]);?>" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" title="Edit"><i class="fa fa-fw fa-lg fa-edit" aria-hidden="true"></i></a></td>
+																	<td><a href="<?php echo base_url($this->router->directory.$this->router->class.'/edit_work_experience/'.$row["id"]);?>" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" title="Edit"><i class="fa fa-fw fa-lg fa-pencil" aria-hidden="true"></i></a></td>
 																	<?php } ?>
 																</tr>
 															<?php
