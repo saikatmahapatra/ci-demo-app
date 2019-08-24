@@ -174,23 +174,21 @@ class User extends CI_Controller {
         if ($this->input->post('form_action') == 'self_registration') {
             if ($this->validate_registration_form_data() == true) {
                 $activation_token = md5(time('Y-m-d h:i:s'));
-                $dob = $this->input->post('dob_year') . '-' . $this->input->post('dob_month') . '-' . $this->input->post('dob_day');
-				$user_emp_id = $this->user_model->get_new_emp_id();				
+				$customer_id = $this->user_model->get_new_customer_id();
                 $postdata = array(
-                    'user_title' => $this->input->post('user_title'),                    
-                    'user_firstname' => ucwords(strtolower($this->input->post('user_firstname'))),                   
+                    'user_firstname' => ucwords(strtolower($this->input->post('user_firstname'))),
                     'user_lastname' => ucwords(strtolower($this->input->post('user_lastname'))),
                     'user_gender' => $this->input->post('user_gender'),
                     'user_email' => strtolower($this->input->post('user_email')),
 					'user_role' => $this->input->post('user_role'),
                     'user_email_secondary' => strtolower($this->input->post('user_email_secondary')),
-                    'user_dob' => $dob,
-					'user_phone1' => $this->input->post('user_phone1'),                    
+                    'user_dob' => $this->common_lib->convert_to_mysql($this->input->post('user_dob')),
+					'user_phone1' => $this->input->post('user_phone1'),
                     'user_password' => md5($this->input->post('user_password')),
                     'user_activation_key' => $activation_token,
                     'user_registration_ip' => $_SERVER['REMOTE_ADDR'],
                     'user_status' => 'Y', // Set N for prod
-                    'user_emp_id' => $user_emp_id
+                    'user_emp_id' => $customer_id
                 );
 				//print_r($postdata); die();
                 $insert_id = $this->user_model->insert($postdata);
@@ -230,18 +228,14 @@ class User extends CI_Controller {
     }
 
     function validate_registration_form_data() {
-        $this->form_validation->set_rules('user_title', 'title', 'required');
         $this->form_validation->set_rules('user_firstname', 'first name', 'required|alpha|min_length[3]|max_length[25]');
         $this->form_validation->set_rules('user_lastname', 'last name', 'required|alpha_numeric_spaces|min_length[3]|max_length[30]');
         $this->form_validation->set_rules('user_gender', 'gender selection', 'required');
         $this->form_validation->set_rules('user_email', 'email', 'trim|required|valid_email|callback_valid_email_domain|callback_is_email_registered');        
         $this->form_validation->set_rules('user_password', 'password', 'required|trim|min_length[6]');
-        $this->form_validation->set_rules('user_phone1', 'mobile number', 'required|trim|min_length[10]|max_length[10]|numeric');        
+        $this->form_validation->set_rules('user_phone1', 'mobile number', 'required|trim|min_length[10]|max_length[10]|numeric');
         $this->form_validation->set_rules('user_password_confirm', 'confirm password', 'required|matches[user_password]');
-        $this->form_validation->set_rules('dob_day', 'birth day selection', 'required');
-        $this->form_validation->set_rules('dob_month', 'birth month selection', 'required');
-        $this->form_validation->set_rules('dob_year', 'birth year selection', 'required');
-        //$this->form_validation->set_rules('user_dob', 'date of birth', 'required');
+        $this->form_validation->set_rules('user_dob', 'date of birth', 'required');
         $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
         if ($this->form_validation->run() == true) {
             return true;
@@ -876,8 +870,7 @@ class User extends CI_Controller {
                     //'user_firstname' => $this->input->post('user_firstname'),
                     //'user_lastname' => $this->input->post('user_lastname'),
                     'user_bio' => $this->input->post('user_bio'),
-                    //'user_gender' => $this->input->post('user_gender'),                   
-                    //'user_dob' => $dob,
+                    //'user_gender' => $this->input->post('user_gender'),
                     'user_phone1' => $this->input->post('user_phone1'),
                     'user_phone2' => $this->input->post('user_phone2'),                  
                     'user_email_secondary' => $this->input->post('user_email_secondary'),                  

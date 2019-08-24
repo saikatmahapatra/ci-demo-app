@@ -14,31 +14,31 @@
 		<?php echo form_open(current_url(), array('method' => 'post', 'class'=>'ci-form','name' => 'myform','id' => 'myform','role' =>'form')); ?>
 		<?php echo form_hidden('form_action', 'insert'); ?>
 		<div class="form-group">
-			<label for="product_name" class="">Product Name <span class="required">*</span></label>
+			<label for="product_name" class="required">Product Name</label>
 			<?php echo form_input(array('name' => 'product_name', 'value' => set_value('product_name'),'id' => 'product_name', 'class' => 'form-control', 'minlength' => '3', 'maxlength' => '200',));?>
 			<?php echo form_error('product_name'); ?>
 		</div>
 		
 		<div class="form-row">
 			<div class="form-group col-md-4">									
-				<label for="category_id" class="">Select Product Category <span class="required">*</span></label>
+				<label for="category_id" class="required">Select Product Category</label>
 				<?php echo form_dropdown('category_id', $category_dropdown, set_value('category_id'), array('class' =>'form-control',));?>
 				<?php echo form_error('category_id'); ?>
 			</div>
 			<div class="form-group col-md-4">									
-				<label for="product_mrp" class="">MRP <span class="required">*</span></label>
+				<label for="product_mrp" class="required">MRP</label>
 				<?php echo form_input(array('name' => 'product_mrp','value' => set_value('product_mrp'),'id' => 'product_mrp','class' => 'form-control numeric-decimal','minlength' => '1','maxlength' => '10',));?>
 				<?php echo form_error('product_mrp'); ?>
 			</div>
 			<div class="form-group col-md-4">									
-				<label for="product_price" class="">Price <span class="required">*</span></label>
+				<label for="product_price" class="required">Price</label>
 				<?php echo form_input(array('name' => 'product_price', 'value' => set_value('product_price'),'id' => 'product_price','class' => 'form-control numeric-decimal','minlength' => '1','maxlength' => '10',));?>
 				<?php echo form_error('product_price'); ?>
 			</div>
 		</div>
 		
 		<div class="form-group">									
-			<label for="product_description" class="">Description <span class="required">*</span></label>
+			<label for="product_description" class="required">Description</label>
 			<?php echo form_textarea(array('name' => 'product_description', 'value' => set_value('product_description'), 'id' => 'product_description','class' => 'form-control','rows' => '4','cols' => '50',));?>
 			<?php echo form_error('product_description'); ?> 
 		</div>

@@ -594,14 +594,10 @@ body.login {
     font-size: 16px;
 }
 
-select.form-control.dob-inline {
-    display: inline !important;
-    width: auto;
-}
-
-.required {
+label.required::after {
+    content: ' *';
+    font-weight: 400;
     color: $mandatory_field_star-color;
-    font-weight: bold;
 }
 
 // Custom Form Control

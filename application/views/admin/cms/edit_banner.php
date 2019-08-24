@@ -76,7 +76,7 @@ $row = $rows[0];
 
 		<div class="form-row">
 			<div class="form-group col-md-12">									
-				<label for="upload_status" class="">Status <span class="required">*</span></label>
+				<label for="upload_status" class="required">Status</label>
 				<?php //echo form_dropdown('upload_status', array('Y'=>'Yes','N'=>'No'), (isset($_POST['upload_status']) ? set_value('upload_status') : $row['upload_status']), array('class' => 'form-control')); ?>
 				  	<!--<div class="">-->
 						<div class="custom-control custom-radio custom-control-inline">

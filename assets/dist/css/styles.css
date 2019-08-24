@@ -9003,14 +9003,10 @@ body.login {
   font-size: 16px;
 }
 
-select.form-control.dob-inline {
-  display: inline !important;
-  width: auto;
-}
-
-.required {
+label.required::after {
+  content: ' *';
+  font-weight: 400;
   color: #dc3545;
-  font-weight: bold;
 }
 
 .custom-control-label::before {

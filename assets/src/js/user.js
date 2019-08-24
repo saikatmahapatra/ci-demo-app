@@ -13,12 +13,20 @@ function domReady() {
     }
 
     //Date of Birth Date Picker
+    $('#user_dob').datepicker({
+        format: "dd-mm-yyyy",
+        weekStart: 1,
+        autoclose: true,
+        endDate: '-18y',
+        container: $('#user_dob').parent()
+    });
+
     $('#user_doj').datepicker({
         format: "dd-mm-yyyy",
         weekStart: 1,
         autoclose: true,
-		container: jQuery('input#user_doj').parent()
-		
+        container: jQuery('input#user_doj').parent()
+
     });
 
     //select2  #academic_specialization

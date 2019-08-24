@@ -17,19 +17,19 @@
 		
 		<div class="form-row">
 			<div class="form-group col-md-4">
-				<label for="content_type" class="">Content Type <span class="required">*</span></label>
+				<label for="content_type" class="required">Content Type</label>
 				<?php echo form_dropdown('content_type', $arr_content_type, set_value('content_type'), array('class' => 'form-control',));?>
 				<?php echo form_error('content_type'); ?>
 			</div>
 			<div class="form-group col-md-8">
-				<label for="content_title" class="">Content Title <span class="required">*</span></label>
+				<label for="content_title" class="required">Content Title</label>
 				<?php echo form_input(array('name' => 'content_title', 'value' => set_value('content_title'), 'id' => 'content_title', 'class' => 'form-control', 'placeholder' => ''));?>
 				<?php echo form_error('content_title'); ?>
 			</div>		
 		</div>
 		
 		<div class="form-group">
-			<label for="content_text" class="">Content (HTML) <span class="required">*</span></label>
+			<label for="content_text" class="required">Description</label>
 			<?php echo form_textarea(array('name' => 'content_text','value' => set_value('content_text'),'class' => 'form-control textarea','id' => 'content_text','rows' => '2','cols' => '50','placeholder' => '')); ?>
 			<?php echo form_error('content_text'); ?>
 		</div>
@@ -73,7 +73,7 @@
 
 		<div class="form-row">
 			<div class="form-group col-md-12">									
-				<label for="content_status" class="">Display Status <span class="required">*</span></label>
+				<label for="content_status" class="required">Status</label>
 				<?php //echo form_dropdown('content_status', array('Y'=>'Yes','N'=>'No'), set_value('content_status'), array('class' => 'form-control')); ?>
 				<?php //echo form_error('content_status'); ?>
 
@@ -94,7 +94,6 @@
 						<label class="custom-control-label" for="N">Unpublish</span></label>
 					</div>								
 				<!-- </div> -->
-				<small id="emailHelp" class="form-text text-muted">If you unpublish this, it will not displayed for public user(employees)</small>
 				<?php echo form_error('content_status'); ?>
 			</div>		
 		</div>

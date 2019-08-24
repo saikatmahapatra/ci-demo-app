@@ -21,7 +21,7 @@
 			<?php /* ?>
             <div class="form-row">                
                     <div class="form-group col-md-6">                                
-						<label for="user_firstname" class="">First Name <span class="required">*</span></label>
+						<label for="user_firstname" class="required">First Name</label>
                         <?php
                         echo form_input(array(
                             'name' => 'user_firstname',
@@ -35,7 +35,7 @@
                     </div>
                 
                     <div class="form-group col-md-6">  
-						<label for="user_lastname" class="">Last Name <span class="required">*</span></label>
+						<label for="user_lastname" class="required">Last Name</label>
                         <?php
                         echo form_input(array(
                             'name' => 'user_lastname',
@@ -56,7 +56,7 @@
 					'name' => 'user_bio',
 					'value' => (isset($_POST['user_bio']) ? set_value('user_bio') : $row['user_bio']),
 					'id' => 'user_bio',
-					'class' => 'form-control',						
+					'class' => 'form-control',
 					'maxlength' => '100',
 				));
 				?>
@@ -65,7 +65,7 @@
                 
 			<?php /*?>	
             <div class="form-control">
-                    <label class="">Gender <span class="required">*</span></label>
+                    <label class="" class="required">Gender</label>
                     <div class="radio">  
                         <label class="label-normal">
                             <?php
@@ -100,7 +100,7 @@
                 </div>
 				<?php */ ?>
 			<div class="form-group">
-				<label for="user_email_secondary" class="">Email (Personal) <span class="required">*</span></label>
+				<label for="user_email_secondary" class="required">Email (Personal)</label>
 				<?php
 				echo form_input(array(
 					'name' => 'user_email_secondary',
@@ -114,7 +114,7 @@
 			
             <div class="form-row">               
 				<div class="form-group col-md-6">
-					<label for="user_phone1" class="">10-digit Mobile Number (Personal) <span class="required">*</span></label>
+					<label for="user_phone1" class="required">10-digit Mobile (Personal)</label>
 					<?php
 					echo form_input(array(
 						'name' => 'user_phone1',
@@ -145,7 +145,7 @@
                     
             <div class="form-row">
                 <div class="form-group col-md-6">
-                <label for="user_blood_group" class="">Blood Group <span class="required">*</span></label>
+                <label for="user_blood_group" class="required">Blood Group</label>
                     <?php
                     echo form_dropdown('user_blood_group', $blood_group, isset($_POST['user_blood_group']) ? set_value('user_blood_group') : $row['user_blood_group'], array(
                         'class' => 'form-control',

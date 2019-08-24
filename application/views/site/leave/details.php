@@ -234,7 +234,7 @@ $row = $data_rows[0];
 		<input type="hidden" id="leave_req_id" name="leave_req_id" value="<?php echo $row['leave_req_id'];?>">
 		<input type="hidden" id="action_by_approver" name="action_by_approver" value="">
 		<input type="hidden" id="action_by_approver_id" name="action_by_approver_id" value="">
-		<label class="bmd-label-floating">Status <span class="required">*</span></label>
+		<label class="bmd-label-floating required">Status</label>
 			<select class="form-control" name="leave_action_status" id="leave_action_status">
 				<option value="">Select Status</option>
 				<option value="A">Approve</option>

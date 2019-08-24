@@ -15,7 +15,7 @@
 		<?php echo form_hidden('form_action', 'insert'); ?>
 		<div class="form-row">
 			<div class="form-group col-md-6">									
-				<label for="category_name" class="">Category Name <span class="required">*</span></label>
+				<label for="category_name" class="required">Category Name</label>
 				<?php 
 				echo form_input(array(
 				'name' => 'category_name', 

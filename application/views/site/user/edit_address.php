@@ -16,7 +16,7 @@
         <?php echo form_hidden('form_action', 'update_address'); ?>
 			<div class="form-row">
 				<div class="form-group col-md-12">
-					<!--<label for="address_type" class="">Communication Address Type <span class="required">*</span></label>-->
+					<!--<label for="address_type" class="required">Communication Address Type</label>-->
 					<?php						
 					/*if(isset($address_type)){
 						foreach($address_type as $address_char=>$address_text){
@@ -39,8 +39,8 @@
 			</div>
 
 			<div class="form-row">
-				<div class="form-group col-md-12">        						
-					<label for="address" class="">Address <span class="required">*</span></label>
+				<div class="form-group col-md-12">
+					<label for="address" class="required">Address</label>
 					<?php 
 					echo form_textarea(array(
 					'name' => 'address',
@@ -58,8 +58,8 @@
 			</div>
 			
 			<div class="form-row">				
-				<div class="form-group col-md-6">						
-					<label for="locality" class="">Locality / Area Name <span class="required">*</span></label>
+				<div class="form-group col-md-6">
+					<label for="locality" class="required">Locality/Area Name</label>
 					<?php
 					echo form_input(array(
 						'name' => 'locality',
@@ -72,8 +72,8 @@
 					<?php echo form_error('locality'); ?>
 				</div>
 
-				<div class="form-group col-md-6">        						
-					<label for="zip" class="">Pin Code <span class="required">*</span></label>
+				<div class="form-group col-md-6">
+					<label for="zip" class="required">PIN Code</label>
 					<?php
 					echo form_input(array(
 						'name' => 'zip',
@@ -92,7 +92,7 @@
 				
 			<div class="form-row">				
 				<div class="form-group col-md-6">
-					<label for="city" class="">City / District / Town <span class="required">*</span></label>
+					<label for="city" class="required">City/District/Town</label>
 					<?php 
 					echo form_input(array(
 					'name' => 'city',
@@ -106,7 +106,7 @@
 					<?php echo form_error('city'); ?>
 				</div>				
 				<div class="form-group col-md-6">
-					<label for="state" class="">State/Union Territory <span class="required">*</span></label>
+					<label for="state" class="required">State/Union Territory</label>
 					<?php 
 					/*echo form_input(array(
 					'name' => 'state',

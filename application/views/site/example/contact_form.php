@@ -14,7 +14,7 @@
     <?php echo form_hidden('form_action', 'send'); ?>
         <div class="form-row">
             <div class="form-group col-md-4">
-                <label for="name">Name <span class="required">*</span></label>
+                <label for="name" class="required">Name</label>
                 <?php
                 echo form_input(array(
                     'name' => 'name',
@@ -29,7 +29,7 @@
             </div>
             
             <div class="form-group col-md-4">
-                <label for="email" class="">Email <span class="required">*</span></label>			
+                <label for="email" class="required">Email</label>			
                 <?php
                 echo form_input(array(
                     'name' => 'email',
@@ -59,7 +59,7 @@
         </div>
         <div class="form-row">
             <div class="form-group col-md-12"> 
-                <label for="message" class="">Message <span class="required">*</span></label>
+                <label for="message" class="required">Message</label>
                 <?php
                 echo form_textarea(array(
                     'name' => 'message',

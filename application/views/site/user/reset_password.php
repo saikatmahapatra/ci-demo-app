@@ -14,7 +14,7 @@
 		<?php echo form_hidden('password_reset_key', $password_reset_key); ?>
 		
 			<div class="form-group">                    
-				<label for="user_email" class="">Registered Email <span class="required">*</span></label>
+				<label for="user_email" class="required">Registered Email</label>
 				<?php
 				echo form_input(array(
 					'name' => 'user_email',
@@ -31,7 +31,7 @@
 
 
 			<div class="form-group">            
-				<label for="user_new_password" class="">New Password <span class="required">*</span></label>
+				<label for="user_new_password" class="required">New Password</label>
 				<?php
 				echo form_password(array(
 					'name' => 'user_new_password',
@@ -46,7 +46,7 @@
 			</div>
 
 			<div class="form-group">            
-				<label for="confirm_user_new_password" class="">Confirm New Password <span class="required">*</span></label>
+				<label for="confirm_user_new_password" class="required">Confirm New Password</label>
 				<?php
 				echo form_password(array(
 					'name' => 'confirm_user_new_password',

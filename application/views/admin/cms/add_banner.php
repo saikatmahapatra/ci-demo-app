@@ -19,7 +19,7 @@
 		
 		<div class="form-row">			
 			<div class="form-group col-md-12">									
-				<label for="userfile" class="">Image (Only 1200x300 dimensions are allowed) <span class="required">*</span></label>
+				<label for="userfile" class="required">Image (Only 1200x300 dimensions are allowed)</label>
 				<?php
 					echo form_upload(array(
 						'name' => 'userfile',
@@ -53,7 +53,7 @@
 		<?php /* ?>
 		<div class="form-row">
 			<div class="form-group col-md-12">									
-				<label for="upload_status" class="">Status <span class="required">*</span></label>
+				<label for="upload_status" class="required">Status</label>
 				<!-- <div class=""> -->
 					<div class="custom-control custom-radio custom-control-inline">
 						<?php

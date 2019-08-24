@@ -13,12 +13,12 @@
 			?>
 		
 			<div class="form-group">
-				<label for="user_email">Email <span class="required">*</span></label>
+				<label for="user_email" class="required">Email/Username</label>
 				<?php echo form_input(array('name' => 'user_email', 'value' => set_value('user_email'),'id' => 'name','class' => 'form-control','placeholder' => '','maxlength' => '100','autofocus' => true,));?>
 				<?php echo form_error('user_email'); ?>
 			</div>
 			<div class="form-group">
-				<label for="user_password">Password <span class="required">*</span></label>
+				<label for="user_password" class="required">Password</label>
 				<?php echo form_password(array('name' => 'user_password','value' => set_value('user_password'),'id' =>'user_password','placeholder' => '','class' => 'form-control','maxlength' => '16'));?>
 				<?php echo form_error('user_password'); ?>
 			</div>

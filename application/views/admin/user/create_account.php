@@ -16,7 +16,7 @@
         <div class="form-row">
 		
 			<div class="form-group col-md-3">
-			  <label for="user_title" class="">Title <span class="required">*</span></label>
+			  <label for="user_title" class="required">Title</label>
 				<?php
 				echo form_dropdown('user_title', $arr_user_title, set_value('user_title'), array(
 					'class' => 'form-control field-help'
@@ -25,8 +25,8 @@
 				<?php echo form_error('user_title'); ?>
 			</div>
 		
-			<div class="form-group col-md-4">                            
-				<label for="user_firstname" class="">First Name <span class="required">*</span></label>
+			<div class="form-group col-md-4">
+				<label for="user_firstname" class="required">First Name</label>
 				<?php
 				echo form_input(array(
 					'name' => 'user_firstname',
@@ -40,8 +40,8 @@
 				<?php echo form_error('user_firstname'); ?>
 			</div>
 			
-			<div class="form-group col-md-5">                            
-				<label for="user_lastname" class="">Last Name <span class="required">*</span></label>
+			<div class="form-group col-md-5">
+				<label for="user_lastname" class="required">Last Name</label>
 				<?php
 				echo form_input(array(
 					'name' => 'user_lastname',
@@ -58,7 +58,7 @@
 		
 		<div class="form-row">
 			<div class="form-group col-md-6">
-				<label for="user_email" class="">Email (Work) <span class="required">*</span></label>
+				<label for="user_email" class="required">Email (Work)</label>
 				<?php
 				echo form_input(array(
 					'name' => 'user_email',
@@ -89,8 +89,8 @@
 		</div>
 		
 		<div class="form-row">			
-			<div class="form-group col-md-6">                           
-				<label for="user_phone1" class="">Mobile (Personal/Primary) <span class="required">*</span></label>
+			<div class="form-group col-md-6">
+				<label for="user_phone1" class="required">Mobile (Personal/Primary)</label>
 				<?php
 				echo form_input(array(
 					'name' => 'user_phone1',
@@ -104,7 +104,7 @@
 				<?php echo form_error('user_phone1'); ?>
 			</div>
 			
-			<div class="form-group col-md-6">                            
+			<div class="form-group col-md-6">
 					<label for="user_phone2" class="">Mobile (Work) </label>
 					<?php
 					echo form_input(array(
@@ -124,32 +124,7 @@
 		
 		
 		<div class="form-row">
-			<?php /* ?><div class="form-group col-md-6">
-			  <label for="user_department" class="">Department <span class="required">*</span></label>
-				<?php
-				echo form_dropdown('user_department', $arr_departments, set_value('user_department'), array(
-					'class' => 'form-control'
-				));
-				?> 
-				<?php echo form_error('user_department'); ?>
-			</div><?php */ ?>
 			
-			<div class="form-group col-md-4">                            
-				<label for="user_doj" class="">Date of Joining </label>				
-				<?php
-				echo form_input(array(
-					'name' => 'user_doj',
-					'value' => set_value('user_doj'),
-					'id' => 'user_doj',
-					'maxlength' => '10',
-					'class' => 'form-control dob-datepicker',
-					'placeholder' => '',
-					'autocomplete'=>'off',
-					'readonly'=>true
-				));
-				?>
-				<?php echo form_error('user_doj'); ?>
-			</div>
 			
 			<div class="form-group col-md-4">
 			  <label for="user_designation" class="">Designation </label>
@@ -173,10 +148,10 @@
 		</div>
 		
 		<div class="form-row">
-				<div class="form-group col-md-6">                            
-					<label for="user_dob" class="">Date of Birth <span class="required">*</span></label>				
+				<div class="form-group col-md-6">
+					<label for="user_dob" class="required">Date of Birth</label>
 					<?php
-					/*echo form_input(array(
+					echo form_input(array(
 						'name' => 'user_dob',
 						'value' => set_value('user_dob'),
 						'id' => 'user_dob',
@@ -185,20 +160,12 @@
 						'placeholder' => 'dd-mm-yyyy',
 						'autocomplete'=>'off',
 						'readonly'=>true
-					));*/
+					));
 					?>
-					<?php /*echo form_error('user_dob'); */?>
-					<div class="">
-						<?php echo form_dropdown('dob_day', $day_arr, set_value('dob_day'), array('class' => 'form-control dob-inline',));?>
-						<?php echo form_dropdown('dob_month', $month_arr, set_value('dob_month'), array('class' => 'form-control dob-inline',));?>
-						<?php echo form_dropdown('dob_year', $year_arr, set_value('dob_year'), array('class' => 'form-control dob-inline'));?>
-					</div>
-					<?php echo form_error('dob_day'); ?>
-					<?php echo form_error('dob_month'); ?>
-					<?php echo form_error('dob_year'); ?>
+					<?php echo form_error('user_dob'); ?>
 				</div>
 				<div class="form-group col-md-6">
-					<label for="gender">Gender <span class="required">*</span></label>
+					<label for="gender" class="required">Gender</label>
 					<div class="">
 						<div class="custom-control custom-radio custom-control-inline">
 							<?php
@@ -223,7 +190,7 @@
 			<?php /* ?>
 			<div class="form-row">				
 				<div class="form-group col-md-6">
-				  <label for="user_role" class="">Access Group <span class="required">*</span></label>
+				  <label for="user_role" class="required">Access Group</label>
 					<?php
 					echo form_dropdown('user_role', $arr_roles, set_value('user_role'), array(
 						'class' => 'form-control field-help'

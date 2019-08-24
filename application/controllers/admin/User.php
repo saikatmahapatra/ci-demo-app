@@ -226,18 +226,15 @@ class User extends CI_Controller {
         if ($this->input->post('form_action') == 'create_account') {
             if ($this->validate_create_account_form_data() == true) {
                 $activation_token = md5(time('Y-m-d h:i:s'));
-                $dob = $this->input->post('dob_year') . '-' . $this->input->post('dob_month') . '-' . $this->input->post('dob_day');
-				$user_emp_id = $this->user_model->get_new_emp_id();
-				$password = $this->generate_password();				
+				$customer_id = $this->user_model->get_new_customer_id();
+				$password = $this->generate_password();
                 $postdata = array(
-                    'user_title' => $this->input->post('user_title'),                    
-                    'user_firstname' => ucwords(strtolower($this->input->post('user_firstname'))),                   
+                    'user_firstname' => ucwords(strtolower($this->input->post('user_firstname'))),
                     'user_lastname' => ucwords(strtolower($this->input->post('user_lastname'))),
                     'user_gender' => $this->input->post('user_gender'),
                     'user_email' => strtolower($this->input->post('user_email')),
                     'user_email_secondary' => strtolower($this->input->post('user_email_secondary')),
-                    'user_dob' => $dob,
-                    'user_doj' => $this->common_lib->convert_to_mysql($this->input->post('user_doj')),
+                    'user_dob' => $this->common_lib->convert_to_mysql($this->input->post('user_dob')),
                     'user_role' => $this->input->post('user_role'),
                     'user_department' => $this->input->post('user_department'),
                     'user_designation' => $this->input->post('user_designation'),
@@ -247,7 +244,7 @@ class User extends CI_Controller {
                     'user_activation_key' => $activation_token,
                     'user_registration_ip' => $_SERVER['REMOTE_ADDR'],
                     'user_status' => 'Y',
-                    'user_emp_id' => $user_emp_id
+                    'user_emp_id' => $customer_id
                 );
 				//print_r($postdata); die();
                 $insert_id = $this->user_model->insert($postdata);
@@ -275,7 +272,7 @@ class User extends CI_Controller {
                     $this->email->message($message_html);
                     $this->email->send();
                     //echo $this->email->print_debugger();
-                    $this->session->set_flashdata('flash_message', 'User account has been created successfully. <br>System generated User ID <span class="font-weight-bold h5">'.$user_emp_id.'</span>. <br>Account activation link will be sent to the registered email address.');
+                    $this->session->set_flashdata('flash_message', 'User account has been created successfully. <br>System generated User ID <span class="font-weight-bold h5">'.$customer_id.'</span>. <br>Account activation link will be sent to the registered email address.');
                     $this->session->set_flashdata('flash_message_css', 'alert-success');
                     redirect(current_url());
                 }
@@ -666,7 +663,6 @@ class User extends CI_Controller {
                     //'user_lastname' => $this->input->post('user_lastname'),
                     'user_bio' => $this->input->post('user_bio'),
                     //'user_gender' => $this->input->post('user_gender'),
-                    //'user_dob' => $dob,
                     'user_phone1' => $this->input->post('user_phone1'),
                     'user_phone2' => $this->input->post('user_phone2'),
                     'user_email_secondary' => $this->input->post('user_email_secondary'),
@@ -688,15 +684,10 @@ class User extends CI_Controller {
     }
 
     function validate_edit_user_profile_form() {
-        $this->form_validation->set_rules('user_title', 'title', 'required');
         $this->form_validation->set_rules('user_firstname', 'first name', 'required|alpha|min_length[3]|max_length[25]');
         $this->form_validation->set_rules('user_lastname', 'last name', 'required|alpha_numeric_spaces|min_length[3]|max_length[30]');
         $this->form_validation->set_rules('user_gender', 'gender selection', 'required');
-        $this->form_validation->set_rules('dob_day', 'birth day selection', 'required');
-        $this->form_validation->set_rules('dob_month', 'birth month selection', 'required');
-        $this->form_validation->set_rules('dob_year', 'birth year selection', 'required');
-        //$this->form_validation->set_rules('user_dob', 'date of birth', 'required');
-        //$this->form_validation->set_rules('user_doj', 'date of joining', 'required');
+        $this->form_validation->set_rules('user_dob', 'date of birth', 'required');
         //$this->form_validation->set_rules('user_role', 'access group', 'required');
         //$this->form_validation->set_rules('user_designation', 'designation', 'required');
         //$this->form_validation->set_rules('user_department', 'department', 'required');

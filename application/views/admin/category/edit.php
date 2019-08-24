@@ -20,7 +20,7 @@ $row = $rows[0];
 		
 		<div class="form-row">							
 			<div class="form-group col-md-4">
-				<label for="category_name" class="">Name <span class="required">*</span></label>
+				<label for="category_name" class="required">Name</label>
 				<?php 
 				echo form_input(array(
 				'name' => 'category_name', 

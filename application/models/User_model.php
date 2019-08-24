@@ -184,7 +184,7 @@ class User_model extends CI_Model {
                 );
                 $auth_result = array('status' => $login_status, 'message' => $message, 'data' => $loggedin_data);
 				// update login date time
-				$postdata = array('user_login_date_time'=>date('Y-m-d h:i:s'));
+				$postdata = array('user_login_date_time'=>date('Y-m-d H:i:s'));
 				$where = array('id'=>$row['id']);
 				$this->update($postdata, $where);
                 return $auth_result;
@@ -497,7 +497,7 @@ class User_model extends CI_Model {
         return $result;
     }
 	
-	function get_new_emp_id() {
+	function get_new_customer_id() {
         $this->db->select('max(user_emp_id)+1 as new_emp_id');        
         $query = $this->db->get('users as t1');
         $result = $query->result_array();

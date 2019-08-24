@@ -1,7 +1,7 @@
 <?php //echo isset($breadcrumbs) ? $breadcrumbs : ''; ?>
 <h1 class="page-title"><?php echo isset($page_title) ? $page_title : 'Page Heading'; ?></h1>
 <div class="row">
-	<div class="col-md-8">
+	<div class="col-md-5">
 		<?php
 		// Show server side flash messages
 		if (isset($alert_message)) {
@@ -14,19 +14,8 @@
 		<?php echo form_hidden('form_action', 'self_registration'); ?>        
 		<?php echo form_hidden('user_role', 3); ?>        
 		<div class="form-row">
-		
-			<div class="form-group col-md-3">
-				<label for="user_title" class="">Title <span class="required">*</span></label>
-				<?php
-				echo form_dropdown('user_title', $arr_user_title, set_value('user_title'), array(
-					'class' => 'form-control field-help'
-				));
-				?> 
-				<?php echo form_error('user_title'); ?>
-			</div>
-		
-			<div class="form-group col-md-4">                            
-				<label for="user_firstname" class="">First Name <span class="required">*</span></label>
+			<div class="form-group col-md-6">
+				<label for="user_firstname" class="required">First Name</label>
 				<?php
 				echo form_input(array(
 					'name' => 'user_firstname',
@@ -40,8 +29,8 @@
 				<?php echo form_error('user_firstname'); ?>
 			</div>
 			
-			<div class="form-group col-md-5">                            
-				<label for="user_lastname" class="">Last Name <span class="required">*</span></label>
+			<div class="form-group col-md-6">
+				<label for="user_lastname" class="required">Last Name</label>
 				<?php
 				echo form_input(array(
 					'name' => 'user_lastname',
@@ -58,7 +47,7 @@
 		
 		<div class="form-row">
 			<div class="form-group col-md-6">
-				<label for="user_email" class="">Email (Work) <span class="required">*</span></label>
+				<label for="user_email" class="required">Email</label>
 				<?php
 				echo form_input(array(
 					'name' => 'user_email',
@@ -73,7 +62,7 @@
 			</div>
 			
 			<div class="form-group col-md-6">
-				<label for="user_phone1" class="">10-digit Mobile Number (Personal) <span class="required">*</span></label>
+				<label for="user_phone1" class="required">10-digit Mobile</label>
 				<?php
 				echo form_input(array(
 					'name' => 'user_phone1',
@@ -90,7 +79,7 @@
 		
 		<div class="form-row">
 			<div class="form-group col-md-6">
-				<label for="user_password" class="">Password <span class="required">*</span></label>
+				<label for="user_password" class="required">Password</label>
 				<?php
 				echo form_password(array(
 					'name' => 'user_password',
@@ -105,7 +94,7 @@
 			</div>
 			
 			<div class="form-group col-md-6">
-				<label for="user_password_confirm" class="">Confirm Password <span class="required">*</span></label>
+				<label for="user_password_confirm" class="required">Confirm Password</label>
 				<?php
 				echo form_password(array(
 					'name' => 'user_password_confirm',
@@ -120,58 +109,48 @@
 			</div>
 		</div>
 		
-		
-		
 		<div class="form-row">
-				<div class="form-group col-md-6">                            
-					<label for="user_dob" class="">Date of Birth <span class="required">*</span></label>				
-					<?php
-					/*echo form_input(array(
-						'name' => 'user_dob',
-						'value' => set_value('user_dob'),
-						'id' => 'user_dob',
-						'maxlength' => '10',
-						'class' => 'form-control dob-datepicker',
-						'placeholder' => 'dd-mm-yyyy',
-						'autocomplete'=>'off',
-						'readonly'=>true
-					));*/
-					?>
-					<?php /*echo form_error('user_dob'); */?>
-					<div class="">
-						<?php echo form_dropdown('dob_day', $day_arr, set_value('dob_day'), array('class' => 'form-control dob-inline',));?>
-						<?php echo form_dropdown('dob_month', $month_arr, set_value('dob_month'), array('class' => 'form-control dob-inline',));?>
-						<?php echo form_dropdown('dob_year', $year_arr, set_value('dob_year'), array('class' => 'form-control dob-inline'));?>
-					</div>
-					<?php echo form_error('dob_day'); ?>
-					<?php echo form_error('dob_month'); ?>
-					<?php echo form_error('dob_year'); ?>
-				</div>
-				<div class="form-group col-md-6">
-					<label for="gender">Gender <span class="required">*</span></label>
-					<div class="">
-						<div class="custom-control custom-radio custom-control-inline">
-							<?php
-								$radio_is_checked = $this->input->post('user_gender') === 'M';
-								echo form_radio(array('name' => 'user_gender','value' => 'M','id' => 'M','checked' => $radio_is_checked,'class' => 'custom-control-input'), set_radio('user_gender', 'M'));
-							?>
-							<label class="custom-control-label" for="M">Male</span></label>
-						</div>
-						
-						<div class="custom-control custom-radio custom-control-inline">
-							<?php
-								$radio_is_checked = $this->input->post('user_gender') === 'F';
-								echo form_radio(array('name' => 'user_gender', 'value' => 'F', 'id' => 'F', 'checked' => $radio_is_checked, 'class' => 'custom-control-input'), set_radio('user_gender', 'F'));
-							?>
-							<label class="custom-control-label" for="F">Female</span></label>
-						</div>								
-					</div>
-					<?php echo form_error('user_gender'); ?>
-				</div>
+			<div class="form-group col-md-6">
+				<label for="user_dob" class="required">Date of Birth</label>
+				<?php
+				echo form_input(array(
+					'name' => 'user_dob',
+					'value' => set_value('user_dob'),
+					'id' => 'user_dob',
+					'maxlength' => '10',
+					'class' => 'form-control',
+					'placeholder' => 'dd-mm-yyyy',
+					'autocomplete'=>'off',
+					'readonly'=>true
+				));
+				?>
+				<?php echo form_error('user_dob');?>
 			</div>
+			<div class="form-group col-md-6">
+				<label for="gender" class="required">Gender</label>
+				<div class="">
+					<div class="custom-control custom-radio custom-control-inline">
+						<?php
+							$radio_is_checked = $this->input->post('user_gender') === 'M';
+							echo form_radio(array('name' => 'user_gender','value' => 'M','id' => 'M','checked' => $radio_is_checked,'class' => 'custom-control-input'), set_radio('user_gender', 'M'));
+						?>
+						<label class="custom-control-label" for="M">Male</span></label>
+					</div>
+					
+					<div class="custom-control custom-radio custom-control-inline">
+						<?php
+							$radio_is_checked = $this->input->post('user_gender') === 'F';
+							echo form_radio(array('name' => 'user_gender', 'value' => 'F', 'id' => 'F', 'checked' => $radio_is_checked, 'class' => 'custom-control-input'), set_radio('user_gender', 'F'));
+						?>
+						<label class="custom-control-label" for="F">Female</span></label>
+					</div>
+				</div>
+				<?php echo form_error('user_gender'); ?>
+			</div>
+		</div>
 
 		<?php echo form_button(array('name' => 'submit_btn','type' => 'submit','content' => 'Submit','class' => 'btn btn-primary'));?>
-		<a href="<?php echo base_url($this->router->directory.$this->router->class.'/login');?>" class="ml-2 btn btn-secondary">Cancel</a>
+		<a href="<?php echo base_url($this->router->directory.$this->router->class.'/login');?>" class="btn btn-sm btn-link">Cancel</a>
 		<?php echo form_close(); ?>
 	</div>
 </div>

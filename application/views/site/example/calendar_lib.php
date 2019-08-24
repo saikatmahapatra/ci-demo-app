@@ -30,7 +30,7 @@
 		<?php echo form_hidden('selected_date',set_value('selected_date')); ?>		  
 
 		<div class="form-group">
-			<label for="selected_days" class="">Selected Day(s) <span class="required">*</span></label>
+			<label for="selected_days" class="required">Selected Day(s)</label>
 			<div id="display_selected_date">no date selected</div>
 			<?php echo form_error('selected_date'); ?>
 		</div>			

@@ -22,7 +22,7 @@
 			<?php echo form_hidden('id', ''); ?>
 			<div class="form-row">
 				<div class="form-group col-md-3">
-					<label for="user_id" class="bmd-label-floating">Employee <span class="required">*</span></label>
+					<label for="user_id" class="bmd-label-floating required">Employee</label>
 					<?php
 					echo form_dropdown('user_id', $user_dropdwon, set_value('user_id'), array(
 						'class' => 'form-control',
@@ -33,19 +33,19 @@
 				</div>
 									
 				<div class="form-group col-md-2">
-					<label for="cl" class="bmd-label-floating">Casual Leave <span class="required">*</span></label>
+					<label for="cl" class="bmd-label-floating required">Casual Leave</label>
 					<?php echo form_input(array('name' => 'cl','value' => set_value('cl'),'id' => 'cl','class' => 'form-control', 'placeholder'=>'', 'maxlength'=>'6')); ?>
 					<?php echo form_error('cl'); ?>
 				</div>
 					
 				<div class="form-group col-md-2">
-					<label for="pl" class="bmd-label-floating">Priviledge Leave <span class="required">*</span></label>		
+					<label for="pl" class="bmd-label-floating required">Priviledge Leave</label>		
 					<?php echo form_input(array('name' => 'pl','value' => set_value('pl'),'id' => 'pl','class' => 'form-control', 'placeholder'=>'', 'maxlength'=>'6')); ?>
 					<?php echo form_error('pl'); ?>
 				</div>
 			
 				<div class="form-group col-md-2">
-					<label for="ol" class="bmd-label-floating">Optional Leave <span class="required">*</span></label>
+					<label for="ol" class="bmd-label-floating required">Optional Leave </label>
 					<?php echo form_input(array('name' => 'ol','value' => set_value('ol'),'id' => 'ol', 'class' => 'form-control','placeholder'=>'','maxlength' => '6'));
 					?>
 					<?php echo form_error('ol'); ?>				
