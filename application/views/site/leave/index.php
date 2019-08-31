@@ -3,14 +3,7 @@
 
 <div class="row my-2">
 	<div class="col-md-12">
-	<?php
-	// Show server side flash messages
-	if (isset($alert_message)) {
-		$html_alert_ui = '';                
-		$html_alert_ui.='<div class="auto-closable-alert alert ' . $alert_message_css . ' alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'.$alert_message.'</div>';
-		echo $html_alert_ui;
-	}
-	?>
+	<?php echo isset($alert_message) ? $alert_message : ''; ?>
 	</div>	
 </div>
 

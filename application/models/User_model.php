@@ -132,7 +132,6 @@ class User_model extends CI_Model {
         $this->db->select('
 		t1.id,
 		t1.user_email,
-		t1.user_title,
 		t1.user_firstname,
 		t1.user_lastname,
 		t1.user_role,
@@ -174,7 +173,6 @@ class User_model extends CI_Model {
                     'id' => $row['id'],
                     'user_role' => $row['user_role'],
 					'user_role_name' => $row['role_name'],
-                    'user_title' => $row['user_title'],
                     'user_firstname' => $row['user_firstname'],
                     'user_lastname' => $row['user_lastname'],
                     'user_email' => $row['user_email'],

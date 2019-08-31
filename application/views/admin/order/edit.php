@@ -8,14 +8,7 @@ $row = $rows[0];
 
 <div class="row">
 	<div class="col-md-12">
-		<?php
-		// Show server side flash messages
-		if (isset($alert_message)) {
-			$html_alert_ui = '';                
-			$html_alert_ui.='<div class="auto-closable-alert alert ' . $alert_message_css . ' alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'.$alert_message.'</div>';
-			echo $html_alert_ui;
-		}
-		?>
+		<?php echo isset($alert_message) ? $alert_message : ''; ?>
 		<div class="card order-summary">
 			<div class="card-header">
 				<h6>Order # <?php echo isset($row['order_no']) ? $row['order_no'] : '';?>  <?php echo isset($row['order_status']) ? strtoupper($row['order_status']) : '';?> <span class="pull-right"><?php echo isset($row['order_datetime']) ? $row['order_datetime'] : '';?></span></h6>
