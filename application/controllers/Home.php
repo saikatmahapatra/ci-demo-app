@@ -34,8 +34,8 @@ class Home extends CI_Controller {
         $this->load->model('upload_model');
         $this->id = $this->uri->segment(3);
 
-        $this->data['alert_message'] = NULL;
-        $this->data['alert_message_css'] = NULL;
+        
+        
         $this->data['page_title'] = $this->router->class.' : '.$this->router->method;
 
         $this->data['content_type'] = array(
@@ -62,8 +62,8 @@ class Home extends CI_Controller {
 		$this->breadcrumbs->push('View','/');				
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
 		
-        $this->data['alert_message'] = $this->session->flashdata('flash_message');
-        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
+        
+        
 
         // Display using CI Pagination: Total filtered rows - check without limit query. Refer to model method definition		
 		$result_array = $this->cms_model->get_contents(NULL, NULL, NULL, FALSE, FALSE);
@@ -105,8 +105,8 @@ class Home extends CI_Controller {
 		$this->breadcrumbs->push('View','/');				
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
 		
-        $this->data['alert_message'] = $this->session->flashdata('flash_message');
-        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
+        
+        
 
         $id = $this->uri->segment(3);		
 		$result_array = $this->cms_model->get_contents($id, NULL, NULL, FALSE, FALSE);

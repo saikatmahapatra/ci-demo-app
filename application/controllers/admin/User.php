@@ -11,8 +11,8 @@ class User extends CI_Controller {
         
         $this->load->model('user_model');
         $this->load->model('upload_model');
-        $this->data['alert_message'] = NULL;
-        $this->data['alert_message_css'] = NULL;
+        
+        
 
         // Get logged  in user id
         $this->sess_user_id = $this->common_lib->get_sess_user('id');
@@ -82,8 +82,8 @@ class User extends CI_Controller {
         
 		$this->breadcrumbs->push('View', '/');		
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
-        $this->data['alert_message'] = $this->session->flashdata('flash_message');
-        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
+        
+        
 		
 		$this->data['page_title'] = 'Manage Users';
         $this->data['maincontent'] = $this->load->view('admin/'.$this->router->class.'/manage', $this->data, true);
@@ -150,8 +150,8 @@ class User extends CI_Controller {
             redirect($this->router->directory.'home');
         }
         ########### Validate User Auth End #############
-        $this->data['alert_message'] = $this->session->flashdata('flash_message');
-        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
+        
+        
         
         if ($this->input->post('form_action') == 'login') {
             if ($this->validate_login_form_data() == true) {
@@ -165,7 +165,7 @@ class User extends CI_Controller {
                     $message = $login_result['message'];
                     $login_data = $login_result['data'];
                     if ($login_status == 'error') {
-                        $this->session->set_flashdata('flash_message', $message);
+                        $this->common_lib->set_flash_message($message);
                         $this->session->set_flashdata('flash_message_css', 'alert-danger');
                         redirect(current_url());
                     }
@@ -221,8 +221,8 @@ class User extends CI_Controller {
         ));
         ########### Validate User Auth End #############
 		
-        $this->data['alert_message'] = $this->session->flashdata('flash_message');
-        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
+        
+        
         if ($this->input->post('form_action') == 'create_account') {
             if ($this->validate_create_account_form_data() == true) {
                 $activation_token = md5(time('Y-m-d h:i:s'));
@@ -272,7 +272,7 @@ class User extends CI_Controller {
                     $this->email->message($message_html);
                     $this->email->send();
                     //echo $this->email->print_debugger();
-                    $this->session->set_flashdata('flash_message', 'User account has been created successfully. <br>System generated User ID <span class="font-weight-bold h5">'.$customer_id.'</span>. <br>Account activation link will be sent to the registered email address.');
+                    $this->common_lib->set_flash_message('User account has been created successfully. <br>System generated User ID <span class="font-weight-bold h5">'.$customer_id.'</span>. <br>Account activation link will be sent to the registered email address.');
                     $this->session->set_flashdata('flash_message_css', 'alert-success');
                     redirect(current_url());
                 }
@@ -335,8 +335,8 @@ class User extends CI_Controller {
     }
 
     function forgot_password() {		
-        $this->data['alert_message'] = $this->session->flashdata('flash_message');
-        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
+        
+        
 
         if ($this->input->post('form_action') == 'forgot_password') {
             if ($this->validate_forgot_password_form() == true) {
@@ -374,7 +374,7 @@ class User extends CI_Controller {
                     $this->email->send();
                     //echo $this->email->print_debugger();
 
-                    $this->session->set_flashdata('flash_message', 'Password reset link will be sent to ' . $email);
+                    $this->common_lib->set_flash_message('Password reset link will be sent to ' . $email);
                     $this->session->set_flashdata('flash_message_css', 'alert-success');
                     redirect(current_url());
                 }
@@ -396,8 +396,6 @@ class User extends CI_Controller {
     }
 
     function reset_password() {
-        $this->data['alert_message'] = $this->session->flashdata('flash_message');
-        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
         $this->data['password_reset_key'] = $this->uri->segment(3);
 
         if (!isset($this->data['password_reset_key'])) {
@@ -422,12 +420,12 @@ class User extends CI_Controller {
                         $result2 = $this->user_model->update($postdata, $where);
                         // End Set user_reset_password_key to NULL on password update    
 
-                        $this->session->set_flashdata('flash_message', 'Password changed successfully.');
+                        $this->common_lib->set_flash_message('Password changed successfully.');
                         $this->session->set_flashdata('flash_message_css', 'alert-success');
                         redirect(current_url());
                     }
                 } else {
-                    $this->session->set_flashdata('flash_message', 'Invalid email or password reset link.');
+                    $this->common_lib->set_flash_message('Invalid email or password reset link.');
                     $this->session->set_flashdata('flash_message_css', 'alert-danger');
                     redirect(current_url());
                 }
@@ -483,14 +481,14 @@ class User extends CI_Controller {
         
         ########### Validate User Auth End #############
 
-        $this->data['alert_message'] = $this->session->flashdata('flash_message');
-        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
+        
+        
         if ($this->input->post('form_action') == 'change_password') {
             if ($this->validate_changepassword_form() == true) {
                 $postdata = array('user_password' => md5($this->input->post('user_new_password')));
                 $where = array('id' => $this->sess_user_id);
                 $this->user_model->update($postdata, $where);
-                $this->session->set_flashdata('flash_message', 'Password changed successfully.');
+                $this->common_lib->set_flash_message('Password changed successfully.');
                 $this->session->set_flashdata('flash_message_css', 'alert-success');
                 redirect(current_url());
             }
@@ -531,7 +529,7 @@ class User extends CI_Controller {
             $this->session->unset_userdata('sess_user');
             $this->session->unset_userdata('sess_post_login_redirect_url');
             $this->session->sess_destroy();
-            $this->session->set_flashdata('flash_message', 'You have been logged out successfully.');
+            $this->common_lib->set_flash_message('You have been logged out successfully.');
             $this->session->set_flashdata('flash_message_css', 'alert-success');
             redirect($this->router->directory.$this->router->class.'/login');
         } else {
@@ -562,8 +560,8 @@ class User extends CI_Controller {
         $this->breadcrumbs->push('Profile','/');
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
 
-        $this->data['alert_message'] = $this->session->flashdata('flash_message');
-        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
+        
+        
 		$user_id = $this->uri->segment(4)? $this->uri->segment(4): $this->sess_user_id;	
         $rows = $this->user_model->get_rows($user_id);		
 		$res_pic = $this->user_model->get_user_profile_pic($user_id);
@@ -649,8 +647,8 @@ class User extends CI_Controller {
             'default-admin-access',
         ));*/
         ########### Validate User Auth End #############
-        $this->data['alert_message'] = $this->session->flashdata('flash_message');
-        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
+        
+        
         $rows = $this->user_model->get_rows($this->sess_user_id);
         $this->data['row'] = $rows['data_rows'];
 
@@ -669,7 +667,7 @@ class User extends CI_Controller {
                 $where = array('id' => $this->sess_user_id);
                 $res = $this->user_model->update($postdata, $where);
                 if ($res) {
-                    $this->session->set_flashdata('flash_message', 'Basic information has been updated successfully.');
+                    $this->common_lib->set_flash_message('Basic information has been updated successfully.');
                     $this->session->set_flashdata('flash_message_css', 'alert-success');
                     redirect($this->router->directory.$this->router->class.'/profile');
                 }
@@ -711,8 +709,8 @@ class User extends CI_Controller {
             'default-admin-access',
         ));*/
         ########### Validate User Auth End #############
-        $this->data['alert_message'] = $this->session->flashdata('flash_message');
-        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
+        
+        
         
 		$this->data['user_id'] = $this->sess_user_id;
 		
@@ -804,19 +802,19 @@ class User extends CI_Controller {
                     // Now update table
                     //$update_upload = $this->user_model->update($postdata, array('id' => $uploads[0]['id']), 'uploads');
                     $update_upload = $this->user_model->update($postdata, $where_array);
-                    $this->session->set_flashdata('flash_message', 'Profile photo uploaded successfully.');
+                    $this->common_lib->set_flash_message('Profile photo uploaded successfully.');
                     $this->session->set_flashdata('flash_message_css', 'alert-success');
                     redirect(current_url());
                 } else {
                     //$upload_insert_id = $this->user_model->insert($postdata, 'uploads');
                     $update_upload = $this->user_model->update($postdata, $where_array);
-                    $this->session->set_flashdata('flash_message', 'Profile photo uploaded successfully.');
+                    $this->common_lib->set_flash_message('Profile photo uploaded successfully.');
                     $this->session->set_flashdata('flash_message_css', 'alert-success');
                     redirect(current_url());
                 }
             } else if (sizeof($upload_result['upload_error']) > 0) {
                 $error_message = $upload_result['upload_error'];
-                $this->session->set_flashdata('flash_message',$error_message);
+                $this->common_lib->set_flash_message($error_message);
                 $this->session->set_flashdata('flash_message_css', 'alert-danger');
                 redirect(current_url());
             }
@@ -838,11 +836,11 @@ class User extends CI_Controller {
 				$where_array = array('id'=>$this->sess_user_id);
 				$res = $this->user_model->update($postdata, $where_array);
 				if($res){
-					$this->session->set_flashdata('flash_message', 'Profile photo has been deleted successfully.');
+					$this->common_lib->set_flash_message('Profile photo has been deleted successfully.');
 					$this->session->set_flashdata('flash_message_css', 'alert-success');
 					redirect($this->router->directory.$this->router->class.'/profile_pic');
 				}else{
-					$this->session->set_flashdata('flash_message', 'Error occured while processing your request.');
+					$this->common_lib->set_flash_message('Error occured while processing your request.');
 					$this->session->set_flashdata('flash_message_css', 'alert-danger');
 					redirect($this->router->directory.$this->router->class.'/profile_pic');
 				}

@@ -23,8 +23,8 @@ class Timesheet extends CI_Controller {
         );
         $this->data['app_js'] = $this->common_lib->add_javascript($javascript_files);
 		        
-        $this->data['alert_message'] = NULL;
-        $this->data['alert_message_css'] = NULL;
+        
+        
 		
 		//Check if any user logged in else redirect to login
         $is_logged_in = $this->common_lib->is_logged_in();
@@ -97,8 +97,8 @@ class Timesheet extends CI_Controller {
         $this->data['project_arr'] = $this->timesheet_model->get_project_dropdown();		
         $this->data['user_arr'] = $this->timesheet_model->get_user_dropdown();		
 				
-        $this->data['alert_message'] = $this->session->flashdata('flash_message');
-        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
+        
+        
         if($this->input->get_post('form_action') == 'search'){
             //print_r($_REQUEST); die();
             // Display using CI Pagination: Total filtered rows - check without limit query. Refer to model method definition		

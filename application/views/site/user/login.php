@@ -6,7 +6,7 @@
 			<?php echo isset($alert_message) ? $alert_message : ''; ?>
 		
 			<div class="form-group">
-				<label for="user_email" class="required">Email/Username</label>
+				<label for="user_email" class="required">Email / Username</label>
 				<?php echo form_input(array('name' => 'user_email', 'value' => set_value('user_email'),'id' => 'name','class' => 'form-control','placeholder' => '','maxlength' => '100','autofocus' => true,));?>
 				<?php echo form_error('user_email'); ?>
 			</div>

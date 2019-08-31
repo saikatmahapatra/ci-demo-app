@@ -37,8 +37,8 @@ class Order extends CI_Controller {
         );
         $this->data['app_js'] = $this->common_lib->add_javascript($javascript_files);
         
-        $this->data['alert_message'] = NULL;
-        $this->data['alert_message_css'] = NULL;
+        
+        
         $this->id = $this->uri->segment(4);
 
         $this->load->library('cart');        
@@ -68,8 +68,8 @@ class Order extends CI_Controller {
     function index() {
 		$this->breadcrumbs->push('View','/');				
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
-        $this->data['alert_message'] = $this->session->flashdata('flash_message');
-        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
+        
+        
 		$this->data['page_title'] = 'Online Orders';
         $this->data['maincontent'] = $this->load->view('admin/'.$this->router->class.'/index', $this->data, true);
         $this->load->view('admin/_layouts/layout_default', $this->data);
@@ -132,8 +132,8 @@ class Order extends CI_Controller {
     }
 	
 	function edit() {
-        $this->data['alert_message'] = $this->session->flashdata('flash_message');
-        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
+        
+        
 		
 		$this->breadcrumbs->push('Edit', '/');		
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
@@ -166,7 +166,7 @@ class Order extends CI_Controller {
 					//print_r($postdata);die();										
 					$res = $this->order_model->update_batch($postdata, 'id', NULL);
 					if ($res) {
-						$this->session->set_flashdata('flash_message', 'Data updated successfully.');
+						$this->common_lib->set_flash_message('Data updated successfully.');
 						$this->session->set_flashdata('flash_message_css', 'alert-success');
 						redirect($this->router->directory.$this->router->class.'/edit/'.$this->id);
 					}

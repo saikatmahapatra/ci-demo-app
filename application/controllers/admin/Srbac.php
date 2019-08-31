@@ -39,8 +39,8 @@ class Srbac extends CI_Controller {
 
         
         $this->load->model('cms_model');
-        $this->data['alert_message'] = NULL;
-        $this->data['alert_message_css'] = NULL;
+        
+        
         $this->id = $this->uri->segment(3);
         $this->data['arr_content_type'] = $this->cms_model->get_content_type();
 
@@ -75,8 +75,8 @@ class Srbac extends CI_Controller {
 		$this->breadcrumbs->push('View','/');				
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
 		
-        $this->data['alert_message'] = $this->session->flashdata('flash_message');
-        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
+        
+        
 		
 		$this->data['page_title'] = 'SRBAC';
         $this->data['maincontent'] = $this->load->view('admin/'.$this->router->class.'/index', $this->data, true);
@@ -90,8 +90,8 @@ class Srbac extends CI_Controller {
 		$this->breadcrumbs->push('View','/');				
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
 		
-        $this->data['alert_message'] = $this->session->flashdata('flash_message');
-        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
+        
+        
 
         // Display using CI Pagination: Total filtered rows - check without limit query. Refer to model method definition		
 		$result_array = $this->cms_model->get_rows(NULL, NULL, NULL, FALSE, FALSE);
@@ -180,8 +180,8 @@ class Srbac extends CI_Controller {
         //$this->data['page_title'] = "Add Page Content";
 		$this->breadcrumbs->push('Add','/');				
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
-        $this->data['alert_message'] = $this->session->flashdata('flash_message');
-        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
+        
+        
         if ($this->input->post('form_action') == 'insert') {
             if ($this->validate_form_data('add') == true) {
 
@@ -199,7 +199,7 @@ class Srbac extends CI_Controller {
                 );
                 $insert_id = $this->cms_model->insert($postdata);
                 if ($insert_id) {
-                    $this->session->set_flashdata('flash_message', 'Data Added Successfully.');
+                    $this->common_lib->set_flash_message('Data Added Successfully.');
                     $this->session->set_flashdata('flash_message_css', 'alert-success');
                     redirect($this->router->directory.$this->router->class.'/add');
                 }
@@ -216,8 +216,8 @@ class Srbac extends CI_Controller {
 		//$this->data['page_title'] = "Edit Page Content";
 		$this->breadcrumbs->push('Edit','/');				
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
-        $this->data['alert_message'] = $this->session->flashdata('flash_message');
-        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
+        
+        
         if ($this->input->post('form_action') == 'update') {
             if ($this->validate_form_data('edit') == true) {
                 $postdata = array(
@@ -236,7 +236,7 @@ class Srbac extends CI_Controller {
                 $where_array = array('id' => $this->input->post('id'));
                 $res = $this->cms_model->update($postdata, $where_array);
                 if ($res) {
-                    $this->session->set_flashdata('flash_message', 'Data Updated Successfully.');
+                    $this->common_lib->set_flash_message('Data Updated Successfully.');
                     $this->session->set_flashdata('flash_message_css', 'alert-success');
                     redirect(current_url());
                 }
@@ -256,7 +256,7 @@ class Srbac extends CI_Controller {
         $where_array = array('id' => $this->id);
         $res = $this->cms_model->delete($where_array);
         if ($res) {
-            $this->session->set_flashdata('flash_message', 'Data Deleted Successfully.');
+            $this->common_lib->set_flash_message('Data Deleted Successfully.');
             $this->session->set_flashdata('flash_message_css', 'alert-success');
             redirect($this->router->directory.$this->router->class);
         }

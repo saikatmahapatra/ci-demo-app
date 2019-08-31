@@ -40,8 +40,8 @@ class Category extends CI_Controller {
         
         $this->load->model('category_model');
         $this->id = $this->uri->segment(4);
-        $this->data['alert_message'] = NULL;
-        $this->data['alert_message_css'] = NULL;
+        
+        
         $this->data['category_dropdown'] = $this->category_model->get_category_dropdown();
 
         //View Page Config
@@ -67,9 +67,6 @@ class Category extends CI_Controller {
     function index() {
 		$this->breadcrumbs->push('View','/');				
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
-		
-        $this->data['alert_message'] = $this->session->flashdata('flash_message');
-        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
 		$this->data['page_title'] = 'Product Category';
         $this->data['maincontent'] = $this->load->view('admin/'.$this->router->class.'/index', $this->data, true);
         $this->load->view('admin/_layouts/layout_default', $this->data);
@@ -155,8 +152,8 @@ class Category extends CI_Controller {
 		$this->breadcrumbs->push('Add','/');				
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
 		
-        $this->data['alert_message'] = $this->session->flashdata('flash_message');
-        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
+        
+        
         if ($this->input->post('form_action') == 'insert') {
             if ($this->validate_category_form_data('add') == true) {
                 $parent_cat_id = ($this->input->post('category_parent') == '') ? NULL : $this->input->post('category_parent');
@@ -166,7 +163,7 @@ class Category extends CI_Controller {
                 );
                 $insert_id = $this->category_model->insert($postdata);
                 if ($insert_id) {
-                    $this->session->set_flashdata('flash_message', 'Data added successfully.');
+                    $this->common_lib->set_flash_message('Data added successfully.');
                     $this->session->set_flashdata('flash_message_css', 'alert-success');
                     redirect(current_url());
                 }
@@ -181,8 +178,8 @@ class Category extends CI_Controller {
 		$this->breadcrumbs->push('Edit','/');				
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
 		
-        $this->data['alert_message'] = $this->session->flashdata('flash_message');
-        $this->data['alert_message_css'] = $this->session->flashdata('flash_message_css');
+        
+        
         if ($this->input->post('form_action') == 'update') {
             if ($this->validate_category_form_data('edit') == true) {
                 $parent_cat_id = ($this->input->post('category_parent') == '') ? NULL : $this->input->post('category_parent');
@@ -195,7 +192,7 @@ class Category extends CI_Controller {
                 $res = $this->category_model->update($postdata, $where_array);
 
                 if ($res) {
-                    $this->session->set_flashdata('flash_message', 'Data updated successfully.');
+                    $this->common_lib->set_flash_message('Data updated successfully.');
                     $this->session->set_flashdata('flash_message_css', 'alert-success');
                     redirect(current_url());
                 }
@@ -212,7 +209,7 @@ class Category extends CI_Controller {
         $where_array = array('id' => $this->id);
         $res = $this->category_model->delete($where_array);
         if ($res) {
-            $this->session->set_flashdata('flash_message', 'Data deleted successfully.');
+            $this->common_lib->set_flash_message('Data deleted successfully.');
             $this->session->set_flashdata('flash_message_css', 'alert-success');
             redirect($this->router->directory.$this->router->class.'');
         }
