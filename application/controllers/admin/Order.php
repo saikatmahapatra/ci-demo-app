@@ -166,8 +166,7 @@ class Order extends CI_Controller {
 					//print_r($postdata);die();										
 					$res = $this->order_model->update_batch($postdata, 'id', NULL);
 					if ($res) {
-						$this->common_lib->set_flash_message('Data updated successfully.');
-						$this->session->set_flashdata('flash_message_css', 'alert-success');
+						$this->common_lib->set_flash_message('Data updated successfully.', 'alert-success');
 						redirect($this->router->directory.$this->router->class.'/edit/'.$this->id);
 					}
 				}

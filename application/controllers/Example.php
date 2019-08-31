@@ -74,8 +74,7 @@ class Example extends CI_Controller {
         if ($this->input->post('form_action') == 'add') {            
             if ($this->validate_form() == TRUE) {
                 print_r($this->input->post());
-                $this->common_lib->set_flash_message('<strong>Ok! </strong>Validated and Ready to Insert Data.');
-                $this->session->set_flashdata('flash_message_css', 'alert-info');
+                $this->common_lib->set_flash_message('<strong>Ok! </strong>Validated and Ready to Insert Data.', 'alert-info');
                 redirect(current_url());
             }
         }
@@ -204,8 +203,7 @@ class Example extends CI_Controller {
         //Simulate Form Submit
         if ($this->input->post('form_action') == 'add') {
             if ($this->validate_form_calander_data('add') == true) {
-                $this->common_lib->set_flash_message('Validation Successful.');
-                $this->session->set_flashdata('flash_message_css', 'alert-success');
+                $this->common_lib->set_flash_message('Validation Successful.', 'alert-success');
                 redirect(current_url());
             }
         }
@@ -269,12 +267,10 @@ class Example extends CI_Controller {
                 $result = $this->email->send();
                 //echo $this->email->print_debugger(); die($html);
                 if ($result == true) {
-                    $this->common_lib->set_flash_message('Your message has been sent successfully.');
-                    $this->session->set_flashdata('flash_message_css', 'alert-success');
+                    $this->common_lib->set_flash_message('Your message has been sent successfully.', 'alert-success');
                     redirect(current_url());
                 } else {
-                    $this->common_lib->set_flash_message('Error occured while sending your message.');
-                    $this->session->set_flashdata('flash_message_css', 'alert-danger');
+                    $this->common_lib->set_flash_message('Error occured while sending your message.', 'alert-danger');
                     redirect(current_url());
                 }
             } else {

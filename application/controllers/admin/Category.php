@@ -163,8 +163,7 @@ class Category extends CI_Controller {
                 );
                 $insert_id = $this->category_model->insert($postdata);
                 if ($insert_id) {
-                    $this->common_lib->set_flash_message('Data added successfully.');
-                    $this->session->set_flashdata('flash_message_css', 'alert-success');
+                    $this->common_lib->set_flash_message('Data added successfully.', 'alert-success');
                     redirect(current_url());
                 }
             }
@@ -192,8 +191,7 @@ class Category extends CI_Controller {
                 $res = $this->category_model->update($postdata, $where_array);
 
                 if ($res) {
-                    $this->common_lib->set_flash_message('Data updated successfully.');
-                    $this->session->set_flashdata('flash_message_css', 'alert-success');
+                    $this->common_lib->set_flash_message('Data updated successfully.', 'alert-success');
                     redirect(current_url());
                 }
             }
@@ -209,8 +207,7 @@ class Category extends CI_Controller {
         $where_array = array('id' => $this->id);
         $res = $this->category_model->delete($where_array);
         if ($res) {
-            $this->common_lib->set_flash_message('Data deleted successfully.');
-            $this->session->set_flashdata('flash_message_css', 'alert-success');
+            $this->common_lib->set_flash_message('Data deleted successfully.', 'alert-success');
             redirect($this->router->directory.$this->router->class.'');
         }
     }

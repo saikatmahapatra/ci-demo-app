@@ -119,19 +119,16 @@ class Document extends CI_Controller {
                     }
                     // Now update table
                     $update_upload = $this->upload_model->update($postdata, array('id' => $uploads[0]['id']), 'uploads');
-                    $this->common_lib->set_flash_message('File has been uploaded successfully.');
-                    $this->session->set_flashdata('flash_message_css', 'alert-success');
+                    $this->common_lib->set_flash_message('File has been uploaded successfully.', 'alert-success');
                     redirect(current_url());
                 } else {
                     $upload_insert_id = $this->upload_model->insert($postdata, 'uploads');
-                    $this->common_lib->set_flash_message('File has been uploaded successfully.');
-                    $this->session->set_flashdata('flash_message_css', 'alert-success');
+                    $this->common_lib->set_flash_message('File has been uploaded successfully.', 'alert-success');
                     redirect(current_url());
                 }
             } else if (sizeof($upload_result['upload_error']) > 0) {
                 $error_message = $upload_result['upload_error'];
-                $this->common_lib->set_flash_message($error_message);
-                $this->session->set_flashdata('flash_message_css', 'alert-danger');
+                $this->common_lib->set_flash_message($error_message, 'alert-danger');
                 redirect(current_url());
             }
         }

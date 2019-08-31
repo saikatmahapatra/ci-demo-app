@@ -185,8 +185,7 @@ class Product extends CI_Controller {
                 );
                 $insert_id = $this->product_model->insert($postdata);
                 if ($insert_id) {
-                    $this->common_lib->set_flash_message('Data added successfully.');
-                    $this->session->set_flashdata('flash_message_css', 'alert-success');
+                    $this->common_lib->set_flash_message('Data added successfully.', 'alert-success');
                     redirect($this->router->directory.$this->router->class.'/add');
                 }
             }
@@ -224,8 +223,7 @@ class Product extends CI_Controller {
                 $res = $this->product_model->update($postdata, $where_array);
 
                 if ($res) {
-                    $this->common_lib->set_flash_message('Data updated successfully.');
-                    $this->session->set_flashdata('flash_message_css', 'alert-success');
+                    $this->common_lib->set_flash_message('Data updated successfully.', 'alert-success');
                     redirect($this->router->directory.$this->router->class.'');
                 }
             }
@@ -258,8 +256,7 @@ class Product extends CI_Controller {
         if ($res) {            
             $upload_related_to = 'product';
             $this->delete_uploads($upload_related_to,$this->id);
-            $this->common_lib->set_flash_message('Data deleted successfully.');
-            $this->session->set_flashdata('flash_message_css', 'alert-success');
+            $this->common_lib->set_flash_message('Data deleted successfully.', 'alert-success');
             redirect($this->router->directory.$this->router->class.'');
         }
     }
@@ -330,19 +327,16 @@ class Product extends CI_Controller {
                     }
                     // Now update table
                     $update_upload = $this->product_model->update($postdata, array('id' => $uploads[0]['id']), 'uploads');
-                    $this->common_lib->set_flash_message('File uploaded successfully.');
-                    $this->session->set_flashdata('flash_message_css', 'alert-success');
+                    $this->common_lib->set_flash_message('File uploaded successfully.', 'alert-success');
                     redirect(current_url());
                 } else {
                     $upload_insert_id = $this->product_model->insert($postdata, 'uploads');
-                    $this->common_lib->set_flash_message('File uploaded successfully.');
-                    $this->session->set_flashdata('flash_message_css', 'alert-success');
+                    $this->common_lib->set_flash_message('File uploaded successfully.', 'alert-success');
                     redirect(current_url());
                 }
             } else if (sizeof($upload_result['upload_error']) > 0) {
                 $error_message = $upload_result['upload_error'];
-                $this->common_lib->set_flash_message($error_message);
-                $this->session->set_flashdata('flash_message_css', 'alert-danger');
+                $this->common_lib->set_flash_message($error_message, 'alert-danger');
                 redirect(current_url());
             }
         }

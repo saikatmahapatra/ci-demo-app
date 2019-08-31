@@ -171,8 +171,7 @@ class Shop extends CI_Controller {
                 echo 'add_success'; // For Ajax response text
                 die();
             }
-            $this->common_lib->set_flash_message('Item has been added to your cart.');
-            $this->session->set_flashdata('flash_message_css', 'alert-success');
+            $this->common_lib->set_flash_message('Item has been added to your cart.', 'alert-success');
             redirect($this->router->directory.$this->router->class.'/my_cart');
         }
     }
@@ -186,8 +185,7 @@ class Shop extends CI_Controller {
 
             $result = $this->cart->update($data);
         }
-        $this->common_lib->set_flash_message('You cart has been updated successfully.');
-        $this->session->set_flashdata('flash_message_css', 'alert-success');
+        $this->common_lib->set_flash_message('You cart has been updated successfully.', 'alert-success');
         redirect($this->router->directory.$this->router->class.'/my_cart');
     }
 
@@ -198,15 +196,13 @@ class Shop extends CI_Controller {
             'qty' => 0
         );
         $result = $this->cart->update($data);
-        $this->common_lib->set_flash_message('Item has been removed from your cart');
-        $this->session->set_flashdata('flash_message_css', 'alert-success');
+        $this->common_lib->set_flash_message('Item has been removed from your cart', 'alert-success');
         redirect($this->router->directory.$this->router->class.'/my_cart');
     }
 
     function remove_all() {
         $result = $this->cart->destroy();
-        $this->common_lib->set_flash_message('Item has been removed from your cart');
-        $this->session->set_flashdata('flash_message_css', 'alert-success');
+        $this->common_lib->set_flash_message('Item has been removed from your cart', 'alert-success');
         redirect($this->router->directory.$this->router->class.'/my_cart');
     }
 	
@@ -219,8 +215,7 @@ class Shop extends CI_Controller {
         }
         
         if($this->cart->total_items() <= 0){
-            $this->common_lib->set_flash_message('You don\'t have any items in your cart. Please add atleast one to proceed.');
-            $this->session->set_flashdata('flash_message_css', 'alert-danger');
+            $this->common_lib->set_flash_message('You don\'t have any items in your cart. Please add atleast one to proceed.', 'alert-danger');
         }
 
 		
@@ -315,8 +310,7 @@ class Shop extends CI_Controller {
 			//print_r($order_details_post_data); die();
 			$this->order_model->insert_batch($order_details_post_data, 'order_details');
 			
-			$this->common_lib->set_flash_message('Thank you! We have received your order. Your Order Number '.$order_number.' Payment Done (Test)');
-			$this->session->set_flashdata('flash_message_css', 'alert-success');
+			$this->common_lib->set_flash_message('Thank you! We have received your order. Your Order Number '.$order_number.' Payment Done (Test)', 'alert-success');
             redirect($this->router->directory.$this->router->class.'/transaction_response/'.$order_number);
 		}
     }
