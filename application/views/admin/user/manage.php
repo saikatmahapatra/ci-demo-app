@@ -3,7 +3,7 @@
 
 
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-lg-12">
         <?php echo isset($alert_message) ? $alert_message : ''; ?>
 		
 		<div class="ci-link-group">

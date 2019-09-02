@@ -1,7 +1,7 @@
 <?php //echo isset($breadcrumbs) ? $breadcrumbs : ''; ?>
 <h1 class="page-title"><?php echo isset($page_title) ? $page_title : 'Page Heading'; ?></h1>
 <div class="row">
-    <div class="col-md-8 mb-3">
+    <div class="col-lg-8 mb-3">
         <div class="card news-card">
             <div class="card-header h6">
             <i class="fa fa-fw fa-newspaper-o fa-lg" aria-hidden="true"></i> Recent Posts
@@ -32,7 +32,7 @@
         </div><!--/.card-->
     </div>
     
-    <div class="col-md-4 mb-3">
+    <div class="col-lg-4 mb-3">
         <div class="card card-stat">
             <div class="card-header h6">
             <i class="fa fa-fw fa-line-chart fa-lg" aria-hidden="true"></i> Statistics

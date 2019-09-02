@@ -5,7 +5,7 @@ $row = $rows[0];
 <h1 class="page-title"><?php echo isset($page_title) ? $page_title : 'Page Heading'; ?></h1>
 
 <div class="row">
-	<div class="col-md-12">
+	<div class="col-lg-12">
 		<?php echo isset($alert_message) ? $alert_message : ''; ?>
 		
 		<nav>
@@ -57,19 +57,19 @@ $row = $rows[0];
 				</div>
 				
 				<div class="form-row">			
-					<div class="form-group col-md-4">
+					<div class="form-group col-lg-4">
 						<label for="category_id" class="required">Category</label>
 						<?php echo form_dropdown('category_id', $category_dropdown, (isset($_POST['category_id']) ? set_value('category_id') : $row['category_id']), array('class' =>'form-control',));?>
 						<?php echo form_error('category_id'); ?>
 					</div>
 				
-					<div class="form-group col-md-4">
+					<div class="form-group col-lg-4">
 						<label for="product_mrp" class="required">MRP</label>
 						<?php echo form_input(array('name' => 'product_mrp','value' => (isset($_POST['product_mrp']) ? set_value('product_mrp') : $row['product_mrp']),'id' => 'product_mrp','class' => 'form-control','minlength' => '1','maxlength' => '10',));?>
 						<?php echo form_error('product_mrp'); ?>
 					</div>
 				
-					<div class="form-group col-md-4">
+					<div class="form-group col-lg-4">
 						<label for="product_price" class="required">Price</label>
 						<?php echo form_input(array('name' => 'product_price', 'value' => (isset($_POST['product_price']) ? set_value('product_price') : $row['product_price']),'id' => 'product_price','class' => 'form-control','minlength' => '1','maxlength' => '10',));?>
 						<?php echo form_error('product_price'); ?>
@@ -83,37 +83,37 @@ $row = $rows[0];
 				</div>
 				
 				<div class="form-row">			
-					<div class="form-group col-md-2">
+					<div class="form-group col-lg-2">
 						<label for="product_size" class="">Size</label>
 						<?php echo form_input(array('name' => 'product_size','value' => (isset($_POST['product_size']) ? set_value('product_size') : $row['product_size']),'id' => 'product_size','class' => 'form-control','minlength' => '1','maxlength' => '5',));?>
 						<?php echo form_error('product_size'); ?>
 					</div>
 				
-					<div class="form-group col-md-2">
+					<div class="form-group col-lg-2">
 						<label for="product_color" class="">Color</label>
 						<?php echo form_input(array('name' => 'product_color','value' => (isset($_POST['product_color']) ? set_value('product_color') : $row['product_color']),'id' => 'product_color','class' => 'form-control'));?>
 						<?php echo form_error('product_color'); ?>
 					</div>
 				
-					<div class="form-group col-md-2">
+					<div class="form-group col-lg-2">
 						<label for="product_weight" class="">Weight</label>
 						<?php echo form_input(array('name' => 'product_weight','value' => (isset($_POST['product_weight']) ? set_value('product_weight') : $row['product_weight']),'id' => 'product_weight','class' => 'form-control'));?>
 						<?php echo form_error('product_weight'); ?>
 					</div>
 				
-					<div class="form-group col-md-2">
+					<div class="form-group col-lg-2">
 						<label for="product_height" class="">Height</label>
 						<?php echo form_input(array('name' => 'product_height','value' => (isset($_POST['product_height']) ? set_value('product_height') : $row['product_height']),'id' => 'product_height','class' => 'form-control'));?>
 						<?php echo form_error('product_height'); ?>
 					</div>
 				
-					<div class="form-group col-md-2">
+					<div class="form-group col-lg-2">
 						<label for="product_width" class="">Width</label>
 						<?php echo form_input(array('name' => 'product_width','value' => (isset($_POST['product_width']) ? set_value('product_width') : $row['product_width']),'id' => 'product_width','class' => 'form-control'));?>
 						<?php echo form_error('product_width'); ?>
 					</div>
 				
-					<div class="form-group col-md-2">
+					<div class="form-group col-lg-2">
 						<label for="product_length" class="">Length</label>
 						<?php echo form_input(array('name' => 'product_length','value' => (isset($_POST['product_length']) ? set_value('product_length') : $row['product_length']),'id' => 'product_length','class' => 'form-control'));?>
 						<?php echo form_error('product_length'); ?>
@@ -121,7 +121,7 @@ $row = $rows[0];
 				</div>
 				
 				<div class="form-row">
-					<div class="form-group col-md-2">									
+					<div class="form-group col-lg-2">									
 					<label for="product_status" class="">Status</label>
 					<?php echo form_dropdown('product_status', array('Y' => 'Shown', 'N' => 'Hidden'), (isset($_POST['product_status']) ? set_value('product_status') : $row['product_status']), array('class' => 'form-control',));?>
 					<?php echo form_error('product_status'); ?> 
@@ -135,7 +135,7 @@ $row = $rows[0];
 			
 			<div class="tab-pane fade <?php echo isset($show_nav_upload)? $show_nav_upload :''; ?>" id="nav-upload" role="tabpanel" aria-labelledby="nav-upload-tab">
 				<div class="row">
-					<div class="col-md-5">
+					<div class="col-lg-5">
 						<?php echo form_open_multipart(current_url(), array('method' => 'post', 'class'=>'ci-form','name' => 'myform','id' => 'myform','role' => 'form'));?>
 						<?php echo form_hidden('form_action', 'file_upload'); ?>
 						<?php echo form_hidden('id', $row['id']); ?>
@@ -165,7 +165,7 @@ $row = $rows[0];
 						<?php echo form_close(); ?>
 					</div>
 					
-					<div class="col-md-7">
+					<div class="col-lg-7">
 						<h6 class="">Uploaded Files</h6>
 						<?php
                         //print_r($all_uploads);
@@ -174,10 +174,10 @@ $row = $rows[0];
                         if (isset($all_uploads) && sizeof($all_uploads) > 0) {
                             foreach ($all_uploads as $key => $upload) {
                                 echo '<div class="file-container row" id="upload_grid_' . $upload['id'] . '">';
-                                echo '<div class="col-md-4">';
+                                echo '<div class="col-lg-4">';
                                 echo strtoupper($upload['upload_file_type_name']);
                                 echo '</div>';
-                                echo '<div class="col-md-6">';
+                                echo '<div class="col-lg-6">';
                                 //echo $upload['upload_file_name'];
                                 $file_path = 'assets/uploads/'.$upload_related_to.'/' . $row['id'] . '/' . $upload['upload_file_name'];
                                 if (file_exists(FCPATH . $file_path)) {
@@ -189,13 +189,13 @@ $row = $rows[0];
                                 }
 
                                 echo '</div>';
-                                echo '<div class="col-md-2">';
+                                echo '<div class="col-lg-2">';
                                 echo '<a href="#" class="btn btn-sm btn-danger btn-delete-file" data-confirmation="1" data-confirmation-message="Are you sure, you want to delete this?" data-upload_id="' . $upload['id'] . '" title="Delete ' . $upload['upload_file_type_name'] . '" data-path="' . $file_path . '">Delete</a>';
                                 echo '</div>';
                                 echo '</div>';                                
                             }
                         } else {
-                            echo '<div class="col-md-12 text-center">No uploads found</div>';
+                            echo '<div class="col-lg-12 text-center">No uploads found</div>';
                         }
                         ?>
 					</div>

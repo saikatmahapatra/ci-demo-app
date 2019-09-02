@@ -2,12 +2,12 @@
 <h1 class="page-title"><?php echo isset($page_title) ? $page_title : 'Page Heading'; ?></h1>
 
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-lg-6">
         <?php echo isset($alert_message) ? $alert_message : ''; ?>
         <?php echo form_open(current_url(), array('method' => 'post', 'class' => 'ci-form','name' => 'form','id' => 'form',));?>
         <?php echo form_hidden('form_action', 'create_account'); ?>        
         <div class="form-row">
-			<div class="form-group col-md-6">
+			<div class="form-group col-lg-6">
 				<label for="user_firstname" class="required">First Name</label>
 				<?php
 				echo form_input(array(
@@ -22,7 +22,7 @@
 				<?php echo form_error('user_firstname'); ?>
 			</div>
 			
-			<div class="form-group col-md-6">
+			<div class="form-group col-lg-6">
 				<label for="user_lastname" class="required">Last Name</label>
 				<?php
 				echo form_input(array(
@@ -39,7 +39,7 @@
 		</div>
 		
 		<div class="form-row">
-			<div class="form-group col-md-6">
+			<div class="form-group col-lg-6">
 				<label for="user_email" class="required">Email (Work)</label>
 				<?php
 				echo form_input(array(
@@ -54,7 +54,7 @@
 				<?php echo form_error('user_email'); ?>
 			</div>
 			
-			<div class="form-group col-md-6">
+			<div class="form-group col-lg-6">
 				<label for="user_email_secondary" class="">Email (Personal) </label>
 				<?php
 				echo form_input(array(
@@ -71,7 +71,7 @@
 		</div>
 		
 		<div class="form-row">			
-			<div class="form-group col-md-6">
+			<div class="form-group col-lg-6">
 				<label for="user_phone1" class="required">Mobile (Personal/Primary)</label>
 				<?php
 				echo form_input(array(
@@ -86,7 +86,7 @@
 				<?php echo form_error('user_phone1'); ?>
 			</div>
 			
-			<div class="form-group col-md-6">
+			<div class="form-group col-lg-6">
 					<label for="user_phone2" class="">Mobile (Work) </label>
 					<?php
 					echo form_input(array(
@@ -102,7 +102,7 @@
             </div>
 		</div>
 		<div class="form-row">
-			<div class="form-group col-md-6">
+			<div class="form-group col-lg-6">
 			  <label for="user_designation" class="">Designation </label>
 				<?php
 				echo form_dropdown('user_designation', $arr_designations, set_value('user_designation'), array(
@@ -112,7 +112,7 @@
 				<?php echo form_error('user_designation'); ?>
 			</div>	
 
-			<div class="form-group col-md-6">
+			<div class="form-group col-lg-6">
 			  <label for="user_department" class="">Department </label>
 				<?php
 				echo form_dropdown('user_department', $arr_departments, set_value('user_department'), array(
@@ -124,7 +124,7 @@
 		</div>
 		
 		<div class="form-row">
-				<div class="form-group col-md-6">
+				<div class="form-group col-lg-6">
 					<label for="user_dob" class="required">Date of Birth</label>
 					<?php
 					echo form_input(array(
@@ -140,7 +140,7 @@
 					?>
 					<?php echo form_error('user_dob'); ?>
 				</div>
-				<div class="form-group col-md-6">
+				<div class="form-group col-lg-6">
 					<label for="gender" class="required">Gender</label>
 					<div class="">
 						<div class="custom-control custom-radio custom-control-inline">
@@ -165,7 +165,7 @@
 			
 			<?php /* ?>
 			<div class="form-row">				
-				<div class="form-group col-md-6">
+				<div class="form-group col-lg-6">
 				  <label for="user_role" class="required">Access Group</label>
 					<?php
 					echo form_dropdown('user_role', $arr_roles, set_value('user_role'), array(

@@ -2,7 +2,7 @@
 <h1 class="page-title"><?php echo isset($page_title) ? $page_title : 'Page Heading'; ?></h1>
 
 <div class="row">
-	<div class="col-md-12">
+	<div class="col-lg-12">
 		<?php echo isset($alert_message) ? $alert_message : ''; ?>
 		<?php echo form_open(current_url(), array('method' => 'post', 'class'=>'ci-form','name' => 'myform','id' => 'myform','role' =>'form')); ?>
 		<?php echo form_hidden('form_action', 'insert'); ?>
@@ -13,17 +13,17 @@
 		</div>
 		
 		<div class="form-row">
-			<div class="form-group col-md-4">									
+			<div class="form-group col-lg-4">									
 				<label for="category_id" class="required">Select Product Category</label>
 				<?php echo form_dropdown('category_id', $category_dropdown, set_value('category_id'), array('class' =>'form-control',));?>
 				<?php echo form_error('category_id'); ?>
 			</div>
-			<div class="form-group col-md-4">									
+			<div class="form-group col-lg-4">									
 				<label for="product_mrp" class="required">MRP</label>
 				<?php echo form_input(array('name' => 'product_mrp','value' => set_value('product_mrp'),'id' => 'product_mrp','class' => 'form-control numeric-decimal','minlength' => '1','maxlength' => '10',));?>
 				<?php echo form_error('product_mrp'); ?>
 			</div>
-			<div class="form-group col-md-4">									
+			<div class="form-group col-lg-4">									
 				<label for="product_price" class="required">Price</label>
 				<?php echo form_input(array('name' => 'product_price', 'value' => set_value('product_price'),'id' => 'product_price','class' => 'form-control numeric-decimal','minlength' => '1','maxlength' => '10',));?>
 				<?php echo form_error('product_price'); ?>
@@ -38,37 +38,37 @@
 		
 		
 		<div class="form-row">			
-			<div class="form-group col-md-2">									
+			<div class="form-group col-lg-2">									
 				<label for="product_size" class="">Size</label>
 				<?php echo form_input(array('name' => 'product_size','value' => set_value('product_size'),'id' => 'product_size','class' => 'form-control','minlength' => '1','maxlength' => '5',));?>
 				<?php echo form_error('product_size'); ?>
 			</div>
 			
-			<div class="form-group col-md-2">									
+			<div class="form-group col-lg-2">									
 				<label for="product_color" class="">Color</label>
 				<?php echo form_input(array('name' => 'product_color','value' => set_value('product_color'),'id' => 'product_color','class' => 'form-control'));?>
 				<?php echo form_error('product_color'); ?>
 			</div>
 			
-			<div class="form-group col-md-2">
+			<div class="form-group col-lg-2">
 				<label for="product_weight" class="">Weight</label>
 				<?php echo form_input(array('name' => 'product_weight','value' => set_value('product_weight'),'id' => 'product_weight','class' => 'form-control'));?>
 				<?php echo form_error('product_weight'); ?>
 			</div>
 		
-			<div class="form-group col-md-2">
+			<div class="form-group col-lg-2">
 				<label for="product_height" class="">Height</label>
 				<?php echo form_input(array('name' => 'product_height','value' => set_value('product_height'),'id' => 'product_height','class' => 'form-control'));?>
 				<?php echo form_error('product_height'); ?>
 			</div>			
 		
-			<div class="form-group col-md-2">
+			<div class="form-group col-lg-2">
 				<label for="product_width" class="">Width</label>
 				<?php echo form_input(array('name' => 'product_width','value' => set_value('product_width'),'id' => 'product_width','class' => 'form-control'));?>
 				<?php echo form_error('product_width'); ?>
 			</div>
 		
-			<div class="form-group col-md-2">
+			<div class="form-group col-lg-2">
 				<label for="product_length" class="">Length</label>
 				<?php echo form_input(array('name' => 'product_length','value' => set_value('product_length'),'id' => 'product_length','class' => 'form-control'));?>
 				<?php echo form_error('product_length'); ?>

@@ -100,7 +100,7 @@
 							<a class="btn btn-sm btn-link" href="<?php echo base_url($this->router->directory.$this->router->class.'/edit_profile');?>"><i class="fa fa-fw fa-pencil" aria-hidden="true"></i> Edit Basic Information</a>
 						<?php } ?>
 						
-					</div><!--/.col-md-3-->
+					</div><!--/.col-lg-3-->
 					<div class="col-lg-9">
 						<nav>
 							<div class="nav nav-tabs ci-nav-tab small" id="nav-tab" role="tablist">
@@ -126,11 +126,11 @@
 						<div class="tab-content" id="nav-tabContent">
 							<div class="tab-pane fade show active" id="tab-1" role="tabpanel" aria-labelledby="nav-1">
 								<div class="row mt-3">
-									<div class="col-md-12">
+									<div class="col-lg-12">
 										
 										<dl class="row">
-											<dt class="col-md-2">Name</dt>
-											<dd class="col-md-4">
+											<dt class="col-lg-2">Name</dt>
+											<dd class="col-lg-4">
 												<?php
 												echo isset($row['user_title']) ? $row['user_title'] . '&nbsp;' : '';
 												echo isset($row['user_firstname']) ? $row['user_firstname'] . '&nbsp;' : '';
@@ -138,23 +138,23 @@
 												echo isset($row['user_lastname']) ? $row['user_lastname'] . '&nbsp;' : '';
 												?>
 											</dd>
-											<dt class="col-md-2">Customer ID</dt>
-											<dd class="col-md-4"><?php echo isset($row['user_emp_id']) ? $row['user_emp_id'] : '-'; ?></dd>
-											<dt class="col-md-2">Designation</dt>
-											<dd class="col-md-4"><?php echo isset($row['designation_name']) ? $row['designation_name'] : '-'; ?></dd>
+											<dt class="col-lg-2">Customer ID</dt>
+											<dd class="col-lg-4"><?php echo isset($row['user_emp_id']) ? $row['user_emp_id'] : '-'; ?></dd>
+											<dt class="col-lg-2">Designation</dt>
+											<dd class="col-lg-4"><?php echo isset($row['designation_name']) ? $row['designation_name'] : '-'; ?></dd>
 										
-											<dt class="col-md-2">Email (office)</dt>
-											<dd class="col-md-4"><a href="mailto:<?php echo isset($row['user_email']) ? $row['user_email'] : '-'; ?>"><?php echo isset($row['user_email']) ? $row['user_email'] : '-'; ?></a></dd>
-											<dt class="col-md-2">Mobile (office)</dt>
-											<dd class="col-md-4"><?php echo isset($row['user_phone2']) ? $row['user_phone2'] : '-'; ?></dd>
+											<dt class="col-lg-2">Email (office)</dt>
+											<dd class="col-lg-4"><a href="mailto:<?php echo isset($row['user_email']) ? $row['user_email'] : '-'; ?>"><?php echo isset($row['user_email']) ? $row['user_email'] : '-'; ?></a></dd>
+											<dt class="col-lg-2">Mobile (office)</dt>
+											<dd class="col-lg-4"><?php echo isset($row['user_phone2']) ? $row['user_phone2'] : '-'; ?></dd>
 										
-											<dt class="col-md-2">Email (personal)</dt>
-											<dd class="col-md-4"><a href="mailto:<?php echo isset($row['user_email_secondary']) ? $row['user_email_secondary'] : '-'; ?>"><?php echo isset($row['user_email_secondary']) ? $row['user_email_secondary'] : '-'; ?></a></dd>			
-											<dt class="col-md-2">Mobile (personal)</dt>
-											<dd class="col-md-4"><?php echo isset($row['user_phone1']) ? $row['user_phone1'] : '-'; ?></dd>						
+											<dt class="col-lg-2">Email (personal)</dt>
+											<dd class="col-lg-4"><a href="mailto:<?php echo isset($row['user_email_secondary']) ? $row['user_email_secondary'] : '-'; ?>"><?php echo isset($row['user_email_secondary']) ? $row['user_email_secondary'] : '-'; ?></a></dd>			
+											<dt class="col-lg-2">Mobile (personal)</dt>
+											<dd class="col-lg-4"><?php echo isset($row['user_phone1']) ? $row['user_phone1'] : '-'; ?></dd>						
 											
-											<dt class="col-md-2"><?php echo ($is_self_account == true) ? "Date of Birth" : "Birth Day";?></dt>
-											<dd class="col-md-4">
+											<dt class="col-lg-2"><?php echo ($is_self_account == true) ? "Date of Birth" : "Birth Day";?></dt>
+											<dd class="col-lg-4">
 											<?php if($is_self_account == true) {?>	
 											<?php echo isset($row['user_dob']) ? $this->common_lib->display_date($row['user_dob']) : '-'; ?>
 											<?php } else{?>
@@ -162,11 +162,11 @@
 											<?php } ?>
 											</dd>
 
-											<dt class="col-md-2">Gender</dt>
-											<dd class="col-md-4"><?php echo isset($row['user_gender']) ? (($row['user_gender'] == 'M') ? 'Male' : 'Female') : ''; ?></dd>
+											<dt class="col-lg-2">Gender</dt>
+											<dd class="col-lg-4"><?php echo isset($row['user_gender']) ? (($row['user_gender'] == 'M') ? 'Male' : 'Female') : ''; ?></dd>
 										
-											<dt class="col-md-2">Blood Group</dt>
-											<dd class="col-md-4"><?php echo isset($row['user_blood_group']) ? $row['user_blood_group'] : ''; ?></dd>								
+											<dt class="col-lg-2">Blood Group</dt>
+											<dd class="col-lg-4"><?php echo isset($row['user_blood_group']) ? $row['user_blood_group'] : ''; ?></dd>								
 										</dl><!--/dl.row-->
 									</div>
 								</div>
@@ -175,7 +175,7 @@
 							<?php if($display_address == true){  ?>
 							<div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="nav-2">
 								<div class="row mt-3">
-									<div class="col-md-12">
+									<div class="col-lg-12">
 										<?php if($is_self_account == true) { ?>
 										<a class="btn btn-outline-success btn-sm" href="<?php echo base_url($this->router->class.'/add_address');?>"><i class="fa fa-fw fa-plus" aria-hidden="true"></i> Add New</a>
 										<?php } ?>
@@ -214,7 +214,7 @@
 							<?php if($display_education == true){  ?>
 							<div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="nav-3">
 								<div class="row mt-3">
-									<div class="col-md-12">
+									<div class="col-lg-12">
 										<?php if($is_self_account == true) { ?>
 										<a class="btn btn-outline-success btn-sm" href="<?php echo base_url($this->router->class.'/add_education');?>"><i class="fa fa-fw fa-plus" aria-hidden="true"></i> Add New</a>
 										<?php } ?>
@@ -253,7 +253,7 @@
 							<?php if($display_others == true){  ?>
 								<div class="tab-pane fade" id="tab-6" role="tabpanel" aria-labelledby="nav-6">
 									<div class="row mt-3">
-										<div class="col-md-12">
+										<div class="col-lg-12">
 											<dl class="row">
 												<dt class="col-sm-3">Portal Account Status</dt>
 												<dd class="col-sm-3">
@@ -275,14 +275,14 @@
 							<?php if($display_uploaded_files == true){  ?>
 							<div class="tab-pane fade" id="tab-8" role="tabpanel" aria-labelledby="nav-8">
 								<div class="row mt-3">
-									<div class="col-md-12">
+									<div class="col-lg-12">
 										<?php
 											if (isset($all_uploads) && sizeof($all_uploads) > 0) {
 												foreach ($all_uploads as $key => $upload) {
 											?>
 											<div class="file-container row my-2" id="upload_grid_<?php echo $upload['id']; ?>">
-												<div class="col-md-6"><?php echo $arr_upload_file_type_name[$upload['upload_file_type_name']]; ?></div>
-												<div class="col-md-4">
+												<div class="col-lg-6"><?php echo $arr_upload_file_type_name[$upload['upload_file_type_name']]; ?></div>
+												<div class="col-lg-4">
 													<div class="small">
 														<div class="text-muted">
 															<?php echo 'Uploaded on '.$this->common_lib->display_date($upload['upload_datetime'], true); ?>
@@ -292,7 +292,7 @@
 														</div>							
 													</div>
 												</div>
-												<div class="col-md-2">
+												<div class="col-lg-2">
 													<?php
 														$file_path = 'assets/uploads/'.$upload_related_to.'/docs/' . $upload_object_user_id . '/' . $upload['upload_file_name'];
 														if (file_exists(FCPATH . $file_path)) {
@@ -310,7 +310,7 @@
 											<?php } //foreach ?>
 											<?php }else {?>
 											<div class="row">
-												<div class="col-md-12">No documents uploaded...</div>
+												<div class="col-lg-12">No documents uploaded...</div>
 											</div>
 											<?php }?>
 									</div>
@@ -319,7 +319,7 @@
 							<?php }  ?>
 
 						</div><!--/.tab-content-->
-					</div><!--/.col-md-9-->
+					</div><!--/.col-lg-9-->
 				</div><!--/.row-->
 			</div><!--./card-body-->
 			<div class="card-footer text-center text-muted small">

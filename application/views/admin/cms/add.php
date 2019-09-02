@@ -2,19 +2,19 @@
 <h1 class="page-title"><?php echo isset($page_title) ? $page_title : 'Page Heading'; ?></h1>
 
 <div class="row">
-	<div class="col-md-9">
+	<div class="col-lg-9">
 		<?php echo isset($alert_message) ? $alert_message : ''; ?>
 		<?php echo form_open(current_url(), array('method' => 'post', 'class'=>'ci-form','name' => 'myform','id' => 'myform','role' =>'form')); ?>
 		<?php echo form_hidden('form_action', 'insert'); ?>
 
 		
 		<div class="form-row">
-			<div class="form-group col-md-4">
+			<div class="form-group col-lg-4">
 				<label for="content_type" class="required">Content Type</label>
 				<?php echo form_dropdown('content_type', $arr_content_type, set_value('content_type'), array('class' => 'form-control',));?>
 				<?php echo form_error('content_type'); ?>
 			</div>
-			<div class="form-group col-md-8">
+			<div class="form-group col-lg-8">
 				<label for="content_title" class="required">Content Title</label>
 				<?php echo form_input(array('name' => 'content_title', 'value' => set_value('content_title'), 'id' => 'content_title', 'class' => 'form-control', 'placeholder' => ''));?>
 				<?php echo form_error('content_title'); ?>
@@ -28,13 +28,13 @@
 		</div>
 		<?php /*?>
 		<div class="form-row">
-			<div class="form-group col-md-4 d-none">									
+			<div class="form-group col-lg-4 d-none">									
 				<label for="content_display_from_date" class="">Display from Date</label>
 				<?php echo form_input(array('name' => 'content_display_from_date','value' => set_value('content_display_from_date'),'id' => 'content_display_from_date','class' => 'form-control cms-datepicker', 'placeholder' => 'dd-mm-yyyy','readonly'=>true));?>
 				<?php echo form_error('content_display_from_date'); ?>
 			</div>
 		
-			<div class="form-group col-md-4 d-none">									
+			<div class="form-group col-lg-4 d-none">									
 				<label for="content_display_to_date" class="">Display to Date</label>
 				<?php echo form_input(array('name' => 'content_display_to_date','value' => set_value('content_display_to_date'),'class' => 'form-control cms-datepicker','id' => 'content_display_to_date','placeholder' => 'dd-mm-yyyy','readonly'=>true));?>
 				<?php echo form_error('content_display_to_date'); ?>
@@ -44,19 +44,19 @@
 		<?php */ ?>
 		<?php /* ?>
 		<div class="form-row d-none">			
-			<div class="form-group col-md-4">									
+			<div class="form-group col-lg-4">									
 				<label for="content_meta_keywords" class="">Meta Keywords</label>
 				<?php echo form_input(array('name' => 'content_meta_keywords','value' => set_value('content_meta_keywords'),'id' => 'content_meta_keywords','class' => 'form-control', 'placeholder' => '')); ?>
 				<?php echo form_error('content_meta_keywords'); ?>
 			</div>
 		
-			<div class="form-group col-md-4">									
+			<div class="form-group col-lg-4">									
 				<label for="content_meta_description" class="">Meta Description</label>
 				<?php echo form_input(array('name' => 'content_meta_description','value' => set_value('content_meta_description'),'id' => 'content_meta_description','class' => 'form-control', 'placeholder' => ''));?>
 				<?php echo form_error('content_meta_description'); ?>
 			</div>
 		
-			<div class="form-group col-md-4">									
+			<div class="form-group col-lg-4">									
 				<label for="content_meta_author" class="">Meta Author</label>
 				<?php echo form_input(array('name' => 'content_meta_author','value' => set_value('content_meta_author'),'class' => 'form-control','id' => 'content_meta_author','placeholder' => ''));?>
 				<?php echo form_error('content_meta_author'); ?>
@@ -65,7 +65,7 @@
 		<?php */ ?>
 
 		<div class="form-row">
-			<div class="form-group col-md-12">									
+			<div class="form-group col-lg-12">									
 				<label for="content_status" class="required">Status</label>
 				<?php //echo form_dropdown('content_status', array('Y'=>'Yes','N'=>'No'), set_value('content_status'), array('class' => 'form-control')); ?>
 				<?php //echo form_error('content_status'); ?>

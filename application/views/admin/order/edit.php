@@ -7,7 +7,7 @@ $row = $rows[0];
 <h1 class="page-title"><?php echo isset($page_title) ? $page_title : 'Page Heading'; ?></h1>
 
 <div class="row">
-	<div class="col-md-12">
+	<div class="col-lg-12">
 		<?php echo isset($alert_message) ? $alert_message : ''; ?>
 		<div class="card order-summary">
 			<div class="card-header">
@@ -16,55 +16,55 @@ $row = $rows[0];
 			<div class="card-body">
 				
 				<div class="row">				
-					<div class="col-md-4">
+					<div class="col-lg-4">
 						<div class="row">
-							<div class="col-md-4">Order Total</div>
-							<div class="col-md-1">:</div>
-							<div class="col-md-7"><?php echo isset($row['order_total_amt']) ? $row['order_total_amt'] : '';?></div>
+							<div class="col-lg-4">Order Total</div>
+							<div class="col-lg-1">:</div>
+							<div class="col-lg-7"><?php echo isset($row['order_total_amt']) ? $row['order_total_amt'] : '';?></div>
 						</div>
 					</div>					
-					<div class="col-md-4">
+					<div class="col-lg-4">
 						<div class="row">
-							<div class="col-md-4">Payment Status</div>
-							<div class="col-md-1">:</div>
-							<div class="col-md-7"><?php echo isset($row['order_payment_status']) ? $row['order_payment_status'] : '';?></div>
+							<div class="col-lg-4">Payment Status</div>
+							<div class="col-lg-1">:</div>
+							<div class="col-lg-7"><?php echo isset($row['order_payment_status']) ? $row['order_payment_status'] : '';?></div>
 						</div>
 					</div>
-					<div class="col-md-4">
+					<div class="col-lg-4">
 						<div class="row">
-							<div class="col-md-4">Payment Mode</div>
-							<div class="col-md-1">:</div>
-							<div class="col-md-7"><?php echo isset($row['order_payment_method']) ? $row['order_payment_method'] : '';?></div>
+							<div class="col-lg-4">Payment Mode</div>
+							<div class="col-lg-1">:</div>
+							<div class="col-lg-7"><?php echo isset($row['order_payment_method']) ? $row['order_payment_method'] : '';?></div>
 						</div>
 					</div>
 					
 				</div>
 				<div class="row mb-3">				
-					<div class="col-md-4">
+					<div class="col-lg-4">
 						<div class="row">
-							<div class="col-md-4">Order GST</div>
-							<div class="col-md-1">:</div>
-							<div class="col-md-7"><?php echo isset($row['order_tax_amt']) ? $row['order_tax_amt'] : '';?></div>
+							<div class="col-lg-4">Order GST</div>
+							<div class="col-lg-1">:</div>
+							<div class="col-lg-7"><?php echo isset($row['order_tax_amt']) ? $row['order_tax_amt'] : '';?></div>
 						</div>
 					</div>					
-					<div class="col-md-4">						
+					<div class="col-lg-4">						
 						<div class="row">
-							<div class="col-md-4">Order Discount</div>
-							<div class="col-md-1">:</div>
-							<div class="col-md-7"><?php echo isset($row['order_discount_amt']) ? $row['order_discount_amt'] : '';?></div>
+							<div class="col-lg-4">Order Discount</div>
+							<div class="col-lg-1">:</div>
+							<div class="col-lg-7"><?php echo isset($row['order_discount_amt']) ? $row['order_discount_amt'] : '';?></div>
 						</div>
 					</div>
-					<div class="col-md-4">
+					<div class="col-lg-4">
 						<div class="row">
-							<div class="col-md-4">Transaction #</div>
-							<div class="col-md-1">:</div>
-							<div class="col-md-7"><?php echo isset($row['order_payment_trans_id']) ? $row['order_payment_trans_id'] : '';?></div>
+							<div class="col-lg-4">Transaction #</div>
+							<div class="col-lg-1">:</div>
+							<div class="col-lg-7"><?php echo isset($row['order_payment_trans_id']) ? $row['order_payment_trans_id'] : '';?></div>
 						</div>
 					</div>					
 				</div>
 				
 				<div class="row mb-3 small">
-					<div class="col-md-6">
+					<div class="col-lg-6">
 						<div class="font-weight-bold">Deliver To:</div>
 						<div><?php echo isset($row['order_shipping_name']) ? $row['order_shipping_name'] : '';?></div>
 						<div><?php echo isset($row['order_shipping_address']) ? $row['order_shipping_address'] : '';?></div>
@@ -82,7 +82,7 @@ $row = $rows[0];
 							<?php echo isset($row['order_shipping_phone2']) ? ' / '.$row['order_shipping_phone2'] : '';?>
 						</div>						
 					</div>
-					<div class="col-md-6 text-right">
+					<div class="col-lg-6 text-right">
 						<div class="font-weight-bold">Order Placed By</div>
 						<div>
 						<?php echo isset($row['user_firstname']) ? $row['user_firstname'] : '';?><?php echo isset($row['user_lastname']) ? $row['user_lastname'] : '';?>

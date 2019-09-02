@@ -3,10 +3,10 @@
 
 <div class="row">
 	
-    <div class="col-md-8">
+    <div class="col-lg-8">
 		<?php echo isset($alert_message) ? $alert_message : ''; ?>
 		<div class="row">
-			<div class="col-md-3 profile-pic">
+			<div class="col-lg-3 profile-pic">
 				<?php
 				$img_src = "";
 				$default_path = "assets/src/img/default_user.jpg";
@@ -26,7 +26,7 @@
 					<div class="edit"><a class="btn btn-sm btn-link mt-2" href="<?php echo base_url($this->router->directory.$this->router->class.'/delete_profile_pic/'.$profile_pic);?>"><i class="fa fa-fw fa-remove"></i> Remove</a></div>
 				<?php } ?>
 			</div>
-			<div class="col-md-9">
+			<div class="col-lg-9">
 				<?php //print_r($row); ?>
 				<?php echo form_open_multipart(current_url(), array('method' => 'post', 'class'=>'ci-form','role' => 'form'));?>
 				<?php echo form_hidden('form_action', 'file_upload'); ?>
@@ -52,5 +52,5 @@
 				<?php echo form_close(); ?>
 			</div>
 		</div>
-    </div><!--/.col-md-6-->
+    </div><!--/.col-lg-6-->
 </div>

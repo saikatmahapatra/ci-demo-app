@@ -2,12 +2,12 @@
 <h1 class="page-title"><?php echo isset($page_title) ? $page_title : 'Page Heading'; ?></h1>
 
 <div class="row">
-	<div class="col-md-8">
+	<div class="col-lg-8">
 		<?php echo isset($alert_message) ? $alert_message : ''; ?>
 		<?php echo form_open(current_url(), array('method' => 'post', 'class'=>'ci-form','name' => 'myform','id' => 'myform','role' =>'form')); ?>
 		<?php echo form_hidden('form_action', 'insert'); ?>
 		<div class="form-row">
-			<div class="form-group col-md-6">									
+			<div class="form-group col-lg-6">									
 				<label for="category_name" class="required">Category Name</label>
 				<?php 
 				echo form_input(array(
@@ -20,7 +20,7 @@
 				?>
 				<?php echo form_error('category_name'); ?>
 			</div>
-			<div class="form-group col-md-6">									
+			<div class="form-group col-lg-6">									
 				<label for="category_parent" class="">Category Root/Parent</label>
 				<?php 
 				echo form_dropdown('category_parent', $category_dropdown, set_value('category_parent'), array('class' => 'form-control',));
