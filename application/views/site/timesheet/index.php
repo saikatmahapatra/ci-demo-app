@@ -2,7 +2,7 @@
 <h1 class="page-title"><?php echo isset($page_title) ? $page_title : 'Page Heading'; ?></h1>
 
 <div class="row">
-	<div class="col-md-12">		
+	<div class="col-lg-12">		
 		<nav>
 			<div class="nav nav-tabs ci-nav-tab" id="nav-tab" role="tablist">
 				<a class="nav-item nav-link active" id="nav-add-tab" data-toggle="tab" href="#nav-add" role="tab" aria-controls="nav-add" aria-selected="true">Log Tasks</a>
@@ -31,7 +31,7 @@
 			</small>
 			
 			<div class="form-row">
-				<div class="col-md-3">	
+				<div class="col-lg-3">	
 					<label class="required">Select Days</label>	
 					<?php echo $cal; ?>					
 					<div class="small">
@@ -50,9 +50,9 @@
 						<div class="d-none">Avg. hours worked: <span class="" id="average_worked_hrs">0.0</span> hrs/day</div>
 					</div>		
 					<a class="text-centre d-none" href="#"><i class="fa fa-fw fa-file-excel-o" aria-hidden="true"></i> Download this month's timesheet</a>
-				</div><!--/.col-md-3-->
+				</div><!--/.col-lg-3-->
 
-				<div class="col-md-8 offset-md-1">
+				<div class="col-lg-8 offset-md-1">
 					<div class="form-group d-none">
 						<label for="selected_days" class="required">Select Day(s)
 						<span class="text-muted font-weight-normal"> You can select multiple dates from the calendar</span></label>				
@@ -61,7 +61,7 @@
 					</div>
 						
 					<div class="form-row">
-						<div class="form-group col-md-4">
+						<div class="form-group col-lg-4">
 						<label for="project_id" class="required">Project</label>
 							<?php
 							echo form_dropdown('project_id', $project_arr, set_value('project_id'), array(
@@ -71,7 +71,7 @@
 							<?php echo form_error('project_id'); ?>
 						</div>
 								
-						<div class="form-group col-md-4">
+						<div class="form-group col-lg-4">
 						<label for="activity_id" class="required">Activity</label>
 							<?php
 							echo form_dropdown('activity_id', $task_task_activity_type_array, set_value('activity_id'), array(
@@ -81,7 +81,7 @@
 							<?php echo form_error('activity_id'); ?>
 						</div>
 							
-						<div class="form-group col-md-4">
+						<div class="form-group col-lg-4">
 							<label for="timesheet_hours" class="required">Time Spent (In Hours)</label>	
 							<?php
 							echo form_input(array(
@@ -116,7 +116,7 @@
 					</div>
 					
 					<button type="submit" class="btn btn-primary">Submit</button>
-				</div><!--/.col-md-9-->	  
+				</div><!--/.col-lg-9-->	  
 			</div>
 			
 			<?php echo form_close(); ?>

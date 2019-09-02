@@ -2,13 +2,13 @@
 <h1 class="page-title"><?php echo isset($page_title) ? $page_title : 'Page Heading'; ?></h1>
 
 <div class="row my-2">
-	<div class="col-md-12">
+	<div class="col-lg-12">
 	<?php echo isset($alert_message) ? $alert_message : ''; ?>
 	</div>	
 </div>
 
 <div class="row my-3">
-	<div class="col-md-12">
+	<div class="col-lg-12">
 		<div class="card card-legend">			
 			<div class="card-body">
 				<h6 class="card-title text-on-card">Apply Leave</h6>
@@ -36,7 +36,7 @@
 				<?php echo form_open(current_url(), array( 'method' => 'post','class'=>'ci-form','name' => '','id' => 'ci-form-leave',)); ?>
 				<?php echo form_hidden('form_action', 'add'); ?>
 				<div class="form-row">
-					<div class="form-group col-md-2">
+					<div class="form-group col-lg-2">
 						<label for="leave_type" class="required">Leave Type</label>
 						<?php
 						echo form_dropdown('leave_type', $leave_type_arr, set_value('leave_type'), array(
@@ -46,19 +46,19 @@
 						<?php echo form_error('leave_type'); ?>
 					</div>
 										
-					<div class="form-group col-md-2">
+					<div class="form-group col-lg-2">
 						<label for="leave_from_date" class="required">From Date</label>
 						<?php echo form_input(array('name' => 'leave_from_date','value' => set_value('leave_from_date'),'id' => 'leave_from_date','class' => 'form-control', 'placeholder'=>'dd-mm-yyyy', 'readonly'=>'readonly')); ?>
 						<?php echo form_error('leave_from_date'); ?>
 					</div>
 						
-					<div class="form-group col-md-2">
+					<div class="form-group col-lg-2">
 						<label for="leave_to_date" class="required">To Date</label>		
 						<?php echo form_input(array('name' => 'leave_to_date','value' => set_value('leave_to_date'),'id' => 'leave_to_date','class' => 'form-control', 'placeholder'=>'dd-mm-yyyy', 'readonly'=>'readonly')); ?>
 						<?php echo form_error('leave_to_date'); ?>
 					</div>
 				
-					<div class="form-group col-md-4">
+					<div class="form-group col-lg-4">
 						<label for="leave_reason" class="required">Reason</label>
 						<?php
 						echo form_input(array(
@@ -73,7 +73,7 @@
 						<?php echo form_error('leave_reason'); ?>				
 					</div>
 
-					<div class="col-md-2 mt-4">
+					<div class="col-lg-2 mt-4">
 						<button type="submit" class="btn btn-primary">Submit</button>
 					</div>
 				</div>
@@ -85,7 +85,7 @@
 </div>
 
 <div class="row my-3">
-	<div class="col-md-12">
+	<div class="col-lg-12">
 		<div class="card card-legend">			
 			<div class="card-body">
 			<h6 class="card-title text-on-card">Leave Details</h6>

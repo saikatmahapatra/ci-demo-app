@@ -1,13 +1,13 @@
 <?php //echo isset($breadcrumbs) ? $breadcrumbs : ''; ?>
 <h1 class="page-title"><?php echo isset($page_title) ? $page_title : 'Page Heading'; ?></h1>
 <div class="row">
-	<div class="col-md-4">
+	<div class="col-lg-4">
 		<?php echo isset($alert_message) ? $alert_message : ''; ?>
 		<!--<div class="card ">
 			<div class="card-header">Change Password</div>
 			<div class="card-body">
                 <div class="row">
-                    <div class="col-md-4">-->
+                    <div class="col-lg-4">-->
                         <?php echo isset($alert_message) ? $alert_message : ''; ?>
                         <?php
                         echo form_open(current_url(), array(
@@ -71,5 +71,5 @@
 		</div>-->
 		<!-- /.card -->
 	</div>
-	<!-- /.col-md-12 -->
+	<!-- /.col-lg-12 -->
 </div>

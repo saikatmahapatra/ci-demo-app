@@ -1,27 +1,27 @@
 <?php //echo isset($breadcrumbs) ? $breadcrumbs : ''; ?>
 <h1 class="page-title"><?php echo isset($page_title) ? $page_title : 'Page Heading'; ?></h1>
 <div class="row">
-	<div class="col-md-12">
+	<div class="col-lg-12">
 		<?php echo isset($alert_message) ? $alert_message : ''; ?>
 				
 		<div class="row mb-3">
-			<div class="col-md-12">
+			<div class="col-lg-12">
 			<?php echo form_open(current_url(), array( 'method' => 'get','class'=>'ci-form','name' => '','id' => 'timesheet-search-form')); ?>
 			<?php echo form_hidden('form_action', 'search'); ?>		  
 				<div class="form-row">
-					<div class="form-group col-md-4 ci-select2">
+					<div class="form-group col-lg-4 ci-select2">
 						<label for="q_emp" class="">Employee</label>
 						<?php echo form_dropdown('q_emp', $user_arr, $this->input->get_post('q_emp'),array('class' => 'form-control select2-control', 'id'=>'q_emp')); ?> 
 						<?php echo form_error('q_emp'); ?>
 					</div>
 					
-					<div class="form-group col-md-4 ci-select2">
+					<div class="form-group col-lg-4 ci-select2">
 						<label for="q_project" class="">Project</label>
 						<?php echo form_dropdown('q_project', $project_arr, $this->input->get_post('q_project'),array('class' => 'form-control select2-control','id'=>'q_project')); ?> 
 						<?php echo form_error('q_project'); ?>
 					</div>
 
-					<div class="form-group col-md-2">									
+					<div class="form-group col-lg-2">									
 						<label for="from_date" class="required">From</label>
 						<?php 
 							$first_day_this_month = date('01-m-Y');
@@ -31,7 +31,7 @@
 						<?php echo form_error('from_date'); ?>
 					</div>
 				
-					<div class="form-group col-md-2">									
+					<div class="form-group col-lg-2">									
 						<label for="to_date" class="required">To</label>
 						<?php echo form_input(array('name' => 'to_date','value' => (isset($_REQUEST['to_date']) ? $_REQUEST['to_date'] : $last_day_this_month),'class' => 'form-control report-datepicker','id' => 'to_date','placeholder' => 'dd-mm-yyyy','readonly'=>true));?>
 						<?php echo form_error('to_date'); ?>

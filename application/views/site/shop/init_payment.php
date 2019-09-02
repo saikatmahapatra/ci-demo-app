@@ -4,7 +4,7 @@
 <?php echo form_open(current_url(), array('method' => 'post','class'=>'ci-form','name' => '','id' => '',)); ?>
 <?php echo form_hidden('form_action', 'place_order'); ?>
 <div class="row">    
-   <div class="col-md-8">    
+   <div class="col-lg-8">    
     <div id="accordion">        
         <div class="card">
             <div class="card-header" id="heading_1">
@@ -93,7 +93,7 @@
                      		//print_r($row);
                      		?>
                   <div class="row cart-item" data-rowid="<?php echo $row['rowid']; ?>" data-id="<?php echo $row['id']; ?>">
-                     <div class="col-md-12">
+                     <div class="col-lg-12">
                         <div class="media">
                            <div class="media-left media-top mr-3">
                               <img src="https://www.w3schools.com/bootstrap/img_avatar1.png" class="media-object" style="width:60px">
@@ -103,11 +103,11 @@
                               <div>Size: M</div>
                               <div>Seller: Polo Store</div>
                               <div class="row">
-                                 <div class="col-md-2">
+                                 <div class="col-lg-2">
                                     Quantity : <?php echo $row['qty']; ?>
                                     <?php echo form_hidden('rowid_'.$row_counter,$row['rowid']);?>
                                  </div>
-                                 <div class="col-md-8 text-right text-bold"><?php echo '<span class="currency" id="INR">&#8377;</span>'.number_format($row['line_total'], 2); ?></div>
+                                 <div class="col-lg-8 text-right text-bold"><?php echo '<span class="currency" id="INR">&#8377;</span>'.number_format($row['line_total'], 2); ?></div>
                               </div>
                            </div>
                         </div>
@@ -165,25 +165,25 @@
         </div>        
     </div><!--/#accordion-->    
    </div>
-   <div class="col-md-4">
+   <div class="col-lg-4">
       <div class="card">
          <div class="card-header">Price Details</div>
          <div class="card-body">
             <div class="row">
-               <div class="col-md-6">Price(<?php echo isset($total_items) ? $total_items.' items' : ''; ?>)</div>
-               <div class="col-md-6 text-right"><span class="currency" id="INR">&#8377;</span><?php echo isset($cart_total)?number_format($cart_total,2):'';?></div>
+               <div class="col-lg-6">Price(<?php echo isset($total_items) ? $total_items.' items' : ''; ?>)</div>
+               <div class="col-lg-6 text-right"><span class="currency" id="INR">&#8377;</span><?php echo isset($cart_total)?number_format($cart_total,2):'';?></div>
             </div>
             <div class="row">
-               <div class="col-md-6">Delivery Charges</div>
-               <div class="col-md-6 text-right text-success">FREE</div>
+               <div class="col-lg-6">Delivery Charges</div>
+               <div class="col-lg-6 text-right text-success">FREE</div>
             </div>
          </div>
          <div class="card-footer">
             <div class="row">
-                <div class="col-md-12 h5">
+                <div class="col-lg-12 h5">
                 Amount Payble <span class="currency" id="INR">&#8377;</span><?php echo isset($cart_total) ? number_format($cart_total,2) :'';?>
                 </div>
-                <div class="col-md-12">
+                <div class="col-lg-12">
                      <?php 
                      if($total_items <= 0){
                         ?>

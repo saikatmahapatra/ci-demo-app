@@ -6,7 +6,7 @@
     if (isset($products) && sizeof($products) > 0) {
         foreach ($products as $key => $product) {
             ?>
-			<div class="col-md-4">
+			<div class="col-lg-4">
               <div class="card mb-4 box-shadow">
                 <img class="card-img-top" src="<?php echo base_url('assets/dist/img/prod.png'); ?>" alt="" data-holder-rendered="true">
                 <div class="card-body">

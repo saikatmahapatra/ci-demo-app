@@ -6,7 +6,7 @@ $row = $rows[0];
 <h1 class="page-title"><?php echo isset($page_title) ? $page_title : 'Page Heading'; ?></h1>
 
 <div class="row">
-	<div class="col-md-9">
+	<div class="col-lg-9">
 		<?php echo isset($alert_message) ? $alert_message : ''; ?>
 		<?php echo form_open(current_url(), array('method' => 'post', 'class'=>'ci-form','name' => 'myform','id' => 'myform','role' =>'form')); ?>
 		<?php echo form_hidden('form_action', 'update'); ?>
@@ -14,7 +14,7 @@ $row = $rows[0];
 		<?php echo form_hidden('selected_date', $row['timesheet_date']); ?>
 		
 		<div class="form-row">
-			<div class="form-group col-md-4">
+			<div class="form-group col-lg-4">
 				<label for="project_id" class="required">Project</label>
 				<?php
 				echo form_dropdown('project_id', $project_arr, (isset($_POST['project_id']) ? set_value('project_id') : $row['project_id']), array(
@@ -24,7 +24,7 @@ $row = $rows[0];
 				<?php echo form_error('project_id'); ?>
 			</div>
 					
-			<div class="form-group col-md-4">
+			<div class="form-group col-lg-4">
 				<label for="activity_id" class="required">Activity</label>
 				<?php
 				echo form_dropdown('activity_id', $task_task_activity_type_array, (isset($_POST['activity_id']) ? set_value('activity_id') : $row['activity_id']), array(
@@ -34,7 +34,7 @@ $row = $rows[0];
 				<?php echo form_error('activity_id'); ?>
 			</div>
 				
-			<div class="form-group col-md-4">
+			<div class="form-group col-lg-4">
 				<label for="timesheet_hours" class="required">Time Spent (In Hours)</label>
 				<?php
 				echo form_input(array(

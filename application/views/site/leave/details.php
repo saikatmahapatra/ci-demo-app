@@ -6,34 +6,34 @@ $row = $data_rows[0];
 <h1 class="page-title"><?php echo isset($page_title) ? $page_title : 'Page Heading'; ?></h1>
 
 <div class="row my-2">
-	<div class="col-md-12">
+	<div class="col-lg-12">
 	<?php echo isset($alert_message) ? $alert_message : ''; ?>
 	</div>	
 </div>
 
 
 <div class="row my-3">
-	<div class="col-md-12">		
+	<div class="col-lg-12">		
 				<dl class="row">
 										
-					<dt class="col-md-2">Leave Status</dt>
-					<dd class="col-md-2 font-weight-bold">
+					<dt class="col-lg-2">Leave Status</dt>
+					<dd class="col-lg-2 font-weight-bold">
 					<span class="<?php echo $leave_status_arr[$row['leave_status']]['css'];?>"> <?php echo $leave_status_arr[$row['leave_status']]['text'];?></span>
 					</dd>
-					<dt class="col-md-2">Request No</dt>
-					<dd class="col-md-2"><?php echo $row['leave_req_id'];?></dd>					
-					<dt class="col-md-2">Leave Type</dt>
-					<dd class="col-md-2"><?php echo $leave_type_arr[$row['leave_type']];?></dd>
-					<dt class="col-md-2">From</dt>
-					<dd class="col-md-2"><?php echo $this->common_lib->display_date($row['leave_from_date']);?></dd>
-					<dt class="col-md-2">To</dt>
-					<dd class="col-md-2"><?php echo $this->common_lib->display_date($row['leave_to_date']);?></dd>
-					<dt class="col-md-2">Days Count</dt>
-					<dd class="col-md-2"><?php echo $row['applied_for_days_count'].' day(s)';?></dd>
-					<dt class="col-md-2">Reason/Occasion</dt>
-					<dd class="col-md-10"><?php echo isset($row['leave_reason']) ? word_limiter($row['leave_reason'], 5) : '';?></dd>
-					<dt class="col-md-2">Applicant Details</dt>
-					<dd class="col-md-10">
+					<dt class="col-lg-2">Request No</dt>
+					<dd class="col-lg-2"><?php echo $row['leave_req_id'];?></dd>					
+					<dt class="col-lg-2">Leave Type</dt>
+					<dd class="col-lg-2"><?php echo $leave_type_arr[$row['leave_type']];?></dd>
+					<dt class="col-lg-2">From</dt>
+					<dd class="col-lg-2"><?php echo $this->common_lib->display_date($row['leave_from_date']);?></dd>
+					<dt class="col-lg-2">To</dt>
+					<dd class="col-lg-2"><?php echo $this->common_lib->display_date($row['leave_to_date']);?></dd>
+					<dt class="col-lg-2">Days Count</dt>
+					<dd class="col-lg-2"><?php echo $row['applied_for_days_count'].' day(s)';?></dd>
+					<dt class="col-lg-2">Reason/Occasion</dt>
+					<dd class="col-lg-10"><?php echo isset($row['leave_reason']) ? word_limiter($row['leave_reason'], 5) : '';?></dd>
+					<dt class="col-lg-2">Applicant Details</dt>
+					<dd class="col-lg-10">
 						<?php echo isset($row['user_firstname']) ? $row['user_firstname'] : '';?>
 						<?php echo isset($row['user_lastname']) ? $row['user_lastname'] : '';?>
 						<?php echo isset($row['user_email']) ? ', '.$row['user_email'] : '';?>
@@ -212,8 +212,8 @@ $row = $data_rows[0];
         </button>
       </div>
       <div class="modal-body">
-		<div class="form-group col-md-12" id="responseMessage_leaveActionModal"></div>
-		<div class="form-group col-md-12">
+		<div class="form-group col-lg-12" id="responseMessage_leaveActionModal"></div>
+		<div class="form-group col-lg-12">
 		<?php 
 		if($row['leave_status'] == 'X'){
 			?>
@@ -235,7 +235,7 @@ $row = $data_rows[0];
 				<option value="C">Cancel</option>
 			</select>
 		</div>
-		<div class="form-group col-md-12">
+		<div class="form-group col-lg-12">
 			<label class="">Comments/Remarks (Optional)</label>
 			<textarea class="form-control" id="leave_action_comment" name="leave_action_comment" placeholder="Please enter your comments here"></textarea>				
 		</div>

@@ -2,7 +2,7 @@
 <?php //echo isset($breadcrumbs) ? $breadcrumbs : ''; ?>
 <h1 class="page-title"><?php echo isset($page_title) ? $page_title : 'Page Heading'; ?></h1>
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-lg-6">
         <?php echo isset($alert_message) ? $alert_message : ''; ?>
         <?php echo form_open(current_url(), array('method' => 'post', 'class' => 'ci-form',
             'name' => 'profile',
@@ -13,7 +13,7 @@
 			
 			<?php /* ?>
             <div class="form-row">                
-                    <div class="form-group col-md-6">                                
+                    <div class="form-group col-lg-6">                                
 						<label for="user_firstname" class="required">First Name</label>
                         <?php
                         echo form_input(array(
@@ -27,7 +27,7 @@
                         <?php echo form_error('user_firstname'); ?>
                     </div>
                 
-                    <div class="form-group col-md-6">  
+                    <div class="form-group col-lg-6">  
 						<label for="user_lastname" class="required">Last Name</label>
                         <?php
                         echo form_input(array(
@@ -106,7 +106,7 @@
 			</div>
 			
             <div class="form-row">               
-				<div class="form-group col-md-6">
+				<div class="form-group col-lg-6">
 					<label for="user_phone1" class="required">10-digit Mobile (Personal)</label>
 					<?php
 					echo form_input(array(
@@ -120,7 +120,7 @@
 					?>
 					<?php echo form_error('user_phone1'); ?>
 				</div>
-				<div class="form-group col-md-6">
+				<div class="form-group col-lg-6">
 					<label for="user_phone2" class="">10-digit Mobile Number (Work)</label>
 					<?php
 					echo form_input(array(
@@ -137,7 +137,7 @@
             </div><!--/.form-row-->
                     
             <div class="form-row">
-                <div class="form-group col-md-6">
+                <div class="form-group col-lg-6">
                 <label for="user_blood_group" class="required">Blood Group</label>
                     <?php
                     echo form_dropdown('user_blood_group', $blood_group, isset($_POST['user_blood_group']) ? set_value('user_blood_group') : $row['user_blood_group'], array(
@@ -151,5 +151,5 @@
 			<?php echo form_button(array('name' => 'submit_btn','type' => 'submit','content' => 'Submit','class' => 'btn btn-primary'));?>
 			<a href="<?php echo base_url($this->router->directory.$this->router->class.'/profile');?>" class="btn btn-light">Cancel</a>
         <?php echo form_close(); ?>
-    </div><!--/.col-md-6-->
+    </div><!--/.col-lg-6-->
 </div>

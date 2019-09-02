@@ -2,13 +2,13 @@
 <h1 class="page-title"><?php echo isset($page_title) ? $page_title : 'Page Heading'; ?></h1>
 
 <div class="row my-2">
-	<div class="col-md-12">
+	<div class="col-lg-12">
 	<?php echo isset($alert_message) ? $alert_message : ''; ?>
 	</div>	
 </div>
 
 <div class="row my-3">
-	<div class="col-md-12">
+	<div class="col-lg-12">
 		<div class="table-responsive">
 			<table class="table table-striped">
 				<thead class="thead-dark">

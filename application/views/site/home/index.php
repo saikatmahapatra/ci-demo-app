@@ -2,7 +2,7 @@
 <?php //echo isset($breadcrumbs) ? $breadcrumbs : ''; ?>
 <?php if(isset($sliders) && sizeof($sliders)>0){ ?>
 <div class="row my-2">
-	<div class="col-md-12">
+	<div class="col-lg-12">
 		<div id="demo" class="carousel slide" data-ride="carousel">
 		<ul class="carousel-indicators">			
 			<!--<li data-target="#demo" data-slide-to="0" class="active"></li>

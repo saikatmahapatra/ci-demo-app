@@ -1,13 +1,13 @@
 <?php //echo isset($breadcrumbs) ? $breadcrumbs : ''; ?>
 <h1 class="page-title"><?php echo isset($page_title) ? $page_title : 'Page Heading'; ?></h1>
 <div class="row">
-	<div class="col-md-5">
+	<div class="col-lg-5">
 		<?php echo isset($alert_message) ? $alert_message : ''; ?>
 		<?php echo form_open(current_url(), array('method' => 'post', 'class' => 'ci-form','name' => 'form','id' => 'form',));?>
 		<?php echo form_hidden('form_action', 'self_registration'); ?>        
 		<?php echo form_hidden('user_role', 3); ?>        
 		<div class="form-row">
-			<div class="form-group col-md-6">
+			<div class="form-group col-lg-6">
 				<label for="user_firstname" class="required">First Name</label>
 				<?php
 				echo form_input(array(
@@ -22,7 +22,7 @@
 				<?php echo form_error('user_firstname'); ?>
 			</div>
 			
-			<div class="form-group col-md-6">
+			<div class="form-group col-lg-6">
 				<label for="user_lastname" class="required">Last Name</label>
 				<?php
 				echo form_input(array(
@@ -39,7 +39,7 @@
 		</div>
 		
 		<div class="form-row">
-			<div class="form-group col-md-6">
+			<div class="form-group col-lg-6">
 				<label for="user_email" class="required">Email</label>
 				<?php
 				echo form_input(array(
@@ -54,7 +54,7 @@
 				<?php echo form_error('user_email'); ?>
 			</div>
 			
-			<div class="form-group col-md-6">
+			<div class="form-group col-lg-6">
 				<label for="user_phone1" class="required">10-digit Mobile</label>
 				<?php
 				echo form_input(array(
@@ -71,7 +71,7 @@
 		</div>
 		
 		<div class="form-row">
-			<div class="form-group col-md-6">
+			<div class="form-group col-lg-6">
 				<label for="user_password" class="required">Password</label>
 				<?php
 				echo form_password(array(
@@ -86,7 +86,7 @@
 				<?php echo form_error('user_password'); ?>
 			</div>
 			
-			<div class="form-group col-md-6">
+			<div class="form-group col-lg-6">
 				<label for="user_password_confirm" class="required">Confirm Password</label>
 				<?php
 				echo form_password(array(
@@ -103,7 +103,7 @@
 		</div>
 		
 		<div class="form-row">
-			<div class="form-group col-md-6">
+			<div class="form-group col-lg-6">
 				<label for="user_dob" class="required">Date of Birth</label>
 				<?php
 				echo form_input(array(
@@ -119,7 +119,7 @@
 				?>
 				<?php echo form_error('user_dob');?>
 			</div>
-			<div class="form-group col-md-6">
+			<div class="form-group col-lg-6">
 				<label for="gender" class="required">Gender</label>
 				<div class="">
 					<div class="custom-control custom-radio custom-control-inline">

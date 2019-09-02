@@ -2,13 +2,13 @@
 <?php //echo isset($breadcrumbs) ? $breadcrumbs : ''; ?>
 <h1 class="page-title"><?php echo isset($page_title) ? $page_title : 'Page Heading'; ?></h1>
 <div class="row">	
-    <div class="col-md-6">
+    <div class="col-lg-6">
 		<?php echo isset($alert_message) ? $alert_message : ''; ?>
  
         <?php echo form_open(current_url(), array('method' => 'post', 'class' => 'ci-form', 'name' => 'address_add','id' => 'address_add')); ?>
         <?php echo form_hidden('form_action', 'update_address'); ?>
 			<div class="form-row">
-				<div class="form-group col-md-12">
+				<div class="form-group col-lg-12">
 					<!--<label for="address_type" class="required">Communication Address Type</label>-->
 					<?php						
 					/*if(isset($address_type)){
@@ -32,7 +32,7 @@
 			</div>
 
 			<div class="form-row">
-				<div class="form-group col-md-12">
+				<div class="form-group col-lg-12">
 					<label for="address" class="required">Address</label>
 					<?php 
 					echo form_textarea(array(
@@ -51,7 +51,7 @@
 			</div>
 			
 			<div class="form-row">				
-				<div class="form-group col-md-6">
+				<div class="form-group col-lg-6">
 					<label for="locality" class="required">Locality/Area Name</label>
 					<?php
 					echo form_input(array(
@@ -65,7 +65,7 @@
 					<?php echo form_error('locality'); ?>
 				</div>
 
-				<div class="form-group col-md-6">
+				<div class="form-group col-lg-6">
 					<label for="zip" class="required">PIN Code</label>
 					<?php
 					echo form_input(array(
@@ -84,7 +84,7 @@
 			
 				
 			<div class="form-row">				
-				<div class="form-group col-md-6">
+				<div class="form-group col-lg-6">
 					<label for="city" class="required">City/District/Town</label>
 					<?php 
 					echo form_input(array(
@@ -98,7 +98,7 @@
 					?>
 					<?php echo form_error('city'); ?>
 				</div>				
-				<div class="form-group col-md-6">
+				<div class="form-group col-lg-6">
 					<label for="state" class="required">State/Union Territory</label>
 					<?php 
 					/*echo form_input(array(
@@ -120,7 +120,7 @@
 			
 				
 			<div class="form-row">	
-				<div class="form-group col-md-6">
+				<div class="form-group col-lg-6">
 					<label for="phone1" class="">Phone (Optional)</label>
 					<?php 
 					echo form_input(array(
@@ -134,7 +134,7 @@
 					?>
 					<?php echo form_error('phone1'); ?>
 				</div>
-				<div class="form-group col-md-6">
+				<div class="form-group col-lg-6">
 					<label for="landmark" class="">Landmark (Optional)</label>
 					<?php 
 					echo form_input(array(

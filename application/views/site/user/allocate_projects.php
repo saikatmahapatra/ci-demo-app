@@ -1,12 +1,12 @@
 <?php //echo isset($breadcrumbs) ? $breadcrumbs : ''; ?>
 <h1 class="page-title"><?php echo isset($page_title) ? $page_title : 'Page Heading'; ?></h1>
 <div class="row">	
-    <div class="col-md-8">
+    <div class="col-lg-8">
 		<?php echo isset($alert_message) ? $alert_message : ''; ?>
         <?php echo form_open(current_url(), array('method' => 'post', 'class' => 'ci-form', 'name' => 'assign_projects','id' => 'address_add')); ?>
         <?php echo form_hidden('form_action', 'add'); ?>
 			<div class="form-row">                
-				<div class="form-group col-md-6">                                
+				<div class="form-group col-lg-6">                                
 					<label for="academic_qualification" class="">Projects</label>
 					<?php
 					echo form_dropdown('project_id[]', $arr_projects, set_value('project_id'), array(
