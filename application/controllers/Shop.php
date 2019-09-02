@@ -30,12 +30,9 @@ class Shop extends CI_Controller {
             $this->router->class
         );
         $this->data['app_js'] = $this->common_lib->add_javascript($javascript_files);
-        
-        
-        
         $this->id = $this->uri->segment(3);
 
-        $this->load->library('cart');        
+        $this->load->library('cart'); 
         $this->load->model('user_model');
         $this->load->model('product_model');
         $this->load->model('order_model');
@@ -57,8 +54,6 @@ class Shop extends CI_Controller {
     }
 
     function store(){
-        
-        
         $result = $this->product_model->get_rows();
         $this->data['total_products'] = $result['num_rows'];
         $this->data['products'] = $result['data_rows'];
@@ -68,8 +63,6 @@ class Shop extends CI_Controller {
     }
 
     function details(){
-        
-        
         $result = $this->product_model->get_rows();
         $this->data['total_products'] = $result['num_rows'];
         $this->data['products'] = $result['data_rows'];
@@ -108,10 +101,6 @@ class Shop extends CI_Controller {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
             redirect($this->router->directory.'user/login');
         }*/
-
-        
-        
-        
         $cart_data = $this->get_cart_data();		
 		$this->data['cartrows'] = $cart_data['cartrows'];
         $this->data['cart_total'] = $cart_data['cart_total']; // Returns:	Total amount
@@ -217,10 +206,6 @@ class Shop extends CI_Controller {
         if($this->cart->total_items() <= 0){
             $this->common_lib->set_flash_message('You don\'t have any items in your cart. Please add atleast one to proceed.', 'alert-danger');
         }
-
-		
-        
-        
 		$cart_data = $this->get_cart_data();
 		$this->data['cartrows'] = $cart_data['cartrows'];
         $this->data['cart_total'] = $cart_data['cart_total']; // Returns:	Total amount
@@ -339,10 +324,7 @@ class Shop extends CI_Controller {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
             redirect($this->router->directory.'user/login');
         }
-
 		$this->cart->destroy(); // remove cart items
-		
-        
         //Update table with payment response
 		//$this->data = array();
 		$this->data['order_no'] = $this->uri->segment(4);

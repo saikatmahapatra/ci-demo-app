@@ -8,12 +8,8 @@ class User extends CI_Controller {
 
     function __construct() {
         parent::__construct();
-        
         $this->load->model('user_model');
         $this->load->model('upload_model');
-        
-        
-
         // Get logged  in user id
         $this->sess_user_id = $this->common_lib->get_sess_user('id');
 
@@ -27,8 +23,7 @@ class User extends CI_Controller {
         $this->data['app_js'] = $this->common_lib->add_javascript($javascript_files);
         
         $this->data['page_title'] = $this->router->class.' : '.$this->router->method;
-        
-		
+
 		// load Breadcrumbs
 		$this->load->library('breadcrumbs');
 		// add breadcrumbs. push() - Append crumb to stack
@@ -37,13 +32,8 @@ class User extends CI_Controller {
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
 		
 		// Address Types
-		$this->data['address_type'] = array('P'=>'Permanent Address','C'=>'Present Address','S'=>'Shipping','B'=>'Billing');
-		
-		// DOB - DD MM YYYY drop down
-        $this->data['day_arr'] = $this->calander_days();
-        $this->data['month_arr'] = $this->calander_months();
-        $this->data['year_arr'] = $this->calander_years();
-		
+        $this->data['address_type'] = array('P'=>'Permanent Address','C'=>'Present Address','S'=>'Shipping','B'=>'Billing');
+
 		//User Roles drop down
 		$this->data['arr_roles'] = $this->user_model->get_user_role_dropdown();
 		$this->data['arr_designations'] = $this->user_model->get_designation_dropdown('Y');
@@ -167,9 +157,7 @@ class User extends CI_Controller {
         }
     }
 	
-	function registration() {		
-        
-        
+	function registration() {
         if ($this->input->post('form_action') == 'self_registration') {
             if ($this->validate_registration_form_data() == true) {
                 $activation_token = md5(time('Y-m-d h:i:s'));
@@ -289,10 +277,7 @@ class User extends CI_Controller {
         }
     }
 
-    function forgot_password() {		
-        
-        
-
+    function forgot_password() {
         if ($this->input->post('form_action') == 'forgot_password') {
             if ($this->validate_forgot_password_form() == true) {
 				//print_r($_POST);die();
@@ -350,14 +335,10 @@ class User extends CI_Controller {
     }
 
     function reset_password() {
-        
-        
         $this->data['password_reset_key'] = $this->uri->segment(3);
-
         if (!isset($this->data['password_reset_key'])) {
             $this->common_lib->set_flash_message('The password reset token not found.', 'alert-danger');
         }
-
         if ($this->input->post('form_action') == 'reset_password') {
             if ($this->validate_reset_password_form() == true) {
                 $email = $this->input->post('user_email');
@@ -433,9 +414,6 @@ class User extends CI_Controller {
         }
         
         ########### Validate User Auth End #############
-
-        
-        
         if ($this->input->post('form_action') == 'change_password') {
             if ($this->validate_changepassword_form() == true) {
                 $postdata = array('user_password' => md5($this->input->post('user_new_password')));
@@ -501,11 +479,8 @@ class User extends CI_Controller {
         }
         $this->data['is_self_account'] = $is_self_account;
         $this->data['page_title'] = "My Profile";
-        $this->breadcrumbs->push('Profile','/');				
+        $this->breadcrumbs->push('Profile','/');
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
-
-        
-        
 		$user_id =  $this->sess_user_id;		
         $rows = $this->user_model->get_rows($user_id);		
 		$res_pic = $this->user_model->get_user_profile_pic($user_id);
@@ -545,8 +520,6 @@ class User extends CI_Controller {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
             redirect($this->router->directory.$this->router->class.'/login');
         }
-        
-        
         $this->data['arr_states'] = $this->user_model->get_state_dropdown();		
         if ($this->input->post('form_action') == 'insert_address') {
             if ($this->validate_user_address_form_data('add') == true) {
@@ -582,8 +555,6 @@ class User extends CI_Controller {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
             redirect($this->router->directory.$this->router->class.'/login');
         }
-        
-        
 		$address_id = $this->uri->segment(3);        
         $this->data['address'] = $this->user_model->get_user_address($address_id, $this->sess_user_id,NULL);
         $this->data['arr_states'] = $this->user_model->get_state_dropdown();
@@ -623,8 +594,6 @@ class User extends CI_Controller {
         if ($is_logged_in == FALSE) {
             redirect($this->router->directory.$this->router->class.'/login');
         }
-        
-        
 		$address_id = $this->uri->segment(3);
         $this->data['address'] = $this->user_model->get_user_address($address_id, $this->sess_user_id,NULL);
 		$where = array('id'=>$address_id, 'user_id' => $this->sess_user_id);
@@ -682,53 +651,12 @@ class User extends CI_Controller {
         }
         return true;
     }
-    	
-	function calander_days() {
-        $result = array();
-        $result[''] = 'Day';
-        for ($i = 0; $i < 31; $i++) {
-            $result[$i + 1] = sprintf('%02d', $i + 1);
-        }
-        return $result;
-    }
 
-    function calander_months() {
-        $result = array(
-            '' => 'Month',
-            '01' => 'Jan',
-            '02' => 'Feb',
-            '03' => 'Mar',
-            '04' => 'Apr',
-            '05' => 'May',
-            '06' => 'Jun',
-            '07' => 'Jul',
-            '08' => 'Aug',
-            '09' => 'Sep',
-            '10' => 'Oct',
-            '11' => 'Nov',
-            '12' => 'Dec',
-        );
-        return $result;
-    }
-
-    function calander_years() {
-        $result = array();
-        $result[''] = 'Year';
-        $current_year = (date('Y')-18); // 18 years age
-        $start_year = ($current_year - 100);
-        for ($i = $current_year; $i > $start_year; $i--) {
-            $result[$i] = $i;
-        }
-        return $result;
-    }
-	
 	function add_education() {
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
             redirect($this->router->directory.$this->router->class.'/login');
         }
-        
-        
         $this->data['arr_academic_qualification'] = $this->user_model->get_qualification_dropdown();
         $this->data['arr_academic_degree'] = $this->user_model->get_degree_dropdown();
 		$this->data['arr_academic_inst'] = $this->user_model->get_institute_dropdown();
@@ -762,8 +690,6 @@ class User extends CI_Controller {
         if ($is_logged_in == FALSE) {
             redirect($this->router->directory.$this->router->class.'/login');
         }
-        
-        
 		$education_id = $this->uri->segment(3);
 		$this->data['arr_academic_qualification'] = $this->user_model->get_qualification_dropdown();
 		$this->data['arr_academic_inst'] = $this->user_model->get_institute_dropdown();
@@ -800,8 +726,6 @@ class User extends CI_Controller {
         if ($is_logged_in == FALSE) {
             redirect($this->router->directory.$this->router->class.'/login');
         }
-        
-        
 		$id = $this->uri->segment(3);
 		$where = array('id'=>$id, 'user_id' => $this->sess_user_id);
 		$res = $this->user_model->delete($where,'user_academics');
@@ -839,8 +763,6 @@ class User extends CI_Controller {
             redirect($this->router->directory.$this->router->class.'/login');
         }
         ########### Validate User Auth End #############
-        
-        
         $rows = $this->user_model->get_rows($this->sess_user_id);
         $this->data['row'] = $rows['data_rows'];
 
@@ -877,8 +799,6 @@ class User extends CI_Controller {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
             redirect($this->router->directory.$this->router->class.'/login');
         }
-        
-        
         
 		$this->data['user_id'] = $this->sess_user_id;
 		
@@ -1017,8 +937,6 @@ class User extends CI_Controller {
             redirect($this->router->directory.$this->router->class.'/login');
         }
 		$this->load->model('project_model');
-        
-        
 		$this->data['arr_projects'] = $this->project_model->get_project_dropdown();
         if ($this->input->post('form_action') == 'add') {
             if ($this->validate_user_project_assign_form_data('add') == true) {

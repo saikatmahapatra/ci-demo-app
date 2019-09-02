@@ -33,9 +33,6 @@ class Home extends CI_Controller {
         $this->load->model('cms_model');
         $this->load->model('upload_model');
         $this->id = $this->uri->segment(3);
-
-        
-        
         $this->data['page_title'] = $this->router->class.' : '.$this->router->method;
 
         $this->data['content_type'] = array(
@@ -59,11 +56,8 @@ class Home extends CI_Controller {
 		// Check user permission by permission name mapped to db
         // $is_authorized = $this->common_lib->is_auth('cms-list-view');
 			
-		$this->breadcrumbs->push('View','/');				
+		$this->breadcrumbs->push('View','/');
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
-		
-        
-        
 
         // Display using CI Pagination: Total filtered rows - check without limit query. Refer to model method definition		
 		$result_array = $this->cms_model->get_contents(NULL, NULL, NULL, FALSE, FALSE);
@@ -102,12 +96,8 @@ class Home extends CI_Controller {
 		// Check user permission by permission name mapped to db
         // $is_authorized = $this->common_lib->is_auth('cms-list-view');
 			
-		$this->breadcrumbs->push('View','/');				
+		$this->breadcrumbs->push('View','/');
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
-		
-        
-        
-
         $id = $this->uri->segment(3);		
 		$result_array = $this->cms_model->get_contents($id, NULL, NULL, FALSE, FALSE);
         $this->data['data_rows'] = $result_array['data_rows'];        

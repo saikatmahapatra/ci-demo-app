@@ -31,12 +31,8 @@ class Document extends CI_Controller {
         $this->data['app_js'] = $this->common_lib->add_javascript($javascript_files);
 
         $this->load->model('upload_model');
-        
-        
-
         $this->data['id'] = $this->uri->segment(3) ? $this->uri->segment(3) : $this->sess_user_id;
         $this->data['page_title'] = $this->router->class.' : '.$this->router->method;
-        
         $this->data['arr_upload_file_type_name'] = array(
             "" => "Select",
             "12_certificate" => "12th Certificate (Single)",
@@ -46,9 +42,6 @@ class Document extends CI_Controller {
     }
 
     function index() {
-        
-        
-
         //Uploads
         $upload_related_to = 'user';
         $this->data['upload_related_to'] = $upload_related_to;

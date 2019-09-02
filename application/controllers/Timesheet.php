@@ -22,10 +22,6 @@ class Timesheet extends CI_Controller {
             $this->router->class
         );
         $this->data['app_js'] = $this->common_lib->add_javascript($javascript_files);
-		        
-        
-        
-		
 		//Check if any user logged in else redirect to login
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
@@ -61,10 +57,8 @@ class Timesheet extends CI_Controller {
 		$template.='{week_row_start}<tr class="wk_nm">{/week_row_start}';
 		$template.='{week_day_cell}<td>{week_day}</td>{/week_day_cell}';
 		$template.='{week_row_end}</tr>{/week_row_end}';
-		
 		$css_days_rows = ($month != date('m'))? 'disabled_m': 'allowed_m';
 		$template.='{cal_row_start}<tr class="'.$css_days_rows.'">{/cal_row_start}';
-		
 		$template.='{cal_cell_start}<td class="day">{/cal_cell_start}';
 		$template.='{cal_cell_content}<a href="{content}">{day}</a>{/cal_cell_content}';
 		$template.='{cal_cell_content_today}<div class="highlight"><a href="{content}">{day}</a></div>{/cal_cell_content_today}';
@@ -73,9 +67,7 @@ class Timesheet extends CI_Controller {
 		$template.='{cal_cell_blank}&nbsp;{/cal_cell_blank}';
 		$template.='{cal_cell_end}</td>{/cal_cell_end}';		
 		$template.='{cal_row_end}</tr>{/cal_row_end}';	
-		
 		$template.='{table_close}</table>{/table_close}';
-		
 		$prefs = array (
                'start_day'    => 'monday',
                'month_type'   => 'short',
@@ -86,9 +78,6 @@ class Timesheet extends CI_Controller {
 		$this->load->library('calendar',$prefs);
 		
 		$this->data['entry_for'] = date('Y/m/d');
-		
-		
-		
 		$data = array();
 		$this->data['cal'] = $this->calendar->generate($year,$month,$data);
 		$month_name = date('M', mktime(0, 0, 0, $month, 10));		
@@ -103,9 +92,6 @@ class Timesheet extends CI_Controller {
 	function add() {
         //Check user permission by permission name mapped to db
         //$is_authorized = $this->common_lib->is_auth('timesheet-add');
-        
-        
-        
         if ($this->input->post('form_action') == 'add') {
             if ($this->validate_form_data('add') == true) {
                 
@@ -253,9 +239,6 @@ class Timesheet extends CI_Controller {
     }
     
     function edit() {
-        
-        
-        
         $year = $this->input->get_post('year') ? $this->input->get_post('year') : date('Y');
         $month = $this->input->get_post('month') ? $this->input->get_post('month') : date('m');
         $current_year = date('Y');
