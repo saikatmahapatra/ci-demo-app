@@ -5,3 +5,4 @@ assets/captcha/images/
 ci_sessions/
 bower_components/
 package-lock.json
+/nbproject/private/
