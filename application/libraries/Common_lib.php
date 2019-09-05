@@ -20,6 +20,7 @@ class Common_lib {
         $this->CI = & get_instance();
         $this->CI->load->model('user_model');
         $this->CI->data['alert_message'] = $this->display_flash_message();
+        $this->CI->data['is_admin'] = ($this->CI->uri->segment(1) == 'admin') ? true : false;
     }
 
     /**
@@ -40,18 +41,18 @@ class Common_lib {
             $this->CI->data['el_html_tag_meta_keywords'] = isset($meta_keyword) ? $meta_keyword : $this->CI->config->item('app_meta_keywords');
             $this->CI->data['el_html_tag_meta_description'] = isset($meta_desc) ? $meta_desc : $this->CI->config->item('app_meta_description');
             $this->CI->data['el_html_tag_meta_author'] = isset($meta_author) ? $meta_author : $this->CI->config->item('app_meta_author');
-            $this->CI->data['el_html_head'] = $this->CI->load->view('site/_layouts/elements/html_head', $this->CI->data, true);
-            $this->CI->data['el_navbar'] = $this->CI->load->view('site/_layouts/elements/navbar', $this->CI->data, true);
-            $this->CI->data['el_footer'] = $this->CI->load->view('site/_layouts/elements/footer', $this->CI->data, true);            
+            $this->CI->data['el_html_head'] = $this->CI->load->view('_layouts/elements/html_head', $this->CI->data, true);
+            $this->CI->data['el_navbar'] = $this->CI->load->view('_layouts/elements/navbar', $this->CI->data, true);
+            $this->CI->data['el_footer'] = $this->CI->load->view('_layouts/elements/footer', $this->CI->data, true);
         }
         if($view_dir == 'admin'){
             $this->CI->data['el_html_tag_title'] = isset($html_title) ? $html_title : $this->CI->config->item('app_html_title');
             $this->CI->data['el_html_tag_meta_keywords'] = isset($meta_keyword) ? $meta_keyword : $this->CI->config->item('app_meta_keywords');
             $this->CI->data['el_html_tag_meta_description'] = isset($meta_desc) ? $meta_desc : $this->CI->config->item('app_meta_description');
             $this->CI->data['el_html_tag_meta_author'] = isset($meta_author) ? $meta_author : $this->CI->config->item('app_meta_author');
-            $this->CI->data['el_html_head'] = $this->CI->load->view('admin/_layouts/elements/html_head', $this->CI->data, true);
-            $this->CI->data['el_footer'] = $this->CI->load->view('admin/_layouts/elements/footer', $this->CI->data, true);
-            $this->CI->data['el_navbar'] = $this->CI->load->view('admin/_layouts/elements/navbar', $this->CI->data, true);
+            $this->CI->data['el_html_head'] = $this->CI->load->view('_layouts/elements/admin_html_head', $this->CI->data, true);
+            $this->CI->data['el_footer'] = $this->CI->load->view('_layouts/elements/admin_footer', $this->CI->data, true);
+            $this->CI->data['el_navbar'] = $this->CI->load->view('_layouts/elements/admin_navbar', $this->CI->data, true);
         }
         return $this->CI->data;
     }

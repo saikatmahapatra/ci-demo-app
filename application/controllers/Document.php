@@ -15,7 +15,11 @@ class Document extends CI_Controller {
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
-            redirect($this->router->directory.'user/login');
+            if($this->data['is_admin'] === true){
+                redirect($this->router->directory.'admin/login');
+            }else{
+                redirect($this->router->directory.'user/login');
+            }
         }
 
         // Get logged  in user id
@@ -57,8 +61,8 @@ class Document extends CI_Controller {
             $this->upload_file();
         }
 		$this->data['page_title'] = 'My Documents';
-        $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/index', $this->data, true);
-        $this->load->view('site/_layouts/layout_default', $this->data);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/index', $this->data, true);
+        $this->load->view('_layouts/layout_default', $this->data);
     }
 
     function upload_file() {
@@ -145,7 +149,11 @@ class Document extends CI_Controller {
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
-            redirect($this->router->directory.'user/login');
+            if($this->data['is_admin'] === true){
+                redirect($this->router->directory.'admin/login');
+            }else{
+                redirect($this->router->directory.'user/login');
+            }
         }
 
         $id = $this->input->get_post('id');

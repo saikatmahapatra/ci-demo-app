@@ -15,7 +15,11 @@ class Product extends CI_Controller {
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
-            redirect($this->router->directory.'user/login');
+            if($this->data['is_admin'] === true){
+                redirect($this->router->directory.'admin/login');
+            }else{
+                redirect($this->router->directory.'user/login');
+            }
         }
 
         //Has logged in user permission to access this page or method?        
@@ -65,13 +69,9 @@ class Product extends CI_Controller {
     function index() {
 		$this->breadcrumbs->push('View', '/');		
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
-		
-        
-        
-		
 		$this->data['page_title'] = 'Products';
-        $this->data['maincontent'] = $this->load->view('admin/'.$this->router->class.'/index', $this->data, true);
-        $this->load->view('admin/_layouts/layout_default', $this->data);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/index', $this->data, true);
+        $this->load->view('_layouts/layout_admin_default', $this->data);
     }
 
     function render_datatable() {
@@ -161,9 +161,6 @@ class Product extends CI_Controller {
     }
 
     function add() {
-        
-        
-		
 		$this->breadcrumbs->push('Add', '/');		
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
 		
@@ -191,18 +188,13 @@ class Product extends CI_Controller {
             }
         }
 		$this->data['page_title'] = 'Add Product';
-        $this->data['maincontent'] = $this->load->view('admin/'.$this->router->class.'/add', $this->data, true);
-        $this->load->view('admin/_layouts/layout_default', $this->data);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/add', $this->data, true);
+        $this->load->view('_layouts/layout_admin_default', $this->data);
     }
 
     function edit() {
-        
-        
-		
 		$this->breadcrumbs->push('Edit', '/');		
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
-		
-		
         if ($this->input->post('form_action') == 'update') {
             if ($this->validate_form_data('edit') == true) {
                 $postdata = array(
@@ -246,8 +238,8 @@ class Product extends CI_Controller {
             $this->upload_file();
         }
 		$this->data['page_title'] = 'Edit Product';
-        $this->data['maincontent'] = $this->load->view('admin/'.$this->router->class.'/edit', $this->data, true);
-        $this->load->view('admin/_layouts/layout_default', $this->data);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/edit', $this->data, true);
+        $this->load->view('_layouts/layout_admin_default', $this->data);
     }
 
     function delete() {

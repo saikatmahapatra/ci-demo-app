@@ -16,7 +16,11 @@ class Home extends CI_Controller {
         /*$is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
-            redirect($this->router->directory.'user/login');
+            if($this->data['is_admin'] === true){
+                redirect($this->router->directory.'admin/login');
+            }else{
+                redirect($this->router->directory.'user/login');
+            }
         }*/
 
         // Get logged  in user id
@@ -85,8 +89,8 @@ class Home extends CI_Controller {
 		$this->data['sliders'] = $this->upload_model->get_slider();
 		//print_r($sliders);
 		$this->data['page_title'] = 'Welcome to '.$this->config->item('app_company_product');
-        $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/index', $this->data, true);
-        $this->load->view('site/_layouts/layout_home', $this->data);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/index', $this->data, true);
+        $this->load->view('_layouts/layout_home', $this->data);
     }
 
     function details() {
@@ -102,10 +106,61 @@ class Home extends CI_Controller {
 		$result_array = $this->cms_model->get_contents($id, NULL, NULL, FALSE, FALSE);
         $this->data['data_rows'] = $result_array['data_rows'];        
 		$this->data['page_title'] = 'Welcome';
-        $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/details', $this->data, true);
-        $this->load->view('site/_layouts/layout_default', $this->data);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/details', $this->data, true);
+        $this->load->view('_layouts/layout_default', $this->data);
     }
 
-}
+    function dashboard() {
+        //Render header, footer, navbar, sidebar etc common elements of templates
+        $this->common_lib->init_template_elements('admin');
 
+        //Check if any user logged in else redirect to login
+        $is_logged_in = $this->common_lib->is_logged_in();
+        if ($is_logged_in == FALSE) {
+			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
+            redirect($this->router->directory.'admin/login');
+        }
+
+        //Has logged in user permission to access this page or method?        
+        $is_authorized = $this->common_lib->is_auth(array(
+            'default-super-admin-access',
+            'default-admin-access'
+        ));
+
+		$this->breadcrumbs->push('View','/');
+        $this->data['breadcrumbs'] = $this->breadcrumbs->show();
+        
+        // Display using CI Pagination: Total filtered rows - check without limit query. Refer to model method definition		
+		$result_array = $this->cms_model->get_contents(NULL, NULL, NULL, FALSE, FALSE);
+		$total_num_rows = $result_array['num_rows'];
+		
+		//pagination config
+		$additional_segment = $this->router->directory.$this->router->class.'/index';
+		$per_page = 4;
+		$config['uri_segment'] = 3;
+		$config['num_links'] = 1;
+		$config['use_page_numbers'] = TRUE;
+		//$this->pagination->initialize($config);
+		
+		$page = ($this->uri->segment(4)) ? ($this->uri->segment(4)-1) : 0;
+		$offset = ($page*$per_page);
+		$this->data['pagination_link'] = $this->common_lib->render_pagination($total_num_rows, $per_page, $additional_segment);
+        //end of pagination config
+        
+        // Data Rows - Refer to model method definition
+        $result_array = $this->cms_model->get_contents(NULL, $per_page, $offset, FALSE, TRUE);
+        $this->data['data_rows'] = $result_array['data_rows'];
+		
+        // Dashboard Stats
+        $this->load->model('home_model');
+        $this->data['user_count'] = $this->home_model->get_user_count();
+        $this->data['post_count'] = $this->home_model->get_post_count();
+        $this->data['order_count'] = $this->home_model->get_order_count();
+        // Dashboard Stats
+		
+		$this->data['page_title'] = "Dashboard";
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/dashboard', $this->data, true);
+        $this->load->view('_layouts/layout_default', $this->data);
+    }
+}
 ?>

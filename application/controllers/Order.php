@@ -16,7 +16,11 @@ class Order extends CI_Controller {
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
-            redirect($this->router->directory.'user/login');
+            if($this->data['is_admin'] === true){
+                redirect($this->router->directory.'admin/login');
+            }else{
+                redirect($this->router->directory.'user/login');
+            }
         }
 
         //Has logged in user permission to access this page or method?        
@@ -66,13 +70,11 @@ class Order extends CI_Controller {
     }
 
     function index() {
-		$this->breadcrumbs->push('View','/');				
+		$this->breadcrumbs->push('View','/');
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
-        
-        
 		$this->data['page_title'] = 'Online Orders';
-        $this->data['maincontent'] = $this->load->view('admin/'.$this->router->class.'/index', $this->data, true);
-        $this->load->view('admin/_layouts/layout_default', $this->data);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/index', $this->data, true);
+        $this->load->view('_layouts/layout_admin_default', $this->data);
     }
 
     function render_datatable() {
@@ -132,9 +134,6 @@ class Order extends CI_Controller {
     }
 	
 	function edit() {
-        
-        
-		
 		$this->breadcrumbs->push('Edit', '/');		
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
 		$this->data['arr_order_item_status'] = array(
@@ -149,9 +148,7 @@ class Order extends CI_Controller {
 		'cancelled'=>'Cancelled',
 		'rejected'=>'Rejected',
 		'dismissed'=>'Dismissed'
-		);		
-		
-		
+		);
         if ($this->input->post('form_action') == 'update') {
             //if ($this->validate_form_data('edit') == true) {
 				//print_r($_POST);die();
@@ -181,8 +178,8 @@ class Order extends CI_Controller {
         $this->data['odetails'] = $order_details_result_array['data_rows'];
 		
 		$this->data['page_title'] = 'Manage Order';
-        $this->data['maincontent'] = $this->load->view('admin/'.$this->router->class.'/edit', $this->data, true);
-        $this->load->view('admin/_layouts/layout_default', $this->data);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/edit', $this->data, true);
+        $this->load->view('_layouts/layout_admin_default', $this->data);
     }
 }
 

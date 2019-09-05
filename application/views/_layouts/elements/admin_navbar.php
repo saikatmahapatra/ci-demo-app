@@ -1,5 +1,6 @@
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-black fixed-top colorgraph-navbar">
-        <a class="navbar-brand" href="<?php echo base_url($this->router->directory); ?>">
+        <a class="navbar-brand" href="<?php echo base_url('admin'); ?>">
             <!-- <img class="logo" src="<?php echo base_url('assets/dist/img/logo.png');?>"> -->
             <?php echo $this->config->item('app_logo_name_dashboard'); ?>
         </a>
@@ -19,28 +20,28 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown_1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Store</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown_1">
-                        <a class="dropdown-item" href="<?php echo base_url($this->router->directory.'order'); ?>">Order Management</a>
-                        <a class="dropdown-item" href="<?php echo base_url($this->router->directory.'product');?>">Manage Products</a>
-                        <a class="dropdown-item" href="<?php echo base_url($this->router->directory.'product/add');?>">Add Product</a>
-                        <a class="dropdown-item" href="<?php echo base_url($this->router->directory.'category');?>">Manage Categories</a>
-                        <a class="dropdown-item" href="<?php echo base_url($this->router->directory.'category/add');?>">Add Category</a>
+                        <a class="dropdown-item" href="<?php echo base_url('admin/order'); ?>">Order Management</a>
+                        <a class="dropdown-item" href="<?php echo base_url('admin/product');?>">Manage Products</a>
+                        <a class="dropdown-item" href="<?php echo base_url('admin/product/add');?>">Add Product</a>
+                        <a class="dropdown-item" href="<?php echo base_url('admin/category');?>">Manage Categories</a>
+                        <a class="dropdown-item" href="<?php echo base_url('admin/category/add');?>">Add Category</a>
                     </div>
                 </li>
                 
 				<li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown_3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Customers</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown_3">
-                        <a class="dropdown-item" href="<?php echo base_url($this->router->directory.'user/manage'); ?>">Manage Users</a>
-                        <a class="dropdown-item" href="<?php echo base_url($this->router->directory.'user/create_account'); ?>">Create New User</a>
+                        <a class="dropdown-item" href="<?php echo base_url('admin/user/manage'); ?>">Manage Users</a>
+                        <a class="dropdown-item" href="<?php echo base_url('admin/user/create_account'); ?>">Create New User</a>
                     </div>
                 </li>
 
 				<li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown_3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More...</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown_3">
-                        <a class="dropdown-item" href="<?php echo base_url($this->router->directory.'timesheet/report'); ?>">Timesheet</a>
-                        <a class="dropdown-item" href="<?php echo base_url($this->router->directory.'cms'); ?>">CMS</a>
-                        <a class="dropdown-item" href="<?php echo base_url($this->router->directory.'cms/manage_banner'); ?>">Banner</a>
+                        <a class="dropdown-item" href="<?php echo base_url('admin/timesheet/report'); ?>">Timesheet</a>
+                        <a class="dropdown-item" href="<?php echo base_url('admin/cms'); ?>">CMS</a>
+                        <a class="dropdown-item" href="<?php echo base_url('admin/cms/manage_banner'); ?>">Banner</a>
                     </div>
                 </li>
             </ul>
@@ -110,9 +111,9 @@
                         </div><!--/.welcome-user-container-->
                         
                         <div class="dropdown-divider mt-2"></div>			
-                        <a class="dropdown-item"  href="<?php echo base_url($this->router->directory.'user/profile/'); ?>">My Profile</a>
-                        <a class="dropdown-item" href="<?php echo base_url($this->router->directory.'user/change_password'); ?>">Change Password</a>
-                        <a class="dropdown-item" href="<?php echo base_url($this->router->directory.'user/logout'); ?>">Logout</a>
+                        <a class="dropdown-item"  href="<?php echo base_url('admin/user/profile/'); ?>">My Profile</a>
+                        <a class="dropdown-item" href="<?php echo base_url('admin/user/change_password'); ?>">Change Password</a>
+                        <a class="dropdown-item" href="<?php echo base_url('admin/user/logout'); ?>">Logout</a>
                     </div>
                 </li>
             </ul>

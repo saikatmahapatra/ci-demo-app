@@ -13,11 +13,15 @@ class Shop extends CI_Controller {
         parent::__construct();
         
         //Check if any user logged in else redirect to login
-        /*$is_logged_in = $this->common_lib->is_logged_in();
+        $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
-			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
-            redirect($this->router->directory.'user/login');
-        }*/
+            $this->session->set_userdata('sess_post_login_redirect_url', current_url());
+            if($this->data['is_admin'] === true){
+                redirect($this->router->directory.'admin/login');
+            }else{
+                redirect($this->router->directory.'user/login');
+            }
+        }
 
         // Get logged  in user id
         $this->sess_user_id = $this->common_lib->get_sess_user('id');
@@ -58,8 +62,8 @@ class Shop extends CI_Controller {
         $this->data['total_products'] = $result['num_rows'];
         $this->data['products'] = $result['data_rows'];
 		$this->data['page_title'] = 'Shop Online';
-        $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/store', $this->data, true);
-        $this->load->view('site/_layouts/layout_default', $this->data);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/store', $this->data, true);
+        $this->load->view('_layouts/layout_default', $this->data);
     }
 
     function details(){
@@ -67,8 +71,8 @@ class Shop extends CI_Controller {
         $this->data['total_products'] = $result['num_rows'];
         $this->data['products'] = $result['data_rows'];
 		$this->data['page_title'] = 'Item Details';
-        $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/store', $this->data, true);
-        $this->load->view('site/_layouts/layout_default', $this->data);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/store', $this->data, true);
+        $this->load->view('_layouts/layout_default', $this->data);
     }
     
     function get_cart_data(){
@@ -99,7 +103,11 @@ class Shop extends CI_Controller {
         /*$is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
-            redirect($this->router->directory.'user/login');
+            if($this->data['is_admin'] === true){
+                redirect($this->router->directory.'admin/login');
+            }else{
+                redirect($this->router->directory.'user/login');
+            }
         }*/
         $cart_data = $this->get_cart_data();		
 		$this->data['cartrows'] = $cart_data['cartrows'];
@@ -112,8 +120,8 @@ class Shop extends CI_Controller {
 		}
 		
 		$this->data['page_title'] = 'My Cart';
-        $this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/my_cart', $this->data, true);
-        $this->load->view('site/_layouts/layout_default', $this->data);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/my_cart', $this->data, true);
+        $this->load->view('_layouts/layout_default', $this->data);
     }
 
     function find_item($product_id) { //return rowid against a product id, if already added to the cart
@@ -200,7 +208,11 @@ class Shop extends CI_Controller {
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
-            redirect($this->router->directory.'user/login');
+            if($this->data['is_admin'] === true){
+                redirect($this->router->directory.'admin/login');
+            }else{
+                redirect($this->router->directory.'user/login');
+            }
         }
         
         if($this->cart->total_items() <= 0){
@@ -222,8 +234,8 @@ class Shop extends CI_Controller {
         }
 
 		$this->data['page_title'] = 'Checkout';		
-		$this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/init_payment', $this->data, true);
-        $this->load->view('site/_layouts/layout_default', $this->data);
+		$this->data['maincontent'] = $this->load->view($this->router->class.'/init_payment', $this->data, true);
+        $this->load->view('_layouts/layout_default', $this->data);
 	}
 
     function get_user_shipping_address($address_id = NULL, $user_id, $address_type_char){
@@ -240,7 +252,11 @@ class Shop extends CI_Controller {
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
-            redirect($this->router->directory.'user/login');
+            if($this->data['is_admin'] === true){
+                redirect($this->router->directory.'admin/login');
+            }else{
+                redirect($this->router->directory.'user/login');
+            }
         }
 
 		$cart_data = $this->get_cart_data();
@@ -300,7 +316,6 @@ class Shop extends CI_Controller {
 		}
     }
 
-    
     function generate_order_number() {
         $order_no = date('mdY') . time();
         return $order_no;
@@ -322,17 +337,146 @@ class Shop extends CI_Controller {
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
-            redirect($this->router->directory.'user/login');
+            if($this->data['is_admin'] === true){
+                redirect($this->router->directory.'admin/login');
+            }else{
+                redirect($this->router->directory.'user/login');
+            }
         }
 		$this->cart->destroy(); // remove cart items
         //Update table with payment response
 		//$this->data = array();
 		$this->data['order_no'] = $this->uri->segment(4);
 		$this->data['page_title'] = 'Your Online Transaction Summary';
-		$this->data['maincontent'] = $this->load->view('site/'.$this->router->class.'/transaction_response', $this->data, true);
-        $this->load->view('site/_layouts/layout_default', $this->data);
+		$this->data['maincontent'] = $this->load->view($this->router->class.'/transaction_response', $this->data, true);
+        $this->load->view('_layouts/layout_default', $this->data);
     }
 
+    function manage_orders() {
+        //Has logged in user permission to access this page or method?        
+        $is_authorized = $this->common_lib->is_auth(array(
+            'default-super-admin-access',
+            'default-admin-access'
+        ));
+		$this->breadcrumbs->push('View','/');
+        $this->data['breadcrumbs'] = $this->breadcrumbs->show();
+        //Render header, footer, navbar, sidebar etc common elements of templates
+        $this->common_lib->init_template_elements('admin');
+		$this->data['page_title'] = 'Online Orders';
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/index', $this->data, true);
+        $this->load->view('_layouts/layout_admin_default', $this->data);
+    }
+
+    function render_datatable() {
+        //Total rows - Refer to model method definition
+        $result_array = $this->order_model->get_rows();
+        $total_rows = $result_array['num_rows'];
+
+        // Total filtered rows - check without limit query. Refer to model method definition
+        $result_array = $this->order_model->get_rows(NULL, NULL, NULL, TRUE, FALSE);
+        $total_filtered = $result_array['num_rows'];
+
+        // Data Rows - Refer to model method definition
+        $result_array = $this->order_model->get_rows(NULL, NULL, NULL, TRUE);
+        $data_rows = $result_array['data_rows'];
+        $data = array();
+        $no = $_REQUEST['start'];
+        foreach ($data_rows as $result) {
+            $no++;
+            $row = array();
+            $row[] = isset($result['order_no']) ? $result['order_no'] : '';
+            $row[] = $this->common_lib->display_date($result['order_datetime'],true);
+			$amt_wrapper = ($result['order_payment_debit_credit']=='C') ? '' : '';
+            $row[] = isset($result['order_total_amt']) ? '<span class="'.$amt_wrapper.'"> &#8377;'.$result['order_total_amt'].'</span>' : '';
+            $row[] = isset($result['order_payment_status']) ? $result['order_payment_status'] : '';
+            //$row[] = isset($result['order_payment_trans_id']) ? $result['order_payment_trans_id'] : '';
+            //$row[] = isset($result['order_status']) ? $result['order_status'] : '';
+
+            $html_user_details = '';
+            $html_user_details.= isset($result['user_firstname']) ? '<div class="">' . $result['user_firstname'] . '&nbsp;' . $result['user_lastname'] . '</div>' : '';
+            $html_user_details.= isset($result['user_email']) ? '<div class="">' . $result['user_email'] . '</div>' : '';
+            $html_user_details.= isset($result['user_phone1']) ? '<div class="">' . $result['user_phone1'] . '</div>' : '';
+            $row[] = $html_user_details;
+
+            //add html for action
+            $action_html = '';
+            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/edit/' .$result['id']), '<i class="fa fa-fw fa-pencil" aria-hidden="true"></i>', array(
+                'class' => 'btn btn-sm btn-outline-secondary',
+                'data-toggle' => 'tooltip',
+                'data-original-title' => 'Edit',
+                'title' => 'Edit',
+            ));
+            $action_html.='&nbsp;';			
+
+            $row[] = $action_html;
+            $data[] = $row;
+        }
+
+        /* jQuery Data Table JSON format */
+        $output = array(
+            'draw' => isset($_REQUEST['draw']) ? $_REQUEST['draw'] : '',
+            'recordsTotal' => $total_rows,
+            'recordsFiltered' => $total_filtered,
+            'data' => $data,
+        );
+        //output to json format
+        echo json_encode($output);
+    }
+	
+	function edit() {
+        //Has logged in user permission to access this page or method?        
+        $is_authorized = $this->common_lib->is_auth(array(
+            'default-super-admin-access',
+            'default-admin-access'
+        ));
+		$this->breadcrumbs->push('Edit', '/');		
+		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
+		$this->data['arr_order_item_status'] = array(
+		'processing'=>'Processing',
+		'dispatched'=>'Dispatched',
+		'out_for_del'=>'Out for Delivery',
+		'delivered'=>'Delivered',
+		'return_init'=>'Return Initiated',
+		'return_approved'=>'Return Approved',
+		'refund_init'=>'Refund Initiated',
+		'refund_done'=>'Refunded Amount',
+		'cancelled'=>'Cancelled',
+		'rejected'=>'Rejected',
+		'dismissed'=>'Dismissed'
+		);
+        if ($this->input->post('form_action') == 'update') {
+            //if ($this->validate_form_data('edit') == true) {
+				//print_r($_POST);die();
+                $postdata = array();				
+				if(isset($_POST['order_detail_status'])){
+					$i = 0;
+					foreach($_POST['order_detail_status'] as $key => $val){					
+						$postdata[$i]['id'] = $key;
+						$postdata[$i]['order_detail_status'] = $val;					
+						$i++;					
+					}
+					//print_r($postdata);die();										
+					$res = $this->order_model->update_batch($postdata, 'id', NULL);
+					if ($res) {
+						$this->common_lib->set_flash_message('Data updated successfully.', 'alert-success');
+						redirect($this->router->directory.$this->router->class.'/edit/'.$this->id);
+					}
+				}
+            //}
+        }
+        $result_array = $this->order_model->get_rows($this->id);
+        $order_details_result_array = $this->order_model->get_order_details($this->id); // order product details
+		//print_r($order_details_result_array);
+		//die();
+		 
+        $this->data['rows'] = $result_array['data_rows'];
+        $this->data['odetails'] = $order_details_result_array['data_rows'];
+		//Render header, footer, navbar, sidebar etc common elements of templates
+        $this->common_lib->init_template_elements('admin');
+		$this->data['page_title'] = 'Manage Order';
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/edit', $this->data, true);
+        $this->load->view('_layouts/layout_admin_default', $this->data);
+    }
 
 }
 

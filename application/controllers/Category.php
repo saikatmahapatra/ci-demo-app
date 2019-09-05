@@ -16,7 +16,11 @@ class Category extends CI_Controller {
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
-            redirect($this->router->directory.'user/login');
+            if($this->data['is_admin'] === true){
+                redirect($this->router->directory.'admin/login');
+            }else{
+                redirect($this->router->directory.'user/login');
+            }
         }
 
         //Has logged in user permission to access this page or method?        
@@ -68,8 +72,8 @@ class Category extends CI_Controller {
 		$this->breadcrumbs->push('View','/');				
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
 		$this->data['page_title'] = 'Product Category';
-        $this->data['maincontent'] = $this->load->view('admin/'.$this->router->class.'/index', $this->data, true);
-        $this->load->view('admin/_layouts/layout_default', $this->data);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/index', $this->data, true);
+        $this->load->view('_layouts/layout_admin_default', $this->data);
     }
 
     function render_datatable() {
@@ -169,16 +173,13 @@ class Category extends CI_Controller {
             }
         }
 		$this->data['page_title'] = 'Add Product Category';
-        $this->data['maincontent'] = $this->load->view('admin/'.$this->router->class.'/add', $this->data, true);
-        $this->load->view('admin/_layouts/layout_default', $this->data);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/add', $this->data, true);
+        $this->load->view('_layouts/layout_admin_default', $this->data);
     }
 
     function edit() {
-		$this->breadcrumbs->push('Edit','/');				
+		$this->breadcrumbs->push('Edit','/');
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
-		
-        
-        
         if ($this->input->post('form_action') == 'update') {
             if ($this->validate_category_form_data('edit') == true) {
                 $parent_cat_id = ($this->input->post('category_parent') == '') ? NULL : $this->input->post('category_parent');
@@ -199,8 +200,8 @@ class Category extends CI_Controller {
         $result_array = $this->category_model->get_rows($this->uri->segment(4));
         $this->data['rows'] = $result_array['data_rows'];
 		$this->data['page_title'] = 'Edit Product Category';
-        $this->data['maincontent'] = $this->load->view('admin/'.$this->router->class.'/edit', $this->data, true);
-        $this->load->view('admin/_layouts/layout_default', $this->data);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/edit', $this->data, true);
+        $this->load->view('_layouts/layout_admin_default', $this->data);
     }
 
     function delete() {

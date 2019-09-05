@@ -50,6 +50,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'home';
-$route['admin'] = 'admin/user';
 $route['404_override'] = 'error/page_not_found';
 $route['translate_uri_dashes'] = FALSE;
+
+//  App Router
+$route['admin'] = 'home/dashboard';
+$route['admin/login'] = 'user/login';
+$route['admin/dashboard'] = 'home/dashboard';
+$route['admin/user/manage'] = 'user/manage';
+$route['admin/user/create_account'] = 'user/create_account';
+$route['admin/user/profile'] = 'user/profile';
+$route['admin/user/change_password'] = 'user/change_password';
+$route['admin/user/logout'] = 'user/logout';
+$route['admin/shop'] = 'shop';
+$route['admin/orders'] = 'shop/manage_orders';
