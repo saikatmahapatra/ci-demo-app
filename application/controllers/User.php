@@ -156,7 +156,7 @@ class User extends CI_Controller {
             redirect($this->router->directory.$this->router->class.'/login');
         }
         //Has logged in user permission to access this page or method?        
-        $is_authorized = $this->common_lib->is_auth(array(
+        $this->common_lib->is_auth(array(
             'default-super-admin-access',
             'default-admin-access',
         ));
@@ -326,7 +326,7 @@ class User extends CI_Controller {
             redirect($this->router->directory.$this->router->class.'/login');
         }
         //Has logged in user permission to access this page or method?        
-        $is_authorized = $this->common_lib->is_auth(array(
+        $this->common_lib->is_auth(array(
             'default-super-admin-access',
             'default-admin-access',
         ));

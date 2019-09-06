@@ -53,14 +53,28 @@ $route['default_controller'] = 'home';
 $route['404_override'] = 'error/page_not_found';
 $route['translate_uri_dashes'] = FALSE;
 
-//  App Router
+/**
+ * App Router
+ */
 $route['admin'] = 'home/dashboard';
 $route['admin/login'] = 'user/login';
 $route['admin/dashboard'] = 'home/dashboard';
+// User
 $route['admin/user/manage'] = 'user/manage';
 $route['admin/user/create_account'] = 'user/create_account';
 $route['admin/user/profile'] = 'user/profile';
 $route['admin/user/change_password'] = 'user/change_password';
 $route['admin/user/logout'] = 'user/logout';
+// Shop
 $route['admin/shop'] = 'shop';
 $route['admin/orders'] = 'shop/manage_orders';
+// Category
+$route['admin/category'] = 'category/index';
+$route['admin/category/add'] = 'category/add';
+$route['admin/category/edit'] = 'category/edit';
+$route['admin/category/delete'] = 'category/delete';
+// Product
+$route['admin/product'] = 'product/index';
+$route['admin/product/add'] = 'product/add';
+$route['admin/product/edit'] = 'product/edit';
+$route['admin/product/delete'] = 'product/delete';

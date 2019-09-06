@@ -55,10 +55,10 @@ class Home extends CI_Controller {
 
     function index() {
         // Check user permission by permission name mapped to db
-        // $is_authorized = $this->common_lib->is_auth('cms-list-view');
+        // $this->common_lib->is_auth('cms-list-view');
 		
 		// Check user permission by permission name mapped to db
-        // $is_authorized = $this->common_lib->is_auth('cms-list-view');
+        // $this->common_lib->is_auth('cms-list-view');
 			
 		$this->breadcrumbs->push('View','/');
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
@@ -95,10 +95,10 @@ class Home extends CI_Controller {
 
     function details() {
         // Check user permission by permission name mapped to db
-        // $is_authorized = $this->common_lib->is_auth('cms-list-view');
+        // $this->common_lib->is_auth('cms-list-view');
 		
 		// Check user permission by permission name mapped to db
-        // $is_authorized = $this->common_lib->is_auth('cms-list-view');
+        // $this->common_lib->is_auth('cms-list-view');
 			
 		$this->breadcrumbs->push('View','/');
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
@@ -122,7 +122,7 @@ class Home extends CI_Controller {
         }
 
         //Has logged in user permission to access this page or method?        
-        $is_authorized = $this->common_lib->is_auth(array(
+        $this->common_lib->is_auth(array(
             'default-super-admin-access',
             'default-admin-access'
         ));

@@ -39,7 +39,7 @@ class Install extends CI_Controller {
 
     function index() {
         // Check user permission by permission name mapped to db
-        // $is_authorized = $this->common_lib->is_auth('cms-list-view');
+        // $this->common_lib->is_auth('cms-list-view');
 		
 		// Get logged  in user id
         $this->sess_user_id = $this->common_lib->get_sess_user('id');

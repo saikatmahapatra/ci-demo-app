@@ -24,7 +24,7 @@ class Category extends CI_Controller {
         }
 
         //Has logged in user permission to access this page or method?        
-        $is_authorized = $this->common_lib->is_auth(array(
+        $this->common_lib->is_auth(array(
             'default-super-admin-access',
             'default-admin-access'
         ));
@@ -40,19 +40,14 @@ class Category extends CI_Controller {
             $this->router->class
         );
         $this->data['app_js'] = $this->common_lib->add_javascript($javascript_files);
-        
-        
+
         $this->load->model('category_model');
         $this->id = $this->uri->segment(4);
         
-        
         $this->data['category_dropdown'] = $this->category_model->get_category_dropdown();
-
-        //View Page Config
-		$this->data['view_dir'] = 'admin/'; //i.e application/view/admin
-        $this->data['page_title'] = $this->router->class.' : '.$this->router->method;        
-		
-		// load Breadcrumbs
+        $this->data['page_title'] = $this->router->class.' : '.$this->router->method;
+        
+        // load Breadcrumbs
 		$this->load->library('breadcrumbs');
 		
 		// Status flag indicator for showing in table grid etc
@@ -153,11 +148,8 @@ class Category extends CI_Controller {
     }
 
     function add() {
-		$this->breadcrumbs->push('Add','/');				
+		$this->breadcrumbs->push('Add','/');
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
-		
-        
-        
         if ($this->input->post('form_action') == 'insert') {
             if ($this->validate_category_form_data('add') == true) {
                 $parent_cat_id = ($this->input->post('category_parent') == '') ? NULL : $this->input->post('category_parent');

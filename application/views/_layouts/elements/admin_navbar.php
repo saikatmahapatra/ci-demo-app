@@ -1,5 +1,5 @@
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-black fixed-top colorgraph-navbar">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top colorgraph-navbar">
         <a class="navbar-brand" href="<?php echo base_url('admin'); ?>">
             <!-- <img class="logo" src="<?php echo base_url('assets/dist/img/logo.png');?>"> -->
             <?php echo $this->config->item('app_logo_name_dashboard'); ?>
@@ -20,7 +20,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown_1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Store</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown_1">
-                        <a class="dropdown-item" href="<?php echo base_url('admin/order'); ?>">Order Management</a>
+                        <a class="dropdown-item" href="<?php echo base_url('admin/orders'); ?>">Order Management</a>
                         <a class="dropdown-item" href="<?php echo base_url('admin/product');?>">Manage Products</a>
                         <a class="dropdown-item" href="<?php echo base_url('admin/product/add');?>">Add Product</a>
                         <a class="dropdown-item" href="<?php echo base_url('admin/category');?>">Manage Categories</a>

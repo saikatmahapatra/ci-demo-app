@@ -100,7 +100,7 @@ class Timesheet extends CI_Controller {
 	
 	function add() {
         //Check user permission by permission name mapped to db
-        //$is_authorized = $this->common_lib->is_auth('timesheet-add');
+        //$this->common_lib->is_auth('timesheet-add');
         if ($this->input->post('form_action') == 'add') {
             if ($this->validate_form_data('add') == true) {
                 

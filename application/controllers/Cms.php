@@ -24,7 +24,7 @@ class Cms extends CI_Controller {
         }
 
         //Has logged in user permission to access this page or method?        
-        $is_authorized = $this->common_lib->is_auth(array(
+        $this->common_lib->is_auth(array(
             'default-super-admin-access',
             'default-admin-access'
         ));
@@ -40,20 +40,19 @@ class Cms extends CI_Controller {
             $this->router->class
         );
         $this->data['app_js'] = $this->common_lib->add_javascript($javascript_files);
-
         
         $this->load->model('cms_model');
 		$this->load->model('upload_model');
         $this->id = $this->uri->segment(4);
 
-        
-        
         $this->data['page_title'] = $this->router->class.' : '.$this->router->method;
         
 		$this->data['arr_content_type'] = $this->cms_model->get_content_type();
-		// load Breadcrumbs
+        
+        // load Breadcrumbs
 		$this->load->library('breadcrumbs');
-		// add breadcrumbs. push() - Append crumb to stack
+        
+        // add breadcrumbs. push() - Append crumb to stack
 		$this->breadcrumbs->push('Home', '/');
 		$this->breadcrumbs->push('CMS', '/cms');		
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
@@ -72,7 +71,7 @@ class Cms extends CI_Controller {
 
     function index() {
         // Check user permission by permission name mapped to db
-        // $is_authorized = $this->common_lib->is_auth('cms-list-view');
+        // $this->common_lib->is_auth('cms-list-view');
 		
 		// Get logged  in user id
         $this->sess_user_id = $this->common_lib->get_sess_user('id');
@@ -90,7 +89,7 @@ class Cms extends CI_Controller {
 	
 	function index_ci_pagination() {
         // Check user permission by permission name mapped to db
-        // $is_authorized = $this->common_lib->is_auth('cms-list-view');
+        // $this->common_lib->is_auth('cms-list-view');
 			
 		$this->breadcrumbs->push('View','/');
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
@@ -174,7 +173,7 @@ class Cms extends CI_Controller {
 
     function add() {
         //Check user permission by permission name mapped to db
-        //$is_authorized = $this->common_lib->is_auth('cms-add');
+        //$this->common_lib->is_auth('cms-add');
         //$this->data['page_title'] = "Add Page Content";
 		$this->breadcrumbs->push('Add','/');				
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
@@ -209,7 +208,7 @@ class Cms extends CI_Controller {
 
     function edit() {
         //Check user permission by permission name mapped to db
-        //$is_authorized = $this->common_lib->is_auth('cms-edit');
+        //$this->common_lib->is_auth('cms-edit');
 		//$this->data['page_title'] = "Edit Page Content";
 		$this->breadcrumbs->push('Edit','/');				
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
@@ -246,7 +245,7 @@ class Cms extends CI_Controller {
 
     function delete() {
         //Check user permission by permission name mapped to db
-        //$is_authorized = $this->common_lib->is_auth('cms-delete');
+        //$this->common_lib->is_auth('cms-delete');
 
         $where_array = array('id' => $this->id);
         $res = $this->cms_model->delete($where_array);
@@ -347,7 +346,7 @@ class Cms extends CI_Controller {
 
 	function manage_banner() {
         // Check user permission by permission name mapped to db
-        // $is_authorized = $this->common_lib->is_auth('cms-list-view');
+        // $this->common_lib->is_auth('cms-list-view');
 		
 		// Get logged  in user id
         $this->sess_user_id = $this->common_lib->get_sess_user('id');

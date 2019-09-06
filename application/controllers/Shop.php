@@ -354,7 +354,7 @@ class Shop extends CI_Controller {
 
     function manage_orders() {
         //Has logged in user permission to access this page or method?        
-        $is_authorized = $this->common_lib->is_auth(array(
+        $this->common_lib->is_auth(array(
             'default-super-admin-access',
             'default-admin-access'
         ));
@@ -363,7 +363,7 @@ class Shop extends CI_Controller {
         //Render header, footer, navbar, sidebar etc common elements of templates
         $this->common_lib->init_template_elements('admin');
 		$this->data['page_title'] = 'Online Orders';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/index', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/manage_orders', $this->data, true);
         $this->load->view('_layouts/layout_admin_default', $this->data);
     }
 
@@ -400,7 +400,7 @@ class Shop extends CI_Controller {
 
             //add html for action
             $action_html = '';
-            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/edit/' .$result['id']), '<i class="fa fa-fw fa-pencil" aria-hidden="true"></i>', array(
+            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/update_order/' .$result['id']), '<i class="fa fa-fw fa-pencil" aria-hidden="true"></i>', array(
                 'class' => 'btn btn-sm btn-outline-secondary',
                 'data-toggle' => 'tooltip',
                 'data-original-title' => 'Edit',
@@ -423,9 +423,9 @@ class Shop extends CI_Controller {
         echo json_encode($output);
     }
 	
-	function edit() {
+	function update_order() {
         //Has logged in user permission to access this page or method?        
-        $is_authorized = $this->common_lib->is_auth(array(
+        $this->common_lib->is_auth(array(
             'default-super-admin-access',
             'default-admin-access'
         ));
@@ -474,7 +474,7 @@ class Shop extends CI_Controller {
 		//Render header, footer, navbar, sidebar etc common elements of templates
         $this->common_lib->init_template_elements('admin');
 		$this->data['page_title'] = 'Manage Order';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/edit', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/update_order', $this->data, true);
         $this->load->view('_layouts/layout_admin_default', $this->data);
     }
 

@@ -24,7 +24,7 @@ class Srbac extends CI_Controller {
         }
 
         //Has logged in user permission to access this page or method?        
-        $is_authorized = $this->common_lib->is_auth(array(
+        $this->common_lib->is_auth(array(
             'default-super-admin-access',
             'default-admin-access'
         ));
@@ -71,7 +71,7 @@ class Srbac extends CI_Controller {
 
     function index() {
         // Check user permission by permission name mapped to db
-        // $is_authorized = $this->common_lib->is_auth('cms-list-view');
+        // $this->common_lib->is_auth('cms-list-view');
 		
 		// Get logged  in user id
         $this->sess_user_id = $this->common_lib->get_sess_user('id');
@@ -89,7 +89,7 @@ class Srbac extends CI_Controller {
 	
 	function index_ci_pagination() {
         // Check user permission by permission name mapped to db
-        // $is_authorized = $this->common_lib->is_auth('cms-list-view');
+        // $this->common_lib->is_auth('cms-list-view');
 			
 		$this->breadcrumbs->push('View','/');				
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
@@ -180,7 +180,7 @@ class Srbac extends CI_Controller {
 
     function add() {
         //Check user permission by permission name mapped to db
-        //$is_authorized = $this->common_lib->is_auth('cms-add');
+        //$this->common_lib->is_auth('cms-add');
         //$this->data['page_title'] = "Add Page Content";
 		$this->breadcrumbs->push('Add','/');				
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
@@ -215,7 +215,7 @@ class Srbac extends CI_Controller {
 
     function edit() {
         //Check user permission by permission name mapped to db
-        //$is_authorized = $this->common_lib->is_auth('cms-edit');
+        //$this->common_lib->is_auth('cms-edit');
 		//$this->data['page_title'] = "Edit Page Content";
 		$this->breadcrumbs->push('Edit','/');				
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
@@ -253,7 +253,7 @@ class Srbac extends CI_Controller {
 
     function delete() {
         //Check user permission by permission name mapped to db
-        //$is_authorized = $this->common_lib->is_auth('cms-delete');
+        //$this->common_lib->is_auth('cms-delete');
 
         $where_array = array('id' => $this->id);
         $res = $this->cms_model->delete($where_array);
