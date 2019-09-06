@@ -153,9 +153,9 @@ class Category_model extends CI_Model {
         $query = $this->db->get('categories');
         $num_row = $query->num_rows();
         if ($num_row >= 1) {
-            return false;
+            return FALSE;
         } else
-            return true;
+            return TRUE;
     }
 
     function create_tree_array($my_array) {

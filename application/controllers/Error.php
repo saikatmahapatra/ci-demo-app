@@ -26,14 +26,14 @@ class Error extends CI_Controller {
     function page_not_found() {
         $data = array();
 		$this->data['page_title'] = "404 Page not found";
-        $this->data['maincontent'] = $this->load->view('errors/error_404', $this->data, true);
+        $this->data['maincontent'] = $this->load->view('errors/error_404', $this->data, TRUE);
         $this->load->view('_layouts/layout_default', $this->data);
     }
 	
 	function auth() {
 		$data = array();
 		$this->data['page_title'] = "Authorization Error Occured";
-        $this->data['maincontent'] = $this->load->view('errors/auth_error', $this->data, true);
+        $this->data['maincontent'] = $this->load->view('errors/auth_error', $this->data, TRUE);
         $this->load->view('_layouts/layout_default', $this->data);
     }
 

@@ -43,9 +43,9 @@ class User extends CI_Controller {
 		
 		// Status flag indicator for showing in table grid etc
 		$this->data['status_flag'] = array(
-            'Y'=>array('text'=>'Active', 'css'=>'text-success', 'icon'=>'<i class="fa fa-fw fa-bookmark-o text-success" aria-hidden="true"></i>'),
-            'N'=>array('text'=>'Inactive', 'css'=>'text-warning', 'icon'=>'<i class="fa fa-fw fa-bookmark-o text-warning" aria-hidden="true"></i>'),
-            'A'=>array('text'=>'Archived', 'css'=>'text-danger', 'icon'=>'<i class="fa fa-fw fa-bookmark-o text-danger" aria-hidden="true"></i>')
+            'Y'=>array('text'=>'Active', 'css'=>'text-success', 'icon'=>'<i class="fa fa-fw fa-bookmark-o text-success" aria-hidden="TRUE"></i>'),
+            'N'=>array('text'=>'Inactive', 'css'=>'text-warning', 'icon'=>'<i class="fa fa-fw fa-bookmark-o text-warning" aria-hidden="TRUE"></i>'),
+            'A'=>array('text'=>'Archived', 'css'=>'text-danger', 'icon'=>'<i class="fa fa-fw fa-bookmark-o text-danger" aria-hidden="TRUE"></i>')
         );
     }
 
@@ -92,7 +92,7 @@ class User extends CI_Controller {
         $this->data['data_rows'] = $result_array['data_rows'];
 		
 		$this->data['page_title'] = 'People';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/people', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/people', $this->data, TRUE);
         $this->load->view('_layouts/layout_default', $this->data);
     }
 
@@ -105,7 +105,7 @@ class User extends CI_Controller {
         ########### Validate User Auth End #############
 
         if ($this->input->post('form_action') == 'login') {
-            if ($this->validate_login_form_data() == true) {
+            if ($this->validate_login_form_data() == TRUE) {
                 $email = $this->input->post('user_email');
                 $password = md5($this->input->post('user_password'));
                 $login_result = $this->user_model->authenticate_user($email, $password);
@@ -124,7 +124,7 @@ class User extends CI_Controller {
                         if($this->session->userdata('sess_post_login_redirect_url')){
                             redirect($this->session->userdata('sess_post_login_redirect_url'));
                         }else{
-                            if($this->data['is_admin'] === true){
+                            if($this->data['is_admin'] === TRUE){
                                 redirect($this->router->directory.'admin/dashboard');
                             }else{
                                 redirect($this->router->directory.'home');
@@ -135,14 +135,14 @@ class User extends CI_Controller {
                 }
             }
         }
-        if($this->data['is_admin'] === true){
+        if($this->data['is_admin'] === TRUE){
             $this->common_lib->init_template_elements('admin');
             $this->data['page_title'] = 'Please sign in';
-            $this->data['maincontent'] = $this->load->view($this->router->class.'/admin_login', $this->data, true);
+            $this->data['maincontent'] = $this->load->view($this->router->class.'/admin_login', $this->data, TRUE);
             $this->load->view('_layouts/layout_admin_login', $this->data);
         }else{
             $this->data['page_title'] = 'Please sign in';
-            $this->data['maincontent'] = $this->load->view($this->router->class.'/login', $this->data, true);
+            $this->data['maincontent'] = $this->load->view($this->router->class.'/login', $this->data, TRUE);
             $this->load->view('_layouts/layout_default', $this->data);
         }
 		
@@ -167,7 +167,7 @@ class User extends CI_Controller {
 		$this->breadcrumbs->push('View', '/');		
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
 		$this->data['page_title'] = 'Manage Users';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/manage', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/manage', $this->data, TRUE);
         $this->load->view('_layouts/layout_admin_default', $this->data);
     }
 
@@ -196,14 +196,14 @@ class User extends CI_Controller {
 			//add html for action
             $action_html = '';
             
-            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/edit_user_profile/' . $result['id']), '<i class="fa fa-fw fa-pencil" aria-hidden="true"></i>', array(
+            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/edit_user_profile/' . $result['id']), '<i class="fa fa-fw fa-pencil" aria-hidden="TRUE"></i>', array(
                 'class' => 'btn btn-sm btn-outline-secondary',
                 'data-toggle' => 'tooltip',
                 'data-original-title' => 'Edit Profile',
                 'title' => 'Edit Profile'
             ));
             $action_html.='&nbsp;';
-            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/profile/' . $result['id']), '<i class="fa fa-fw fa-info-circle" aria-hidden="true"></i>', array(
+            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/profile/' . $result['id']), '<i class="fa fa-fw fa-info-circle" aria-hidden="TRUE"></i>', array(
                 'class' => 'btn btn-sm btn-outline-info',
                 'data-toggle' => 'tooltip',
                 'data-original-title' => 'View Profile',
@@ -230,7 +230,7 @@ class User extends CI_Controller {
 
     function auth_error() {
 		$this->data['page_title'] = 'Authorization Error Occured';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/auth_error', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/auth_error', $this->data, TRUE);
         $this->load->view('_layouts/layout_default', $this->data);
     }
 
@@ -238,16 +238,16 @@ class User extends CI_Controller {
         $this->form_validation->set_rules('user_email', 'email', 'trim|required|valid_email');
         $this->form_validation->set_rules('user_password', 'password', 'required');
         $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
-        if ($this->form_validation->run() == true) {
-            return true;
+        if ($this->form_validation->run() == TRUE) {
+            return TRUE;
         } else {
-            return false;
+            return FALSE;
         }
     }
 	
 	function registration() {
         if ($this->input->post('form_action') == 'self_registration') {
-            if ($this->validate_registration_form_data() == true) {
+            if ($this->validate_registration_form_data() == TRUE) {
                 $activation_token = md5(time('Y-m-d h:i:s'));
 				$customer_id = $this->user_model->get_new_customer_id();
                 $postdata = array(
@@ -297,7 +297,7 @@ class User extends CI_Controller {
             }
         }
 		$this->data['page_title'] = "Sign Up";
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/registration', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/registration', $this->data, TRUE);
         $this->load->view('_layouts/layout_default', $this->data);
     }
 
@@ -311,10 +311,10 @@ class User extends CI_Controller {
         $this->form_validation->set_rules('user_password_confirm', 'confirm password', 'required|matches[user_password]');
         $this->form_validation->set_rules('user_dob', 'date of birth', 'required');
         $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
-        if ($this->form_validation->run() == true) {
-            return true;
+        if ($this->form_validation->run() == TRUE) {
+            return TRUE;
         } else {
-            return false;
+            return FALSE;
         }
     }
 
@@ -332,7 +332,7 @@ class User extends CI_Controller {
         ));
         ########### Validate User Auth End #############
         if ($this->input->post('form_action') == 'create_account') {
-            if ($this->validate_create_account_form_data() == true) {
+            if ($this->validate_create_account_form_data() == TRUE) {
                 $activation_token = md5(time('Y-m-d h:i:s'));
 				$customer_id = $this->user_model->get_new_customer_id();
 				$password = $this->generate_password();
@@ -387,7 +387,7 @@ class User extends CI_Controller {
         }
         $this->common_lib->init_template_elements('admin');
 		$this->data['page_title'] = "Add New User";
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/create_account', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/create_account', $this->data, TRUE);
         $this->load->view('_layouts/layout_admin_default', $this->data);
     }
 
@@ -402,23 +402,23 @@ class User extends CI_Controller {
         $this->form_validation->set_rules('user_dob', 'date of birth', 'required');
         $this->form_validation->set_rules('user_role', 'access group', 'required');
         $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
-        if ($this->form_validation->run() == true) {
-            return true;
+        if ($this->form_validation->run() == TRUE) {
+            return TRUE;
         } else {
-            return false;
+            return FALSE;
         }
     }
 	
 	function valid_email_domain($str){
 		/*if($str){
-			if(stristr($str,'@domain.com') !== false){
-				return true;
+			if(stristr($str,'@domain.com') !== FALSE){
+				return TRUE;
 			}else{
 				$this->form_validation->set_message('valid_email_domain', 'Please provide an acceptable email address.');
-				return false;
+				return FALSE;
 			}
 		}*/
-        return true;
+        return TRUE;
 	}
 	
     function is_email_registered($user_email, $action_type = NULL) {
@@ -427,12 +427,12 @@ class User extends CI_Controller {
         if ($result) {
             $this->form_validation->set_message('is_email_registered', $user_email . ' is already registered !');
             if ($action_type == 'forgot_password') {
-                return true;
+                return TRUE;
             } else {
-                return false;
+                return FALSE;
             }
         }
-        return true;
+        return TRUE;
     }
 
     function activate_account() {
@@ -458,7 +458,7 @@ class User extends CI_Controller {
 
     function forgot_password() {
         if ($this->input->post('form_action') == 'forgot_password') {
-            if ($this->validate_forgot_password_form() == true) {
+            if ($this->validate_forgot_password_form() == TRUE) {
 				//print_r($_POST);die();
                 $email = $this->input->post('user_email');
                 $password_reset_key = $this->generate_password();
@@ -499,17 +499,17 @@ class User extends CI_Controller {
             }
         }
 		$this->data['page_title'] = 'Forgot Password?';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/forgot_password', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/forgot_password', $this->data, TRUE);
         $this->load->view('_layouts/layout_default', $this->data);
     }
 
     function validate_forgot_password_form() {		
         $this->form_validation->set_rules('user_email', 'email address', 'required|valid_email|callback_is_email_valid');
         $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
-        if ($this->form_validation->run() == true) {
-            return true;
+        if ($this->form_validation->run() == TRUE) {
+            return TRUE;
         } else {
-            return false;
+            return FALSE;
         }
     }
 
@@ -519,7 +519,7 @@ class User extends CI_Controller {
             $this->common_lib->set_flash_message('The password reset token not found.', 'alert-danger');
         }
         if ($this->input->post('form_action') == 'reset_password') {
-            if ($this->validate_reset_password_form() == true) {
+            if ($this->validate_reset_password_form() == TRUE) {
                 $email = $this->input->post('user_email');
                 $password_reset_key = $this->input->post('password_reset_key');
                 $new_password = $this->input->post('user_new_password');
@@ -545,7 +545,7 @@ class User extends CI_Controller {
             }
         }
 		$this->data['page_title'] = 'Create New Password';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/reset_password', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/reset_password', $this->data, TRUE);
         $this->load->view('_layouts/layout_default', $this->data);
     }
 
@@ -555,10 +555,10 @@ class User extends CI_Controller {
         $this->form_validation->set_rules('confirm_user_new_password', 'confirm password', 'required|matches[user_new_password]');
 
         $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
-        if ($this->form_validation->run() == true) {
-            return true;
+        if ($this->form_validation->run() == TRUE) {
+            return TRUE;
         } else {
-            return false;
+            return FALSE;
         }
     }
 
@@ -575,11 +575,11 @@ class User extends CI_Controller {
     function is_email_valid($user_email) {		
         if($user_email){
             $result = $this->user_model->check_is_email_registered($user_email);			
-            if ($result == true) {
-                return true;
+            if ($result == TRUE) {
+                return TRUE;
             }else{
 				$this->form_validation->set_message('is_email_valid', $user_email . ' is not a registered email address.');
-				return false;
+				return FALSE;
 			}            
         }
     }
@@ -594,7 +594,7 @@ class User extends CI_Controller {
         
         ########### Validate User Auth End #############
         if ($this->input->post('form_action') == 'change_password') {
-            if ($this->validate_changepassword_form() == true) {
+            if ($this->validate_changepassword_form() == TRUE) {
                 $postdata = array('user_password' => md5($this->input->post('user_new_password')));
                 $where = array('id' => $this->sess_user_id);
                 $this->user_model->update($postdata, $where);
@@ -603,7 +603,7 @@ class User extends CI_Controller {
             }
         }
 		$this->data['page_title'] = 'Change Password';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/change_password', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/change_password', $this->data, TRUE);
         $this->load->view('_layouts/layout_default', $this->data);
     }
 
@@ -612,24 +612,24 @@ class User extends CI_Controller {
         $this->form_validation->set_rules('user_new_password', 'new password', 'required|trim|min_length[6]');
         $this->form_validation->set_rules('confirm_user_new_password', 'confirm password', 'required|matches[user_new_password]');
         $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
-        if ($this->form_validation->run() == true) {
-            return true;
+        if ($this->form_validation->run() == TRUE) {
+            return TRUE;
         } else {
-            return false;
+            return FALSE;
         }
     }
 
     function check_current_password($password) {
         if($password){
             $result = $this->user_model->check_user_password_valid(md5($password), $this->sess_user_id);
-            if ($result == false) {
+            if ($result == FALSE) {
                 $this->form_validation->set_message('check_current_password', 'The {field} field is invalid');
-                return false;
+                return FALSE;
             }else{
-                return true;
+                return TRUE;
             }
         }else{
-            return true;
+            return TRUE;
         }
     }
 
@@ -640,7 +640,7 @@ class User extends CI_Controller {
             $this->common_lib->set_flash_message('You have been logged out successfully.','alert-success');
             redirect($this->router->directory.$this->router->class.'/login');
         } else {
-            if($this->data['is_admin'] === true){
+            if($this->data['is_admin'] === TRUE){
                 redirect($this->router->directory.'admin/login');
             }else{
                 redirect($this->router->directory.'home');
@@ -656,9 +656,9 @@ class User extends CI_Controller {
         }
 		
         //View Page Config
-        $is_self_account = true;
+        $is_self_account = TRUE;
         if(!empty($this->uri->segment(3)) && ($this->uri->segment(3) != $this->sess_user_id)){
-            $is_self_account = false;
+            $is_self_account = FALSE;
         }
         $this->data['is_self_account'] = $is_self_account;
         $this->data['page_title'] = "My Profile";
@@ -672,7 +672,7 @@ class User extends CI_Controller {
 		$this->data['address'] = $this->user_model->get_user_address(NULL,$user_id,NULL);
         $this->data['education'] = $this->user_model->get_user_education(NULL, $user_id);
 		$this->data['page_title'] = 'My Profile';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/profile', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/profile', $this->data, TRUE);
         $this->load->view('_layouts/layout_default', $this->data);
     }
 	
@@ -690,10 +690,10 @@ class User extends CI_Controller {
           $this->form_validation->set_rules('dob_month', 'birth month selection', 'required');
           $this->form_validation->set_rules('dob_year', 'birth year selection', 'required'); */
         $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
-        if ($this->form_validation->run() == true) {
-            return true;
+        if ($this->form_validation->run() == TRUE) {
+            return TRUE;
         } else {
-            return false;
+            return FALSE;
         }
     }
 
@@ -705,7 +705,7 @@ class User extends CI_Controller {
         }
         $this->data['arr_states'] = $this->user_model->get_state_dropdown();		
         if ($this->input->post('form_action') == 'insert_address') {
-            if ($this->validate_user_address_form_data('add') == true) {
+            if ($this->validate_user_address_form_data('add') == TRUE) {
                 $postdata = array(
 					'user_id' => $this->sess_user_id,
                     'address_type' => $this->input->post('address_type'),
@@ -728,7 +728,7 @@ class User extends CI_Controller {
             }
         }
 		$this->data['page_title'] = 'Add Address';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/add_address', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/add_address', $this->data, TRUE);
         $this->load->view('_layouts/layout_default', $this->data);
     }
 	
@@ -743,7 +743,7 @@ class User extends CI_Controller {
         $this->data['arr_states'] = $this->user_model->get_state_dropdown();
         //print_r($this->data['address']);die();
         if ($this->input->post('form_action') == 'update_address') {
-            if ($this->validate_user_address_form_data('edit') == true) {
+            if ($this->validate_user_address_form_data('edit') == TRUE) {
                 $postdata = array(
 					//'user_id' => $this->sess_user_id,
                     //'address_type' => $this->input->post('address_type'),
@@ -768,7 +768,7 @@ class User extends CI_Controller {
         }
 		
 		$this->data['page_title'] = 'Edit Address';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/edit_address', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/edit_address', $this->data, TRUE);
         $this->load->view('_layouts/layout_default', $this->data);
     }
 	
@@ -818,10 +818,10 @@ class User extends CI_Controller {
         //$this->form_validation->set_rules('phone2', ' ', 'min_length[10]|max_length[10]|numeric');    
 
         $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
-        if ($this->form_validation->run() == true) {
-            return true;
+        if ($this->form_validation->run() == TRUE) {
+            return TRUE;
         } else {
-            return false;
+            return FALSE;
         }
     }
 
@@ -830,9 +830,9 @@ class User extends CI_Controller {
         $result = $this->user_model->check_address_type_exists($this->sess_user_id, $str);
         if ($result) {
             $this->form_validation->set_message('check_is_address_added', 'This address type is already added by you. Please choose another.');
-            return false;
+            return FALSE;
         }
-        return true;
+        return TRUE;
     }
 
 	function add_education() {
@@ -845,7 +845,7 @@ class User extends CI_Controller {
 		$this->data['arr_academic_inst'] = $this->user_model->get_institute_dropdown();
 		$this->data['arr_academic_specialization'] = $this->user_model->get_specialization_dropdown();
         if ($this->input->post('form_action') == 'add') {
-            if ($this->validate_user_education_form_data('add') == true) {
+            if ($this->validate_user_education_form_data('add') == TRUE) {
                 $postdata = array(
 					'user_id' => $this->sess_user_id,
                     'academic_qualification' => $this->input->post('academic_qualification'),
@@ -864,7 +864,7 @@ class User extends CI_Controller {
             }
         }
 		$this->data['page_title'] = "Add Educational Qualification";
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/add_education', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/add_education', $this->data, TRUE);
         $this->load->view('_layouts/layout_default', $this->data);
     }
 	
@@ -881,7 +881,7 @@ class User extends CI_Controller {
         $this->data['education'] = $this->user_model->get_user_education($education_id, $this->sess_user_id);
 
         if ($this->input->post('form_action') == 'edit') {
-            if ($this->validate_user_education_form_data('edit') == true) {
+            if ($this->validate_user_education_form_data('edit') == TRUE) {
                 $postdata = array(                    
                     'academic_qualification' => $this->input->post('academic_qualification'),
                     'academic_degree' => $this->input->post('academic_degree'),
@@ -900,7 +900,7 @@ class User extends CI_Controller {
             }
         }
 		$this->data['page_title'] = "Edit Educational Qualification";
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/edit_education', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/edit_education', $this->data, TRUE);
         $this->load->view('_layouts/layout_default', $this->data);
     }
 	
@@ -931,10 +931,10 @@ class User extends CI_Controller {
         $this->form_validation->set_rules('academic_specialization', 'specialization', 'required|greater_than_equal_to[0]',array('greater_than_equal_to' => 'The %s field is required.'));
         $this->form_validation->set_rules('academic_marks_percentage', 'marks in percentage', 'required|less_than_equal_to[100]|decimal');
         $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
-        if ($this->form_validation->run() == true) {
-            return true;
+        if ($this->form_validation->run() == TRUE) {
+            return TRUE;
         } else {
-            return false;
+            return FALSE;
         }
     }
 	
@@ -950,7 +950,7 @@ class User extends CI_Controller {
         $this->data['row'] = $rows['data_rows'];
 
         if ($this->input->post('form_action') == 'update_profile') {
-            if ($this->validate_edit_profile_form() == true) {
+            if ($this->validate_edit_profile_form() == TRUE) {
                 $postdata = array(
                     //'user_firstname' => $this->input->post('user_firstname'),
                     //'user_lastname' => $this->input->post('user_lastname'),
@@ -971,7 +971,7 @@ class User extends CI_Controller {
         }
 	
 		$this->data['page_title'] = 'Edit My Profile';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/edit_profile', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/edit_profile', $this->data, TRUE);
         $this->load->view('_layouts/layout_default', $this->data);
     }
 	
@@ -993,22 +993,22 @@ class User extends CI_Controller {
         }
 	
 		$this->data['page_title'] = 'Profile Photo';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/profile_pic', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/profile_pic', $this->data, TRUE);
         $this->load->view('_layouts/layout_default', $this->data);
     }
 	
 	function validate_uplaod_form_data() {
         //$this->form_validation->set_rules('userfile', 'file selection field', 'required');        
         //$this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
-        //if ($this->form_validation->run() == true) {
-            return true;
+        //if ($this->form_validation->run() == TRUE) {
+            return TRUE;
         //} else {
-            //return false;
+            //return FALSE;
         //}
     }
 	
 	function upload_file() {
-        if ($this->validate_uplaod_form_data() == true) {
+        if ($this->validate_uplaod_form_data() == TRUE) {
             $upload_related_to = 'user';
             $upload_related_to_id = $this->sess_user_id;
             $upload_file_type_name = 'profile_pic';
@@ -1122,7 +1122,7 @@ class User extends CI_Controller {
 		$this->load->model('project_model');
 		$this->data['arr_projects'] = $this->project_model->get_project_dropdown();
         if ($this->input->post('form_action') == 'add') {
-            if ($this->validate_user_project_assign_form_data('add') == true) {
+            if ($this->validate_user_project_assign_form_data('add') == TRUE) {
                 $postdata = array(					
                     'academic_qualification' => $this->input->post('academic_qualification')                 
                 );                
@@ -1134,33 +1134,33 @@ class User extends CI_Controller {
             }
         }
 		$this->data['page_title'] = "Allocate Projects";
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/allocate_projects', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/allocate_projects', $this->data, TRUE);
         $this->load->view('_layouts/layout_default', $this->data);
     }
 	
 	function validate_user_project_assign_form_data(){
 		$this->form_validation->set_rules('project_id', 'project', 'required');
         $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
-        if ($this->form_validation->run() == true) {
-            return true;
+        if ($this->form_validation->run() == TRUE) {
+            return TRUE;
         } else {
-            return false;
+            return FALSE;
         }
 	}	
     
     function add_user_input_specialization(){
-        $message = array('is_valid'=>false, 'insert_id'=>'','msg'=>'');
+        $message = array('is_valid'=>FALSE, 'insert_id'=>'','msg'=>'');
         if(($this->input->post('action')=='add')){
-            if ($this->validate_add_user_input_specialization_data() == true) {
+            if ($this->validate_add_user_input_specialization_data() == TRUE) {
                 $postdata = array(					
                     'specialization_name' => ucwords(strtolower($this->input->post('specialization_name')))
                 );                
                 $insert_id = $this->user_model->insert($postdata,'academic_specialization');
                 if ($insert_id) {
-                    $message = array('is_valid'=>true, 'insert_id'=>$insert_id,'msg'=>'<div class="alert alert-success">Specialization has been added succesfully.</div>'); 
+                    $message = array('is_valid'=>TRUE, 'insert_id'=>$insert_id,'msg'=>'<div class="alert alert-success">Specialization has been added succesfully.</div>'); 
                 }
             }else{
-                $message = array('is_valid'=>false, 'insert_id'=>'','msg'=>validation_errors()); 
+                $message = array('is_valid'=>FALSE, 'insert_id'=>'','msg'=>validation_errors()); 
             }
         }
         echo json_encode($message); die();
@@ -1172,26 +1172,26 @@ class User extends CI_Controller {
                 'is_unique'     => 'This %s already exists.'
         ));
         $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
-        if ($this->form_validation->run() == true) {
-            return true;
+        if ($this->form_validation->run() == TRUE) {
+            return TRUE;
         } else {
-            return false;
+            return FALSE;
         }
     }
 
     function add_user_input_degree(){
-        $message = array('is_valid'=>false, 'insert_id'=>'','msg'=>'');
+        $message = array('is_valid'=>FALSE, 'insert_id'=>'','msg'=>'');
         if(($this->input->post('action')=='add')){
-            if ($this->validate_add_user_input_degree_data() == true) {
+            if ($this->validate_add_user_input_degree_data() == TRUE) {
                 $postdata = array(					
                     'degree_name' => ucwords(strtolower($this->input->post('degree_name')))
                 );                
                 $insert_id = $this->user_model->insert($postdata,'academic_degree');
                 if ($insert_id) {
-                    $message = array('is_valid'=>true, 'insert_id'=>$insert_id,'msg'=>'<div class="alert alert-success">degree has been added succesfully.</div>'); 
+                    $message = array('is_valid'=>TRUE, 'insert_id'=>$insert_id,'msg'=>'<div class="alert alert-success">degree has been added succesfully.</div>'); 
                 }
             }else{
-                $message = array('is_valid'=>false, 'insert_id'=>'','msg'=>validation_errors()); 
+                $message = array('is_valid'=>FALSE, 'insert_id'=>'','msg'=>validation_errors()); 
             }
         }
         echo json_encode($message); die();
@@ -1203,26 +1203,26 @@ class User extends CI_Controller {
                 'is_unique'     => 'This %s already exists.'
         ));
         $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
-        if ($this->form_validation->run() == true) {
-            return true;
+        if ($this->form_validation->run() == TRUE) {
+            return TRUE;
         } else {
-            return false;
+            return FALSE;
         }
     }
 
     function add_user_input_institute(){
-        $message = array('is_valid'=>false, 'insert_id'=>'','msg'=>'');
+        $message = array('is_valid'=>FALSE, 'insert_id'=>'','msg'=>'');
         if(($this->input->post('action')=='add')){
-            if ($this->validate_add_user_input_institute_data() == true) {
+            if ($this->validate_add_user_input_institute_data() == TRUE) {
                 $postdata = array(					
                     'institute_name' => ucwords(strtolower($this->input->post('institute_name')))
                 );                
                 $insert_id = $this->user_model->insert($postdata,'academic_institute');
                 if ($insert_id) {
-                    $message = array('is_valid'=>true, 'insert_id'=>$insert_id,'msg'=>'<div class="alert alert-success">institute has been added succesfully.</div>'); 
+                    $message = array('is_valid'=>TRUE, 'insert_id'=>$insert_id,'msg'=>'<div class="alert alert-success">institute has been added succesfully.</div>'); 
                 }
             }else{
-                $message = array('is_valid'=>false, 'insert_id'=>'','msg'=>validation_errors()); 
+                $message = array('is_valid'=>FALSE, 'insert_id'=>'','msg'=>validation_errors()); 
             }
         }
         echo json_encode($message); die();
@@ -1234,10 +1234,10 @@ class User extends CI_Controller {
                 'is_unique'     => 'This %s already exists.'
         ));
         $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
-        if ($this->form_validation->run() == true) {
-            return true;
+        if ($this->form_validation->run() == TRUE) {
+            return TRUE;
         } else {
-            return false;
+            return FALSE;
         }
     }
 
@@ -1332,7 +1332,7 @@ class User extends CI_Controller {
                 'color' => array('rgb' => '80bfff'),
             ),
             'font' => array(
-                'bold' => true
+                'bold' => TRUE
             )
         );
         $styleArray = array(

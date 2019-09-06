@@ -20,7 +20,7 @@ class Common_lib {
         $this->CI = & get_instance();
         $this->CI->load->model('user_model');
         $this->CI->data['alert_message'] = $this->display_flash_message();
-        $this->CI->data['is_admin'] = ($this->CI->uri->segment(1) == 'admin') ? true : false;
+        $this->CI->data['is_admin'] = ($this->CI->uri->segment(1) == 'admin') ? TRUE : FALSE;
     }
 
     /**
@@ -41,18 +41,18 @@ class Common_lib {
             $this->CI->data['el_html_tag_meta_keywords'] = isset($meta_keyword) ? $meta_keyword : $this->CI->config->item('app_meta_keywords');
             $this->CI->data['el_html_tag_meta_description'] = isset($meta_desc) ? $meta_desc : $this->CI->config->item('app_meta_description');
             $this->CI->data['el_html_tag_meta_author'] = isset($meta_author) ? $meta_author : $this->CI->config->item('app_meta_author');
-            $this->CI->data['el_html_head'] = $this->CI->load->view('_layouts/elements/html_head', $this->CI->data, true);
-            $this->CI->data['el_navbar'] = $this->CI->load->view('_layouts/elements/navbar', $this->CI->data, true);
-            $this->CI->data['el_footer'] = $this->CI->load->view('_layouts/elements/footer', $this->CI->data, true);
+            $this->CI->data['el_html_head'] = $this->CI->load->view('_layouts/elements/html_head', $this->CI->data, TRUE);
+            $this->CI->data['el_navbar'] = $this->CI->load->view('_layouts/elements/navbar', $this->CI->data, TRUE);
+            $this->CI->data['el_footer'] = $this->CI->load->view('_layouts/elements/footer', $this->CI->data, TRUE);
         }
         if($view_dir == 'admin'){
             $this->CI->data['el_html_tag_title'] = isset($html_title) ? $html_title : $this->CI->config->item('app_html_title');
             $this->CI->data['el_html_tag_meta_keywords'] = isset($meta_keyword) ? $meta_keyword : $this->CI->config->item('app_meta_keywords');
             $this->CI->data['el_html_tag_meta_description'] = isset($meta_desc) ? $meta_desc : $this->CI->config->item('app_meta_description');
             $this->CI->data['el_html_tag_meta_author'] = isset($meta_author) ? $meta_author : $this->CI->config->item('app_meta_author');
-            $this->CI->data['el_html_head'] = $this->CI->load->view('_layouts/elements/admin_html_head', $this->CI->data, true);
-            $this->CI->data['el_footer'] = $this->CI->load->view('_layouts/elements/admin_footer', $this->CI->data, true);
-            $this->CI->data['el_navbar'] = $this->CI->load->view('_layouts/elements/admin_navbar', $this->CI->data, true);
+            $this->CI->data['el_html_head'] = $this->CI->load->view('_layouts/elements/admin_html_head', $this->CI->data, TRUE);
+            $this->CI->data['el_footer'] = $this->CI->load->view('_layouts/elements/admin_footer', $this->CI->data, TRUE);
+            $this->CI->data['el_navbar'] = $this->CI->load->view('_layouts/elements/admin_navbar', $this->CI->data, TRUE);
         }
         return $this->CI->data;
     }
@@ -152,7 +152,7 @@ class Common_lib {
         if (!$this->CI->upload->do_upload($html_control)) {            
             return array('upload_error' => $this->CI->upload->display_errors('<div>', '</div>'));
             //$this->CI->form_validation->set_message($html_control, $this->CI->upload->display_errors());
-            //return false;
+            //return FALSE;
         } else {
             $this->CI->data = array('upload_data' => $this->CI->upload->data());
             $this->file_full_upload_path = $upload_param['upload_path'] . '/' . $this->CI->data['upload_data']['file_name'];
@@ -208,13 +208,13 @@ class Common_lib {
                 $this->CI->image_lib->resize();
                 $this->CI->image_lib->clear();
             }
-            if (isset($upload_param['check_img_size']) && ($upload_param['check_img_size'] == true)) {
+            if (isset($upload_param['check_img_size']) && ($upload_param['check_img_size'] == TRUE)) {
                 $image_width = $this->CI->data['upload_data']['image_width'];
                 $image_height = $this->CI->data['upload_data']['image_height'];
                 $allowed_img_width = $upload_param['allowed_img_width'];
                 $allowed_img_height = $upload_param['allowed_img_height'];
                 $is_valid = $this->is_valid_dimension($image_width, $image_height, $allowed_img_width, $allowed_img_height);
-                if ($is_valid == true) {
+                if ($is_valid == TRUE) {
                     return $this->CI->data['upload_data'];
                 } else {
                     @unlink($this->file_full_upload_path);
@@ -248,7 +248,7 @@ class Common_lib {
         }
     }
 
-    function generate_rand_number($length = 4, $append_date = true) {
+    function generate_rand_number($length = 4, $append_date = TRUE) {
         // We are removine confusing characters
         // Small case    :    i, o,s 
         // Upper case    :    I, O, S
@@ -259,7 +259,7 @@ class Common_lib {
         for ($i = 0; $i < $length; $i++) {
             $str .= $chars[rand(0, $size - 1)];
         }
-        if ($append_date == true) {
+        if ($append_date == TRUE) {
             $str = date('mdy') . $str;
         }
         return $str;
@@ -323,7 +323,7 @@ class Common_lib {
         $css = $this->CI->session->flashdata('flash_message_css');
         $msg_html = NULL;
         if(isset($msg)){
-         $msg_html = '<div class="alert ' . $css . ' alert-dismissable auto-closable-alert"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'.$msg.'</div>';
+         $msg_html = '<div class="alert ' . $css . ' alert-dismissable auto-closable-alert"><button type="button" class="close" data-dismiss="alert" aria-hidden="TRUE">&times;</button>'.$msg.'</div>';
         }else{
             $msg_html = NULL; 
         }
@@ -424,11 +424,11 @@ class Common_lib {
 	}
 	
 	/*Convert date to display format date*/
-	function display_date($date, $time=null, $birthday=null){
-		if($time == true){
+	function display_date($date, $time=NULL, $birthday=NULL){
+		if($time == TRUE){
 			return date('d-m-Y h:i:s a',strtotime($date));
         }
-        if($birthday == true){
+        if($birthday == TRUE){
             $dob = explode('-',$date);            
 			return $this->display_ordinal_suffix($dob[2]).' '.date('F',strtotime($date));
         }
@@ -455,7 +455,7 @@ class Common_lib {
 		$output = $string;
 		$required_encryption = FALSE;
 		$this->CI->load->library('MY_Encrypt');
-		if($required_encryption==true){
+		if($required_encryption==TRUE){
 			$output =  $this->CI->my_encrypt->encode($string, $key="", $url_safe=TRUE);
 		}
 		return $output;
@@ -466,7 +466,7 @@ class Common_lib {
 		$output = $string;
 		$required_encryption = FALSE;
 		$this->CI->load->library('MY_Encrypt');
-		if($required_encryption==true){
+		if($required_encryption==TRUE){
 			$output =  $this->CI->my_encrypt->decode($string, $key="");
 		}
 		return $output;

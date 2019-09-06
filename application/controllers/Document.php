@@ -15,7 +15,7 @@ class Document extends CI_Controller {
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
-            if($this->data['is_admin'] === true){
+            if($this->data['is_admin'] === TRUE){
                 redirect($this->router->directory.'admin/login');
             }else{
                 redirect($this->router->directory.'user/login');
@@ -61,12 +61,12 @@ class Document extends CI_Controller {
             $this->upload_file();
         }
 		$this->data['page_title'] = 'My Documents';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/index', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/index', $this->data, TRUE);
         $this->load->view('_layouts/layout_default', $this->data);
     }
 
     function upload_file() {
-        if ($this->validate_uplaod_form_data() == true) {
+        if ($this->validate_uplaod_form_data() == TRUE) {
             $upload_related_to = 'user'; // related to user, product, album, contents etc
             $upload_related_to_id = $this->sess_user_id; // related to id user id, product id, album id etc
             $upload_file_type_name = $this->input->post('upload_file_type_name'); // file type name			
@@ -137,10 +137,10 @@ class Document extends CI_Controller {
 			$this->form_validation->set_rules('userfile', ' ', 'required');
 		}
         $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
-        if ($this->form_validation->run() == true) {
-            return true;
+        if ($this->form_validation->run() == TRUE) {
+            return TRUE;
         } else {
-            return false;
+            return FALSE;
         }
     }
 
@@ -149,7 +149,7 @@ class Document extends CI_Controller {
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
-            if($this->data['is_admin'] === true){
+            if($this->data['is_admin'] === TRUE){
                 redirect($this->router->directory.'admin/login');
             }else{
                 redirect($this->router->directory.'user/login');

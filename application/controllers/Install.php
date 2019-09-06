@@ -16,7 +16,7 @@ class Install extends CI_Controller {
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
-            if($this->data['is_admin'] === true){
+            if($this->data['is_admin'] === TRUE){
                 redirect($this->router->directory.'admin/login');
             }else{
                 redirect($this->router->directory.'user/login');
@@ -44,7 +44,7 @@ class Install extends CI_Controller {
 		// Get logged  in user id
         $this->sess_user_id = $this->common_lib->get_sess_user('id');
 		$this->data['page_title'] = 'Install';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/index', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/index', $this->data, TRUE);
         $this->load->view('_layouts/layout_default', $this->data);
     }
 }

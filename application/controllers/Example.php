@@ -23,9 +23,9 @@ class Example extends CI_Controller {
 		
 		// Status flag indicator for showing in table grid etc
 		$this->data['status_flag'] = array(
-            'Y'=>array('text'=>'Active', 'css'=>'text-success', 'icon'=>'<i class="fa fa-fw fa-bookmark-o text-success" aria-hidden="true"></i>'),
-            'N'=>array('text'=>'Inactive', 'css'=>'text-warning', 'icon'=>'<i class="fa fa-fw fa-bookmark-o text-warning" aria-hidden="true"></i>'),
-            'A'=>array('text'=>'Archived', 'css'=>'text-danger', 'icon'=>'<i class="fa fa-fw fa-bookmark-o text-danger" aria-hidden="true"></i>')
+            'Y'=>array('text'=>'Active', 'css'=>'text-success', 'icon'=>'<i class="fa fa-fw fa-bookmark-o text-success" aria-hidden="TRUE"></i>'),
+            'N'=>array('text'=>'Inactive', 'css'=>'text-warning', 'icon'=>'<i class="fa fa-fw fa-bookmark-o text-warning" aria-hidden="TRUE"></i>'),
+            'A'=>array('text'=>'Archived', 'css'=>'text-danger', 'icon'=>'<i class="fa fa-fw fa-bookmark-o text-danger" aria-hidden="TRUE"></i>')
         );
         
         
@@ -36,7 +36,7 @@ class Example extends CI_Controller {
 
     function index() {
 		$this->bootstrap();
-        //$this->data['maincontent'] = $this->load->view($this->router->class.'/index', $this->data, true);
+        //$this->data['maincontent'] = $this->load->view($this->router->class.'/index', $this->data, TRUE);
         //$this->load->view('_layouts/layout_default', $this->data);
     }
 
@@ -76,7 +76,7 @@ class Example extends CI_Controller {
             }
         }
         $this->data['page_title'] = 'CI Form Syntax';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/form_helper', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/form_helper', $this->data, TRUE);
         $this->load->view('_layouts/layout_default', $this->data);
     }
 
@@ -91,17 +91,17 @@ class Example extends CI_Controller {
         $this->form_validation->set_rules('userfile', 'resume upload', 'trim|required');
         $this->form_validation->set_rules('terms', 'terms & condition acceptance', 'trim|required');
         $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
-        if ($this->form_validation->run() == true) {
-            return true;
+        if ($this->form_validation->run() == TRUE) {
+            return TRUE;
         } else {
-            return false;
+            return FALSE;
         }
     }
 
     function validate_max_function_domain($functional_domain, $size) {
         //echo $size;die();
         //$this->form_validation->set_message('validate_max_function_domain', 'You can choose maximum 3 options');
-        //return false;
+        //return FALSE;
     }
     
     function download_as_pdf(){
@@ -124,7 +124,7 @@ class Example extends CI_Controller {
     function date_helper() {
         $this->load->helper('date');
 
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/date_helper', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/date_helper', $this->data, TRUE);
         $this->load->view('_layouts/layout_default', $this->data);
     }
 
@@ -136,13 +136,13 @@ class Example extends CI_Controller {
         $map = directory_map('./application/controllers', 1);
         $this->data['sub_folders'] = $map;
 
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/directory_helper', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/directory_helper', $this->data, TRUE);
         $this->load->view('_layouts/layout_default', $this->data);
     }
 
     function bootstrap() {
         $this->data['page_title'] = 'Bootstrap Style Guide';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/bootstrap', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/bootstrap', $this->data, TRUE);
         $this->load->view('_layouts/layout_default', $this->data);
     }
 	
@@ -192,29 +192,29 @@ class Example extends CI_Controller {
 
         //Simulate Form Submit
         if ($this->input->post('form_action') == 'add') {
-            if ($this->validate_form_calander_data('add') == true) {
+            if ($this->validate_form_calander_data('add') == TRUE) {
                 $this->common_lib->set_flash_message('Validation Successful.', 'alert-success');
                 redirect(current_url());
             }
         }
 
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/calendar_lib', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/calendar_lib', $this->data, TRUE);
         $this->load->view('_layouts/layout_default', $this->data);
     }
 
     function validate_form_calander_data($action = NULL) {
         $this->form_validation->set_rules('selected_date', 'calendar date selection', 'required');
         $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
-        if ($this->form_validation->run() == true) {
-            return true;
+        if ($this->form_validation->run() == TRUE) {
+            return TRUE;
         } else {
-            return false;
+            return FALSE;
         }
     }
 
     function contact_form() {
         if ($this->input->post('form_action') == 'send') {
-            if ($this->validate_contact_form() == true) {
+            if ($this->validate_contact_form() == TRUE) {
                 $name = $this->input->post('name');
                 $email = $this->input->post('email');
                 $phone_number = $this->input->post('phone_number');
@@ -253,7 +253,7 @@ class Example extends CI_Controller {
                 $this->email->message($html);
                 $result = $this->email->send();
                 //echo $this->email->print_debugger(); die($html);
-                if ($result == true) {
+                if ($result == TRUE) {
                     $this->common_lib->set_flash_message('Your message has been sent successfully.', 'alert-success');
                     redirect(current_url());
                 } else {
@@ -293,7 +293,7 @@ class Example extends CI_Controller {
         $this->data['captcha_image'] = $cap['image'];
 		
 		$this->data['page_title'] = 'Contact Us';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/contact_form', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/contact_form', $this->data, TRUE);
         $this->load->view('_layouts/layout_default', $this->data);
     }
 
@@ -304,25 +304,25 @@ class Example extends CI_Controller {
         $this->form_validation->set_rules('message', 'message', 'required');
         $this->form_validation->set_rules('captcha', 'captcha verification', 'required|trim|callback_validate_captcha');
         $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
-        if ($this->form_validation->run() == true) {
-            return true;
+        if ($this->form_validation->run() == TRUE) {
+            return TRUE;
         } else {
-            return false;
+            return FALSE;
         }
     }
 
     function validate_captcha($str) {
         if ($str != $this->input->post('captcha_word')) {
             $this->form_validation->set_message('validate_captcha', 'Invalid CAPTCHA.');
-            return false;
+            return FALSE;
         } else {
-            return true;
+            return TRUE;
         }
     }
     
     
     function test_cron_job() {
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/test_cron_job', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/test_cron_job', $this->data, TRUE);
         $this->load->view('_layouts/layout_default', $this->data);
     }
 
@@ -342,7 +342,7 @@ class Example extends CI_Controller {
         $this->email->subject('Cron Job Test');
         $this->email->message($html);
         $result = $this->email->send();
-        if($result === true){
+        if($result === TRUE){
             echo "message sent";
         }else{
             echo "unable to send message";

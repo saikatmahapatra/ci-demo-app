@@ -16,7 +16,7 @@ class Cms extends CI_Controller {
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
-            if($this->data['is_admin'] === true){
+            if($this->data['is_admin'] === TRUE){
                 redirect($this->router->directory.'admin/login');
             }else{
                 redirect($this->router->directory.'user/login');
@@ -62,9 +62,9 @@ class Cms extends CI_Controller {
 		 
 		// Status flag indicator for showing in table grid etc
 		$this->data['status_flag'] = array(
-            'Y'=>array('text'=>'Active', 'css'=>'text-success', 'icon'=>'<i class="fa fa-fw fa-bookmark-o text-success" aria-hidden="true"></i>'),
-            'N'=>array('text'=>'Inactive', 'css'=>'text-warning', 'icon'=>'<i class="fa fa-fw fa-bookmark-o text-warning" aria-hidden="true"></i>'),
-            'A'=>array('text'=>'Archived', 'css'=>'text-danger', 'icon'=>'<i class="fa fa-fw fa-bookmark-o text-danger" aria-hidden="true"></i>')
+            'Y'=>array('text'=>'Active', 'css'=>'text-success', 'icon'=>'<i class="fa fa-fw fa-bookmark-o text-success" aria-hidden="TRUE"></i>'),
+            'N'=>array('text'=>'Inactive', 'css'=>'text-warning', 'icon'=>'<i class="fa fa-fw fa-bookmark-o text-warning" aria-hidden="TRUE"></i>'),
+            'A'=>array('text'=>'Archived', 'css'=>'text-danger', 'icon'=>'<i class="fa fa-fw fa-bookmark-o text-danger" aria-hidden="TRUE"></i>')
         );
 		
     }
@@ -83,7 +83,7 @@ class Cms extends CI_Controller {
         
 		
 		$this->data['page_title'] = 'Website CMS - Contents';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/index', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/index', $this->data, TRUE);
         $this->load->view('_layouts/layout_admin_default', $this->data);
     }
 	
@@ -113,7 +113,7 @@ class Cms extends CI_Controller {
         $this->data['data_rows'] = $result_array['data_rows'];
 		
 		$this->data['page_title'] = 'Website Contents (CI Pagination Version)';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/index_ci_pagination', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/index_ci_pagination', $this->data, TRUE);
         $this->load->view('_layouts/layout_admin_default', $this->data);
     }
 
@@ -136,20 +136,20 @@ class Cms extends CI_Controller {
             $row = array();
             $row[] = $result['content_type'];
             $row[] = $result['content_title'];
-            $row[] = $this->common_lib->display_date($result['content_created_on'], true);
+            $row[] = $this->common_lib->display_date($result['content_created_on'], TRUE);
             $row[] = isset($result['content_status']) ? $this->data['status_flag'][$result['content_status']]['text'] : '';
             //add html for action
             $action_html = '';
-            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/edit/' .$result['id']), '<i class="fa fa-fw fa-pencil" aria-hidden="true"></i>', array(
+            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/edit/' .$result['id']), '<i class="fa fa-fw fa-pencil" aria-hidden="TRUE"></i>', array(
                 'class' => 'btn btn-sm btn-outline-secondary',
                 'data-toggle' => 'tooltip',
                 'data-original-title' => 'Edit',
                 'title' => 'Edit',
             ));
             $action_html.='&nbsp;';
-            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/delete/' . $result['id']), '<i class="fa fa-fw fa-trash-o" aria-hidden="true"></i>', array(
+            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/delete/' . $result['id']), '<i class="fa fa-fw fa-trash-o" aria-hidden="TRUE"></i>', array(
                 'class' => 'btn btn-sm btn-outline-danger btn-delete',
-				'data-confirmation'=>true,
+				'data-confirmation'=>TRUE,
 				'data-confirmation-message'=>'Are you sure, you want to delete this?',
                 'data-toggle' => 'tooltip',
                 'data-original-title' => 'Delete',
@@ -180,7 +180,7 @@ class Cms extends CI_Controller {
         
         
         if ($this->input->post('form_action') == 'insert') {
-            if ($this->validate_form_data('add') == true) {
+            if ($this->validate_form_data('add') == TRUE) {
 
                 $postdata = array(
                     'content_type' => $this->input->post('content_type'),
@@ -202,7 +202,7 @@ class Cms extends CI_Controller {
             }
         }
 		$this->data['page_title'] = 'Add Contents';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/add', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/add', $this->data, TRUE);
         $this->load->view('_layouts/layout_admin_default', $this->data);
     }
 
@@ -213,7 +213,7 @@ class Cms extends CI_Controller {
 		$this->breadcrumbs->push('Edit','/');				
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
         if ($this->input->post('form_action') == 'update') {
-            if ($this->validate_form_data('edit') == true) {
+            if ($this->validate_form_data('edit') == TRUE) {
                 $postdata = array(
                     'content_type' => $this->input->post('content_type'),
                     'content_title' => $this->input->post('content_title'),
@@ -239,7 +239,7 @@ class Cms extends CI_Controller {
         $result_array = $this->cms_model->get_rows($this->id);
         $this->data['rows'] = $result_array['data_rows'];
 		$this->data['page_title'] = 'Edit Contents';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/edit', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/edit', $this->data, TRUE);
         $this->load->view('_layouts/layout_admin_default', $this->data);
     }
 
@@ -262,10 +262,10 @@ class Cms extends CI_Controller {
         $this->form_validation->set_rules('content_status', 'display status', 'required');
 
         $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
-        if ($this->form_validation->run() == true) {
-            return true;
+        if ($this->form_validation->run() == TRUE) {
+            return TRUE;
         } else {
-            return false;
+            return FALSE;
         }
     }
 	
@@ -309,20 +309,20 @@ class Cms extends CI_Controller {
             //$row[] = $result['upload_file_name'].'<div>'.$result['upload_mime_type'].'</div>';
             $row[] = '<img class="img banner-img-xs" src="'.base_url($img_src).'"><div>'.$result['upload_mime_type'].'</div>';
             //$row[] = $result['upload_mime_type'];
-            //$row[] = $this->common_lib->display_date($result['upload_datetime'], true);
+            //$row[] = $this->common_lib->display_date($result['upload_datetime'], TRUE);
             $row[] = isset($result['upload_status']) ? $this->data['status_flag'][$result['upload_status']]['text'] : '';
             //add html for action
             $action_html = '';
-            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/edit_banner/' .$result['id']), '<i class="fa fa-fw fa-pencil" aria-hidden="true"></i>', array(
+            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/edit_banner/' .$result['id']), '<i class="fa fa-fw fa-pencil" aria-hidden="TRUE"></i>', array(
                 'class' => 'btn btn-sm btn-outline-secondary',
                 'data-toggle' => 'tooltip',
                 'data-original-title' => 'Edit',
                 'title' => 'Edit',
             ));
             $action_html.='&nbsp;';
-            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/delete_banner/' . $result['id'].'/'.$result['upload_file_name']), '<i class="fa fa-fw fa-trash-o" aria-hidden="true"></i>', array(
+            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/delete_banner/' . $result['id'].'/'.$result['upload_file_name']), '<i class="fa fa-fw fa-trash-o" aria-hidden="TRUE"></i>', array(
                 'class' => 'btn btn-sm btn-outline-danger btn-delete',
-				'data-confirmation'=>true,
+				'data-confirmation'=>TRUE,
 				'data-confirmation-message'=>'Are you sure, you want to delete this?',
                 'data-toggle' => 'tooltip',
                 'data-original-title' => 'Delete',
@@ -358,7 +358,7 @@ class Cms extends CI_Controller {
         
 		
 		$this->data['page_title'] = 'Carousel';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/manage_banner', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/manage_banner', $this->data, TRUE);
         $this->load->view('_layouts/layout_admin_default', $this->data);
     }
 	
@@ -371,7 +371,7 @@ class Cms extends CI_Controller {
 			$this->upload_file();            
         }
 		$this->data['page_title'] = 'Create a Carousel Slider';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/add_banner', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/add_banner', $this->data, TRUE);
         $this->load->view('_layouts/layout_admin_default', $this->data);
     }
 	
@@ -386,7 +386,7 @@ class Cms extends CI_Controller {
 		$result_array = $this->upload_model->get_uploads($this->id, NULL, NULL, FALSE, FALSE, NULL);
         $this->data['rows'] = $result_array['data_rows'];		
 		$this->data['page_title'] = 'Edit Carousel Slider';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/edit_banner', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/edit_banner', $this->data, TRUE);
         $this->load->view('_layouts/layout_admin_default', $this->data);
     }
 	
@@ -416,15 +416,15 @@ class Cms extends CI_Controller {
 			$this->form_validation->set_rules('userfile', 'file', 'required');
 		}
         $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
-        if ($this->form_validation->run() == true) {
-            return true;
+        if ($this->form_validation->run() == TRUE) {
+            return TRUE;
         } else {
-            return false;
+            return FALSE;
         }
     }
 	
 	function upload_file() {
-        if ($this->validate_banner_form_data() == true) {
+        if ($this->validate_banner_form_data() == TRUE) {
             $upload_related_to = 'slider'; // related to user, product, album, contents etc
             $upload_related_to_id = $this->id; // related to id user id, product id, album id etc
             $upload_file_type_name = $this->input->post('upload_file_type_name'); // file type name            
@@ -448,7 +448,7 @@ class Cms extends CI_Controller {
                 'allowed_types' => $allowed_ext, // allowed file types,
                 'max_size' => '2048', // max 2MB size,
                 'file_new_name' => $upload_related_to_id . '_' . $upload_file_type_name . '_' . time(),
-				'check_img_size'=> true, //only specific dimention image are uploadable
+				'check_img_size'=> TRUE, //only specific dimention image are uploadable
 				'allowed_img_width'=> 1200, // int img dimention
 				'allowed_img_height'=>300 // int img dimention
             );

@@ -28,10 +28,10 @@ class Api extends REST_Controller {
         // Common Response Array
         $this->api_response = array();
         $this->api_response['time'] = time();        
-        $this->api_response['screen_id'] = null;
+        $this->api_response['screen_id'] = NULL;
         $this->api_response['code'] = 1000; //1000 =success, 1001 = error
         $this->api_response['status'] = 'success'; // success|error
-        $this->api_response['message'] = null; // any custom message        
+        $this->api_response['message'] = NULL; // any custom message        
         $this->api_response['css_class'] = 'alert alert-success';                
         $this->api_response['data'] = array(); // data return by model
 
@@ -87,8 +87,8 @@ class Api extends REST_Controller {
             'email' => $this->post('email'),
             'mobile' => $this->post('mobile')
         );
-        $validate = true;
-        if ($validate == true) {
+        $validate = TRUE;
+        if ($validate == TRUE) {
             $insert_id = $this->user_model->insert($postdata);
             if ($insert_id) {
                 $newResponse = array('code' => '1', 'message' => 'User added successfully', 'data' => array('id' => $insert_id));
@@ -114,8 +114,8 @@ class Api extends REST_Controller {
             'mobile' => $this->put('mobile')
         );
         
-        $validate = true;
-        if ($validate == true) {
+        $validate = TRUE;
+        if ($validate == TRUE) {
             $where_array = array('id' => $id);
             $res = $this->user_model->update($postdata, $where_array);
             if ($res) {

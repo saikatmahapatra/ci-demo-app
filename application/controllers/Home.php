@@ -16,7 +16,7 @@ class Home extends CI_Controller {
         /*$is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
-            if($this->data['is_admin'] === true){
+            if($this->data['is_admin'] === TRUE){
                 redirect($this->router->directory.'admin/login');
             }else{
                 redirect($this->router->directory.'user/login');
@@ -89,7 +89,7 @@ class Home extends CI_Controller {
 		$this->data['sliders'] = $this->upload_model->get_slider();
 		//print_r($sliders);
 		$this->data['page_title'] = 'Welcome to '.$this->config->item('app_company_product');
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/index', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/index', $this->data, TRUE);
         $this->load->view('_layouts/layout_home', $this->data);
     }
 
@@ -106,7 +106,7 @@ class Home extends CI_Controller {
 		$result_array = $this->cms_model->get_contents($id, NULL, NULL, FALSE, FALSE);
         $this->data['data_rows'] = $result_array['data_rows'];        
 		$this->data['page_title'] = 'Welcome';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/details', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/details', $this->data, TRUE);
         $this->load->view('_layouts/layout_default', $this->data);
     }
 
@@ -159,7 +159,7 @@ class Home extends CI_Controller {
         // Dashboard Stats
 		
 		$this->data['page_title'] = "Dashboard";
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/dashboard', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/dashboard', $this->data, TRUE);
         $this->load->view('_layouts/layout_default', $this->data);
     }
 }

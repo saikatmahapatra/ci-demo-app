@@ -16,7 +16,7 @@ class Category extends CI_Controller {
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
-            if($this->data['is_admin'] === true){
+            if($this->data['is_admin'] === TRUE){
                 redirect($this->router->directory.'admin/login');
             }else{
                 redirect($this->router->directory.'user/login');
@@ -52,9 +52,9 @@ class Category extends CI_Controller {
 		
 		// Status flag indicator for showing in table grid etc
 		$this->data['status_flag'] = array(
-            'Y'=>array('text'=>'Active', 'css'=>'text-success', 'icon'=>'<i class="fa fa-fw fa-bookmark-o text-success" aria-hidden="true"></i>'),
-            'N'=>array('text'=>'Inactive', 'css'=>'text-warning', 'icon'=>'<i class="fa fa-fw fa-bookmark-o text-warning" aria-hidden="true"></i>'),
-            'A'=>array('text'=>'Archived', 'css'=>'text-danger', 'icon'=>'<i class="fa fa-fw fa-bookmark-o text-danger" aria-hidden="true"></i>')
+            'Y'=>array('text'=>'Active', 'css'=>'text-success', 'icon'=>'<i class="fa fa-fw fa-bookmark-o text-success" aria-hidden="TRUE"></i>'),
+            'N'=>array('text'=>'Inactive', 'css'=>'text-warning', 'icon'=>'<i class="fa fa-fw fa-bookmark-o text-warning" aria-hidden="TRUE"></i>'),
+            'A'=>array('text'=>'Archived', 'css'=>'text-danger', 'icon'=>'<i class="fa fa-fw fa-bookmark-o text-danger" aria-hidden="TRUE"></i>')
         );
 		
 		// add breadcrumbs. push() - Append crumb to stack
@@ -67,7 +67,7 @@ class Category extends CI_Controller {
 		$this->breadcrumbs->push('View','/');				
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
 		$this->data['page_title'] = 'Product Category';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/index', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/index', $this->data, TRUE);
         $this->load->view('_layouts/layout_admin_default', $this->data);
     }
 
@@ -92,16 +92,16 @@ class Category extends CI_Controller {
             $row[] = isset($result['category_status']) ? $this->data['status_flag'][$result['category_status']]['text'] : '';
             //add html for action
             $action_html = '';
-            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/edit/' .$result['id']), '<i class="fa fa-fw fa-pencil" aria-hidden="true"></i>', array(
+            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/edit/' .$result['id']), '<i class="fa fa-fw fa-pencil" aria-hidden="TRUE"></i>', array(
                 'class' => 'btn btn-sm btn-outline-secondary',
                 'data-toggle' => 'tooltip',
                 'data-original-title' => 'Edit',
                 'title' => 'Edit',
             ));
             $action_html.='&nbsp;';
-            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/delete/' .$result['id']), '<i class="fa fa-fw fa-trash-o" aria-hidden="true"></i>', array(
+            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/delete/' .$result['id']), '<i class="fa fa-fw fa-trash-o" aria-hidden="TRUE"></i>', array(
                 'class' => 'btn btn-sm btn-outline-danger btn-delete',
-				'data-confirmation'=>true,
+				'data-confirmation'=>TRUE,
 				'data-confirmation-message'=>'Are you sure, you want to delete this?',
                 'data-toggle' => 'tooltip',
                 'data-original-title' => 'Delete',
@@ -130,28 +130,28 @@ class Category extends CI_Controller {
             $this->form_validation->set_rules('category_name', 'category name', 'required|callback_is_category_name_exists');
         }
         $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
-        if ($this->form_validation->run() == true) {
-            return true;
+        if ($this->form_validation->run() == TRUE) {
+            return TRUE;
         } else {
-            return false;
+            return FALSE;
         }
     }
 
     function is_category_name_exists($str) {
         //echo $str; die();
         $result = $this->category_model->check_category_name($str);
-        if ($result == false) {
+        if ($result == FALSE) {
             $this->form_validation->set_message('is_category_name_exists', $str . ' is already exists !');
-            return false;
+            return FALSE;
         }
-        return true;
+        return TRUE;
     }
 
     function add() {
 		$this->breadcrumbs->push('Add','/');
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
         if ($this->input->post('form_action') == 'insert') {
-            if ($this->validate_category_form_data('add') == true) {
+            if ($this->validate_category_form_data('add') == TRUE) {
                 $parent_cat_id = ($this->input->post('category_parent') == '') ? NULL : $this->input->post('category_parent');
                 $postdata = array(
                     'category_name' => $this->input->post('category_name'),
@@ -165,7 +165,7 @@ class Category extends CI_Controller {
             }
         }
 		$this->data['page_title'] = 'Add Product Category';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/add', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/add', $this->data, TRUE);
         $this->load->view('_layouts/layout_admin_default', $this->data);
     }
 
@@ -173,7 +173,7 @@ class Category extends CI_Controller {
 		$this->breadcrumbs->push('Edit','/');
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
         if ($this->input->post('form_action') == 'update') {
-            if ($this->validate_category_form_data('edit') == true) {
+            if ($this->validate_category_form_data('edit') == TRUE) {
                 $parent_cat_id = ($this->input->post('category_parent') == '') ? NULL : $this->input->post('category_parent');
                 $postdata = array(
                     'category_name' => $this->input->post('category_name'),
@@ -192,7 +192,7 @@ class Category extends CI_Controller {
         $result_array = $this->category_model->get_rows($this->uri->segment(4));
         $this->data['rows'] = $result_array['data_rows'];
 		$this->data['page_title'] = 'Edit Product Category';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/edit', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/edit', $this->data, TRUE);
         $this->load->view('_layouts/layout_admin_default', $this->data);
     }
 

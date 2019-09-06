@@ -16,7 +16,7 @@ class Srbac extends CI_Controller {
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
-            if($this->data['is_admin'] === true){
+            if($this->data['is_admin'] === TRUE){
                 redirect($this->router->directory.'admin/login');
             }else{
                 redirect($this->router->directory.'user/login');
@@ -62,9 +62,9 @@ class Srbac extends CI_Controller {
          
          // Status flag indicator for showing in table grid etc
 		$this->data['status_flag'] = array(
-            'Y'=>array('text'=>'Active', 'css'=>'text-success', 'icon'=>'<i class="fa fa-fw fa-bookmark-o text-success" aria-hidden="true"></i>'),
-            'N'=>array('text'=>'Inactive', 'css'=>'text-warning', 'icon'=>'<i class="fa fa-fw fa-bookmark-o text-warning" aria-hidden="true"></i>'),
-            'A'=>array('text'=>'Archived', 'css'=>'text-danger', 'icon'=>'<i class="fa fa-fw fa-bookmark-o text-danger" aria-hidden="true"></i>')
+            'Y'=>array('text'=>'Active', 'css'=>'text-success', 'icon'=>'<i class="fa fa-fw fa-bookmark-o text-success" aria-hidden="TRUE"></i>'),
+            'N'=>array('text'=>'Inactive', 'css'=>'text-warning', 'icon'=>'<i class="fa fa-fw fa-bookmark-o text-warning" aria-hidden="TRUE"></i>'),
+            'A'=>array('text'=>'Archived', 'css'=>'text-danger', 'icon'=>'<i class="fa fa-fw fa-bookmark-o text-danger" aria-hidden="TRUE"></i>')
         );
 		
     }
@@ -83,7 +83,7 @@ class Srbac extends CI_Controller {
         
 		
 		$this->data['page_title'] = 'SRBAC';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/index', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/index', $this->data, TRUE);
         $this->load->view('_layouts/layout_admin_default', $this->data);
     }
 	
@@ -120,7 +120,7 @@ class Srbac extends CI_Controller {
         $this->data['data_rows'] = $result_array['data_rows'];
 		
 		$this->data['page_title'] = 'Website Contents (CI Pagination Version)';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/index_ci_pagination', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/index_ci_pagination', $this->data, TRUE);
         $this->load->view('_layouts/layout_admin_default', $this->data);
     }
 
@@ -143,20 +143,20 @@ class Srbac extends CI_Controller {
             $row = array();
             $row[] = $result['content_type'];
             $row[] = $result['content_title'];
-            $row[] = $this->common_lib->display_date($result['content_created_on'], true);
+            $row[] = $this->common_lib->display_date($result['content_created_on'], TRUE);
             $row[] = isset($result['content_status']) ? $this->data['status_flag'][$result['content_status']]['text'] : '';
             //add html for action
             $action_html = '';
-            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/edit/' . $result['id']), '<i class="fa fa-fw fa-pencil" aria-hidden="true"></i>', array(
+            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/edit/' . $result['id']), '<i class="fa fa-fw fa-pencil" aria-hidden="TRUE"></i>', array(
                 'class' => 'btn btn-sm btn-outline-secondary',
                 'data-toggle' => 'tooltip',
                 'data-original-title' => 'Edit',
                 'title' => 'Edit',
             ));
             $action_html.='&nbsp;';
-            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/delete/' . $result['id']), '<i class="fa fa-fw fa-trash-o" aria-hidden="true"></i>', array(
+            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/delete/' . $result['id']), '<i class="fa fa-fw fa-trash-o" aria-hidden="TRUE"></i>', array(
                 'class' => 'btn btn-sm btn-outline-danger btn-delete',
-				'data-confirmation'=>true,
+				'data-confirmation'=>TRUE,
 				'data-confirmation-message'=>'Are you sure, you want to delete this?',
                 'data-toggle' => 'tooltip',
                 'data-original-title' => 'Delete',
@@ -187,7 +187,7 @@ class Srbac extends CI_Controller {
         
         
         if ($this->input->post('form_action') == 'insert') {
-            if ($this->validate_form_data('add') == true) {
+            if ($this->validate_form_data('add') == TRUE) {
 
                 $postdata = array(
                     'content_type' => $this->input->post('content_type'),
@@ -209,7 +209,7 @@ class Srbac extends CI_Controller {
             }
         }
 		$this->data['page_title'] = 'Add Roles | Permission';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/add', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/add', $this->data, TRUE);
         $this->load->view('_layouts/layout_admin_default', $this->data);
     }
 
@@ -222,7 +222,7 @@ class Srbac extends CI_Controller {
         
         
         if ($this->input->post('form_action') == 'update') {
-            if ($this->validate_form_data('edit') == true) {
+            if ($this->validate_form_data('edit') == TRUE) {
                 $postdata = array(
                     'content_type' => $this->input->post('content_type'),
                     'content_title' => $this->input->post('content_title'),
@@ -247,7 +247,7 @@ class Srbac extends CI_Controller {
         $result_array = $this->cms_model->get_rows($this->id);
         $this->data['rows'] = $result_array['data_rows'];
 		$this->data['page_title'] = 'Edit Roles | Permission';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/edit', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/edit', $this->data, TRUE);
         $this->load->view('_layouts/layout_admin_default', $this->data);
     }
 
@@ -269,10 +269,10 @@ class Srbac extends CI_Controller {
         $this->form_validation->set_rules('content_text', 'page content text', 'required');
 
         $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
-        if ($this->form_validation->run() == true) {
-            return true;
+        if ($this->form_validation->run() == TRUE) {
+            return TRUE;
         } else {
-            return false;
+            return FALSE;
         }
     }
 

@@ -15,7 +15,7 @@ class Product extends CI_Controller {
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
-            if($this->data['is_admin'] === true){
+            if($this->data['is_admin'] === TRUE){
                 redirect($this->router->directory.'admin/login');
             }else{
                 redirect($this->router->directory.'user/login');
@@ -53,9 +53,9 @@ class Product extends CI_Controller {
 		
 		// Status flag indicator for showing in table grid etc
 		$this->data['status_flag'] = array(
-            'Y'=>array('text'=>'Active', 'css'=>'text-success', 'icon'=>'<i class="fa fa-fw fa-bookmark-o text-success" aria-hidden="true"></i>'),
-            'N'=>array('text'=>'Inactive', 'css'=>'text-warning', 'icon'=>'<i class="fa fa-fw fa-bookmark-o text-warning" aria-hidden="true"></i>'),
-            'A'=>array('text'=>'Archived', 'css'=>'text-danger', 'icon'=>'<i class="fa fa-fw fa-bookmark-o text-danger" aria-hidden="true"></i>')
+            'Y'=>array('text'=>'Active', 'css'=>'text-success', 'icon'=>'<i class="fa fa-fw fa-bookmark-o text-success" aria-hidden="TRUE"></i>'),
+            'N'=>array('text'=>'Inactive', 'css'=>'text-warning', 'icon'=>'<i class="fa fa-fw fa-bookmark-o text-warning" aria-hidden="TRUE"></i>'),
+            'A'=>array('text'=>'Archived', 'css'=>'text-danger', 'icon'=>'<i class="fa fa-fw fa-bookmark-o text-danger" aria-hidden="TRUE"></i>')
         );
 		
 		// load Breadcrumbs
@@ -70,7 +70,7 @@ class Product extends CI_Controller {
 		$this->breadcrumbs->push('View', '/');		
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
 		$this->data['page_title'] = 'Products';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/index', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/index', $this->data, TRUE);
         $this->load->view('_layouts/layout_admin_default', $this->data);
     }
 
@@ -114,16 +114,16 @@ class Product extends CI_Controller {
             $row[] = isset($result['product_status']) ? $this->data['status_flag'][$result['product_status']]['text'] : '';
             //add html for action
             $action_html = '';
-            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/edit/' .$result['id']), '<i class="fa fa-fw fa-pencil" aria-hidden="true"></i>', array(
+            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/edit/' .$result['id']), '<i class="fa fa-fw fa-pencil" aria-hidden="TRUE"></i>', array(
                 'class' => 'btn btn-sm btn-outline-secondary',
                 'data-toggle' => 'tooltip',
                 'data-original-title' => 'Edit',
                 'title' => 'Edit',
             ));
             $action_html.='&nbsp;';
-            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/delete/' .$result['id']), '<i class="fa fa-fw fa-trash-o" aria-hidden="true"></i>', array(
+            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/delete/' .$result['id']), '<i class="fa fa-fw fa-trash-o" aria-hidden="TRUE"></i>', array(
                 'class' => 'btn btn-sm btn-outline-danger btn-delete',
-				'data-confirmation'=>true,
+				'data-confirmation'=>TRUE,
 				'data-confirmation-message'=>'Are you sure, you want to delete this?',
                 'data-toggle' => 'tooltip',
                 'data-original-title' => 'Delete',
@@ -153,10 +153,10 @@ class Product extends CI_Controller {
         $this->form_validation->set_rules('product_mrp', 'MRP', 'required');
         $this->form_validation->set_rules('product_description', 'description', 'required');
         $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
-        if ($this->form_validation->run() == true) {
-            return true;
+        if ($this->form_validation->run() == TRUE) {
+            return TRUE;
         } else {
-            return false;
+            return FALSE;
         }
     }
 
@@ -165,7 +165,7 @@ class Product extends CI_Controller {
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
 		
         if ($this->input->post('form_action') == 'insert') {
-            if ($this->validate_form_data('add') == true) {
+            if ($this->validate_form_data('add') == TRUE) {
                 $postdata = array(
                     'product_sku' => 'E' . time(),
                     'product_name' => $this->input->post('product_name'),
@@ -188,7 +188,7 @@ class Product extends CI_Controller {
             }
         }
 		$this->data['page_title'] = 'Add Product';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/add', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/add', $this->data, TRUE);
         $this->load->view('_layouts/layout_admin_default', $this->data);
     }
 
@@ -196,7 +196,7 @@ class Product extends CI_Controller {
 		$this->breadcrumbs->push('Edit', '/');		
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
         if ($this->input->post('form_action') == 'update') {
-            if ($this->validate_form_data('edit') == true) {
+            if ($this->validate_form_data('edit') == TRUE) {
                 $postdata = array(
                     'product_name' => $this->input->post('product_name'),
                     'category_id' => $this->input->post('category_id'),
@@ -238,7 +238,7 @@ class Product extends CI_Controller {
             $this->upload_file();
         }
 		$this->data['page_title'] = 'Edit Product';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/edit', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/edit', $this->data, TRUE);
         $this->load->view('_layouts/layout_admin_default', $this->data);
     }
 
@@ -268,7 +268,7 @@ class Product extends CI_Controller {
     }
 
     function upload_file() {
-        if ($this->validate_uplaod_form_data() == true) {
+        if ($this->validate_uplaod_form_data() == TRUE) {
             $upload_related_to = 'product'; // related to user, product, album, contents etc
             $upload_related_to_id = $this->id; // related to id user id, product id, album id etc
             $upload_file_type_name = $this->input->post('upload_file_type_name'); // file type name
@@ -340,10 +340,10 @@ class Product extends CI_Controller {
 			$this->form_validation->set_rules('userfile', ' ', 'required');
 		}
         $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
-        if ($this->form_validation->run() == true) {
-            return true;
+        if ($this->form_validation->run() == TRUE) {
+            return TRUE;
         } else {
-            return false;
+            return FALSE;
         }
     }
 

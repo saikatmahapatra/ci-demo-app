@@ -27,7 +27,7 @@ class Timesheet extends CI_Controller {
         
         if ($is_logged_in == FALSE) {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
-            if($this->data['is_admin'] === true){
+            if($this->data['is_admin'] === TRUE){
                 redirect($this->router->directory.'admin/login');
             }else{
                 redirect($this->router->directory.'user/login');
@@ -39,9 +39,9 @@ class Timesheet extends CI_Controller {
         
         // Status flag indicator for showing in table grid etc
 		$this->data['status_flag'] = array(
-            'Y'=>array('text'=>'Active', 'css'=>'text-success', 'icon'=>'<i class="fa fa-fw fa-bookmark-o text-success" aria-hidden="true"></i>'),
-            'N'=>array('text'=>'Inactive', 'css'=>'text-warning', 'icon'=>'<i class="fa fa-fw fa-bookmark-o text-warning" aria-hidden="true"></i>'),
-            'A'=>array('text'=>'Archived', 'css'=>'text-danger', 'icon'=>'<i class="fa fa-fw fa-bookmark-o text-danger" aria-hidden="true"></i>')
+            'Y'=>array('text'=>'Active', 'css'=>'text-success', 'icon'=>'<i class="fa fa-fw fa-bookmark-o text-success" aria-hidden="TRUE"></i>'),
+            'N'=>array('text'=>'Inactive', 'css'=>'text-warning', 'icon'=>'<i class="fa fa-fw fa-bookmark-o text-warning" aria-hidden="TRUE"></i>'),
+            'A'=>array('text'=>'Archived', 'css'=>'text-danger', 'icon'=>'<i class="fa fa-fw fa-bookmark-o text-danger" aria-hidden="TRUE"></i>')
         );
 		//Dropdown
 		$this->data['project_arr'] = $this->timesheet_model->get_project_dropdown();
@@ -94,7 +94,7 @@ class Timesheet extends CI_Controller {
 		
 		$this->add();
 		
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/index', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/index', $this->data, TRUE);
         $this->load->view('_layouts/layout_default', $this->data);
     }
 	
@@ -102,7 +102,7 @@ class Timesheet extends CI_Controller {
         //Check user permission by permission name mapped to db
         //$this->common_lib->is_auth('timesheet-add');
         if ($this->input->post('form_action') == 'add') {
-            if ($this->validate_form_data('add') == true) {
+            if ($this->validate_form_data('add') == TRUE) {
                 
 				$selected_date_arr = explode(',', $this->input->post('selected_date'));
 				//print_r($selected_date_arr); die();
@@ -136,10 +136,10 @@ class Timesheet extends CI_Controller {
         $this->form_validation->set_rules('timesheet_hours', 'time spent', 'required|numeric|less_than[18]|greater_than[0]');
         $this->form_validation->set_rules('timesheet_description', 'description', 'required|max_length[200]');
         $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
-        if ($this->form_validation->run() == true) {
-            return true;
+        if ($this->form_validation->run() == TRUE) {
+            return TRUE;
         } else {
-            return false;
+            return FALSE;
         }
     }
 		
@@ -204,22 +204,22 @@ class Timesheet extends CI_Controller {
             //$row[] = $result['timesheet_hours'];
             //$row[] = $result['timesheet_review_status'];
 			
-			$html = '<div class="font-weight-bold">'.$this->common_lib->display_date($result['timesheet_date']).' <span class="float-right"><i class="fa fa-fw fa-clock-o" aria-hidden="true"></i> '.$result['timesheet_hours'].' hrs</span></div>';			
+			$html = '<div class="font-weight-bold">'.$this->common_lib->display_date($result['timesheet_date']).' <span class="float-right"><i class="fa fa-fw fa-clock-o" aria-hidden="TRUE"></i> '.$result['timesheet_hours'].' hrs</span></div>';			
 			$html.= '<div class="">'.$result['project_number'].' '.$result['project_name'].'<span class="float-right">'.$result['task_activity_name'].'</span></div>';			
 			
             
                 //add html for action
                 $action_html = '<span class="float-right">';
                 if(($year == $current_year) && ($month == $current_month)){
-                $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/edit/' . $result['id']), '<i class="fa fa-fw fa-pencil" aria-hidden="true"></i>', array(
+                $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/edit/' . $result['id']), '<i class="fa fa-fw fa-pencil" aria-hidden="TRUE"></i>', array(
                     'class' => 'btn btn-sm btn-outline-secondary',
                     'data-toggle' => 'tooltip',
                     'data-original-title' => 'Edit',
                     'title' => 'Edit',
                 ));            
-                $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/delete/' . $result['id']), '<i class="fa fa-fw fa-trash-o" aria-hidden="true"></i>', array(
+                $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/delete/' . $result['id']), '<i class="fa fa-fw fa-trash-o" aria-hidden="TRUE"></i>', array(
                     'class' => 'btn btn-sm btn-outline-danger btn-delete',
-                    'data-confirmation'=>false,
+                    'data-confirmation'=>FALSE,
                     'data-confirmation-message'=>'Are you sure, you want to delete this?',
                     'data-toggle' => 'tooltip',
                     'data-original-title' => 'Delete',
@@ -254,7 +254,7 @@ class Timesheet extends CI_Controller {
         $current_month = date('m');
 
         if ($this->input->post('form_action') == 'update') {
-            if ($this->validate_form_data('edit') == true) {
+            if ($this->validate_form_data('edit') == TRUE) {
                 $postdata = array(                    
                     'project_id' => $this->input->post('project_id'),
                     'activity_id' => $this->input->post('activity_id'),
@@ -276,7 +276,7 @@ class Timesheet extends CI_Controller {
             redirect($this->router->directory.$this->router->class);
         }
 		$this->data['page_title'] = 'Edit Timesheet Entry for ';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/edit', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/edit', $this->data, TRUE);
         $this->load->view('_layouts/layout_default', $this->data);
     }
 
@@ -297,10 +297,10 @@ class Timesheet extends CI_Controller {
         $datediff = ($to_date - $from_date);
         $no_day = round($datediff / (60 * 60 * 24));
         if($no_day >= 0 ){
-            return true;
+            return TRUE;
         }else{
             $this->form_validation->set_message('validate_days_diff', 'Invalid date range.');
-            return false;
+            return FALSE;
         }
     }
 
@@ -321,7 +321,7 @@ class Timesheet extends CI_Controller {
                 'from_date' => $this->input->get_post('from_date'),
                 'to_date' => $this->input->get_post('to_date')
             );
-            if ($this->validate_search_form_data($filter_by_condition) == true) {
+            if ($this->validate_search_form_data($filter_by_condition) == TRUE) {
                 $result_array = $this->timesheet_model->get_report_data(NULL, NULL, NULL, $filter_by_condition);
                 $total_num_rows = $result_array['num_rows'];
                 
@@ -347,7 +347,7 @@ class Timesheet extends CI_Controller {
         //Render header, footer, navbar, sidebar etc common elements of templates
         $this->common_lib->init_template_elements('admin');
 		$this->data['page_title'] = 'Timesheet Report';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/report', $this->data, true);
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/report', $this->data, TRUE);
         $this->load->view('_layouts/layout_default', $this->data);
     }
     
@@ -357,10 +357,10 @@ class Timesheet extends CI_Controller {
         $this->form_validation->set_rules('from_date', ' ', 'required');
         $this->form_validation->set_rules('to_date', ' ', 'required');
         $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
-        if ($this->form_validation->run() == true) {
-            return true;
+        if ($this->form_validation->run() == TRUE) {
+            return TRUE;
         } else {
-            return false;
+            return FALSE;
         }
     }
 
@@ -449,7 +449,7 @@ class Timesheet extends CI_Controller {
                 'color' => array('rgb' => '80bfff'),
             ),
             'font' => array(
-                'bold' => true
+                'bold' => TRUE
             )
         );
         $styleArray = array(

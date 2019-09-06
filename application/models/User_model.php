@@ -216,9 +216,9 @@ class User_model extends CI_Model {
         }
         $query = $this->db->get('users');
         if ($query->num_rows() > 0) {
-            return true;
+            return TRUE;
         } else {
-            return false;
+            return FALSE;
         }
     }
 
@@ -227,9 +227,9 @@ class User_model extends CI_Model {
         $this->db->where(array('id' => $user_id, 'user_activation_key' => $activation_key));
         $qury = $this->db->get('users');
         if ($qury->num_rows() > 0) {
-            return true;
+            return TRUE;
         } else {
-            return false;
+            return FALSE;
         }
     }
 
@@ -239,9 +239,9 @@ class User_model extends CI_Model {
         $this->db->where('user_password', $current_password);
         $query = $this->db->get('users');
         if ($query->num_rows() > 0) {
-            return true;
+            return TRUE;
         } else {
-            return false;
+            return FALSE;
         }
     }
     
@@ -250,9 +250,9 @@ class User_model extends CI_Model {
         $this->db->where(array('user_email' => $email, 'user_reset_password_key' => $key));
         $qury = $this->db->get('users');
         if ($qury->num_rows() > 0) {
-            return true;
+            return TRUE;
         } else {
-            return false;
+            return FALSE;
         }
     }
 
@@ -511,9 +511,9 @@ class User_model extends CI_Model {
         $this->db->where(array('user_id' => $user_id, 'address_type' => $address_type));
         $qury = $this->db->get('user_addresses');
         if ($qury->num_rows() > 0) {
-            return true;
+            return TRUE;
         } else {
-            return false;
+            return FALSE;
         }
     }
 	

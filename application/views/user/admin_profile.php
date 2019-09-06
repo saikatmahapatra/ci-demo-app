@@ -323,7 +323,7 @@
 				</div><!--/.row-->
 			</div><!--./card-body-->
 			<div class="card-footer text-center text-muted small">
-				<i class="fa fa-fw fa-clock-o" aria-hidden="true"></i> Last login on <?php echo isset($user_row['user_login_date_time']) ? $this->common_lib->display_date($user_row['user_login_date_time'],true,null,'d-M-Y h:i:s a') : '-'; ?>
+				<i class="fa fa-fw fa-clock-o" aria-hidden="true"></i> Last login on <?php echo isset($user_row['user_login_date_time']) ? $this->common_lib->display_date($user_row['user_login_date_time'],true,NULL,'d-M-Y h:i:s a') : '-'; ?>
 			</div>
 		</div><!--/.card-->
 		
