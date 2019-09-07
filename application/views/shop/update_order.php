@@ -167,7 +167,7 @@ $row = $rows[0];
 							  <td colspan="8">
 								<div class="pull-right mt-4">
 								<?php echo form_button(array('name' => 'submit_btn','type' => 'submit','content' => 'Update','class' => 'btn btn-primary'));?> 
-								<a href="<?php echo base_url($this->router->directory.'order');?>" class="btn btn-light">Cancel</a>
+								<a href="<?php echo base_url($this->router->directory.$this->router->class.'/manage_orders');?>" class="btn btn-light">Cancel</a>
 								</div>
 							  </td>
 							</tr><!--/.order-item-->
