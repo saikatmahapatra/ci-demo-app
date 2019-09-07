@@ -9190,6 +9190,15 @@ label.optional::after {
   background-color: #f5f5f5;
 }
 
+.bs-mega-menu .dropdown-mega-menu .dropdown-item:active {
+  background-color: #f5f5f5;
+}
+
+.bs-mega-menu .dropdown-mega-menu .dropdown-item:active a:active {
+  background-color: #0062cc;
+  color: #fff;
+}
+
 .bs-mega-menu .dropdown-mega-menu .divider {
   margin-top: 15px;
 }
