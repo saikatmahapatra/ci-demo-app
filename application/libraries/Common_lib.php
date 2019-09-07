@@ -32,11 +32,11 @@ class Common_lib {
      * @param type $meta_author
      * @return type
      */
-    function init_template_elements($view_dir = NULL, $html_title = NULL, $meta_keyword = NULL, $meta_desc = NULL, $meta_author = NULL) {
+    function init_template_elements($view = NULL, $html_title = NULL, $meta_keyword = NULL, $meta_desc = NULL, $meta_author = NULL) {
         $this->CI->data['sess_user_name'] = isset($this->CI->session->userdata['sess_user']['user_firstname']) ? ucwords(strtolower($this->CI->session->userdata['sess_user']['user_firstname'])) : 'Guest';
         $this->CI->data['sess_user_id'] = isset($this->CI->session->userdata['sess_user']['id']) ? ucwords(strtolower($this->CI->session->userdata['sess_user']['id'])) : NULL;
         
-        if($view_dir == 'site'){
+        if($view == 'site'){
             $this->CI->data['el_html_tag_title'] = isset($html_title) ? $html_title : $this->CI->config->item('app_html_title');
             $this->CI->data['el_html_tag_meta_keywords'] = isset($meta_keyword) ? $meta_keyword : $this->CI->config->item('app_meta_keywords');
             $this->CI->data['el_html_tag_meta_description'] = isset($meta_desc) ? $meta_desc : $this->CI->config->item('app_meta_description');
@@ -45,7 +45,7 @@ class Common_lib {
             $this->CI->data['el_navbar'] = $this->CI->load->view('_layouts/elements/navbar', $this->CI->data, TRUE);
             $this->CI->data['el_footer'] = $this->CI->load->view('_layouts/elements/footer', $this->CI->data, TRUE);
         }
-        if($view_dir == 'admin'){
+        if($view == 'admin'){
             $this->CI->data['el_html_tag_title'] = isset($html_title) ? $html_title : $this->CI->config->item('app_html_title');
             $this->CI->data['el_html_tag_meta_keywords'] = isset($meta_keyword) ? $meta_keyword : $this->CI->config->item('app_meta_keywords');
             $this->CI->data['el_html_tag_meta_description'] = isset($meta_desc) ? $meta_desc : $this->CI->config->item('app_meta_description');
