@@ -5,11 +5,13 @@ if (!defined('BASEPATH'))
 class User extends CI_Controller {
 
     var $data;
+    var $id;
 
     function __construct() {
         parent::__construct();
         $this->load->model('user_model');
         $this->load->model('upload_model');
+        
         // Get logged  in user id
         $this->sess_user_id = $this->common_lib->get_sess_user('id');
 
@@ -52,58 +54,16 @@ class User extends CI_Controller {
     function index() {
         $this->login();
     }
-
-	function people() {        
-        $is_logged_in = $this->common_lib->is_logged_in();
-        if ($is_logged_in == FALSE) {
-			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
-            redirect($this->router->directory.$this->router->class.'/login');
-        }               
-		$this->breadcrumbs->push('People', '/');		
-		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
-        
-        
-        $search_keywords = NULL;
-        if($this->input->get_post('form_action') == 'search'){
-            $search_keywords = $this->input->get_post('user_search_keywords');
-        }
-        //die($search_keywords);
-
-		// Display using CI Pagination: Total filtered rows - check without limit query. Refer to model method definition		
-		$result_array = $this->user_model->get_users(NULL, NULL, NULL, $search_keywords);
-		$total_num_rows = $result_array['num_rows'];
-		
-		//pagination config
-		$additional_segment = $this->router->class.'/'.$this->router->method;
-		$per_page = 12;
-		$config['uri_segment'] = 4;
-		$config['num_links'] = 1;
-		$config['use_page_numbers'] = TRUE;
-		//$this->pagination->initialize($config);
-		
-		$page = ($this->uri->segment(4)) ? ($this->uri->segment(4)-1) : 0;
-		$offset = ($page*$per_page);
-		$this->data['pagination_link'] = $this->common_lib->render_pagination($total_num_rows, $per_page, $additional_segment);
-		//end of pagination config
-        
-
-        // Data Rows - Refer to model method definition
-        $result_array = $this->user_model->get_users(NULL, $per_page, $offset, $search_keywords);
-        $this->data['data_rows'] = $result_array['data_rows'];
-		
-		$this->data['page_title'] = 'People';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/people', $this->data, TRUE);
-        $this->load->view('_layouts/layout_default', $this->data);
-    }
-
+    
     function login() {
-        ########### Validate User Auth #############
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == TRUE) {
-            redirect($this->router->directory.'home');
+            if($this->data['is_admin'] === TRUE){
+                redirect($this->router->directory.'admin/dashboard');
+            }else{
+                redirect($this->router->directory.'home');
+            }
         }
-        ########### Validate User Auth End #############
-
         if ($this->input->post('form_action') == 'login') {
             if ($this->validate_login_form_data() == TRUE) {
                 $email = $this->input->post('user_email');
@@ -129,7 +89,6 @@ class User extends CI_Controller {
                             }else{
                                 redirect($this->router->directory.'home');
                             }
-
                         }
                     }
                 }
@@ -146,86 +105,6 @@ class User extends CI_Controller {
             $this->load->view('_layouts/layout_default', $this->data);
         }
 		
-    }
-
-    function manage() {
-        $this->common_lib->init_template_elements('admin');
-        $is_logged_in = $this->common_lib->is_logged_in();
-        if ($is_logged_in == FALSE) {
-			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
-            redirect($this->router->directory.$this->router->class.'/login');
-        }
-        //Has logged in user permission to access this page or method?        
-        $this->common_lib->is_auth(array(
-            'default-super-admin-access',
-            'default-admin-access',
-        ));
-        //Download Data 
-        if($this->input->post('form_action') == 'download'){
-            $this->download_to_excel();
-        }
-		$this->breadcrumbs->push('View', '/');		
-		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
-		$this->data['page_title'] = 'Manage Users';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/manage', $this->data, TRUE);
-        $this->load->view('_layouts/layout_admin_default', $this->data);
-    }
-
-    function render_datatable() {
-        //Total rows - Refer to model method definition
-        $result_array = $this->user_model->get_rows();
-        $total_rows = $result_array['num_rows'];
-
-        // Total filtered rows - check without limit query. Refer to model method definition
-        $result_array = $this->user_model->get_rows(NULL, NULL, NULL, TRUE, FALSE);
-        $total_filtered = $result_array['num_rows'];
-
-        // Data Rows - Refer to model method definition
-        $result_array = $this->user_model->get_rows(NULL, NULL, NULL, TRUE);
-        $data_rows = $result_array['data_rows'];
-        $data = array();
-        $no = $_REQUEST['start'];
-        foreach ($data_rows as $result) {
-            $no++;
-            $row = array();
-            $row[] = '<div class="">'.$result['user_firstname'] . '&nbsp;' . $result['user_lastname'].'</div>';
-            $row[] = $result['user_email'];
-            $row[] = $result['user_phone1'];			
-			$row[] = isset($result['user_status']) ? $this->data['status_flag'][$result['user_status']]['text'] : '';
-            
-			//add html for action
-            $action_html = '';
-            
-            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/edit_user_profile/' . $result['id']), '<i class="fa fa-fw fa-pencil" aria-hidden="TRUE"></i>', array(
-                'class' => 'btn btn-sm btn-outline-secondary',
-                'data-toggle' => 'tooltip',
-                'data-original-title' => 'Edit Profile',
-                'title' => 'Edit Profile'
-            ));
-            $action_html.='&nbsp;';
-            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/profile/' . $result['id']), '<i class="fa fa-fw fa-info-circle" aria-hidden="TRUE"></i>', array(
-                'class' => 'btn btn-sm btn-outline-info',
-                'data-toggle' => 'tooltip',
-                'data-original-title' => 'View Profile',
-                'title' => 'View Profile'
-            ));
-            $row[] = $action_html;
-            $data[] = $row;
-        }
-
-        /* jQuery Data Table JSON format */
-        $output = array(
-            'draw' => isset($_REQUEST['draw']) ? $_REQUEST['draw'] : '',
-            'recordsTotal' => $total_rows,
-            'recordsFiltered' => $total_filtered,
-            'data' => $data,
-        );
-        //output to json format
-        echo json_encode($output);
-    }
-
-    function home() {
-        $this->profile();
     }
 
     function auth_error() {
@@ -319,7 +198,6 @@ class User extends CI_Controller {
     }
 
     function create_account() {
-		########### Validate User Auth #############
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
@@ -330,7 +208,6 @@ class User extends CI_Controller {
             'default-super-admin-access',
             'default-admin-access',
         ));
-        ########### Validate User Auth End #############
         if ($this->input->post('form_action') == 'create_account') {
             if ($this->validate_create_account_form_data() == TRUE) {
                 $activation_token = md5(time('Y-m-d h:i:s'));
@@ -585,14 +462,13 @@ class User extends CI_Controller {
     }
 
     function change_password() {
-        ########### Validate User Auth #############
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
             redirect($this->router->directory.$this->router->class.'/login');
         }
         
-        ########### Validate User Auth End #############
+        
         if ($this->input->post('form_action') == 'change_password') {
             if ($this->validate_changepassword_form() == TRUE) {
                 $postdata = array('user_password' => md5($this->input->post('user_new_password')));
@@ -648,8 +524,87 @@ class User extends CI_Controller {
         }
     }
 
+    function manage() {
+        $this->common_lib->init_template_elements('admin');
+        $is_logged_in = $this->common_lib->is_logged_in();
+        if ($is_logged_in == FALSE) {
+			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
+            redirect($this->router->directory.$this->router->class.'/login');
+        }
+        //Has logged in user permission to access this page or method?        
+        $this->common_lib->is_auth(array(
+            'default-super-admin-access',
+            'default-admin-access',
+        ));
+        //Download Data 
+        if($this->input->post('form_action') == 'download'){
+            $this->download_to_excel();
+        }
+		$this->breadcrumbs->push('View', '/');		
+		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
+		$this->data['page_title'] = 'Manage Users';
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/manage', $this->data, TRUE);
+        $this->load->view('_layouts/layout_admin_default', $this->data);
+    }
+
+    function render_datatable() {
+        //Total rows - Refer to model method definition
+        $result_array = $this->user_model->get_rows();
+        $total_rows = $result_array['num_rows'];
+
+        // Total filtered rows - check without limit query. Refer to model method definition
+        $result_array = $this->user_model->get_rows(NULL, NULL, NULL, TRUE, FALSE);
+        $total_filtered = $result_array['num_rows'];
+
+        // Data Rows - Refer to model method definition
+        $result_array = $this->user_model->get_rows(NULL, NULL, NULL, TRUE);
+        $data_rows = $result_array['data_rows'];
+        $data = array();
+        $no = $_REQUEST['start'];
+        foreach ($data_rows as $result) {
+            $no++;
+            $row = array();
+            $row[] = '<div class="">'.$result['user_firstname'] . '&nbsp;' . $result['user_lastname'].'</div>';
+            $row[] = $result['user_email'];
+            $row[] = $result['user_phone1'];			
+			$row[] = isset($result['user_status']) ? $this->data['status_flag'][$result['user_status']]['text'] : '';
+            
+			//add html for action
+            $action_html = '';
+            
+            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/edit_user_profile/' . $result['id']), '<i class="fa fa-fw fa-pencil" aria-hidden="TRUE"></i>', array(
+                'class' => 'btn btn-sm btn-outline-secondary',
+                'data-toggle' => 'tooltip',
+                'data-original-title' => 'Edit Profile',
+                'title' => 'Edit Profile'
+            ));
+            $action_html.='&nbsp;';
+            $action_html.= anchor(base_url($this->router->directory.$this->router->class.'/profile/' . $result['id']), '<i class="fa fa-fw fa-info-circle" aria-hidden="TRUE"></i>', array(
+                'class' => 'btn btn-sm btn-outline-info',
+                'data-toggle' => 'tooltip',
+                'data-original-title' => 'View Profile',
+                'title' => 'View Profile'
+            ));
+            $row[] = $action_html;
+            $data[] = $row;
+        }
+
+        /* jQuery Data Table JSON format */
+        $output = array(
+            'draw' => isset($_REQUEST['draw']) ? $_REQUEST['draw'] : '',
+            'recordsTotal' => $total_rows,
+            'recordsFiltered' => $total_filtered,
+            'data' => $data,
+        );
+        //output to json format
+        echo json_encode($output);
+    }
+
+    function home() {
+        $this->profile();
+    }
+
     function profile() {
-        ########### Validate User Auth #############
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
             redirect($this->router->directory.$this->router->class.'/login');
@@ -695,6 +650,48 @@ class User extends CI_Controller {
         } else {
             return FALSE;
         }
+    }
+
+    function people() {        
+        $is_logged_in = $this->common_lib->is_logged_in();
+        if ($is_logged_in == FALSE) {
+			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
+            redirect($this->router->directory.$this->router->class.'/login');
+        }               
+		$this->breadcrumbs->push('People', '/');		
+		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
+        
+        
+        $search_keywords = NULL;
+        if($this->input->get_post('form_action') == 'search'){
+            $search_keywords = $this->input->get_post('user_search_keywords');
+        }
+        //die($search_keywords);
+
+		// Display using CI Pagination: Total filtered rows - check without limit query. Refer to model method definition		
+		$result_array = $this->user_model->get_users(NULL, NULL, NULL, $search_keywords);
+		$total_num_rows = $result_array['num_rows'];
+		
+		//pagination config
+		$additional_segment = $this->router->class.'/'.$this->router->method;
+		$per_page = 12;
+		$config['uri_segment'] = 4;
+		$config['num_links'] = 1;
+		$config['use_page_numbers'] = TRUE;
+		//$this->pagination->initialize($config);
+		
+		$page = ($this->uri->segment(4)) ? ($this->uri->segment(4)-1) : 0;
+		$offset = ($page*$per_page);
+		$this->data['pagination_link'] = $this->common_lib->render_pagination($total_num_rows, $per_page, $additional_segment);
+        //end of pagination config
+        
+        // Data Rows - Refer to model method definition
+        $result_array = $this->user_model->get_users(NULL, $per_page, $offset, $search_keywords);
+        $this->data['data_rows'] = $result_array['data_rows'];
+		
+		$this->data['page_title'] = 'People';
+        $this->data['maincontent'] = $this->load->view($this->router->class.'/people', $this->data, TRUE);
+        $this->load->view('_layouts/layout_default', $this->data);
     }
 
     function add_address() {
@@ -939,13 +936,12 @@ class User extends CI_Controller {
     }
 	
 	function edit_profile() {
-        ########### Validate User Auth #############
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
             redirect($this->router->directory.$this->router->class.'/login');
         }
-        ########### Validate User Auth End #############
+        
         $rows = $this->user_model->get_rows($this->sess_user_id);
         $this->data['row'] = $rows['data_rows'];
 
@@ -976,7 +972,6 @@ class User extends CI_Controller {
     }
 	
 	function profile_pic() {
-        ########### Validate User Auth #############
         $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
