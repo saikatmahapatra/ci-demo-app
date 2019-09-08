@@ -43,7 +43,7 @@ class Cms extends CI_Controller {
         
         $this->load->model('cms_model');
 		$this->load->model('upload_model');
-        $this->id = $this->uri->segment(4);
+        $this->id = $this->uri->segment(3);
 
         $this->data['page_title'] = $this->router->class.' : '.$this->router->method;
         
@@ -75,13 +75,8 @@ class Cms extends CI_Controller {
 		
 		// Get logged  in user id
         $this->sess_user_id = $this->common_lib->get_sess_user('id');
-			
-		$this->breadcrumbs->push('View','/');				
+		$this->breadcrumbs->push('View','/');
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
-		
-        
-        
-		
 		$this->data['page_title'] = 'Website CMS - Contents';
         $this->data['maincontent'] = $this->load->view($this->router->class.'/index', $this->data, TRUE);
         $this->load->view('_layouts/layout_admin_default', $this->data);
@@ -100,7 +95,7 @@ class Cms extends CI_Controller {
 		
 		//Pagination config starts here		
         $per_page = 3;
-        $config['uri_segment'] = 5; //which segment of your URI contains the page number
+        $config['uri_segment'] = 4; //which segment of your URI contains the page number
         $config['num_links'] = 2;
         $page = ($this->uri->segment($config['uri_segment'])) ? ($this->uri->segment($config['uri_segment'])-1) : 0;
         $offset = ($page*$per_page);
@@ -177,11 +172,8 @@ class Cms extends CI_Controller {
         //$this->data['page_title'] = "Add Page Content";
 		$this->breadcrumbs->push('Add','/');				
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
-        
-        
         if ($this->input->post('form_action') == 'insert') {
             if ($this->validate_form_data('add') == TRUE) {
-
                 $postdata = array(
                     'content_type' => $this->input->post('content_type'),
                     'content_title' => $this->input->post('content_title'),
@@ -246,7 +238,6 @@ class Cms extends CI_Controller {
     function delete() {
         //Check user permission by permission name mapped to db
         //$this->common_lib->is_auth('cms-delete');
-
         $where_array = array('id' => $this->id);
         $res = $this->cms_model->delete($where_array);
         if ($res) {
@@ -351,24 +342,18 @@ class Cms extends CI_Controller {
 		// Get logged  in user id
         $this->sess_user_id = $this->common_lib->get_sess_user('id');
 			
-		$this->breadcrumbs->push('View','/');				
+		$this->breadcrumbs->push('View','/');
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
-		
-        
-        
-		
 		$this->data['page_title'] = 'Carousel';
         $this->data['maincontent'] = $this->load->view($this->router->class.'/manage_banner', $this->data, TRUE);
         $this->load->view('_layouts/layout_admin_default', $this->data);
     }
 	
 	function add_banner() {
-		$this->breadcrumbs->push('Add','/');				
+		$this->breadcrumbs->push('Add','/');
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
-        
-        
         if ($this->input->post('form_action') == 'insert') {
-			$this->upload_file();            
+			$this->upload_file();
         }
 		$this->data['page_title'] = 'Create a Carousel Slider';
         $this->data['maincontent'] = $this->load->view($this->router->class.'/add_banner', $this->data, TRUE);
@@ -376,12 +361,10 @@ class Cms extends CI_Controller {
     }
 	
 	function edit_banner() {
-		$this->breadcrumbs->push('Edit','/');				
+		$this->breadcrumbs->push('Edit','/');
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
-        
-        
         if ($this->input->post('form_action') == 'update') {
-			$this->upload_file();            
+			$this->upload_file();
         }
 		$result_array = $this->upload_model->get_uploads($this->id, NULL, NULL, FALSE, FALSE, NULL);
         $this->data['rows'] = $result_array['data_rows'];		
@@ -394,7 +377,7 @@ class Cms extends CI_Controller {
 		$uploaded_file_id = $this->uri->segment(4);
 		$uploaded_file_name = $this->uri->segment(5);
 		//if($uploaded_file_name){
-			//Unlink previously uploaded file                    
+			//Unlink previously uploaded file
 			$file_path = 'assets/uploads/banner_img/'.$uploaded_file_name;
 			//if (file_exists(FCPATH . $file_path)) {
 				$this->common_lib->unlink_file(array(FCPATH . $file_path));
