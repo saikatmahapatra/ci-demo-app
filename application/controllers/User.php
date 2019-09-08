@@ -6,7 +6,8 @@ class User extends CI_Controller {
 
     var $data;
     var $id;
-
+    var $sess_user_id;
+    
     function __construct() {
         parent::__construct();
         $this->load->model('user_model');

@@ -160,7 +160,7 @@ class Home extends CI_Controller {
 		
 		$this->data['page_title'] = "Dashboard";
         $this->data['maincontent'] = $this->load->view($this->router->class.'/dashboard', $this->data, TRUE);
-        $this->load->view('_layouts/layout_default', $this->data);
+        $this->load->view('_layouts/layout_admin_default', $this->data);
     }
 }
 ?>
