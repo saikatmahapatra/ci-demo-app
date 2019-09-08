@@ -1,3 +1,4 @@
+<?php $this->session->set_userdata('sess_template', 'site'); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

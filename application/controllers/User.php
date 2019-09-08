@@ -86,7 +86,7 @@ class User extends CI_Controller {
                             redirect($this->session->userdata('sess_post_login_redirect_url'));
                         }else{
                             if($this->data['is_admin'] === TRUE){
-                                redirect($this->router->directory.'admin/dashboard');
+                                redirect($this->router->directory.'home/dashboard');
                             }else{
                                 redirect($this->router->directory.'home');
                             }
@@ -468,8 +468,6 @@ class User extends CI_Controller {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
             redirect($this->router->directory.$this->router->class.'/login');
         }
-        
-        
         if ($this->input->post('form_action') == 'change_password') {
             if ($this->validate_changepassword_form() == TRUE) {
                 $postdata = array('user_password' => md5($this->input->post('user_new_password')));
@@ -479,9 +477,17 @@ class User extends CI_Controller {
                 redirect(current_url());
             }
         }
-		$this->data['page_title'] = 'Change Password';
-        $this->data['maincontent'] = $this->load->view($this->router->class.'/change_password', $this->data, TRUE);
-        $this->load->view('_layouts/layout_default', $this->data);
+        if($this->data['is_admin'] === TRUE){
+            $this->common_lib->init_template_elements('admin');
+            $this->data['page_title'] = 'Please sign in';
+            $this->data['maincontent'] = $this->load->view($this->router->class.'/admin_change_password', $this->data, TRUE);
+            $this->load->view('_layouts/layout_admin_default', $this->data);
+        }else{
+            $this->data['page_title'] = 'Change Password';
+            $this->data['maincontent'] = $this->load->view($this->router->class.'/change_password', $this->data, TRUE);
+            $this->load->view('_layouts/layout_default', $this->data);
+        }
+		
     }
 
     function validate_changepassword_form() {
