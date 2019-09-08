@@ -62,7 +62,7 @@
 
         <div class="form-row">
             <div class="form-group col-12">
-                <label for="userfile" class="required">Resume</label>
+                <label for="userfile" class="optional">Resume</label>
                 <div class="custom-file">
                     <?php echo form_upload(array('name' => 'userfile', 'id' => 'userfile', 'class' => 'custom-file-input', 'aria-describedby'=>'uploaderHelpBlock')); ?>
                     <label class="custom-file-label" for="userfile">Choose file</label>
@@ -76,7 +76,7 @@
 
         <div class="form-row">
             <div class="form-group col-12">
-                <label for="gender" class="required">Gender</label>
+                <label for="gender" class="optional">Gender</label>
                 <div class="">
                     <div class="custom-control custom-radio custom-control-inline">
                         <?php

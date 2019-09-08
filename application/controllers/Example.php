@@ -85,10 +85,10 @@ class Example extends CI_Controller {
         $this->form_validation->set_rules('user_password', 'password', 'required|trim|min_length[6]|max_length[16]');
         $this->form_validation->set_rules('user_password_confirm', 'confirm password', 'required|matches[user_password]');
         $this->form_validation->set_rules('address', 'address', 'required');
-        $this->form_validation->set_rules('gender', 'gender', 'required');
+        //$this->form_validation->set_rules('gender', 'gender', 'required');
         $this->form_validation->set_rules('job_role', 'job role selection', 'required');
         $this->form_validation->set_rules('functional_domain', 'functional domain', 'required');        
-        $this->form_validation->set_rules('userfile', 'resume upload', 'trim|required');
+        //$this->form_validation->set_rules('userfile', 'resume upload', 'trim|required');
         $this->form_validation->set_rules('terms', 'terms & condition acceptance', 'trim|required');
         $this->form_validation->set_error_delimiters('<div class="validation-error">', '</div>');
         if ($this->form_validation->run() == TRUE) {
