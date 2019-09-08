@@ -42,7 +42,7 @@ class Category extends CI_Controller {
         $this->data['app_js'] = $this->common_lib->add_javascript($javascript_files);
 
         $this->load->model('category_model');
-        $this->id = $this->uri->segment(4);
+        $this->id = $this->uri->segment(3);
         
         $this->data['category_dropdown'] = $this->category_model->get_category_dropdown();
         $this->data['page_title'] = $this->router->class.' : '.$this->router->method;
@@ -189,7 +189,7 @@ class Category extends CI_Controller {
                 }
             }
         }
-        $result_array = $this->category_model->get_rows($this->uri->segment(4));
+        $result_array = $this->category_model->get_rows($this->id);
         $this->data['rows'] = $result_array['data_rows'];
 		$this->data['page_title'] = 'Edit Product Category';
         $this->data['maincontent'] = $this->load->view($this->router->class.'/edit', $this->data, TRUE);

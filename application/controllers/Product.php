@@ -48,7 +48,7 @@ class Product extends CI_Controller {
         
         $this->data['category_dropdown'] = $this->category_model->get_category_dropdown();
 
-        $this->id = $this->uri->segment(4);
+        $this->id = $this->uri->segment(3);
         $this->data['page_title'] = $this->router->class.' : '.$this->router->method;
 		
 		// Status flag indicator for showing in table grid etc

@@ -374,8 +374,8 @@ class Cms extends CI_Controller {
     }
 	
 	function delete_banner(){
-		$uploaded_file_id = $this->uri->segment(4);
-		$uploaded_file_name = $this->uri->segment(5);
+		$uploaded_file_id = $this->uri->segment(3);
+		$uploaded_file_name = $this->uri->segment(4);
 		//if($uploaded_file_name){
 			//Unlink previously uploaded file
 			$file_path = 'assets/uploads/banner_img/'.$uploaded_file_name;
