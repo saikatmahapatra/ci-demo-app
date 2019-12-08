@@ -6,7 +6,7 @@
 <div class="row">    
    <div class="col-lg-8">    
     <div id="accordion">        
-        <div class="card">
+        <div class="card ci-card">
             <div class="card-header" id="heading_1">
                 <h5 class="mb-0">
                     <button type="button" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse_1" aria-expanded="false" aria-controls="collapse_1">1. Login</button>
@@ -23,7 +23,7 @@
         </div>
 
 
-        <div class="card">
+        <div class="card ci-card">
             <div class="card-header" id="heading_2">
                 <h5 class="mb-0">
                     <button type="button" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse_2" aria-expanded="false" aria-controls="collapse_2">2. Select Delivery Address</button>
@@ -78,7 +78,7 @@
         </div>
 
 
-        <div class="card">
+        <div class="card ci-card">
             <div class="card-header" id="heading_3">
                 <h5 class="mb-0">
                     <button type="button" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse_3" aria-expanded="false" aria-controls="collapse_3">3. Review Order Summary</button>
@@ -124,7 +124,7 @@
 
 
 
-        <div class="card">
+        <div class="card ci-card">
             <div class="card-header" id="heading_4">
                 <h5 class="mb-0">
                     <button type="button" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse_4" aria-expanded="false" aria-controls="collapse_4">4. Payment</button>
@@ -166,9 +166,9 @@
     </div><!--/#accordion-->    
    </div>
    <div class="col-lg-4">
-      <div class="card">
-         <div class="card-header">Price Details</div>
+      <div class="card ci-card">
          <div class="card-body">
+            <h5 class="card-title">Price Details</h5>
             <div class="row">
                <div class="col-lg-6">Price(<?php echo isset($total_items) ? $total_items.' items' : ''; ?>)</div>
                <div class="col-lg-6 text-right"><span class="currency" id="INR">&#8377;</span><?php echo isset($cart_total)?number_format($cart_total,2):'';?></div>
@@ -177,9 +177,7 @@
                <div class="col-lg-6">Delivery Charges</div>
                <div class="col-lg-6 text-right text-success">FREE</div>
             </div>
-         </div>
-         <div class="card-footer">
-            <div class="row">
+            <div class="row mt-3">
                 <div class="col-lg-12 h5">
                 Amount Payble <span class="currency" id="INR">&#8377;</span><?php echo isset($cart_total) ? number_format($cart_total,2) :'';?>
                 </div>

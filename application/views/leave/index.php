@@ -9,10 +9,9 @@
 
 <div class="row my-3">
 	<div class="col-lg-12">
-		<div class="card card-legend">			
+		<div class="card ci-card">			
 			<div class="card-body">
-				<h6 class="card-title text-on-card">Apply Leave</h6>
-
+				<h5 class="card-title">Apply Leave</h5>
 					<table class="table table-sm table-bordered">
 						<thead class="thead-light text-center">
 							<tr>
@@ -86,9 +85,9 @@
 
 <div class="row my-3">
 	<div class="col-lg-12">
-		<div class="card card-legend">			
+		<div class="card ci-card">			
 			<div class="card-body">
-			<h6 class="card-title text-on-card">Leave Details</h6>
+			<h5 class="card-title">Leave Details</h5>
 				<div class="table-responsive">
 					<div class="mb-2 d-none">
 						<span class="mx-2"><i class="fa fa-fw fa-square text-secondary" aria-hidden="true"></i> Pending</span>					

@@ -9,12 +9,9 @@ $row = $rows[0];
 <div class="row">
 	<div class="col-lg-12">
 		<?php echo isset($alert_message) ? $alert_message : ''; ?>
-		<div class="card order-summary">
-			<div class="card-header">
-				<h6>Order # <?php echo isset($row['order_no']) ? $row['order_no'] : '';?>  <?php echo isset($row['order_status']) ? strtoupper($row['order_status']) : '';?> <span class="pull-right"><?php echo isset($row['order_datetime']) ? $row['order_datetime'] : '';?></span></h6>
-			</div>
+		<div class="card ci-card order-summary">
 			<div class="card-body">
-				
+				<h5 class="card-title">Order No <?php echo isset($row['order_no']) ? $row['order_no'] : '';?>  <?php echo isset($row['order_status']) ? strtoupper($row['order_status']) : '';?> <span class="pull-right"><?php echo isset($row['order_datetime']) ? $row['order_datetime'] : '';?></span></h5>
 				<div class="row">				
 					<div class="col-lg-4">
 						<div class="row">

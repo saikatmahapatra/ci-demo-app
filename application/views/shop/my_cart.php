@@ -6,11 +6,9 @@
 	<?php echo form_hidden('form_action', 'update_cart'); ?>
 	<div class="row">
 	<div class="col-lg-8">		
-		<div class="card">
-			<div class="card-header">
-				Cart (<?php echo $total_items; ?>)
-			</div><!--/.card-header-->
-			<div class="card-body">				
+		<div class="card ci-card">
+			<div class="card-body">
+				<h5 class="card-title">Your Bag (<?php echo $total_items; ?>)</h5>				
 				<?php
 					if (sizeof($cartrows) > 0) {
 						$row_counter = 1;								
@@ -55,10 +53,8 @@
 							<div class="col-lg-12">your shopping cart is empty</div>
 						</div>
 					<?php } ?>
-				
-			</div><!--/.card-body-->
-			<div class="card-footer">
-				<div class="text-right">
+
+					<div class="text-right">
 					<a href="<?php echo base_url($this->router->directory.'shop');?>" class="btn btn-primary">Continue Shopping</a>
 					<?php
 					if (sizeof($cartrows) > 0) {
@@ -69,26 +65,24 @@
 					}
 					?>
 				</div>
-			</div><!--/.card-footer-->			
+				
+			</div><!--/.card-body-->
 		</div><!--/.card-->		
 	</div>
 	
 	<div class="col-lg-4">
-		<div class="card">
-			<div class="card-header">
-				<div class="text-success">Your order is eligible for FREE Delivery. Select this option at checkout.</div>
-			</div>
+		<div class="card ci-card">
 			<div class="card-body">
-				<h5>Subtotal(<?php echo isset($total_items) ? $total_items.' items' : ''; ?>): <span class="currency" id="INR">&#8377;</span><?php echo isset($cart_total)?number_format($cart_total,2):'';?></h5>
-			</div>
-			<div class="card-footer text-center">
+				<h5 class="card-title">Subtotal</h5>
+				<h6 class="">You have to pay (<?php echo isset($total_items) ? $total_items.' items' : ''; ?>): <span class="currency" id="INR">&#8377;</span><?php echo isset($cart_total)?number_format($cart_total,2):'';?></h6>
+				<p class="text-success">Your order is eligible for FREE Delivery. Select this option at checkout.</p>
 				<?php
 					if (sizeof($cartrows) > 0) {
 						?>						
 						<a href="<?php echo base_url($this->router->directory.'shop/init_payment');?>" class="btn btn-primary">Proceed to Checkout</a>
 						<?php						
 					}
-					?>
+				?>
 			</div>
 		</div>
 		<p>

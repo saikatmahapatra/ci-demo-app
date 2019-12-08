@@ -53,11 +53,11 @@
 <div class="row">
 	<div class="col-lg-12">
 		<div class="card ci-card ci-dl">
-			<div class="card-header h6">
+			<div class="card-body">
+				<h5 class="card-title">
 				<i class="fa fa-fw fa-user-circle " aria-hidden="true"></i>
 				<?php echo isset($row['user_emp_id']) ? 'Employee Code - UEIPL/'.$row['user_emp_id'] : ''; ?>
-			</div><!--/.card-header-->
-			<div class="card-body">
+				</h5>
 				<?php echo isset($alert_message) ? $alert_message : ''; ?>
 				<div class="row">
 					<div class="col-lg-3 text-center mb-3">
@@ -323,9 +323,6 @@
 					</div><!--/.col-lg-9-->
 				</div><!--/.row-->
 			</div><!--./card-body-->
-			<div class="card-footer text-center text-muted small">
-				<i class="fa fa-fw fa-clock-o" aria-hidden="true"></i> Last login on <?php echo isset($user_row['user_login_date_time']) ? $this->common_lib->display_date($user_row['user_login_date_time'],true,NULL,'d-M-Y h:i:s a') : '-'; ?>
-			</div>
 		</div><!--/.card-->
 		
 	</div><!--/.col-->

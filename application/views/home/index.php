@@ -49,12 +49,9 @@
 <?php } ?>
 
 <?php if( isset($data_rows) && sizeof($data_rows) > 0 ){ ?>
-	<div class="card news-card">
-            <div class="card-header h6">
-            <i class="fa fa-fw fa-newspaper-o fa-lg" aria-hidden="true"></i> News
-            </div>
+	<div class="card ci-card news-card">
             <div class="card-body">
-            
+				<h5 class="card-title"><i class="fa fa-fw fa-newspaper-o fa-lg" aria-hidden="true"></i> News</h5>
                 <ul class="list-group list-group-flush">
                 <?php foreach($data_rows as $key=>$row) { ?>
                     <li class="list-group-item">
@@ -85,10 +82,8 @@
                                 <?php echo isset($row['content_text']) ? $this->common_lib->remove_empty_p($row['content_text']) : '';?>
                         </div>
                     </div>
-                <?php } */ ?>
-            </div>
-            <div class="card-footer text-center">
-                <?php echo $pagination_link;?>
+				<?php } */ ?>
+				<?php echo $pagination_link;?>
             </div>
         </div><!--/.card-->
 <?php } ?>
