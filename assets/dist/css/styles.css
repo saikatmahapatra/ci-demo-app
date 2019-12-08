@@ -8436,7 +8436,6 @@ a.text-dark:hover, a.text-dark:focus {
 /* App Specific CSS - Additional Customization*/
 body {
   margin-top: 4.5rem;
-  margin-bottom: 1rem;
 }
 
 body.login {
@@ -8508,20 +8507,14 @@ body.login {
 }
 
 .ci-calendar {
-  border: 2px solid #6c757d;
+  border: 1px solid #b3b2b2;
 }
 
 .ci-calendar th {
-  background: #6c757d;
-  font-size: 1rem;
-  color: #fff;
+  color: #495057;
   vertical-align: center !important;
   text-align: center;
-}
-
-.ci-calendar tr.wk_nm {
-  background: #999999;
-  color: #fff;
+  border-top: 1px solid #b3b2b2;
 }
 
 .ci-calendar td {
@@ -8545,7 +8538,7 @@ body.login {
 .ci-calendar td[data-calday='disabled_day'] {
   opacity: 0.5;
   cursor: default !important;
-  background: #f8f8f8;
+  background: #e9ecef;
 }
 
 .ci-calendar .highlight {
@@ -8555,7 +8548,7 @@ body.login {
 
 .ci-calendar .prevcell a,
 .ci-calendar .nextcell a {
-  color: #fff !important;
+  color: #212529 !important;
   text-decoration: none !important;
 }
 
@@ -8717,6 +8710,21 @@ body.login {
 
 .ci-accordion-card .card-body {
   padding-left: 0px;
+}
+
+.accordion .card-header {
+  cursor: pointer;
+}
+
+.accordion .card-header:before {
+  font-family: 'FontAwesome';
+  content: "\f068";
+  margin-right: 15px;
+}
+
+.accordion .card-header.collapsed:before {
+  /* symbol for "collapsed" panels */
+  content: "\f067";
 }
 
 .ci-wizard {
@@ -8895,8 +8903,42 @@ body.login {
   text-decoration: none;
 }
 
-.ci-card .card-header.h6 {
-  font-weight: 400;
+.ci-card {
+  box-shadow: 0 0.46875rem 2.1875rem rgba(4, 9, 20, 0.03), 0 0.9375rem 1.40625rem rgba(4, 9, 20, 0.03), 0 0.25rem 0.53125rem rgba(4, 9, 20, 0.05), 0 0.125rem 0.1875rem rgba(4, 9, 20, 0.03);
+  border-width: 0;
+  transition: all .2s;
+  margin-bottom: 30px;
+}
+
+.ci-card .card-body {
+  flex: 1 1 auto;
+  padding: 1.25rem;
+}
+
+.ci-card .card-body .card-title {
+  text-transform: uppercase;
+  color: rgba(13, 27, 62, 0.7);
+  font-weight: bold;
+  font-size: 0.88rem;
+}
+
+.ci-card .card-header,
+.ci-card .card-title {
+  text-transform: uppercase;
+  color: rgba(13, 27, 62, 0.7);
+  font-weight: bold;
+  font-size: 0.88rem;
+  background-color: none;
+  border-bottom: none;
+}
+
+.ci-card .card-title {
+  margin-bottom: 0.75rem;
+}
+
+.ci-card .card-footer {
+  background-color: rgba(0, 0, 0, 0);
+  border-top: none;
 }
 
 .no-toggle-icon .dropdown-toggle::after {
@@ -9163,9 +9205,11 @@ label.optional::after {
 }
 
 .bs-mega-menu .dropdown-mega-menu {
-  background-color: #e9ecef;
+  background-color: #212529;
   padding: 20px 20px;
   width: 100%;
+  box-shadow: 0 0.46875rem 2.1875rem rgba(4, 9, 20, 0.03), 0 0.9375rem 1.40625rem rgba(4, 9, 20, 0.03), 0 0.25rem 0.53125rem rgba(4, 9, 20, 0.05), 0 0.125rem 0.1875rem rgba(4, 9, 20, 0.03);
+  transition: all .2s;
 }
 
 .bs-mega-menu .dropdown-mega-menu li > ul {
@@ -9182,22 +9226,35 @@ label.optional::after {
   padding: 8px 20px;
   clear: both;
   font-weight: normal;
-  color: #495057;
+  color: #fff;
   white-space: normal;
 }
 
 .bs-mega-menu .dropdown-mega-menu li > ul > li a:hover, .bs-mega-menu .dropdown-mega-menu li > ul > li a:focus {
   text-decoration: none;
-  color: #000;
-  background-color: #f5f5f5;
+  color: #fff;
+  background-color: #6c757d;
+}
+
+.bs-mega-menu .dropdown-mega-menu .dropdown-header {
+  font-size: 1.25rem;
+  color: #fff;
 }
 
 .bs-mega-menu .dropdown-mega-menu .dropdown-item:active {
-  background-color: #f5f5f5;
+  background-color: #343a40;
 }
 
 .bs-mega-menu .dropdown-mega-menu .dropdown-item:active a:active {
   background-color: #0062cc;
+  color: #fff;
+}
+
+.bs-mega-menu .dropdown-mega-menu .dropdown-item:hover {
+  background-color: #343a40;
+}
+
+.bs-mega-menu .dropdown-mega-menu .dropdown-item:hover .dropdown-header {
   color: #fff;
 }
 
@@ -9224,10 +9281,6 @@ label.optional::after {
   background-color: transparent;
   background-image: none;
   cursor: not-allowed;
-}
-
-.bs-mega-menu .dropdown-mega-menu .dropdown-header {
-  font-size: 1.5rem;
 }
 
 @media (max-width: 768px) {
