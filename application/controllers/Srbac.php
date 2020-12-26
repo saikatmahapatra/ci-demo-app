@@ -13,7 +13,7 @@ class Srbac extends CI_Controller {
         parent::__construct();
 
         //Check if any user logged in else redirect to login
-        $is_logged_in = $this->common_lib->is_logged_in();
+        $is_logged_in = $this->app_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
             if($this->data['is_admin'] === TRUE){
@@ -24,22 +24,22 @@ class Srbac extends CI_Controller {
         }
 
         //Has logged in user permission to access this page or method?        
-        $this->common_lib->is_auth(array(
+        $this->app_lib->is_auth(array(
             'default-super-admin-access',
             'default-admin-access'
         ));
 
         // Get logged  in user id
-        $this->sess_user_id = $this->common_lib->get_sess_user('id');
+        $this->sess_user_id = $this->app_lib->get_sess_user('id');
 
         //Render header, footer, navbar, sidebar etc common elements of templates
-        $this->common_lib->init_template_elements('admin');
+        $this->app_lib->init_template_elements('admin');
 
         // Load required js files for this controller
         $javascript_files = array(
             $this->router->class
         );
-        $this->data['app_js'] = $this->common_lib->add_javascript($javascript_files);
+        $this->data['app_js'] = $this->app_lib->add_javascript($javascript_files);
 
         
         $this->load->model('cms_model');
@@ -71,10 +71,10 @@ class Srbac extends CI_Controller {
 
     function index() {
         // Check user permission by permission name mapped to db
-        // $this->common_lib->is_auth('cms-list-view');
+        // $this->app_lib->is_auth('cms-list-view');
 		
 		// Get logged  in user id
-        $this->sess_user_id = $this->common_lib->get_sess_user('id');
+        $this->sess_user_id = $this->app_lib->get_sess_user('id');
 			
 		$this->breadcrumbs->push('View','/');				
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
@@ -89,7 +89,7 @@ class Srbac extends CI_Controller {
 	
 	function index_ci_pagination() {
         // Check user permission by permission name mapped to db
-        // $this->common_lib->is_auth('cms-list-view');
+        // $this->app_lib->is_auth('cms-list-view');
 			
 		$this->breadcrumbs->push('View','/');				
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
@@ -111,7 +111,7 @@ class Srbac extends CI_Controller {
 		
 		$page = ($this->uri->segment(4)) ? ($this->uri->segment(4)-1) : 0;
 		$offset = ($page*$per_page);
-		$this->data['pagination_link'] = $this->common_lib->render_pagination($total_num_rows, $per_page, $additional_segment);
+		$this->data['pagination_link'] = $this->app_lib->render_pagination($total_num_rows, $per_page, $additional_segment);
 		//end of pagination config
         
 
@@ -143,7 +143,7 @@ class Srbac extends CI_Controller {
             $row = array();
             $row[] = $result['content_type'];
             $row[] = $result['content_title'];
-            $row[] = $this->common_lib->display_date($result['content_created_on'], TRUE);
+            $row[] = $this->app_lib->display_date($result['content_created_on'], TRUE);
             $row[] = isset($result['content_status']) ? $this->data['status_flag'][$result['content_status']]['text'] : '';
             //add html for action
             $action_html = '';
@@ -180,7 +180,7 @@ class Srbac extends CI_Controller {
 
     function add() {
         //Check user permission by permission name mapped to db
-        //$this->common_lib->is_auth('cms-add');
+        //$this->app_lib->is_auth('cms-add');
         //$this->data['page_title'] = "Add Page Content";
 		$this->breadcrumbs->push('Add','/');				
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
@@ -195,15 +195,15 @@ class Srbac extends CI_Controller {
                     'content_text' => $this->input->post('content_text'),
                     'content_meta_keywords' => $this->input->post('content_meta_keywords'),
                     'content_meta_description' => $this->input->post('content_meta_description'),
-                    'content_display_from_date' => $this->common_lib->convert_to_mysql($this->input->post('content_display_from_date')),
-                    'content_display_to_date' => $this->common_lib->convert_to_mysql($this->input->post('content_display_to_date')),
+                    'content_display_from_date' => $this->app_lib->convert_to_mysql($this->input->post('content_display_from_date')),
+                    'content_display_to_date' => $this->app_lib->convert_to_mysql($this->input->post('content_display_to_date')),
                     'content_meta_author' => $this->input->post('content_meta_author'),
                     'content_created_by' => $this->sess_user_id,
 					'content_status' => $this->input->post('content_status')
                 );
                 $insert_id = $this->cms_model->insert($postdata);
                 if ($insert_id) {
-                    $this->common_lib->set_flash_message('Data Added Successfully.', 'alert-success');
+                    $this->app_lib->set_flash_message('Data Added Successfully.', 'alert-success');
                     redirect($this->router->directory.$this->router->class.'/add');
                 }
             }
@@ -215,7 +215,7 @@ class Srbac extends CI_Controller {
 
     function edit() {
         //Check user permission by permission name mapped to db
-        //$this->common_lib->is_auth('cms-edit');
+        //$this->app_lib->is_auth('cms-edit');
 		//$this->data['page_title'] = "Edit Page Content";
 		$this->breadcrumbs->push('Edit','/');				
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
@@ -231,15 +231,15 @@ class Srbac extends CI_Controller {
                     'content_meta_description' => $this->input->post('content_meta_description'),
                     'content_meta_author' => $this->input->post('content_meta_author'),
                     'content_status' => $this->input->post('content_status'),
-					'content_display_from_date' => $this->common_lib->convert_to_mysql($this->input->post('content_display_from_date')),
-                    'content_display_to_date' => $this->common_lib->convert_to_mysql($this->input->post('content_display_to_date')),
+					'content_display_from_date' => $this->app_lib->convert_to_mysql($this->input->post('content_display_from_date')),
+                    'content_display_to_date' => $this->app_lib->convert_to_mysql($this->input->post('content_display_to_date')),
                     'content_archived' => $this->input->post('content_archived'),
 					'content_created_by' => $this->sess_user_id
                 );
                 $where_array = array('id' => $this->input->post('id'));
                 $res = $this->cms_model->update($postdata, $where_array);
                 if ($res) {
-                    $this->common_lib->set_flash_message('Data Updated Successfully.', 'alert-success');
+                    $this->app_lib->set_flash_message('Data Updated Successfully.', 'alert-success');
                     redirect(current_url());
                 }
             }
@@ -253,12 +253,12 @@ class Srbac extends CI_Controller {
 
     function delete() {
         //Check user permission by permission name mapped to db
-        //$this->common_lib->is_auth('cms-delete');
+        //$this->app_lib->is_auth('cms-delete');
 
         $where_array = array('id' => $this->id);
         $res = $this->cms_model->delete($where_array);
         if ($res) {
-            $this->common_lib->set_flash_message('Data Deleted Successfully.', 'alert-success');
+            $this->app_lib->set_flash_message('Data Deleted Successfully.', 'alert-success');
             redirect($this->router->directory.$this->router->class);
         }
     }

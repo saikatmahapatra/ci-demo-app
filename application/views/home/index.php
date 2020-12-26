@@ -60,10 +60,10 @@
                             <?php echo $content_type[$row['content_type']]['text']; ?>
                             <?php echo isset($row['user_firstname']) ? "By ".$row['user_firstname'] : '';?>
                             <?php echo isset($row['user_lastname']) ? $row['user_lastname'].", " : '';?>
-                            <?php echo $this->common_lib->display_date($row['content_created_on'],true,NULL,'d-M-Y h:i:s a'); ?>
+                            <?php echo $this->app_lib->display_date($row['content_created_on'],true,NULL,'d-M-Y h:i:s a'); ?>
                         </div>
                         <div class="mb-0 lh-125" style="max-height: 120px; overflow: hidden;">
-                            <?php echo isset($row['content_text']) ? ($this->common_lib->remove_empty_p($row['content_text'])) : '';?>
+                            <?php echo isset($row['content_text']) ? ($this->app_lib->remove_empty_p($row['content_text'])) : '';?>
                         </div>
                     </li>
                 <?php }  ?>
@@ -77,9 +77,9 @@
                                     <?php echo $content_type[$row['content_type']]['text']; ?>
                                     <?php echo isset($row['user_firstname']) ? "By ".$row['user_firstname'] : '';?>
                                     <?php echo isset($row['user_lastname']) ? $row['user_lastname'].", " : '';?>
-                                    <?php echo $this->common_lib->display_date($row['content_created_on'],true,NULL,'d-M-Y h:i:sa'); ?>
+                                    <?php echo $this->app_lib->display_date($row['content_created_on'],true,NULL,'d-M-Y h:i:sa'); ?>
                                 </strong>
-                                <?php echo isset($row['content_text']) ? $this->common_lib->remove_empty_p($row['content_text']) : '';?>
+                                <?php echo isset($row['content_text']) ? $this->app_lib->remove_empty_p($row['content_text']) : '';?>
                         </div>
                     </div>
 				<?php } */ ?>

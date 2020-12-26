@@ -116,8 +116,8 @@
 								<tr>
 									<td><?php echo $row['leave_req_id'];?></td>
 									<td><?php echo $row['leave_type'];?></td>
-									<td><?php echo $this->common_lib->display_date($row['leave_from_date']);?></td>
-									<td><?php echo $this->common_lib->display_date($row['leave_to_date']);?></td>
+									<td><?php echo $this->app_lib->display_date($row['leave_from_date']);?></td>
+									<td><?php echo $this->app_lib->display_date($row['leave_to_date']);?></td>
 									<td><?php echo $row['leave_days'].' day(s)';?></td>
 									<td>
 										<!-- <span class="small"><i class="fa fa-fw fa-square <?php echo $leave_status_arr[$row['leave_status']]['css'];?>" aria-hidden="true"></i></span>  -->

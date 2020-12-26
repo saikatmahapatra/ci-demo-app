@@ -12,18 +12,18 @@ class Timesheet extends CI_Controller {
     function __construct() {
         parent::__construct();
         //Loggedin user details
-        $this->sess_user_id = $this->common_lib->get_sess_user('id');        
+        $this->sess_user_id = $this->app_lib->get_sess_user('id');        
         
         //Render header, footer, navbar, sidebar etc common elements of templates
-        $this->common_lib->init_template_elements('site');
+        $this->app_lib->init_template_elements('site');
         
         // Load required js files for this controller
         $javascript_files = array(
             $this->router->class
         );
-        $this->data['app_js'] = $this->common_lib->add_javascript($javascript_files);
+        $this->data['app_js'] = $this->app_lib->add_javascript($javascript_files);
 		//Check if any user logged in else redirect to login
-        $is_logged_in = $this->common_lib->is_logged_in();
+        $is_logged_in = $this->app_lib->is_logged_in();
         
         if ($is_logged_in == FALSE) {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
@@ -100,7 +100,7 @@ class Timesheet extends CI_Controller {
 	
 	function add() {
         //Check user permission by permission name mapped to db
-        //$this->common_lib->is_auth('timesheet-add');
+        //$this->app_lib->is_auth('timesheet-add');
         if ($this->input->post('form_action') == 'add') {
             if ($this->validate_form_data('add') == TRUE) {
                 
@@ -122,7 +122,7 @@ class Timesheet extends CI_Controller {
 				}
                 $insert_id = $this->timesheet_model->insert_batch($batch_post_data);
                 if ($insert_id) {
-                    $this->common_lib->set_flash_message('Timesheet Entry Added Successfully.', 'alert-success');
+                    $this->app_lib->set_flash_message('Timesheet Entry Added Successfully.', 'alert-success');
                     redirect(current_url());
                 }
             }
@@ -198,13 +198,13 @@ class Timesheet extends CI_Controller {
         foreach ($data_rows as $result) {
             $no++;
             $row = array();
-            //$row[] = $this->common_lib->display_date($result['timesheet_date']);
+            //$row[] = $this->app_lib->display_date($result['timesheet_date']);
             //$row[] = $result['project_name'];
             //$row[] = $result['task_activity_name'];
             //$row[] = $result['timesheet_hours'];
             //$row[] = $result['timesheet_review_status'];
 			
-			$html = '<div class="font-weight-bold">'.$this->common_lib->display_date($result['timesheet_date']).' <span class="float-right"><i class="fa fa-fw fa-clock-o" aria-hidden="TRUE"></i> '.$result['timesheet_hours'].' hrs</span></div>';			
+			$html = '<div class="font-weight-bold">'.$this->app_lib->display_date($result['timesheet_date']).' <span class="float-right"><i class="fa fa-fw fa-clock-o" aria-hidden="TRUE"></i> '.$result['timesheet_hours'].' hrs</span></div>';			
 			$html.= '<div class="">'.$result['project_number'].' '.$result['project_name'].'<span class="float-right">'.$result['task_activity_name'].'</span></div>';			
 			
             
@@ -265,7 +265,7 @@ class Timesheet extends CI_Controller {
                 $res = $this->timesheet_model->update($postdata, $where_array);
 
                 if ($res) {
-                    $this->common_lib->set_flash_message('Data Updated Successfully.', 'alert-success');
+                    $this->app_lib->set_flash_message('Data Updated Successfully.', 'alert-success');
                     redirect(current_url());
                 }
             }
@@ -286,14 +286,14 @@ class Timesheet extends CI_Controller {
         $where_array = array('id' => $this->id);
         $res = $this->timesheet_model->delete($where_array);
         if ($res) {
-            $this->common_lib->set_flash_message('Timesheet Entry Deleted Successfully.', 'alert-success');
+            $this->app_lib->set_flash_message('Timesheet Entry Deleted Successfully.', 'alert-success');
             redirect($this->router->directory.$this->router->class.'');
         }
     }
 
     function validate_days_diff(){
-        $from_date = strtotime($this->common_lib->convert_to_mysql($this->input->post('from_date'))); // or your date as well
-        $to_date = strtotime($this->common_lib->convert_to_mysql($this->input->post('to_date')));
+        $from_date = strtotime($this->app_lib->convert_to_mysql($this->input->post('from_date'))); // or your date as well
+        $to_date = strtotime($this->app_lib->convert_to_mysql($this->input->post('to_date')));
         $datediff = ($to_date - $from_date);
         $no_day = round($datediff / (60 * 60 * 24));
         if($no_day >= 0 ){
@@ -306,7 +306,7 @@ class Timesheet extends CI_Controller {
 
     function report() {
         //Has logged in user permission to access this page or method?        
-        $this->common_lib->is_auth(array(
+        $this->app_lib->is_auth(array(
             'default-super-admin-access',
             'default-admin-access'
         ));
@@ -331,7 +331,7 @@ class Timesheet extends CI_Controller {
                 $config['num_links'] = 2;
                 $page = ($this->uri->segment($config['uri_segment'])) ? ($this->uri->segment($config['uri_segment'])-1) : 0;
                 $offset = ($page*$per_page);
-                $this->data['pagination_link'] = $this->common_lib->render_pagination($total_num_rows, $per_page);
+                $this->data['pagination_link'] = $this->app_lib->render_pagination($total_num_rows, $per_page);
                 //Pagination config ends here
                 
 
@@ -345,7 +345,7 @@ class Timesheet extends CI_Controller {
             }
         }
         //Render header, footer, navbar, sidebar etc common elements of templates
-        $this->common_lib->init_template_elements('admin');
+        $this->app_lib->init_template_elements('admin');
 		$this->data['page_title'] = 'Timesheet Report';
         $this->data['maincontent'] = $this->load->view($this->router->class.'/report', $this->data, TRUE);
         $this->load->view('_layouts/layout_default', $this->data);
@@ -366,7 +366,7 @@ class Timesheet extends CI_Controller {
 
     function download_to_excel(){
         //Has logged in user permission to access this page or method?        
-        $this->common_lib->is_auth(array(
+        $this->app_lib->is_auth(array(
             'default-super-admin-access',
             'default-admin-access'
         ));
@@ -422,7 +422,7 @@ class Timesheet extends CI_Controller {
         $serial_no = 1;
         foreach ($data_rows as $index => $row) {
             $sheet->setCellValue('A' . $excel_row, $serial_no);
-            $sheet->setCellValue('B' . $excel_row, $this->common_lib->display_date($row['timesheet_date']));
+            $sheet->setCellValue('B' . $excel_row, $this->app_lib->display_date($row['timesheet_date']));
             $sheet->setCellValue('C' . $excel_row, $row['user_firstname'].' '.$row['user_lastname']);
             $sheet->setCellValue('D' . $excel_row, $row['project_number'].'-'.$row['project_name']);
             $sheet->setCellValue('E' . $excel_row, $row['task_activity_name']);

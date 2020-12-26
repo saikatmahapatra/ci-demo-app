@@ -73,7 +73,7 @@
 				<tbody>
 						<?php foreach($data_rows as $row){ ?>
 							<tr>
-								<td><?php echo $this->common_lib->display_date($row['timesheet_date']);?></td>
+								<td><?php echo $this->app_lib->display_date($row['timesheet_date']);?></td>
 								<td><?php echo $row['user_firstname'].' '.$row['user_lastname'];?></td>
 								<td><?php echo $row['project_number'].'-'.$row['project_name'];?></td>
 								<td><?php echo $row['task_activity_name'];?></td>

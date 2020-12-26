@@ -9,7 +9,7 @@
 	$display_education = false;
 	$display_uploaded_files = false;
 	if($is_self_account !== true){
-		if($this->common_lib->is_auth(array('view-user-uploads'),false) == true){
+		if($this->app_lib->is_auth(array('view-user-uploads'),false) == true){
 			$display_uploaded_files = true;
 		}else{
 			$display_uploaded_files = false;
@@ -19,7 +19,7 @@
 	}
 	$display_others = false;
 	if($is_self_account !== true){
-		if($this->common_lib->is_auth(array('view-user-address'),false) == true){
+		if($this->app_lib->is_auth(array('view-user-address'),false) == true){
 			$display_address = true;
 		}else{
 			$display_address = false;
@@ -29,7 +29,7 @@
 	}
 
 	if($is_self_account !== true){
-		if($this->common_lib->is_auth(array('view-user-education'),false) == true){
+		if($this->app_lib->is_auth(array('view-user-education'),false) == true){
 			$display_education = true;
 		}else{
 			$display_education = false;
@@ -39,7 +39,7 @@
 	}
 	
 	if($is_self_account !== true){
-		if($this->common_lib->is_auth(array('view-user-account-stat'),false) == true){
+		if($this->app_lib->is_auth(array('view-user-account-stat'),false) == true){
 			$display_others = true;
 		}else{
 			$display_others = false;
@@ -156,9 +156,9 @@
 											<dt class="col-lg-2"><?php echo ($is_self_account == true) ? "Date of Birth" : "Birth Day";?></dt>
 											<dd class="col-lg-4">
 											<?php if($is_self_account == true) {?>	
-											<?php echo isset($row['user_dob']) ? $this->common_lib->display_date($row['user_dob']) : '-'; ?>
+											<?php echo isset($row['user_dob']) ? $this->app_lib->display_date($row['user_dob']) : '-'; ?>
 											<?php } else{?>
-											<?php echo isset($row['user_dob']) ? $this->common_lib->display_date($row['user_dob'],NULL, TRUE) : '-'; ?>
+											<?php echo isset($row['user_dob']) ? $this->app_lib->display_date($row['user_dob'],NULL, TRUE) : '-'; ?>
 											<?php } ?>
 											</dd>
 
@@ -260,12 +260,12 @@
 													<?php echo isset($user_row['user_status']) ? $this->data['status_flag'][$user_row['user_status']]['text'] : '-'; ?>
 												</dd>
 												<dt class="col-sm-3">Registered on</dt>
-												<dd class="col-sm-3"><?php echo isset($user_row['user_registration_date']) ? $this->common_lib->display_date($user_row['user_registration_date'],true) : '-'; ?></dd>									
+												<dd class="col-sm-3"><?php echo isset($user_row['user_registration_date']) ? $this->app_lib->display_date($user_row['user_registration_date'],true) : '-'; ?></dd>									
 											
 												<dt class="col-sm-3">Registered from IP</dt>
 												<dd class="col-sm-3"><?php echo isset($user_row['user_registration_ip']) ? $user_row['user_registration_ip'] : '-'; ?></dd>
 												<dt class="col-sm-3">Last Login Date Time</dt>
-												<dd class="col-sm-3"><?php echo isset($user_row['user_login_date_time']) ? $this->common_lib->display_date($user_row['user_login_date_time'],true) : '-'; ?></dd>									
+												<dd class="col-sm-3"><?php echo isset($user_row['user_login_date_time']) ? $this->app_lib->display_date($user_row['user_login_date_time'],true) : '-'; ?></dd>									
 											</dl>
 										</div>
 									</div>
@@ -285,7 +285,7 @@
 												<div class="col-lg-4">
 													<div class="small">
 														<div class="text-muted">
-															<?php echo 'Uploaded on '.$this->common_lib->display_date($upload['upload_datetime'], true); ?>
+															<?php echo 'Uploaded on '.$this->app_lib->display_date($upload['upload_datetime'], true); ?>
 														</div>
 														<div class="text-muted">
 															<?php echo $char_doc_verification[$upload['upload_is_verified']]; ?>
@@ -323,7 +323,7 @@
 				</div><!--/.row-->
 			</div><!--./card-body-->
 			<div class="card-footer text-center text-muted small">
-				<i class="fa fa-fw fa-clock-o" aria-hidden="true"></i> Last login on <?php echo isset($user_row['user_login_date_time']) ? $this->common_lib->display_date($user_row['user_login_date_time'],true,NULL,'d-M-Y h:i:s a') : '-'; ?>
+				<i class="fa fa-fw fa-clock-o" aria-hidden="true"></i> Last login on <?php echo isset($user_row['user_login_date_time']) ? $this->app_lib->display_date($user_row['user_login_date_time'],true,NULL,'d-M-Y h:i:s a') : '-'; ?>
 			</div>
 		</div><!--/.card-->
 		

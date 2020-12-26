@@ -12,7 +12,7 @@ $row = $data_rows[0];
 			<div class="card-news-sig text-muted small">
 				<?php echo isset($row['user_firstname']) ? "By ".$row['user_firstname'] : '';?>
 				<?php echo isset($row['user_lastname']) ? $row['user_lastname'].", " : '';?>
-				<?php echo $this->common_lib->display_date($row['content_created_on'],true); ?>
+				<?php echo $this->app_lib->display_date($row['content_created_on'],true); ?>
 			</div>
 			<div class="card-news-body"><?php echo isset($row['content_text']) ? $row['content_text'] : '';?></div>
 			<a href="<?php echo base_url();?>" class="btn btn-outline-secondary"><i class="fa fa-fw fa-chevron-left" aria-hidden="true"></i> Back </a>
