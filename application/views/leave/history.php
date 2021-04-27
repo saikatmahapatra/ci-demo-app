@@ -31,8 +31,8 @@
 						<tr>
 							<td><a href="<?php echo base_url($this->router->directory.$this->router->class.'/details/'.$row['id'].'/'.$row['leave_req_id'].'/history');?>"><?php echo $row['leave_req_id'];?></a></td>
 							<td><?php echo $leave_type_arr[$row['leave_type']];?></td>
-							<td><?php echo $this->app_lib->display_date($row['leave_from_date']);?></td>
-							<td><?php echo $this->app_lib->display_date($row['leave_to_date']);?></td>
+							<td><?php echo $this->common_lib->display_date($row['leave_from_date']);?></td>
+							<td><?php echo $this->common_lib->display_date($row['leave_to_date']);?></td>
 							<td><?php echo $row['applied_for_days_count'].' day(s)';?></td>
 							<td>
 								<!-- <span class="small"><i class="fa fa-fw fa-bookmark-o <?php echo $leave_status_arr[$row['leave_status']]['css'];?>" aria-hidden="true"></i></span>  -->

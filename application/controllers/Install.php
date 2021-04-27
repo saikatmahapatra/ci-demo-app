@@ -13,7 +13,7 @@ class Install extends CI_Controller {
         parent::__construct();
 
         //Check if any user logged in else redirect to login
-        $is_logged_in = $this->app_lib->is_logged_in();
+        $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
             if($this->data['is_admin'] === TRUE){
@@ -24,25 +24,25 @@ class Install extends CI_Controller {
         }
 
         //Has logged in user permission to access this page or method?        
-        $this->app_lib->is_auth(array(
+        $this->common_lib->is_auth(array(
             'default-super-admin-access',
             'default-admin-access'
         ));
 
         // Get logged  in user id
-        $this->sess_user_id = $this->app_lib->get_sess_user('id');
+        $this->sess_user_id = $this->common_lib->get_sess_user('id');
 
         //Render header, footer, navbar, sidebar etc common elements of templates
-        $this->app_lib->init_template_elements();
+        $this->common_lib->init_template_elements();
         $this->load->model('install_model');
     }
 
     function index() {
         // Check user permission by permission name mapped to db
-        // $this->app_lib->is_auth('cms-list-view');
+        // $this->common_lib->is_auth('cms-list-view');
 		
 		// Get logged  in user id
-        $this->sess_user_id = $this->app_lib->get_sess_user('id');
+        $this->sess_user_id = $this->common_lib->get_sess_user('id');
 		$this->data['page_title'] = 'Install';
         $this->data['maincontent'] = $this->load->view($this->router->class.'/index', $this->data, TRUE);
         $this->load->view('_layouts/layout_default', $this->data);

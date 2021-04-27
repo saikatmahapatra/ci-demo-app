@@ -25,9 +25,9 @@ $row = $data_rows[0];
 					<dt class="col-lg-2">Leave Type</dt>
 					<dd class="col-lg-2"><?php echo $leave_type_arr[$row['leave_type']];?></dd>
 					<dt class="col-lg-2">From</dt>
-					<dd class="col-lg-2"><?php echo $this->app_lib->display_date($row['leave_from_date']);?></dd>
+					<dd class="col-lg-2"><?php echo $this->common_lib->display_date($row['leave_from_date']);?></dd>
 					<dt class="col-lg-2">To</dt>
-					<dd class="col-lg-2"><?php echo $this->app_lib->display_date($row['leave_to_date']);?></dd>
+					<dd class="col-lg-2"><?php echo $this->common_lib->display_date($row['leave_to_date']);?></dd>
 					<dt class="col-lg-2">Days Count</dt>
 					<dd class="col-lg-2"><?php echo $row['applied_for_days_count'].' day(s)';?></dd>
 					<dt class="col-lg-2">Reason/Occasion</dt>
@@ -56,7 +56,7 @@ $row = $data_rows[0];
 						<?php
 							$set_attributes ='';	
 							$edit_icon = '';						
-							if($this->app_lib->get_sess_user('id') == $row['user_id']){
+							if($this->common_lib->get_sess_user('id') == $row['user_id']){
 								$set_attributes = 'data-action-by="applicant" data-action-by-userid="'.$row['user_id'].'"';
 								$edit_icon = '<i class="fa fa-fw fa-pencil" aria-hidden="true"></i>';
 							}
@@ -69,7 +69,7 @@ $row = $data_rows[0];
 						<a <?php echo $set_attributes; ?> href="#" class="ci-wizard-dot"></a>
 						<div class="ci-wizard-info text-center">	
 							<label <?php echo $set_attributes; ?>><?php echo $edit_icon;?> Applied</label>		
-							<div class="small"><?php echo $this->app_lib->display_date($row['leave_created_on'], true);?></div>
+							<div class="small"><?php echo $this->common_lib->display_date($row['leave_created_on'], true);?></div>
 							<div class=""><?php echo isset($row['leave_reason']) ? $row['leave_reason'] : '';?></div>
 							
 							<?php
@@ -78,7 +78,7 @@ $row = $data_rows[0];
 								$edit_icon = '';
 								?>
 								<label><span class="text text-warning">Calcel Requested</span></label>
-								<div class="small"><?php echo $this->app_lib->display_date($row['cancel_request_datetime'], true);?></div>
+								<div class="small"><?php echo $this->common_lib->display_date($row['cancel_request_datetime'], true);?></div>
 								<div class=""><?php echo isset($row['cancel_request_reason']) ? $row['cancel_request_reason'] : '';?></div>
 								<?php
 							}
@@ -91,7 +91,7 @@ $row = $data_rows[0];
 								<?php echo $edit_icon;?>
 								<?php echo isset($row['leave_status']) ? '<span class="'.$leave_status_arr[$row['leave_status']]['css'].'">'.$leave_status_arr[$row['leave_status']]['text'].'</span>' : ''; ?>
 								</label>
-								<div class="small"><?php echo $this->app_lib->display_date($row['cancellation_datetime'], true);?></div>
+								<div class="small"><?php echo $this->common_lib->display_date($row['cancellation_datetime'], true);?></div>
 								<div class=""><?php echo isset($row['cancellation_reason']) ? $row['cancellation_reason'] : '';?></div>
 								<?php
 							}
@@ -121,7 +121,7 @@ $row = $data_rows[0];
 						<?php
 							$set_attributes = '';
 							$edit_icon = '';
-							if($this->app_lib->get_sess_user('id') == $row['supervisor_approver_id']){
+							if($this->common_lib->get_sess_user('id') == $row['supervisor_approver_id']){
 								$set_attributes = 'data-action-by="supervisor" data-action-by-userid="'.$row['supervisor_approver_id'].'"';
 								$edit_icon = '<i class="fa fa-fw fa-pencil" aria-hidden="true"></i>';
 							}
@@ -139,7 +139,7 @@ $row = $data_rows[0];
 							<?php echo isset($row['supervisor_approver_status']) ? '<span class="'.$leave_status_arr[$row['supervisor_approver_status']]['css'].'">'.$leave_status_arr[$row['supervisor_approver_status']]['text'].'</span>' : ''; ?>
 							</label>
 
-							<div class="small"><?php echo isset($row['supervisor_approver_datetime']) ? $this->app_lib->display_date($row['supervisor_approver_datetime'], true): ''; ?></div>
+							<div class="small"><?php echo isset($row['supervisor_approver_datetime']) ? $this->common_lib->display_date($row['supervisor_approver_datetime'], true): ''; ?></div>
 							<div class=""><?php echo isset($row['supervisor_approver_comment']) ? $row['supervisor_approver_comment']: ''; ?></div>
 						</div>
 					</div>
@@ -169,7 +169,7 @@ $row = $data_rows[0];
 						<?php
 							$set_attributes ='';
 							$edit_icon = '';
-							if(($this->app_lib->get_sess_user('id') == $row['director_approver_id']) && ($row['supervisor_approver_status']=='A' || ( $row['leave_status'] == 'A' && $row['cancel_requested'] == 'Y' ))) {
+							if(($this->common_lib->get_sess_user('id') == $row['director_approver_id']) && ($row['supervisor_approver_status']=='A' || ( $row['leave_status'] == 'A' && $row['cancel_requested'] == 'Y' ))) {
 								$edit_icon = '<i class="fa fa-fw fa-pencil" aria-hidden="true"></i>';
 								$set_attributes = 'data-action-by="director" data-action-by-userid="'.$row['director_approver_id'].'"';
 							}
@@ -185,7 +185,7 @@ $row = $data_rows[0];
 							 <?php echo $edit_icon;?> <?php echo isset($row['director_approver_status']) ? '<span class="'.$leave_status_arr[$row['director_approver_status']]['css'].'">'.$leave_status_arr[$row['director_approver_status']]['text'].'</span>': ''; ?>
 							</label>
 
-							<div class="small"><?php echo isset($row['director_approver_datetime']) ? $this->app_lib->display_date($row['director_approver_datetime'], true): ''; ?></div>
+							<div class="small"><?php echo isset($row['director_approver_datetime']) ? $this->common_lib->display_date($row['director_approver_datetime'], true): ''; ?></div>
 							<div class=""><?php echo isset($row['director_approver_comment']) ? $row['director_approver_comment']: ''; ?></div>
 						</div>
 					</div>			

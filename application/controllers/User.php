@@ -14,16 +14,16 @@ class User extends CI_Controller {
         $this->load->model('upload_model');
         
         // Get logged  in user id
-        $this->sess_user_id = $this->app_lib->get_sess_user('id');
+        $this->sess_user_id = $this->common_lib->get_sess_user('id');
 
         //Render header, footer, navbar, sidebar etc common elements of templates
-        $this->app_lib->init_template_elements('site');
+        $this->common_lib->init_template_elements('site');
 
         // Load required js files for this controller
         $javascript_files = array(
             $this->router->class
         );
-        $this->data['app_js'] = $this->app_lib->add_javascript($javascript_files);
+        $this->data['app_js'] = $this->common_lib->add_javascript($javascript_files);
         
         $this->data['page_title'] = $this->router->class.' : '.$this->router->method;
 
@@ -57,7 +57,7 @@ class User extends CI_Controller {
     }
     
     function login() {
-        $is_logged_in = $this->app_lib->is_logged_in();
+        $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == TRUE) {
             if($this->data['is_admin'] === TRUE){
                 redirect($this->router->directory.'admin/dashboard');
@@ -77,7 +77,7 @@ class User extends CI_Controller {
                     $message = $login_result['message'];
                     $login_data = $login_result['data'];
                     if ($login_status == 'error') {
-                        $this->app_lib->set_flash_message($message, 'alert-danger');
+                        $this->common_lib->set_flash_message($message, 'alert-danger');
                         redirect(current_url());
                     }
                     if ($login_status == 'success') {
@@ -96,7 +96,7 @@ class User extends CI_Controller {
             }
         }
         if($this->data['is_admin'] === TRUE){
-            $this->app_lib->init_template_elements('admin');
+            $this->common_lib->init_template_elements('admin');
             $this->data['page_title'] = 'Please sign in';
             $this->data['maincontent'] = $this->load->view($this->router->class.'/admin_login', $this->data, TRUE);
             $this->load->view('_layouts/layout_admin_login', $this->data);
@@ -137,7 +137,7 @@ class User extends CI_Controller {
                     'user_email' => strtolower($this->input->post('user_email')),
 					'user_role' => $this->input->post('user_role'),
                     'user_email_secondary' => strtolower($this->input->post('user_email_secondary')),
-                    'user_dob' => $this->app_lib->convert_to_mysql($this->input->post('user_dob')),
+                    'user_dob' => $this->common_lib->convert_to_mysql($this->input->post('user_dob')),
 					'user_phone1' => $this->input->post('user_phone1'),
                     'user_password' => md5($this->input->post('user_password')),
                     'user_activation_key' => $activation_token,
@@ -171,7 +171,7 @@ class User extends CI_Controller {
                     $this->email->message($message_html);
                     $this->email->send();
                     //echo $this->email->print_debugger();
-                    $this->app_lib->set_flash_message('Your account has been created successfully. You will receive account activation link in your registered email. Please activate your account to login.', 'alert-success');
+                    $this->common_lib->set_flash_message('Your account has been created successfully. You will receive account activation link in your registered email. Please activate your account to login.', 'alert-success');
                     redirect(current_url());
                 }
             }
@@ -199,13 +199,13 @@ class User extends CI_Controller {
     }
 
     function create_account() {
-        $is_logged_in = $this->app_lib->is_logged_in();
+        $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
             redirect($this->router->directory.$this->router->class.'/login');
         }
         //Has logged in user permission to access this page or method?        
-        $this->app_lib->is_auth(array(
+        $this->common_lib->is_auth(array(
             'default-super-admin-access',
             'default-admin-access',
         ));
@@ -220,7 +220,7 @@ class User extends CI_Controller {
                     'user_gender' => $this->input->post('user_gender'),
                     'user_email' => strtolower($this->input->post('user_email')),
                     'user_email_secondary' => strtolower($this->input->post('user_email_secondary')),
-                    'user_dob' => $this->app_lib->convert_to_mysql($this->input->post('user_dob')),
+                    'user_dob' => $this->common_lib->convert_to_mysql($this->input->post('user_dob')),
                     'user_role' => $this->input->post('user_role'),
                     'user_department' => $this->input->post('user_department'),
                     'user_designation' => $this->input->post('user_designation'),
@@ -258,12 +258,12 @@ class User extends CI_Controller {
                     $this->email->message($message_html);
                     $this->email->send();
                     //echo $this->email->print_debugger();
-                    $this->app_lib->set_flash_message('User account has been created successfully. <br>System generated User ID <span class="font-weight-bold h5">'.$customer_id.'</span>. <br>Account activation link will be sent to the registered email address.', 'alert-success');
+                    $this->common_lib->set_flash_message('User account has been created successfully. <br>System generated User ID <span class="font-weight-bold h5">'.$customer_id.'</span>. <br>Account activation link will be sent to the registered email address.', 'alert-success');
                     redirect(current_url());
                 }
             }
         }
-        $this->app_lib->init_template_elements('admin');
+        $this->common_lib->init_template_elements('admin');
 		$this->data['page_title'] = "Add New User";
         $this->data['maincontent'] = $this->load->view($this->router->class.'/create_account', $this->data, TRUE);
         $this->load->view('_layouts/layout_admin_default', $this->data);
@@ -322,14 +322,14 @@ class User extends CI_Controller {
             $where = array('id' => $user_id, 'user_activation_key' => $activation_key);
             $act_res = $this->user_model->update($postdata, $where);
             if ($act_res) {
-                $this->app_lib->set_flash_message('Your account has been activated successfully', 'alert-success');
+                $this->common_lib->set_flash_message('Your account has been activated successfully', 'alert-success');
                 redirect($this->router->directory.$this->router->class.'/login');
             } else {
-                $this->app_lib->set_flash_message('Sorry ! Unable to activate your account', 'alert-danger');
+                $this->common_lib->set_flash_message('Sorry ! Unable to activate your account', 'alert-danger');
                 redirect($this->router->directory.$this->router->class.'/login');
             }
         } else {
-            $this->app_lib->set_flash_message('No activation token match found for you', 'alert-danger');
+            $this->common_lib->set_flash_message('No activation token match found for you', 'alert-danger');
             redirect($this->router->directory.$this->router->class.'/login');
         }
     }
@@ -371,7 +371,7 @@ class User extends CI_Controller {
                     $this->email->send();
                     //echo $this->email->print_debugger();
 
-                    $this->app_lib->set_flash_message('Password reset link will be sent to ' . $email, 'alert-success');
+                    $this->common_lib->set_flash_message('Password reset link will be sent to ' . $email, 'alert-success');
                     redirect(current_url());
                 }
             }
@@ -394,7 +394,7 @@ class User extends CI_Controller {
     function reset_password() {
         $this->data['password_reset_key'] = $this->uri->segment(3);
         if (!isset($this->data['password_reset_key'])) {
-            $this->app_lib->set_flash_message('The password reset token not found.', 'alert-danger');
+            $this->common_lib->set_flash_message('The password reset token not found.', 'alert-danger');
         }
         if ($this->input->post('form_action') == 'reset_password') {
             if ($this->validate_reset_password_form() == TRUE) {
@@ -413,11 +413,11 @@ class User extends CI_Controller {
                         $result2 = $this->user_model->update($postdata, $where);
                         // End Set user_reset_password_key to NULL on password update    
 
-                        $this->app_lib->set_flash_message('Password changed successfully.', 'alert-success');
+                        $this->common_lib->set_flash_message('Password changed successfully.', 'alert-success');
                         redirect(current_url());
                     }
                 } else {
-                    $this->app_lib->set_flash_message('Invalid email or password reset link.', 'alert-danger');
+                    $this->common_lib->set_flash_message('Invalid email or password reset link.', 'alert-danger');
                     redirect(current_url());
                 }
             }
@@ -463,7 +463,7 @@ class User extends CI_Controller {
     }
 
     function change_password() {
-        $is_logged_in = $this->app_lib->is_logged_in();
+        $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
             redirect($this->router->directory.$this->router->class.'/login');
@@ -473,12 +473,12 @@ class User extends CI_Controller {
                 $postdata = array('user_password' => md5($this->input->post('user_new_password')));
                 $where = array('id' => $this->sess_user_id);
                 $this->user_model->update($postdata, $where);
-                $this->app_lib->set_flash_message('Password changed successfully.', 'alert-success');
+                $this->common_lib->set_flash_message('Password changed successfully.', 'alert-success');
                 redirect(current_url());
             }
         }
         if($this->data['is_admin'] === TRUE){
-            $this->app_lib->init_template_elements('admin');
+            $this->common_lib->init_template_elements('admin');
             $this->data['page_title'] = 'Please sign in';
             $this->data['maincontent'] = $this->load->view($this->router->class.'/admin_change_password', $this->data, TRUE);
             $this->load->view('_layouts/layout_admin_default', $this->data);
@@ -520,7 +520,7 @@ class User extends CI_Controller {
         if (isset($this->session->userdata['sess_user'])) {
             $this->session->unset_userdata('sess_user');
             $this->session->unset_userdata('sess_post_login_redirect_url');
-            $this->app_lib->set_flash_message('You have been logged out successfully.','alert-success');
+            $this->common_lib->set_flash_message('You have been logged out successfully.','alert-success');
             redirect($this->router->directory.$this->router->class.'/login');
         } else {
             if($this->data['is_admin'] === TRUE){
@@ -532,14 +532,14 @@ class User extends CI_Controller {
     }
 
     function manage() {
-        $this->app_lib->init_template_elements('admin');
-        $is_logged_in = $this->app_lib->is_logged_in();
+        $this->common_lib->init_template_elements('admin');
+        $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
             redirect($this->router->directory.$this->router->class.'/login');
         }
         //Has logged in user permission to access this page or method?        
-        $this->app_lib->is_auth(array(
+        $this->common_lib->is_auth(array(
             'default-super-admin-access',
             'default-admin-access',
         ));
@@ -612,7 +612,7 @@ class User extends CI_Controller {
     }
 
     function profile() {
-        $is_logged_in = $this->app_lib->is_logged_in();
+        $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
             redirect($this->router->directory.$this->router->class.'/login');
         }
@@ -660,7 +660,7 @@ class User extends CI_Controller {
     }
 
     function people() {        
-        $is_logged_in = $this->app_lib->is_logged_in();
+        $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
             redirect($this->router->directory.$this->router->class.'/login');
@@ -689,7 +689,7 @@ class User extends CI_Controller {
 		
 		$page = ($this->uri->segment(4)) ? ($this->uri->segment(4)-1) : 0;
 		$offset = ($page*$per_page);
-		$this->data['pagination_link'] = $this->app_lib->render_pagination($total_num_rows, $per_page, $additional_segment);
+		$this->data['pagination_link'] = $this->common_lib->render_pagination($total_num_rows, $per_page, $additional_segment);
         //end of pagination config
         
         // Data Rows - Refer to model method definition
@@ -702,7 +702,7 @@ class User extends CI_Controller {
     }
 
     function add_address() {
-        $is_logged_in = $this->app_lib->is_logged_in();
+        $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
             redirect($this->router->directory.$this->router->class.'/login');
@@ -726,7 +726,7 @@ class User extends CI_Controller {
                 );                
                 $res = $this->user_model->insert($postdata,'user_addresses');
                 if ($res) {
-                    $this->app_lib->set_flash_message('Address has been added successfully.', 'alert-success');
+                    $this->common_lib->set_flash_message('Address has been added successfully.', 'alert-success');
                     redirect($this->router->directory.$this->router->class.'/profile');
                 }
             }
@@ -737,7 +737,7 @@ class User extends CI_Controller {
     }
 	
 	function edit_address() {
-        $is_logged_in = $this->app_lib->is_logged_in();
+        $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
             redirect($this->router->directory.$this->router->class.'/login');
@@ -765,7 +765,7 @@ class User extends CI_Controller {
                 $where = array('id'=>$address_id, 'user_id' => $this->sess_user_id);
                 $res = $this->user_model->update($postdata, $where,'user_addresses');
                 if ($res) {
-                    $this->app_lib->set_flash_message('Address has been updated successfully.', 'alert-success');
+                    $this->common_lib->set_flash_message('Address has been updated successfully.', 'alert-success');
                     redirect($this->router->directory.$this->router->class.'/profile');
                 }
             }
@@ -777,7 +777,7 @@ class User extends CI_Controller {
     }
 	
 	function delete_address() {
-        $is_logged_in = $this->app_lib->is_logged_in();
+        $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
             redirect($this->router->directory.$this->router->class.'/login');
         }
@@ -786,10 +786,10 @@ class User extends CI_Controller {
 		$where = array('id'=>$address_id, 'user_id' => $this->sess_user_id);
 		$res = $this->user_model->delete($where,'user_addresses');
 		if ($res) {
-			$this->app_lib->set_flash_message('Address has been deleted successfully.', 'alert-success');
+			$this->common_lib->set_flash_message('Address has been deleted successfully.', 'alert-success');
 			redirect($this->router->directory.$this->router->class.'/profile');
 		}else{
-			$this->app_lib->set_flash_message('We\'re unable to process your request.', 'alert-danger');
+			$this->common_lib->set_flash_message('We\'re unable to process your request.', 'alert-danger');
 			redirect($this->router->directory.$this->router->class.'/profile');
 		}
     }
@@ -840,7 +840,7 @@ class User extends CI_Controller {
     }
 
 	function add_education() {
-        $is_logged_in = $this->app_lib->is_logged_in();
+        $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
             redirect($this->router->directory.$this->router->class.'/login');
         }
@@ -862,7 +862,7 @@ class User extends CI_Controller {
                 );                
                 $res = $this->user_model->insert($postdata,'user_academics');
                 if ($res) {
-                    $this->app_lib->set_flash_message('Education has been added successfully.', 'alert-success');
+                    $this->common_lib->set_flash_message('Education has been added successfully.', 'alert-success');
                     redirect($this->router->directory.$this->router->class.'/profile');
                 }
             }
@@ -873,7 +873,7 @@ class User extends CI_Controller {
     }
 	
 	function edit_education() {
-        $is_logged_in = $this->app_lib->is_logged_in();
+        $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
             redirect($this->router->directory.$this->router->class.'/login');
         }
@@ -898,7 +898,7 @@ class User extends CI_Controller {
                 $where = array('id'=>$education_id, 'user_id' => $this->sess_user_id);
                 $res = $this->user_model->update($postdata, $where,'user_academics');
                 if ($res) {
-                    $this->app_lib->set_flash_message('Education has been updated successfully.', 'alert-success');
+                    $this->common_lib->set_flash_message('Education has been updated successfully.', 'alert-success');
                     redirect($this->router->directory.$this->router->class.'/profile');
                 }
             }
@@ -909,7 +909,7 @@ class User extends CI_Controller {
     }
 	
 	function delete_education() {
-        $is_logged_in = $this->app_lib->is_logged_in();
+        $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
             redirect($this->router->directory.$this->router->class.'/login');
         }
@@ -917,10 +917,10 @@ class User extends CI_Controller {
 		$where = array('id'=>$id, 'user_id' => $this->sess_user_id);
 		$res = $this->user_model->delete($where,'user_academics');
 		if ($res) {
-			$this->app_lib->set_flash_message('Education details has been deleted successfully.', 'alert-success');
+			$this->common_lib->set_flash_message('Education details has been deleted successfully.', 'alert-success');
 			redirect($this->router->directory.$this->router->class.'/profile');
 		}else{
-			$this->app_lib->set_flash_message('We\'re unable to process your request.', 'alert-danger');
+			$this->common_lib->set_flash_message('We\'re unable to process your request.', 'alert-danger');
 			redirect($this->router->directory.$this->router->class.'/profile');
 		}
     }
@@ -943,7 +943,7 @@ class User extends CI_Controller {
     }
 	
 	function edit_profile() {
-        $is_logged_in = $this->app_lib->is_logged_in();
+        $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
             redirect($this->router->directory.$this->router->class.'/login');
@@ -967,7 +967,7 @@ class User extends CI_Controller {
                 $where = array('id' => $this->sess_user_id);
                 $res = $this->user_model->update($postdata, $where);
                 if ($res) {
-                    $this->app_lib->set_flash_message('Basic information has been updated successfully.', 'alert-success');
+                    $this->common_lib->set_flash_message('Basic information has been updated successfully.', 'alert-success');
                     redirect($this->router->directory.$this->router->class.'/profile');
                 }
             }
@@ -979,7 +979,7 @@ class User extends CI_Controller {
     }
 	
 	function profile_pic() {
-        $is_logged_in = $this->app_lib->is_logged_in();
+        $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
             redirect($this->router->directory.$this->router->class.'/login');
@@ -1034,7 +1034,7 @@ class User extends CI_Controller {
 				'thumb_img_width'=>'250',
 				'thumb_img_height'=>'300'
             );
-            $upload_result = $this->app_lib->upload_file('userfile', $upload_param);
+            $upload_result = $this->common_lib->upload_file('userfile', $upload_param);
             if (isset($upload_result['file_name']) && empty($upload_result['upload_error'])) {
                 $uploaded_file_name = $upload_result['file_name'];
                 /*$postdata = array(
@@ -1070,22 +1070,22 @@ class User extends CI_Controller {
                     //Unlink previously uploaded file                    
                     $file_path = $upload_param['upload_path'] . '/' . $uploads[0]['upload_file_name'];
                     if (file_exists(FCPATH . $file_path)) {
-                        $this->app_lib->unlink_file(array(FCPATH . $file_path));
+                        $this->common_lib->unlink_file(array(FCPATH . $file_path));
                     }
                     // Now update table
                     //$update_upload = $this->user_model->update($postdata, array('id' => $uploads[0]['id']), 'uploads');
                     $update_upload = $this->user_model->update($postdata, $where_array);
-                    $this->app_lib->set_flash_message('Profile photo uploaded successfully.', 'alert-success');
+                    $this->common_lib->set_flash_message('Profile photo uploaded successfully.', 'alert-success');
                     redirect(current_url());
                 } else {
                     //$upload_insert_id = $this->user_model->insert($postdata, 'uploads');
                     $update_upload = $this->user_model->update($postdata, $where_array);
-                    $this->app_lib->set_flash_message('Profile photo uploaded successfully.', 'alert-success');
+                    $this->common_lib->set_flash_message('Profile photo uploaded successfully.', 'alert-success');
                     redirect(current_url());
                 }
             } else if (sizeof($upload_result['upload_error']) > 0) {
                 $error_message = $upload_result['upload_error'];
-                $this->app_lib->set_flash_message($error_message, 'alert-danger');
+                $this->common_lib->set_flash_message($error_message, 'alert-danger');
                 redirect(current_url());
             }
         }
@@ -1098,7 +1098,7 @@ class User extends CI_Controller {
 			//Unlink previously uploaded file                    
 			$file_path = 'assets/uploads/user/profile_pic/'.$uploaded_file_name;
 			if (file_exists(FCPATH . $file_path)) {
-				$this->app_lib->unlink_file(array(FCPATH . $file_path));
+				$this->common_lib->unlink_file(array(FCPATH . $file_path));
 				//$res = $this->user_model->delete(array('id'=>$uploaded_file_id),'uploads');
 				$postdata = array(                    
                     'user_profile_pic' => NULL
@@ -1106,10 +1106,10 @@ class User extends CI_Controller {
 				$where_array = array('id'=>$this->sess_user_id);
 				$res = $this->user_model->update($postdata, $where_array);
 				if($res){
-					$this->app_lib->set_flash_message('Profile photo has been deleted successfully.', 'alert-success');
+					$this->common_lib->set_flash_message('Profile photo has been deleted successfully.', 'alert-success');
 					redirect($this->router->directory.$this->router->class.'/profile_pic');
 				}else{
-					$this->app_lib->set_flash_message('Error occured while processing your request.', 'alert-danger');
+					$this->common_lib->set_flash_message('Error occured while processing your request.', 'alert-danger');
 					redirect($this->router->directory.$this->router->class.'/profile_pic');
 				}
 			}
@@ -1117,7 +1117,7 @@ class User extends CI_Controller {
 	}	
 	
 	function allocate_projects() {
-        $is_logged_in = $this->app_lib->is_logged_in();
+        $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
             redirect($this->router->directory.$this->router->class.'/login');
         }
@@ -1130,7 +1130,7 @@ class User extends CI_Controller {
                 );                
                 $res = $this->user_model->insert($postdata,'user_projects');
                 if ($res) {
-                    $this->app_lib->set_flash_message('Project has been added successfully.', 'alert-success');
+                    $this->common_lib->set_flash_message('Project has been added successfully.', 'alert-success');
                     redirect($this->router->directory.$this->router->class.'/profile');
                 }
             }

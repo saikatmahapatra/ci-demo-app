@@ -13,7 +13,7 @@ class Shop extends CI_Controller {
         parent::__construct();
         
         //Check if any user logged in else redirect to login
-        $is_logged_in = $this->app_lib->is_logged_in();
+        $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
             $this->session->set_userdata('sess_post_login_redirect_url', current_url());
             if($this->data['is_admin'] === TRUE){
@@ -24,16 +24,16 @@ class Shop extends CI_Controller {
         }
 
         // Get logged  in user id
-        $this->sess_user_id = $this->app_lib->get_sess_user('id');
+        $this->sess_user_id = $this->common_lib->get_sess_user('id');
 
         //Render header, footer, navbar, sidebar etc common elements of templates
-        $this->app_lib->init_template_elements('site');
+        $this->common_lib->init_template_elements('site');
 
         // Load required js files for this controller
         $javascript_files = array(
             $this->router->class
         );
-        $this->data['app_js'] = $this->app_lib->add_javascript($javascript_files);
+        $this->data['app_js'] = $this->common_lib->add_javascript($javascript_files);
         $this->id = $this->uri->segment(3);
 
         $this->load->library('cart'); 
@@ -100,7 +100,7 @@ class Shop extends CI_Controller {
 
     function my_cart() {
         //Check if any user logged in else redirect to login
-        /*$is_logged_in = $this->app_lib->is_logged_in();
+        /*$is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
             if($this->data['is_admin'] === TRUE){
@@ -134,7 +134,7 @@ class Shop extends CI_Controller {
     }
 
     function add_to_cart() {
-        $product_id = $this->input->get_post('product_id') ? $this->input->get_post('product_id') : $this->app_lib->decode($this->uri->segment(3));
+        $product_id = $this->input->get_post('product_id') ? $this->input->get_post('product_id') : $this->common_lib->decode($this->uri->segment(3));
         $result = $this->find_item($product_id);
         $qty = ($this->input->get_post('quantity') > 0) ? $this->input->get_post('quantity') : '1';
 
@@ -168,7 +168,7 @@ class Shop extends CI_Controller {
                 echo 'add_success'; // For Ajax response text
                 die();
             }
-            $this->app_lib->set_flash_message('Item has been added to your cart.', 'alert-success');
+            $this->common_lib->set_flash_message('Item has been added to your cart.', 'alert-success');
             redirect($this->router->directory.$this->router->class.'/my_cart');
         }
     }
@@ -182,7 +182,7 @@ class Shop extends CI_Controller {
 
             $result = $this->cart->update($data);
         }
-        $this->app_lib->set_flash_message('You cart has been updated successfully.', 'alert-success');
+        $this->common_lib->set_flash_message('You cart has been updated successfully.', 'alert-success');
         redirect($this->router->directory.$this->router->class.'/my_cart');
     }
 
@@ -193,19 +193,19 @@ class Shop extends CI_Controller {
             'qty' => 0
         );
         $result = $this->cart->update($data);
-        $this->app_lib->set_flash_message('Item has been removed from your cart', 'alert-success');
+        $this->common_lib->set_flash_message('Item has been removed from your cart', 'alert-success');
         redirect($this->router->directory.$this->router->class.'/my_cart');
     }
 
     function remove_all() {
         $result = $this->cart->destroy();
-        $this->app_lib->set_flash_message('Item has been removed from your cart', 'alert-success');
+        $this->common_lib->set_flash_message('Item has been removed from your cart', 'alert-success');
         redirect($this->router->directory.$this->router->class.'/my_cart');
     }
 	
 	function init_payment(){
         //Check if any user logged in else redirect to login
-        $is_logged_in = $this->app_lib->is_logged_in();
+        $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
             if($this->data['is_admin'] === TRUE){
@@ -216,7 +216,7 @@ class Shop extends CI_Controller {
         }
         
         if($this->cart->total_items() <= 0){
-            $this->app_lib->set_flash_message('You don\'t have any items in your cart. Please add atleast one to proceed.', 'alert-danger');
+            $this->common_lib->set_flash_message('You don\'t have any items in your cart. Please add atleast one to proceed.', 'alert-danger');
         }
 		$cart_data = $this->get_cart_data();
 		$this->data['cartrows'] = $cart_data['cartrows'];
@@ -249,7 +249,7 @@ class Shop extends CI_Controller {
 
     function place_order() {  
         //Check if any user logged in else redirect to login
-        $is_logged_in = $this->app_lib->is_logged_in();
+        $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
             if($this->data['is_admin'] === TRUE){
@@ -311,7 +311,7 @@ class Shop extends CI_Controller {
 			//print_r($order_details_post_data); die();
 			$this->order_model->insert_batch($order_details_post_data, 'order_details');
 			
-			$this->app_lib->set_flash_message('Thank you! We have received your order. Your Order Number '.$order_number.' Payment Done (Test)', 'alert-success');
+			$this->common_lib->set_flash_message('Thank you! We have received your order. Your Order Number '.$order_number.' Payment Done (Test)', 'alert-success');
             redirect($this->router->directory.$this->router->class.'/transaction_response/'.$order_number);
 		}
     }
@@ -334,7 +334,7 @@ class Shop extends CI_Controller {
 
     function transaction_response() {
         //Check if any user logged in else redirect to login
-        $is_logged_in = $this->app_lib->is_logged_in();
+        $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
             if($this->data['is_admin'] === TRUE){
@@ -354,14 +354,14 @@ class Shop extends CI_Controller {
 
     function manage_orders() {
         //Has logged in user permission to access this page or method?        
-        $this->app_lib->is_auth(array(
+        $this->common_lib->is_auth(array(
             'default-super-admin-access',
             'default-admin-access'
         ));
 		$this->breadcrumbs->push('View','/');
         $this->data['breadcrumbs'] = $this->breadcrumbs->show();
         //Render header, footer, navbar, sidebar etc common elements of templates
-        $this->app_lib->init_template_elements('admin');
+        $this->common_lib->init_template_elements('admin');
 		$this->data['page_title'] = 'Online Orders';
         $this->data['maincontent'] = $this->load->view($this->router->class.'/manage_orders', $this->data, TRUE);
         $this->load->view('_layouts/layout_admin_default', $this->data);
@@ -385,7 +385,7 @@ class Shop extends CI_Controller {
             $no++;
             $row = array();
             $row[] = isset($result['order_no']) ? $result['order_no'] : '';
-            $row[] = $this->app_lib->display_date($result['order_datetime'],TRUE);
+            $row[] = $this->common_lib->display_date($result['order_datetime'],TRUE);
 			$amt_wrapper = ($result['order_payment_debit_credit']=='C') ? '' : '';
             $row[] = isset($result['order_total_amt']) ? '<span class="'.$amt_wrapper.'"> &#8377;'.$result['order_total_amt'].'</span>' : '';
             $row[] = isset($result['order_payment_status']) ? $result['order_payment_status'] : '';
@@ -425,7 +425,7 @@ class Shop extends CI_Controller {
 	
 	function update_order() {
         //Has logged in user permission to access this page or method?        
-        $this->app_lib->is_auth(array(
+        $this->common_lib->is_auth(array(
             'default-super-admin-access',
             'default-admin-access'
         ));
@@ -458,7 +458,7 @@ class Shop extends CI_Controller {
 					//print_r($postdata);die();										
 					$res = $this->order_model->update_batch($postdata, 'id', NULL);
 					if ($res) {
-						$this->app_lib->set_flash_message('Data updated successfully.', 'alert-success');
+						$this->common_lib->set_flash_message('Data updated successfully.', 'alert-success');
 						redirect($this->router->directory.$this->router->class.'/edit/'.$this->id);
 					}
 				}
@@ -472,7 +472,7 @@ class Shop extends CI_Controller {
         $this->data['rows'] = $result_array['data_rows'];
         $this->data['odetails'] = $order_details_result_array['data_rows'];
 		//Render header, footer, navbar, sidebar etc common elements of templates
-        $this->app_lib->init_template_elements('admin');
+        $this->common_lib->init_template_elements('admin');
 		$this->data['page_title'] = 'Manage Order';
         $this->data['maincontent'] = $this->load->view($this->router->class.'/update_order', $this->data, TRUE);
         $this->load->view('_layouts/layout_admin_default', $this->data);

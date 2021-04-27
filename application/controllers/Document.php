@@ -12,7 +12,7 @@ class Document extends CI_Controller {
         parent::__construct();
 
         //Check if any user logged in else redirect to login
-        $is_logged_in = $this->app_lib->is_logged_in();
+        $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
             if($this->data['is_admin'] === TRUE){
@@ -23,16 +23,16 @@ class Document extends CI_Controller {
         }
 
         // Get logged  in user id
-        $this->sess_user_id = $this->app_lib->get_sess_user('id');
+        $this->sess_user_id = $this->common_lib->get_sess_user('id');
 
         //Render header, footer, navbar, sidebar etc common elements of templates
-        $this->app_lib->init_template_elements('site');
+        $this->common_lib->init_template_elements('site');
 
         // Load required js files for this controller
         $javascript_files = array(
             $this->router->class
         );
-        $this->data['app_js'] = $this->app_lib->add_javascript($javascript_files);
+        $this->data['app_js'] = $this->common_lib->add_javascript($javascript_files);
 
         $this->load->model('upload_model');
         $this->data['id'] = $this->uri->segment(3) ? $this->uri->segment(3) : $this->sess_user_id;
@@ -83,7 +83,7 @@ class Document extends CI_Controller {
                 'max_size' => '2048', // max 2MB size,
                 'file_new_name' => $upload_related_to_id . '_' . $upload_file_type_name . '_' . time(),
             );
-            $upload_result = $this->app_lib->upload_file('userfile', $upload_param);
+            $upload_result = $this->common_lib->upload_file('userfile', $upload_param);
             if (isset($upload_result['file_name']) && empty($upload_result['upload_error'])) {
                 $uploaded_file_name = $upload_result['file_name'];
                 $postdata = array(
@@ -112,20 +112,20 @@ class Document extends CI_Controller {
                     //Unlink previously uploaded file
                     $file_path = $upload_param['upload_path'] . '/' . $uploads[0]['upload_file_name'];
                     if (file_exists(FCPATH . $file_path)) {
-                        $this->app_lib->unlink_file(array(FCPATH . $file_path));
+                        $this->common_lib->unlink_file(array(FCPATH . $file_path));
                     }
                     // Now update table
                     $update_upload = $this->upload_model->update($postdata, array('id' => $uploads[0]['id']), 'uploads');
-                    $this->app_lib->set_flash_message('File has been uploaded successfully.', 'alert-success');
+                    $this->common_lib->set_flash_message('File has been uploaded successfully.', 'alert-success');
                     redirect(current_url());
                 } else {
                     $upload_insert_id = $this->upload_model->insert($postdata, 'uploads');
-                    $this->app_lib->set_flash_message('File has been uploaded successfully.', 'alert-success');
+                    $this->common_lib->set_flash_message('File has been uploaded successfully.', 'alert-success');
                     redirect(current_url());
                 }
             } else if (sizeof($upload_result['upload_error']) > 0) {
                 $error_message = $upload_result['upload_error'];
-                $this->app_lib->set_flash_message($error_message, 'alert-danger');
+                $this->common_lib->set_flash_message($error_message, 'alert-danger');
                 redirect(current_url());
             }
         }
@@ -146,7 +146,7 @@ class Document extends CI_Controller {
 
     function delete_file() {
         //Check if any user logged in else redirect to login
-        $is_logged_in = $this->app_lib->is_logged_in();
+        $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
             if($this->data['is_admin'] === TRUE){
@@ -162,7 +162,7 @@ class Document extends CI_Controller {
             $where_array = array('id' => $id);
             $res = $this->user_model->delete($where_array, 'uploads');
             if ($res) {
-                $this->app_lib->unlink_file(array(FCPATH . $file_path));
+                $this->common_lib->unlink_file(array(FCPATH . $file_path));
             }
             echo json_encode("success");
         } else {
@@ -175,7 +175,7 @@ class Document extends CI_Controller {
         $res = $this->upload_model->delete($where_array, 'uploads');
         if ($res) {
             $upload_path = 'assets/uploads/'.$upload_related_to.'/' . $upload_related_to_id;
-            $this->app_lib->recursive_remove_directory(FCPATH . $upload_path);
+            $this->common_lib->recursive_remove_directory(FCPATH . $upload_path);
         }
     }
 }

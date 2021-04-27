@@ -13,7 +13,7 @@ class Cms extends CI_Controller {
         parent::__construct();
 
         //Check if any user logged in else redirect to login
-        $is_logged_in = $this->app_lib->is_logged_in();
+        $is_logged_in = $this->common_lib->is_logged_in();
         if ($is_logged_in == FALSE) {
 			$this->session->set_userdata('sess_post_login_redirect_url', current_url());
             if($this->data['is_admin'] === TRUE){
@@ -24,22 +24,22 @@ class Cms extends CI_Controller {
         }
 
         //Has logged in user permission to access this page or method?        
-        $this->app_lib->is_auth(array(
+        $this->common_lib->is_auth(array(
             'default-super-admin-access',
             'default-admin-access'
         ));
 
         // Get logged  in user id
-        $this->sess_user_id = $this->app_lib->get_sess_user('id');
+        $this->sess_user_id = $this->common_lib->get_sess_user('id');
 
         //Render header, footer, navbar, sidebar etc common elements of templates
-        $this->app_lib->init_template_elements('admin');
+        $this->common_lib->init_template_elements('admin');
 
         // Load required js files for this controller
         $javascript_files = array(
             $this->router->class
         );
-        $this->data['app_js'] = $this->app_lib->add_javascript($javascript_files);
+        $this->data['app_js'] = $this->common_lib->add_javascript($javascript_files);
         
         $this->load->model('cms_model');
 		$this->load->model('upload_model');
@@ -71,10 +71,10 @@ class Cms extends CI_Controller {
 
     function index() {
         // Check user permission by permission name mapped to db
-        // $this->app_lib->is_auth('cms-list-view');
+        // $this->common_lib->is_auth('cms-list-view');
 		
 		// Get logged  in user id
-        $this->sess_user_id = $this->app_lib->get_sess_user('id');
+        $this->sess_user_id = $this->common_lib->get_sess_user('id');
 		$this->breadcrumbs->push('View','/');
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
 		$this->data['page_title'] = 'Website CMS - Contents';
@@ -84,7 +84,7 @@ class Cms extends CI_Controller {
 	
 	function index_ci_pagination() {
         // Check user permission by permission name mapped to db
-        // $this->app_lib->is_auth('cms-list-view');
+        // $this->common_lib->is_auth('cms-list-view');
 			
 		$this->breadcrumbs->push('View','/');
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
@@ -99,7 +99,7 @@ class Cms extends CI_Controller {
         $config['num_links'] = 2;
         $page = ($this->uri->segment($config['uri_segment'])) ? ($this->uri->segment($config['uri_segment'])-1) : 0;
         $offset = ($page*$per_page);
-        $this->data['pagination_link'] = $this->app_lib->render_pagination($total_num_rows, $per_page);
+        $this->data['pagination_link'] = $this->common_lib->render_pagination($total_num_rows, $per_page);
         //Pagination config ends here
         
 
@@ -131,7 +131,7 @@ class Cms extends CI_Controller {
             $row = array();
             $row[] = $result['content_type'];
             $row[] = $result['content_title'];
-            $row[] = $this->app_lib->display_date($result['content_created_on'], TRUE);
+            $row[] = $this->common_lib->display_date($result['content_created_on'], TRUE);
             $row[] = isset($result['content_status']) ? $this->data['status_flag'][$result['content_status']]['text'] : '';
             //add html for action
             $action_html = '';
@@ -168,7 +168,7 @@ class Cms extends CI_Controller {
 
     function add() {
         //Check user permission by permission name mapped to db
-        //$this->app_lib->is_auth('cms-add');
+        //$this->common_lib->is_auth('cms-add');
         //$this->data['page_title'] = "Add Page Content";
 		$this->breadcrumbs->push('Add','/');				
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
@@ -180,15 +180,15 @@ class Cms extends CI_Controller {
                     'content_text' => $this->input->post('content_text'),
                     'content_meta_keywords' => $this->input->post('content_meta_keywords'),
                     'content_meta_description' => $this->input->post('content_meta_description'),
-                    //'content_display_from_date' => $this->app_lib->convert_to_mysql($this->input->post('content_display_from_date')),
-                    //'content_display_to_date' => $this->app_lib->convert_to_mysql($this->input->post('content_display_to_date')),
+                    //'content_display_from_date' => $this->common_lib->convert_to_mysql($this->input->post('content_display_from_date')),
+                    //'content_display_to_date' => $this->common_lib->convert_to_mysql($this->input->post('content_display_to_date')),
                     'content_meta_author' => $this->input->post('content_meta_author'),
                     'content_created_by' => $this->sess_user_id,
 					'content_status' => $this->input->post('content_status')
                 );
                 $insert_id = $this->cms_model->insert($postdata);
                 if ($insert_id) {
-                    $this->app_lib->set_flash_message('Data Added Successfully.', 'alert-success');
+                    $this->common_lib->set_flash_message('Data Added Successfully.', 'alert-success');
                     redirect($this->router->directory.$this->router->class.'/add');
                 }
             }
@@ -200,7 +200,7 @@ class Cms extends CI_Controller {
 
     function edit() {
         //Check user permission by permission name mapped to db
-        //$this->app_lib->is_auth('cms-edit');
+        //$this->common_lib->is_auth('cms-edit');
 		//$this->data['page_title'] = "Edit Page Content";
 		$this->breadcrumbs->push('Edit','/');				
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
@@ -214,8 +214,8 @@ class Cms extends CI_Controller {
                     'content_meta_description' => $this->input->post('content_meta_description'),
                     'content_meta_author' => $this->input->post('content_meta_author'),
                     'content_status' => $this->input->post('content_status'),
-					//'content_display_from_date' => $this->app_lib->convert_to_mysql($this->input->post('content_display_from_date')),
-                    //'content_display_to_date' => $this->app_lib->convert_to_mysql($this->input->post('content_display_to_date')),
+					//'content_display_from_date' => $this->common_lib->convert_to_mysql($this->input->post('content_display_from_date')),
+                    //'content_display_to_date' => $this->common_lib->convert_to_mysql($this->input->post('content_display_to_date')),
                     'content_archived' => $this->input->post('content_archived'),
                     'content_updated_by' => $this->sess_user_id,
                     'content_updated_on' => date('Y-m-d H:i:s'),
@@ -223,7 +223,7 @@ class Cms extends CI_Controller {
                 $where_array = array('id' => $this->input->post('id'));
                 $res = $this->cms_model->update($postdata, $where_array);
                 if ($res) {
-                    $this->app_lib->set_flash_message('Data Updated Successfully.', 'alert-success');
+                    $this->common_lib->set_flash_message('Data Updated Successfully.', 'alert-success');
                     redirect(current_url());
                 }
             }
@@ -237,11 +237,11 @@ class Cms extends CI_Controller {
 
     function delete() {
         //Check user permission by permission name mapped to db
-        //$this->app_lib->is_auth('cms-delete');
+        //$this->common_lib->is_auth('cms-delete');
         $where_array = array('id' => $this->id);
         $res = $this->cms_model->delete($where_array);
         if ($res) {
-            $this->app_lib->set_flash_message('Data Deleted Successfully.', 'alert-success');
+            $this->common_lib->set_flash_message('Data Deleted Successfully.', 'alert-success');
             redirect($this->router->directory.$this->router->class);
         }
     }
@@ -300,7 +300,7 @@ class Cms extends CI_Controller {
             //$row[] = $result['upload_file_name'].'<div>'.$result['upload_mime_type'].'</div>';
             $row[] = '<img class="img banner-img-xs" src="'.base_url($img_src).'"><div>'.$result['upload_mime_type'].'</div>';
             //$row[] = $result['upload_mime_type'];
-            //$row[] = $this->app_lib->display_date($result['upload_datetime'], TRUE);
+            //$row[] = $this->common_lib->display_date($result['upload_datetime'], TRUE);
             $row[] = isset($result['upload_status']) ? $this->data['status_flag'][$result['upload_status']]['text'] : '';
             //add html for action
             $action_html = '';
@@ -337,10 +337,10 @@ class Cms extends CI_Controller {
 
 	function manage_banner() {
         // Check user permission by permission name mapped to db
-        // $this->app_lib->is_auth('cms-list-view');
+        // $this->common_lib->is_auth('cms-list-view');
 		
 		// Get logged  in user id
-        $this->sess_user_id = $this->app_lib->get_sess_user('id');
+        $this->sess_user_id = $this->common_lib->get_sess_user('id');
 			
 		$this->breadcrumbs->push('View','/');
 		$this->data['breadcrumbs'] = $this->breadcrumbs->show();
@@ -380,13 +380,13 @@ class Cms extends CI_Controller {
 			//Unlink previously uploaded file
 			$file_path = 'assets/uploads/banner_img/'.$uploaded_file_name;
 			//if (file_exists(FCPATH . $file_path)) {
-				$this->app_lib->unlink_file(array(FCPATH . $file_path));
+				$this->common_lib->unlink_file(array(FCPATH . $file_path));
 				$res = $this->upload_model->delete(array('id'=>$uploaded_file_id),'uploads');
 				if($res){
-					$this->app_lib->set_flash_message('Banner has been deleted successfully.', 'alert-success');
+					$this->common_lib->set_flash_message('Banner has been deleted successfully.', 'alert-success');
 					redirect($this->router->directory.$this->router->class.'/manage_banner');
 				}else{
-					$this->app_lib->set_flash_message('Error occured while processing your request.', 'alert-danger');
+					$this->common_lib->set_flash_message('Error occured while processing your request.', 'alert-danger');
 					redirect($this->router->directory.$this->router->class.'/manage_banner');
 				}
 			//}
@@ -438,7 +438,7 @@ class Cms extends CI_Controller {
 			
 			// If user chhose file to upload
 			if(!empty($_FILES['userfile']['name'])){
-				$upload_result = $this->app_lib->upload_file('userfile', $upload_param);
+				$upload_result = $this->common_lib->upload_file('userfile', $upload_param);
 				if (isset($upload_result['file_name']) && empty($upload_result['upload_error'])) {
 					$uploaded_file_name = $upload_result['file_name'];
 					$postdata = array(
@@ -480,20 +480,20 @@ class Cms extends CI_Controller {
 						//Unlink previously uploaded file                    
 						$file_path = $upload_param['upload_path'] . '/' . $uploads[0]['upload_file_name'];
 						if (file_exists(FCPATH . $file_path)) {
-							$this->app_lib->unlink_file(array(FCPATH . $file_path));
+							$this->common_lib->unlink_file(array(FCPATH . $file_path));
 						}
 						// Now update table
 						$update_upload = $this->cms_model->update($postdata, array('id' => $uploads[0]['id']), 'uploads');
-						$this->app_lib->set_flash_message('File uploaded successfully.', 'alert-success');
+						$this->common_lib->set_flash_message('File uploaded successfully.', 'alert-success');
 						redirect(current_url());
 					} else {
 						$upload_insert_id = $this->cms_model->insert($postdata, 'uploads');
-						$this->app_lib->set_flash_message('File uploaded successfully.', 'alert-success');
+						$this->common_lib->set_flash_message('File uploaded successfully.', 'alert-success');
 						redirect(current_url());
 					}
 				} else if (sizeof($upload_result['upload_error']) > 0) {
 					$error_message = $upload_result['upload_error'];
-					$this->app_lib->set_flash_message($error_message, 'alert-danger');
+					$this->common_lib->set_flash_message($error_message, 'alert-danger');
 					redirect(current_url());
 				}
 			}
@@ -507,7 +507,7 @@ class Cms extends CI_Controller {
 					);
 				$id = $this->input->post('id');
 				$update_upload = $this->cms_model->update($postdata, array('id' => $id), 'uploads');
-				$this->app_lib->set_flash_message('Data updated successfully.', 'alert-success');
+				$this->common_lib->set_flash_message('Data updated successfully.', 'alert-success');
 				redirect(current_url());
 			}
 			

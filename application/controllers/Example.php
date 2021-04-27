@@ -10,16 +10,16 @@ class Example extends CI_Controller {
     function __construct() {
         parent::__construct();
         //Loggedin user details
-        $this->sess_user_id = $this->app_lib->get_sess_user('id');
+        $this->sess_user_id = $this->common_lib->get_sess_user('id');
         
         //Render header, footer, navbar, sidebar etc common elements of templates
-        $this->app_lib->init_template_elements('site');
+        $this->common_lib->init_template_elements('site');
         
         // Load required js files for this controller
         $javascript_files = array(
             $this->router->class
         );
-        $this->data['app_js'] = $this->app_lib->add_javascript($javascript_files);
+        $this->data['app_js'] = $this->common_lib->add_javascript($javascript_files);
 		
 		// Status flag indicator for showing in table grid etc
 		$this->data['status_flag'] = array(
@@ -71,7 +71,7 @@ class Example extends CI_Controller {
         if ($this->input->post('form_action') == 'add') {            
             if ($this->validate_form() == TRUE) {
                 print_r($this->input->post());
-                $this->app_lib->set_flash_message('<strong>Ok! </strong>Validated and Ready to Insert Data.', 'alert-info');
+                $this->common_lib->set_flash_message('<strong>Ok! </strong>Validated and Ready to Insert Data.', 'alert-info');
                 redirect(current_url());
             }
         }
@@ -193,7 +193,7 @@ class Example extends CI_Controller {
         //Simulate Form Submit
         if ($this->input->post('form_action') == 'add') {
             if ($this->validate_form_calander_data('add') == TRUE) {
-                $this->app_lib->set_flash_message('Validation Successful.', 'alert-success');
+                $this->common_lib->set_flash_message('Validation Successful.', 'alert-success');
                 redirect(current_url());
             }
         }
@@ -254,10 +254,10 @@ class Example extends CI_Controller {
                 $result = $this->email->send();
                 //echo $this->email->print_debugger(); die($html);
                 if ($result == TRUE) {
-                    $this->app_lib->set_flash_message('Your message has been sent successfully.', 'alert-success');
+                    $this->common_lib->set_flash_message('Your message has been sent successfully.', 'alert-success');
                     redirect(current_url());
                 } else {
-                    $this->app_lib->set_flash_message('Error occured while sending your message.', 'alert-danger');
+                    $this->common_lib->set_flash_message('Error occured while sending your message.', 'alert-danger');
                     redirect(current_url());
                 }
             } else {

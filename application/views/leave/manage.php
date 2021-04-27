@@ -73,8 +73,8 @@
 							</td>
 							<td>
 							<?php echo $row['leave_type'];?>
-							<?php echo $this->app_lib->display_date($row['leave_from_date']);?>
-							<?php echo ' to '.$this->app_lib->display_date($row['leave_to_date']);?>
+							<?php echo $this->common_lib->display_date($row['leave_from_date']);?>
+							<?php echo ' to '.$this->common_lib->display_date($row['leave_to_date']);?>
 							<?php echo ', '.$row['applied_for_days_count'].' day(s)';?></td>
 							<td>
 								<span class="<?php echo $leave_status_arr[$row['leave_status']]['css'];?>"><?php echo $leave_status_arr[$row['leave_status']]['text'];?></span>
